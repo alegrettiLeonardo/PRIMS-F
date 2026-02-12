@@ -1,0 +1,72 @@
+&PARAMS
+  ! ==========================================================
+  !  Montgomery (2002) - Severe Slugging 1 (SS1) - Case A
+  !  (valores do Apêndice F + ULS/UGS listados na tese)
+  ! ==========================================================
+
+  ! -------------------- Geometry / mesh ----------------------
+  nodes           = 51
+  mesh_ratio      = 1.01
+  num_dummy_cells = 2
+  X               = 6.435
+  Z               = 9.886
+  Lp              = 57.4
+  beta_deg        = 2.0
+
+  ! -------------------- Physical properties -----------------
+  rho_l0          = 997.05
+  P_l0            = 101325.0
+  Cl              = 1498.0
+
+  ! Gas: N2 (Case A)
+  Rg              = 296.8
+  gamma_g         = 1.4
+  mu_g            = 1.76e-5
+  mu_l            = 0.89e-3
+  eps             = 1.0e-4        
+  D               = 0.0525018     
+  sigma           = 7.28e-2
+  G               = 9.81
+
+  ! -------------------- Scenario (SS1 - Case A) --------------
+  Ps              = 2.064e5       ! 2.064 bar(a) 
+  jl              = 0.2017        ! ULS (tese)
+  jg              = 0.0985        ! UGS (tese)
+  Tgas            = 293.92        ! 20.77°C 
+  time_dim        = 300.0         !
+  pb_dp_on        = 1.05
+  pb_dp_off       = 0.98
+
+
+  ! -------------------- Numerics -----------------------------
+  CFL             = 100.0
+  tol             = 1.0e-12
+  tola            = 1.0e-12
+  tol_res         = 1.0e-6
+  tol_inc         = 1.0e-6
+  quad_points     = 3
+  max_iter        = 50000
+  max_workers     = 16
+  newton_max      = 25
+
+  ! -------------------- Time-step control --------------------
+  dt_start        = 1.0e-3
+  dt_min          = 1.0e-5
+  dt_max          = 1.0e-2
+
+  use_it_target   = .true.
+  it_target       = 6
+  it_p            = 0.6
+  dt_fac_min      = 0.9
+  dt_fac_max      = 1.2
+
+  ! -------------------- High-quality Jacobian options --------
+  jac_dissipation_fd = .false.
+  jac_dissipation_fd_eps = 1.0e-9
+  debug_dfduj_check = .false.
+
+  ! -------------------- Labels -------------------------------
+  regime          = 'SS1_CASE_A'
+  out_dir         = 'output_ss1_caseA'
+/
+

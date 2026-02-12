@@ -1,0 +1,58 @@
+&PARAMS
+
+  ! ================== Geometria ==================
+  nodes           = 61
+  num_dummy_cells = 2
+  X               = 6.435
+  Z               = 9.886
+  Lp              = 57.4
+  beta_deg        = 2.0
+  D               = 0.0508
+  eps             = 4.6e-5
+  mesh_ratio      = 1.04
+
+  ! ================== Fluidos ==================
+  Cl     = 1498.0
+  P_l0   = 101325.0
+  rho_l0 = 997.05
+  mu_g   = 1.85e-5
+  mu_l   = 0.89e-3
+  sigma  = 7.28e-2
+  G      = 9.81
+  Rg     = 287.053
+
+  ! Aliases legados (desabilitados): se > 0, podem sobrescrever mu_l/mu_g
+  mul = -1.0
+  mug = -1.0
+
+  ! ================== Numéricos ==================
+  CFL         = 1.5
+  tol         = 1.0e-8
+  tola        = 1.0e-8
+  tol_res     = 1.0e-8
+  tol_inc     = 1.0e-10
+  quad_points = 3
+  use_muscl   = .false.
+
+  ! ============ Condições Operacionais (Stable) ============
+  Ps       = 4.25e5
+  jl       = 0.594
+  jg       = 0.69
+  Tgas     = 328.55
+  time_dim = 20.0
+
+  ! Aliases alternativos (desabilitados): se > 0, podem sobrescrever Tgas/time_dim
+  T_scenario = -1.0
+  time_phys  = -1.0
+
+  ! ================== Propriedades do gás ==================
+  gamma_g = 1.4
+
+  ! ================== Execução ==================
+  max_iter    = 200000
+  max_workers = 1
+  save_every  = 10
+  newton_max  = 10
+  regime      = 'Stable'
+
+/

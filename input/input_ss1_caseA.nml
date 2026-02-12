@@ -1,0 +1,108 @@
+&PARAMS
+  ! ==========================================================
+  !  Montgomery (2002) - Severe Slugging 1 (SS1) - Case A (N2)
+  !  Arquivo completo (com as novas entradas do critério de estabilidade + histerese)
+  !
+  !  IMPORTANTE (nomenclatura):
+  !    - mu_l, mu_g  : viscosidades dinâmicas [Pa.s]
+  !    - mul, mug    : vazões mássicas por área (mass flux) [kg/(m^2.s)] (OPCIONAL)
+  !      * Se mul/mug NÃO forem informados (ou <= 0), o solver usa jl/jg + densidades.
+  ! ==========================================================
+
+  ! -------------------- Geometry / mesh ----------------------
+  nodes           = 51          ! nº de volumes de controle (sem contar ghost)
+  mesh_ratio      = 1.01        ! progressão geométrica
+  num_dummy_cells = 2           ! ghost cells
+  X               = 6.435       ! [m] deslocamento horizontal do riser (catenária)
+  Z               = 9.886       ! [m] altura vertical total
+  Lp              = 57.4        ! [m] comprimento do pipeline
+  beta_deg        = 2.0         ! [deg] inclinação do PIPELINE; no código: theta_pipe = -beta (pipeline descendente)
+
+  ! -------------------- Pipe roughness / diameter ------------
+  eps             = 1.0e-4      ! [m] rugosidade absoluta
+  D               = 0.0525018   ! [m] diâmetro interno
+  sigma           = 7.28e-2     ! [N/m] tensão superficial (água/ar)
+  G               = 9.81        ! [m/s^2]
+
+  ! -------------------- Liquid (water) -----------------------
+  rho_l0          = 997.05      ! [kg/m^3]
+  P_l0            = 101325.0    ! [Pa]
+  Cl              = 1498.0      ! [m/s]
+  mu_l            = 0.89e-3     ! [Pa.s]
+
+  ! -------------------- Gas (N2) -----------------------------
+  Rg              = 296.8       ! [J/(kg.K)]
+  gamma_g         = 1.4         ! [-]
+  mu_g            = 1.76e-5     ! [Pa.s]
+  Tgas            = 293.92      ! [K]
+
+  ! -------------------- Scenario (SS1 - Case A) --------------
+  Ps              = 2.064e5     ! [Pa] pressão do separador (2.064 bar(a))
+
+  ! Superficial velocities (referência Montgomery)
+  jl              = 0.2017      ! [m/s]
+  jg              = 0.0985      ! [m/s]  (OBS: no seu arquivo anterior estava 0.0485; aqui está o valor “tese”)
+
+  ! (OPCIONAL) Mass flux BC no inlet: mul=rho_l*jl e mug=rho_g*jg
+  ! Se você quiser forçar o BC por vazão mássica, descomente e preencha:
+  ! mul            = 201.0       ! [kg/(m^2.s)] exemplo ~ rho_l0*jl
+  ! mug            = 0.23        ! [kg/(m^2.s)] exemplo (depende de rho_g no separador)
+
+  time_dim        = 300.0       ! [s] tempo físico total de simulação
+
+  ! Critério “Pb - Ps” (transição tipo SS1: penetração de bolhas / estabilidade global)
+  pb_dp_on        = 1.05        ! liga quando (Pb-Ps)/(Pb0-Ps) > pb_dp_on
+  pb_dp_off       = 0.98        ! desliga quando (Pb-Ps)/(Pb0-Ps) < pb_dp_off
+
+  ! -------------------- Flow regime stability (PIPELINE) ----
+  ! Critério SI (estabilidade interfacial) para comutar:
+  !   estratificado  <-> não-estratificado
+  ! com histerese:
+  !   - se idx_prev==STRAT e SI >= stab_si_on  -> muda p/ não-estratificado
+  !   - se idx_prev/=STRAT e SI <= stab_si_off -> volta p/ estratificado
+  stab_use_hysteresis = .true.
+  stab_si_on          = 0.55
+  stab_si_off         = 0.45
+
+  ! Dica de debug: se você suspeitar que o crash está na histerese, teste com:
+  ! stab_use_hysteresis = .false.
+
+  ! -------------------- Numerics -----------------------------
+  ! OBS: para evitar instabilidades numéricas no arranque, estes valores são “seguros”.
+  CFL             = 10.0
+  tol             = 1.0e-10
+  tola            = 1.0e-12
+  tol_res         = 1.0e-6
+  tol_inc         = 1.0e-6
+  quad_points     = 3
+  max_iter        = 200000
+  max_workers     = 8
+  newton_max      = 25
+  save_every      = 10
+
+  use_muscl       = .false.     ! comece com .false. (mais robusto)
+
+  ! -------------------- Time-step control (implícito) --------
+  dt_start        = 1.0e-4
+  dt_min          = 1.0e-6
+  dt_max          = 1.0e-2
+
+  use_it_target   = .true.
+  it_target       = 6
+  it_p            = 0.6
+  dt_fac_min      = 0.9
+  dt_fac_max      = 1.2
+
+  ! -------------------- Jacobian options ---------------------
+  jac_dissipation_fd = .false.
+  jac_dissipation_fd_eps = 1.0e-9
+  debug_dfduj_check = .false.
+  debug_dfduj_cell  = 0
+  debug_dfduj_eps   = 1.0e-7
+
+  ! -------------------- Labels / output ----------------------
+  regime          = 'SS1'                  ! use 'SS1' para ativar a perturbação inicial (gatilho do SS1)
+  out_dir         = 'output/output_ss1_caseA'
+/
+
+
