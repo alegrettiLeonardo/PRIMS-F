@@ -14,6 +14,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 ROOT=Path(__file__).resolve().parents[1]
+# NumPy 1.x names this same integration rule trapz; NumPy 2.x uses trapezoid.
+trapezoidal_integral=np.trapezoid if hasattr(np,'trapezoid') else np.trapz
 
 
 def number(x):
@@ -23,8 +25,8 @@ def number(x):
 def time_statistics(t,values):
     """Trapezoidal time weights avoid bias from adaptive accepted steps."""
     if len(t)<2 or t[-1]<=t[0]:return float(values[-1]),0.0
-    mean=float(np.trapezoid(values,t)/(t[-1]-t[0]))
-    variance=float(np.trapezoid((values-mean)**2,t)/(t[-1]-t[0]))
+    mean=float(trapezoidal_integral(values,t)/(t[-1]-t[0]))
+    variance=float(trapezoidal_integral((values-mean)**2,t)/(t[-1]-t[0]))
     return mean,float(np.sqrt(max(variance,0.0)))
 
 def read_metadata(path):
