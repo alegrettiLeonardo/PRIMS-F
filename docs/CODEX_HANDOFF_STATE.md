@@ -1,111 +1,111 @@
 # Estado para continuação no Codex
 
-## Base e objetivo
+## Onde continuar e o que foi preservado
 
-Repositório `alegrettiLeonardo/PRIMS-F`. O [PR #1](https://github.com/alegrettiLeonardo/PRIMS-F/pull/1)
-foi incorporado ao `main` no commit `4572f95ee61795c852b8d87c0f142505dcd11378`.
-A continuação com os diagnósticos e este handoff está na branch
-`audit/chexal-continuation-20261118`, baseada nesse merge e entregue em novo PR draft.
-O primeiro commit de implementação foi `c31521ed5bff1b4df90a184b44fb88765f3b8dd1`;
-a base original era `16c9879cc8c134591bf0653e47d70e399377d8a9`.
-Verifique a ponta das branches antes de trabalhar e preserve alterações locais.
+Repositório `alegrettiLeonardo/PRIMS-F`; PR #1 incorporado em `4572f95`.
+Base desta continuação: `origin/audit/chexal-continuation-20261118`, `05ad799`.
+O checkout `/home/leonardoab/Documentos/PRIMS-F` permaneceu limpo em `main`.
+As alterações estão no worktree `/home/leonardoab/Documentos/PRIMS-F-chexal`,
+branch `audit/chexal-implementation-20261118`. Confira status/refs antes de agir;
+não faça reset nem descarte alterações locais.
 
-Último pedido: avaliar Chexal para contrafluxo e continuar no WSL em
-`/home/leonardoab/Documentos/PRIMS-F`. **Chexal ainda não está implementado.**
+No Windows, o endereço é `\\wsl.localhost\weg-linux\home\leonardoab\Documentos`.
+Comandos usados: `wsl -d weg-linux --user leonardoab --exec sh -c ...`.
+O perfil de login `sh -lc` não foi necessário; a distribuição Ubuntu-24.04
+não contém este projeto. O fetch WSL falhou na rede; a referência foi trazida
+de clone GitHub verificado no Windows, sem alterar `main`.
 
-## O que já existe
+## Correções e implementação já realizadas
 
-- Fortran 2018; operadores em SI, derivadas, Fanning, gravidade e escala corrigidos;
-  primitivas, Jacobianos, catenária, estacionário e contornos revistos.
-- IDs de fechamento: 1 estratificado, 2 Bendiksen, 3 Bhagwat conforme transcrição
-  Azevedo–Baliño–Burr 2015, 4 variante Montgomery. Bhagwat atual exige cocorrente.
-- FV de primeira ordem, Euler implícito, Newton e LAPACK. Campanha usa `ROE`,
-  `MATCHED`, `LAGGED`. MUSCL não está qualificado no novo caminho.
-- **2185 verificações Fortran em 6 programas e 16 testes Python aprovados.**
-  Isso não constitui validação física. Comandos e dependências: README/CI.
-- Catenária da dissertação: Lp 57,4 m, declive 2°, X 6,435 m, Z 9,886 m,
-  D 0,05254 m; Lr 12,546254 m, topo 76,473695° desde a horizontal. Perfil principal
-  usa `rho_g=p/343^2`; `_ISO` é sensibilidade separada. Gás de entrada convertido
-  nas condições padrão 101300 Pa / 293,15 K. Não misturar instalações/EOS.
+- `47433f8`: alpha-tail integrado **antes** de mudar física. O0/O3: 55 guards,
+  398 checks estacionários por versão, 101 registros antigos idênticos; revisão
+  O2: 129 contratos. Erro relativo máximo nas raízes novas `3,263e-13`.
+  Não amplia o domínio de Bhagwat. Evidência em
+  `validation/diagnostics/alpha_tail_integration_20261118`.
+- `db8d47c`: `prior_evidence.json` recuperado do ZIP local com SHA original
+  `f88afc885178f1c3456ed0d03c9177566939b7ab90edf77ce77f411ae169af89`.
+  A ausência inicial da branch permanece registrada como lacuna resolvida.
+- `ee4b7c6`: Roe interpola `(U,theta)` no caminho; MATCHED continua no ângulo
+  do oleoduto. 315 checks específicos; snapshot SS3 antigo status14 passa0.
+  A identidade inclui `integral(F_theta*dtheta)`; não se alega propriedade Roe
+  exata para a integral de `F_U` isolada. Evidência em `roe_geometry_20261118`.
+- `3096c3b`: núcleo Chexal1992 SI, ar–água, Reynolds assinados, CCFL e ramos,
+  referências independentes mpmath60. Núcleo:139 checks diagnósticos.
+- `40a7d44`: integração de residual, primitivas, derivadas/Jacobianos,
+  estacionário, contorno e junção; `868eeb9`: fixture adicional do ramo baixo.
+  `closure_riser=5` é CHEXAL_1992, `6` HIGH, `7` LOW; Bhagwat permanece3.
+- Análise: seleção explícita de coortes OSC e bloqueio de mistura de fontes,
+  fechamento/EOS/parâmetros. NumPy1/2 suportados no integrador trapezoidal.
 
-## Achados que orientam a próxima alteração
+Última checagem integrada: **3331 verificações Fortran em10 programas e19 testes
+Python aprovados**, mais build release. `make test FC=gfortran LIBS='-llapack -lblas'`
+e `python3 -m unittest discover -s tests -p 'test_validation_evidence.py' -v`.
+Compiler WSL: GNU Fortran13.3.0. Logs, flags e hashes estão em
+`validation/diagnostics/chexal_integration_20261118`; essas aprovações são
+verificação numérica, **não validação experimental**.
 
-1. Controle estável completa 2400 s. OSC barotrópico oscila com passos menores,
-   mas amortece com passos maiores; não atribuir estabilidade apenas ao fechamento.
-   Em 51 + 51 células, dt máximo0,125 s: 64 intervalos na janela 900–2400 s, período
-   próximo 23 s. Dois refinamentos completos apresentam dez intervalos finais
-   com amplitude quase constante: 51 + 51 / dt máximo 0,0625 s e 101 + 101 /
-   dt máximo 0,125 s, ambos com período próximo de 23,27 s. As amplitudes ainda
-   diferem entre discretizações. Leia `VALIDATION_RESULTS.md` e os envelopes;
-   não reclassifique essas oscilações como validação física.
-2. SS1/SS3 não completam os transientes. Há causas distintas: limite celular
-   `ul=0`; traço gasoso `MATCHED` negativo com células admissíveis; caminho de Roe
-   fora do domínio ao usar inclinação média. Veja `TRANSIENT_DOMAIN_LIMITS.md`
-   e `validation/diagnostics/final_domain_summary.json`. Fluxo numérico negativo
-   na junção não prova contrafluxo físico nas células.
-3. A busca estacionária atual só varre `|logit(alpha)|<=28`: pode retornar falso
-   `NO_ROOT` para alfa positivo abaixo de aproximadamente 6,9144e-13. O candidato
-   em `validation/diagnostics/alpha_tail_candidate/` foi testado separadamente,
-   **não aplicado**. Corrige apenas essa busca; não libera contracorrente.
-4. Chexal 1992 p.262 / PDF 8 restringe contracorrente ao tubo vertical, gás subindo,
-   líquido descendo; p.264 / PDF 10 só cocorrente horizontal. P.268 / PDF 14 exige
-   seleção entre duas raízes abaixo da CCFL. Não extrapolar isso para a catenária.
-   Referências e cuidados: `CHEXAL_1992_SCOPE.md`.
-5. Baliño 2010 tabela 3 p.653 / PDF 11, caso 11: SS3 experimental **76 s**, confirmado
-   visualmente no novo PDF; a dissertação traz 26 s. O erro percentual impresso
-   na tabela também é inconsistente com 72,2/76. OSC caso 13: faixa 19,3–33,8 s;
-   a dissertação informa 33,9 s. Não ajustar coeficientes para resolver divergências.
+## Contratos físicos e limites que não podem desaparecer
 
-## Retomada das execuções interrompidas
+Leia `CHEXAL_1992_IMPLEMENTATION.md` (fontes/equações) e
+`CHEXAL_1992_INTEGRATION.md` (operadores/unidades/status).
 
-A campanha entregue reúne **28 configurações: 13 completas, 13 falhas do solver
-e duas interrupções da sessão de execução**, além de duas tentativas anteriores
-arquivadas por timeout de 1800 s de relógio: 30 execuções no total. As interrupções
-não são falhas físicas. Não há processo que esta entrega prometa continuar.
+Chexal1992 p.262 admite contracorrente **vertical**, gás ascendente e líquido
+descendente. P.264 restringe horizontal a cocorrente. P.268 distingue C3 HIGH
+e LOW e exige informação de seleção. Não usar variantes1997 ou autorizar
+contracorrente inclinada: a catenária D não tem seção vertical.
 
-As duas repetições interrompidas pertencem a D_OSC / BAROTROPIC / ID3 / MATCHED /
-LAGGED / ROE: 201 + 201 células, dt máximo 0,125 s, último registro em
-1351,5568528 s; e 51 + 51 células, dt máximo 0,03125 s, último registro em
-1329,8109900 s. Os dados das primeiras tentativas chegaram mais longe e permanecem
-em `validation/runtime_limited`; não unir séries reiniciadas como se fossem uma.
+O residual é `alpha*(C0*(jl+jg)+Vgj)-jg`, sem divisão pelo fluxo total.
+AUTO detecta alternativas CC verticais; IDs6/7 declaram ramo, e a recuperação
+revalida a raiz contra o ramo alfa. Enumeração finita não prova inexistência de
+pares de raízes/tangências não amostrados. CCFL retorna status de dobra ou limite
+excedido; erros numéricos não são convertidos em NO_ROOT.
 
-Para fechar a campanha anterior, repita essas configurações com os fontes
-congelados da entrega, limite de relógio suficiente e rótulo novo. O limite de
-relógio não altera o tempo físico solicitado. O solver não oferece retomada por
-checkpoint validada; iniciar novamente não deve ser chamado de continuação do
-mesmo estado. Preserve a comparação por versão se aplicar o candidato de alfa.
+Derivadas preservam a assinatura constitutiva e recusam quinas. Os testes
+exercitam j=0, orientação invertida, escala, U–primitivas, derivadas no mesmo
+ramo, conservação e espectros reais; nenhum espectro foi reparado. Inventário
+ausente tem recuperação e fluxo exatos. Fluxo nulo isolado exige informação
+de inventário para selecionar alfa0/1; o Jacobiano bifásico completo no endpoint
+de fase ausente é recusado, sem modo artificial.
 
-## Mapa mínimo
+**MATCHED/Roe com gás negativo continua sendo um impedimento separado.**
+Replay de cinco propostas Newton preserva as48 células admissíveis, mas falha
+na junção;15 replays dos três seletores Chexal recusam o traço horizontal.
+Não foi aplicada barreira/projeção de gás nem ampliação de domínio. Consulte
+`validation/diagnostics/chexal_junction_20261118` e os diagnósticos históricos.
 
-| Trabalho | Arquivos |
-|---|---|
-| C0, Vgj, fonte, derivadas | `scr/module_closure_law.f90`, `scr/mod_void_helpers.f90` |
-| Primitivas/Jacobiano/Roe | `scr/module_find.f90`, `scr/module_jacobian.f90`, `scr/module_matrix_roe.f90` |
-| Ramo, estacionário, contornos | `scr/module_flow_regime.f90`, `scr/module_steady_state.f90`, `scr/module_boundary_conditions.f90` |
-| Fluxos, junção, Newton | `scr/module_simulate_pipe_riser.f90`, `scr/module_roe_solver.f90` |
-| Entradas/testes | `scr/module_config.f90`, `input/benchmarks/`, `tests/` |
-| Reprodução | `scripts/run_validation.py`, `scripts/run_study.py`, `scripts/analyze_*.py`, `scripts/compare_validation.py` |
-| Fontes e qualificação | `BENCHMARK_REFERENCE.md`, `benchmark_sources.json`, `IMPLEMENTATION_PHYSICS.md`, `VALIDATION_RESULTS.md` |
+SS3: dissertação Tabela6.7 p.136 informa26s; Baliño2010 Tabela3 p.653, caso11,
+informa76s. A divergência permanece explícita, sem ajuste de parâmetros.
+OSC/SS3 podem manter penetração gasosa: bloqueio completo não é requisito
+universal, e oscilações isoladas de pressão não estabelecem slugging validado.
 
-Os PDFs da conversa não são distribuídos pelo repositório. Localize-os no WSL
-antes de transcrever fórmulas; não suponha que caminhos do ambiente anterior
-existam no computador do usuário. Os manifests preservam caminhos históricos
-como proveniência; scripts novos devem funcionar a partir da raiz do clone.
+## Campanhas por versão
 
-Use rótulos novos para novas execuções, preserve resultados anteriores e registre
-hashes. Diferencie execução incompleta, timeout de infraestrutura, verificação
-numérica, convergência e concordância experimental.
+A campanha histórica de05ad799 permanece preservada:28 configurações,13 completas,
+13 falhas do solver e2 interrupções de sessão, além de2 tentativas de timeout.
+Os refinamentos interrompidos foram reiniciados do zero no worktree separado
+`PRIMS-F-baseline-20261118`, detached05ad799, sem alpha-tail/Chexal:
+201+201/dtmax0,125s e51+51/dtmax0,03125s, ambos até2400s.
+Label `repeat_20261118_frozen05ad799`. Não há restart por checkpoint validado;
+não concatenar séries reiniciadas. Compilador histórico14.2 e atual13.3 são
+identificados como diferença de reprodução.
 
-`make test` executa as suítes Fortran. Execute também
-`python3 -m unittest discover -s tests -p 'test_validation_evidence.py' -v`
-para os 16 testes Python. O pós-processamento requer NumPy, SciPy e Matplotlib;
-mpmath é necessário apenas para regenerar as referências de alta precisão.
+A comparação nova usa worktree congelado `PRIMS-F-comparison-20261118`,
+Bhagwat3 e Chexal5, BAROTROPIC/MATCHED/LAGGED/ROE,51+51,dtmax0,125s,2400s.
+O script `scripts/run_closure_comparison.py` preserva EOS, vazões e geometria
+e grava plano, hashes, comandos e status. Consulte manifests e resumos de
+`validation/comparisons/` para o resultado de cada execução; não confunda
+RUNNING/TIMEOUT/FAILED com COMPLETED.
 
-O runner `run_study --resume` não é um retry automático: pode reutilizar uma
-tentativa encerrada com falha e recusa a pasta `INTERRUPTED`. O analisador
-`analyze_osc_envelopes.py` ainda seleciona somente os padrões
-`final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_*` e
-`refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_*`. Antes de comparar Chexal ou
-rótulos novos, generalize essa seleção com opções explícitas e testes, sem
-misturar fisicamente os conjuntos antigos. Para um smoke de um único caso,
-use `run_validation.py`; reduzir o tempo em `run_study` ainda lança toda a matriz.
+## Próximo trabalho condicionado à evidência
+
+Avaliar separadamente refino de malha e de passo, dez intervalos finais,
+pressão, holdup, fluxos por fase, inventários e balanço integral. Examinar
+acumulação/compressão, produção, penetração e blowdown conforme o regime.
+Falhas de domínio na catenária não autorizam estender Chexal vertical nem
+ajustar entradas para forçar slugging. Manter PR draft até qualificação física.
+
+Os PDFs e imagens de páginas permanecem fora do Git. Fontes conferidas, hashes,
+páginas e a desambiguação pontual de C10 pelo manual primário RELAP1995 estão
+na nota de implementação. O candidato alpha-tail histórico pode ser reproduzido
+no worktree `PRIMS-F-roe-review-20261118`/commit47433f8; seu runner exige o hash
+exato anterior/candidato e não deve ser aplicado à árvore já modificada porChexal.

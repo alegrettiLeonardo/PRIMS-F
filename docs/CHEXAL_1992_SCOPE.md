@@ -1,3 +1,7 @@
+> Nota histórica da base `05ad799`, anterior à integração. Para o estado atual,
+> leia [CODEX_HANDOFF_STATE.md](CODEX_HANDOFF_STATE.md) e
+> [CHEXAL_1992_IMPLEMENTATION.md](CHEXAL_1992_IMPLEMENTATION.md).
+
 # Chexal 1992 e Ozaki 2015: escopo para continuidade da auditoria
 
 **Estado em 18/11/2026: fontes recebidas e escopo documental verificado;

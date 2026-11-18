@@ -1,3 +1,7 @@
+> Nota histórica da base `05ad799`, anterior à integração. Para o estado atual,
+> leia [CODEX_HANDOFF_STATE.md](CODEX_HANDOFF_STATE.md) e
+> [CHEXAL_1992_IMPLEMENTATION.md](CHEXAL_1992_IMPLEMENTATION.md).
+
 # Prompt de continuação — PRIMS-F / Chexal
 
 Copie o bloco abaixo para o Codex aberto no projeto do WSL. Os PDFs anexados à
