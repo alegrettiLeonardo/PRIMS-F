@@ -26,8 +26,8 @@ program main
   !   - mul, mug  = inlet *mass fluxes* (rho*j)
   !   - MUL, MUG  = viscosities
   ! Fortran is case-insensitive, so viscosities are named mu_l/mu_g here.
-  ! If mul/mug are left <= 0 in the namelist, the code computes them as:
-  !   mul = rho_l(Pb)*jl,  mug = rho_g(Pb)*jg
+  ! If mul/mug are negative, liquid mass flux uses rho_l0*jl and gas mass
+  ! flux uses the explicitly selected STANDARD or SEPARATOR reference.
   real(wp)           :: mul, mug
   real(wp)           :: eps, D, sigma
   real(wp)           :: CFL, tol, tola, tol_res, tol_inc, G
@@ -47,6 +47,11 @@ program main
   real(wp)           :: mesh_ratio
   real(wp)           :: T_scenario, time_phys
   real(wp)           :: gamma_g
+  character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model
+  character(len=20) :: dissipation_mode
+  real(wp) :: Cg_fixed, P_standard, T_standard, dt_min_s, dt_max_s, dt_start_s
+  real(wp) :: perturbation_amplitude, output_interval_s, field_interval_s
+  integer(i4) :: n_riser, closure_riser, sim_status, steady_status
   integer(i4)        :: quad_points, max_iter, max_workers, save_every, newton_max
   character(len=32)  :: regime
 
@@ -67,21 +72,21 @@ program main
                     it_target, use_it_target, it_p, dt_fac_min, dt_fac_max, dt_growth, dt_shrink, newton_fast, newton_slow, quad_points, Ps, jl, jg, Tgas, time_dim, T_scenario, time_phys, &
                     gamma_g, max_iter, max_workers, save_every, newton_max, regime, use_muscl, out_dir, jac_dissipation_fd, jac_dissipation_fd_eps, debug_dfduj_check, debug_dfduj_cell, debug_dfduj_eps, &
                     pb_dp_on, pb_dp_off, &
-                    stab_si_on, stab_si_off, stab_use_hysteresis
+                    stab_si_on, stab_si_off, stab_use_hysteresis, &
+                    gas_eos, gas_flow_basis, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, &
+                    dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
   type(pipeline_riser_simulator_t) :: sim
   type(fluid_dynamics_t)        :: fd
 
-  integer(i4) :: i, nd, Nss, N, ios, j, idx_base_ext
+  integer(i4) :: i, nd, Nss, N, ios
   real(wp)    :: CA, Lr, AREA
   real(wp)    :: Cg
   real(wp)    :: Pb, rhog, rhol
   real(wp)    :: ml_flux, mg_flux
   real(wp)           :: ntime, omega_t
   real(wp)    :: beta_rad
-  real(wp)    :: eps_pert
-  real(wp)    :: u2_old
 
   ! Adimensionalization outputs (match Python solver_utils.adimensionalizar)
   real(wp) :: nCg, nCl, nP_l0, nrho_l0
@@ -91,6 +96,7 @@ program main
 
   ! Steady-state vectors (dimensionless)
   real(wp), allocatable :: vns(:), vnp(:)
+  real(wp), allocatable :: physical_faces(:)
   real(wp), allocatable :: nrhogv(:), nrholv(:)
   real(wp), allocatable :: alphav(:), nugv(:), nulv(:)
   real(wp), allocatable :: thetav(:), njlv(:), njgv(:)
@@ -112,7 +118,7 @@ program main
   X = 6.435_wp
   Z = 9.886_wp
   Lp = 57.4_wp
-  beta_deg = -2.0_wp
+  beta_deg = 2.0_wp
   rho_l0 = 997.05_wp
   P_l0   = 101325.0_wp
   Cl = 1498.0_wp
@@ -176,14 +182,30 @@ program main
   stab_si_off = 0.9_wp
   stab_use_hysteresis = .true.
   quad_points = 3
-  max_iter = 200
-  newton_max = 10
+  max_iter = 10000000
+  newton_max = 18
   max_workers = 1
     save_every = 10
   regime = 'OSC'
   out_dir = 'output'
 
-  use_muscl = .true.
+  use_muscl = .false.
+  n_riser = 0
+  closure_riser = 2
+  gas_eos = 'ISOTHERMAL'
+  gas_flow_basis = 'STANDARD'
+  Cg_fixed = 343.0_wp
+  P_standard = 101300.0_wp
+  T_standard = 293.15_wp
+  dt_min_s = -1.0_wp
+  dt_max_s = 0.20_wp
+  dt_start_s = 0.01_wp
+  perturbation_amplitude = 0.01_wp
+  output_interval_s = 1.0_wp
+  field_interval_s = 30.0_wp
+  flux_scheme = 'ROE'
+  junction_model = 'MATCHED'
+  dissipation_mode = 'LAGGED'
   ! ------------------------------ Read -----------------------------------
   infile = 'input_params.nml'
   if (command_argument_count() >= 1) then
@@ -191,13 +213,14 @@ program main
   end if
 
   write(output_unit,'(a,1x,a)') '[INFO] Reading input file:', trim(infile)
-  call flush(output_unit)
+  flush(output_unit)
 
   open(unit=10, file=trim(infile), status='old', action='read', iostat=ios, iomsg=iomsg)
   if (ios /= 0) then
-    write(error_unit,'(a,1x,a)') '[WARNING] Could not open input file; using defaults. file=', trim(infile)
+    write(error_unit,'(a,1x,a)') '[ERROR] Could not open input file. file=', trim(infile)
     write(error_unit,'(a,1x,a)') '  iomsg:', trim(iomsg)
-    call flush(error_unit)
+    flush(error_unit)
+    error stop 1
   else
     read(10, nml=PARAMS, iostat=ios, iomsg=iomsg)
     if (ios /= 0) then
@@ -216,7 +239,7 @@ program main
     close(10)
 
     write(output_unit,'(a,i0,2a)') '[INFO] Input parsed: nodes=', nodes, '  regime=', trim(regime)
-    call flush(output_unit)
+    flush(output_unit)
 
     ! --- If tol_res/tol_inc were not explicitly provided, follow tol ---
     if (tol_res <= 0.0_wp) tol_res = tol
@@ -228,6 +251,15 @@ program main
   end if
 
   nd = num_dummy_cells
+  if (n_riser <= 0) n_riser = max(2, nodes/2)
+  if (nodes<2 .or. nd<1 .or. min(X,Z,Lp,D,Cl,Rg,Tgas,P_standard,T_standard,Ps,rho_l0,P_l0)<=0.0_wp) &
+    error stop 'Invalid geometry, mesh or material domain'
+  if (beta_deg<0.0_wp .or. beta_deg>=90.0_wp) error stop 'beta_deg is a positive downhill angle'
+  if (trim(flux_scheme)/='ROE'.and.trim(flux_scheme)/='RUSANOV') error stop 'Unknown flux_scheme'
+  if (trim(junction_model)/='MATCHED'.and.trim(junction_model)/='BLOCKING'.and. &
+      trim(junction_model)/='CONSERVATIVE') error stop 'Unknown junction_model'
+  if (trim(dissipation_mode)/='LAGGED'.and.trim(dissipation_mode)/='FULLY_IMPLICIT') error stop 'Unknown dissipation_mode'
+  if (mu_l<=0.0_wp .or. mu_g<=0.0_wp .or. eps<0.0_wp .or. eps/D>=1.0_wp) error stop 'Invalid viscosities/roughness'
   beta_rad = beta_deg * (acos(-1.0_wp)/180.0_wp)
 
   ! ---------------------- Geometry & properties --------------------------
@@ -236,21 +268,35 @@ program main
   CA = solve_A(Z, X)
   Lr = CA * sinh(X / CA)
 
-  ! gas sound speed at scenario temperature
-  Cg = sqrt(gamma_g * Rg * Tgas)
+  ! The derivative of an ISOTHERMAL ideal-gas EOS is R*T, not gamma*R*T.
+  select case(trim(gas_eos))
+  case('ISOTHERMAL')
+    Cg = sqrt(Rg*Tgas)
+  case('BAROTROPIC')
+    Cg = Cg_fixed
+  case default
+    error stop 'gas_eos must be ISOTHERMAL or BAROTROPIC'
+  end select
 
   ! bottom pressure and densities for initial fluxes
   Pb   = Ps + rho_l0 * G * Z
   rhog = Pb / (Cg*Cg)
   rhol = rho_l0 + (Pb - P_l0) / (Cl*Cl)
   ! Default inlet mass fluxes per area (kg/m^2/s): mul=rho_l*jl, mug=rho_g*jg
-  ml_flux  = rhol * jl
-  mg_flux  = rhog * jg
+  ml_flux  = rho_l0 * jl
+  select case(trim(gas_flow_basis))
+  case('STANDARD')
+    mg_flux = (P_standard/(Rg*T_standard))*jg
+  case('SEPARATOR')
+    mg_flux = (Ps/(Cg*Cg))*jg
+  case default
+    error stop 'gas_flow_basis must be STANDARD or SEPARATOR; alternatively supply mug explicitly'
+  end select
 
   ! If the user provided mul/mug in the namelist, use them as overrides.
   ! (Useful when inlet mass flux is specified directly, instead of jl/jg.)
-  if (mul > 0.0_wp) ml_flux = mul
-  if (mug > 0.0_wp) mg_flux = mug
+  if (mul >= 0.0_wp) ml_flux = mul
+  if (mug >= 0.0_wp) mg_flux = mug
 
   ! ----------------------- Adimensionalization ---------------------------
   call fd%adimensionalizar(Cg, Cl, P_l0, rho_l0, Ps, Pb, jl, jg, ml_flux, mg_flux, &
@@ -263,7 +309,13 @@ program main
   ! ------------------------ Steady-state (IC) ----------------------------
   call EstadoEstacionario_ndim_simp(nodes, nmul, nmug, nPs, Lp, Lr, CA, beta_rad, D, AREA, eps, G, &
                                     nCl, nCg, nrho_l0, nP_l0, mu_l, mu_g, sigma, omega_P, omega_u, omega_rho, tol, &
-                                    vns, vnp, nrhogv, nrholv, alphav, nugv, nulv, thetav, njlv, njgv)
+                                    vns, vnp, nrhogv, nrholv, alphav, nugv, nulv, thetav, njlv, njgv, &
+                                    mesh_ratio=mesh_ratio, n_riser=n_riser, face_positions=physical_faces, &
+                                    closure_id_riser=closure_riser, status=steady_status)
+  if (steady_status/=0) then
+    write(error_unit,'(a,i0)') 'Steady initialization failed, status=',steady_status
+    error stop 2
+  end if
 
   call print_steady_state_summary(nodes, vns, vnp, alphav, nrholv, nrhogv, njlv, njgv, omega_u, omega_rho, omega_P, Lr, Lp)
 
@@ -288,39 +340,30 @@ program main
   call apply_ghost_cells(U, nd)
 
   ! ------------------------- Initial perturbation -------------------------
-  if (trim(adjustl(regime)) == 'OSC' .or. trim(adjustl(regime)) == 'SS1' .or. &
-      trim(adjustl(regime)) == 'SS2' .or. trim(adjustl(regime)) == 'SS3') then
-
-    write(*,'(a)') '>>> Introduzindo pequena perturbação em U0 (momento total) <<<'
-    eps_pert = 1.0e-4_wp
-    ! NOTE (robustness): the steady-state mesh size (Nss=size(vns)) may differ
-    ! from the user input `nodes` due to progressive/refined mesh generation.
-    ! Clamp the perturbation index to the physical range to avoid OOB access.
-    idx_base_ext = nd + min(nodes, Nss) - 1
-    idx_base_ext = max(nd+1, min(idx_base_ext, N-nd))
-    
-    j = idx_base_ext ! Define j como o índice alvo
-
-    call compute_primitive_variables(U(j,1), U(j,2), U(j,3), thetav_ext(j), &
-        nCg, nCl, nrho_l0, nP_l0, D, AREA, eps, G, mu_l, mu_g, sigma, njl, &
-        omega_u, omega_rho, tol, tola, 150, alpha_i, nrhol_i, nrhog_i, P_nd, ul_nd, ug_nd, phase)
-
-    u2_old = U(j,2)
-    U(j,2) = u2_old * (1.0_wp + eps_pert)
-    U(j,3) = U(j,3) + (U(j,2)-u2_old)*ug_nd
-
-    call apply_ghost_cells(U, nd)
-  end if
+  ! The SAME localized momentum perturbation is used for every regime label.
+  ! It changes neither phase inventory; no time-periodic forcing is imposed.
+  do i=nd+1,N-nd
+    U(i,3)=U(i,3)*(1.0_wp+perturbation_amplitude*exp(-((vns_ext(i)-Lp/Lr)/0.15_wp)**2))
+  end do
+  call apply_ghost_cells(U,nd)
 
   ! ---------------------------- Config -----------------------------------
   cfg%regime         = trim(adjustl(regime))
   cfg%num_dummy_cells= nd
   cfg%nCells         = N
-  cfg%N_pipe         = nodes - 1
+  cfg%N_pipe         = nodes
+  cfg%closure_riser  = closure_riser
+  cfg%flux_scheme    = flux_scheme
+  cfg%junction_model = junction_model
+  cfg%dissipation_mode = dissipation_mode
+  cfg%gas_eos        = gas_eos
+  cfg%output_interval_s = output_interval_s
+  cfg%field_interval_s = field_interval_s
+  cfg%perturbation_amplitude = perturbation_amplitude
 
   cfg%Lp   = Lp
   cfg%Lr   = Lr
-  cfg%beta = beta_deg
+  cfg%beta = beta_rad
 
   cfg%D_H  = D
   cfg%AREA = AREA
@@ -365,12 +408,15 @@ program main
 
   ! --- output directory ---
   cfg%out_dir = trim(out_dir)
-  call execute_command_line('mkdir -p ' // trim(cfg%out_dir))
+  call execute_command_line('mkdir -p -- ' // shell_quote(trim(cfg%out_dir)),exitstat=ios)
+  if(ios/=0)error stop 'Unable to create output directory'
 
   ! --- implicit time-step bounds (non-dimensional) ---
   ! If the user provides dt_min/dt_max/dt_start/cfl_target in the namelist, use them.
   ! Otherwise, fall back to safe defaults based on total non-dimensional time cfg%T.
-  if (dt_min > 0.0_wp) then
+  if (dt_min_s > 0.0_wp) then
+    cfg%dt_min = dt_min_s / omega_t
+  else if (dt_min > 0.0_wp) then
     cfg%dt_min = dt_min
   else
     cfg%dt_min = 1.0e-9_wp
@@ -379,13 +425,13 @@ program main
   if (dt_max > 0.0_wp) then
     cfg%dt_max = dt_max
   else
-    cfg%dt_max = cfg%T / 10.0_wp
+    cfg%dt_max = dt_max_s / omega_t
   end if
 
   if (dt_start > 0.0_wp) then
     cfg%dt_start = dt_start
   else
-    cfg%dt_start = 0.01_wp * cfg%T
+    cfg%dt_start = dt_start_s / omega_t
   end if
 
   if (cfl_target > 0.0_wp) then
@@ -401,6 +447,19 @@ program main
   cfg%U0     = U
   cfg%vns    = vns_ext
   cfg%thetav = thetav_ext
+  allocate(cfg%cell_width(N), cfg%face_positions(0:Nss))
+  cfg%face_positions=physical_faces
+  do i=1,Nss
+    cfg%cell_width(nd+i)=cfg%face_positions(i)-cfg%face_positions(i-1)
+  end do
+  cfg%cell_width(:nd)=cfg%cell_width(nd+1)
+  cfg%cell_width(N-nd+1:)=cfg%cell_width(N-nd)
+  open(newunit=ios,file=trim(out_dir)//'/run_metadata.txt',status='replace')
+  write(ios,nml=PARAMS)
+  write(ios,'(a,8(es24.16,1x))') 'Lr,CA,Cg,Gl,Gg,omega_P,omega_rho,omega_u: ', &
+       Lr,CA,Cg,ml_flux,mg_flux,omega_P,omega_rho,omega_u
+  write(ios,'(a)') 'FV1 + backward Euler; mass fluxes kg/m2/s; pressure Pa; time s. Regime is a label only.'
+  close(ios)
 
   ! ---------------------------- Simulate ---------------------------------
   call sim%init(cfg)
@@ -408,7 +467,11 @@ program main
                    it_target=it_target, use_it_target=use_it_target, it_p=it_p, &
                    dt_fac_min=dt_fac_min, dt_fac_max=dt_fac_max, &
                    dt_growth=dt_growth, dt_shrink=dt_shrink, &
-                   newton_fast=newton_fast, newton_slow=newton_slow)
+                   newton_fast=newton_fast, newton_slow=newton_slow, status=sim_status)
+  if (sim_status/=0) then
+    write(error_unit,'(a,i0)') 'Transient did not reach requested final time; status=',sim_status
+    error stop 3
+  end if
 
   ! ----------------------------- Output ----------------------------------
   outname = trim(cfg%out_dir)//'/results_'//trim(adjustl(regime))//'.dat'
@@ -440,6 +503,20 @@ program main
   write(*,'(a,1x,a)') 'Done. Wrote', trim(outname)
 
 contains
+  function shell_quote(s) result(quoted)
+    character(len=*),intent(in)::s
+    character(len=:),allocatable::quoted
+    integer::k
+    quoted=achar(39)
+    do k=1,len(s)
+      if(s(k:k)==achar(39))then
+        quoted=quoted//achar(39)//achar(92)//achar(39)//achar(39)
+      else
+        quoted=quoted//s(k:k)
+      endif
+    enddo
+    quoted=quoted//achar(39)
+  end function
 
   subroutine print_steady_state_summary(nodes, vns, vnp, alphav, nrholv, nrhogv, njlv, njgv, omega_u, omega_rho, omega_P, Lr, Lp)
     use mod_kinds, only: wp, i4

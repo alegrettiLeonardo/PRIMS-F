@@ -34,6 +34,15 @@ module module_config
     integer(i4) :: num_dummy_cells = 2
     integer(i4) :: nCells = 0
     integer(i4) :: N_pipe = 0          ! number of pipe cells in the extended vector (Python: nodes-1)
+    integer(i4) :: closure_pipe = 1
+    integer(i4) :: closure_riser = 2
+    character(len=16) :: flux_scheme = 'ROE'
+    character(len=16) :: gas_eos = 'ISOTHERMAL'
+    character(len=16) :: junction_model = 'MATCHED'
+    character(len=20) :: dissipation_mode = 'LAGGED'
+    real(wp) :: output_interval_s = 1.0_wp
+    real(wp) :: field_interval_s = 30.0_wp
+    real(wp) :: perturbation_amplitude = 0.01_wp
 
     ! --- geometry/physics
     real(wp) :: Lr = 0.0_wp
@@ -95,7 +104,7 @@ module module_config
 
 
     ! --- reconstruction control
-    logical :: use_muscl = .true.
+    logical :: use_muscl = .false.
     ! --- boundary condition safety
     real(wp) :: bc_min_value = 1.0e-12_wp
 
@@ -103,6 +112,8 @@ module module_config
     real(wp), allocatable :: U0(:,:)     ! (N,3)
     real(wp), allocatable :: vns(:)      ! (N)
     real(wp), allocatable :: thetav(:)   ! (N)
+    real(wp), allocatable :: cell_width(:) ! (N), dimensionless TRUE FV widths
+    real(wp), allocatable :: face_positions(:) ! physical faces, 0..nphysical
   end type sim_config_t
 
   public :: first_physical_cell, last_physical_cell

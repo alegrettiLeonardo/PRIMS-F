@@ -79,7 +79,9 @@ contains
     rho_m = alpha_i * rho_g_i + (1.0_wp - alpha_i) * rho_l_i
     j     = alpha_i * u_g_i + (1.0_wp - alpha_i) * u_l_i
 
-    if (abs(mu_m) <= 1.0e-30_wp) then
+    if (j == 0.0_wp) then
+      ! The product f_F*j*abs(j) has the analytic laminar limit zero.
+      ! Do not call the friction correlation outside its Re>0 domain.
       Re_m = 0.0_wp
       f_m  = 0.0_wp
     else
@@ -92,10 +94,11 @@ contains
   subroutine compute_source_term_vector(this, alpha_i, rho_m_i, theta_i, f_m_i, j_i, g, D, S)
     class(fluid_dynamics_t), intent(in) :: this
     real(wp), intent(in) :: alpha_i, rho_m_i, theta_i, f_m_i, j_i, g, D
+    ! Here g=g_dim*Lr/omega_u**2 and D=Lr/diameter; f_m is Fanning.
     real(wp), intent(out) :: S(3)
     S(1) = 0.0_wp
     S(2) = 0.0_wp
-    S(3) = -rho_m_i * g * sin(theta_i) - (D/2.0_wp) * rho_m_i * f_m_i * abs(j_i) * j_i
+    S(3) = -rho_m_i * g * sin(theta_i) - (2.0_wp*D) * rho_m_i * f_m_i * abs(j_i) * j_i
   end subroutine compute_source_term_vector
 
 end module module_solver_utils

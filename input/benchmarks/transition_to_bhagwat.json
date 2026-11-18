@@ -1,0 +1,331 @@
+{
+  "purpose": "Preserve the eight pre-Bhagwat Bendiksen benchmark decks byte for byte; track declared protocol changes without altering physical parameters.",
+  "archive_directory": "input/benchmarks/bendiksen",
+  "archived_sha256": {
+    "D_OSC.nml": "c537fd9bdf8951b46fcb776759e3f3d6bd455cdf2ff565f876ef82df382d86a1",
+    "D_OSC_ISO.nml": "f53f361fca930f94ed16aa443a0f4844c39afbff24fc14b8d083ac187708a755",
+    "D_SS1.nml": "a0b5d29fa1fd68e6a030be2ab75f81b160653ab107be01020ee68502892187b1",
+    "D_SS1_ISO.nml": "1894f1e255fd0eb369bb4a272f639f2f4380a1b0b964b48d6d07ab9f52835201",
+    "D_SS3.nml": "ec85b0b18552aabcbb6e6d99532b13207eb6074479af1c26994b4ecafef9f960",
+    "D_SS3_ISO.nml": "f62472b7c7fbf22fd1fbffb5aa6bfccc443d2ecc90023306df6a39a0e80fd98a",
+    "D_Stable.nml": "10bc3556629429c9b14a44e3adca740c517887ce7b9bebb40a6678ad14e47ec5",
+    "D_Stable_ISO.nml": "9d1bbaa964cd79fd3432bf2421fc0c9567513d4799c3b66e0de279c8a340bad5"
+  },
+  "primary_sha256": {
+    "D_OSC.nml": "48b02dffb9319c3786fc5d4c102c1893786e9d3ab8ec668025f1893e26272408",
+    "D_OSC_ISO.nml": "030a271e93bdb491a4f317046f0c37a9a9b36759667cc6c9a9f4cdab14e519b9",
+    "D_SS1.nml": "6c7b0f9bdcc0b2d2acca212f50b760dc2613fc8f3b6474ceac7731e240d58f7d",
+    "D_SS1_ISO.nml": "db31eff235698bdd1c35e4f951b42d3ddc3c09e25f0578645698ee1769bc3817",
+    "D_SS3.nml": "f5fe9ece006415d71541f1196b243fb047d57abd5739319cf1a81247261c86ee",
+    "D_SS3_ISO.nml": "ef047dc2fe5f54f412bf3895d41bddcadb25adaae82477efa43b27f06a9a279a",
+    "D_Stable.nml": "bc41e84552eb44e0938a25065a71d1c3ebcf7c81fbf7cb0c4349d10431e49ec9",
+    "D_Stable_ISO.nml": "1417971608264446e4e41351aa712b2034242a1101bff437f46672530b8a381c"
+  },
+  "namelist_changes": {
+    "D_OSC.nml": {
+      "closure_riser": {
+        "before": "2",
+        "after": "3"
+      },
+      "dissipation_mode": {
+        "before": null,
+        "after": "'LAGGED'"
+      },
+      "dt_max_s": {
+        "before": "0.01",
+        "after": "0.5"
+      },
+      "dt_start_s": {
+        "before": "1.0e-4",
+        "after": "0.001"
+      },
+      "field_interval_s": {
+        "before": null,
+        "after": "15.0"
+      },
+      "junction_model": {
+        "before": null,
+        "after": "'MATCHED'"
+      },
+      "save_every": {
+        "before": "1",
+        "after": "0"
+      },
+      "tol": {
+        "before": "1.0e-8",
+        "after": "1.0e-12"
+      },
+      "tola": {
+        "before": "1.0e-10",
+        "after": "1.0e-13"
+      }
+    },
+    "D_OSC_ISO.nml": {
+      "closure_riser": {
+        "before": "2",
+        "after": "3"
+      },
+      "dissipation_mode": {
+        "before": null,
+        "after": "'LAGGED'"
+      },
+      "dt_max_s": {
+        "before": "0.01",
+        "after": "0.5"
+      },
+      "dt_start_s": {
+        "before": "1.0e-4",
+        "after": "0.001"
+      },
+      "field_interval_s": {
+        "before": null,
+        "after": "15.0"
+      },
+      "junction_model": {
+        "before": null,
+        "after": "'MATCHED'"
+      },
+      "save_every": {
+        "before": "1",
+        "after": "0"
+      },
+      "tol": {
+        "before": "1.0e-8",
+        "after": "1.0e-12"
+      },
+      "tola": {
+        "before": "1.0e-10",
+        "after": "1.0e-13"
+      }
+    },
+    "D_SS1.nml": {
+      "closure_riser": {
+        "before": "2",
+        "after": "3"
+      },
+      "dissipation_mode": {
+        "before": null,
+        "after": "'LAGGED'"
+      },
+      "dt_max_s": {
+        "before": "0.01",
+        "after": "0.5"
+      },
+      "dt_start_s": {
+        "before": "1.0e-4",
+        "after": "0.001"
+      },
+      "field_interval_s": {
+        "before": null,
+        "after": "15.0"
+      },
+      "junction_model": {
+        "before": null,
+        "after": "'MATCHED'"
+      },
+      "save_every": {
+        "before": "1",
+        "after": "0"
+      },
+      "tol": {
+        "before": "1.0e-8",
+        "after": "1.0e-12"
+      },
+      "tola": {
+        "before": "1.0e-10",
+        "after": "1.0e-13"
+      }
+    },
+    "D_SS1_ISO.nml": {
+      "closure_riser": {
+        "before": "2",
+        "after": "3"
+      },
+      "dissipation_mode": {
+        "before": null,
+        "after": "'LAGGED'"
+      },
+      "dt_max_s": {
+        "before": "0.01",
+        "after": "0.5"
+      },
+      "dt_start_s": {
+        "before": "1.0e-4",
+        "after": "0.001"
+      },
+      "field_interval_s": {
+        "before": null,
+        "after": "15.0"
+      },
+      "junction_model": {
+        "before": null,
+        "after": "'MATCHED'"
+      },
+      "save_every": {
+        "before": "1",
+        "after": "0"
+      },
+      "tol": {
+        "before": "1.0e-8",
+        "after": "1.0e-12"
+      },
+      "tola": {
+        "before": "1.0e-10",
+        "after": "1.0e-13"
+      }
+    },
+    "D_SS3.nml": {
+      "closure_riser": {
+        "before": "2",
+        "after": "3"
+      },
+      "dissipation_mode": {
+        "before": null,
+        "after": "'LAGGED'"
+      },
+      "dt_max_s": {
+        "before": "0.01",
+        "after": "0.5"
+      },
+      "dt_start_s": {
+        "before": "1.0e-4",
+        "after": "0.001"
+      },
+      "field_interval_s": {
+        "before": null,
+        "after": "15.0"
+      },
+      "junction_model": {
+        "before": null,
+        "after": "'MATCHED'"
+      },
+      "save_every": {
+        "before": "1",
+        "after": "0"
+      },
+      "tol": {
+        "before": "1.0e-8",
+        "after": "1.0e-12"
+      },
+      "tola": {
+        "before": "1.0e-10",
+        "after": "1.0e-13"
+      }
+    },
+    "D_SS3_ISO.nml": {
+      "closure_riser": {
+        "before": "2",
+        "after": "3"
+      },
+      "dissipation_mode": {
+        "before": null,
+        "after": "'LAGGED'"
+      },
+      "dt_max_s": {
+        "before": "0.01",
+        "after": "0.5"
+      },
+      "dt_start_s": {
+        "before": "1.0e-4",
+        "after": "0.001"
+      },
+      "field_interval_s": {
+        "before": null,
+        "after": "15.0"
+      },
+      "junction_model": {
+        "before": null,
+        "after": "'MATCHED'"
+      },
+      "save_every": {
+        "before": "1",
+        "after": "0"
+      },
+      "tol": {
+        "before": "1.0e-8",
+        "after": "1.0e-12"
+      },
+      "tola": {
+        "before": "1.0e-10",
+        "after": "1.0e-13"
+      }
+    },
+    "D_Stable.nml": {
+      "closure_riser": {
+        "before": "2",
+        "after": "3"
+      },
+      "dissipation_mode": {
+        "before": null,
+        "after": "'LAGGED'"
+      },
+      "dt_max_s": {
+        "before": "0.01",
+        "after": "0.5"
+      },
+      "dt_start_s": {
+        "before": "1.0e-4",
+        "after": "0.001"
+      },
+      "field_interval_s": {
+        "before": null,
+        "after": "15.0"
+      },
+      "junction_model": {
+        "before": null,
+        "after": "'MATCHED'"
+      },
+      "save_every": {
+        "before": "1",
+        "after": "0"
+      },
+      "tol": {
+        "before": "1.0e-8",
+        "after": "1.0e-12"
+      },
+      "tola": {
+        "before": "1.0e-10",
+        "after": "1.0e-13"
+      }
+    },
+    "D_Stable_ISO.nml": {
+      "closure_riser": {
+        "before": "2",
+        "after": "3"
+      },
+      "dissipation_mode": {
+        "before": null,
+        "after": "'LAGGED'"
+      },
+      "dt_max_s": {
+        "before": "0.01",
+        "after": "0.5"
+      },
+      "dt_start_s": {
+        "before": "1.0e-4",
+        "after": "0.001"
+      },
+      "field_interval_s": {
+        "before": null,
+        "after": "15.0"
+      },
+      "junction_model": {
+        "before": null,
+        "after": "'MATCHED'"
+      },
+      "save_every": {
+        "before": "1",
+        "after": "0"
+      },
+      "tol": {
+        "before": "1.0e-8",
+        "after": "1.0e-12"
+      },
+      "tola": {
+        "before": "1.0e-10",
+        "after": "1.0e-13"
+      }
+    }
+  },
+  "physical_parameter_changes": []
+}

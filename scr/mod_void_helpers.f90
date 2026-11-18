@@ -1,192 +1,134 @@
 module mod_void_helpers
-  !! Utilities originally from voidFraction.py:
-  !! - numerical guards (clamp/safe_div)
-  !! - Fanning friction factor ffan and its partial derivatives
-  !! - alpha <-> gamma relation via bisection
-  use mod_kinds,       only: wp
-  use mod_rootfinding, only: bisect_root
+  !! Geometry and Fanning friction. No hidden root fallback or negative-Re clipping.
+  use mod_kinds, only: wp
+  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite, ieee_value, ieee_quiet_nan
   implicit none
   private
-
-  public :: clamp, safe_div
-  public :: calcular_fatrito, ffan, Dffan
-  public :: fvgamma, alpha2gamma
-
-  real(wp), parameter :: PI = acos(-1.0_wp)
-
+  public :: clamp, safe_div, calcular_fatrito, ffan, Dffan, fvgamma, alpha2gamma
+  real(wp), parameter :: PI=acos(-1.0_wp)
 contains
-
-  pure real(wp) function clamp(x, lo, hi) result(y)
-    real(wp), intent(in) :: x, lo, hi
-    y = min(max(x, lo), hi)
-  end function clamp
-
-  pure real(wp) function safe_div(a, b, eps) result(y)
-    real(wp), intent(in) :: a, b
-    real(wp), intent(in), optional :: eps
-    real(wp) :: e, bb
-
-    if (present(eps)) then
-      e = eps
+  pure real(wp) function clamp(x,lo,hi) result(y)
+    real(wp),intent(in)::x,lo,hi
+    y=min(max(x,lo),hi)
+  end function
+  pure real(wp) function safe_div(a,b,eps) result(y)
+    real(wp),intent(in)::a,b
+    real(wp),intent(in),optional::eps
+    real(wp)::e,bb
+    e=1e-30_wp
+    if(present(eps)) e=eps
+    bb=b
+    if(abs(bb)<=e)bb=sign(e,bb)
+    y=a/bb
+  end function
+  real(wp) function calcular_fatrito(Re,epsD,status) result(f)
+    !! Explicit turbulent Fanning approximation from the supplied implementation.
+    !! The -4 logarithm coefficient is Fanning, not Darcy.
+    real(wp),intent(in)::Re,epsD
+    integer,intent(out),optional::status
+    real(wp)::q,b
+    if(present(status))status=10
+    f=ieee_value(0.0_wp,ieee_quiet_nan)
+    if(.not.all(ieee_is_finite([Re,epsD])))return
+    if(Re<=0.0_wp.or.epsD<0.0_wp)return
+    q=5.8506_wp/Re**0.8981_wp+epsD**1.1098_wp/2.8257_wp
+    if(q<=0.0_wp)return
+    b=epsD/3.7065_wp-(5.0452_wp/Re)*log10(q)
+    if(b<=0.0_wp)return
+    q=-4.0_wp*log10(b)
+    if(abs(q)<=tiny(1.0_wp))return
+    f=1.0_wp/(q*q)
+    if(present(status))status=0
+  end function
+  real(wp) function ffan(epsD,Re,status) result(f)
+    real(wp),intent(in)::epsD,Re
+    integer,intent(out),optional::status
+    integer::ierr
+    real(wp)::ft
+    f=ieee_value(0.0_wp,ieee_quiet_nan)
+    if(present(status))status=10
+    if(.not.all(ieee_is_finite([Re,epsD])))return
+    if(Re<=0.0_wp.or.epsD<0.0_wp)return
+    if(Re<2000.0_wp)then
+      f=16.0_wp/Re
+    else if(Re>2300.0_wp)then
+      f=calcular_fatrito(Re,epsD,ierr)
+      if(ierr/=0)return
     else
-      e = 1.0e-30_wp
-    end if
-
-    bb = b
-    if (abs(bb) <= e) bb = sign(e, bb)
-    y = a / bb
-  end function safe_div
-
-
-  ! =========================
-  ! Fator de atrito (Fanning)
-  ! =========================
-
-  real(wp) function calcular_fatrito(Re, epsD) result(f)
-    !! Explicit approximation (same algebra as in Python).
-    real(wp), intent(in) :: Re, epsD
-    real(wp) :: Re2, termo_interno, f0, f1
-
-    Re2 = max(Re, 1.0e-12_wp)
-
-    termo_interno = 5.8506_wp / (Re2 ** 0.8981_wp) + (epsD ** 1.1098_wp) / 2.8257_wp
-    termo_interno = max(termo_interno, 1.0e-30_wp)
-
-    f0 = log10(termo_interno)
-    f1 = (epsD / 3.7065_wp) - (5.0452_wp / Re2) * f0
-    f1 = max(f1, 1.0e-30_wp)
-
-    f = (-4.0_wp * log10(f1)) ** (-2.0_wp)
-  end function calcular_fatrito
-
-
-  real(wp) function ffan(epsD, Re) result(f)
-    !! Fanning friction factor piecewise:
-    !!   - Laminar (Re < 2000): f = 16/Re
-    !!   - Transitional (2000..2300): linear blend
-    !!   - Turbulent (Re > 2300): calcular_fatrito(Re, epsD)
-    real(wp), intent(in) :: epsD, Re
-    real(wp) :: Re2, fl, ft
-
-    Re2 = max(Re, 1.0e-12_wp)
-
-    if (Re2 < 2000.0_wp) then
-      f = 16.0_wp / Re2
-    elseif (Re2 > 2300.0_wp) then
-      f = calcular_fatrito(Re2, epsD)
+      ft=calcular_fatrito(2300.0_wp,epsD,ierr)
+      if(ierr/=0)return
+      f=((Re-2000.0_wp)*ft+(2300.0_wp-Re)*(16.0_wp/2000.0_wp))/300.0_wp
+    endif
+    if(present(status))status=0
+  end function
+  subroutine Dffan(Re,epsD,dRe,dE,status)
+    real(wp),intent(in)::Re,epsD
+    real(wp),intent(out)::dRe,dE
+    integer,intent(out),optional::status
+    real(wp)::re_eval,inner,ll,b,dbdr,dbde,fac,ft,der,dee
+    integer::ierr
+    dRe=ieee_value(0.0_wp,ieee_quiet_nan);dE=dRe
+    if(present(status))status=10
+    if(.not.all(ieee_is_finite([Re,epsD])))return
+    if(Re<=0.0_wp.or.epsD<0.0_wp)return
+    if(Re<2000.0_wp)then
+      dRe=-16.0_wp/Re**2;dE=0.0_wp
     else
-      fl = 16.0_wp / 2000.0_wp
-      ft = calcular_fatrito(2300.0_wp, epsD)
-      f = ((Re2 - 2000.0_wp) * ft + (2300.0_wp - Re2) * fl) / 300.0_wp
-    end if
-  end function ffan
-
-
-  subroutine Dffan(Rem, epsD, D1ffan, D2ffan)
-    !! Partial derivatives of ffan:
-    !!   D1ffan = df/dRem
-    !!   D2ffan = df/depsD
-    real(wp), intent(in)  :: Rem, epsD
-    real(wp), intent(out) :: D1ffan, D2ffan
-
-    real(wp) :: Re2, ED
-    real(wp) :: a, b, c, d, e
-    real(wp) :: ln10
-    real(wp) :: inner, L, Aval, logA10
-    real(wp) :: df_dA
-    real(wp) :: dL_dRem, dA_dRem
-    real(wp) :: d_inner_dED, dL_dED, dA_dED
-
-    Re2 = max(Rem, 1.0e-12_wp)
-    ED  = epsD
-
-    if (Re2 < 2000.0_wp) then
-      D1ffan = -16.0_wp / (Re2 * Re2)
-      D2ffan = 0.0_wp
-      return
-    end if
-
-    if (Re2 > 2300.0_wp) then
-      a = ED / 3.7065_wp
-      b = 5.0452_wp
-      c = (ED ** 1.1098_wp) / 2.8257_wp
-      d = 5.8506_wp
-      e = 0.8981_wp
-      ln10 = log(10.0_wp)
-
-      inner = c + d * Re2 ** (-e)
-      inner = max(inner, 1.0e-30_wp)
-      L = log10(inner)
-
-      Aval = a - (b / Re2) * L
-      Aval = max(Aval, 1.0e-30_wp)
-
-      logA10 = log10(Aval)
-
-      ! df/dA  where f = 1/[16 (log10 Aval)^2]
-      df_dA = -2.0_wp * (1.0_wp / 16.0_wp) * (logA10 ** (-3.0_wp)) * (1.0_wp / (Aval * ln10))
-
-      ! dA/dRe
-      dL_dRem = (1.0_wp / (inner * ln10)) * (d * (-e) * Re2 ** (-e - 1.0_wp))
-      dA_dRem = - ( -b / (Re2 ** 2) * L + (b / Re2) * dL_dRem )
-
-      ! dA/dED
-      d_inner_dED = (1.1098_wp * (ED ** 0.1098_wp)) / 2.8257_wp
-      dL_dED = (1.0_wp / (inner * ln10)) * d_inner_dED
-      dA_dED = (1.0_wp / 3.7065_wp) - (b / Re2) * dL_dED
-
-      D1ffan = df_dA * dA_dRem
-      D2ffan = df_dA * dA_dED
-      return
-    end if
-
-    ! Transition region: linear blend.
-    ! ft evaluated at Re=2300 -> treated constant w.r.t Re in this branch.
-    D1ffan = (calcular_fatrito(2300.0_wp, ED) - 16.0_wp/2000.0_wp) / 300.0_wp
-    D2ffan = 0.0_wp
-  end subroutine Dffan
-
-
-  ! =========================
-  ! Relação alpha <-> gamma
-  ! =========================
-
-  real(wp) function fvgamma(alpha, gamma) result(val)
-    real(wp), intent(in) :: alpha, gamma
-    val = alpha - 1.0_wp + gamma - sin(2.0_wp*PI*gamma)/(2.0_wp*PI)
-  end function fvgamma
-
-
-  real(wp) function alpha2gamma(alpha, tol) result(gamma)
-    !! Solve gamma in [0,1] given alpha.
-    !! Uses bisection on fvgamma(alpha, g) == 0.
-    real(wp), intent(in) :: alpha, tol
-
-    real(wp) :: root
-    integer :: ier
-
-    if (abs(alpha) <= tol) then
-      gamma = 1.0_wp
-      return
-    end if
-    if (abs(1.0_wp - alpha) <= tol) then
-      gamma = 0.0_wp
-      return
-    end if
-
-    ! NOTE: bisect_root is a FUNCTION (returns the root) with an integer INFO output.
-    root = bisect_root(fun_gamma, 0.0_wp, 1.0_wp, tol, 200, ier)
-    if (ier /= 0) then
-      gamma = 0.5_wp
+      re_eval=max(Re,2300.0_wp)
+      inner=5.8506_wp/re_eval**0.8981_wp+epsD**1.1098_wp/2.8257_wp
+      ll=log10(inner)
+      b=epsD/3.7065_wp-5.0452_wp*ll/re_eval
+      if(b<=0.0_wp)return
+      fac=-1.0_wp/(8.0_wp*log10(b)**3*b*log(10.0_wp))
+      dbdr=5.0452_wp*ll/re_eval**2+ &
+        (5.0452_wp/re_eval)*(0.8981_wp*5.8506_wp/re_eval**1.8981_wp)/(inner*log(10.0_wp))
+      dbde=1.0_wp/3.7065_wp-(5.0452_wp/re_eval)* &
+        (1.1098_wp*epsD**0.1098_wp/2.8257_wp)/(inner*log(10.0_wp))
+      der=fac*dbdr;dee=fac*dbde
+      if(Re>2300.0_wp)then
+        dRe=der;dE=dee
+      else
+        ft=calcular_fatrito(2300.0_wp,epsD,ierr)
+        if(ierr/=0)return
+        dRe=(ft-16.0_wp/2000.0_wp)/300.0_wp
+        ! Unlike the previous version, the transition retains roughness sensitivity.
+        dE=(Re-2000.0_wp)*dee/300.0_wp
+      endif
+    endif
+    if(present(status))status=0
+  end subroutine
+  pure real(wp) function fvgamma(alpha,gamma) result(v)
+    real(wp),intent(in)::alpha,gamma
+    v=alpha-1.0_wp+gamma-sin(2.0_wp*PI*gamma)/(2.0_wp*PI)
+  end function
+  real(wp) function alpha2gamma(alpha,tol,status) result(gamma)
+    real(wp),intent(in)::alpha,tol
+    integer,intent(out),optional::status
+    real(wp)::lo,hi,mid,f,xtol
+    integer::k
+    gamma=ieee_value(0.0_wp,ieee_quiet_nan)
+    if(present(status))status=10
+    if(.not.all(ieee_is_finite([alpha,tol])))return
+    if(alpha<0.0_wp.or.alpha>1.0_wp.or.tol<=0.0_wp)return
+    if(alpha==0.0_wp)then
+      gamma=1.0_wp
+    else if(alpha==1.0_wp)then
+      gamma=0.0_wp
     else
-      gamma = root
-    end if
-
-  contains
-    real(wp) function fun_gamma(g) result(val)
-      real(wp), intent(in) :: g
-      val = fvgamma(alpha, g)
-    end function fun_gamma
-  end function alpha2gamma
-
+      lo=0.0_wp;hi=1.0_wp
+      xtol=max(4.0_wp*epsilon(1.0_wp),min(tol,1e-12_wp))
+      do k=1,100
+        mid=0.5_wp*(lo+hi)
+        f=fvgamma(alpha,mid)
+        if(f>0.0_wp)then
+          hi=mid
+        else
+          lo=mid
+        endif
+        if(hi-lo<=xtol)exit
+      enddo
+      gamma=0.5_wp*(lo+hi)
+    endif
+    if(present(status))status=0
+  end function
 end module mod_void_helpers

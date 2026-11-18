@@ -1,165 +1,128 @@
 module module_boundary_conditions
-  !! Boundary conditions and ghost-cell filling for PRIMS-F.
-  !!
-  !! IMPORTANT INDEXING CONVENTION (1-based):
-  !!   - total cells include ghosts: N = size(U,1)
-  !!   - left ghosts:   1 .. nd
-  !!   - physical:      nd+1 .. N-nd
-  !!   - right ghosts:  N-nd+1 .. N
-  !!
-  !! This module is written defensively to avoid out-of-bounds access
-  !! (a common source of SIGSEGV when porting from 0-based Python).
-
-  use mod_kinds,     only: wp, i4
-  use module_config, only: sim_config_t
-  use module_find,   only: compute_primitive_variables
-  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
+  !! Boundary conditions act on boundary faces and ghosts only. There is no
+  !! inlet cache and no positivity repair of physical conservative states.
+  use mod_kinds,only:wp,i4
+  use module_config,only:sim_config_t
+  use module_find,only:compute_primitive_variables,pressure_fun_uj
+  use module_steady_state,only:solve_alpha_from_superficials,PHASE_AUTO,PHASE_LIQUID_ONLY,PHASE_GAS_ONLY
+  use,intrinsic::ieee_arithmetic,only:ieee_is_finite,ieee_value,ieee_quiet_nan
   implicit none
   private
-
-  public :: apply_ghost_cells
-  public :: apply_boundary_conditions
-
-  ! Cache a reference inlet state so SS1/SS2/SS3 can keep a strong inlet
-  ! Dirichlet BC (the solver excludes the inlet physical cell from Newton).
-  logical, save :: inlet_cached = .false.
-  real(wp), save :: u1_in_ref = 0.0_wp
-  real(wp), save :: u2_in_ref = 0.0_wp
-
+  public::apply_ghost_cells,apply_boundary_conditions,boundary_flux
 contains
-
-  subroutine apply_ghost_cells(U, nd)
-    !! Simple and SAFE ghost fill: constant extrapolation from nearest physical cells.
-    !! This is robust and avoids any access to index 0/-1 or N+1.
-    real(wp), intent(inout) :: U(:,:)
-    integer(i4), intent(in) :: nd
-    integer(i4) :: N, iL, iR, k, idx
-    real(wp) :: bcmin
-
-    N = size(U,1)
-    if (N < 1) return
-    if (nd < 1) return
-    if (N <= 2*nd) return
-
-    iL = nd + 1
-    iR = N - nd
-    bcmin = 1.0e-12_wp
-
-    ! Left ghosts
-    do k = 1, nd
-      idx = iL - k
-      if (idx < 1) exit
-      U(idx,:) = U(iL,:)
-    end do
-
-    ! Right ghosts
-    do k = 1, nd
-      idx = iR + k
-      if (idx > N) exit
-      U(idx,:) = U(iR,:)
-    end do
-
-    ! Positivity clamp (helps avoid NaNs inside primitive recovery)
-    U(:,1) = max(U(:,1), bcmin)
-    U(:,2) = max(U(:,2), bcmin)
-  end subroutine apply_ghost_cells
-
-
-  subroutine apply_boundary_conditions(U, inlet_idx, outlet_idx, theta_inlet, theta_outlet, cfg)
-    !! Applies:
-    !!   - Inlet: strong mass-flux BC (cfg%mul, cfg%mug) by fixing the inlet
-    !!            physical cell conservative state (and copying to left ghosts).
-    !!   - Outlet: separator pressure BC (cfg%nPs) via right ghost cells.
-    !!
-    !! NOTES:
-    !!   1) The solver residual at the outlet uses U(outlet_idx+1,:) (ghost).
-    !!   2) The solver may exclude inlet_idx from Newton for non-OSC regimes;
-    !!      therefore we keep inlet_idx fixed.
-    real(wp), intent(inout)        :: U(:,:)
-    integer(i4), intent(in)        :: inlet_idx, outlet_idx
-    real(wp), intent(in)           :: theta_inlet, theta_outlet
-    type(sim_config_t), intent(in) :: cfg
-
-    integer(i4) :: N, nd, k, idx
-    real(wp) :: bcmin
-    real(wp) :: P_bc, rhog_bc, rhol_bc, alpha_out
-    real(wp) :: ul_out, ug_out, P_out, rhol_out, rhog_out
-    integer(i4) :: phase_out
-    real(wp) :: u1_bc, u2_bc, u3_bc
-    real(wp), parameter :: rho_eps = 1.0e-16_wp
-    real(wp), parameter :: alpha_eps = 1.0e-12_wp
-
-    N  = size(U,1)
-    nd = cfg%num_dummy_cells
-    if (N < 1) return
-    if (nd < 0) return
-
-    bcmin = max(cfg%bc_min_value, 1.0e-16_wp)
-
-    ! -----------------------------
-    ! Inlet strong BC (fix inlet cell)
-    ! -----------------------------
-    if (inlet_idx >= 1 .and. inlet_idx <= N) then
-      if (.not. inlet_cached) then
-        u1_in_ref = max(U(inlet_idx,1), bcmin)
-        u2_in_ref = max(U(inlet_idx,2), bcmin)
-        inlet_cached = .true.
-      end if
-
-      U(inlet_idx,1) = max(u1_in_ref, bcmin)
-      U(inlet_idx,2) = max(u2_in_ref, bcmin)
-      ! Enforce inlet phase mass fluxes: m_l = u1*ul, m_g = u2*ug.
-      ! By construction, mixture momentum becomes m_l + m_g.
-      U(inlet_idx,3) = cfg%mul + cfg%mug
-
-      ! Fill left ghost cells as copies of inlet state
-      do k = 1, nd
-        idx = inlet_idx - k
-        if (idx < 1) exit
-        U(idx,:) = U(inlet_idx,:)
-      end do
-    end if
-
-    ! -----------------------------
-    ! Outlet pressure BC via right ghosts
-    ! -----------------------------
-    if (outlet_idx >= 1 .and. outlet_idx <= N) then
-      ! Recover outlet primitives (to get alpha and velocities)
-      call compute_primitive_variables( &
-        U(outlet_idx,1), U(outlet_idx,2), U(outlet_idx,3), theta_outlet, &
-        cfg%nCg, cfg%nCl, cfg%nrho_l0, cfg%nP_l0, &
-        cfg%D_H, cfg%AREA, cfg%eps, cfg%G, &
-        cfg%mu_l, cfg%mu_g, cfg%sigma, cfg%njl, &
-        cfg%omega_u, cfg%omega_rho, &
-        cfg%tol, cfg%tola, cfg%maxit, &
-        alpha_out, rhol_out, rhog_out, P_out, ul_out, ug_out, phase_out )
-
-      if (.not. ieee_is_finite(alpha_out)) alpha_out = 0.5_wp
-      alpha_out = max(min(alpha_out, 1.0_wp - alpha_eps), alpha_eps)
-      if (.not. ieee_is_finite(ul_out)) ul_out = 0.0_wp
-      if (.not. ieee_is_finite(ug_out)) ug_out = 0.0_wp
-
-      P_bc    = max(cfg%nPs, 1.0e-12_wp)
-      rhog_bc = max(P_bc / max(cfg%nCg*cfg%nCg, 1.0e-30_wp), rho_eps)
-      rhol_bc = max(cfg%nrho_l0 + (P_bc - cfg%nP_l0) / max(cfg%nCl*cfg%nCl, 1.0e-30_wp), rho_eps)
-
-      u1_bc = max((1.0_wp - alpha_out) * rhol_bc, bcmin)
-      u2_bc = max(alpha_out * rhog_bc, bcmin)
-      u3_bc = u1_bc * ul_out + u2_bc * ug_out
-
-      ! Fill right ghost cells
-      do k = 1, nd
-        idx = outlet_idx + k
-        if (idx > N) exit
-        U(idx,1) = u1_bc
-        U(idx,2) = u2_bc
-        U(idx,3) = u3_bc
-      end do
-    end if
-
-    ! Final safety clamp
-    U(:,1) = max(U(:,1), bcmin)
-    U(:,2) = max(U(:,2), bcmin)
-  end subroutine apply_boundary_conditions
-
+  subroutine apply_ghost_cells(U,nd,status)
+    real(wp),intent(inout)::U(:,:)
+    integer(i4),intent(in)::nd
+    integer,intent(out),optional::status
+    integer::n,k,first,last
+    if(present(status))status=101
+    n=size(U,1)
+    if(size(U,2)/=3.or.nd<0.or.n<=2*nd)return
+    first=nd+1;last=n-nd
+    do k=1,nd
+      U(first-k,:)=U(first,:)
+      U(last+k,:)=U(last,:)
+    enddo
+    if(present(status))status=0
+  end subroutine
+  subroutine boundary_flux(Uinterior,theta,cfg,is_inlet,F,status,Ubc)
+    real(wp),intent(in)::Uinterior(3),theta
+    type(sim_config_t),intent(in)::cfg
+    logical,intent(in)::is_inlet
+    real(wp),intent(out)::F(3)
+    integer,intent(out)::status
+    real(wp),intent(out),optional::Ubc(3)
+    real(wp)::p,rhol,rhog,alpha,alpha_interior,ul,ug,jl,jg,pip,state(3),pcheck
+    integer::model,phase,inlet_phase
+    F=ieee_value(0.0_wp,ieee_quiet_nan)
+    if(present(Ubc))Ubc=F
+    status=101
+    if(.not.all(ieee_is_finite(Uinterior)))return
+    if(minval(Uinterior(1:2))<0.0_wp.or.sum(Uinterior(1:2))<=0.0_wp)return
+    if(min(cfg%nCg,cfg%nCl,cfg%omega_rho,cfg%omega_u,cfg%omega_P)<=0.0_wp)return
+    p=pressure_fun_uj(Uinterior(1),Uinterior(2),cfg%nCg,cfg%nCl,cfg%nrho_l0,cfg%nP_l0)
+    if(.not.ieee_is_finite(p).or.p<=0.0_wp)return
+    pip=cfg%omega_P/(cfg%omega_rho*cfg%omega_u**2)
+    if(is_inlet)then
+      model=cfg%closure_pipe
+      ! Inlet pressure follows the interior. Two independently prescribed
+      ! phase mass fluxes supply the incoming boundary conditions.
+      rhol=cfg%nrho_l0+(p-cfg%nP_l0)/cfg%nCl**2
+      rhog=p/cfg%nCg**2
+      if(min(rhol,rhog)<=0.0_wp)return
+      alpha_interior=Uinterior(2)/rhog
+      if(Uinterior(1)==0.0_wp)alpha_interior=1.0_wp
+      if(alpha_interior<0.0_wp.or.alpha_interior>1.0_wp)return
+      ! Zero imposed flow alone does not imply that a phase is absent.
+      inlet_phase=PHASE_AUTO
+      if(Uinterior(2)==0.0_wp.and.cfg%mug==0.0_wp)inlet_phase=PHASE_LIQUID_ONLY
+      if(Uinterior(1)==0.0_wp.and.cfg%mul==0.0_wp)inlet_phase=PHASE_GAS_ONLY
+      jl=cfg%mul/rhol;jg=cfg%mug/rhog
+      alpha=solve_alpha_from_superficials(jl,jg,rhol,rhog,theta,cfg%D_H,cfg%AREA,cfg%eps,cfg%G, &
+        cfg%mu_l,cfg%mu_g,cfg%sigma,cfg%omega_u,cfg%omega_rho,cfg%tol,status=status,closure_id=model, &
+        alpha_hint=alpha_interior,phase_hint=inlet_phase)
+      if(status/=0)return
+      ul=0.0_wp;ug=0.0_wp
+      if(alpha<1.0_wp)ul=jl/(1.0_wp-alpha)
+      if(alpha>0.0_wp)ug=jg/alpha
+      state=[(1.0_wp-alpha)*rhol,alpha*rhog,cfg%mul+cfg%mug]
+      F=[cfg%mul,cfg%mug,cfg%mul*ul+cfg%mug*ug+pip*p]
+    else
+      model=cfg%closure_riser
+      rhog=p/cfg%nCg**2
+      alpha=Uinterior(2)/rhog
+      if(alpha<0.0_wp.or.alpha>1.0_wp)return
+      ! Impose pressure at the face; retain interior void fraction and total
+      ! momentum, then recover velocities under the selected closure at Pout.
+      p=cfg%nPs
+      if(.not.ieee_is_finite(p).or.p<=0.0_wp)return
+      rhol=cfg%nrho_l0+(p-cfg%nP_l0)/cfg%nCl**2
+      rhog=p/cfg%nCg**2
+      if(min(rhol,rhog)<=0.0_wp)return
+      state=[(1.0_wp-alpha)*rhol,alpha*rhog,Uinterior(3)]
+      call compute_primitive_variables(state(1),state(2),state(3),theta,cfg%nCg,cfg%nCl,cfg%nrho_l0,cfg%nP_l0, &
+        cfg%D_H,cfg%AREA,cfg%eps,cfg%G,cfg%mu_l,cfg%mu_g,cfg%sigma,cfg%njl,cfg%omega_u,cfg%omega_rho, &
+        cfg%tol,cfg%tola,cfg%maxit,alpha,rhol,rhog,pcheck,ul,ug,phase,status=status,closure_id=model)
+      if(status/=0)return
+      F=[state(1)*ul,state(2)*ug,state(1)*ul**2+state(2)*ug**2+pip*p]
+    endif
+    if(.not.all(ieee_is_finite(F)).or..not.all(ieee_is_finite(state)))then
+      F=ieee_value(0.0_wp,ieee_quiet_nan);status=102;return
+    endif
+    if(present(Ubc))Ubc=state
+    status=0
+  end subroutine
+  subroutine apply_boundary_conditions(U,inlet_idx,outlet_idx,theta_inlet,theta_outlet,cfg,status)
+    real(wp),intent(inout)::U(:,:)
+    integer(i4),intent(in)::inlet_idx,outlet_idx
+    real(wp),intent(in)::theta_inlet,theta_outlet
+    type(sim_config_t),intent(in)::cfg
+    integer,intent(out),optional::status
+    real(wp)::left(3),right(3),flux(3)
+    integer::n,nd,k,code
+    if(present(status))status=101
+    n=size(U,1);nd=cfg%num_dummy_cells
+    if(size(U,2)/=3.or.nd<0.or.n<=2*nd)return
+    if(inlet_idx/=nd+1.or.outlet_idx/=n-nd)return
+    if(nd==0)then
+      if(present(status))status=0
+      return
+    endif
+    call boundary_flux(U(inlet_idx,:),theta_inlet,cfg,.true.,flux,code,left)
+    if(code/=0)then
+      if(present(status))status=code
+      return
+    endif
+    call boundary_flux(U(outlet_idx,:),theta_outlet,cfg,.false.,flux,code,right)
+    if(code/=0)then
+      if(present(status))status=code
+      return
+    endif
+    ! Commit only when both boundary states have succeeded.
+    do k=1,nd
+      U(inlet_idx-k,:)=left
+      U(outlet_idx+k,:)=right
+    enddo
+    if(present(status))status=0
+  end subroutine
 end module module_boundary_conditions
