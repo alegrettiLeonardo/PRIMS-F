@@ -1,0 +1,208 @@
+{
+  "status": "PASS",
+  "git_head": "db8d47cc6ad0df7fd78350c895381a2c8cc70753",
+  "scope": "Frozen Bhagwat SS1 Newton relinearization; horizontal trace replay through Chexal only",
+  "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "source_sha256": {
+    "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c",
+    "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "scr/module_flow_regime.f90": "af17e75c6991c128935eddda4e90fbc8a5ed70d24b19bf0f978359080bac2afa",
+    "scr/module_config.f90": "2f719eda0f336d4ca5951228083c076d67166be307056224dea3dd75579f838b",
+    "scr/module_lapack_small.f90": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+    "scr/module_chexal_1992.f90": "f86590aa6262aceec15430bcb1de6dca4b1abe06d9dd7aa1d32ccbe26cdc3674",
+    "scr/module_closure_law.f90": "2c38f3deaa3424da9a87edbfbb0e0e140d7e44004e9a625da8d447dcc02cf905",
+    "scr/module_find.f90": "e6a9a70050885b092e17b7db0d04a46450b5eb7c4659d0a1f91ed3312afdafce",
+    "scr/module_catenary.f90": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+    "scr/module_steady_state.f90": "a6346574744a95d8da6ed1061730a889d39d1bb93eee27e79d412595e46ff529",
+    "scr/module_jacobian.f90": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+    "scr/module_matrix_roe.f90": "f75d32c43cfb344c58aaaf0217f186f042c57dd68c86cd111a8c23bf8f64be6e",
+    "scr/module_roe_solver.f90": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+    "scr/module_boundary_conditions.f90": "d9f24ac455573778ccbee722a1fcb930ab45b5865213746f176acc5ff416b994",
+    "scr/module_solver_utils.f90": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+    "scr/module_time_step.f90": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133",
+    "scr/module_simulate_pipe_riser.f90": "998e9d56e85b64c3075379d02c7c63de5b720e796be3553f8245024990318997",
+    "validation/diagnostics/bg_ss1_stall/probe_bg_ss1_stall.f90": "74f12c3046aa0c1f9b8aceb06e6f18ddd1122788232d56e7b005ee7685dc2209",
+    "validation/diagnostics/bg_ss1_stall/last_rejected_state.dat": "dbf56301becd49340aa26b5c0c7b89f247b551bc49688fb8c24af1c0f403bdf8"
+  },
+  "newton_candidates": [
+    {
+      "lambda": 1.0,
+      "point_failures": 0,
+      "junction_status": 1012
+    },
+    {
+      "lambda": 0.5,
+      "point_failures": 0,
+      "junction_status": 1012
+    },
+    {
+      "lambda": 0.25,
+      "point_failures": 0,
+      "junction_status": 1012
+    },
+    {
+      "lambda": 0.125,
+      "point_failures": 0,
+      "junction_status": 1012
+    },
+    {
+      "lambda": 0.0625,
+      "point_failures": 0,
+      "junction_status": 1012
+    }
+  ],
+  "chexal_trace_replays": [
+    {
+      "profile": 1,
+      "model": 5,
+      "status": 0,
+      "nroots": 1,
+      "jg_m_s": 1.3645740299071214e-12
+    },
+    {
+      "profile": 1,
+      "model": 6,
+      "status": 0,
+      "nroots": 1,
+      "jg_m_s": 1.3645740299071214e-12
+    },
+    {
+      "profile": 1,
+      "model": 7,
+      "status": 0,
+      "nroots": 1,
+      "jg_m_s": 1.3645740299071214e-12
+    },
+    {
+      "profile": 2,
+      "model": 5,
+      "status": 0,
+      "nroots": 1,
+      "jg_m_s": 1.2786836684061666e-12
+    },
+    {
+      "profile": 2,
+      "model": 6,
+      "status": 0,
+      "nroots": 1,
+      "jg_m_s": 1.2786836684061666e-12
+    },
+    {
+      "profile": 2,
+      "model": 7,
+      "status": 0,
+      "nroots": 1,
+      "jg_m_s": 1.2786836684061666e-12
+    },
+    {
+      "profile": 10,
+      "model": 5,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -6.768366208064684e-11
+    },
+    {
+      "profile": 10,
+      "model": 6,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -6.768366208064684e-11
+    },
+    {
+      "profile": 10,
+      "model": 7,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -6.768366208064684e-11
+    },
+    {
+      "profile": 11,
+      "model": 5,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -3.249353159678851e-11
+    },
+    {
+      "profile": 11,
+      "model": 6,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -3.249353159678851e-11
+    },
+    {
+      "profile": 11,
+      "model": 7,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -3.249353159678851e-11
+    },
+    {
+      "profile": 12,
+      "model": 5,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -1.5539752684930932e-11
+    },
+    {
+      "profile": 12,
+      "model": 6,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -1.5539752684930932e-11
+    },
+    {
+      "profile": 12,
+      "model": 7,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -1.5539752684930932e-11
+    },
+    {
+      "profile": 13,
+      "model": 5,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -7.353717560614347e-12
+    },
+    {
+      "profile": 13,
+      "model": 6,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -7.353717560614347e-12
+    },
+    {
+      "profile": 13,
+      "model": 7,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -7.353717560614347e-12
+    },
+    {
+      "profile": 14,
+      "model": 5,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -3.643884073311242e-12
+    },
+    {
+      "profile": 14,
+      "model": 6,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -3.643884073311242e-12
+    },
+    {
+      "profile": 14,
+      "model": 7,
+      "status": 61,
+      "nroots": 0,
+      "jg_m_s": -3.643884073311242e-12
+    }
+  ],
+  "negative_replays_count": 15,
+  "negative_replays_all_domain61": true,
+  "physical_reverse_gas_claim": false,
+  "chexal_transient_claim": false
+}
