@@ -39,6 +39,10 @@ def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def finite_or_none(value: float) -> float | None:
+    return float(value) if np.isfinite(value) else None
+
+
 def metadata_number(text: str, key: str) -> float:
     match = re.search(r"^\s*" + re.escape(key) + r"\s*=\s*([^,\n]+)",
                       text, flags=re.MULTILINE | re.IGNORECASE)
@@ -119,7 +123,7 @@ def fit_envelope(envelope: list[dict], lo: float, hi: float,
     result.update(available=True,
                   growth_rate_s_inv=float(regression.slope),
                   log_amplitude_intercept=float(regression.intercept),
-                  r_squared=float(regression.rvalue ** 2),
+                  r_squared=finite_or_none(regression.rvalue ** 2),
                   slope_standard_error_s_inv=float(regression.stderr),
                   first_peak_time_s=float(t[0]), last_peak_time_s=float(t[-1]),
                   first_amplitude_Pa=float(amplitude[0]), last_amplitude_Pa=float(amplitude[-1]),
@@ -137,7 +141,7 @@ def window_statistics(t: np.ndarray, y: np.ndarray, lo: float, hi: float) -> dic
     use = (t > lo) & (t < hi)
     tx = np.r_[lo, t[use], hi]
     yy = np.r_[np.interp(lo, t, y), y[use], np.interp(hi, t, y)]
-    mean = float(np.trapezoid(yy, tx) / (hi - lo))
+    mean = float(np.sum(.5 * (yy[:-1] + yy[1:]) * np.diff(tx)) / (hi - lo))
     z = yy - mean
     variance = float(np.sum(np.diff(tx) * (z[:-1] ** 2 + z[:-1] * z[1:] + z[1:] ** 2) / 3)
                      / (hi - lo))
@@ -174,7 +178,7 @@ def last_ten_cycles(t: np.ndarray, y: np.ndarray, envelope: list[dict]) -> dict:
             "relative_difference_last_five_vs_first_five_amplitudes":
                 float(np.mean(amplitudes[-5:]) / np.mean(amplitudes[:5]) - 1),
             "growth_rate_s_inv": float(regression.slope),
-            "log_amplitude_r_squared": float(regression.rvalue ** 2),
+            "log_amplitude_r_squared": finite_or_none(regression.rvalue ** 2),
             "useful_above_declared_detection_thresholds": useful,
             "amplitude_change_within_one_percent": bool(abs(relative_change) <= .01),
             "amplitude_change_within_five_percent": bool(abs(relative_change) <= .05),
@@ -211,6 +215,7 @@ def read_run(path: Path) -> tuple[dict, np.ndarray, np.ndarray, np.ndarray]:
               "nodes_pipe": int(metadata_number(meta, "NODES")),
               "nodes_riser": int(metadata_number(meta, "N_RISER")),
               "dt_max_s": metadata_number(meta, "DT_MAX_S"),
+              "requested_output_interval_s": metadata_number(meta, "OUTPUT_INTERVAL_S"),
               "sample_interval_median_s": float(np.median(np.diff(t))),
               "actual_step_range_40_400_s":
                   [float(np.min(data["dt_s"][(t >= 40) & (t <= 400)])),
@@ -222,6 +227,14 @@ def read_run(path: Path) -> tuple[dict, np.ndarray, np.ndarray, np.ndarray]:
               "pressure_blocks": [window_statistics(t, pressure, lo, hi) for lo, hi in BLOCKS],
               "pressure_900_2400": window_statistics(t, pressure, 900., 2400.),
               "last_ten_cycles": last_ten_cycles(t, pressure, envelope)}
+    # Refined runs save more frequently.  Repeat the initial-window fit on a
+    # common 0.125 s grid to expose the effect of sampling separately from h.
+    if result["dt_max_s"] <= .125 and t[-1] >= 450:
+        common_t = np.arange(0., 450.00001, .125)
+        common_pressure = np.interp(common_t, t, pressure)
+        common_fit = fit_envelope(pressure_envelope(common_t, common_pressure), 40., 400., 450.)
+        result["common_sample_step_s"] = .125
+        result["initial_fit_common_sampling"] = common_fit
     return result, t, pressure, data["dt_s"]
 
 
@@ -389,15 +402,20 @@ def report(cases: list[dict], model: dict, generated: str) -> str:
              "úteis, exige-se excursão pico–mínimo ≥ 100 Pa em todos eles e RMS da pressão em torno da média "
              "≥ 1 Pa. Onze picos consecutivos definem exatamente dez intervalos. O RMS é integrado no tempo "
              "sobre a interpolação linear das amostras. Dados ainda em execução são explicitamente identificados.", "",
+             "Os refinados 0,0625 e 0,03125 s também gravam o monitor com intervalo menor. O JSON registra "
+             "essa cadência e repete o ajuste inicial em uma grade comum de amostragem de 0,125 s, por "
+             "interpolação linear. Isso permite distinguir o efeito da gravação do efeito do passo do solver; "
+             "a tabela principal usa as amostras nativas.", "",
              "## Crescimento inicial observado", "",
              "| N | Δt máximo (s) | Fim observado (s) | Execução completa | Taxa (s⁻¹) | R² | Picos | Intervalo médio entre picos (s) |",
              "|---:|---:|---:|:---:|---:|---:|---:|---:|"]
     for case in sorted(cases, key=lambda c: (c["nodes_pipe"], -c["dt_max_s"])):
         fit = initial_fit(case)
         if fit:
+            r_squared = f"{fit['r_squared']:.9f}" if fit['r_squared'] is not None else "indefinido"
             lines.append(f"| {case['nodes_pipe']} | {case['dt_max_s']:g} | {case['observed_end_s']:.3f} | "
                          f"{'sim' if case['completed'] else 'não'} | {fit['growth_rate_s_inv']:+.9f} | "
-                         f"{fit['r_squared']:.9f} | {fit['n_peaks']} | {fit['mean_peak_interval_s']:.6f} |")
+                         f"{r_squared} | {fit['n_peaks']} | {fit['mean_peak_interval_s']:.6f} |")
     lines += ["", "O alto R² descreve a regularidade exponencial desta janela. O erro padrão da regressão não "
               "é uma incerteza de modelo: os ciclos vêm de uma única trajetória numérica, e não de réplicas independentes.", "",
               "## Acomodação nas execuções completas", "",

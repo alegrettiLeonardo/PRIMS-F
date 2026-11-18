@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "tests": 16,
+  "command": [
+    "python",
+    "tests/test_validation_evidence.py"
+  ],
+  "scope": "Software analysis safeguards; synthetic fixtures are not physical validation",
+  "source_sha256": {
+    "scripts/validation_evidence.py": "70e9c37925124fe80e5343cc633401181b94ee5a3b63599e8bbf8141e3fc852c",
+    "scripts/compare_validation.py": "92306413c0c35632aa7ba6aad34d05dc8bb57948b608113cc07a36ca0cabd52a",
+    "scripts/analyze_phase_sequence.py": "723fb8e3f5631bd3ecfd0302ad8769571c56ec102b5639e6201a843400bde5f6",
+    "tests/test_validation_evidence.py": "038dc47f823e81a3d8b7785c21b9cdafbb46ff66259d651153dbfa620e821bbe"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "frozen_utc": "2026-11-18T17:39:56.589920+00:00",
+  "source": "validation/results/bgpilot_D_SS1_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N24_24_dt0.5",
+  "files": {
+    "last_rejected_state.dat": "dbf56301becd49340aa26b5c0c7b89f247b551bc49688fb8c24af1c0f403bdf8",
+    "run_metadata.txt": "d2c3f50057765576630c97b010b79bc3e1b500e69c49470d23b893f07eff9fb6",
+    "stdout.log": "95cbc00c448f340e7552c01cf65ac671829d09caef374d2daad4fa318744d798",
+    "monitor.csv": "6cdf8b0ac4b7c7415057f3f46a40fb551e99b9f54b98429c7acc15cedce55fac",
+    "manifest.json": "e3a66d13e34d3de2b5abfd3d1b2d7c80dd04c5932d00cec9379f23e82c2c277a"
+  }
+}

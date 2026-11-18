@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/workspace/scratch/c1efa7482de0/analysis/gfortran",
+    "-std=f2018",
+    "-O0",
+    "-g",
+    "-ffree-line-length-none",
+    "-fcheck=all,no-array-temps",
+    "-ffpe-trap=invalid,zero,overflow",
+    "-J/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/validation/diagnostics/alpha_search_limit_counterprobe/build",
+    "-I/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/validation/diagnostics/alpha_search_limit_counterprobe/build",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/mod_kinds.f90",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/mod_void_helpers.f90",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/module_closure_law.f90",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/module_steady_state.f90",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/validation/diagnostics/alpha_search_limit_counterprobe/probe.f90",
+    "-o",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/validation/diagnostics/alpha_search_limit_counterprobe/build/probe"
+  ],
+  "source_sha256": {
+    "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "scr/module_closure_law.f90": "815af1f0355ea3075e729038644a193e52dc4a92d24f4504e9fa965eab9905a2",
+    "scr/module_steady_state.f90": "73fbc6f2359b450d2d582439e65fd7942084a4d6c68a3c1426c4a6b668d40450",
+    "validation/diagnostics/alpha_search_limit_counterprobe/probe.f90": "5d9a8a18a6821139559693a6d5524d60a2cce35800331241ee713883f8508fd6"
+  },
+  "independent_reference_sha256": "4d9c664c979b3dbc88b758ed602c14840a13045c587adcde8c2d7f8b72ccb101",
+  "probe_script_sha256": "168fe24b2009ac570e6267c22617ef512ea4bdaf9f476b3a6e72901c58ae6402",
+  "production_sources_modified": false
+}

@@ -15,14 +15,18 @@ Os resultados desta seção pertencem às execuções `final_`, com perfil estac
 | Caso / EOS | Células oleoduto + riser | Passo máximo (s) | Tempo final alcançado (s) | Status final | Causa localizada |
 |---|---:|---:|---:|---:|---|
 | SS1 / barotrópica | 51 + 51 | 0,5 | 77,8135719720 | 6000 | Traço gasoso `MATCHED`/Roe fora do domínio cocorrente |
+| SS1 / barotrópica | 51 + 51 | 0,25 | 78,3167215637 | 3021 | Limite da busca de raiz do traço; propostas de Newton maiores tornam o gás negativo |
+| SS1 / barotrópica | 51 + 51 | 0,125 | 78,5717791089 | 6000 | Traço gasoso `MATCHED`/Roe no limite cocorrente e da busca de raiz |
 | SS1 / barotrópica | 101 + 101 | 0,5 | 80,7176203174 | 3012 | Traço gasoso `MATCHED`/Roe fora do domínio cocorrente |
 | SS1 / barotrópica | 201 + 201 | 0,5 | 83,8347381667 | 3012 | Traço gasoso `MATCHED`/Roe fora do domínio cocorrente |
+| SS1 / isotérmica | 51 + 51 | 0,5 | 50,2814408213 | 3012 | Traço gasoso `MATCHED`/Roe fora do domínio cocorrente |
 | SS3 / barotrópica | 51 + 51 | 0,5 | 97,9664102050 | 6000 | Célula do riser no limite `ul=0`; Newton exige raiz fora do domínio cocorrente |
 | SS3 / barotrópica | 101 + 101 | 0,5 | 104,8738277208 | 6000 | Célula do riser no limite `ul=0`; Newton exige raiz fora do domínio cocorrente |
 | SS3 / barotrópica | 201 + 201 | 0,5 | 109,5081070983 | 3012 | Traço gasoso `MATCHED`/Roe fora do domínio; células continuam admissíveis |
 | SS3 / barotrópica | 51 + 51 | 0,25 | 97,1927147578 | 9214 | Caminho de quadratura de Roe com inclinação média fora do domínio |
 | SS3 / barotrópica | 51 + 51 | 0,125 | 97,1319590113 | 6000 | Célula do riser no limite `ul=0`; Newton exige raiz fora do domínio cocorrente |
 | SS3 / isotérmica | 51 + 51 | 0,5 | 72,6323225104 | 6000 | Traço gasoso `MATCHED`/Roe fora do domínio; células continuam admissíveis |
+| OSC / isotérmica | 51 + 51 | 0,5 | 382,9801996224 | 3012 | Traço gasoso `MATCHED`/Roe fora do domínio; células continuam admissíveis |
 
 Esses resultados não autorizam tratar toda interrupção SS3 como retorno físico do líquido. A causa imediata muda com a malha ou o passo máximo. Também não permitem inferir período, amplitude convergida ou ordem de convergência de ciclos de slug a partir dos tempos de parada.
 
@@ -75,6 +79,36 @@ Os [probes SS1 por caso](../validation/diagnostics/final_ss1_cases) confirmam o 
 
 Em N101 e N201, as menores frações de gás celulares são, respectivamente, `0,00344218738154` e `0,00108947879030466`. Os traços gasosos propostos por Newton tornam-se negativos e são rejeitados pelo mesmo contrato ID3. Os tempos finais 80,7176203174 s e 83,8347381667 s pertencem aos seus próprios snapshots. A persistência desse mecanismo em três malhas demonstra uma restrição recorrente do acoplamento atual; não demonstra convergência de um ciclo SS1 nem desaparecimento do inventário gasoso das células.
 
+As execuções barotrópicas N51 com passos máximos 0,25 s e 0,125 s foram reavaliadas separadamente. Os traços gasosos no estado trial são `6,445998075e-13` e `6,8718178e-13 m/s`; as propostas completas de Newton levam esses valores a aproximadamente `-2,08963187e-9` e `-1,77191319e-9 m/s`, sem invalidar as primitivas celulares. O caso isotérmico N51/0,5 s também apresenta esse mecanismo, mas em 50,2814408213 s, com menor fração gasosa celular `4,4925791e-4`. Os resumos preservam os diferentes códigos finais; o status 3021 do caso barotrópico de 0,25 s não foi convertido para 3012.
+
+### Limite numérico da busca de fração gasosa no traço
+
+Há uma restrição numérica adicional que deve permanecer explícita. A inversão estacionária usada para o traço de junção varre `|logit(alpha)| <= 28`, correspondente a
+
+\[
+\alpha_{\min}=\frac{1}{1+e^{28}}\approx6{,}9144\times10^{-13}.
+\]
+
+Essa é a faixa da busca implementada, não um limite físico da correlação. Um status `STEADY_NO_ROOT=21` **não prova inexistência de uma raiz positiva abaixo desse intervalo**. No SS1 N51/0,25 s, o traço trial possui `alpha=7,2235794e-13`, muito próximo da extremidade inferior. A relação local `jg/alpha` é aproximadamente 0,89235 m/s, de modo que a extremidade de busca corresponde a `jg` da ordem de `6,17e-13 m/s`, ainda positivo.
+
+Os probes armazenados demonstram que as propostas de Newton examinadas com multiplicadores 1 até 1/16 produzem gás negativo e são rejeitadas por domínio. Eles não reconstituem toda a sequência histórica de tentativas que terminou no código 3021, nem excluem que uma tentativa positiva menor tenha uma raiz abaixo do intervalo pesquisado. O diagnóstico desse caso reúne **limite de busca numérica do traço** e propostas que cruzam o domínio cocorrente; não deve ser apresentado como prova de impossibilidade física de todos os estados intermediários. Não houve aumento silencioso da faixa nem recorte do fluxo durante a qualificação final.
+
+Essa limitação da busca foi confirmada por um [contraprobe sintético independente](../validation/diagnostics/alpha_search_limit_counterprobe/summary.json). Mantendo a pressão `284053,9719206488 Pa`, a velocidade superficial líquida `0,5295514577421165 m/s` e a inclinação do traço `theta=0`, reduziu-se à metade o pequeno fluxo gasoso positivo salvo: `jg=3,222999037667472e-13 m/s`. A avaliação independente das equações com 80 dígitos encontra
+
+\[
+\alpha=3{,}61178969909092588045\times10^{-13},
+\]
+
+abaixo da extremidade de busca. O fechamento Fortran aceita essa raiz e retorna residual nulo na precisão da execução; o helper de inversão retorna status 21 e nenhuma raiz, inclusive quando recebe essa fração como `alpha_hint`. Com o fluxo gasoso positivo original, recupera corretamente `alpha=7,22357939817937e-13`. Logo, existem estados cocorrentes admissíveis que a faixa atual não encontra. O [script e o probe reproduzíveis](../validation/diagnostics/alpha_search_limit_counterprobe/run_counterprobe.py) preservam as entradas, a precisão de referência e a compilação utilizada. Este é um estado construído para verificar a busca, **não a tentativa histórica rejeitada exata**, e não autoriza estender a correlação a fluxo gasoso negativo.
+
+### Caso nominal OSC isotérmico
+
+A [análise local do caso OSC isotérmico](../validation/diagnostics/final_osc_cases/final_D_OSC_C3_ISOTHERMAL_MATCHED_LAGGED_ROE_N51_51_dt0.5/summary.json) confirmou a parada em **382,98019962240915 s**, com status 3012. Todas as 102 primitivas celulares, as faces base e a preparação da dissipação são admissíveis, e todos os espectros locais calculados são reais. A menor velocidade líquida é `0,2004764817 m/s`, e a menor fração gasosa celular é `0,001791816876`.
+
+Na análise de Newton, não há falhas pontuais nas células, mas onze das vinte propostas locais examinadas falham na junção com status 1012. Portanto, esse caso também atinge o limite do traço aproximado `MATCHED`; não é uma ocorrência de `ul=0` dentro do riser. O nome de entrada `OSC` foi preservado no resumo e na tabela: esse diagnóstico de interrupção não reclassifica seus sinais como ciclos SS1 ou SS3.
+
+O [probe específico da junção OSC](../validation/diagnostics/final_junction_cases/final_D_OSC_C3_ISOTHERMAL_MATCHED_LAGGED_ROE_N51_51_dt0.5/summary.json) confirma pressão comum de `278668,740564 Pa`, `jl*=0,544110515880 m/s`, `jg*=1,12011428e-12 m/s` e fração do traço `1,23512976e-12`. O fluxo de gás restante é `8,04356936e-15 kg/s`, após subtração de duas parcelas de aproximadamente `1,16332793e-4 kg/s`. A proposta completa de Newton produz `jg*=-4,80144659e-10 m/s`; as cinco propostas específicas de multiplicador 1 até 1/16 mantêm as células admissíveis e falham no traço.
+
 ### Reprodução das análises finais
 
 O [probe dinâmico](../validation/diagnostics/probe_bg_domain.f90) e seu [script de compilação](../validation/diagnostics/build_final_domain_probe.py) leem as dimensões da malha, as propriedades e as escalas de cada caso. Por exemplo:
@@ -92,7 +126,7 @@ FC=gfortran LIBS='-llapack -lblas' python3 validation/diagnostics/build_final_do
   validation/results/final_D_SS3_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.25
 ```
 
-Cada diretório de saída preserva seu `summary.json`, o estado de entrada, metadados, manifesto, hashes e `build_provenance.json`. O resumo registra tanto o tempo do snapshot quanto o término da execução, evitando confundir um estado rejeitado anterior com o estado final. Os logs dos probes são locais e compactos; nenhuma reprodução inicia um transiente. Os [scripts independentes de junção](../validation/diagnostics/build_bg_ss1_case.py) complementam essa análise para SS1 e SS3 N201.
+Cada diretório de saída preserva seu `summary.json`, o estado de entrada, metadados, manifesto, hashes e `build_provenance.json`. O resumo registra tanto o tempo do snapshot quanto o término da execução, evitando confundir um estado rejeitado anterior com o estado final. Os logs dos probes são locais e compactos; nenhuma reprodução inicia um transiente. Os [scripts independentes de junção](../validation/diagnostics/build_bg_ss1_case.py) complementam essa análise. O [agregador](../validation/diagnostics/summarize_final_domains.py) atualiza a tabela JSON somente a partir dos resumos já produzidos, mantendo a identificação de regime e EOS.
 
 ## Piloto SS3: início de retorno do líquido dentro do riser
 

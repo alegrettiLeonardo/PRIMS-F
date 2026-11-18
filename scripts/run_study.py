@@ -19,7 +19,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--workers',type=int,default=4)
     p.add_argument('--time',type=float,default=2400.)
-    p.add_argument('--timeout',type=float,default=1200.)
+    p.add_argument('--timeout',type=float,default=7200.)
     p.add_argument('--label',default='final')
     p.add_argument('--study',choices=['baseline','osc-refinement'],default='baseline')
     p.add_argument('--resume',action='store_true',help='Reuse finished attempts only when source and binary hashes agree')

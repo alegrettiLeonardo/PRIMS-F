@@ -1,0 +1,7 @@
+status=6000
+reached_time_s=  9.7131959011265351E+01
+requested_time_s=  2.4000000000000000E+03
+accepted_steps=811
+rejected_steps=24
+last_rejection_status=6000
+cpu_seconds=  3.0723976000000000E+01

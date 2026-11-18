@@ -1,0 +1,32 @@
+{
+  "command": [
+    "/workspace/scratch/c1efa7482de0/analysis/gfortran",
+    "-std=f2018",
+    "-O2",
+    "-g",
+    "-fcheck=all,no-array-temps",
+    "-ffpe-trap=invalid,zero,overflow",
+    "-ffree-line-length-none",
+    "-J",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/validation/diagnostics/build_gap",
+    "-I",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/validation/diagnostics/build_gap",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/mod_kinds.f90",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/mod_rootfinding.f90",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/mod_void_helpers.f90",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/module_closure_law.f90",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/module_find.f90",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/validation/diagnostics/probe_ss3_bendiksen_gap.f90",
+    "-o",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/validation/diagnostics/build_gap/probe_gap"
+  ],
+  "source_sha256": {
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/module_closure_law.f90": "60789a069e2ecd05e1c8db974a0868411b2b136aa1697c7b60cd90c4aab428b3",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/scr/module_find.f90": "e2885896062c41ff68802d3d457e704d1eb3a89a01fa6b891b45eb3ee2381e8e",
+    "/workspace/scratch/c1efa7482de0/PRIMS-F-implementation/validation/diagnostics/probe_ss3_bendiksen_gap.f90": "0f8c585aa18ddffc85eb191cc8fe0df8e8cd9836b4872bdb66051a0024cb63ab"
+  },
+  "snapshot_sha256": "401c9421a13d967fc9c37a5964059bff2d60e16db9289363c3f4d834eb6bfe50"
+}

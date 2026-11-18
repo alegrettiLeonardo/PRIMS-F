@@ -14,6 +14,11 @@ código diferente de zero é uma execução incompleta, mesmo que produza CSV.
 Consulte `docs/VALIDATION_RESULTS.md` para os resultados da campanha e
 `docs/TRANSIENT_DOMAIN_LIMITS.md` para os diagnósticos de SS1 e SS3.
 
+Para continuar a auditoria no WSL, comece por `docs/CODEX_HANDOFF_STATE.md`.
+O prompt pronto para o Codex está em `docs/CODEX_CONTINUATION_PROMPT_PT.md`,
+e o domínio documentado do futuro fechamento em `docs/CHEXAL_1992_SCOPE.md`.
+Chexal ainda não está implementado nesta entrega.
+
 ## Compilação e testes
 
 Dependências do executável: GNU Fortran com suporte a Fortran 2018,

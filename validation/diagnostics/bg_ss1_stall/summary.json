@@ -1,0 +1,47 @@
+{
+  "case": "D_SS1_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N24_24_dt0.5",
+  "evidence_class": "diagnosis_of_numerical_junction_and_constitutive_domain_limit",
+  "time_s": 41.95011050178417,
+  "dt_s": 7.300434350813846e-09,
+  "all_48_cell_primitives_admissible": true,
+  "both_external_boundaries_admissible": true,
+  "minimum_cell_alpha": 0.005079894502560056,
+  "junction": {
+    "left_extended_cell": 26,
+    "right_extended_cell": 27,
+    "pressure_Pa": 298980.84692980215,
+    "jl_m_s": 0.5296144723724787,
+    "jg_m_s": 1.2787513030500396e-12,
+    "gas_mass_flow_kg_s": 7.045490525876859e-15,
+    "alpha_riser_trace": 1.4331643093301488e-12,
+    "central_gas_mass_flow_kg_s": 0.0001854557944344025,
+    "dissipative_gas_mass_flow_kg_s": 0.00018545579442735702
+  },
+  "newton_candidate": {
+    "maximum_abs_conservative_increment": 8.622552769011446e-11,
+    "all_cell_primitives_admissible": true,
+    "full_step_jg_m_s": -6.800580025319073e-11,
+    "full_step_gas_mass_flow_kg_s": -3.7468913638705913e-13,
+    "face_status": 1012,
+    "closure_status": 12,
+    "aggregate_status": 3012,
+    "negative_jg_for_lambda": [
+      1,
+      0.5,
+      0.25,
+      0.125,
+      0.0625
+    ]
+  },
+  "interpretation": "The MATCHED Roe junction reaches zero gas transfer while cell gas inventory remains finite. The next Newton correction requests a reverse-gas trace excluded by the qualified co-current Bhagwat transcription. This is not evidence of physical reverse-gas flow by itself.",
+  "production_source_modified": false,
+  "files": [
+    "last_rejected_state.dat",
+    "run_metadata.txt",
+    "snapshot_provenance.json",
+    "probe_bg_ss1_stall.f90",
+    "build_probe.py",
+    "probe.log",
+    "point_states.csv"
+  ]
+}
