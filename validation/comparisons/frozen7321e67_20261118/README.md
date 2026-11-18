@@ -22,7 +22,8 @@ All cases use BAROTROPIC / MATCHED / LAGGED / ROE, original geometry, EOS and im
 
 Closure 3 is Bhagwat; closure 5 is Chexal1992 AUTO. Failed runs were not assigned periods from truncated substitute windows.
 
-Failure diagnosis: SS1 reaches a negative numerical gas trace in the horizontal MATCHED mapping while cell states remain admissible (Bhagwat trace 12; Chexal 61). SS3 Bhagwat proposals cross its local cocurrent primitive limit. Chexal SS3 and OSC/refinements stop at a positive liquid velocity near 2.2586e-8 m/s because the old derivative stencil cannot remain on the admissible piece. Some larger OSC Newton proposals are actually negative on the inclined catenary and correctly fail 61. The b0d33cb same-snapshot replays, recorded separately, remove the numerical 53 failures while preserving domain refusals. No projection or artificial spectrum was used.
+Failure diagnosis: SS1 reaches a negative numerical gas trace in the horizontal MATCHED mapping while cell states remain admissible (Bhagwat trace 12; Chexal 61). SS3 Bhagwat proposals return NO_ROOT in the local cocurrent primitive recovery;
+this finite search is not a global proof that no admissible root exists. Chexal SS3 and OSC/refinements stop at a positive liquid velocity near 2.2586e-8 m/s because the old derivative stencil cannot remain on the admissible piece. Some larger OSC Newton proposals are actually negative on the inclined catenary and correctly fail 61. The b0d33cb same-snapshot replays, recorded separately, remove the numerical 53 failures while preserving domain refusals. No projection or artificial spectrum was used.
 
 Temporal accommodation uses the existing declared 1% amplitude-change check over ten complete pressure cycles. Conservation uses original cumulative phase-flow integrals; both absolute kg errors and normalization-relative errors are recorded. These are numerical criteria, not experimental validation.
 

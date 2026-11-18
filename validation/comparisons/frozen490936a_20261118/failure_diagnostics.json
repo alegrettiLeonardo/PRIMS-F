@@ -1,0 +1,850 @@
+[
+  {
+    "case": "comparison_final_20261118_D_OSC_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "snapshot_sha256": "ee6ca2f11512f8bec5348041887c74a07f261f7465aef390644e52f75ca48e3a",
+    "time_s": 93.10000408374412,
+    "saved_status": 6000,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 2.627427378485518e-08,
+        "min_ug_m_s": 0.8722467302162339
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 3.4830482212539193e-14,
+        "min_ug_m_s": 0.8722466717333701
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [
+      {
+        "step_halving_index": 0,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 1,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 2,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 3,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 4,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      }
+    ],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      }
+    ],
+    "trace_states": {
+      "1": {
+        "trace_status": 0,
+        "jg_m_s": 0.4671767606827327,
+        "jl_m_s": 0.545523569373365,
+        "gas_mass_flow_kg_s": 0.002127553906976634,
+        "assembly_status": 0
+      },
+      "2": {
+        "trace_status": 0,
+        "jg_m_s": 0.4671767244376128,
+        "jl_m_s": 0.5455235692672648,
+        "gas_mass_flow_kg_s": 0.0021275537435847098,
+        "assembly_status": 0
+      },
+      "10": {
+        "trace_status": 0,
+        "jg_m_s": 0.46717667496995047,
+        "jl_m_s": 0.5455235691224863,
+        "gas_mass_flow_kg_s": 0.00212755352058582,
+        "assembly_status": null
+      },
+      "11": {
+        "trace_status": 0,
+        "jg_m_s": 0.46717669970373443,
+        "jl_m_s": 0.5455235691948755,
+        "gas_mass_flow_kg_s": 0.00212755363208505,
+        "assembly_status": null
+      },
+      "12": {
+        "trace_status": 0,
+        "jg_m_s": 0.46717671207213773,
+        "jl_m_s": 0.5455235692310735,
+        "gas_mass_flow_kg_s": 0.0021275536878415315,
+        "assembly_status": null
+      },
+      "13": {
+        "trace_status": 0,
+        "jg_m_s": 0.467176718254552,
+        "jl_m_s": 0.5455235692491687,
+        "gas_mass_flow_kg_s": 0.0021275537157116517,
+        "assembly_status": null
+      },
+      "14": {
+        "trace_status": 0,
+        "jg_m_s": 0.46717672134833804,
+        "jl_m_s": 0.5455235692582132,
+        "gas_mass_flow_kg_s": 0.0021275537296584503,
+        "assembly_status": null
+      }
+    }
+  },
+  {
+    "case": "comparison_final_20261118_D_SS1_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "snapshot_sha256": "1e9629e5293c8ee55ae324b6094b0a73d46aee47b6673dda2e5ee456917f27dc",
+    "time_s": 78.57178847673931,
+    "saved_status": 6000,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 0.3831453041979558,
+        "min_ug_m_s": 0.05307837224270139
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 0.383145300725776,
+        "min_ug_m_s": 0.05307836549984288
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 0,
+        "junction_status": 1012
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 0,
+        "junction_status": 1012
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 0,
+        "junction_status": 1012
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 0,
+        "junction_status": 1012
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 0,
+        "junction_status": 1012
+      }
+    ],
+    "trace_states": {
+      "1": {
+        "trace_status": 0,
+        "jg_m_s": 3.986659464143864e-09,
+        "jl_m_s": 0.5294866993518667,
+        "gas_mass_flow_kg_s": 2.069685279348673e-11,
+        "assembly_status": 0
+      },
+      "2": {
+        "trace_status": 0,
+        "jg_m_s": 2.0693970492068103e-13,
+        "jl_m_s": 0.5294866993292505,
+        "gas_mass_flow_kg_s": 1.0743331977258377e-15,
+        "assembly_status": 0
+      },
+      "10": {
+        "trace_status": 12,
+        "jg_m_s": -6.054984667542992e-09,
+        "jl_m_s": 0.5294866992948974,
+        "gas_mass_flow_kg_s": -3.1434620261388524e-11,
+        "assembly_status": null
+      },
+      "11": {
+        "trace_status": 12,
+        "jg_m_s": -3.0285136875902674e-09,
+        "jl_m_s": 0.5294866993120858,
+        "gas_mass_flow_kg_s": -1.5722612515917366e-11,
+        "assembly_status": null
+      },
+      "12": {
+        "trace_status": 12,
+        "jg_m_s": -1.51334457987604e-09,
+        "jl_m_s": 0.5294866993206633,
+        "gas_mass_flow_kg_s": -7.856570214269095e-12,
+        "assembly_status": null
+      },
+      "13": {
+        "trace_status": 12,
+        "jg_m_s": -7.562179703892966e-10,
+        "jl_m_s": 0.5294866993249585,
+        "gas_mass_flow_kg_s": -3.925926494555534e-12,
+        "assembly_status": null
+      },
+      "14": {
+        "trace_status": 12,
+        "jg_m_s": -3.7677547844516803e-10,
+        "jl_m_s": 0.5294866993271016,
+        "gas_mass_flow_kg_s": -1.956040310109643e-12,
+        "assembly_status": null
+      }
+    }
+  },
+  {
+    "case": "comparison_final_20261118_D_SS1_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "snapshot_sha256": "675df04887ada60eee587217f82a1fc007eb973043eb662b25e9dfbc55e0ac0e",
+    "time_s": 52.795265493768895,
+    "saved_status": 3061,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 0.48764547225819105,
+        "min_ug_m_s": 0.05378141950457424
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 0.48764547125288077,
+        "min_ug_m_s": 0.05378141808316153
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 0,
+        "junction_status": 1061
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 0,
+        "junction_status": 1061
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 0,
+        "junction_status": 1061
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 0,
+        "junction_status": 1061
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 0,
+        "junction_status": 1061
+      }
+    ],
+    "trace_states": {
+      "1": {
+        "trace_status": 0,
+        "jg_m_s": 9.028041210600932e-10,
+        "jl_m_s": 0.5296049300308726,
+        "gas_mass_flow_kg_s": 4.923745608031573e-12,
+        "assembly_status": 0
+      },
+      "2": {
+        "trace_status": 0,
+        "jg_m_s": 7.602658605964663e-13,
+        "jl_m_s": 0.529604930025615,
+        "gas_mass_flow_kg_s": 4.146365313716852e-15,
+        "assembly_status": 0
+      },
+      "10": {
+        "trace_status": 61,
+        "jg_m_s": -1.735992281685142e-10,
+        "jl_m_s": 0.5296049300245952,
+        "gas_mass_flow_kg_s": -9.467817187302257e-13,
+        "assembly_status": null
+      },
+      "11": {
+        "trace_status": 61,
+        "jg_m_s": -8.794720002153724e-11,
+        "jl_m_s": 0.5296049300251064,
+        "gas_mass_flow_kg_s": -4.796496048463493e-13,
+        "assembly_status": null
+      },
+      "12": {
+        "trace_status": 61,
+        "jg_m_s": -4.3821397373690954e-11,
+        "jl_m_s": 0.529604930025351,
+        "gas_mass_flow_kg_s": -2.389947142012672e-13,
+        "assembly_status": null
+      },
+      "13": {
+        "trace_status": 61,
+        "jg_m_s": -2.1623800779449088e-11,
+        "jl_m_s": 0.5296049300254825,
+        "gas_mass_flow_kg_s": -1.179326629669039e-13,
+        "assembly_status": null
+      },
+      "14": {
+        "trace_status": 61,
+        "jg_m_s": -1.0579992896729139e-11,
+        "jl_m_s": 0.529604930025548,
+        "gas_mass_flow_kg_s": -5.7701546051316e-14,
+        "assembly_status": null
+      }
+    }
+  },
+  {
+    "case": "comparison_final_20261118_D_SS3_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "snapshot_sha256": "e2cafe7245ac084fe8b8db764d4d19bbc6d4dc6e0f891ec4a58ad68f054fac3c",
+    "time_s": 97.1318523387001,
+    "saved_status": 6000,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 2.9367850460519817e-09,
+        "min_ug_m_s": 0.3543943152539772
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 2.202834647338875e-14,
+        "min_ug_m_s": 0.3543942841141205
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [
+      {
+        "step_halving_index": 0,
+        "cell": 69,
+        "point_state_status": 14,
+        "theta_rad": 0.9012386672268461
+      },
+      {
+        "step_halving_index": 1,
+        "cell": 69,
+        "point_state_status": 14,
+        "theta_rad": 0.9012386672268461
+      },
+      {
+        "step_halving_index": 2,
+        "cell": 69,
+        "point_state_status": 14,
+        "theta_rad": 0.9012386672268461
+      },
+      {
+        "step_halving_index": 3,
+        "cell": 69,
+        "point_state_status": 14,
+        "theta_rad": 0.9012386672268461
+      },
+      {
+        "step_halving_index": 4,
+        "cell": 69,
+        "point_state_status": 14,
+        "theta_rad": 0.9012386672268461
+      }
+    ],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      }
+    ],
+    "trace_states": {
+      "1": {
+        "trace_status": 0,
+        "jg_m_s": 0.22693498417896482,
+        "jl_m_s": 0.2797841080520174,
+        "gas_mass_flow_kg_s": 0.0009861153687757977,
+        "assembly_status": 0
+      },
+      "2": {
+        "trace_status": 0,
+        "jg_m_s": 0.22693496641340477,
+        "jl_m_s": 0.2797841080801867,
+        "gas_mass_flow_kg_s": 0.000986115291595972,
+        "assembly_status": 0
+      },
+      "10": {
+        "trace_status": 0,
+        "jg_m_s": 0.22693493419763794,
+        "jl_m_s": 0.2797841081312711,
+        "gas_mass_flow_kg_s": 0.0009861151516393754,
+        "assembly_status": null
+      },
+      "11": {
+        "trace_status": 0,
+        "jg_m_s": 0.2269349503044005,
+        "jl_m_s": 0.2797841081057385,
+        "gas_mass_flow_kg_s": 0.000986115221612794,
+        "assembly_status": null
+      },
+      "12": {
+        "trace_status": 0,
+        "jg_m_s": 0.22693495835886415,
+        "jl_m_s": 0.27978410809295745,
+        "gas_mass_flow_kg_s": 0.0009861152566042223,
+        "assembly_status": null
+      },
+      "13": {
+        "trace_status": 0,
+        "jg_m_s": 0.226934962388098,
+        "jl_m_s": 0.279784108086568,
+        "gas_mass_flow_kg_s": 0.0009861152741086302,
+        "assembly_status": null
+      },
+      "14": {
+        "trace_status": 0,
+        "jg_m_s": 0.2269349644002065,
+        "jl_m_s": 0.27978410808338194,
+        "gas_mass_flow_kg_s": 0.0009861152828499285,
+        "assembly_status": null
+      }
+    }
+  },
+  {
+    "case": "comparison_final_20261118_D_SS3_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "snapshot_sha256": "04bc3bcfc351614aed35bd6405ad5edf9d73a121d1dcb08fccf3871cae0e1847",
+    "time_s": 42.18200954877784,
+    "saved_status": 6000,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 6.658006662732724e-09,
+        "min_ug_m_s": 0.44379265815077423
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 1.809617503412686e-13,
+        "min_ug_m_s": 0.44379265800862305
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [
+      {
+        "step_halving_index": 0,
+        "cell": 81,
+        "point_state_status": 71,
+        "theta_rad": 1.1511590174118609
+      },
+      {
+        "step_halving_index": 1,
+        "cell": 81,
+        "point_state_status": 71,
+        "theta_rad": 1.1511590174118609
+      },
+      {
+        "step_halving_index": 2,
+        "cell": 81,
+        "point_state_status": 71,
+        "theta_rad": 1.1511590174118609
+      },
+      {
+        "step_halving_index": 3,
+        "cell": 81,
+        "point_state_status": 71,
+        "theta_rad": 1.1511590174118609
+      },
+      {
+        "step_halving_index": 4,
+        "cell": 81,
+        "point_state_status": 71,
+        "theta_rad": 1.1511590174118609
+      }
+    ],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      }
+    ],
+    "trace_states": {
+      "1": {
+        "trace_status": 0,
+        "jg_m_s": 0.4194330201972462,
+        "jl_m_s": 0.28019919479411143,
+        "gas_mass_flow_kg_s": 0.001896429387841188,
+        "assembly_status": 0
+      },
+      "2": {
+        "trace_status": 0,
+        "jg_m_s": 0.41943300541097966,
+        "jl_m_s": 0.2801991947818763,
+        "gas_mass_flow_kg_s": 0.0018964293206746438,
+        "assembly_status": 0
+      },
+      "10": {
+        "trace_status": 0,
+        "jg_m_s": 0.41943286758158177,
+        "jl_m_s": 0.28019919466788806,
+        "gas_mass_flow_kg_s": 0.0018964286945849958,
+        "assembly_status": null
+      },
+      "11": {
+        "trace_status": 0,
+        "jg_m_s": 0.4194329364968604,
+        "jl_m_s": 0.280199194724888,
+        "gas_mass_flow_kg_s": 0.0018964290076324232,
+        "assembly_status": null
+      },
+      "12": {
+        "trace_status": 0,
+        "jg_m_s": 0.41943297095153437,
+        "jl_m_s": 0.2801991947533808,
+        "gas_mass_flow_kg_s": 0.0018964291641427624,
+        "assembly_status": null
+      },
+      "13": {
+        "trace_status": 0,
+        "jg_m_s": 0.4194329881813233,
+        "jl_m_s": 0.28019919476762856,
+        "gas_mass_flow_kg_s": 0.0018964292424090026,
+        "assembly_status": null
+      },
+      "14": {
+        "trace_status": 0,
+        "jg_m_s": 0.41943299679624463,
+        "jl_m_s": 0.2801991947747526,
+        "gas_mass_flow_kg_s": 0.0018964292815422431,
+        "assembly_status": null
+      }
+    }
+  },
+  {
+    "case": "comparison_final_20261118_h_D_OSC_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+    "snapshot_sha256": "57b06d38cbd10823c9200c2c7f57b9dfc1b2864bf833a1b8a1c59be9a86736af",
+    "time_s": 94.24528577961324,
+    "saved_status": 6000,
+    "physical_cells": 202,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 202,
+        "min_ul_m_s": 8.66491545063771e-10,
+        "min_ug_m_s": 0.4850077327124262
+      },
+      "2": {
+        "valid_cells": 202,
+        "min_ul_m_s": 7.301639099947164e-14,
+        "min_ug_m_s": 0.48500773546601805
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [
+      {
+        "step_halving_index": 0,
+        "cell": 203,
+        "point_state_status": 71,
+        "theta_rad": 1.3312923967834003
+      },
+      {
+        "step_halving_index": 1,
+        "cell": 203,
+        "point_state_status": 71,
+        "theta_rad": 1.3312923967834003
+      },
+      {
+        "step_halving_index": 2,
+        "cell": 203,
+        "point_state_status": 71,
+        "theta_rad": 1.3312923967834003
+      },
+      {
+        "step_halving_index": 3,
+        "cell": 203,
+        "point_state_status": 71,
+        "theta_rad": 1.3312923967834003
+      },
+      {
+        "step_halving_index": 4,
+        "cell": 203,
+        "point_state_status": 71,
+        "theta_rad": 1.3312923967834003
+      }
+    ],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      }
+    ],
+    "trace_states": {
+      "1": {
+        "trace_status": 0,
+        "jg_m_s": 0.25392983166067384,
+        "jl_m_s": 0.5451465225342376,
+        "gas_mass_flow_kg_s": 0.001192622624186269,
+        "assembly_status": 0
+      },
+      "2": {
+        "trace_status": 0,
+        "jg_m_s": 0.2539298311634964,
+        "jl_m_s": 0.5451465225328335,
+        "gas_mass_flow_kg_s": 0.0011926226219325894,
+        "assembly_status": 0
+      },
+      "10": {
+        "trace_status": 0,
+        "jg_m_s": 0.2539298212452087,
+        "jl_m_s": 0.5451465225049276,
+        "gas_mass_flow_kg_s": 0.0011926225769694687,
+        "assembly_status": null
+      },
+      "11": {
+        "trace_status": 0,
+        "jg_m_s": 0.25392982620264143,
+        "jl_m_s": 0.5451465225188846,
+        "gas_mass_flow_kg_s": 0.0011926225994429917,
+        "assembly_status": null
+      },
+      "12": {
+        "trace_status": 0,
+        "jg_m_s": 0.25392982868301134,
+        "jl_m_s": 0.5451465225258503,
+        "gas_mass_flow_kg_s": 0.0011926226106875315,
+        "assembly_status": null
+      },
+      "13": {
+        "trace_status": 0,
+        "jg_m_s": 0.25392982992336804,
+        "jl_m_s": 0.5451465225293507,
+        "gas_mass_flow_kg_s": 0.0011926226163105852,
+        "assembly_status": null
+      },
+      "14": {
+        "trace_status": 0,
+        "jg_m_s": 0.2539298305434789,
+        "jl_m_s": 0.5451465225310924,
+        "gas_mass_flow_kg_s": 0.001192622619121806,
+        "assembly_status": null
+      }
+    }
+  },
+  {
+    "case": "comparison_final_20261118_dt_D_OSC_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+    "snapshot_sha256": "b2a8d714a3527e2632c653191b5dc8897860d7134bf76033cb921afa2a93a3c7",
+    "time_s": 77.36499394952784,
+    "saved_status": 6000,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 1.3537402071824707e-09,
+        "min_ug_m_s": 0.39679061155644946
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 1.620265764671165e-14,
+        "min_ug_m_s": 0.3967906074405509
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [
+      {
+        "step_halving_index": 0,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 1,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 2,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 3,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 4,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      }
+    ],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      }
+    ],
+    "trace_states": {
+      "1": {
+        "trace_status": 0,
+        "jg_m_s": 0.1872462731624615,
+        "jl_m_s": 0.5450106322968432,
+        "gas_mass_flow_kg_s": 0.0008946363783847188,
+        "assembly_status": 0
+      },
+      "2": {
+        "trace_status": 0,
+        "jg_m_s": 0.1872462686285603,
+        "jl_m_s": 0.5450106322783633,
+        "gas_mass_flow_kg_s": 0.0008946363570014073,
+        "assembly_status": 0
+      },
+      "10": {
+        "trace_status": 0,
+        "jg_m_s": 0.18724623939832652,
+        "jl_m_s": 0.5450106321591057,
+        "gas_mass_flow_kg_s": 0.0008946362191429979,
+        "assembly_status": null
+      },
+      "11": {
+        "trace_status": 0,
+        "jg_m_s": 0.18724625401299574,
+        "jl_m_s": 0.5450106322187331,
+        "gas_mass_flow_kg_s": 0.0008946362880700658,
+        "assembly_status": null
+      },
+      "12": {
+        "trace_status": 0,
+        "jg_m_s": 0.18724626132148375,
+        "jl_m_s": 0.5450106322485417,
+        "gas_mass_flow_kg_s": 0.0008946363225391129,
+        "assembly_status": null
+      },
+      "13": {
+        "trace_status": 0,
+        "jg_m_s": 0.18724626497454813,
+        "jl_m_s": 0.5450106322634513,
+        "gas_mass_flow_kg_s": 0.0008946363397679983,
+        "assembly_status": null
+      },
+      "14": {
+        "trace_status": 0,
+        "jg_m_s": 0.1872462668016012,
+        "jl_m_s": 0.5450106322709074,
+        "gas_mass_flow_kg_s": 0.0008946363483849271,
+        "assembly_status": null
+      }
+    }
+  }
+]
