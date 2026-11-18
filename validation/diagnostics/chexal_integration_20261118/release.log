@@ -1,0 +1,611 @@
+gfortran -std=f2018 -Wall -Wextra -Wno-unused-parameter -Wno-unused-dummy-argument -fimplicit-none -ffree-line-length-none -Jtmp/release -Itmp/release -Iscr -fopenmp  -Wa,--noexecstack -O2 -c scr/module_chexal_1992.f90 -o tmp/release/module_chexal_1992.o
+scr/module_chexal_1992.f90:47:7:
+
+   47 |     if(p%theta==0.0_wp.and.(fl<0.or.fg<0))return
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:49:9:
+
+   49 |       if(theta_deg/=0.0_wp.or.fg<0)return
+      |         1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:186:14:
+
+  186 |     if(cc.and.theta_deg/=0)then
+      |              1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:202:11:
+
+  202 |         if(fg==0)then
+      |           1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:153:16:
+
+  153 |       if(abs(fl)+abs(fg)==0)then
+      |                1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:229:7:
+
+  229 |     if(theta_deg==0)then
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:874:28:
+
+  874 |       if(k>20.or.x+h==x.or.x-h==x)then
+      |                            1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:874:18:
+
+  874 |       if(k>20.or.x+h==x.or.x-h==x)then
+      |                  1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:511:7:
+
+  511 |     if(fl==0)call add_root(xx(0),rr,n,status)
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:513:9:
+
+  513 |       if(xx(i)==xx(i-1))cycle
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:515:9:
+
+  515 |       if(fh==0)then
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:517:24:
+
+  517 |       else if(fl/=0.and.sign(1.0_wp,fl)/=sign(1.0_wp,fh))then
+      |                        1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:517:14:
+
+  517 |       else if(fl/=0.and.sign(1.0_wp,fl)/=sign(1.0_wp,fh))then
+      |              1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:433:7:
+
+  433 |     if(fl==0)then
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:436:7:
+
+  436 |     if(fh==0)then
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:439:7:
+
+  439 |     if(sign(1.0_wp,fl)==sign(1.0_wp,fh))then
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:444:18:
+
+  444 |       if(x==lo.or.x==hi)exit
+      |                  1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:444:9:
+
+  444 |       if(x==lo.or.x==hi)exit
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:446:9:
+
+  446 |       if(fx==0)then
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:449:9:
+
+  449 |       if(sign(1.0_wp,fx)==sign(1.0_wp,fl))then
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:779:31:
+
+  779 |       if(.not.had_previous.and.fx==0)then
+      |                               1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:792:20:
+
+  792 |         if(fx==0.or.sign(1.0_wp,fx)/=sign(1.0_wp,fprev))then
+      |                    1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:792:11:
+
+  792 |         if(fx==0.or.sign(1.0_wp,fx)/=sign(1.0_wp,fprev))then
+      |           1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:795:15:
+
+  795 |             if(fl==0)then
+      |               1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:797:20:
+
+  797 |             else if(fh==0)then
+      |                    1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:801:26:
+
+  801 |             if(mid==lo.or.mid==hi)exit
+      |                          1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:801:15:
+
+  801 |             if(mid==lo.or.mid==hi)exit
+      |               1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:804:15:
+
+  804 |             if(fmid==0)then
+      |               1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:806:20:
+
+  806 |             else if(sign(1.0_wp,fmid)==sign(1.0_wp,fl))then
+      |                    1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:616:7:
+
+  616 |     if(alpha==0)then
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:618:12:
+
+  618 |     else if(alpha==1)then
+      |            1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:661:7:
+
+  661 |     if(momentum/=0)then
+      |       1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:668:27:
+
+  668 |     if(fl/=0.and.fh/=0.and.sign(1.0_wp,fl)==sign(1.0_wp,fh))then
+      |                           1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:668:17:
+
+  668 |     if(fl/=0.and.fh/=0.and.sign(1.0_wp,fl)==sign(1.0_wp,fh))then
+      |                 1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:668:7:
+
+  668 |     if(fl/=0.and.fh/=0.and.sign(1.0_wp,fl)==sign(1.0_wp,fh))then
+      |       1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:680:9:
+
+  680 |       if(fl==0)then
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:682:14:
+
+  682 |       else if(fh==0)then
+      |              1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:686:25:
+
+  686 |       if(mod(i,4)/=0.and.fh/=fl)then
+      |                         1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:690:18:
+
+  690 |       if(x==lo.or.x==hi)exit
+      |                  1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:690:9:
+
+  690 |       if(x==lo.or.x==hi)exit
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:698:9:
+
+  698 |       if(fx==0)then
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:700:14:
+
+  700 |       else if(sign(1.0_wp,fx)==sign(1.0_wp,fl))then
+      |              1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_chexal_1992.f90:721:33:
+
+  721 |     real(wp)::xx(0:320),ff(0:320),t,prev,fprev,x,fx,lo,hi,fl,fh,mid,fmid,jl,asel,rr(8)
+      |                                 1
+Warning: Unused variable ‘ff’ declared at (1) [-Wunused-variable]
+scr/module_chexal_1992.f90:722:29:
+
+  722 |     integer::i,j,k,n,st,sm,nn
+      |                             1
+Warning: Unused variable ‘nn’ declared at (1) [-Wunused-variable]
+gfortran -std=f2018 -Wall -Wextra -Wno-unused-parameter -Wno-unused-dummy-argument -fimplicit-none -ffree-line-length-none -Jtmp/release -Itmp/release -Iscr -fopenmp  -Wa,--noexecstack -O2 -c scr/module_closure_law.f90 -o tmp/release/module_closure_law.o
+scr/module_closure_law.f90:629:13:
+
+  629 |           if(xp(k)==x(k))then
+      |             1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_closure_law.f90:314:7:
+
+  314 |     if(G==0.0_wp)then
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_closure_law.f90:104:7:
+
+  104 |     if(sg==0.0_wp)then
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_closure_law.f90:131:7:
+
+  131 |     if(ul/=0.0_wp)drel(4)=rhol*sign(1.0_wp,ul)*dl/mul
+      |       1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+gfortran -std=f2018 -Wall -Wextra -Wno-unused-parameter -Wno-unused-dummy-argument -fimplicit-none -ffree-line-length-none -Jtmp/release -Itmp/release -Iscr -fopenmp  -Wa,--noexecstack -O2 -c scr/module_find.f90 -o tmp/release/module_find.o
+scr/module_find.f90:341:12:
+
+  341 |         if (v==velocity_upper) then
+      |            1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:321:12:
+
+  321 |         if (v==velocity_upper) then
+      |            1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:122:8:
+
+  122 |     if (u2==0.0_wp) then
+      |        1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:126:13:
+
+  126 |     else if (u1==0.0_wp) then
+      |             1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:210:8:
+
+  210 |     if (fx==0.0_wp) then
+      |        1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:242:10:
+
+  242 |       if (flo==0.0_wp) then
+      |          1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:246:10:
+
+  246 |       if (fhi==0.0_wp) then
+      |          1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:250:10:
+
+  250 |       if (sign(1.0_wp,flo)/=sign(1.0_wp,fhi)) then
+      |          1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:255:29:
+
+  255 |         if (xlo==0.0_wp .and. xhi==velocity_upper) exit
+      |                             1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:255:12:
+
+  255 |         if (xlo==0.0_wp .and. xhi==velocity_upper) exit
+      |            1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:264:10:
+
+  264 |       if (fx==0.0_wp) then
+      |          1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:268:10:
+
+  268 |       if (sign(1.0_wp,fx)==sign(1.0_wp,flo)) then
+      |          1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:58:8:
+
+   58 |     if (u2==0.0_wp) then
+      |        1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_find.f90:60:13:
+
+   60 |     else if (u1==0.0_wp) then
+      |             1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+gfortran -std=f2018 -Wall -Wextra -Wno-unused-parameter -Wno-unused-dummy-argument -fimplicit-none -ffree-line-length-none -Jtmp/release -Itmp/release -Iscr -fopenmp  -Wa,--noexecstack -O2 -c scr/module_steady_state.f90 -o tmp/release/module_steady_state.o
+gfortran -std=f2018 -Wall -Wextra -Wno-unused-parameter -Wno-unused-dummy-argument -fimplicit-none -ffree-line-length-none -Jtmp/release -Itmp/release -Iscr -fopenmp  -Wa,--noexecstack -O2 -c scr/module_jacobian.f90 -o tmp/release/module_jacobian.o
+scr/module_steady_state.f90:661:9:
+
+  661 |       if(target==ss)return
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:610:7:
+
+  610 |     if(Lp==0.0_wp)nb=0
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:42:37:
+
+   42 |     if((s_riser>0.0_wp.and.nb<1).or.(s_riser==0.0_wp.and.nb/=0))return
+      |                                     1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:43:38:
+
+   43 |     if((L_total>s_riser.and.na<1).or.(L_total==s_riser.and.na/=0))return
+      |                                      1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:436:22:
+
+  436 |     if(gl==0.0_wp.and.gg==0.0_wp)then
+      |                      1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:436:7:
+
+  436 |     if(gl==0.0_wp.and.gg==0.0_wp)then
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:377:35:
+
+  377 |         if(abs(midpoint)<=tol_b.or.ff_b==0.0_wp)then
+      |                                   1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:382:13:
+
+  382 |           if(aa==cc)then
+      |             1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:323:11:
+
+  323 |         if(fleft==0.0_wp)then
+      |           1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:329:33:
+
+  329 |             if(midpoint==left.or.midpoint==right.or.right-left<=xtol*right)then
+      |                                 1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:329:15:
+
+  329 |             if(midpoint==left.or.midpoint==right.or.right-left<=xtol*right)then
+      |               1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:336:15:
+
+  336 |             if(fmid==0.0_wp)then
+      |               1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:122:11:
+
+  122 |         if(njg/=0.0_wp)return
+      |           1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:128:11:
+
+  128 |         if(njl/=0.0_wp)return
+      |           1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:144:39:
+
+  144 |       if(ierr==0.and.(alpha==0.0_wp.or.alpha==1.0_wp))then
+      |                                       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:144:22:
+
+  144 |       if(ierr==0.and.(alpha==0.0_wp.or.alpha==1.0_wp))then
+      |                      1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:165:23:
+
+  165 |     if(njl==0.0_wp.and.njg==0.0_wp)then
+      |                       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:165:7:
+
+  165 |     if(njl==0.0_wp.and.njg==0.0_wp)then
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:166:42:
+
+  166 |       if(G==0.0_wp.or.(id==STRATIFIED.and.sin(theta)==0.0_wp))then
+      |                                          1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:166:9:
+
+  166 |       if(G==0.0_wp.or.(id==STRATIFIED.and.sin(theta)==0.0_wp))then
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:186:9:
+
+  186 |       if(den==0.0_wp)then
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:192:79:
+
+  192 |       if(a<0.0_wp.or.a>1.0_wp.or.(a==0.0_wp.and.njg/=0.0_wp).or.(a==1.0_wp.and.njl/=0.0_wp))then
+      |                                                                               1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:192:65:
+
+  192 |       if(a<0.0_wp.or.a>1.0_wp.or.(a==0.0_wp.and.njg/=0.0_wp).or.(a==1.0_wp.and.njl/=0.0_wp))then
+      |                                                                 1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:192:48:
+
+  192 |       if(a<0.0_wp.or.a>1.0_wp.or.(a==0.0_wp.and.njg/=0.0_wp).or.(a==1.0_wp.and.njl/=0.0_wp))then
+      |                                                1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:192:34:
+
+  192 |       if(a<0.0_wp.or.a>1.0_wp.or.(a==0.0_wp.and.njg/=0.0_wp).or.(a==1.0_wp.and.njl/=0.0_wp))then
+      |                                  1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:237:9:
+
+  237 |       if(fa==0.0_wp)then
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:266:11:
+
+  266 |         if(alpha_hint==0.0_wp)then
+      |           1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:268:16:
+
+  268 |         else if(alpha_hint==1.0_wp)then
+      |                1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:446:7:
+
+  446 |     if(alpha==0.0_wp)then
+      |       1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:448:12:
+
+  448 |     else if(alpha==1.0_wp)then
+      |            1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:523:43:
+
+  523 |     if(theta_s/=0.0_wp.and.mul/=0.0_wp.and.mug/=0.0_wp)then
+      |                                           1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:523:27:
+
+  523 |     if(theta_s/=0.0_wp.and.mul/=0.0_wp.and.mug/=0.0_wp)then
+      |                           1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:523:7:
+
+  523 |     if(theta_s/=0.0_wp.and.mul/=0.0_wp.and.mug/=0.0_wp)then
+      |       1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_steady_state.f90:566:7:
+
+  566 |     if(j/=0.0_wp)then
+      |       1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+gfortran -std=f2018 -Wall -Wextra -Wno-unused-parameter -Wno-unused-dummy-argument -fimplicit-none -ffree-line-length-none -Jtmp/release -Itmp/release -Iscr -fopenmp  -Wa,--noexecstack -O2 -c scr/module_matrix_roe.f90 -o tmp/release/module_matrix_roe.o
+gfortran -std=f2018 -Wall -Wextra -Wno-unused-parameter -Wno-unused-dummy-argument -fimplicit-none -ffree-line-length-none -Jtmp/release -Itmp/release -Iscr -fopenmp  -Wa,--noexecstack -O2 -c scr/module_roe_solver.f90 -o tmp/release/module_roe_solver.o
+scr/module_roe_solver.f90:98:12:
+
+   98 |     if (any(wi/=0.0_wp)) return
+      |            1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+gfortran -std=f2018 -Wall -Wextra -Wno-unused-parameter -Wno-unused-dummy-argument -fimplicit-none -ffree-line-length-none -Jtmp/release -Itmp/release -Iscr -fopenmp  -Wa,--noexecstack -O2 -c scr/module_boundary_conditions.f90 -o tmp/release/module_boundary_conditions.o
+scr/module_boundary_conditions.f90:56:9:
+
+   56 |       if(Uinterior(1)==0.0_wp)alpha_interior=1.0_wp
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_boundary_conditions.f90:60:34:
+
+   60 |       if(Uinterior(2)==0.0_wp.and.cfg%mug==0.0_wp)inlet_phase=PHASE_LIQUID_ONLY
+      |                                  1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_boundary_conditions.f90:60:9:
+
+   60 |       if(Uinterior(2)==0.0_wp.and.cfg%mug==0.0_wp)inlet_phase=PHASE_LIQUID_ONLY
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_boundary_conditions.f90:61:34:
+
+   61 |       if(Uinterior(1)==0.0_wp.and.cfg%mul==0.0_wp)inlet_phase=PHASE_GAS_ONLY
+      |                                  1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_boundary_conditions.f90:61:9:
+
+   61 |       if(Uinterior(1)==0.0_wp.and.cfg%mul==0.0_wp)inlet_phase=PHASE_GAS_ONLY
+      |         1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+gfortran -std=f2018 -Wall -Wextra -Wno-unused-parameter -Wno-unused-dummy-argument -fimplicit-none -ffree-line-length-none -Jtmp/release -Itmp/release -Iscr -fopenmp  -Wa,--noexecstack -O2 -c scr/module_simulate_pipe_riser.f90 -o tmp/release/module_simulate_pipe_riser.o
+scr/module_simulate_pipe_riser.f90:286:9:
+
+  286 |       if(gl/=0.0_wp)then
+      |         1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_simulate_pipe_riser.f90:287:11:
+
+  287 |         if(alpha==1.0_wp)return
+      |           1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_simulate_pipe_riser.f90:290:9:
+
+  290 |       if(gg/=0.0_wp)then
+      |         1
+Warning: Inequality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_simulate_pipe_riser.f90:291:11:
+
+  291 |         if(alpha==0.0_wp)return
+      |           1
+Warning: Equality comparison for REAL(8) at (1) [-Wcompare-reals]
+scr/module_simulate_pipe_riser.f90:304:39:
+
+  304 |       real(wp)::pip,kin,jsl,jsg,ax(3,3),raw_gas_flux,path_theta,path_theta_right
+      |                                       1
+Warning: Unused variable ‘ax’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:178:89:
+
+  178 |     real(wp)::vl(6),vr(6),fl(3),fr(3),sl(3),sr(3),al(3,3),ar(3,3),ds(3,3),ab(3,3),aa(3,3),amax
+      |                                                                                         1
+Warning: Unused variable ‘aa’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:180:25:
+
+  180 |     integer::code,k,cp,cm,n_one_sided
+      |                         1
+Warning: Unused variable ‘cm’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:180:22:
+
+  180 |     integer::code,k,cp,cm,n_one_sided
+      |                      1
+Warning: Unused variable ‘cp’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:178:73:
+
+  178 |     real(wp)::vl(6),vr(6),fl(3),fr(3),sl(3),sr(3),al(3,3),ar(3,3),ds(3,3),ab(3,3),aa(3,3),amax
+      |                                                                         1
+Warning: Unused variable ‘ds’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:179:32:
+
+  179 |     real(wp)::up(3),um(3),fm1(3),fp1(3),fm2(3),fp2(3),h,lj(3,3),rj(3,3),lk(3,3),rk(3,3)
+      |                                1
+Warning: Unused variable ‘fm1’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:179:46:
+
+  179 |     real(wp)::up(3),um(3),fm1(3),fp1(3),fm2(3),fp2(3),h,lj(3,3),rj(3,3),lk(3,3),rk(3,3)
+      |                                              1
+Warning: Unused variable ‘fm2’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:179:39:
+
+  179 |     real(wp)::up(3),um(3),fm1(3),fp1(3),fm2(3),fp2(3),h,lj(3,3),rj(3,3),lk(3,3),rk(3,3)
+      |                                       1
+Warning: Unused variable ‘fp1’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:179:53:
+
+  179 |     real(wp)::up(3),um(3),fm1(3),fp1(3),fm2(3),fp2(3),h,lj(3,3),rj(3,3),lk(3,3),rk(3,3)
+      |                                                     1
+Warning: Unused variable ‘fp2’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:179:55:
+
+  179 |     real(wp)::up(3),um(3),fm1(3),fp1(3),fm2(3),fp2(3),h,lj(3,3),rj(3,3),lk(3,3),rk(3,3)
+      |                                                       1
+Warning: Unused variable ‘h’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:179:25:
+
+  179 |     real(wp)::up(3),um(3),fm1(3),fp1(3),fm2(3),fp2(3),h,lj(3,3),rj(3,3),lk(3,3),rk(3,3)
+      |                         1
+Warning: Unused variable ‘um’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:179:19:
+
+  179 |     real(wp)::up(3),um(3),fm1(3),fp1(3),fm2(3),fp2(3),h,lj(3,3),rj(3,3),lk(3,3),rk(3,3)
+      |                   1
+Warning: Unused variable ‘up’ declared at (1) [-Wunused-variable]
+scr/module_simulate_pipe_riser.f90:158:98:
+
+  158 |         dS(3,:)=-grav*sin(theta)*dr-drag*(ff*j*abs(j)*dr+rhom*fr*j*abs(j)*dre+2*rhom*ff*abs(j)*dj)
+      |                                                                                                  ^
+Warning: ‘ff’ may be used uninitialized [-Wmaybe-uninitialized]
+scr/module_simulate_pipe_riser.f90:103:49:
+
+  103 |     real(wp)::alpha,rl,rg,p,ul,ug,rhom,j,mu,re,ff,fr,fe,pip,grav,drag
+      |                                                 ^
+note: ‘ff’ was declared here
+gfortran -std=f2018 -Wall -Wextra -Wno-unused-parameter -Wno-unused-dummy-argument -fimplicit-none -ffree-line-length-none -Jtmp/release -Itmp/release -Iscr -fopenmp  -Wa,--noexecstack -O2 -c scr/main.f90 -o tmp/release/main.o
+gfortran -fopenmp -Wl,-z,noexecstack -o bin/prims_f tmp/release/mod_kinds.o tmp/release/mod_rootfinding.o tmp/release/mod_void_helpers.o tmp/release/module_flow_regime.o tmp/release/module_config.o tmp/release/module_lapack_small.o tmp/release/module_chexal_1992.o tmp/release/module_closure_law.o tmp/release/module_find.o tmp/release/module_catenary.o tmp/release/module_steady_state.o tmp/release/module_jacobian.o tmp/release/module_matrix_roe.o tmp/release/module_roe_solver.o tmp/release/module_boundary_conditions.o tmp/release/module_solver_utils.o tmp/release/module_time_step.o tmp/release/module_simulate_pipe_riser.o tmp/release/main.o -llapack -lblas

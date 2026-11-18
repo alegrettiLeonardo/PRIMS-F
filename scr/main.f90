@@ -250,6 +250,15 @@ program main
 
   end if
 
+  if(closure_riser<1.or.closure_riser>7)error stop 'Unsupported riser closure ID: use 1..7'
+  select case(closure_riser)
+  case(5)
+    write(output_unit,'(a)') '[MODEL] CHEXAL_1992 air-water; branch selection required for countercurrent ambiguity'
+  case(6)
+    write(output_unit,'(a)') '[MODEL] CHEXAL_1992 air-water; explicitly selected high-alpha branch'
+  case(7)
+    write(output_unit,'(a)') '[MODEL] CHEXAL_1992 air-water; explicitly selected low-alpha branch'
+  end select
   nd = num_dummy_cells
   if (n_riser <= 0) n_riser = max(2, nodes/2)
   if (nodes<2 .or. nd<1 .or. min(X,Z,Lp,D,Cl,Rg,Tgas,P_standard,T_standard,Ps,rho_l0,P_l0)<=0.0_wp) &

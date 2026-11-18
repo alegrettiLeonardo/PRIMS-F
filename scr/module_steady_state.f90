@@ -8,13 +8,14 @@ module module_steady_state
   use mod_kinds, only: wp,i4
   use mod_void_helpers, only: ffan
   use module_closure_law, only: lei_fechamento_or_ndim_simp,CdUd_drift, &
-    STRATIFIED,BENDIKSEN,BHAGWAT,MONTGOMERY,CLOSURE_UNSUPPORTED
+    STRATIFIED,BENDIKSEN,BHAGWAT,MONTGOMERY,CLOSURE_UNSUPPORTED,is_chexal,chexal_branch_id
+  use module_chexal_1992, only: chexal_solve_alpha
   use, intrinsic :: ieee_arithmetic, only: ieee_is_finite,ieee_value,ieee_quiet_nan
   implicit none
   private
   integer,parameter,public :: STEADY_OK=0,STEADY_INVALID=20,STEADY_NO_ROOT=21
   integer,parameter,public :: STEADY_MULTIPLE_ROOTS=22,STEADY_SINGULAR=23
-  integer,parameter,public :: STEADY_INTEGRATION=24
+  integer,parameter,public :: STEADY_INTEGRATION=24,STEADY_PHASE_REQUIRED=25
   integer,parameter,public :: PHASE_AUTO=0,PHASE_LIQUID_ONLY=1,PHASE_GAS_ONLY=2
   public :: malha_progressiva,fun_dpds,steady_state_ndim_simp,EstadoEstacionario_ndim_simp
   public :: solve_alpha_from_superficials
@@ -106,9 +107,12 @@ contains
     id=BENDIKSEN
     if(theta<0.0_wp)id=STRATIFIED
     if(present(closure_id))id=closure_id
-    if(id/=STRATIFIED.and.id/=BENDIKSEN.and.id/=BHAGWAT.and.id/=MONTGOMERY)then
+    if(id/=STRATIFIED.and.id/=BENDIKSEN.and.id/=BHAGWAT.and.id/=MONTGOMERY.and..not.is_chexal(id))then
       if(present(status))status=CLOSURE_UNSUPPORTED
       return
+    endif
+    if(is_chexal(id))then
+      if(abs(AREA-acos(-1.0_wp)*DH**2/4.0_wp)>1e-6_wp*AREA)return
     endif
     ! A zero PHASE FLUX does not establish that the phase inventory is absent.
     ! Pure phases must be declared by a caller that knows the inventory.
@@ -131,6 +135,19 @@ contains
       case default
         return
       end select
+    endif
+    if(is_chexal(id))then
+      call chexal_solve_alpha(njl*w_u,njg*w_u,nrhol*w_rho,nrhog*w_rho,theta,DH,G, &
+        mu_l_dyn,mu_g_dyn,sigma,alpha,ierr,branch=chexal_branch_id(id),nroots=ns,alpha_hint=alpha_hint)
+      ! An endpoint root of the algebraic equation is not evidence that its
+      ! phase inventory is absent. Exact inventory hints were handled above.
+      if(ierr==0.and.(alpha==0.0_wp.or.alpha==1.0_wp))then
+        ierr=STEADY_PHASE_REQUIRED
+        alpha=nan_value()
+      endif
+      if(present(status))status=ierr
+      if(present(nroots))nroots=ns
+      return
     endif
     if(id==BHAGWAT)then
       ! Qualify the global two-phase input domain through the closure itself.

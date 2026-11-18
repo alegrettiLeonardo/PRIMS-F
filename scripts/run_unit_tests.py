@@ -23,13 +23,13 @@ from datetime import datetime, timezone
 
 SOURCES = [
     'mod_kinds', 'mod_rootfinding', 'mod_void_helpers', 'module_flow_regime',
-    'module_config', 'module_lapack_small', 'module_closure_law', 'module_find',
+    'module_config', 'module_lapack_small', 'module_chexal_1992', 'module_closure_law', 'module_find',
     'module_catenary', 'module_steady_state', 'module_jacobian', 'module_matrix_roe',
     'module_roe_solver', 'module_boundary_conditions', 'module_solver_utils',
     'module_time_step', 'module_simulate_pipe_riser',
 ]
-TESTS = ['test_geometry', 'test_closure_physics', 'test_primitives_numerics', 'test_steady',
-         'test_boundaries_time', 'test_fv_operators', 'test_roe_geometry']
+TESTS = ['test_chexal_1992_core', 'test_chexal_integration', 'test_geometry', 'test_closure_physics', 'test_primitives_numerics', 'test_steady',
+         'test_boundaries_time', 'test_fv_operators', 'test_roe_geometry', 'test_chexal_junction']
 
 def run_command(command: list[str], cwd: Path, log: Path, timeout: float) -> dict:
     start = time.perf_counter()

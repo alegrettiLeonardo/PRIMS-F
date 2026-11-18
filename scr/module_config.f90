@@ -35,6 +35,9 @@ module module_config
     integer(i4) :: nCells = 0
     integer(i4) :: N_pipe = 0          ! number of pipe cells in the extended vector (Python: nodes-1)
     integer(i4) :: closure_pipe = 1
+    ! 1 stratified; 2 Bendiksen; 3 Bhagwat; 4 Montgomery;
+    ! 5 Chexal1992 auto, 6 Chexal1992 high-alpha, 7 Chexal1992 low-alpha.
+    ! Explicit branches never extend countercurrent validity to inclined flow.
     integer(i4) :: closure_riser = 2
     character(len=16) :: flux_scheme = 'ROE'
     character(len=16) :: gas_eos = 'ISOTHERMAL'

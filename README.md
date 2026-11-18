@@ -198,3 +198,12 @@ frequência de gravação do CSV. A análise da sequência física exige examina
 acumulação, compressão, produção, penetração gasosa e blowdown conforme o regime.
 O detector de bloqueio forte não constitui condição necessária para OSC/SS3.
 Período ou conservação isolados não aprovam um ciclo físico.
+
+## Chexal 1992 (continuação de auditoria)
+
+`closure_riser=5` seleciona Chexal1992 ar–água; `6`/`7` declaram os ramos
+de maior/menor alfa da mesma correlação. ID3 preserva Bhagwat. Contracorrente
+é admitida apenas na vertical, gás ascendente e líquido descendente; a
+catenária D e o traço horizontal MATCHED não ganham essa extensão.
+Consulte [contratos de integração](docs/CHEXAL_1992_INTEGRATION.md) e os
+registros de fontes/testes. Verificação numérica não é validação experimental.
