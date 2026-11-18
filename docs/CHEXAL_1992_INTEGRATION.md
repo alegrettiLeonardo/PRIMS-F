@@ -32,8 +32,15 @@ mesma equação implícita de velocidades e a mesma EOS da recuperação.
 
 As derivadas Chexal são diferenças de quarta ordem por extrapolação Richardson,
 com redução de incremento e verificação da assinatura das peças constitutivas.
-Se o stencil atravessa uma troca de expressão ou não converge, o operador
-retorna falha. Não se arredondam autovalores complexos para reais. O caminho
+Para velocidades não nulas muito pequenas, um stencil unilateral de quarta
+ordem aponta para o interior do domínio. Uma guarda bilateral adaptativa exige
+a mesma peça em torno do estado; o stencil também preserva essa assinatura.
+Isso remove o piso numérico artificial de aproximadamente 2,2586e-8 m/s do
+stencil centrado anterior, mantendo a recusa em zero e nas quinas exercitadas.
+Se não é possível obter um stencil na mesma peça ou ele não converge, o operador
+retorna falha de derivada; esse status não é prova de domínio físico excedido.
+Consulte `CHEXAL_VELOCITY_DERIVATIVE_REFERENCE.md` para a referência independente
+e a regressão da guarda perto de Rel=Reg. Não se arredondam autovalores complexos para reais. O caminho
 Roe com geometria variável é documentado e testado separadamente; sua matriz
 é uma dissipação aproximada, sem alegação de propriedade Roe exata ao omitir
 o termo geométrico explícito da identidade de fluxo.

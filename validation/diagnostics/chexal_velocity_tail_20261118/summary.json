@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "fortran_programs": 12,
+  "fortran_assertions": 3439,
+  "python_tests": 19,
+  "commands": [
+    [
+      "make",
+      "-j2",
+      "FC=gfortran",
+      "LIBS=-llapack -lblas"
+    ],
+    [
+      "make",
+      "test",
+      "FC=gfortran",
+      "LIBS=-llapack -lblas"
+    ],
+    [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_validation_evidence.py",
+      "-v"
+    ]
+  ],
+  "tested_source_sha256": {
+    "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c",
+    "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "scr/module_flow_regime.f90": "af17e75c6991c128935eddda4e90fbc8a5ed70d24b19bf0f978359080bac2afa",
+    "scr/module_config.f90": "c4b52aaf5f090a8e366b7b61b2fc3dd0234601ab1e6eaaab092e9e6b1a9e68d4",
+    "scr/module_lapack_small.f90": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+    "scr/module_chexal_1992.f90": "63aa7e3ab00beab6b16602daf50b029a22e01e4401eed9e69d34e3620bb72ad1",
+    "scr/module_closure_law.f90": "2c7e9b7d81651faa6580be044fcf04e8430fc54670afd8b10dd614d2e955d233",
+    "scr/module_find.f90": "e6a9a70050885b092e17b7db0d04a46450b5eb7c4659d0a1f91ed3312afdafce",
+    "scr/module_catenary.f90": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+    "scr/module_steady_state.f90": "a6346574744a95d8da6ed1061730a889d39d1bb93eee27e79d412595e46ff529",
+    "scr/module_jacobian.f90": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+    "scr/module_matrix_roe.f90": "f75d32c43cfb344c58aaaf0217f186f042c57dd68c86cd111a8c23bf8f64be6e",
+    "scr/module_roe_solver.f90": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+    "scr/module_boundary_conditions.f90": "d9f24ac455573778ccbee722a1fcb930ab45b5865213746f176acc5ff416b994",
+    "scr/module_solver_utils.f90": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+    "scr/module_time_step.f90": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133",
+    "scr/module_simulate_pipe_riser.f90": "998e9d56e85b64c3075379d02c7c63de5b720e796be3553f8245024990318997",
+    "tests/test_chexal_velocity_reference.f90": "94305a19fc06582be1af53a92c616654179af71cce720b0c318fdb531cd79a70",
+    "tests/test_chexal_derivative_tail.f90": "0cdb5ae9089dfff5f36403a04de34ed37beb42fbe2883e184b10d5c9f1e8d9e3",
+    "tests/test_chexal_1992_core.f90": "4daf5f7517ce173d9c1bcd3dcf0413054fbd750954efd086f1066bd6cd737185",
+    "tests/test_chexal_integration.f90": "d172a5831e412660e1493aa57f31478ec8022463b26f6d90c7e7518a2342fcc7",
+    "tests/test_geometry.f90": "cea60253a701249a1730633fce23db60d81ce418c33cc4ec9a7b2e741693d213",
+    "tests/test_closure_physics.f90": "cfb986acaa8d6b68b78be813e8f808c2a601a08e311d5e8143b23ae13e4039eb",
+    "tests/test_primitives_numerics.f90": "584e2202469cb0b1445e91a2fe05c99c5c17bb635d156e1a1f6d140e9524518d",
+    "tests/test_steady.f90": "50bebcb6a429c0b43a07a063803a37e9d4980c9767627c92feafccdc6137f49f",
+    "tests/test_boundaries_time.f90": "d59abebcf35adfd75b216c1fda26de0a9a66a1571b15f805d6ede37e1cb05b3f",
+    "tests/test_fv_operators.f90": "e7a8cdd7312b57bcde4a5e4ec04ade4ea433946aca6c961776a14fd9080546b1",
+    "tests/test_roe_geometry.f90": "296e6b0c20b994a1e309deed2b65a78baf43edf0a648d9b5321cf58efcdbc8ef",
+    "tests/test_chexal_junction.f90": "7c48d4d6181d3ce5bc7157b0bdff9f3c249effdb42f8172cf7ebaa9fe88c9698"
+  },
+  "tested_parent": "0e84f19121ca25d31747dea10ddf8b45e6f9f725",
+  "binary_sha256": "ef2660a6dfc153c2dae6b5f3d76770aacadc3b5020f1e5c33b8d235994d1e533",
+  "experimental_validation": false
+}

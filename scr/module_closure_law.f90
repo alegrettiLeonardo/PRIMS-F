@@ -602,29 +602,53 @@ contains
       dfda,dfdrhog,dfdrhol,dfdug,dfdul,BHAGWAT,status)
   end subroutine
   subroutine chexal_derivatives_si(x,theta,D,G,mul,mug,sigma,branch,der,status)
-    !! Fourth-order Richardson derivatives of the SAME selected residual.
-    !! Piece signatures prohibit stencils across a constitutive switch/CCFL.
-    !! No altered phase sign, clipped state, or branch substitution is used.
+    !! Fourth-order differences of ONE selected residual. A velocity very
+    !! close to zero uses a one-sided stencil directed away from the sign
+    !! boundary. A local two-sided signature probe first excludes real kinks.
+    !! Exact zero is not assigned an invented bilateral derivative.
     real(wp),intent(in)::x(5),theta,D,G,mul,mug,sigma
     integer,intent(in)::branch
     real(wp),intent(out)::der(5)
     integer,intent(out)::status
-    real(wp)::xp(5),h,scale,values(4),f0,dc,df,offsets(4)
-    integer::sig0,sig,code,k,n,attempt
-    logical::valid
+    real(wp)::xp(5),h,scale,values(6),f0,dc,df,offsets(6),probe,sgn
+    integer::sig0,sig,code,k,n,attempt,np,guard_attempt
+    logical::valid,one_sided
     der=invalid_real();status=CLOSURE_DERIVATIVE
     call eval(x,f0,code,sig0)
     if(code/=0)then
       status=code;return
     endif
-    offsets=[1.0_wp,-1.0_wp,0.5_wp,-0.5_wp]
     do k=1,5
       scale=max(abs(x(k)),1.0_wp)
       if(k==1)scale=min(x(1),1.0_wp-x(1))
       h=epsilon(1.0_wp)**0.2_wp*scale
+      one_sided=k>=4.and.x(k)/=0.0_wp.and.abs(x(k))<4*h
+      sgn=1.0_wp;np=4
+      offsets(:4)=[1.0_wp,-1.0_wp,0.5_wp,-0.5_wp]
+      if(one_sided)then
+        ! A nearby switch need not be a kink AT the state. Reduce the
+        ! bilateral probe until both samples use its piece; never accept
+        ! an unresolved switch or an unrepresentable probe. The finite
+        ! limit keeps exact switches well above rounding-width plateaus.
+        probe=0.125_wp*abs(x(k))
+        do guard_attempt=1,16
+          valid=.true.
+          do n=-1,1,2
+            xp=x;xp(k)=x(k)+n*probe
+            if(xp(k)==x(k))return
+            call eval(xp,values(1),code,sig)
+            if(code/=0.or.sig/=sig0)valid=.false.
+          enddo
+          if(valid)exit
+          probe=0.5_wp*probe
+        enddo
+        if(guard_attempt>16)return
+        sgn=sign(1.0_wp,x(k));np=6
+        offsets=sgn*[0.5_wp,1.0_wp,1.5_wp,2.0_wp,3.0_wp,4.0_wp]
+      endif
       do attempt=1,16
         valid=.true.
-        do n=1,4
+        do n=1,np
           xp=x;xp(k)=x(k)+offsets(n)*h
           if(xp(k)==x(k))then
             valid=.false.;exit
@@ -635,14 +659,23 @@ contains
           endif
         enddo
         if(valid)then
-          dc=(values(1)-values(2))/(2.0_wp*h)
-          df=(values(3)-values(4))/h
+          if(one_sided)then
+            dc=(-25*f0+48*values(2)-36*values(4)+16*values(5)-3*values(6))/(12*h*sgn)
+            df=(-25*f0+48*values(1)-36*values(2)+16*values(3)-3*values(4))/(6*h*sgn)
+          else
+            dc=(values(1)-values(2))/(2.0_wp*h)
+            df=(values(3)-values(4))/h
+          endif
           if(abs(dc-df)<=2e-6_wp*max(abs(df),abs(f0)/scale,1e-9_wp))exit
         endif
         h=0.5_wp*h
       enddo
       if(attempt>16)return
-      der(k)=(4.0_wp*df-dc)/3.0_wp
+      if(one_sided)then
+        der(k)=(16.0_wp*df-dc)/15.0_wp
+      else
+        der(k)=(4.0_wp*df-dc)/3.0_wp
+      endif
     enddo
     if(.not.all(ieee_is_finite(der)))return
     status=CLOSURE_OK

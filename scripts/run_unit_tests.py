@@ -28,7 +28,7 @@ SOURCES = [
     'module_roe_solver', 'module_boundary_conditions', 'module_solver_utils',
     'module_time_step', 'module_simulate_pipe_riser',
 ]
-TESTS = ['test_chexal_1992_core', 'test_chexal_integration', 'test_geometry', 'test_closure_physics', 'test_primitives_numerics', 'test_steady',
+TESTS = ['test_chexal_velocity_reference', 'test_chexal_derivative_tail', 'test_chexal_1992_core', 'test_chexal_integration', 'test_geometry', 'test_closure_physics', 'test_primitives_numerics', 'test_steady',
          'test_boundaries_time', 'test_fv_operators', 'test_roe_geometry', 'test_chexal_junction']
 
 def run_command(command: list[str], cwd: Path, log: Path, timeout: float) -> dict:
