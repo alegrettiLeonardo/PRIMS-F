@@ -1,0 +1,7 @@
+status=0
+reached_time_s=  2.4000000000000000E+03
+requested_time_s=  2.4000000000000000E+03
+accepted_steps=76815
+rejected_steps=0
+last_rejection_status=0
+cpu_seconds=  1.9420698400000001E+03
