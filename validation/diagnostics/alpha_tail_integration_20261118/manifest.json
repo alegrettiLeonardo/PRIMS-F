@@ -1,0 +1,50 @@
+{
+  "baseline_commit": "05ad799af3b82aa540cb6c87b58debe914e52681",
+  "source_sha256": "76311d3a412b6699ccb25a93c74062b2f993181bbecd9aff0928530a02c01624",
+  "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "commands": [
+    {
+      "argv": [
+        "make",
+        "test",
+        "FC=gfortran",
+        "LIBS=-llapack -lblas"
+      ],
+      "returncode": 0,
+      "log": "fortran_tests.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_validation_evidence.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "log": "python_tests.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "validation/diagnostics/alpha_tail_candidate/run_tests.py",
+        "--review",
+        "--output",
+        "tmp/alpha_tail_applied_20261118"
+      ],
+      "returncode": 0,
+      "log": "applied_candidate_tests.log"
+    }
+  ],
+  "new_tail_roots": 108,
+  "independent_contracts_passed": 129,
+  "max_new_root_relative_error": 3.262945469373335e-13,
+  "max_new_root_relative_residual": 3.2658841470324894e-13,
+  "preserved_preexisting_accuracy_limit_cases": 6,
+  "historical_evidence_gap": "prior_evidence.json absent at 05ad799; original manifest preserved, expected hash retained; not verified",
+  "scope": "Numerical lower-tail root repair only; no countercurrent extension or transient validation"
+}

@@ -103,6 +103,13 @@ def main():
     for name, expected in manifest['files'].items():
         if sha(HERE / name) != expected:
             raise RuntimeError(f'Candidate payload checksum differs: {name}')
+    historical_evidence = []
+    for name, expected in manifest.get('historical_files_not_distributed', {}).items():
+        path = HERE / name
+        if path.exists() and sha(path) != expected:
+            raise RuntimeError(f'Historical evidence checksum differs: {name}')
+        historical_evidence.append({'name': name, 'expected_sha256': expected,
+                                    'status': 'VERIFIED' if path.exists() else 'NOT_DISTRIBUTED'})
     before_hashes = {name: sha(repo / 'scr' / name) for name in MODULES}
     binary = repo / 'bin/prims_f'
     binary_before = sha(binary) if binary.is_file() else None
@@ -113,6 +120,7 @@ def main():
     compiler = shlex.split(os.environ.get('FC', 'gfortran'))
     report = {'candidate_package_status': 'CANDIDATE_NOT_APPLIED',
               'detected_worktree_state': 'baseline' if current == old_hash else 'candidate_already_applied',
+              'historical_evidence': historical_evidence,
               'check_only': args.check_only, 'patch_sha256': sha(HERE / 'alpha_tail.patch'),
               'production_source_before': before_hashes, 'runs': []}
     with tempfile.TemporaryDirectory(prefix='prims_alpha_tail_') as temporary:

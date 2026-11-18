@@ -1,0 +1,1327 @@
+{
+  "candidate_package_status": "CANDIDATE_NOT_APPLIED",
+  "detected_worktree_state": "candidate_already_applied",
+  "historical_evidence": [
+    {
+      "name": "prior_evidence.json",
+      "expected_sha256": "f88afc885178f1c3456ed0d03c9177566939b7ab90edf77ce77f411ae169af89",
+      "status": "NOT_DISTRIBUTED"
+    }
+  ],
+  "check_only": false,
+  "patch_sha256": "bd1dda3ebf56997e99ceeb9df5e14a97361f6a40fa4599c42fcc9656bbbb8ee7",
+  "production_source_before": {
+    "mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "module_closure_law.f90": "815af1f0355ea3075e729038644a193e52dc4a92d24f4504e9fa965eab9905a2",
+    "module_steady_state.f90": "76311d3a412b6699ccb25a93c74062b2f993181bbecd9aff0928530a02c01624"
+  },
+  "runs": [
+    {
+      "optimization": "O0",
+      "tail_guards_pass": 55,
+      "steady_checks_before_pass": 398,
+      "steady_checks_candidate_pass": 398,
+      "old_records_byte_identical": 101
+    },
+    {
+      "optimization": "O3",
+      "tail_guards_pass": 55,
+      "steady_checks_before_pass": 398,
+      "steady_checks_candidate_pass": 398,
+      "old_records_byte_identical": 101
+    }
+  ],
+  "temporary_patch_hash_verified": true,
+  "independent_review": {
+    "cases": 129,
+    "passed": 129,
+    "results": [
+      {
+        "index": 1,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 0.042801397230003424,
+        "relative_closure_residual": 0.042801397230000114,
+        "accuracy_criterion_met": false,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 2,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 1.3322676295501878e-15,
+        "relative_closure_residual": 1.2531706610916757e-15,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 3,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 1.3322676295501878e-15,
+        "relative_closure_residual": 1.2531706610916757e-15,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 4,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 0.042801397230003424,
+        "relative_closure_residual": 0.04280139723000012,
+        "accuracy_criterion_met": false,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 5,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 8.881784197001252e-16,
+        "relative_closure_residual": 9.398779958187567e-16,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 6,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 8.881784197001252e-16,
+        "relative_closure_residual": 9.398779958187567e-16,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 7,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 0.042801397230003424,
+        "relative_closure_residual": 0.042801397230000426,
+        "accuracy_criterion_met": false,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 8,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 1.5543122344752192e-15,
+        "relative_closure_residual": 1.5664633263645945e-15,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 9,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 1.5543122344752192e-15,
+        "relative_closure_residual": 1.5664633263645945e-15,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 10,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 0.042801397230003424,
+        "relative_closure_residual": 0.042801397230000114,
+        "accuracy_criterion_met": false,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 11,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 1.1102230246251565e-15,
+        "relative_closure_residual": 1.0965243284552162e-15,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 12,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 1.1102230246251565e-15,
+        "relative_closure_residual": 1.0965243284552162e-15,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 13,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 0.042801397230003424,
+        "relative_closure_residual": 0.042801397230000114,
+        "accuracy_criterion_met": false,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 14,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 1.1102230246251565e-15,
+        "relative_closure_residual": 1.0965243284552162e-15,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 15,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 1.1102230246251565e-15,
+        "relative_closure_residual": 1.0965243284552162e-15,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 16,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 0.042801397230003424,
+        "relative_closure_residual": 0.04280139723000012,
+        "accuracy_criterion_met": false,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 17,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 8.881784197001252e-16,
+        "relative_closure_residual": 9.398779958187567e-16,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 18,
+        "status": 0,
+        "baseline_status": 0,
+        "relative_alpha_error": 8.881784197001252e-16,
+        "relative_closure_residual": 9.398779958187567e-16,
+        "accuracy_criterion_met": true,
+        "category": "preserved_old_success",
+        "patch_contract_met": true
+      },
+      {
+        "index": 19,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.3292479056635784e-13,
+        "relative_closure_residual": 2.3277645029777877e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 20,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.723109659001054e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 21,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 22,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.3292479056635784e-13,
+        "relative_closure_residual": 2.3277645029777877e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 23,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.723109659001054e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 24,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 25,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.3292479056635784e-13,
+        "relative_closure_residual": 2.327764502977787e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 26,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.723109659001054e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 27,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 28,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.3292479056635784e-13,
+        "relative_closure_residual": 2.327764502977787e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 29,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.723109659001054e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 30,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 31,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.3292479056635784e-13,
+        "relative_closure_residual": 2.327764502977787e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 32,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.723109659001054e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 33,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 34,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.3292479056635784e-13,
+        "relative_closure_residual": 2.3277645029777877e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 35,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.723109659001054e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 36,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 37,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.64863736182997e-14,
+        "relative_closure_residual": 8.636592094361511e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 38,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.504632769052528e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 39,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 40,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.64863736182997e-14,
+        "relative_closure_residual": 8.636592094361511e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 41,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.504632769052528e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 42,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 43,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.64863736182997e-14,
+        "relative_closure_residual": 8.636592094361511e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 44,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.504632769052528e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 45,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 46,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.64863736182997e-14,
+        "relative_closure_residual": 8.636592094361511e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 47,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.5046327690525282e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 48,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 49,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.64863736182997e-14,
+        "relative_closure_residual": 8.636592094361511e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 50,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.5046327690525282e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 51,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 52,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.64863736182997e-14,
+        "relative_closure_residual": 8.636592094361511e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 53,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.6653345369377348e-15,
+        "relative_closure_residual": 1.504632769052528e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 54,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 0.0,
+        "relative_closure_residual": 0.0,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 55,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.79296635503124e-14,
+        "relative_closure_residual": 8.781278757112147e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 56,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.5379418373156493e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 57,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.5379418373156493e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 58,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.79296635503124e-14,
+        "relative_closure_residual": 8.781278757112145e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 59,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.5379418373156493e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 60,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.5379418373156493e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 61,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.79296635503124e-14,
+        "relative_closure_residual": 8.781278757112145e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 62,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.537941837315649e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 63,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.537941837315649e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 64,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.79296635503124e-14,
+        "relative_closure_residual": 8.781278757112147e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 65,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.537941837315649e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 66,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.537941837315649e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 67,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.79296635503124e-14,
+        "relative_closure_residual": 8.781278757112147e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 68,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.537941837315649e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 69,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.537941837315649e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 70,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.79296635503124e-14,
+        "relative_closure_residual": 8.781278757112145e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 71,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.5379418373156493e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 72,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.5379418373156493e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 73,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.504308368628699e-14,
+        "relative_closure_residual": 8.521139348094921e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 74,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.3322676295501878e-15,
+        "relative_closure_residual": 1.326247369353295e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 75,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 4.440892098500626e-16,
+        "relative_closure_residual": 4.973427635074857e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 76,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.504308368628699e-14,
+        "relative_closure_residual": 8.521139348070218e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 77,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.3322676295501878e-15,
+        "relative_closure_residual": 1.3262473681675375e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 78,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 4.440892098500626e-16,
+        "relative_closure_residual": 4.973427630628266e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 79,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.504308368628699e-14,
+        "relative_closure_residual": 8.521139348094921e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 80,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.3322676295501878e-15,
+        "relative_closure_residual": 1.3262473693532953e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 81,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 4.440892098500626e-16,
+        "relative_closure_residual": 4.973427635074857e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 82,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.504308368628699e-14,
+        "relative_closure_residual": 8.52115019382398e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 83,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.3322676295501878e-15,
+        "relative_closure_residual": 1.3240959308545408e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 84,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 4.440892098500626e-16,
+        "relative_closure_residual": 4.99006302299659e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 85,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.504308368628699e-14,
+        "relative_closure_residual": 8.52115019382398e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 86,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.3322676295501878e-15,
+        "relative_closure_residual": 1.3240959308545408e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 87,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 4.440892098500626e-16,
+        "relative_closure_residual": 4.99006302299659e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 88,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.504308368628699e-14,
+        "relative_closure_residual": 8.521139348070218e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 89,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.3322676295501878e-15,
+        "relative_closure_residual": 1.3262473681675375e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 90,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 4.440892098500626e-16,
+        "relative_closure_residual": 4.973427630628266e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 91,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.548717289613705e-14,
+        "relative_closure_residual": 8.552863991753737e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 92,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.7765592861209543e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 93,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.5379418373156493e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 94,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.548717289613705e-14,
+        "relative_closure_residual": 8.552863991753737e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 95,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.7765592861209543e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 96,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.5379418373156493e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 97,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.548717289613705e-14,
+        "relative_closure_residual": 8.552863991753737e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 98,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.7765592861209543e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 99,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.537941837315649e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 100,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.548717289613705e-14,
+        "relative_closure_residual": 8.552863991753737e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 101,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.903456377986737e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 102,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.537941837315649e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 103,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.548717289613705e-14,
+        "relative_closure_residual": 8.552863991753737e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 104,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.903456377986737e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 105,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.537941837315649e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 106,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 8.548717289613705e-14,
+        "relative_closure_residual": 8.552863991753737e-14,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 107,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.7765592861209543e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 108,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 2.220446049250313e-16,
+        "relative_closure_residual": 2.5379418373156493e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 109,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.262945469373335e-13,
+        "relative_closure_residual": 3.2642263378207977e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 110,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.6578092116916189e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 111,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.3306690738754696e-16,
+        "relative_closure_residual": 3.3156184233832377e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 112,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.262945469373335e-13,
+        "relative_closure_residual": 3.2642263378089403e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 113,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.6578092128279699e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 114,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.3306690738754696e-16,
+        "relative_closure_residual": 3.315618420418844e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 115,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.262945469373335e-13,
+        "relative_closure_residual": 3.2658841470324894e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 116,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.6578092116916189e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 117,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.3306690738754696e-16,
+        "relative_closure_residual": 3.315618423383238e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 118,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.262945469373335e-13,
+        "relative_closure_residual": 3.264242315508532e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 119,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.6600605700265883e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 120,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.3306690738754696e-16,
+        "relative_closure_residual": 3.310239827136352e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 121,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.262945469373335e-13,
+        "relative_closure_residual": 3.264242315508532e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 122,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.6600605700265883e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 123,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.3306690738754696e-16,
+        "relative_closure_residual": 3.310239827136352e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 124,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.262945469373335e-13,
+        "relative_closure_residual": 3.2642263378089403e-13,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 125,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 1.7763568394002505e-15,
+        "relative_closure_residual": 1.6578092128279699e-15,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 126,
+        "status": 0,
+        "baseline_status": 21,
+        "relative_alpha_error": 3.3306690738754696e-16,
+        "relative_closure_residual": 3.315618420418844e-16,
+        "accuracy_criterion_met": true,
+        "category": "new_lower_tail_root",
+        "patch_contract_met": true
+      },
+      {
+        "index": 127,
+        "status": 21,
+        "baseline_status": 21,
+        "category": "preserved_exclusion",
+        "patch_contract_met": true
+      },
+      {
+        "index": 128,
+        "status": 12,
+        "baseline_status": 12,
+        "category": "preserved_exclusion",
+        "patch_contract_met": true
+      },
+      {
+        "index": 129,
+        "status": 12,
+        "baseline_status": 12,
+        "category": "preserved_exclusion",
+        "patch_contract_met": true
+      }
+    ],
+    "preexisting_accuracy_limit_cases": 6
+  },
+  "production_sources_unchanged": true,
+  "production_binary_unchanged": true,
+  "status": "PASS"
+}

@@ -1,0 +1,33 @@
+{
+  "candidate_package_status": "CANDIDATE_NOT_APPLIED",
+  "detected_worktree_state": "candidate_already_applied",
+  "historical_evidence": [
+    {
+      "name": "prior_evidence.json",
+      "expected_sha256": "f88afc885178f1c3456ed0d03c9177566939b7ab90edf77ce77f411ae169af89",
+      "status": "NOT_DISTRIBUTED"
+    }
+  ],
+  "check_only": false,
+  "patch_sha256": "bd1dda3ebf56997e99ceeb9df5e14a97361f6a40fa4599c42fcc9656bbbb8ee7",
+  "runs": [
+    {
+      "optimization": "O0",
+      "tail_guards_pass": 55,
+      "steady_checks_before_pass": 398,
+      "steady_checks_candidate_pass": 398,
+      "old_records_byte_identical": 101
+    },
+    {
+      "optimization": "O3",
+      "tail_guards_pass": 55,
+      "steady_checks_before_pass": 398,
+      "steady_checks_candidate_pass": 398,
+      "old_records_byte_identical": 101
+    }
+  ],
+  "temporary_patch_hash_verified": true,
+  "production_sources_unchanged": true,
+  "production_binary_unchanged": true,
+  "status": "PASS"
+}

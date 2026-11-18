@@ -227,6 +227,15 @@ contains
       endif
       b=a;fb=fa;previous_valid=.true.
     enddo
+    if(ns==0.and.id==BHAGWAT.and.theta>=0.0_wp.and.njl>=0.0_wp.and.njg>0.0_wp)then
+      ! Only extend a failed scan. Existing successes, multiple-root selection,
+      ! pure-phase declarations and the qualified countercurrent exclusions are
+      ! unchanged. The regular co-current riser tail is strictly monotone; the
+      ! helper checks a positive C0 bound before using that property.
+      a=1.0_wp/(1.0_wp+exp(28.0_wp))
+      call lower_riser_tail(a,mid,ierr)
+      if(ierr==0)call record(mid)
+    endif
     if(present(nroots))nroots=ns
     if(ns==1)then
       alpha=rootlast
@@ -262,6 +271,64 @@ contains
       if(present(status))status=STEADY_NO_ROOT
     endif
   contains
+    subroutine lower_riser_tail(upper,rr,code)
+      !! Geometric bracketing below the old alpha minimum, then relative
+      !! bisection. A representable bracket is required; no alpha floor is
+      !! substituted for a root. This path never changes a previously found
+      !! root and does not extend the closure to negative phase velocities.
+      real(wp),intent(in)::upper
+      real(wp),intent(out)::rr
+      integer,intent(out)::code
+      real(wp)::left,right,fleft,fright,midpoint,fmid,smallest,cd_tail,ud_tail,cd_margin
+      integer::step,iteration,local_status
+      rr=nan_value();code=STEADY_NO_ROOT
+      call CdUd_drift(upper,nrhol,nrhog,njl/(1.0_wp-upper),njg/upper,theta,DH,AREA,EPS,G, &
+        mu_l_dyn,mu_g_dyn,sigma,w_u,w_rho,tol,cd_tail,ud_tail,id,local_status)
+      if(local_status/=0)return
+      ! At fixed superficial fluxes and 0<=theta<=pi/2, 0<=dC0/da<=ln(2)/5.
+      ! This sufficient bound ensures C0>0 throughout 0<a<=upper; with Ud>=0,
+      ! d[a(C0*j+Ud)]/da>0 for a<2/3. The lower tail then has at most one root.
+      cd_margin=0.2_wp*log(2.0_wp)*upper+32.0_wp*epsilon(1.0_wp)*max(1.0_wp,abs(cd_tail))
+      if(cd_tail<=cd_margin.or.ud_tail<0.0_wp)return
+      right=upper
+      call residual(right,fright,local_status)
+      if(local_status/=0.or..not.ieee_is_finite(fright))return
+      if(fright<=0.0_wp)return
+      smallest=nearest(0.0_wp,1.0_wp)
+      do step=1,maxexponent(1.0_wp)-minexponent(1.0_wp)+digits(1.0_wp)+8
+        if(right<=smallest)return
+        left=0.5_wp*right
+        if(left<=0.0_wp.or.left>=right)return
+        ! Avoid an overflow before calling a closure that takes phase speeds.
+        if(left<njg/huge(1.0_wp))return
+        call residual(left,fleft,local_status)
+        if(local_status/=0.or..not.ieee_is_finite(fleft))return
+        if(fleft==0.0_wp)then
+          rr=left;code=0;return
+        endif
+        if(fleft<0.0_wp)then
+          do iteration=1,digits(1.0_wp)+8
+            midpoint=left+0.5_wp*(right-left)
+            if(midpoint==left.or.midpoint==right.or.right-left<=xtol*right)then
+              rr=left
+              if(abs(fright)<abs(fleft))rr=right
+              code=0;return
+            endif
+            call residual(midpoint,fmid,local_status)
+            if(local_status/=0.or..not.ieee_is_finite(fmid))return
+            if(fmid==0.0_wp)then
+              rr=midpoint;code=0;return
+            else if(fmid<0.0_wp)then
+              left=midpoint;fleft=fmid
+            else
+              right=midpoint;fright=fmid
+            endif
+          enddo
+          return
+        endif
+        right=left;fright=fleft
+      enddo
+    end subroutine
     subroutine residual(aa,value,code)
       real(wp),intent(in)::aa
       real(wp),intent(out)::value
