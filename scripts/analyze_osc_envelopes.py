@@ -25,13 +25,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import find_peaks
 from scipy.stats import linregress
+from osc_run_selection import DEFAULT_PATTERNS, cohort_metadata, select_runs
 
 
 WINDOWS = ((40., 200.), (200., 400.), (40., 400.), (900., 1400.),
            (1400., 1900.), (1900., 2400.), (2100., 2400.))
 BLOCKS = ((900., 1400.), (1400., 1900.), (1900., 2400.))
-PATTERNS = ("final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_*",
-            "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_*")
+PATTERNS = DEFAULT_PATTERNS
 THRESHOLD_AMPLITUDE_PA = 1.0  # Fit floor; not the physical-cycle detector.
 
 
@@ -475,8 +475,9 @@ def report(cases: list[dict], model: dict, generated: str) -> str:
               "lista as regressões. Os PNG e PDF são figuras independentes para exportação.", "",
               "As execuções refinadas em curso podem mudar suas estatísticas tardias. Reexecute este script "
               "após a conclusão. Nenhum alvo experimental é usado para ajustar as taxas, o modelo descritivo "
-              "ou os limiares. Captar uma oscilação de pressão não comprova a sequência física de bloqueio, "
-              "expulsão e retorno de líquido requerida para caracterizar severe slugging.", ""]
+              "ou os limiares. Captar uma oscilação de pressão não comprova a sequência física de acumulação, "
+              "compressão, produção, penetração de gás e blowdown. Bloqueio completo do gás não é um "
+              "requisito universal de OSC/SS3; a análise dessas fases exige fluxos e inventários.", ""]
     return "\n".join(lines)
 
 
@@ -485,9 +486,16 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results-root", type=Path, default=repo / "validation/results")
     parser.add_argument("--output", type=Path, default=repo / "validation/analysis_final")
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument("--pattern", action="append", help="Repeatable glob; replaces historical defaults")
+    selection.add_argument("--run-dir", action="append", type=Path,
+                           help="Explicit run directory; repeat for independent mesh/time refinements")
     args = parser.parse_args()
-    paths = sorted({p for pattern in PATTERNS for p in args.results_root.glob(pattern)
-                    if (p / "monitor.csv").exists() and (p / "run_metadata.txt").exists()})
+    try:
+        paths = select_runs(args.results_root, args.pattern, args.run_dir)
+        cohort = cohort_metadata(paths)
+    except (ValueError, OSError) as exc:
+        parser.error(str(exc))
     args.output.mkdir(parents=True, exist_ok=True)
     cases, signals, errors = [], {}, []
     for path in paths:
@@ -503,6 +511,11 @@ def main() -> None:
     generated = datetime.now(timezone.utc).isoformat()
     model = backward_euler_model(cases)
     summary = {"generated_utc": generated, "script_sha256": sha256(Path(__file__).read_bytes()),
+               "selection": {"patterns": args.pattern if not args.run_dir else None,
+                             "used_historical_defaults": not (args.pattern or args.run_dir),
+                             "run_directories": [str(p) for p in paths]},
+               "cohort": {"parameters": cohort[0]["parameters"],
+                          "source_sha256": cohort[0]["manifest"]["source_sha256"]},
                "interpretation": "numerical signal diagnostics; no physical validation claim",
                "main_fit_window_s": [40, 400], "fit_amplitude_floor_Pa": THRESHOLD_AMPLITUDE_PA,
                "cycle_detection_thresholds": {"minimum_peak_to_trough_Pa": 100, "minimum_rms_Pa": 1},
