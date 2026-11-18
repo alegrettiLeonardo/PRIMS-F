@@ -1,0 +1,5 @@
+$ /home/leonardoab/Documentos/PRIMS-F-chexal/tmp/unit_tests/test_chexal_junction
+HISTORICAL_NEGATIVE_TRACE model=5 status=61 jg_SI= -6.8005800E-11
+HISTORICAL_NEGATIVE_TRACE model=6 status=61 jg_SI= -6.8005800E-11
+HISTORICAL_NEGATIVE_TRACE model=7 status=61 jg_SI= -6.8005800E-11
+PASS 108 Chexal junction checks

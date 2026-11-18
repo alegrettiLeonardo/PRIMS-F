@@ -370,7 +370,7 @@ contains
     real(wp),intent(out)::jlstar,astar
     integer,intent(out)::status
     type(parameters)::pv
-    real(wp)::lo,hi,mid,fl,fh,fm,a,v,c,scale
+    real(wp)::lo,hi,mid,fl,fh,fm,a,v,c,scale,rscale,ftol,delta,fminus,fplus
     integer::i,sig
     jlstar=nan();astar=nan();status=CHEXAL_INVALID
     if(.not.valid(p).or..not.ieee_is_finite(jg))return
@@ -407,6 +407,33 @@ contains
     enddo
     jlstar=0.5_wp*(lo+hi)
     call max_residual(pv,jlstar,jg,astar,fm,status)
+    if(status/=CHEXAL_OK)return
+    ! A disappearing sampled maximum can merely fall BETWEEN the mesh nodes.
+    ! Never report that sampling event as a physical CCFL fold. Check the
+    ! candidate's interiority, actual residual and local maximality first.
+    if(astar<=0.0_wp.or.astar>=1.0_wp)then
+      jlstar=nan();astar=nan();status=CHEXAL_NUMERIC;return
+    endif
+    call evaluate(astar,pv,jlstar,jg,CHEXAL_BRANCH_HIGH,c,v,status,sig)
+    if(status/=CHEXAL_OK)return
+    rscale=max(abs(astar*c*(jlstar+jg)),abs(astar*v),abs(jg))
+    ftol=2048*epsilon(1.0_wp)*rscale
+    if(abs(fm)>ftol)then
+      jlstar=nan();astar=nan();status=CHEXAL_NUMERIC;return
+    endif
+    delta=epsilon(1.0_wp)**(1.0_wp/3.0_wp)*min(astar,1-astar)
+    if(delta<=0.or.astar-delta==astar.or.astar+delta==astar)then
+      jlstar=nan();astar=nan();status=CHEXAL_SINGULAR;return
+    endif
+    fminus=residual(astar-delta,pv,jlstar,jg,CHEXAL_BRANCH_HIGH,status)
+    if(status/=CHEXAL_OK)return
+    fplus=residual(astar+delta,pv,jlstar,jg,CHEXAL_BRANCH_HIGH,status)
+    if(status/=CHEXAL_OK)return
+    ! One-sided inequalities also permit a genuine maximum at a constitutive
+    ! kink; demanding a zero bilateral derivative there would be incorrect.
+    if(fminus>fm+ftol.or.fplus>fm+ftol)then
+      jlstar=nan();astar=nan();status=CHEXAL_NUMERIC;return
+    endif
   end subroutine
 
   subroutine chexal_ccfl(jg,rhol,rhog,D,G,mul,mug,sigma,jl_ccfl,alpha_ccfl,status)
@@ -636,13 +663,13 @@ contains
       if(.not.have_prior)then
         call enumerate_cc_velocity(alpha,p,momentum,b,ul,ug,ncc,status)
         if(status/=CHEXAL_NO_ROOT)return
-        ! The explicit CC branch has no admissible root in its derived bounded
-        ! interval; a cocurrent state can now be tested without replacing it.
+        ! No admissible CC root was detected in the derived bounded interval;
+        ! finite sampling is not a global certificate of root completeness.
       endif
     endif
     if(abs(abs(theta)-PI/2)<=ANGLE_TOL.and.b==CHEXAL_BRANCH_AUTO.and..not.have_prior)then
-      ! AUTO may accept a cocurrent inversion only after excluding admissible
-      ! vertical countercurrent alternatives in both source branches.
+      ! AUTO tests cocurrent inversion only after both source-branch searches
+      ! detect no vertical CC alternative. Their finite sampling is documented.
       call enumerate_cc_velocity(alpha,p,momentum,CHEXAL_BRANCH_HIGH,ul,ug,ncc,status)
       if(status/=CHEXAL_NO_ROOT)then
         if(status==CHEXAL_OK)status=CHEXAL_BRANCH_REQUIRED
@@ -778,13 +805,15 @@ contains
       endif
       if(.not.had_previous.and.fx==0)then
         call chexal_solve_alpha(jl,x,p%rl,p%rg,PI/2,p%d,p%g,p%ml,p%mg,p%sigma,asel,sm,branch=b)
-        if(sm/=CHEXAL_OK)then
+        if(sm/=CHEXAL_OK.and.sm/=CHEXAL_DOMAIN.and.sm/=CHEXAL_NO_ROOT.and.sm/=CHEXAL_CCFL_EXCEEDED)then
           status=sm;return
         endif
-        if(abs(asel-a)<=2e-9_wp*max(abs(a),tiny(1.0_wp)))then
-          call add_root(x,rr,nroots,sm)
-          if(sm/=CHEXAL_OK)then
-            status=sm;return
+        if(sm==CHEXAL_OK)then
+          if(abs(asel-a)<=2e-9_wp*max(abs(a),tiny(1.0_wp)))then
+            call add_root(x,rr,nroots,sm)
+            if(sm/=CHEXAL_OK)then
+              status=sm;return
+            endif
           endif
         endif
       endif
@@ -800,7 +829,12 @@ contains
             mid=lo+(hi-lo)/2
             if(mid==lo.or.mid==hi)exit
             fmid=residual(a,pv,(q-p%rg*mid)/p%rl,mid,b,sm)
-            if(sm/=CHEXAL_OK)exit
+            if(sm/=CHEXAL_OK)then
+              if(sm==CHEXAL_DOMAIN.or.sm==CHEXAL_CCFL_EXCEEDED)exit
+              status=sm
+              if(sm==CHEXAL_NO_ROOT)status=CHEXAL_NUMERIC
+              return
+            endif
             if(fmid==0)then
               lo=mid;hi=mid;exit
             else if(sign(1.0_wp,fmid)==sign(1.0_wp,fl))then
@@ -811,9 +845,17 @@ contains
           enddo
           mid=lo+(hi-lo)/2;jl=(q-p%rg*mid)/p%rl
           fmid=residual(a,pv,jl,mid,b,sm)
+          if(sm/=CHEXAL_OK.and.sm/=CHEXAL_DOMAIN.and.sm/=CHEXAL_CCFL_EXCEEDED)then
+            status=sm
+            if(sm==CHEXAL_NO_ROOT)status=CHEXAL_NUMERIC
+            return
+          endif
           if(sm==CHEXAL_OK)then
             if(abs(fmid)<=256*epsilon(1.0_wp)*max(abs(mid),abs(jl),tiny(1.0_wp)))then
               call chexal_solve_alpha(jl,mid,p%rl,p%rg,PI/2,p%d,p%g,p%ml,p%mg,p%sigma,asel,sm,branch=b)
+              if(sm/=CHEXAL_OK.and.sm/=CHEXAL_DOMAIN.and.sm/=CHEXAL_NO_ROOT.and.sm/=CHEXAL_CCFL_EXCEEDED)then
+                status=sm;return
+              endif
               if(sm==CHEXAL_OK)then
                 if(abs(asel-a)<=2e-9_wp*max(abs(a),tiny(1.0_wp)))then
                   call add_root(mid,rr,nroots,sm)

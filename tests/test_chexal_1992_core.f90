@@ -78,6 +78,10 @@ program test_chexal_1992_core
   call ok(st==0,'CCFL solver status')
   call near(fs,-.44380008170984717617_wp,2e-10_wp,'CCFL jl high precision independent')
   call near(af,.34341477862448349592_wp,3e-8_wp,'CCFL alpha high precision independent')
+  do b=-1,1,2
+    call chexal_recover_velocities(af,rl,rg,rl*fs+rg*.1_wp,pi/2,d,g,ml,mg,sigma,u,w,st,branch=b)
+    call ok(st==CHEXAL_SINGULAR,'CCFL singular candidate never falls back to cocurrent flow')
+  enddo
   call chexal_residual_si(af,rl,rg,fs,.1_wp,pi/2,d,g,ml,mg,sigma,r,st,branch=1)
   call near(r,0.0_wp,1e-12_wp,'CCFL residual')
   h=1e-5_wp
@@ -130,6 +134,11 @@ program test_chexal_1992_core
   call chexal_coefficients_si(.2_wp,rl,rg,.4_wp,.7_wp,pi/2,d,g,ml,mg,sigma,c,v,st,signature=s1)
   call chexal_coefficients_si(.2_wp+1e-6_wp,rl,rg,.4_wp,.7_wp,pi/2,d,g,ml,mg,sigma,c,v,st,signature=s2)
   call ok(s1==s2,'same-piece signature for derivative perturbation')
+  do i=4,8,2
+    call chexal_ccfl(10.0_wp**(-i),rl,rg,d,g,ml,mg,sigma,fs,af,st)
+    call ok(st==CHEXAL_NUMERIC,'unresolved tiny-gas CCFL is not accepted as a fold')
+    call ok(.not.ieee_is_finite(fs).and..not.ieee_is_finite(af),'unresolved CCFL has no physical outputs')
+  enddo
   write(*,'(a,i0,a)')'PASS ',checks,' Chexal 1992 core checks (not experimental validation)'
 contains
   subroutine ok(condition,message)

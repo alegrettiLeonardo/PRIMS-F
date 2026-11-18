@@ -1,0 +1,24 @@
+test_amplitude_change_is_flagged_even_if_mass_balances_pass (test_validation_evidence.EvidenceTests.test_amplitude_change_is_flagged_even_if_mass_balances_pass) ... ok
+test_different_numeric_controller_is_not_a_one_factor_study (test_validation_evidence.EvidenceTests.test_different_numeric_controller_is_not_a_one_factor_study) ... ok
+test_different_physics_is_not_a_refinement_pair (test_validation_evidence.EvidenceTests.test_different_physics_is_not_a_refinement_pair) ... ok
+test_effective_mass_override_precedes_nominal_volumetric_input (test_validation_evidence.EvidenceTests.test_effective_mass_override_precedes_nominal_volumetric_input) ... ok
+test_flat_signals_create_no_periods_or_phase_sequences (test_validation_evidence.EvidenceTests.test_flat_signals_create_no_periods_or_phase_sequences) ... ok
+test_mass_pass_does_not_establish_convergence (test_validation_evidence.EvidenceTests.test_mass_pass_does_not_establish_convergence) ... ok
+test_missing_compartment_inventory_blocks_ordered_claim (test_validation_evidence.EvidenceTests.test_missing_compartment_inventory_blocks_ordered_claim) ... ok
+test_missing_segments_are_not_zero_or_interpolated_away (test_validation_evidence.EvidenceTests.test_missing_segments_are_not_zero_or_interpolated_away) ... ok
+test_monotone_pressure_is_not_a_cycle (test_validation_evidence.EvidenceTests.test_monotone_pressure_is_not_a_cycle) ... ok
+test_new_source_hash_is_flagged (test_validation_evidence.EvidenceTests.test_new_source_hash_is_flagged) ... ok
+test_only_independent_refinement_pairs (test_validation_evidence.EvidenceTests.test_only_independent_refinement_pairs) ... ok
+test_pressure_oscillation_with_positive_gas_is_preserved_as_positive_evidence (test_validation_evidence.EvidenceTests.test_pressure_oscillation_with_positive_gas_is_preserved_as_positive_evidence) ... ok
+test_separate_short_low_flux_visits_are_not_a_continuous_dwell (test_validation_evidence.EvidenceTests.test_separate_short_low_flux_visits_are_not_a_continuous_dwell) ... ok
+test_synthetic_order_is_detected_but_not_validated (test_validation_evidence.EvidenceTests.test_synthetic_order_is_detected_but_not_validated) ... ok
+test_time_weighted_statistics_on_irregular_samples (test_validation_evidence.EvidenceTests.test_time_weighted_statistics_on_irregular_samples) ... ok
+test_unreached_window_never_falls_back_to_a_pilot_window (test_validation_evidence.EvidenceTests.test_unreached_window_never_falls_back_to_a_pilot_window) ... ok
+test_cohort_allows_mesh_refinement_but_rejects_source_or_physics_mixing (test_validation_evidence.OscSelectionTests.test_cohort_allows_mesh_refinement_but_rejects_source_or_physics_mixing) ... ok
+test_explicit_selection_excludes_historical_defaults_and_deduplicates (test_validation_evidence.OscSelectionTests.test_explicit_selection_excludes_historical_defaults_and_deduplicates) ... ok
+test_missing_selected_metadata_is_an_error (test_validation_evidence.OscSelectionTests.test_missing_selected_metadata_is_an_error) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.051s
+
+OK
