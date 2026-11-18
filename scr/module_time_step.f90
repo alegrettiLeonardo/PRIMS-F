@@ -1,387 +1,167 @@
 module module_time_step
-  use mod_kinds,            only: wp, i4
-  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
+  use mod_kinds,only:wp,i4
+  use module_lapack_small,only:dgeev_3x3,inv3x3
+  use,intrinsic::ieee_arithmetic,only:ieee_is_finite,ieee_value,ieee_quiet_nan
   implicit none
-
   private
-  public :: time_integrator_t
-
-  type :: time_integrator_t
+  public::time_integrator_t
+  type::time_integrator_t
   contains
-    procedure :: compute_time_step_lax_wendroff
-    procedure :: solver_ivp
-    procedure :: compute_residual_vector
-    procedure :: solve_block_tridiagonal_3x3
-    procedure :: invert_3x3
-  end type time_integrator_t
-
+    procedure::compute_time_step_lax_wendroff
+    procedure::solver_ivp
+    procedure::compute_residual_vector
+    procedure::solve_block_tridiagonal_3x3
+    procedure::invert_3x3
+  end type
+  interface
+    subroutine dgbsv(n,kl,ku,nrhs,ab,ldab,ipiv,b,ldb,info)
+      import wp
+      integer,intent(in)::n,kl,ku,nrhs,ldab,ldb
+      real(wp),intent(inout)::ab(ldab,*),b(ldb,*)
+      integer,intent(out)::ipiv(*),info
+    end subroutine
+  end interface
 contains
-
-  real(wp) function compute_time_step_lax_wendroff(this, CFL, delta_x, Roe_matrix, mode, acoustic_scale, u_material) result(dt)
-    !! CFL-based time-step estimate.
-    !! - mode='acoustic' (default): dt ~ CFL*dx/(acoustic_scale*max|A|)
-    !! - mode='material' : dt ~ CFL*dx/max(|u_material|, tiny)
-    !! For implicit stepping, users can select large CFL and/or small acoustic_scale.
-    class(time_integrator_t), intent(in) :: this
-    real(wp), intent(in) :: CFL
-    real(wp), intent(in) :: delta_x
-    real(wp), intent(in) :: Roe_matrix(3,3)
-    character(len=*), intent(in), optional :: mode
-    real(wp), intent(in), optional :: acoustic_scale
-    real(wp), intent(in), optional :: u_material
-
-    real(wp) :: amax, scale
-    logical  :: use_material
-
-    use_material = .false.
-    if (present(mode)) then
-      select case (trim(mode))
+  real(wp) function compute_time_step_lax_wendroff(this,CFL,delta_x,Roe_matrix,mode,acoustic_scale,u_material,status) result(dt)
+    class(time_integrator_t),intent(in)::this
+    real(wp),intent(in)::CFL,delta_x,Roe_matrix(3,3)
+    character(*),intent(in),optional::mode
+    real(wp),intent(in),optional::acoustic_scale,u_material
+    integer,intent(out),optional::status
+    real(wp)::wr(3),wi(3),vr(3,3),amax,scale
+    integer::info
+    dt=ieee_value(0.0_wp,ieee_quiet_nan)
+    if(present(status))status=-100
+    if(.not.all(ieee_is_finite([CFL,delta_x])).or.CFL<=0.0_wp.or.delta_x<=0.0_wp)return
+    call dgeev_3x3(Roe_matrix,wr,wi,vr,info)
+    if(info/=0)then
+      if(present(status))status=info
+      return
+    endif
+    amax=maxval(abs(wr))
+    if(maxval(abs(wi))>1e-10_wp*max(1.0_wp,amax))then
+      if(present(status))status=-103
+      return
+    endif
+    if(present(acoustic_scale))then
+      ! Downscaling wave speeds would cease to be a spectral CFL estimate.
+      if(.not.ieee_is_finite(acoustic_scale).or.acoustic_scale<1.0_wp)return
+      amax=amax*acoustic_scale
+    endif
+    if(present(mode))then
+      select case(trim(mode))
+      case('acoustic','ACOUSTIC','Acoustic')
       case('material','MATERIAL','Material')
-        use_material = .true.
+        ! Material speed may tighten the estimate, never remove acoustic waves.
+        if(.not.present(u_material))return
+        if(.not.ieee_is_finite(u_material))return
+        amax=max(amax,abs(u_material))
       case default
-        use_material = .false.
+        return
       end select
-    end if
-
-    if (use_material) then
-      if (present(u_material)) then
-        amax = abs(u_material)
-      else
-        amax = maxval(abs(Roe_matrix))
-      end if
+    endif
+    if(amax==0.0_wp)then
+      dt=huge(1.0_wp)
     else
-      amax = maxval(abs(Roe_matrix))
-      if (present(acoustic_scale)) then
-        scale = max(acoustic_scale, 0.0_wp)
-        amax  = amax * scale
-      end if
-    end if
-
-    amax = max(amax, 1.0e-12_wp)
-    dt   = CFL * abs(delta_x) / amax
-
-    if (.not. ieee_is_finite(dt)) dt = 0.0_wp
-
-    call dummy_use(this)
-  end function compute_time_step_lax_wendroff
-
-
-  subroutine solver_ivp(this, U, numerical_flux_values, source_term_values, delta_s, delta_t, tol, U_out)
-    class(time_integrator_t), intent(in) :: this
-    real(wp), intent(in) :: U(:,:)
-    real(wp), intent(in) :: numerical_flux_values(:,:)
-    real(wp), intent(in) :: source_term_values(:,:)
-    real(wp), intent(in) :: delta_s(:)
-    real(wp), intent(in) :: delta_t
-    real(wp), intent(in) :: tol
-    real(wp), intent(out):: U_out(:,:)
-
-    integer :: i
-    real(wp) :: ds
-
-    U_out = U
-    do i = 2, size(U,1)-1
-      ds = max(abs(delta_s(i)), 1.0e-12_wp)
-      U_out(i,:) = U(i,:) - (delta_t/ds) * &
-                   (numerical_flux_values(i,:) - numerical_flux_values(i-1,:)) &
-                   + delta_t * source_term_values(i,:)
-    end do
-
-    call dummy_use(this)
-    call dummy_use_real(tol)
-  end subroutine solver_ivp
-
-
-  subroutine compute_residual_vector(this, U, U_n, delta_s, flux_faces, source_faces, i_first, i_last, dt, R, res_norm)
-    class(time_integrator_t), intent(in) :: this
-    real(wp), intent(in)  :: U(:,:)
-    real(wp), intent(in)  :: U_n(:,:)
-    real(wp), intent(in)  :: delta_s(:)
-    real(wp), intent(in)  :: flux_faces(:,:)
-    real(wp), intent(in)  :: source_faces(:,:)
-    integer, intent(in)   :: i_first, i_last
-    real(wp), intent(in)  :: dt
-    real(wp), intent(out) :: R(:,:)
-    real(wp), intent(out) :: res_norm
-
-    integer :: i
-    real(wp) :: ds
-
-    R = 0.0_wp
-    res_norm = 0.0_wp
-
-    if (i_first < 2 .or. i_last < i_first) then
-      res_norm = huge(1.0_wp)
-      return
-    end if
-
-    do i = i_first, i_last
-      ds = max(abs(delta_s(i)), 1.0e-12_wp)
-
-      R(i,:) = U(i,:) - U_n(i,:) - dt * ( &
-               - (flux_faces(i,:) - flux_faces(i-1,:)) / ds + source_faces(i,:) )
-
-      if (.not. all(ieee_is_finite(R(i,:)))) then
-        write(*,'(a,i0)') '[ERROR] Non-finite residual at cell i=', i
-        write(*,'(a,3es25.16)') '  R(i,:)     =', R(i,1), R(i,2), R(i,3)
-        write(*,'(a,3es25.16)') '  U(i,:)     =', U(i,1), U(i,2), U(i,3)
-        write(*,'(a,3es25.16)') '  U_n(i,:)   =', U_n(i,1), U_n(i,2), U_n(i,3)
-        write(*,'(a,3es25.16)') '  fluxR      =', flux_faces(i,1), flux_faces(i,2), flux_faces(i,3)
-        write(*,'(a,3es25.16)') '  fluxL      =', flux_faces(i-1,1), flux_faces(i-1,2), flux_faces(i-1,3)
-        write(*,'(a,3es25.16)') '  source(i,:) =', source_faces(i,1), source_faces(i,2), source_faces(i,3)
-        write(*,'(a,es25.16,a,es25.16)') '  dt=', dt, '  ds=', ds
-        res_norm = huge(1.0_wp)
-        call dummy_use(this)
-        return
-      end if
-
-      res_norm = res_norm + sum(R(i,:)*R(i,:))
-    end do
-
-    res_norm = sqrt(res_norm)
-    if (.not. ieee_is_finite(res_norm)) res_norm = huge(1.0_wp)
-
-    call dummy_use(this)
-  end subroutine compute_residual_vector
-
-
-  subroutine solve_block_tridiagonal_3x3(this, A, B, C, D, X, info)
-    !! Solve a block tridiagonal system with 3x3 blocks using a Thomas-like algorithm.
-    !!
-    !! System form (for i=1..n):
-    !!   A_i * x_{i-1} + B_i * x_i + C_i * x_{i+1} = D_i
-    !! with A_1 unused and C_n unused.
-    !!
-    !! Dummy arguments are assumed-shape to satisfy Fortran rules and avoid
-    !! nonstandard mixes like (3,3,:).
-    class(time_integrator_t), intent(in) :: this
-    real(wp), intent(in)  :: A(:,:,:), B(:,:,:), C(:,:,:)
-    real(wp), intent(in)  :: D(:,:)
-    real(wp), intent(out) :: X(:,:)
-    integer(i4), intent(out) :: info
-
-    integer(i4) :: n, i, info_loc
-    real(wp), allocatable :: Cp(:,:,:), Dp(:,:), M(:,:)
-
-    info = 0_i4
-
-    ! Basic shape checks (avoid silent out-of-bounds / wrong calls)
-    if (size(D,1) /= 3 .or. size(X,1) /= 3) then
-      info = -2_i4
-      call dummy_use(this)
-      return
-    end if
-    if (size(A,1) /= 3 .or. size(A,2) /= 3 .or. size(B,1) /= 3 .or. size(B,2) /= 3 .or. size(C,1) /= 3 .or. size(C,2) /= 3) then
-      info = -1_i4
-      call dummy_use(this)
-      return
-    end if
-
-    n = int(size(D,2), kind=i4)
-
-    if (n < 1_i4) then
-      info = -4_i4
-      call dummy_use(this)
-      return
-    end if
-
-    if (size(A,3) < n .or. size(B,3) < n .or. size(C,3) < n .or. size(X,2) < n) then
-      info = -3_i4
-      call dummy_use(this)
-      return
-    end if
-
-    allocate(Cp(3,3,n), Dp(3,n), M(3,3))
-
-    ! Forward elimination
-    call solve_3x3_mat(B(:,:,1), C(:,:,1), Cp(:,:,1), info_loc)
-    if (info_loc /= 0_i4) then
-      info = 1_i4
-      deallocate(Cp, Dp, M)
-      call dummy_use(this)
-      return
-    end if
-
-    call solve_3x3_vec(B(:,:,1), D(:,1), Dp(:,1), info_loc)
-    if (info_loc /= 0_i4) then
-      info = 1_i4
-      deallocate(Cp, Dp, M)
-      call dummy_use(this)
-      return
-    end if
-
-    do i = 2_i4, n
-      M = B(:,:,i) - matmul(A(:,:,i), Cp(:,:,i-1_i4))
-
-      call solve_3x3_mat(M, C(:,:,i), Cp(:,:,i), info_loc)
-      if (info_loc /= 0_i4) then
-        info = i
-        deallocate(Cp, Dp, M)
-        call dummy_use(this)
-        return
-      end if
-
-      call solve_3x3_vec(M, D(:,i) - matmul(A(:,:,i), Dp(:,i-1_i4)), Dp(:,i), info_loc)
-      if (info_loc /= 0_i4) then
-        info = i
-        deallocate(Cp, Dp, M)
-        call dummy_use(this)
-        return
-      end if
-    end do
-
-    ! Back substitution
-    X(:,n) = Dp(:,n)
-    do i = n-1_i4, 1_i4, -1_i4
-      X(:,i) = Dp(:,i) - matmul(Cp(:,:,i), X(:,i+1_i4))
-    end do
-
-    deallocate(Cp, Dp, M)
-    call dummy_use(this)
-  end subroutine solve_block_tridiagonal_3x3
-
-
-  subroutine invert_3x3(this, A, Ainv, info)
-    !! Kept for compatibility; prefers solve_3x3_* regularized path.
-    class(time_integrator_t), intent(in) :: this
-    real(wp), intent(in)  :: A(3,3)
-    real(wp), intent(out) :: Ainv(3,3)
-    integer(i4), intent(out)  :: info
-
-    real(wp) :: det
-    real(wp), parameter :: eps_reg = 1.0e-12_wp
-    real(wp) :: Areg(3,3)
-
-    Areg = A
-    det = det3(Areg)
-    if (.not. ieee_is_finite(det) .or. abs(det) < eps_reg) then
-      Areg(1,1)=Areg(1,1)+eps_reg
-      Areg(2,2)=Areg(2,2)+eps_reg
-      Areg(3,3)=Areg(3,3)+eps_reg
-      det = det3(Areg)
-    end if
-
-    if (.not. ieee_is_finite(det) .or. abs(det) < eps_reg) then
-      info = 1_i4
-      Ainv = 0.0_wp
-      call dummy_use(this)
-      return
-    end if
-
-    Ainv(1,1) =  (Areg(2,2)*Areg(3,3) - Areg(2,3)*Areg(3,2)) / det
-    Ainv(1,2) = -(Areg(1,2)*Areg(3,3) - Areg(1,3)*Areg(3,2)) / det
-    Ainv(1,3) =  (Areg(1,2)*Areg(2,3) - Areg(1,3)*Areg(2,2)) / det
-    Ainv(2,1) = -(Areg(2,1)*Areg(3,3) - Areg(2,3)*Areg(3,1)) / det
-    Ainv(2,2) =  (Areg(1,1)*Areg(3,3) - Areg(1,3)*Areg(3,1)) / det
-    Ainv(2,3) = -(Areg(1,1)*Areg(2,3) - Areg(1,3)*Areg(2,1)) / det
-    Ainv(3,1) =  (Areg(2,1)*Areg(3,2) - Areg(2,2)*Areg(3,1)) / det
-    Ainv(3,2) = -(Areg(1,1)*Areg(3,2) - Areg(1,2)*Areg(3,1)) / det
-    Ainv(3,3) =  (Areg(1,1)*Areg(2,2) - Areg(1,2)*Areg(2,1)) / det
-
-    info = 0_i4
-    call dummy_use(this)
-  end subroutine invert_3x3
-
-
-  subroutine solve_3x3_mat(A, B, X, info)
-    real(wp), intent(in)  :: A(3,3), B(3,3)
-    real(wp), intent(out) :: X(3,3)
-    integer(i4), intent(out)  :: info
-
-    real(wp), parameter :: eps_reg = 1.0e-12_wp
-    real(wp) :: Areg(3,3), invA(3,3), det
-
-    Areg = A
-    det  = det3(Areg)
-
-    if (.not. ieee_is_finite(det) .or. abs(det) < eps_reg) then
-      Areg(1,1)=Areg(1,1)+eps_reg
-      Areg(2,2)=Areg(2,2)+eps_reg
-      Areg(3,3)=Areg(3,3)+eps_reg
-      det = det3(Areg)
-    end if
-
-    if (.not. ieee_is_finite(det) .or. abs(det) < eps_reg) then
-      info = 1_i4
-      X    = 0.0_wp
-      return
-    end if
-
-    invA(1,1) =  (Areg(2,2)*Areg(3,3) - Areg(2,3)*Areg(3,2)) / det
-    invA(1,2) = -(Areg(1,2)*Areg(3,3) - Areg(1,3)*Areg(3,2)) / det
-    invA(1,3) =  (Areg(1,2)*Areg(2,3) - Areg(1,3)*Areg(2,2)) / det
-    invA(2,1) = -(Areg(2,1)*Areg(3,3) - Areg(2,3)*Areg(3,1)) / det
-    invA(2,2) =  (Areg(1,1)*Areg(3,3) - Areg(1,3)*Areg(3,1)) / det
-    invA(2,3) = -(Areg(1,1)*Areg(2,3) - Areg(1,3)*Areg(2,1)) / det
-    invA(3,1) =  (Areg(2,1)*Areg(3,2) - Areg(2,2)*Areg(3,1)) / det
-    invA(3,2) = -(Areg(1,1)*Areg(3,2) - Areg(1,2)*Areg(3,1)) / det
-    invA(3,3) =  (Areg(1,1)*Areg(2,2) - Areg(1,2)*Areg(2,1)) / det
-
-    X = matmul(invA, B)
-    info = 0_i4
-  end subroutine solve_3x3_mat
-
-
-  subroutine solve_3x3_vec(A, b, x, info)
-    real(wp), intent(in)  :: A(3,3), b(3)
-    real(wp), intent(out) :: x(3)
-    integer(i4), intent(out)  :: info
-
-    real(wp), parameter :: eps_reg = 1.0e-12_wp
-    real(wp) :: Areg(3,3), invA(3,3), det
-
-    Areg = A
-    det  = det3(Areg)
-
-    if (.not. ieee_is_finite(det) .or. abs(det) < eps_reg) then
-      Areg(1,1)=Areg(1,1)+eps_reg
-      Areg(2,2)=Areg(2,2)+eps_reg
-      Areg(3,3)=Areg(3,3)+eps_reg
-      det = det3(Areg)
-    end if
-
-    if (.not. ieee_is_finite(det) .or. abs(det) < eps_reg) then
-      info = 1_i4
-      x    = 0.0_wp
-      return
-    end if
-
-    invA(1,1) =  (Areg(2,2)*Areg(3,3) - Areg(2,3)*Areg(3,2)) / det
-    invA(1,2) = -(Areg(1,2)*Areg(3,3) - Areg(1,3)*Areg(3,2)) / det
-    invA(1,3) =  (Areg(1,2)*Areg(2,3) - Areg(1,3)*Areg(2,2)) / det
-    invA(2,1) = -(Areg(2,1)*Areg(3,3) - Areg(2,3)*Areg(3,1)) / det
-    invA(2,2) =  (Areg(1,1)*Areg(3,3) - Areg(1,3)*Areg(3,1)) / det
-    invA(2,3) = -(Areg(1,1)*Areg(2,3) - Areg(1,3)*Areg(2,1)) / det
-    invA(3,1) =  (Areg(2,1)*Areg(3,2) - Areg(2,2)*Areg(3,1)) / det
-    invA(3,2) = -(Areg(1,1)*Areg(3,2) - Areg(1,2)*Areg(3,1)) / det
-    invA(3,3) =  (Areg(1,1)*Areg(2,2) - Areg(1,2)*Areg(2,1)) / det
-
-    x = matmul(invA, b)
-    info = 0_i4
-  end subroutine solve_3x3_vec
-
-
-  pure real(wp) function det3(A) result(det)
-    real(wp), intent(in) :: A(3,3)
-    det = A(1,1)*(A(2,2)*A(3,3) - A(2,3)*A(3,2)) - A(1,2)*(A(2,1)*A(3,3) - A(2,3)*A(3,1)) + A(1,3)*(A(2,1)*A(3,2) - A(2,2)*A(3,1))
-  end function det3
-
-
-  subroutine dummy_use(this)
-    !! Utility to mark polymorphic dummy arguments as "used" without I/O.
-    class(time_integrator_t), intent(in) :: this
-    select type (this)
-    type is (time_integrator_t)
-      continue
-    class default
-      continue
-    end select
-  end subroutine dummy_use
-
-
-  subroutine dummy_use_real(x)
-    real(wp), intent(in) :: x
-    if (.false.) write(*,*) x
-  end subroutine dummy_use_real
-
+      dt=CFL*delta_x/amax
+    endif
+    if(.not.ieee_is_finite(dt).or.dt<=0.0_wp)then
+      dt=ieee_value(0.0_wp,ieee_quiet_nan);return
+    endif
+    if(present(status))status=0
+  end function
+  subroutine solver_ivp(this,U,numerical_flux_values,source_term_values,delta_s,delta_t,tol,U_out,status)
+    class(time_integrator_t),intent(in)::this
+    real(wp),intent(in)::U(:,:),numerical_flux_values(:,:),source_term_values(:,:),delta_s(:),delta_t,tol
+    real(wp),intent(out)::U_out(:,:)
+    integer,intent(out),optional::status
+    integer::i,n
+    U_out=ieee_value(0.0_wp,ieee_quiet_nan)
+    if(present(status))status=-100
+    n=size(U,1)
+    if(size(U,2)/=3.or.any(shape(U_out)/=shape(U)).or.n<3)return
+    if(size(delta_s)<n.or.size(numerical_flux_values,1)<n-1.or.size(numerical_flux_values,2)/=3)return
+    if(any(shape(source_term_values)/=shape(U)))return
+    if(.not.ieee_is_finite(delta_t).or.delta_t<0.0_wp)return
+    if(.not.all(ieee_is_finite(delta_s(2:n-1))).or.minval(delta_s(2:n-1))<=0.0_wp)return
+    U_out=U
+    do i=2,n-1
+      U_out(i,:)=U(i,:)-delta_t*(numerical_flux_values(i,:)-numerical_flux_values(i-1,:))/delta_s(i)+ &
+        delta_t*source_term_values(i,:)
+    enddo
+    if(.not.all(ieee_is_finite(U_out)))return
+    if(present(status))status=0
+  end subroutine
+  subroutine compute_residual_vector(this,U,U_n,delta_s,flux_faces,source_faces,i_first,i_last,dt,R,res_norm,status)
+    class(time_integrator_t),intent(in)::this
+    real(wp),intent(in)::U(:,:),U_n(:,:),delta_s(:),flux_faces(:,:),source_faces(:,:),dt
+    integer,intent(in)::i_first,i_last
+    real(wp),intent(out)::R(:,:),res_norm
+    integer,intent(out),optional::status
+    integer::i
+    R=ieee_value(0.0_wp,ieee_quiet_nan);res_norm=ieee_value(0.0_wp,ieee_quiet_nan)
+    if(present(status))status=-100
+    if(size(U,2)/=3.or.any(shape(U_n)/=shape(U)).or.any(shape(R)/=shape(U)))return
+    if(i_first<2.or.i_last<i_first.or.i_last>size(U,1))return
+    if(size(delta_s)<i_last.or.size(flux_faces,1)<i_last.or.size(flux_faces,2)/=3)return
+    if(size(source_faces,1)<i_last.or.size(source_faces,2)/=3)return
+    if(.not.ieee_is_finite(dt).or.dt<0.0_wp)return
+    if(.not.all(ieee_is_finite(delta_s(i_first:i_last))).or.minval(delta_s(i_first:i_last))<=0.0_wp)return
+    R=0.0_wp
+    do i=i_first,i_last
+      R(i,:)=U(i,:)-U_n(i,:)+dt*(flux_faces(i,:)-flux_faces(i-1,:))/delta_s(i)-dt*source_faces(i,:)
+    enddo
+    if(.not.all(ieee_is_finite(R)))return
+    res_norm=norm2(R(i_first:i_last,:))
+    if(.not.ieee_is_finite(res_norm))return
+    if(present(status))status=0
+  end subroutine
+  subroutine solve_block_tridiagonal_3x3(this,A,B,C,D,X,info)
+    !! Pivoted LAPACK band solve. Full 3x3 off-diagonal blocks imply KL=KU=5.
+    !! AB(KL+KU+1+i-j,j)=matrix(i,j); LDAB=2*KL+KU+1=16.
+    !! No diagonal epsilon or per-block nonsingularity assumption is introduced.
+    class(time_integrator_t),intent(in)::this
+    real(wp),intent(in)::A(:,:,:),B(:,:,:),C(:,:,:),D(:,:)
+    real(wp),intent(out)::X(:,:)
+    integer(i4),intent(out)::info
+    integer,parameter::kl=5,ku=5,ldab=16,diag=11
+    real(wp),allocatable::ab(:,:),rhs(:,:)
+    integer,allocatable::ipiv(:)
+    integer::nb,n,k,i,j,row,col
+    X=ieee_value(0.0_wp,ieee_quiet_nan);info=-100
+    if(size(D,1)/=3.or.any(shape(X)/=shape(D)))return
+    if(size(A,1)/=3.or.size(A,2)/=3.or.any(shape(A)/=shape(B)).or.any(shape(B)/=shape(C)))return
+    nb=size(D,2)
+    if(nb<1.or.size(B,3)/=nb)return
+    if(.not.all(ieee_is_finite(A)).or..not.all(ieee_is_finite(B)).or. &
+      .not.all(ieee_is_finite(C)).or..not.all(ieee_is_finite(D)))return
+    n=3*nb
+    allocate(ab(ldab,n),rhs(n,1),ipiv(n))
+    ab=0.0_wp
+    do k=1,nb
+      do j=1,3
+        col=3*(k-1)+j
+        do i=1,3
+          row=3*(k-1)+i
+          ab(diag+row-col,col)=B(i,j,k)
+          if(k>1)ab(diag+row-(col-3),col-3)=A(i,j,k)
+          if(k<nb)ab(diag+row-(col+3),col+3)=C(i,j,k)
+        enddo
+      enddo
+    enddo
+    rhs(:,1)=reshape(D,[n])
+    call dgbsv(n,kl,ku,1,ab,ldab,ipiv,rhs,n,info)
+    if(info/=0)return
+    if(.not.all(ieee_is_finite(rhs)))then
+      info=-101;return
+    endif
+    X=reshape(rhs(:,1),shape(X))
+  end subroutine
+  subroutine invert_3x3(this,A,Ainv,info)
+    class(time_integrator_t),intent(in)::this
+    real(wp),intent(in)::A(3,3)
+    real(wp),intent(out)::Ainv(3,3)
+    integer(i4),intent(out)::info
+    Ainv=inv3x3(A,info)
+  end subroutine
 end module module_time_step

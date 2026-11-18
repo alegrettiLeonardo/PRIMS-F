@@ -1,468 +1,658 @@
 module module_steady_state
-  !! Steady-state utilities (pressure ODE along pipeline+riser) - port of steadyState.py
-  !!
-  !! Provides:
-  !!   - malha_progressiva: progressive mesh (cell centers + nodal points)
-  !!   - fun_dpds: dp/ds right-hand side (dimensionless)
-  !!   - steady_state_ndim_simp: compute steady state along the system on a progressive mesh
-
-  use mod_kinds, only: wp, i4
-  use, intrinsic :: ieee_arithmetic, only: ieee_is_nan, ieee_is_finite
-  use mod_rootfinding, only: brent_root, bisect_root
+  !! Steady mass fluxes Gl,Gg and total momentum flux
+  !! H(P,theta)=Gl*ul+Gg*ug+PIP*P obey dH/ds=S3.
+  !! Pressure integration includes explicit theta(s) dependence of the closure.
+  !! Inputs P,rho,u and global s/Lr are nondimensional; geometry/properties are SI.
+  !! At the pipeline/riser junction pressure is matched, with separate closure
+  !! traces, as specified by the reference's coupling assumption.
+  use mod_kinds, only: wp,i4
   use mod_void_helpers, only: ffan
-  use module_catenary, only: fun_or_geo
-  use module_closure_law, only: lei_fechamento_or_ndim_simp, Dlei_fechamento_or_ndim_simp
+  use module_closure_law, only: lei_fechamento_or_ndim_simp,CdUd_drift, &
+    STRATIFIED,BENDIKSEN,BHAGWAT,MONTGOMERY,CLOSURE_UNSUPPORTED
+  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite,ieee_value,ieee_quiet_nan
   implicit none
   private
-
-  public :: malha_progressiva
-  public :: fun_dpds
-  public :: steady_state_ndim_simp
-  public :: EstadoEstacionario_ndim_simp
-
+  integer,parameter,public :: STEADY_OK=0,STEADY_INVALID=20,STEADY_NO_ROOT=21
+  integer,parameter,public :: STEADY_MULTIPLE_ROOTS=22,STEADY_SINGULAR=23
+  integer,parameter,public :: STEADY_INTEGRATION=24
+  integer,parameter,public :: PHASE_AUTO=0,PHASE_LIQUID_ONLY=1,PHASE_GAS_ONLY=2
+  public :: malha_progressiva,fun_dpds,steady_state_ndim_simp,EstadoEstacionario_ndim_simp
+  public :: solve_alpha_from_superficials
 contains
-
-  !----------------------------------------
-  ! Python-compatible wrapper name
-  !----------------------------------------
-  subroutine EstadoEstacionario_ndim_simp(N, mul, mug, Ps, Lp, Lr, CA, beta, DH, AREA, EPS, G, Cl, Cg, rho_l0, P_l0, &
-                                         mu_l_dyn, mu_g_dyn, sigma, w_p, w_u, w_rho, tol, &
-                                         vns, vnp, nrhogv, nrholv, alphav, nugv, nulv, thetav, njlv, njgv)
-    integer(i4), intent(in) :: N
-    real(wp),    intent(in) :: mul, mug, Ps
-    real(wp),    intent(in) :: Lp, Lr, CA, beta
-    real(wp),    intent(in) :: DH, AREA, EPS, G
-    real(wp),    intent(in) :: Cl, Cg, rho_l0, P_l0
-    real(wp),    intent(in) :: mu_l_dyn, mu_g_dyn, sigma
-    real(wp),    intent(in) :: w_p, w_u, w_rho, tol
-
-    real(wp), allocatable, intent(out) :: vns(:), vnp(:)
-    real(wp), allocatable, intent(out) :: nrhogv(:), nrholv(:)
-    real(wp), allocatable, intent(out) :: alphav(:), nugv(:), nulv(:)
-    real(wp), allocatable, intent(out) :: thetav(:)
-    real(wp), allocatable, intent(out) :: njlv(:), njgv(:)
-
-    call steady_state_ndim_simp(N, mul, mug, Ps, Lp, Lr, CA, beta, DH, AREA, EPS, G, Cl, Cg, rho_l0, P_l0, &
-                               mu_l_dyn, mu_g_dyn, sigma, w_p, w_u, w_rho, tol, &
-                               vns, vnp, nrhogv, nrholv, alphav, nugv, nulv, thetav, njlv, njgv)
-  end subroutine EstadoEstacionario_ndim_simp
-
-  subroutine malha_progressiva(L_total, s_riser, N_before, N_after, ratio_before, ratio_after, &
-                               malha_centros, malha_nodal)
-    !! Progressive mesh generator (ported from steadyState.py)
-    !!
-    !! Before s_riser: decreasing spacing (towards s_riser)
-    !! After  s_riser: increasing spacing
-    real(wp), intent(in) :: L_total, s_riser
-    integer(i4), intent(in) :: N_before, N_after
-    real(wp), intent(in) :: ratio_before, ratio_after
-    real(wp), allocatable, intent(out) :: malha_centros(:)
-    real(wp), allocatable, intent(out) :: malha_nodal(:)
-
-    real(wp) :: L_before, L_after
-    real(wp) :: r_b, r_a, d_b, d_a
-    integer(i4) :: n_b, n_a
-    integer(i4) :: i, n_nodes
-    real(wp), allocatable :: delta_before(:), delta_after(:)
-
-    n_b = max(1_i4, N_before)
-    n_a = max(1_i4, N_after)
-    r_b = ratio_before
-    r_a = ratio_after
-
-    L_before = s_riser
-    L_after  = L_total - s_riser
-    if (L_before < 0.0_wp) L_before = 0.0_wp
-    if (L_after  < 0.0_wp) L_after  = 0.0_wp
-
-    allocate(delta_before(n_b), delta_after(n_a))
-
-    ! --- before s_riser (decreasing towards the junction)
-    if (abs(r_b - 1.0_wp) < 1.0e-14_wp) then
-      d_b = L_before / real(n_b, wp)
-      do i = 1, n_b
-        delta_before(i) = d_b
-      end do
-    else
-      d_b = L_before * (1.0_wp - r_b) / (1.0_wp - r_b**real(n_b, wp))
-      do i = 1, n_b
-        ! reversed geometric progression: r_b^(n_b-1 .. 0)
-        delta_before(i) = d_b * r_b**real(n_b - i, wp)
-      end do
-    end if
-
-    ! --- after s_riser (increasing away from the junction)
-    if (abs(r_a - 1.0_wp) < 1.0e-14_wp) then
-      d_a = L_after / real(n_a, wp)
-      do i = 1, n_a
-        delta_after(i) = d_a
-      end do
-    else
-      d_a = L_after * (1.0_wp - r_a) / (1.0_wp - r_a**real(n_a, wp))
-      do i = 1, n_a
-        delta_after(i) = d_a * r_a**real(i - 1, wp)
-      end do
-    end if
-
-    ! nodal mesh: [0 .. s_riser] with n_b cells + [s_riser .. L_total] with n_a cells
-    n_nodes = (n_b + 1) + n_a
-    allocate(malha_nodal(n_nodes))
-    malha_nodal(1) = 0.0_wp
-    do i = 1, n_b
-      malha_nodal(i+1) = malha_nodal(i) + delta_before(i)
-    end do
-    ! force exact junction
-    malha_nodal(n_b+1) = s_riser
-    do i = 1, n_a
-      malha_nodal(n_b+1+i) = s_riser + sum(delta_after(1:i))
-    end do
-    ! force exact end
-    malha_nodal(n_nodes) = L_total
-
-    allocate(malha_centros(n_nodes-1))
-    do i = 1, n_nodes-1
-      malha_centros(i) = 0.5_wp * (malha_nodal(i) + malha_nodal(i+1))
-    end do
-
-    deallocate(delta_before, delta_after)
-  end subroutine malha_progressiva
-
-
-  real(wp) function fun_dpds(s, p, mul, mug, Lp, Lr, CA, beta, DH, AREA, EPS, G, &
-                             Cl, Cg, rho_l0, P_l0, mu_l_dyn, mu_g_dyn, sigma, w_p, w_u, w_rho, tol) result(dpds)
-    !! RHS for dp/ds along pipeline-riser (dimensionless).
-    !! Direct port of steadyState.py:fun_dpds (without printing).
-    real(wp), intent(in) :: s, p
-    real(wp), intent(in) :: mul, mug
-    real(wp), intent(in) :: Lp, Lr, CA, beta
-    real(wp), intent(in) :: DH, AREA, EPS, G
-    real(wp), intent(in) :: Cl, Cg, rho_l0, P_l0
-    real(wp), intent(in) :: mu_l_dyn, mu_g_dyn, sigma
-    real(wp), intent(in) :: w_p, w_u, w_rho, tol
-
-    real(wp) :: PIP, PIG, PIF
-    real(wp) :: nrhog, nrhol, njl, njg
-    real(wp) :: theta, alpha
-    real(wp) :: nug, nul
-    real(wp) :: dfda, dfdrhog, dfdrhol, dfdug, dfdul
-    real(wp) :: A11, A12, A21, A22
-    real(wp) :: B1, B2
-    real(wp) :: auxa, auxb, auxc
-    real(wp) :: rhom, jt, dmu, Rem, fm
-
-    ! Nondimensional groups
-    PIP = w_p / (w_rho * (w_u*w_u))
-    PIG = G * Lr / (w_u*w_u)
-    PIF = Lr / DH
-
-    nrhog = p / (Cg*Cg)
-    nrhol = rho_l0 + (p - P_l0) / (Cl*Cl)
-
-    njl = mul / nrhol
-    njg = mug / nrhog
-
-    theta = fun_or_geo(s * Lr, Lp, beta, CA)
-
-    alpha = solve_alpha_from_superficials(njl, njg, nrhol, nrhog, theta, DH, AREA, EPS, G, mu_l_dyn, mu_g_dyn, sigma, w_u, w_rho, tol)
-
-    nug = njg / max(alpha, 1.0e-14_wp)
-    nul = njl / max(1.0_wp - alpha, 1.0e-14_wp)
-
-    call Dlei_fechamento_or_ndim_simp(alpha, nrhol, nrhog, nul, nug, theta, DH, AREA, EPS, G, mu_l_dyn, mu_g_dyn, sigma, w_u, w_rho, tol, &
-                                     dfda, dfdrhol, dfdrhog, dfdul, dfdug)
-
-    ! A matrix entries (i,j = 1,2)
-    A11 = (1.0_wp - alpha) * nrhol + nrhol * nul * dfdul / dfda
-    A12 = nrhol * nul * dfdug / dfda
-    A21 = -nrhog * nug * dfdug / dfda
-    A22 = alpha * nrhog - nrhog * nug * dfdug / dfda
-
-    ! B vector entries
-    B1 = -((1.0_wp - alpha) * nul / (Cl*Cl) + nrhol * nul * (dfdrhol / (Cl*Cl) + dfdrhog / (Cg*Cg)) / dfda)
-    B2 = -(alpha * nug / (Cg*Cg) - nrhog * nug * (dfdrhol / (Cl*Cl) + dfdrhog / (Cg*Cg)) / dfda)
-
-    ! Aux terms that multiply dp/ds
-    auxa = (B1 * A22 - B2 * A12) / (A22 * A11 - A21 * A12)
-    auxb = (B2 * A11 - B1 * A21) / (A22 * A11 - A21 * A12)
-    auxc = mul * auxa + mug * auxb + PIP
-
-    rhom = (1.0_wp - alpha) * nrhol + alpha * nrhog
-    auxa = -PIG * sin(theta) * rhom
-
-    jt = njl + njg
-    dmu = mu_g_dyn / mu_l_dyn
-    Rem = (w_rho * w_u * DH / mu_l_dyn) * rhom * abs(jt) / ((1.0_wp - alpha) + dmu * alpha)
-
-    fm = ffan(EPS / DH, Rem)
-    auxb = -PIF * rhom * fm * jt * abs(jt) / 2.0_wp
-
-    dpds = (auxa + auxb) / auxc
-  end function fun_dpds
-
-
-  subroutine steady_state_ndim_simp(N, mul, mug, Ps, Lp, Lr, CA, beta, DH, AREA, EPS, G, &
-                                   Cl, Cg, rho_l0, P_l0, mu_l_dyn, mu_g_dyn, sigma, w_p, w_u, w_rho, tol, &
-                                   vns, vnp, nrhogv, nrholv, alphav, nugv, nulv, thetav, njlv, njgv)
-    !! Steady-state solver (nondimensional) on a progressive mesh.
-    !!
-    !! Port of steadyState.py:EstadoEstacionario_ndim_simp (centers-based mesh).
-    integer(i4), intent(in) :: N
-    real(wp), intent(in) :: mul, mug, Ps
-    real(wp), intent(in) :: Lp, Lr, CA, beta
-    real(wp), intent(in) :: DH, AREA, EPS, G
-    real(wp), intent(in) :: Cl, Cg, rho_l0, P_l0
-    real(wp), intent(in) :: mu_l_dyn, mu_g_dyn, sigma
-    real(wp), intent(in) :: w_p, w_u, w_rho, tol
-
-    real(wp), allocatable, intent(out) :: vns(:), vnp(:)
-    real(wp), allocatable, intent(out) :: nrhogv(:), nrholv(:)
-    real(wp), allocatable, intent(out) :: alphav(:), nugv(:), nulv(:)
-    real(wp), allocatable, intent(out) :: thetav(:), njlv(:), njgv(:)
-
-    real(wp), allocatable :: s_cent(:), s_nodes(:)
-    real(wp), allocatable :: tspan(:), pspan(:)
-    integer(i4) :: N_before, N_after, N_total
-    real(wp) :: L_total_nd, s_riser
-    integer(i4) :: i
-    real(wp) :: nrhog, nrhol, njl, njg, theta, alpha
-
-    ! Mesh parameters as in the python implementation
-    N_before = N
-    N_after  = max(1_i4, N/2)
-    L_total_nd = (Lp + Lr) / Lr
-    s_riser    = Lp / Lr
-
-    call malha_progressiva(L_total_nd, s_riser, N_before, N_after, 1.04_wp, 1.04_wp, s_cent, s_nodes)
-    N_total = size(s_cent)
-
-    allocate(vns(N_total), vnp(N_total))
-    allocate(nrhogv(N_total), nrholv(N_total))
-    allocate(alphav(N_total), nugv(N_total), nulv(N_total))
-    allocate(thetav(N_total), njlv(N_total), njgv(N_total))
-
-    vns = s_cent
-
-    ! integrate from top to bottom (reverse centers)
-    allocate(tspan(N_total), pspan(N_total))
-    do i = 1, N_total
-      tspan(i) = s_cent(N_total - i + 1)
-    end do
-
-    call integrate_rk45(tspan, Ps, pspan, 1.0e-12_wp, tol)
-
-    ! reverse back to increasing order
-    do i = 1, N_total
-      vnp(i) = pspan(N_total - i + 1)
-    end do
-
-    do i = 1, N_total
-      nrhog = vnp(i) / (Cg*Cg)
-      nrhol = rho_l0 + (vnp(i) - P_l0) / (Cl*Cl)
-      nrhogv(i) = nrhog
-      nrholv(i) = nrhol
-
-      njg = mug / nrhog
-      njl = mul / nrhol
-      njlv(i) = njl
-      njgv(i) = njg
-
-      theta = fun_or_geo(vns(i) * Lr, Lp, beta, CA)
-      thetav(i) = theta
-
-      alpha = solve_alpha_from_superficials(njl, njg, nrhol, nrhog, theta, DH, AREA, EPS, G, mu_l_dyn, mu_g_dyn, sigma, w_u, w_rho, tol)
-      alphav(i) = alpha
-      nugv(i) = njg / max(alpha, 1.0e-14_wp)
-      nulv(i) = njl / max(1.0_wp - alpha, 1.0e-14_wp)
-    end do
-
-    deallocate(s_cent, s_nodes, tspan, pspan)
-
-  contains
-
-    subroutine integrate_rk45(s_eval, y0, y_eval, rtol, atol)
-      !! Adaptive Dormand-Prince RK45 integration for a scalar ODE.
-      !! s_eval is monotonic (here: decreasing). y_eval is returned at s_eval points.
-      real(wp), intent(in) :: s_eval(:)
-      real(wp), intent(in) :: y0
-      real(wp), intent(out) :: y_eval(:)
-      real(wp), intent(in) :: rtol, atol
-
-      integer(i4) :: n, i
-      real(wp) :: s, y, s_tgt
-      real(wp) :: h, dir
-      real(wp) :: k1, k2, k3, k4, k5, k6, k7
-      real(wp) :: y5, y4, err, sc, fac
-      integer(i4) :: it
-
-      n = size(s_eval)
-      if (size(y_eval) /= n) error stop 'integrate_rk45: size mismatch'
-
-      y_eval(1) = y0
-
-      do i = 1, n-1
-        s = s_eval(i)
-        y = y_eval(i)
-        s_tgt = s_eval(i+1)
-
-        dir = sign(1.0_wp, s_tgt - s)  ! expected -1
-        h = (s_tgt - s)
-        if (abs(h) > 0.0_wp) then
-          h = h / 10.0_wp
-        else
-          h = dir * 1.0e-6_wp
-        end if
-
-        it = 0
-        do while (dir*(s - s_tgt) < 0.0_wp)
-          it = it + 1
-          if (it > 200000) error stop 'integrate_rk45: too many steps'
-
-          if (abs(h) > abs(s_tgt - s)) h = s_tgt - s
-
-          k1 = rhs(s, y)
-          k2 = rhs(s + h*(1.0_wp/5.0_wp), y + h*(1.0_wp/5.0_wp)*k1)
-          k3 = rhs(s + h*(3.0_wp/10.0_wp), y + h*((3.0_wp/40.0_wp)*k1 + (9.0_wp/40.0_wp)*k2))
-          k4 = rhs(s + h*(4.0_wp/5.0_wp), y + h*((44.0_wp/45.0_wp)*k1 + (-56.0_wp/15.0_wp)*k2 + (32.0_wp/9.0_wp)*k3))
-          k5 = rhs(s + h*(8.0_wp/9.0_wp), y + h*((19372.0_wp/6561.0_wp)*k1 + (-25360.0_wp/2187.0_wp)*k2 + (64448.0_wp/6561.0_wp)*k3 + (-212.0_wp/729.0_wp)*k4))
-          k6 = rhs(s + h,                y + h*((9017.0_wp/3168.0_wp)*k1 + (-355.0_wp/33.0_wp)*k2 + (46732.0_wp/5247.0_wp)*k3 + (49.0_wp/176.0_wp)*k4 + (-5103.0_wp/18656.0_wp)*k5))
-
-          y5 = y + h*((35.0_wp/384.0_wp)*k1 + (500.0_wp/1113.0_wp)*k3 + (125.0_wp/192.0_wp)*k4 + (-2187.0_wp/6784.0_wp)*k5 + (11.0_wp/84.0_wp)*k6)
-          k7 = rhs(s + h, y5)
-
-          y4 = y + h*((5179.0_wp/57600.0_wp)*k1 + (7571.0_wp/16695.0_wp)*k3 + (393.0_wp/640.0_wp)*k4 + (-92097.0_wp/339200.0_wp)*k5 + (187.0_wp/2100.0_wp)*k6 + (1.0_wp/40.0_wp)*k7)
-
-          err = abs(y5 - y4)
-          sc  = atol + rtol*max(abs(y), abs(y5))
-
-          if (.not. ieee_is_finite(err) .or. .not. ieee_is_finite(sc)) then
-            ! Reject and reduce step
-            h = h * 0.5_wp
-            cycle
-          end if
-
-          if (err <= sc) then
-            ! accept
-            s = s + h
-            y = y5
-          end if
-
-          if (abs(err) <= 100.0_wp*epsilon(1.0_wp)) then
-            fac = 5.0_wp
-          else
-            fac = 0.9_wp * (sc / err)**0.2_wp
-            fac = min(5.0_wp, max(0.2_wp, fac))
-          end if
-
-          if (err <= sc) then
-            h = h * fac
-          else
-            ! error estimate is O(h^5) -> use exponent 1/5
-            h = h * max(0.2_wp, 0.9_wp*(sc/err)**0.2_wp)
-          end if
-
-          if (abs(h) < 1.0e-14_wp) error stop 'integrate_rk45: step underflow'
-        end do
-
-        y_eval(i+1) = y
-      end do
-
-    end subroutine integrate_rk45
-
-
-    real(wp) function rhs(sloc, ploc) result(f)
-      real(wp), intent(in) :: sloc, ploc
-      f = fun_dpds(sloc, ploc, mul, mug, Lp, Lr, CA, beta, DH, AREA, EPS, G, Cl, Cg, rho_l0, P_l0, &
-                   mu_l_dyn, mu_g_dyn, sigma, w_p, w_u, w_rho, tol)
-    end function rhs
-
-  end subroutine steady_state_ndim_simp
-
-
-  real(wp) function solve_alpha_from_superficials(njl, njg, nrhol, nrhog, theta, DH, AREA, EPS, G, mu_l_dyn, mu_g_dyn, sigma, w_u, w_rho, tol) result(alpha)
-    !! Solve for void fraction alpha from superficial velocities (njl, njg)
-    !! using the same closure selector as lei_fechamento_or_ndim_simp.
-    real(wp), intent(in) :: njl, njg, nrhol, nrhog, theta
-    real(wp), intent(in) :: DH, AREA, EPS, G, mu_l_dyn, mu_g_dyn, sigma, w_u, w_rho, tol
-
-    real(wp), parameter :: tiny_a = 1.0e-14_wp
-    integer(i4), parameter :: nscan = 200_i4
-    real(wp) :: a_lo, a_hi, a, b, fa, fb
-    real(wp) :: best_a, best_f
-    integer(i4) :: k
-    integer(i4) :: info
-
-    ! Python reference uses alpha_min = sqrt(tol) and alpha_max = 1 - sqrt(tol)
-    a_lo = max(1.0e-12_wp, sqrt(max(tol, tiny_a)))
-    a_hi = 1.0_wp - a_lo
-
-    best_a = 0.5_wp
-    best_f = huge(1.0_wp)
-
-    ! scan for a sign change bracket
-    fa = alpha_residual(a_lo)
-    best_a = a_lo
-    best_f = abs(fa)
-    b = a_lo
-    fb = fa
-
-    ! Scan uniformly including both endpoints (matches np.linspace in Python)
-    do k = 0, nscan-1
-      if (nscan > 1) then
-        a = a_lo + (a_hi - a_lo) * real(k, wp) / real(nscan-1, wp)
-      else
-        a = a_lo
-      end if
-      fa = alpha_residual(a)
-      if (ieee_is_finite(fa)) then
-        if (abs(fa) < best_f) then
-          best_f = abs(fa)
-          best_a = a
-        end if
-        if (ieee_is_finite(fb)) then
-          if (abs(fa) <= 100.0_wp*epsilon(1.0_wp)) then
-            alpha = a
-            return
-          end if
-          if (abs(fb) <= 100.0_wp*epsilon(1.0_wp)) then
-            alpha = b
-            return
-          end if
-          if (fa*fb < 0.0_wp) then
-            ! Bracket found -> use bisection (matches Python root_scalar(method='bisect'))
-            block
-              real(wp)   :: root
-              integer(i4):: info
-              root = bisect_root(alpha_residual, b, a, xtol=tol, maxit=200_i4, info=info)
-              if (info == 0_i4) then
-                alpha = min(a_hi, max(a_lo, root))
-                return
-              end if
-            end block
-          end if
-        end if
-      end if
-      b  = a
-      fb = fa
-    end do
-
-    ! fallback: best point from scan
-    alpha = min(a_hi, max(a_lo, best_a))
-    return
-
-  contains
-    real(wp) function alpha_residual(a) result(val)
-      real(wp), intent(in) :: a
-      real(wp) :: ul, ug
-      ! Reject only invalid void fractions (outside (0,1)).
-      if (a <= 0.0_wp .or. a >= 1.0_wp) then
-        val = huge(1.0_wp)
+  pure real(wp) function nan_value() result(v)
+    v=ieee_value(0.0_wp,ieee_quiet_nan)
+  end function
+
+  subroutine malha_progressiva(L_total,s_riser,N_before,N_after,ratio_before,ratio_after, &
+      malha_centros,malha_nodal,status)
+    real(wp),intent(in)::L_total,s_riser,ratio_before,ratio_after
+    integer(i4),intent(in)::N_before,N_after
+    real(wp),allocatable,intent(out)::malha_centros(:),malha_nodal(:)
+    integer,intent(out),optional::status
+    real(wp),allocatable::d(:)
+    real(wp)::exponent,shift
+    integer::i,nb,na,nt
+    if(present(status))status=STEADY_INVALID
+    if(.not.all(ieee_is_finite([L_total,s_riser,ratio_before,ratio_after])))return
+    if(L_total<=0.0_wp.or.s_riser<0.0_wp.or.s_riser>L_total)return
+    if(ratio_before<=0.0_wp.or.ratio_after<=0.0_wp)return
+    nb=N_before;na=N_after;nt=nb+na
+    if(nb<0.or.na<0.or.nt<1)return
+    if((s_riser>0.0_wp.and.nb<1).or.(s_riser==0.0_wp.and.nb/=0))return
+    if((L_total>s_riser.and.na<1).or.(L_total==s_riser.and.na/=0))return
+    allocate(d(nt))
+    if(nb>0)then
+      shift=max(0.0_wp,real(nb-1,wp)*log(ratio_before))
+      do i=1,nb
+        exponent=real(nb-i,wp)*log(ratio_before)-shift
+        d(i)=exp(exponent)
+      enddo
+      d(1:nb)=s_riser*d(1:nb)/sum(d(1:nb))
+    endif
+    if(na>0)then
+      shift=max(0.0_wp,real(na-1,wp)*log(ratio_after))
+      do i=1,na
+        exponent=real(i-1,wp)*log(ratio_after)-shift
+        d(nb+i)=exp(exponent)
+      enddo
+      d(nb+1:nt)=(L_total-s_riser)*d(nb+1:nt)/sum(d(nb+1:nt))
+    endif
+    if(any(d<=0.0_wp).or..not.all(ieee_is_finite(d)))return
+    allocate(malha_nodal(nt+1),malha_centros(nt))
+    malha_nodal(1)=0.0_wp
+    do i=1,nt
+      malha_nodal(i+1)=malha_nodal(i)+d(i)
+    enddo
+    if(nb>0)malha_nodal(nb+1)=s_riser
+    malha_nodal(nt+1)=L_total
+    if(any(malha_nodal(2:)<=malha_nodal(:nt)))then
+      deallocate(malha_nodal,malha_centros)
+      return
+    endif
+    malha_centros=0.5_wp*(malha_nodal(:nt)+malha_nodal(2:))
+    if(present(status))status=STEADY_OK
+  end subroutine
+
+  real(wp) function solve_alpha_from_superficials(njl,njg,nrhol,nrhog,theta,DH,AREA,EPS,G, &
+      mu_l_dyn,mu_g_dyn,sigma,w_u,w_rho,tol,status,closure_id,nroots,alpha_hint,phase_hint) result(alpha)
+    !! Explicit pure-phase inventory limits are exact; zero flux alone does not
+    !! imply phase absence. For stratified flow and alpha-dependent Bhagwat, scan a
+    !! logit grid and bisect every detected sign-changing bracket. Multiple roots
+    !! are reported unless the caller supplies alpha_hint for explicit branch
+    !! continuation (closest logit root). There is no best-point fallback or
+    !! clipping of a nonphysical root. nroots requests the full diagnostic scan.
+    real(wp),intent(in)::njl,njg,nrhol,nrhog,theta,DH,AREA,EPS,G
+    real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_u,w_rho,tol
+    integer,intent(out),optional::status,nroots
+    integer,intent(in),optional::closure_id,phase_hint
+    real(wp),intent(in),optional::alpha_hint
+    integer,parameter::nscan=160
+    real(wp)::a,b,fa,fb,mid,cd,ud,den,xtol,x,rootlast,re_l_min
+    real(wp)::roots(nscan+2),hint_logit,distance,best_distance
+    integer::id,i,ns,ierr,selected
+    logical::previous_valid,tied
+    alpha=nan_value()
+    if(present(status))status=STEADY_INVALID
+    if(present(nroots))nroots=0
+    if(present(alpha_hint))then
+      if(.not.ieee_is_finite(alpha_hint))return
+      if(alpha_hint<0.0_wp.or.alpha_hint>1.0_wp)return
+    endif
+    if(.not.all(ieee_is_finite([njl,njg,nrhol,nrhog,theta,DH,AREA,EPS,G, &
+      mu_l_dyn,mu_g_dyn,sigma,w_u,w_rho,tol])))return
+    if(nrhol<=0.0_wp.or.nrhog<=0.0_wp.or.DH<=0.0_wp.or.AREA<=0.0_wp)return
+    if(EPS<0.0_wp.or.G<0.0_wp.or.mu_l_dyn<=0.0_wp.or.mu_g_dyn<=0.0_wp)return
+    if(sigma<0.0_wp.or.w_u<=0.0_wp.or.w_rho<=0.0_wp.or.tol<=0.0_wp)return
+    id=BENDIKSEN
+    if(theta<0.0_wp)id=STRATIFIED
+    if(present(closure_id))id=closure_id
+    if(id/=STRATIFIED.and.id/=BENDIKSEN.and.id/=BHAGWAT.and.id/=MONTGOMERY)then
+      if(present(status))status=CLOSURE_UNSUPPORTED
+      return
+    endif
+    ! A zero PHASE FLUX does not establish that the phase inventory is absent.
+    ! Pure phases must be declared by a caller that knows the inventory.
+    if(present(phase_hint))then
+      select case(phase_hint)
+      case(PHASE_LIQUID_ONLY)
+        if(njg/=0.0_wp)return
+        alpha=0.0_wp
+        if(present(status))status=0
+        if(present(nroots))nroots=1
         return
-      end if
-      ul = njl / max(1.0_wp - a, 1.0e-14_wp)
-      ug = njg / max(a, 1.0e-14_wp)
-      call lei_fechamento_or_ndim_simp(a, nrhol, nrhog, ul, ug, theta, DH, AREA, EPS, G, mu_l_dyn, mu_g_dyn, sigma, w_u, w_rho, tol, val)
-      if (ieee_is_nan(val)) val = huge(1.0_wp)
-    end function alpha_residual
-  end function solve_alpha_from_superficials
+      case(PHASE_GAS_ONLY)
+        if(njl/=0.0_wp)return
+        alpha=1.0_wp
+        if(present(status))status=0
+        if(present(nroots))nroots=1
+        return
+      case(PHASE_AUTO)
+        continue
+      case default
+        return
+      end select
+    endif
+    if(id==BHAGWAT)then
+      ! Qualify the global two-phase input domain through the closure itself.
+      ! This is not an explicit alpha solution: Bhagwat's C0 and Ud depend on
+      ! alpha, and every residual below recomputes them at the candidate alpha.
+      ! Pure phases above are explicit inventory limits, outside this two-phase
+      ! correlation. In particular, zero flow alone never selects alpha=0 or 1.
+      call CdUd_drift(0.5_wp,nrhol,nrhog,2.0_wp*njl,2.0_wp*njg,theta,DH,AREA,EPS,G, &
+        mu_l_dyn,mu_g_dyn,sigma,w_u,w_rho,tol,cd,ud,id,ierr)
+      if(ierr/=0)then
+        if(present(status))status=ierr
+        return
+      endif
+    endif
+    if(njl==0.0_wp.and.njg==0.0_wp)then
+      if(G==0.0_wp.or.(id==STRATIFIED.and.sin(theta)==0.0_wp))then
+        ! Continuum of stationary roots: the known inventory/hint is required.
+        if(present(nroots))nroots=-1
+        if(present(status))status=STEADY_MULTIPLE_ROOTS
+        if(present(alpha_hint))then
+          alpha=alpha_hint
+          if(present(status))status=0
+        endif
+        return
+      endif
+    endif
+    if(id==BENDIKSEN.or.id==MONTGOMERY)then
+      ! At fixed superficial velocities coefficients do not depend on alpha.
+      call CdUd_drift(0.5_wp,nrhol,nrhog,2.0_wp*njl,2.0_wp*njg,theta,DH,AREA,EPS,G, &
+        mu_l_dyn,mu_g_dyn,sigma,w_u,w_rho,tol,cd,ud,id,ierr)
+      if(ierr/=0)then
+        if(present(status))status=ierr
+        return
+      endif
+      den=cd*(njl+njg)+ud/w_u
+      if(den==0.0_wp)then
+        if(present(status))status=STEADY_NO_ROOT
+        return
+      endif
+      a=njg/den
+      if(.not.ieee_is_finite(a))return
+      if(a<0.0_wp.or.a>1.0_wp.or.(a==0.0_wp.and.njg/=0.0_wp).or.(a==1.0_wp.and.njl/=0.0_wp))then
+        if(present(status))status=STEADY_NO_ROOT
+        return
+      endif
+      alpha=a
+      if(present(status))status=0
+      if(present(nroots))nroots=1
+      return
+    endif
+    xtol=max(8.0_wp*epsilon(1.0_wp),min(1.0e-12_wp,0.01_wp*tol))
+    ! Positive co-current downhill flow, with no interfacial-velocity transition,
+    ! uses the regular single-root branch. Endpoint bracketing + safeguarded Brent
+    ! is the fast production path. Requesting nroots always enables the full scan
+    ! for branch audits; countercurrent/low-Re states always use that scan too.
+    re_l_min=nrhol*w_rho*njl*w_u*DH/mu_l_dyn
+    if(id==STRATIFIED.and.njl>0.0_wp.and.njg>0.0_wp.and.theta<=0.0_wp.and. &
+      re_l_min>=2200.0_wp.and..not.present(nroots))then
+      a=1.0_wp/(1.0_wp+exp(28.0_wp));b=1.0_wp-a
+      call residual(a,fa,ierr)
+      if(ierr==0)then
+        call residual(b,fb,ierr)
+        if(ierr==0)then
+          if((fa>0.0_wp.and.fb<0.0_wp).or.(fa<0.0_wp.and.fb>0.0_wp))then
+            call root_bracket(a,b,fa,fb,mid,ierr)
+            if(ierr==0)then
+              alpha=mid
+              if(present(status))status=0
+              return
+            endif
+          endif
+        endif
+      endif
+    endif
+    ns=0;rootlast=-1.0_wp;previous_valid=.false.
+    b=0.0_wp;fb=0.0_wp
+    ! |logit(alpha)|<=28 covers alpha down to6.9e-13. No finite grid proves
+    ! absence of a tangential root; such degeneracy is not silently accepted.
+    do i=0,nscan
+      x=-28.0_wp+56.0_wp*real(i,wp)/real(nscan,wp)
+      a=1.0_wp/(1.0_wp+exp(-x))
+      call residual(a,fa,ierr)
+      if(ierr/=0.or..not.ieee_is_finite(fa))then
+        previous_valid=.false.
+        cycle
+      endif
+      if(fa==0.0_wp)then
+        call record(a)
+      else if(previous_valid)then
+        if((fa>0.0_wp.and.fb<0.0_wp).or.(fa<0.0_wp.and.fb>0.0_wp))then
+          call root_bracket(b,a,fb,fa,mid,ierr)
+          if(ierr==0)call record(mid)
+        endif
+      endif
+      b=a;fb=fa;previous_valid=.true.
+    enddo
+    if(present(nroots))nroots=ns
+    if(ns==1)then
+      alpha=rootlast
+      if(present(status))status=0
+    else if(ns>1)then
+      if(present(status))status=STEADY_MULTIPLE_ROOTS
+      if(present(alpha_hint))then
+        ! Continuation is an explicit caller choice, not a root-clipping rule.
+        ! Endpoint hints select the corresponding limit in logit distance.
+        selected=0;tied=.false.
+        if(alpha_hint==0.0_wp)then
+          selected=1
+        else if(alpha_hint==1.0_wp)then
+          selected=ns
+        else
+          hint_logit=log(alpha_hint/(1.0_wp-alpha_hint))
+          best_distance=huge(1.0_wp)
+          do i=1,ns
+            distance=abs(log(roots(i)/(1.0_wp-roots(i)))-hint_logit)
+            if(distance<best_distance-1e-12_wp)then
+              selected=i;best_distance=distance;tied=.false.
+            else if(abs(distance-best_distance)<=1e-12_wp)then
+              tied=.true.
+            endif
+          enddo
+        endif
+        if(selected>0.and..not.tied)then
+          alpha=roots(selected)
+          if(present(status))status=0
+        endif
+      endif
+    else
+      if(present(status))status=STEADY_NO_ROOT
+    endif
+  contains
+    subroutine residual(aa,value,code)
+      real(wp),intent(in)::aa
+      real(wp),intent(out)::value
+      integer,intent(out)::code
+      call lei_fechamento_or_ndim_simp(aa,nrhol,nrhog,njl/(1.0_wp-aa),njg/aa,theta,DH,AREA,EPS,G, &
+        mu_l_dyn,mu_g_dyn,sigma,w_u,w_rho,tol,value,id,code)
+    end subroutine
+    subroutine root_bracket(left,right,fleft,fright,rr,code)
+      !! Brent-Dekker, called directly (no procedure pointer or executable stack).
+      real(wp),intent(in)::left,right,fleft,fright
+      real(wp),intent(out)::rr
+      integer,intent(out)::code
+      real(wp)::aa,bb,cc,ff_a,ff_b,ff_c,dd,ee,midpoint,tol_b,ss,pp,qq,ratio
+      real(wp)::old_b,old_fb
+      integer::iteration
+      aa=left;bb=right;cc=bb
+      ff_a=fleft;ff_b=fright;ff_c=ff_b
+      dd=bb-aa;ee=dd;rr=nan_value();code=STEADY_NO_ROOT
+      do iteration=1,100
+        if((ff_b>0.0_wp.and.ff_c>0.0_wp).or.(ff_b<0.0_wp.and.ff_c<0.0_wp))then
+          cc=aa;ff_c=ff_a;dd=bb-aa;ee=dd
+        endif
+        if(abs(ff_c)<abs(ff_b))then
+          old_b=bb;old_fb=ff_b
+          aa=old_b;ff_a=old_fb;bb=cc;ff_b=ff_c;cc=old_b;ff_c=old_fb
+        endif
+        tol_b=2.0_wp*epsilon(1.0_wp)*abs(bb)+0.5_wp*xtol
+        midpoint=0.5_wp*(cc-bb)
+        if(abs(midpoint)<=tol_b.or.ff_b==0.0_wp)then
+          rr=bb;code=0;return
+        endif
+        if(abs(ee)>=tol_b.and.abs(ff_a)>abs(ff_b))then
+          ss=ff_b/ff_a
+          if(aa==cc)then
+            pp=2.0_wp*midpoint*ss;qq=1.0_wp-ss
+          else
+            qq=ff_a/ff_c;ratio=ff_b/ff_c
+            pp=ss*(2.0_wp*midpoint*qq*(qq-ratio)-(bb-aa)*(ratio-1.0_wp))
+            qq=(qq-1.0_wp)*(ratio-1.0_wp)*(ss-1.0_wp)
+          endif
+          if(pp>0.0_wp)qq=-qq
+          pp=abs(pp)
+          if(2.0_wp*pp<min(3.0_wp*midpoint*qq-abs(tol_b*qq),abs(ee*qq)))then
+            ee=dd;dd=pp/qq
+          else
+            dd=midpoint;ee=dd
+          endif
+        else
+          dd=midpoint;ee=dd
+        endif
+        aa=bb;ff_a=ff_b
+        if(abs(dd)>tol_b)then
+          bb=bb+dd
+        else
+          bb=bb+sign(tol_b,midpoint)
+        endif
+        call residual(bb,ff_b,code)
+        if(code/=0)return
+        if(.not.ieee_is_finite(ff_b))then
+          code=STEADY_NO_ROOT;return
+        endif
+      enddo
+      code=STEADY_NO_ROOT
+    end subroutine
+    subroutine record(rr)
+      real(wp),intent(in)::rr
+      if(ns>0)then
+        if(abs(rr-rootlast)<=8.0_wp*xtol)return
+      endif
+      ns=ns+1;rootlast=rr;roots(ns)=rr
+    end subroutine
+  end function
 
+  subroutine state_at(p,theta,gl,gg,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
+      w_u,w_rho,tol,id,rl,rg,alpha,ul,ug,jl,jg,kin,status)
+    real(wp),intent(in)::p,theta,gl,gg,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
+    real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_u,w_rho,tol
+    integer,intent(in)::id
+    real(wp),intent(out)::rl,rg,alpha,ul,ug,jl,jg,kin
+    integer,intent(out)::status
+    rl=nan_value();rg=rl;alpha=rl;ul=rl;ug=rl;jl=rl;jg=rl;kin=rl
+    status=STEADY_INVALID
+    if(.not.all(ieee_is_finite([p,Cl,Cg,rho_l0,P_l0,gl,gg])))return
+    if(p<=0.0_wp.or.Cl<=0.0_wp.or.Cg<=0.0_wp.or.rho_l0<=0.0_wp)return
+    rg=p/(Cg*Cg);rl=rho_l0+(p-P_l0)/(Cl*Cl)
+    if(rl<=0.0_wp.or.rg<=0.0_wp)return
+    jl=gl/rl;jg=gg/rg
+    if(gl==0.0_wp.and.gg==0.0_wp)then
+      ! Defined initialization scenario: stationary liquid-filled hydrostatics.
+      ! This is a declared inventory choice, not inferred for a flowing phase.
+      alpha=solve_alpha_from_superficials(jl,jg,rl,rg,theta,DH,AREA,EPS,G,mu_l_dyn,mu_g_dyn, &
+        sigma,w_u,w_rho,tol,status,id,phase_hint=PHASE_LIQUID_ONLY)
+    else
+      alpha=solve_alpha_from_superficials(jl,jg,rl,rg,theta,DH,AREA,EPS,G,mu_l_dyn,mu_g_dyn, &
+        sigma,w_u,w_rho,tol,status,id)
+    endif
+    if(status/=0)return
+    if(alpha==0.0_wp)then
+      ul=jl;ug=0.0_wp
+    else if(alpha==1.0_wp)then
+      ul=0.0_wp;ug=jg
+    else
+      ul=jl/(1.0_wp-alpha);ug=jg/alpha
+    endif
+    kin=gl*ul+gg*ug
+    if(.not.ieee_is_finite(kin))status=STEADY_INVALID
+  end subroutine
+
+  real(wp) function fun_dpds(s,p,mul,mug,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
+      mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,status,closure_id_riser,section_id) result(dpds)
+    !! Optional section_id forces the pipe/riser trace at the shared junction;
+    !! 1=pipe and2=riser. It never changes the closure's model definition.
+    real(wp),intent(in)::s,p,mul,mug,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
+    real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol
+    integer,intent(out),optional::status
+    integer,intent(in),optional::closure_id_riser,section_id
+    real(wp)::theta,theta_s,sr,pip,pig,pif,rl,rg,alpha,ul,ug,jl,jg,kin
+    real(wp)::rl1,rg1,a1,ul1,ug1,jl1,jg1,kp,km,hp,ht,delta,h_theta,source
+    real(wp)::rm,j,mu,re,f,fric,scale,geometry_tol,theta_other
+    integer::cid,sec,ierr
+    dpds=nan_value()
+    if(present(status))status=STEADY_INVALID
+    if(.not.all(ieee_is_finite([s,p,Lp,Lr,CA,beta,w_p,w_u,w_rho,DH,AREA,EPS,G, &
+      Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma,tol])))return
+    if(Lr<=0.0_wp.or.Lp<0.0_wp.or.CA<=0.0_wp.or.w_p<=0.0_wp.or.w_u<=0.0_wp.or.w_rho<=0.0_wp)return
+    if(DH<=0.0_wp.or.G<0.0_wp.or.p<=0.0_wp.or.tol<=0.0_wp)return
+    sec=2
+    if(s<Lp/Lr)sec=1
+    if(present(section_id))sec=section_id
+    if(sec/=1.and.sec/=2)return
+    cid=BENDIKSEN
+    if(present(closure_id_riser))cid=closure_id_riser
+    if(sec==1)then
+      theta=-beta;theta_s=0.0_wp;cid=STRATIFIED
+    else
+      ! Compute the coordinate relative to the exact shared mesh face first.
+      ! A sub-ulp roundoff excursion must not select the downhill C4 trace of
+      ! Bhagwat at a geometrically horizontal riser boundary. A real excursion
+      ! outside the riser remains invalid; this is not a physical angle clip.
+      sr=Lr*(s-Lp/Lr)
+      geometry_tol=64.0_wp*epsilon(1.0_wp)*max(Lp,Lr,abs(s*Lr),CA)
+      if(abs(sr)<=geometry_tol)sr=0.0_wp
+      if(sr<0.0_wp)return
+      theta=atan(sr/CA)
+      theta_s=Lr*CA/(CA*CA+sr*sr)
+    endif
+    pip=w_p/(w_rho*w_u*w_u);pig=G*Lr/(w_u*w_u);pif=Lr/DH
+    call state_at(p,theta,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
+      w_u,w_rho,tol,cid,rl,rg,alpha,ul,ug,jl,jg,kin,ierr)
+    if(ierr/=0)then
+      if(present(status))status=ierr
+      return
+    endif
+    ! Separate pressure term analytically to avoid cancellation of PIP*P.
+    delta=min(0.25_wp*p,epsilon(1.0_wp)**(1.0_wp/3.0_wp)*max(abs(p),1.0_wp))
+    call state_at(p+delta,theta,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
+      w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,kp,ierr)
+    if(ierr/=0)then
+      if(present(status))status=ierr
+      return
+    endif
+    call state_at(p-delta,theta,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
+      w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,km,ierr)
+    if(ierr/=0)then
+      if(present(status))status=ierr
+      return
+    endif
+    hp=pip+(kp-km)/(2.0_wp*delta)
+    scale=max(abs(pip),abs((kp-km)/(2.0_wp*delta)),1.0_wp)
+    if(.not.ieee_is_finite(hp).or.abs(hp)<1.0e-10_wp*scale)then
+      if(present(status))status=STEADY_SINGULAR
+      return
+    endif
+    ht=0.0_wp
+    if(theta_s/=0.0_wp.and.mul/=0.0_wp.and.mug/=0.0_wp)then
+      h_theta=epsilon(1.0_wp)**(1.0_wp/3.0_wp)
+      ! Htheta is the derivative of the RISER trace. Its geometric domain is
+      ! 0<=theta<pi/2. At the lower face, a centered stencil would cross the real
+      ! Bhagwat C4 jump at theta=0 and inject an O(1/h) term into the ODE. Use
+      ! second-order one-sided derivatives at angular boundaries, not smoothing.
+      if(theta<h_theta)then
+        theta_other=theta+h_theta
+      else if(theta+h_theta>0.5_wp*acos(-1.0_wp))then
+        theta_other=theta-h_theta
+      else
+        theta_other=theta+h_theta
+      endif
+      call state_at(p,theta_other,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
+        w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,kp,ierr)
+      if(ierr/=0)then
+        if(present(status))status=ierr
+        return
+      endif
+      if(theta<h_theta)then
+        theta_other=theta+2.0_wp*h_theta
+      else if(theta+h_theta>0.5_wp*acos(-1.0_wp))then
+        theta_other=theta-2.0_wp*h_theta
+      else
+        theta_other=theta-h_theta
+      endif
+      call state_at(p,theta_other,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
+        w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,km,ierr)
+      if(ierr/=0)then
+        if(present(status))status=ierr
+        return
+      endif
+      if(theta<h_theta)then
+        ht=(4.0_wp*(kp-kin)-(km-kin))/(2.0_wp*h_theta)
+      else if(theta+h_theta>0.5_wp*acos(-1.0_wp))then
+        ht=(4.0_wp*(kin-kp)-(kin-km))/(2.0_wp*h_theta)
+      else
+        ht=(kp-km)/(2.0_wp*h_theta)
+      endif
+    endif
+    rm=(1.0_wp-alpha)*rl+alpha*rg;j=jl+jg
+    mu=(1.0_wp-alpha)*mu_l_dyn+alpha*mu_g_dyn
+    fric=0.0_wp
+    if(j/=0.0_wp)then
+      re=w_rho*w_u*DH*rm*abs(j)/mu
+      if(re<2000.0_wp)then
+        ! Analytic finite signed limit of -2*(Lr/D)*f_F*rm*j*abs(j).
+        fric=-32.0_wp*Lr*mu*j/(DH*DH*w_rho*w_u)
+      else
+        f=ffan(EPS/DH,re,ierr)
+        if(ierr/=0)then
+          if(present(status))status=ierr
+          return
+        endif
+        fric=-2.0_wp*pif*f*rm*j*abs(j)
+      endif
+    endif
+    source=-pig*rm*sin(theta)+fric
+    dpds=(source-ht*theta_s)/hp
+    if(.not.ieee_is_finite(dpds))then
+      dpds=nan_value()
+      if(present(status))status=STEADY_INVALID
+    else
+      if(present(status))status=STEADY_OK
+    endif
+  end function
+
+  subroutine steady_state_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G, &
+      Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol, &
+      vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures)
+    integer(i4),intent(in)::N
+    real(wp),intent(in)::mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
+    real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol
+    real(wp),allocatable,intent(out)::vns(:),vnp(:),nrhogv(:),nrholv(:),alphav(:),nugv(:),nulv(:)
+    real(wp),allocatable,intent(out)::thetav(:),njlv(:),njgv(:)
+    real(wp),intent(in),optional::mesh_ratio
+    integer,intent(in),optional::n_riser,closure_id_riser
+    real(wp),allocatable,intent(out),optional::face_positions(:),face_pressures(:)
+    integer,intent(out),optional::status
+    real(wp),allocatable::faces(:),pf(:)
+    real(wp)::ratio,s,p,theta,kin,rtol
+    integer::nb,na,nt,i,sec,cid,iriser,ierr
+    if(present(status))status=STEADY_INVALID
+    if(.not.all(ieee_is_finite([Ps,Lp,Lr,CA,tol])))return
+    if(Ps<=0.0_wp.or.Lp<0.0_wp.or.Lr<=0.0_wp.or.CA<=0.0_wp.or.tol<=0.0_wp)return
+    nb=N
+    if(Lp==0.0_wp)nb=0
+    na=max(1,N/2)
+    if(present(n_riser))na=n_riser
+    ratio=1.0_wp
+    if(present(mesh_ratio))ratio=mesh_ratio
+    iriser=BENDIKSEN
+    if(present(closure_id_riser))iriser=closure_id_riser
+    call malha_progressiva((Lp+Lr)/Lr,Lp/Lr,nb,na,ratio,ratio,vns,faces,ierr)
+    if(ierr/=0)then
+      if(present(status))status=ierr
+      return
+    endif
+    nt=size(vns)
+    allocate(vnp(nt),nrhogv(nt),nrholv(nt),alphav(nt),nugv(nt),nulv(nt),thetav(nt),njlv(nt),njgv(nt),pf(nt+1))
+    vnp=nan_value();nrhogv=vnp;nrholv=vnp;alphav=vnp;nugv=vnp;nulv=vnp;thetav=vnp;njlv=vnp;njgv=vnp;pf=nan_value()
+    if(present(face_positions))face_positions=faces
+    ! The boundary is at the TOP FACE, never at the last cell center.
+    s=faces(nt+1);p=Ps;pf(nt+1)=Ps
+    rtol=max(tol,1.0e-11_wp) ! FD pressure derivatives do not support an arbitrarily tiny ODE tolerance.
+    do i=nt,1,-1
+      sec=2;cid=iriser
+      if(i<=nb)then
+        sec=1;cid=STRATIFIED
+      endif
+      call advance(vns(i),sec,s,p,ierr)
+      if(ierr/=0)exit
+      vnp(i)=p
+      if(sec==1)then
+        theta=-beta
+      else
+        theta=atan((vns(i)*Lr-Lp)/CA)
+      endif
+      thetav(i)=theta
+      call state_at(p,theta,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
+        w_u,w_rho,tol,cid,nrholv(i),nrhogv(i),alphav(i),nulv(i),nugv(i),njlv(i),njgv(i),kin,ierr)
+      if(ierr/=0)exit
+      call advance(faces(i),sec,s,p,ierr)
+      if(ierr/=0)exit
+      pf(i)=p
+    enddo
+    if(present(face_pressures))face_pressures=pf
+    if(present(status))status=ierr
+  contains
+    subroutine advance(target,section,ss,pp,code)
+      real(wp),intent(in)::target
+      integer,intent(in)::section
+      real(wp),intent(inout)::ss,pp
+      integer,intent(out)::code
+      real(wp)::h,remaining,y5,y4,err,sc,fac,k(7)
+      integer::it,ic
+      code=0
+      if(target==ss)return
+      if(target>ss)then
+        code=STEADY_INVALID;return
+      endif
+      h=target-ss
+      do it=1,100000
+        remaining=target-ss
+        if(abs(remaining)<=16.0_wp*epsilon(1.0_wp)*max(1.0_wp,abs(ss)))then
+          ss=target;return
+        endif
+        if(abs(h)>abs(remaining))h=remaining
+        if(abs(h)<64.0_wp*epsilon(1.0_wp)*max(1.0_wp,abs(ss)))then
+          code=STEADY_INTEGRATION;return
+        endif
+        call rhs(ss,pp,section,k(1),ic)
+        if(ic/=0)then
+          code=ic;return
+        endif
+        call rhs(ss+h/5.0_wp,pp+h*k(1)/5.0_wp,section,k(2),ic)
+        if(ic==0)call rhs(ss+3.0_wp*h/10.0_wp,pp+h*(3.0_wp*k(1)/40.0_wp+9.0_wp*k(2)/40.0_wp), &
+          section,k(3),ic)
+        if(ic==0)call rhs(ss+4.0_wp*h/5.0_wp,pp+h*(44.0_wp*k(1)/45.0_wp-56.0_wp*k(2)/15.0_wp+ &
+          32.0_wp*k(3)/9.0_wp),section,k(4),ic)
+        if(ic==0)call rhs(ss+8.0_wp*h/9.0_wp,pp+h*(19372.0_wp*k(1)/6561.0_wp-25360.0_wp*k(2)/2187.0_wp+ &
+          64448.0_wp*k(3)/6561.0_wp-212.0_wp*k(4)/729.0_wp),section,k(5),ic)
+        if(ic==0)call rhs(ss+h,pp+h*(9017.0_wp*k(1)/3168.0_wp-355.0_wp*k(2)/33.0_wp+ &
+          46732.0_wp*k(3)/5247.0_wp+49.0_wp*k(4)/176.0_wp-5103.0_wp*k(5)/18656.0_wp),section,k(6),ic)
+        if(ic==0)then
+          y5=pp+h*(35.0_wp*k(1)/384.0_wp+500.0_wp*k(3)/1113.0_wp+125.0_wp*k(4)/192.0_wp- &
+            2187.0_wp*k(5)/6784.0_wp+11.0_wp*k(6)/84.0_wp)
+          call rhs(ss+h,y5,section,k(7),ic)
+        endif
+        if(ic/=0)then
+          h=0.5_wp*h
+          cycle
+        endif
+        y4=pp+h*(5179.0_wp*k(1)/57600.0_wp+7571.0_wp*k(3)/16695.0_wp+393.0_wp*k(4)/640.0_wp- &
+          92097.0_wp*k(5)/339200.0_wp+187.0_wp*k(6)/2100.0_wp+k(7)/40.0_wp)
+        err=abs(y5-y4);sc=rtol*(1.0_wp+max(abs(pp),abs(y5)))
+        if(.not.ieee_is_finite(err).or.y5<=0.0_wp)then
+          h=0.5_wp*h
+          cycle
+        endif
+        if(err<=sc)then
+          ss=ss+h;pp=y5
+        endif
+        if(err<=tiny(1.0_wp))then
+          fac=2.0_wp
+        else
+          fac=min(2.0_wp,max(0.2_wp,0.9_wp*(sc/err)**0.2_wp))
+        endif
+        h=h*fac
+      enddo
+      code=STEADY_INTEGRATION
+    end subroutine
+    subroutine rhs(ss,pp,section,value,code)
+      real(wp),intent(in)::ss,pp
+      integer,intent(in)::section
+      real(wp),intent(out)::value
+      integer,intent(out)::code
+      value=fun_dpds(ss,pp,mul,mug,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
+        mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,code,iriser,section)
+    end subroutine
+  end subroutine
+
+  subroutine EstadoEstacionario_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
+      mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures)
+    integer(i4),intent(in)::N
+    real(wp),intent(in)::mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
+    real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol
+    real(wp),allocatable,intent(out)::vns(:),vnp(:),nrhogv(:),nrholv(:),alphav(:),nugv(:),nulv(:)
+    real(wp),allocatable,intent(out)::thetav(:),njlv(:),njgv(:)
+    real(wp),intent(in),optional::mesh_ratio
+    integer,intent(in),optional::n_riser,closure_id_riser
+    real(wp),allocatable,intent(out),optional::face_positions(:),face_pressures(:)
+    integer,intent(out),optional::status
+    call steady_state_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
+      mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures)
+  end subroutine
 end module module_steady_state

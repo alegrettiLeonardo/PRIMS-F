@@ -1,5 +1,5 @@
 #=======================================================================
-# PRIMS-F Makefile (Fortran 2008)
+# PRIMS-F Makefile (Fortran 2018; audited with GNU Fortran 14.2)
 # - Estrutura: ./scr (fontes), ./tmp (obj/mod), ./bin (exe)
 # - Compilação paralela segura: dependências explícitas de módulos
 # - Targets úteis:
@@ -7,10 +7,11 @@
 #     make check_all  -> debug + runtime checks (bin/prims_f_check_all)
 #     make asan       -> AddressSanitizer (bin/prims_f_asan)
 #=======================================================================
+.DEFAULT_GOAL := all
 
 # -------------------- diretórios --------------------
 DIR_SRC := scr
-DIR_OBJ := tmp
+DIR_OBJ := tmp/release
 DIR_BIN := bin
 DIR_OUT := output
 DIR_DOC := doc
@@ -18,18 +19,22 @@ DIR_DOC := doc
 # -------------------- compilador --------------------
 FC := gfortran
 
+# Production code no longer passes internal procedures as callbacks.
+# No compiler-specific executable/heap trampoline option is required.
+CALLBACK_FLAGS ?=
+
 # -------------------- flags base --------------------
-FFLAGS_BASE := -std=f2008 -Wall -Wextra \
+FFLAGS_BASE := -std=f2018 -Wall -Wextra \
   -Wno-unused-parameter -Wno-unused-dummy-argument \
   -fimplicit-none -ffree-line-length-none \
   -J$(DIR_OBJ) -I$(DIR_OBJ) -I$(DIR_SRC) \
-  -fopenmp -Wa,--noexecstack
+  -fopenmp $(CALLBACK_FLAGS) -Wa,--noexecstack
 
 LDFLAGS_BASE := -fopenmp -Wl,-z,noexecstack
-LIBS         :=
+LIBS         ?= -llapack -lblas
 
 # Release (padrão)
-FFLAGS_RELEASE := $(FFLAGS_BASE) -O3 -march=native
+FFLAGS_RELEASE := $(FFLAGS_BASE) -O2
 LDFLAGS_RELEASE := $(LDFLAGS_BASE)
 
 # Debug pesado (linha exata + bounds + NaN traps)
@@ -78,7 +83,7 @@ SRC := \
 
 OBJ := $(patsubst $(DIR_SRC)/%.f90,$(DIR_OBJ)/%.o,$(SRC))
 
-.PHONY: all clean dirs check_all asan release debug help
+.PHONY: all clean dirs check_all asan release debug help test
 
 help:
 	@echo "Targets:"
@@ -88,6 +93,9 @@ help:
 	@echo "  make clean            -> remove tmp + bin executables"
 
 release: all
+
+test:
+	FC='$(FC)' LIBS='$(LIBS)' CALLBACK_FLAGS='$(CALLBACK_FLAGS)' python3 scripts/run_unit_tests.py
 
 all: $(EXE)
 
@@ -109,15 +117,16 @@ clean:
 	rm -rf $(DIR_OBJ) $(DIR_BIN)/prims_f $(DIR_BIN)/prims_f_check_all $(DIR_BIN)/prims_f_asan
 
 # -------------------- builds alternativos ------------------------------
-check_all: FFLAGS := $(FFLAGS_CHECKALL)
-check_all: LDFLAGS := $(LDFLAGS_CHECKALL)
-check_all: EXE := $(DIR_BIN)/prims_f_check_all
-check_all: clean all
+# Separate object directories avoid races between clean/all and mixing flags.
+check_all:
+	$(MAKE) all DIR_OBJ=tmp/check EXE=bin/prims_f_check_all \
+	  FFLAGS='-std=f2018 -O0 -g3 -Wall -Wextra -fimplicit-none -ffree-line-length-none -fopenmp $(CALLBACK_FLAGS) -Wa,--noexecstack -Jtmp/check -Itmp/check -Iscr -fcheck=all -fbacktrace -ffpe-trap=invalid,zero,overflow -finit-real=snan -finit-integer=-999' \
+	  LDFLAGS='$(LDFLAGS_CHECKALL)'
 
-asan: FFLAGS := $(FFLAGS_ASAN)
-asan: LDFLAGS := $(LDFLAGS_ASAN)
-asan: EXE := $(DIR_BIN)/prims_f_asan
-asan: clean all
+asan:
+	$(MAKE) all DIR_OBJ=tmp/asan EXE=bin/prims_f_asan \
+	  FFLAGS='-std=f2018 -O0 -g3 -Wall -Wextra -fimplicit-none -ffree-line-length-none -fopenmp $(CALLBACK_FLAGS) -Wa,--noexecstack -Jtmp/asan -Itmp/asan -Iscr -fcheck=all -fbacktrace -fsanitize=address,undefined -fno-omit-frame-pointer' \
+	  LDFLAGS='$(LDFLAGS_ASAN)'
 
 # -----------------------------------------------------------------------------
 # Dependências explícitas (ordem segura para make -j com módulos)
@@ -144,6 +153,7 @@ $(DIR_OBJ)/module_roe_solver.o:       $(DIR_OBJ)/module_matrix_roe.o $(DIR_OBJ)/
 
 # boundary_conditions usa module_roe_solver
 $(DIR_OBJ)/module_boundary_conditions.o: \
+                                      $(DIR_OBJ)/module_steady_state.o \
                                       $(DIR_OBJ)/module_roe_solver.o $(DIR_OBJ)/module_jacobian.o \
                                       $(DIR_OBJ)/module_find.o $(DIR_OBJ)/module_closure_law.o \
                                       $(DIR_OBJ)/module_config.o

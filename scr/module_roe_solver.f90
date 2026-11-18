@@ -6,15 +6,16 @@ module module_roe_solver
   !! - Adaptive limiter: MC in smooth regions, Superbee near steep gradients
   !!   (hysteresis shock sensor), applied to characteristic variables.
   !! - Roe flux: F = 0.5(F_L+F_R) - 0.5*|Ahat|*(U_R-U_L)
-  !!   with Harten entropy fix.
+  !!   with the exact matrix absolute value (no acoustic-scale contact fix).
   !!
   !! Robustness:
-  !! - If the Roe matrix eigen-decomposition yields complex eigenvalues or fails,
-  !!   we fall back to component-wise MUSCL and/or Rusanov flux.
+  !! - A failed or non-real eigenstructure is reported explicitly. Choosing a
+  !!   dissipative alternative is the caller's decision, recorded separately
+  !!   from a valid Roe flux; complex spectra are not erased.
 
   use mod_kinds,           only: wp, i4
   use module_lapack_small, only: dgeev_3x3, inv3x3, matvec3
-  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
+  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite, ieee_value, ieee_quiet_nan
   implicit none
   private
 
@@ -78,45 +79,38 @@ contains
     end do
   end subroutine sort_eigenpairs_3
 
-  subroutine roe_eigenstructure(A, wr, wi, R, L, ok)
-    !! Roe linearization eigenstructure:
-    !!   A R = R Λ,   L = R^{-1}
-    !! Returns ok=.false. if eigenvalues are complex or inversion fails.
-    real(wp), intent(in)  :: A(3,3)
-    real(wp), intent(out) :: wr(3), wi(3)
-    real(wp), intent(out) :: R(3,3)
-    real(wp), intent(out) :: L(3,3)
-    logical, intent(out)  :: ok
-
-    integer :: info
-    integer(i4) :: inv_info
-    real(wp) :: Rinv(3,3)
-
-    call dgeev_3x3(A, wr, wi, R, info)
-    if (info /= 0) then
-      ok = .false.
-      return
-    end if
-
-    if (maxval(abs(wi)) > 1.0e-12_wp) then
-      ok = .false.
-      return
-    end if
-
-    if (.not. all(ieee_is_finite(R)) .or. .not. all(ieee_is_finite(wr))) then
-      ok = .false.
-      return
-    end if
-
-    call sort_eigenpairs_3(wr, wi, R)
-
-    Rinv = inv3x3(R, inv_info)
-    if (inv_info /= 0) then
-      ok = .false.
-      return
-    end if
-    L  = Rinv
-    ok = .true.
+  subroutine roe_eigenstructure(A,wr,wi,R,L,ok,status)
+    real(wp), intent(in) :: A(3,3)
+    real(wp), intent(out) :: wr(3),wi(3),R(3,3),L(3,3)
+    logical, intent(out) :: ok
+    integer(i4), intent(out), optional :: status
+    integer :: info,j
+    real(wp) :: residual(3,3),scale,condition
+    ok=.false.
+    L=ieee_value(0.0_wp,ieee_quiet_nan)
+    if (present(status)) status=10
+    call dgeev_3x3(A,wr,wi,R,info)
+    if (info/=0) return
+    if (present(status)) status=11
+    ! LAPACK stores a complex pair as real and imaginary vector columns.
+    ! Such columns must never be treated as independent real eigenvectors,
+    ! even if the imaginary part is small compared with an arbitrary scale.
+    if (any(wi/=0.0_wp)) return
+    call sort_eigenpairs_3(wr,wi,R)
+    if (present(status)) status=12
+    L=inv3x3(R,info)
+    if (info/=0) return
+    condition=maxval(sum(abs(R),dim=2))*maxval(sum(abs(L),dim=2))
+    if (condition>1.0_wp/sqrt(epsilon(1.0_wp))) return
+    residual=matmul(A,R)
+    do j=1,3
+      residual(:,j)=residual(:,j)-wr(j)*R(:,j)
+    end do
+    scale=max(1.0_wp,maxval(abs(A)))*max(1.0_wp,maxval(abs(R)))
+    if (present(status)) status=13
+    if (maxval(abs(residual))>1024.0_wp*epsilon(1.0_wp)*scale) return
+    ok=.true.
+    if (present(status)) status=0
   end subroutine roe_eigenstructure
 
   pure subroutine matvec3_strided(A, Ust, irow, y)
@@ -306,126 +300,59 @@ contains
   end subroutine muscl_reconstruction_characteristic
 
 
-  subroutine rusanov_flux(this, F_L, F_R, U_L, U_R, amax, flux)
+  subroutine rusanov_flux(this,F_L,F_R,U_L,U_R,amax,flux,status)
     class(roe_solver_t), intent(in) :: this
-    real(wp), intent(in) :: F_L(3), F_R(3)
-    real(wp), intent(in) :: U_L(3), U_R(3)
-    real(wp), intent(in) :: amax
+    real(wp), intent(in) :: F_L(3),F_R(3),U_L(3),U_R(3),amax
     real(wp), intent(out) :: flux(3)
-
-    flux = 0.5_wp*(F_L + F_R) - 0.5_wp*amax*(U_R - U_L)
+    integer(i4), intent(out), optional :: status
+    flux=ieee_value(0.0_wp,ieee_quiet_nan)
+    if (present(status)) status=1
+    if (.not. all(ieee_is_finite([F_L,F_R,U_L,U_R,amax]))) return
+    if (amax<0.0_wp) return
+    flux=0.5_wp*(F_L+F_R)-0.5_wp*amax*(U_R-U_L)
+    if (present(status)) status=0
   end subroutine rusanov_flux
 
-
-  subroutine roe_riemann_solver(this, F_L, F_R, U_L, U_R, Roe_matrix, flux)
+  subroutine roe_riemann_solver(this,F_L,F_R,U_L,U_R,Roe_matrix,flux,status)
     class(roe_solver_t), intent(in) :: this
-    real(wp), intent(in) :: F_L(3), F_R(3)
-    real(wp), intent(in) :: U_L(3), U_R(3)
-    real(wp), intent(in) :: Roe_matrix(3,3)
+    real(wp), intent(in) :: F_L(3),F_R(3),U_L(3),U_R(3),Roe_matrix(3,3)
     real(wp), intent(out) :: flux(3)
-
-    real(wp) :: wr(3), wi(3)
-    real(wp) :: R(3,3), Lmat(3,3)
-    logical :: ok
-
-    real(wp) :: dU(3)
-    real(wp) :: a_char(3)
-    real(wp) :: absLam(3)
-    real(wp) :: diss_char(3)
-    real(wp) :: diss(3)
-    real(wp) :: delta
-    real(wp) :: amax
-    integer(i4) :: k
-
-    dU = U_R - U_L
-
-    call build_characteristic_basis(Roe_matrix, wr, wi, R, Lmat, ok)
-    if (.not. ok) then
-      amax = max( sum(abs(Roe_matrix(1,:))), max( sum(abs(Roe_matrix(2,:))), sum(abs(Roe_matrix(3,:))) ) )
-      if (amax <= 0.0_wp .or. .not. ieee_is_finite(amax)) amax = 1.0_wp
-      call this%rusanov_flux(F_L, F_R, U_L, U_R, amax, flux)
-      return
-    end if
-
-    call matvec3(Lmat, dU, a_char)
-
-    absLam = abs(wr)
-    delta = max(1.0e-6_wp, 0.1_wp*maxval(absLam))
-    do k = 1, 3
-      if (absLam(k) < delta) then
-        absLam(k) = 0.5_wp*(wr(k)*wr(k)/delta + delta)
-      end if
-    end do
-
-    diss_char = absLam * a_char
-    call matvec3(R, diss_char, diss)
-
-    flux = 0.5_wp*(F_L + F_R) - 0.5_wp*diss
-
+    integer(i4), intent(out), optional :: status
+    real(wp) :: absA(3,3),amax
+    integer(i4) :: code
+    flux=ieee_value(0.0_wp,ieee_quiet_nan)
+    if (present(status)) status=1
+    if (.not. all(ieee_is_finite([F_L,F_R,U_L,U_R]))) return
+    call roe_absA_from_A(Roe_matrix,absA,amax,code)
+    if (present(status)) status=code
+    if (code/=0) return
+    flux=0.5_wp*(F_L+F_R)-0.5_wp*matmul(absA,U_R-U_L)
     if (.not. all(ieee_is_finite(flux))) then
-      amax = maxval(absLam)
-      if (amax <= 0.0_wp .or. .not. ieee_is_finite(amax)) amax = 1.0_wp
-      call this%rusanov_flux(F_L, F_R, U_L, U_R, amax, flux)
+      if (present(status)) status=14
     end if
   end subroutine roe_riemann_solver
 
-
-  subroutine roe_absA_from_A(A, absA, amax, info)
-    !! Build |A| = R * |Lambda| * L with a smooth (entropy-fixed) |lambda|.
-    !!
-    !! This is meant to keep the *frozen Roe Jacobian* consistent with the
-    !! Roe numerical flux used in the residual, improving Newton robustness.
-    !!
-    !! If A has complex eigenvalues, or the basis is singular, info>0 and absA
-    !! is returned as zero; callers should fall back to a more diffusive option.
-    real(wp), intent(in)  :: A(3,3)
-    real(wp), intent(out) :: absA(3,3)
-    real(wp), intent(out) :: amax
+  subroutine roe_absA_from_A(A,absA,amax,info)
+    !! Exact matrix absolute value, shared by flux and frozen dissipation.
+    !! An acoustic-scale Harten fix on all modes would artificially diffuse
+    !! the slow material wave. A transonic fix requires left/right acoustic
+    !! information not present in this API; none is silently imposed here.
+    real(wp), intent(in) :: A(3,3)
+    real(wp), intent(out) :: absA(3,3),amax
     integer(i4), intent(out) :: info
-
-    real(wp) :: wr(3), wi(3), VR(3,3), invVR(3,3)
-    real(wp) :: absLam(3), delta
-    integer(i4) :: i, info_inv
-
-    absA = 0.0_wp
-    amax = 0.0_wp
-    info = 0
-
-    call dgeev_3x3(A, wr, wi, VR, info)
-    if (info /= 0) then
-      info = 10
-      return
-    end if
-
-    ! Hyperbolicity check: if eigenvalues are complex, do not use characteristic form.
-    if (maxval(abs(wi)) > 1.0e-12_wp) then
-      info = 11
-      return
-    end if
-
-    invVR = inv3x3(VR, info_inv)
-    if (info_inv /= 0) then
-      info = 12
-      return
-    end if
-
-    ! Harten entropy fix (C1) to smooth |lambda| near zero.
-    absLam = abs(wr)
-    delta  = max(1.0e-6_wp, 0.10_wp*maxval(absLam))
-    do i = 1, 3
-      if (absLam(i) < delta) absLam(i) = 0.5_wp*(wr(i)*wr(i)/delta + delta)
+    real(wp) :: wr(3),wi(3),R(3,3),L(3,3),scaled_R(3,3),absLam(3)
+    integer :: j
+    logical :: ok
+    absA=ieee_value(0.0_wp,ieee_quiet_nan)
+    amax=ieee_value(0.0_wp,ieee_quiet_nan)
+    call roe_eigenstructure(A,wr,wi,R,L,ok,info)
+    if (.not. ok) return
+    absLam=abs(wr)
+    do j=1,3
+      scaled_R(:,j)=R(:,j)*absLam(j)
     end do
-    amax = maxval(absLam)
-
-    absA = matmul(VR, matmul(diag3(absLam), invVR))
-
-  contains
-    pure function diag3(v) result(M)
-      real(wp), intent(in) :: v(3)
-      real(wp) :: M(3,3)
-      M = 0.0_wp
-      M(1,1)=v(1); M(2,2)=v(2); M(3,3)=v(3)
-    end function diag3
+    absA=matmul(scaled_R,L)
+    amax=maxval(absLam)
+    if (.not. all(ieee_is_finite(absA))) info=14
   end subroutine roe_absA_from_A
-
 end module module_roe_solver

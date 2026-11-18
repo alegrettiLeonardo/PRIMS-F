@@ -1,0 +1,15 @@
+/tmp/
+/output/
+/validation/results/
+/validation/bin/
+/validation/*.log
+/validation/diagnostics/*.exe
+/validation/diagnostics/*.o
+/validation/diagnostics/*.mod
+/validation/diagnostics/build*/
+/validation/diagnostics/*/build*/
+/validation/diagnostics/*/*.exe
+/validation/diagnostics/*/*.o
+/validation/diagnostics/*/*.mod
+__pycache__/
+*.pyc

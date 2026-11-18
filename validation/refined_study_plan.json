@@ -1,0 +1,25 @@
+{
+  "reason": "OSC at N51+51 and dt_max0.125s has64pressure intervals near23s with nonstationary amplitude; resolve observed time and spatial sensitivity before physical acceptance.",
+  "duration_s": 2400,
+  "case": "D_OSC",
+  "variants": [
+    {
+      "cells_per_section": 51,
+      "dt_max_s": 0.0625
+    },
+    {
+      "cells_per_section": 51,
+      "dt_max_s": 0.03125
+    },
+    {
+      "cells_per_section": 101,
+      "dt_max_s": 0.125
+    },
+    {
+      "cells_per_section": 201,
+      "dt_max_s": 0.125
+    }
+  ],
+  "physical_parameters": "same D barotropic, closure3, MATCHED, LAGGED, ROE",
+  "reference_spec": "docs/benchmark_sources.json; removal of third-party image link only compared with at-run spec of the first24runs"
+}

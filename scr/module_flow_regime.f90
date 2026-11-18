@@ -14,7 +14,7 @@ module module_flow_regime
   !!   instead of the final aux value). Here we apply the corrected check.
   !!
   use mod_kinds, only: wp, i4
-  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
+  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite, ieee_value, ieee_quiet_nan
   implicit none
   public
 
@@ -31,7 +31,8 @@ contains
 
 
   pure real(wp) function alphap_from_h(h) result(alphap)
-    !! Liquid hold-up for stratified geometry (circular pipe)
+    !! GAS area fraction above a liquid level h=H_l/D (circular pipe).
+    !! This function decreases from 1 to 0 as h increases from 0 to 1.
     !! alpha_p = (acos(2h-1) - (2h-1)*sqrt(1-(2h-1)^2)) / pi
     real(wp), intent(in) :: h
     real(wp) :: auxa, auxb, auxc
@@ -54,12 +55,15 @@ contains
     h_hi = 1.0_wp
     h_mid = 0.5_wp
 
-    if (alphap <= 0.0_wp) then
-      h = 0.0_wp
+    h=ieee_value(0.0_wp,ieee_quiet_nan)
+    if (.not. ieee_is_finite(alphap)) return
+    if (alphap<0.0_wp .or. alphap>1.0_wp) return
+    if (alphap == 0.0_wp) then
+      h = 1.0_wp
       return
     end if
-    if (alphap >= 1.0_wp) then
-      h = 1.0_wp
+    if (alphap == 1.0_wp) then
+      h = 0.0_wp
       return
     end if
 
@@ -67,7 +71,7 @@ contains
       h_mid = 0.5_wp*(h_lo + h_hi)
       a_mid = alphap_from_h(h_mid)
       if (abs(a_mid - alphap) <= max(tol, 1.0e-14_wp)) exit
-      if (a_mid < alphap) then
+      if (a_mid > alphap) then
         h_lo = h_mid
       else
         h_hi = h_mid
@@ -79,7 +83,10 @@ contains
   end function h_from_alphap
 
   real(wp) function criteria_stab_flow_index(alpha_p, jg, jl0, area, D, g, rhol, rhog, beta, tol) result(SI)
-    !! Stability index used to switch stratified -> intermittent (Montgomery/Burr).
+    !! LEGACY diagnostic only; NOT used to select the solver closure.
+    !! The original normalization is dimensionally ambiguous and the supplied
+    !! Burr equations disagree about the density in the threshold. Retained
+    !! for comparison with historical outputs, not a qualified SI criterion.
     !!
     !! Translation of CriteriaStabFlow.m (legacy MATLAB).
     !!

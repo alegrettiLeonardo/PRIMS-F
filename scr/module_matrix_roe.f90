@@ -9,7 +9,7 @@ module module_matrix_roe
   use mod_kinds, only: wp, i4
   use module_find, only: compute_primitive_variables
   use module_jacobian, only: DFduj
-  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite
+  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite, ieee_value, ieee_quiet_nan
   implicit none
   private
 
@@ -43,7 +43,9 @@ contains
       x = [ -0.9061798459386640_wp, -0.5384693101056831_wp, 0.0_wp, 0.5384693101056831_wp, 0.9061798459386640_wp ]
       w = [  0.2369268850561891_wp,  0.4786286704993665_wp, 0.5688888888888889_wp, 0.4786286704993665_wp, 0.2369268850561891_wp ]
     case default
-      error stop 'gauss_legendre_points: n not supported (use 1..5).'
+      x=ieee_value(0.0_wp,ieee_quiet_nan)
+      w=x
+      return
     end select
 
     ! transform [-1,1] -> [a,b]
@@ -52,67 +54,70 @@ contains
   end subroutine gauss_legendre_points
 
 
-  function calculate_roe_matrix(U_i, U_ip1, Cl, Cg, theta, rho_l0, P_l0, D, AREA, EPS, G, MUL, MUG, sigma, njl_ref, &
-                                w_u, w_rho, w_P, tol, tola, num_points, a, b, ul_prev, ug_prev) result(RoeA)
-    real(wp), intent(in) :: U_i(3), U_ip1(3)
-    real(wp), intent(in) :: Cl, Cg, theta, rho_l0, P_l0
-    real(wp), intent(in) :: D, AREA, EPS, G, MUL, MUG, sigma, njl_ref
-    real(wp), intent(in) :: w_u, w_rho, w_P, tol, tola
+  function calculate_roe_matrix(U_i,U_ip1,Cl,Cg,theta,rho_l0,P_l0,D,AREA,EPS,G,MUL,MUG,sigma,njl_ref, &
+                                w_u,w_rho,w_P,tol,tola,num_points,a,b,ul_prev,ug_prev,status,fixed_regime,closure_id) result(RoeA)
+    !! Quadrature of dF/dU on the conservative segment. The closure branch
+    !! is selected once and held fixed at every node. This is an approximate
+    !! path integral, not an exact algebraic Roe average for a general closure.
+    real(wp), intent(in) :: U_i(3),U_ip1(3),Cl,Cg,theta,rho_l0,P_l0
+    real(wp), intent(in) :: D,AREA,EPS,G,MUL,MUG,sigma,njl_ref,w_u,w_rho,w_P,tol,tola
     integer(i4), intent(in) :: num_points
-    real(wp), intent(in), optional :: a, b
-    real(wp), intent(in), optional :: ul_prev, ug_prev
-    real(wp) :: RoeA(3,3)
-
-    real(wp) :: aa, bb, inv_len
-    real(wp), allocatable :: xi(:), wi(:)
-    real(wp) :: t, wj
-    real(wp) :: dU(3), Ux(3)
-    real(wp) :: alpha_i, rho_l_i, rho_g_i, P_i, u_l_i, u_g_i
-    integer(i4) :: idx
-    integer(i4) :: j
-    real(wp) :: ul_seed, ug_seed
-    real(wp) :: Jmat(3,3)
-
-    aa = 0.0_wp; bb = 1.0_wp
-    if (present(a)) aa = a
-    if (present(b)) bb = b
-    if (abs(bb-aa) < epsilon(bb)) error stop 'calculate_roe_matrix: invalid interval.'
-
-    allocate(xi(num_points), wi(num_points))
-    call gauss_legendre_points(num_points, aa, bb, xi, wi)
-
-    inv_len = 1.0_wp / (bb - aa)
-
-    dU = U_ip1 - U_i
-    RoeA = 0.0_wp
-
-    ul_seed = 0.0_wp
-    ug_seed = 0.0_wp
-    if (present(ul_prev)) ul_seed = ul_prev
-    if (present(ug_prev)) ug_seed = ug_prev
-
-    do j = 1, num_points
-      t  = (xi(j) - aa) * inv_len
-      wj = wi(j)
-      Ux = U_i + t * dU
-
-      call compute_primitive_variables(Ux(1), Ux(2), Ux(3), theta, Cg, Cl, rho_l0, P_l0, D, AREA, EPS, G, &
-                                       MUL, MUG, sigma, njl_ref, w_u, w_rho, tol, tola, 1000, &
-                                       alpha_i, rho_l_i, rho_g_i, P_i, u_l_i, u_g_i, idx, &
-                                       ul_prev=ul_seed, ug_prev=ug_seed)
-
-      ul_seed = u_l_i
-      ug_seed = u_g_i
-
-      Jmat = DFduj(alpha_i, rho_l_i, rho_g_i, u_l_i, u_g_i, Cl, Cg, theta, D, AREA, EPS, G, MUL, MUG, sigma, w_u, w_rho, w_P, tol)
-      RoeA = RoeA + wj * Jmat
-    end do
-
-    if (.not. all(ieee_is_finite(RoeA))) then
-      error stop 'calculate_roe_matrix: Roe matrix has NaN/Inf.'
+    real(wp), intent(in), optional :: a,b,ul_prev,ug_prev
+    integer(i4), intent(out), optional :: status
+    integer(i4), intent(in), optional :: fixed_regime,closure_id
+    real(wp) :: RoeA(3,3),aa,bb,xi(5),wi(5),t,Ux(3),partial(3,3),Jmat(3,3)
+    real(wp) :: alpha_i,rho_l_i,rho_g_i,P_i,u_l_i,u_g_i,ul_seed,ug_seed
+    integer(i4) :: idx,j,cid,code
+    RoeA=ieee_value(0.0_wp,ieee_quiet_nan)
+    if (present(status)) status=1
+    if (num_points<1 .or. num_points>5) return
+    if (.not. all(ieee_is_finite(U_i)) .or. .not. all(ieee_is_finite(U_ip1))) return
+    aa=0.0_wp; bb=1.0_wp
+    if (present(a)) aa=a
+    if (present(b)) bb=b
+    if (.not. all(ieee_is_finite([aa,bb]))) return
+    if (bb<=aa) return
+    cid=2
+    if (theta<0.0_wp) cid=1
+    if (present(fixed_regime)) then
+      select case(fixed_regime)
+      case(0)
+        cid=1
+      case(1)
+        cid=2
+      case default
+        return
+      end select
     end if
-
-    deallocate(xi, wi)
+    if (present(closure_id)) cid=closure_id
+    call gauss_legendre_points(num_points,aa,bb,xi(:num_points),wi(:num_points))
+    partial=0.0_wp
+    ul_seed=0.0_wp; ug_seed=0.0_wp
+    if (present(ul_prev)) ul_seed=ul_prev
+    if (present(ug_prev)) ug_seed=ug_prev
+    do j=1,num_points
+      t=(xi(j)-aa)/(bb-aa)
+      Ux=U_i+t*(U_ip1-U_i)
+      call compute_primitive_variables(Ux(1),Ux(2),Ux(3),theta,Cg,Cl,rho_l0,P_l0,D,AREA,EPS,G, &
+            MUL,MUG,sigma,njl_ref,w_u,w_rho,tol,tola,100_i4,alpha_i,rho_l_i,rho_g_i,P_i,u_l_i,u_g_i,idx, &
+            ul_prev=ul_seed,ug_prev=ug_seed,status=code,closure_id=cid)
+      if (code/=0) then
+        if (present(status)) status=10+code
+        return
+      end if
+      ul_seed=u_l_i; ug_seed=u_g_i
+      Jmat=DFduj(alpha_i,rho_l_i,rho_g_i,u_l_i,u_g_i,Cl,Cg,theta,D,AREA,EPS,G,MUL,MUG,sigma, &
+                 w_u,w_rho,w_P,tol,status=code,closure_id=cid)
+      if (code/=0) then
+        if (present(status)) status=100+code
+        return
+      end if
+      ! Normalized path weights: arbitrary [a,b] parameterizations must give
+      ! the same average as [0,1], including when the interval length is not 1.
+      partial=partial+wi(j)/(bb-aa)*Jmat
+    end do
+    if (.not. all(ieee_is_finite(partial))) return
+    RoeA=partial
+    if (present(status)) status=0
   end function calculate_roe_matrix
-
 end module module_matrix_roe

@@ -1,11 +1,9 @@
 module module_catenary
   !! Fortran translation of catenary.py
   !!
-  !! Replaces scipy.optimize.fsolve with a damped Newton method and a robust
-  !! bisection fallback (using mod_rootfinding).
+  !! Catenary geometry with a dimensionless, bracketed positive root.
   use mod_kinds,       only: wp
-  use mod_rootfinding, only: bisect_root
-  use, intrinsic :: ieee_arithmetic, only: ieee_is_nan
+  use, intrinsic :: ieee_arithmetic, only: ieee_is_finite,ieee_value,ieee_quiet_nan
   implicit none
   private
 
@@ -24,80 +22,40 @@ contains
   end function eq_transcendental
 
 
-  real(wp) function solve_A(Z, X) result(A)
-    !! Solve A>0 such that Z - A*(cosh(X/A)-1) = 0.
-    !! Faithful to Python's behavior:
-    !!   - Uses a physically informed initial guess
-    !!   - Tight tolerance (1e-10)
-    !!   - Raises error if no convergence (here: returns A=0 and stops via info)
-    real(wp), intent(in) :: Z, X
-
-    integer :: it
-    real(wp) :: A_guess, f, df, y, c, s
-    real(wp) :: tol
-    real(wp) :: damp
-    real(wp) :: Anew
-    real(wp) :: root
-    integer :: ier
-
-    tol = 1.0e-10_wp
-
-    if (Z <= 0.0_wp .or. X <= 0.0_wp) then
-      error stop 'solve_A: Z e X devem ser positivos.'
-    end if
-
-    ! Initial guess (same as Python)
-    A_guess = X / log(Z / X + 1.0_wp)
-    if (A_guess <= 0.0_wp .or. ieee_is_nan(A_guess)) then
-      A_guess = max(Z, X)
-    end if
-
-    A = A_guess
-    damp = 1.0_wp
-
-    do it = 1, 100
-      f = eq_transcendental(A, Z, X)
-      if (abs(f) <= tol) return
-
-      y = X / A
-      c = cosh(y) - 1.0_wp
-      s = sinh(y)
-
-      ! df/dA = -(cosh(y)-1) + y*sinh(y)
-      df = -c + y*s
-      if (abs(df) <= 1.0e-30_wp .or. ieee_is_nan(df)) exit
-
-      Anew = A - damp * f / df
-
-      ! Keep positive; if it goes bad, reduce damping
-      if (Anew <= 0.0_wp .or. ieee_is_nan(Anew)) then
-        damp = 0.5_wp * damp
-        if (damp < 1.0e-6_wp) exit
-        cycle
-      end if
-
-      ! accept step; if residual worsened, damp
-      if (abs(eq_transcendental(Anew, Z, X)) > abs(f)) then
-        damp = 0.5_wp * damp
-        if (damp < 1.0e-6_wp) exit
+  real(wp) function solve_A(Z,X,status) result(A)
+    !! Solve sinh(y/2)^2*2/y=Z/X, y=X/A. No procedure callbacks,
+    !! executable-stack trampolines, or overflowing trial X/A are needed.
+    real(wp),intent(in)::Z,X
+    integer,intent(out),optional::status
+    real(wp)::lo,hi,y,ratio,value
+    integer::k
+    A=ieee_value(0.0_wp,ieee_quiet_nan)
+    if(present(status))status=1
+    if(.not.all(ieee_is_finite([Z,X])))return
+    if(min(Z,X)<=0.0_wp)return
+    ratio=Z/X
+    if(.not.ieee_is_finite(ratio).or.ratio<=0.0_wp)return
+    lo=0.0_wp;hi=1.0_wp
+    do k=1,10
+      value=2.0_wp*sinh(hi/2.0_wp)**2/hi
+      if(value>=ratio)exit
+      hi=min(2.0_wp*hi,700.0_wp)
+    enddo
+    if(value<ratio)return
+    do k=1,1100
+      y=0.5_wp*(lo+hi)
+      if(y<=0.0_wp)return
+      value=2.0_wp*sinh(y/2.0_wp)**2/y
+      if(value<ratio)then
+        lo=y
       else
-        A = Anew
-        damp = min(1.0_wp, 2.0_wp*damp)
-      end if
-    end do
-
-    ! Robust fallback: bisection on [A_lo, A_hi]
-    root = bisect_root(funA, 1.0e-12_wp, max(Z,X)*1.0e3_wp, tol, 5000, ier)
-    if (ier /= 0) then
-      error stop 'solve_A: Falha ao resolver A (Newton+bisection).'
-    end if
-    A = root
-
-  contains
-    real(wp) function funA(a0) result(v)
-      real(wp), intent(in) :: a0
-      v = eq_transcendental(a0, Z, X)
-    end function funA
+        hi=y
+      endif
+      if(hi-lo<=8.0_wp*epsilon(1.0_wp)*y)exit
+    enddo
+    A=X/(0.5_wp*(lo+hi))
+    if(.not.ieee_is_finite(A))return
+    if(present(status))status=0
   end function solve_A
 
 
@@ -113,16 +71,12 @@ contains
   end function comprimento_arco
 
 
-  pure real(wp) function angulo_inclinacao(s, A) result(theta)
-    !! theta(s) = 0.5*log((1+s/A)/(1-s/A)), returns +Inf if |s/A|>=1
-    real(wp), intent(in) :: s, A
-    real(wp) :: r
-    r = s / A
-    if (abs(r) >= 1.0_wp) then
-      theta = huge(1.0_wp)
-    else
-      theta = 0.5_wp * log((1.0_wp + r) / (1.0_wp - r))
-    end if
+  pure real(wp) function angulo_inclinacao(s,A) result(theta)
+    !! tan(theta)=s/A for catenary arc length s; this is not atanh(s/A).
+    real(wp),intent(in)::s,A
+    theta=ieee_value(0.0_wp,ieee_quiet_nan)
+    if(.not.all(ieee_is_finite([s,A])).or.A<=0.0_wp)return
+    theta=atan2(s,A)
   end function angulo_inclinacao
 
 

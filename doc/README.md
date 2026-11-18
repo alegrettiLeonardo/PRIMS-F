@@ -1,5 +1,9 @@
 # pipe_riser (Fortran Moderno)
 
+> Documento histórico do port inicial. Para o estado atual da implementação,
+> compilação Fortran 2018, testes e limites de validação, consulte
+> [README principal](../README.md) e [resultados da campanha](../docs/VALIDATION_RESULTS.md).
+
 Este projeto e um **esqueleto compilavel** em Fortran (F2008) que segue a modularizacao pedida:
 
 - `module_simulate_pipe_riser`  (simulatePipeRiser.py)

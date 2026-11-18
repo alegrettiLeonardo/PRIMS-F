@@ -1,0 +1,23 @@
+name: Fortran 2018 operator verification
+on:
+  push:
+  pull_request:
+jobs:
+  operators:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install compiler and linear algebra libraries
+        run: sudo apt-get update && sudo apt-get install -y gfortran liblapack-dev libblas-dev
+      - name: Build executable
+        run: make -j2 FC=gfortran LIBS='-llapack -lblas'
+      - name: Verify physical and numerical operators
+        run: make test FC=gfortran LIBS='-llapack -lblas'
+      - name: Preserve test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fortran-operator-tests
+          path: |
+            tmp/unit_tests/summary.json
+            tmp/unit_tests/logs/*.log
