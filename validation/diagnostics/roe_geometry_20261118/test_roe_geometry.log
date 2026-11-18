@@ -1,0 +1,4 @@
+$ /home/leonardoab/Documentos/PRIMS-F-roe-review-20261118/tmp/unit_tests/test_roe_geometry
+GEOMETRY closure=2 chain_error=  1.715859E-12 omitted_term_error=  9.465609E-06
+GEOMETRY closure=3 chain_error=  5.248431E-12 omitted_term_error=  7.842068E-06
+PASS 315 Roe geometry checks

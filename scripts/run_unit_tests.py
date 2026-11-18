@@ -29,7 +29,7 @@ SOURCES = [
     'module_time_step', 'module_simulate_pipe_riser',
 ]
 TESTS = ['test_geometry', 'test_closure_physics', 'test_primitives_numerics', 'test_steady',
-         'test_boundaries_time', 'test_fv_operators']
+         'test_boundaries_time', 'test_fv_operators', 'test_roe_geometry']
 
 def run_command(command: list[str], cwd: Path, log: Path, timeout: float) -> dict:
     start = time.perf_counter()

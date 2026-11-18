@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "compiler_version": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "git_head": "47433f848548fcffc37f765351cd1bcaa33ee0aa",
+  "libraries": [
+    "-llapack",
+    "-lblas"
+  ],
+  "verification_tree": "/home/leonardoab/Documentos/PRIMS-F-roe-review-20261118",
+  "command": [
+    "make",
+    "test",
+    "FC=gfortran",
+    "LIBS=-llapack -lblas"
+  ],
+  "tests": [
+    {
+      "name": "test_geometry",
+      "status": "PASS",
+      "assertions": 43
+    },
+    {
+      "name": "test_closure_physics",
+      "status": "PASS",
+      "assertions": 1110
+    },
+    {
+      "name": "test_primitives_numerics",
+      "status": "PASS",
+      "assertions": 283
+    },
+    {
+      "name": "test_steady",
+      "status": "PASS",
+      "assertions": 398
+    },
+    {
+      "name": "test_boundaries_time",
+      "status": "PASS",
+      "assertions": 32
+    },
+    {
+      "name": "test_fv_operators",
+      "status": "PASS",
+      "assertions": 319
+    },
+    {
+      "name": "test_roe_geometry",
+      "status": "PASS",
+      "assertions": 315
+    }
+  ],
+  "source_sha256": {
+    "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c",
+    "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "scr/module_flow_regime.f90": "af17e75c6991c128935eddda4e90fbc8a5ed70d24b19bf0f978359080bac2afa",
+    "scr/module_config.f90": "2f719eda0f336d4ca5951228083c076d67166be307056224dea3dd75579f838b",
+    "scr/module_lapack_small.f90": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+    "scr/module_closure_law.f90": "815af1f0355ea3075e729038644a193e52dc4a92d24f4504e9fa965eab9905a2",
+    "scr/module_find.f90": "25f58d38f585a479c5919b9d4fd20810e0608527ac4ee5d047faec9426fbb007",
+    "scr/module_catenary.f90": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+    "scr/module_steady_state.f90": "76311d3a412b6699ccb25a93c74062b2f993181bbecd9aff0928530a02c01624",
+    "scr/module_jacobian.f90": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+    "scr/module_matrix_roe.f90": "f75d32c43cfb344c58aaaf0217f186f042c57dd68c86cd111a8c23bf8f64be6e",
+    "scr/module_roe_solver.f90": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+    "scr/module_boundary_conditions.f90": "a2a5d3bf8393661226c45e61f759fd874bd337801adf9c4e360bc0c3d48207b0",
+    "scr/module_solver_utils.f90": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+    "scr/module_time_step.f90": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133",
+    "scr/module_simulate_pipe_riser.f90": "998e9d56e85b64c3075379d02c7c63de5b720e796be3553f8245024990318997",
+    "tests/test_geometry.f90": "cea60253a701249a1730633fce23db60d81ce418c33cc4ec9a7b2e741693d213",
+    "tests/test_closure_physics.f90": "cfb986acaa8d6b68b78be813e8f808c2a601a08e311d5e8143b23ae13e4039eb",
+    "tests/test_primitives_numerics.f90": "584e2202469cb0b1445e91a2fe05c99c5c17bb635d156e1a1f6d140e9524518d",
+    "tests/test_steady.f90": "50bebcb6a429c0b43a07a063803a37e9d4980c9767627c92feafccdc6137f49f",
+    "tests/test_boundaries_time.f90": "d59abebcf35adfd75b216c1fda26de0a9a66a1571b15f805d6ede37e1cb05b3f",
+    "tests/test_fv_operators.f90": "e7a8cdd7312b57bcde4a5e4ec04ade4ea433946aca6c961776a14fd9080546b1",
+    "tests/test_roe_geometry.f90": "296e6b0c20b994a1e309deed2b65a78baf43edf0a648d9b5321cf58efcdbc8ef"
+  },
+  "scope": "Isolated alpha-tail+Roe operator tests; excludes concurrent Chexal changes and long transients",
+  "frozen_snapshot": "baseline05ad799 final_D_SS3_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.25__final_fields, cells72-73 at97.1927147578s"
+}
