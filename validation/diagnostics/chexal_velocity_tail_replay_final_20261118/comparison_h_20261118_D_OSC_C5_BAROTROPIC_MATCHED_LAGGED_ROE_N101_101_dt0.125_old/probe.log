@@ -1,0 +1,58 @@
+snapshot time_s,dt_s,norm,status    9.4245285601634720E+01   1.7797851562499999E-07   5.7843216379158165E-08    6000
+prepare_dissipation status        0
+minimum physical alpha profile   1   2.3559193642729107E-01
+inlet boundary profile,status        1       0
+outlet boundary profile,status        1       0
+map right trace to pipe profile,status,alpha   1       0   5.5854481390114874E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile   1   2.5486343952516513E+05   5.4514652257292628E-01   2.5392984508866751E-01
+junction gas convective,diffusive,net kg_s profile   1   1.2519113613130117E-03   5.9288676545643210E-05   1.1926226847673684E-03
+riser trace root profile,status,nroots,alpha   1       0       1   2.2766934649904627E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile   1   1.2150426945442232E+00   4.8500764892963216E-01   6.9771108646126101E-01   1.1280879629526093E+00   5.5129362107500424E-01   2.3559193642729107E-01
+assembly residual profile,status,norm   1       0   6.8479080689399639E-08
+assembly Jacobian profile,status,norm   1       0   6.8479080689399639E-08
+minimum physical alpha profile   2   2.3559193384008376E-01
+inlet boundary profile,status        2       0
+outlet boundary profile,status        2       0
+map right trace to pipe profile,status,alpha   2       0   5.5854481441643522E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile   2   2.5486343961926716E+05   5.4514652256533780E-01   2.5392984239307792E-01
+junction gas convective,diffusive,net kg_s profile   2   1.2519113696042958E-03   5.9288697056854470E-05   1.1926226725474413E-03
+riser trace root profile,status,nroots,alpha   2       0       1   2.2766934499336705E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile   2   1.2150426946149089E+00   4.8500766380298099E-01   6.9771108297567219E-01   1.1280879547964844E+00   5.5129362107400259E-01   2.3559193384008376E-01
+assembly residual profile,status,norm   2       0   5.7843216379158165E-08
+assembly Jacobian profile,status,norm   2       0   5.7843216379158165E-08
+Newton band solve status,max increment        0   1.4071672117179029E-08
+Newton cell failure step,cell,status,theta        0     203      71   1.3312923967834003E+00
+Newton candidate lambda,point failures,junction status    1.0000000000000000E+00       1       0
+map right trace to pipe profile,status,alpha  10       0   5.5854481721884464E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile  10   2.5486344013103674E+05   5.4514652252409723E-01   2.5392982772753181E-01
+junction gas convective,diffusive,net kg_s profile  10   1.2519114146688304E-03   5.9288808605699975E-05   1.1926226060631304E-03
+riser trace root profile,status,nroots,alpha  10       0       1   2.2766933680158311E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile  10   1.2150426949993653E+00   4.8500774467949220E-01   6.9771106401927374E-01   1.1280879104393489E+00   5.5129362106855673E-01   2.3559191976954091E-01
+Newton cell failure step,cell,status,theta        1     203      53   1.3312923967834003E+00
+Newton candidate lambda,point failures,junction status    5.0000000000000000E-01       1       0
+map right trace to pipe profile,status,alpha  11       0   5.5854481581762860E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile  11   2.5486343987515438E+05   5.4514652254470863E-01   2.5392983506023464E-01
+junction gas convective,diffusive,net kg_s profile  11   1.2519113921360488E-03   5.9288752831081144E-05   1.1926226393049676E-03
+riser trace root profile,status,nroots,alpha  11       0       1   2.2766934089743662E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile  11   1.2150426948071371E+00   4.8500770424132600E-01   6.9771107349747286E-01   1.1280879326179167E+00   5.5129362107127999E-01   2.3559192680481239E-01
+Newton cell failure step,cell,status,theta        2     203      53   1.3312923967834003E+00
+Newton candidate lambda,point failures,junction status    2.5000000000000000E-01       1       0
+map right trace to pipe profile,status,alpha  12       0   5.5854481511703047E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile  12   2.5486343974721106E+05   5.4514652255502249E-01   2.5392983872640473E-01
+junction gas convective,diffusive,net kg_s profile  12   1.2519113808690430E-03   5.9288724944018578E-05   1.1926226559250245E-03
+riser trace root profile,status,nroots,alpha  12       0       1   2.2766934294526026E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile  12   1.2150426947110229E+00   4.8500768402212380E-01   6.9771107823657252E-01   1.1280879437072004E+00   5.5129362107264135E-01   2.3559193032244805E-01
+Newton cell failure step,cell,status,theta        3     203      53   1.3312923967834003E+00
+Newton candidate lambda,point failures,junction status    1.2500000000000000E-01       1       0
+map right trace to pipe profile,status,alpha  13       0   5.5854481476672002E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile  13   2.5486343968324192E+05   5.4514652256017049E-01   2.5392984055936452E-01
+junction gas convective,diffusive,net kg_s profile  13   1.2519113752347884E-03   5.9288711000312112E-05   1.1926226642344762E-03
+riser trace root profile,status,nroots,alpha  13       0       1   2.2766934396910260E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile  13   1.2150426946629658E+00   4.8500767391257338E-01   6.9771108060612219E-01   1.1280879492518425E+00   5.5129362107332214E-01   2.3559193208126597E-01
+Newton cell failure step,cell,status,theta        4     203      53   1.3312923967834003E+00
+Newton candidate lambda,point failures,junction status    6.2500000000000000E-02       1       0
+map right trace to pipe profile,status,alpha  14       0   5.5854481459159000E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile  14   2.5486343965125163E+05   5.4514652256276375E-01   2.5392984147656811E-01
+junction gas convective,diffusive,net kg_s profile  14   1.2519113724211426E-03   5.9288704028568373E-05   1.1926226683925743E-03
+riser trace root profile,status,nroots,alpha  14       0       1   2.2766934448142900E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile  14   1.2150426946389372E+00   4.8500766885785229E-01   6.9771108179089725E-01   1.1280879520241642E+00   5.5129362107366264E-01   2.3559193296067488E-01
