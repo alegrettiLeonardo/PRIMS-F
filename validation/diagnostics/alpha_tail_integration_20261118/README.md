@@ -25,3 +25,13 @@ Os resumos desta pasta são novas execuções independentes.
 Não foram repetidos transientes neste commit. Os resultados anteriores continuam
 associados à baseline sem alpha-tail; os limites de ul=0, MATCHED gasoso negativo,
 Roe com inclinação variável e a validação experimental permanecem trabalhos distintos.
+
+## Recuperação posterior da evidência histórica
+
+Depois da integração, `prior_evidence.json` foi recuperado do ZIP local fornecido
+`PRIMSF_Evidencias_Implementacao.zip`. O SHA-256 coincide exatamente com o manifesto
+original: `f88afc885178f1c3456ed0d03c9177566939b7ab90edf77ce77f411ae169af89`.
+O arquivo foi restaurado como entrada obrigatória de checksum. Os registros
+`NOT_DISTRIBUTED` acima documentam o primeiro checkout e foram preservados;
+a lacuna de distribuição está resolvida, sem regeneração da evidência histórica.
+O manifesto atualizado contém o hash do ZIP e a proveniência da recuperação.
