@@ -1,0 +1,493 @@
+[
+  {
+    "case": "comparison_20261118_D_OSC_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "snapshot_sha256": "f51e45ba590c70a8053ca0e67730aff72524e75df60a77fb46ef8d7f48f7a680",
+    "time_s": 93.10000408374412,
+    "saved_status": 6000,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 2.6275435637912628e-08,
+        "min_ug_m_s": 0.8722467302162339
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 2.2585985763573563e-08,
+        "min_ug_m_s": 0.8722467220050057
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [
+      {
+        "step_halving_index": 0,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 1,
+        "cell": 103,
+        "point_state_status": 71,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 2,
+        "cell": 103,
+        "point_state_status": 53,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 3,
+        "cell": 103,
+        "point_state_status": 53,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 4,
+        "cell": 103,
+        "point_state_status": 53,
+        "theta_rad": 1.3278382388484324
+      }
+    ],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      }
+    ]
+  },
+  {
+    "case": "comparison_20261118_D_SS1_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "snapshot_sha256": "1e9629e5293c8ee55ae324b6094b0a73d46aee47b6673dda2e5ee456917f27dc",
+    "time_s": 78.57178847673931,
+    "saved_status": 6000,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 0.3831453041979558,
+        "min_ug_m_s": 0.05307837224270139
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 0.383145300725776,
+        "min_ug_m_s": 0.05307836549984288
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 0,
+        "junction_status": 1012
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 0,
+        "junction_status": 1012
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 0,
+        "junction_status": 1012
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 0,
+        "junction_status": 1012
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 0,
+        "junction_status": 1012
+      }
+    ]
+  },
+  {
+    "case": "comparison_20261118_D_SS1_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "snapshot_sha256": "675df04887ada60eee587217f82a1fc007eb973043eb662b25e9dfbc55e0ac0e",
+    "time_s": 52.795265493768895,
+    "saved_status": 3061,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 0.48764547225819105,
+        "min_ug_m_s": 0.05378141950457424
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 0.48764547125288077,
+        "min_ug_m_s": 0.05378141808316153
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 0,
+        "junction_status": 1061
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 0,
+        "junction_status": 1061
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 0,
+        "junction_status": 1061
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 0,
+        "junction_status": 1061
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 0,
+        "junction_status": 1061
+      }
+    ]
+  },
+  {
+    "case": "comparison_20261118_D_SS3_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "snapshot_sha256": "e2cafe7245ac084fe8b8db764d4d19bbc6d4dc6e0f891ec4a58ad68f054fac3c",
+    "time_s": 97.1318523387001,
+    "saved_status": 6000,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 2.9367850460519817e-09,
+        "min_ug_m_s": 0.3543943152539772
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 2.202834647338875e-14,
+        "min_ug_m_s": 0.3543942841141205
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [
+      {
+        "step_halving_index": 0,
+        "cell": 69,
+        "point_state_status": 14,
+        "theta_rad": 0.9012386672268461
+      },
+      {
+        "step_halving_index": 1,
+        "cell": 69,
+        "point_state_status": 14,
+        "theta_rad": 0.9012386672268461
+      },
+      {
+        "step_halving_index": 2,
+        "cell": 69,
+        "point_state_status": 14,
+        "theta_rad": 0.9012386672268461
+      },
+      {
+        "step_halving_index": 3,
+        "cell": 69,
+        "point_state_status": 14,
+        "theta_rad": 0.9012386672268461
+      },
+      {
+        "step_halving_index": 4,
+        "cell": 69,
+        "point_state_status": 14,
+        "theta_rad": 0.9012386672268461
+      }
+    ],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      }
+    ]
+  },
+  {
+    "case": "comparison_20261118_D_SS3_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "snapshot_sha256": "2e98aad842aa2976511a2c6105638b8c3d27e9dbd1799e31aac62060e5488a89",
+    "time_s": 42.18200940046241,
+    "saved_status": 6000,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 6.392493998790166e-08,
+        "min_ug_m_s": 0.4437926593347786
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 2.258600053866059e-08,
+        "min_ug_m_s": 0.44379265848121413
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [
+      {
+        "step_halving_index": 0,
+        "cell": 81,
+        "point_state_status": 53,
+        "theta_rad": 1.1511590174118609
+      },
+      {
+        "step_halving_index": 1,
+        "cell": 81,
+        "point_state_status": 53,
+        "theta_rad": 1.1511590174118609
+      },
+      {
+        "step_halving_index": 2,
+        "cell": 81,
+        "point_state_status": 53,
+        "theta_rad": 1.1511590174118609
+      },
+      {
+        "step_halving_index": 3,
+        "cell": 81,
+        "point_state_status": 53,
+        "theta_rad": 1.1511590174118609
+      },
+      {
+        "step_halving_index": 4,
+        "cell": 81,
+        "point_state_status": 53,
+        "theta_rad": 1.1511590174118609
+      }
+    ],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      }
+    ]
+  },
+  {
+    "case": "comparison_h_20261118_D_OSC_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+    "snapshot_sha256": "bb7a49fc627e5c85fc105c1b48bbef19f715a8dcf41cd1c0f366e2c7567702c3",
+    "time_s": 94.24528560163472,
+    "saved_status": 6000,
+    "physical_cells": 202,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 202,
+        "min_ul_m_s": 2.7273277491650094e-08,
+        "min_ug_m_s": 0.48500764892963216
+      },
+      "2": {
+        "valid_cells": 202,
+        "min_ul_m_s": 2.258597459511861e-08,
+        "min_ug_m_s": 0.485007663802981
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [
+      {
+        "step_halving_index": 0,
+        "cell": 203,
+        "point_state_status": 71,
+        "theta_rad": 1.3312923967834003
+      },
+      {
+        "step_halving_index": 1,
+        "cell": 203,
+        "point_state_status": 53,
+        "theta_rad": 1.3312923967834003
+      },
+      {
+        "step_halving_index": 2,
+        "cell": 203,
+        "point_state_status": 53,
+        "theta_rad": 1.3312923967834003
+      },
+      {
+        "step_halving_index": 3,
+        "cell": 203,
+        "point_state_status": 53,
+        "theta_rad": 1.3312923967834003
+      },
+      {
+        "step_halving_index": 4,
+        "cell": 203,
+        "point_state_status": 53,
+        "theta_rad": 1.3312923967834003
+      }
+    ],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      }
+    ]
+  },
+  {
+    "case": "comparison_dt_20261118_D_OSC_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+    "snapshot_sha256": "45c564a7096841a0d5e202a9a8e9a0cf74d73c017912d04e8a55860d3e2e5f51",
+    "time_s": 77.36499357873926,
+    "saved_status": 6000,
+    "physical_cells": 102,
+    "profiles_minima": {
+      "1": {
+        "valid_cells": 102,
+        "min_ul_m_s": 2.4462787801900594e-08,
+        "min_ug_m_s": 0.3967906817275297
+      },
+      "2": {
+        "valid_cells": 102,
+        "min_ul_m_s": 2.2585949207166082e-08,
+        "min_ug_m_s": 0.3967906760248884
+      }
+    },
+    "point_failures": [],
+    "newton_cell_failures": [
+      {
+        "step_halving_index": 0,
+        "cell": 103,
+        "point_state_status": 53,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 1,
+        "cell": 103,
+        "point_state_status": 53,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 2,
+        "cell": 103,
+        "point_state_status": 53,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 3,
+        "cell": 103,
+        "point_state_status": 53,
+        "theta_rad": 1.3278382388484324
+      },
+      {
+        "step_halving_index": 4,
+        "cell": 103,
+        "point_state_status": 53,
+        "theta_rad": 1.3278382388484324
+      }
+    ],
+    "newton_candidates": [
+      {
+        "lambda": 1.0,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.5,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.25,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.125,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      },
+      {
+        "lambda": 0.0625,
+        "cell_point_failures": 1,
+        "junction_status": 0
+      }
+    ]
+  }
+]
