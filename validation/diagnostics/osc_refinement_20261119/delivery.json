@@ -1,0 +1,46 @@
+{
+  "created_utc": "2026-11-19T16:22:10.774904+00:00",
+  "artifacts": {
+    "summary/terminal_index.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/summary/terminal_index.json",
+      "sha256": "149f398eebda20fc02e71e2d6227a2e4823c4b3173ab752b6ea4e4242d4533ca"
+    },
+    "summary/RESULTS.md": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/summary/RESULTS.md",
+      "sha256": "4233da8515456be4034ac2a9d38c743c3178ffb5c744f49b1e4f2b5fab57a950"
+    },
+    "summary/RESULTS_v2.md": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/summary/RESULTS_v2.md",
+      "sha256": "b3e9c9fcf9d597ead38c2ecf66ca48663365f78e4b511e18ef8f483fb20f03fd"
+    },
+    "figures_refinement_v1/index.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/figures_refinement_v1/index.json",
+      "sha256": "d63e84da907bc233e5706b33ecaa20faf6e7494a1e63182aad707c7337c618a9"
+    },
+    "figures_refinement_v1/osc_refinamento.png": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/figures_refinement_v1/osc_refinamento.png",
+      "sha256": "e6a2a66b2acb4a280a2ad1fe0cbe1af8320924941db3eec35cffda9109872599"
+    },
+    "analysis/adjacent_orders_v1.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/adjacent_orders_v1.json",
+      "sha256": "1a3b2d885666d80e9c2402611a4f243154321630a69ae3fa5055c2d29fb854d3"
+    },
+    "analysis/fixed_trace_comparison.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/fixed_trace_comparison.json",
+      "sha256": "1a4611d7f5867d2f47e6b7acae901d3beaf7a0ec9fc7dd92de77094b3a670f9e"
+    },
+    "analysis_tests_integrated_v1/manifest.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis_tests_integrated_v1/manifest.json",
+      "sha256": "f279960de6cc7d645dc1770dce5f9ab4d7d81362914b0a02779c42dd5c322092"
+    },
+    "analysis_tests_integrated_v1/cli_equivalence.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis_tests_integrated_v1/cli_equivalence.json",
+      "sha256": "2b0c3e2ffbb71f1425267930551c503d2ecff0ca50e3710f5bfa764161d3c5b8"
+    }
+  },
+  "integrated_analysis_commit": "9c8a1c8621840d2f1cca077308afda5cb9d3cfd1",
+  "figure_visually_checked": true,
+  "all_six_runs_completed": true,
+  "duration_extension_required": false,
+  "report_v2_note": "Display-only distinction between observed FAIL and unavailable; all five amplitudes actually fail the declared criterion. Prior report retained."
+}
