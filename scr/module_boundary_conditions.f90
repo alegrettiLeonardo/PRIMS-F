@@ -35,15 +35,18 @@ contains
     real(wp),intent(out),optional::Ubc(3)
     real(wp)::p,rhol,rhog,alpha,alpha_interior,ul,ug,jl,jg,pip,state(3),pcheck
     real(wp)::ul_interior,ug_interior,ai,rli,rgi,pi
-    integer::model,phase,inlet_phase
+    integer::model,phase,inlet_phase,interior_status
     F=ieee_value(0.0_wp,ieee_quiet_nan)
     if(present(Ubc))Ubc=F
     status=101
     if(.not.all(ieee_is_finite(Uinterior)))return
     if(minval(Uinterior(1:2))<0.0_wp.or.sum(Uinterior(1:2))<=0.0_wp)return
+    if(.not.all(ieee_is_finite([theta,cfg%nCg,cfg%nCl,cfg%nrho_l0,cfg%nP_l0, &
+      cfg%omega_rho,cfg%omega_u,cfg%omega_P])))return
     if(min(cfg%nCg,cfg%nCl,cfg%omega_rho,cfg%omega_u,cfg%omega_P)<=0.0_wp)return
     p=pressure_fun_uj(Uinterior(1),Uinterior(2),cfg%nCg,cfg%nCl,cfg%nrho_l0,cfg%nP_l0)
-    if(.not.ieee_is_finite(p).or.p<=0.0_wp)return
+    if(.not.ieee_is_finite(p))return
+    if(p<=0.0_wp)return
     pip=cfg%omega_P/(cfg%omega_rho*cfg%omega_u**2)
     if(is_inlet)then
       model=cfg%closure_pipe
@@ -80,13 +83,17 @@ contains
         call compute_primitive_variables(Uinterior(1),Uinterior(2),Uinterior(3),theta,cfg%nCg,cfg%nCl, &
           cfg%nrho_l0,cfg%nP_l0,cfg%D_H,cfg%AREA,cfg%eps,cfg%G,cfg%mu_l,cfg%mu_g,cfg%sigma,cfg%njl, &
           cfg%omega_u,cfg%omega_rho,cfg%tol,cfg%tola,cfg%maxit,ai,rli,rgi,pi,ul_interior,ug_interior, &
-          phase,status=status,closure_id=model)
-        if(status/=0)return
+          phase,status=interior_status,closure_id=model)
+        if(interior_status/=0)then
+          status=interior_status
+          return
+        endif
       endif
       ! Impose pressure at the face; retain interior void fraction and total
       ! momentum, then recover velocities under the selected closure at Pout.
       p=cfg%nPs
-      if(.not.ieee_is_finite(p).or.p<=0.0_wp)return
+      if(.not.ieee_is_finite(p))return
+      if(p<=0.0_wp)return
       rhol=cfg%nrho_l0+(p-cfg%nP_l0)/cfg%nCl**2
       rhog=p/cfg%nCg**2
       if(min(rhol,rhog)<=0.0_wp)return

@@ -72,9 +72,16 @@ contains
     real(wp) :: RoeA(3,3),aa,bb,xi(5),wi(5),t,Ux(3),partial(3,3),Jmat(3,3)
     real(wp) :: alpha_i,rho_l_i,rho_g_i,P_i,u_l_i,u_g_i,ul_seed,ug_seed,theta_end,theta_node
     integer(i4) :: idx,j,cid,code
+    logical :: have_history
     RoeA=ieee_value(0.0_wp,ieee_quiet_nan)
     if (present(status)) status=1
     if (num_points<1 .or. num_points>5) return
+    if (present(ul_prev).neqv.present(ug_prev)) return
+    have_history=present(ul_prev)
+    if(have_history)then
+      if(.not.all(ieee_is_finite([ul_prev,ug_prev])))return
+      ul_seed=ul_prev;ug_seed=ug_prev
+    endif
     if (.not. all(ieee_is_finite(U_i)) .or. .not. all(ieee_is_finite(U_ip1))) return
     theta_end=theta
     if (present(theta_right)) theta_end=theta_right
@@ -99,21 +106,21 @@ contains
     if (present(closure_id)) cid=closure_id
     call gauss_legendre_points(num_points,aa,bb,xi(:num_points),wi(:num_points))
     partial=0.0_wp
-    ul_seed=0.0_wp; ug_seed=0.0_wp
-    if (present(ul_prev)) ul_seed=ul_prev
-    if (present(ug_prev)) ug_seed=ug_prev
     do j=1,num_points
       t=(xi(j)-aa)/(bb-aa)
       Ux=U_i+t*(U_ip1-U_i)
       theta_node=theta+t*(theta_end-theta)
-      call compute_primitive_variables(Ux(1),Ux(2),Ux(3),theta_node,Cg,Cl,rho_l0,P_l0,D,AREA,EPS,G, &
-            MUL,MUG,sigma,njl_ref,w_u,w_rho,tol,tola,100_i4,alpha_i,rho_l_i,rho_g_i,P_i,u_l_i,u_g_i,idx, &
-            ul_prev=ul_seed,ug_prev=ug_seed,status=code,closure_id=cid)
+      if(have_history)then
+        call recover_at_node(ul_seed,ug_seed)
+      else
+        ! The first node must resolve the same ambiguity as direct recovery.
+        call recover_at_node()
+      endif
       if (code/=0) then
         if (present(status)) status=10+code
         return
       end if
-      ul_seed=u_l_i; ug_seed=u_g_i
+      ul_seed=u_l_i; ug_seed=u_g_i; have_history=.true.
       Jmat=DFduj(alpha_i,rho_l_i,rho_g_i,u_l_i,u_g_i,Cl,Cg,theta_node,D,AREA,EPS,G,MUL,MUG,sigma, &
                  w_u,w_rho,w_P,tol,status=code,closure_id=cid)
       if (code/=0) then
@@ -127,5 +134,12 @@ contains
     if (.not. all(ieee_is_finite(partial))) return
     RoeA=partial
     if (present(status)) status=0
+  contains
+    subroutine recover_at_node(liquid_history,gas_history)
+      real(wp),optional,intent(in)::liquid_history,gas_history
+      call compute_primitive_variables(Ux(1),Ux(2),Ux(3),theta_node,Cg,Cl,rho_l0,P_l0,D,AREA,EPS,G, &
+            MUL,MUG,sigma,njl_ref,w_u,w_rho,tol,tola,100_i4,alpha_i,rho_l_i,rho_g_i,P_i,u_l_i,u_g_i,idx, &
+            ul_prev=liquid_history,ug_prev=gas_history,status=code,closure_id=cid)
+    end subroutine
   end function calculate_roe_matrix
 end module module_matrix_roe
