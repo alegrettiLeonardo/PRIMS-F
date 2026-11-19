@@ -15,7 +15,7 @@ module module_simulate_pipe_riser
   use module_steady_state, only: solve_alpha_from_superficials
   use mod_void_helpers, only: ffan,Dffan
   use, intrinsic :: ieee_arithmetic, only: ieee_is_finite,ieee_value,ieee_quiet_nan
-  use, intrinsic :: iso_fortran_env, only: output_unit
+  use, intrinsic :: iso_fortran_env, only: output_unit,int64
   implicit none
   private
   public :: pipeline_riser_simulator_t
@@ -456,17 +456,21 @@ contains
     if(present(status))status=code
   end subroutine
 
-  subroutine assemble(this,U,Uold,dt,R,A,B,C,norm,fin,fout,status,with_jac)
+  subroutine assemble(this,U,Uold,dt,R,A,B,C,norm,fin,fout,status,with_jac,base_mass_flux)
     class(pipeline_riser_simulator_t),intent(in)::this
     real(wp),intent(in)::U(:,:),Uold(:,:),dt
     real(wp),intent(out)::R(:,:),A(:,:,:),B(:,:,:),C(:,:,:),norm,fin(3),fout(3)
     integer,intent(out)::status
     logical,intent(in)::with_jac
+    ! Phase fluxes actually inserted in the residual: column 1 leaves the
+    ! pipe, column 2 enters the riser. Keep both; never impose equality here.
+    real(wp),intent(out),optional::base_mass_flux(2,2)
     integer::lo,hi,n,i,k,l,q,code,cp,cm
     real(wp)::v(6),f(3),s(3),fj(3,3),sj(3,3),fm(3),fp(3),jl(3,3),jr(3,3),kl(3,3),kr(3,3)
     real(wp)::up(3),um(3),plus(3),minus(3),h,jb(3,3),scale(3),ds
     lo=first_physical_cell(this%cfg);hi=last_physical_cell(this%cfg);n=hi-lo+1
     R=0;A=0;B=0;C=0;status=0;norm=huge(1.0_wp)
+    if(present(base_mass_flux))base_mass_flux=ieee_value(0.0_wp,ieee_quiet_nan)
     do i=lo,hi
       l=i-lo+1;ds=this%cfg%cell_width(i)
       call this%point_state(U(i,:),this%cfg%thetav(i),v,f,s,fj,sj,code,with_jac,cell_closure(this,this%cfg%thetav(i),i))
@@ -496,6 +500,11 @@ contains
       endif
       if(code/=0)then
         status=2000+code;return
+      endif
+      if(present(base_mass_flux))then
+        if(i==lo+this%cfg%N_pipe-1)then
+          base_mass_flux(:,1)=fm(:2);base_mass_flux(:,2)=fp(:2)
+        endif
       endif
       R(:,l)=R(:,l)+dt*fm/this%cfg%cell_width(i)
       R(:,l+1)=R(:,l+1)-dt*fp/this%cfg%cell_width(i+1)
@@ -562,7 +571,13 @@ contains
     real(wp)::next_output,next_field,last_print,wall0,wall1,remaining,dt_next
     integer::lo,hi,n,step,it,code,ls,info,maxsteps,rej,unitmon,unitfield,unitstat,i,k,lastcode,finstatus
     logical::accepted,converged,requested_full_jac,diagnose_burr15
-    integer::unitburr15
+    integer::unitburr15,unitsteps,unitmass,ib,initial_flux_status
+    integer::jacobian_evaluations,residual_evaluations,linear_solves,backtrack_trials,newton_iterations,prepare_calls
+    integer(int64)::clock_start,clock_now,clock_rate
+    real(wp)::base_mass_flux(2,2),trial_base_mass_flux(2,2),accepted_base(2,2),accepted_in(2),accepted_out(2)
+    real(wp)::base_sum(2,2),base_abs(2,2),in_abs(2),out_abs(2),massflow_scale,mass_scale
+    real(wp)::mass0(2,3),mass_previous(2,3),mass_current(2,3),mass_residual(2,3),mass_residual_sum(2,3)
+    real(wp)::step_balance(2,3),cpu_previous,cpu_now,elapsed_wall
     lo=first_physical_cell(this%cfg);hi=last_physical_cell(this%cfg);n=hi-lo+1
     if(present(status))status=1
     requested_full_jac=this%cfg%jac_dissipation_fd
@@ -583,7 +598,17 @@ contains
     if(dt<=0)dt=min(0.01_wp/this%cfg%omega_t,this%max_dt)
     tcur=0;step=0;rej=0;in_sum=0;out_sum=0;lastcode=0;finstatus=0
     next_output=0;next_field=0;last_print=-huge(1.0_wp)
-    call cpu_time(wall0)
+    ib=lo+this%cfg%N_pipe-1
+    base_sum=0;base_abs=0;in_abs=0;out_abs=0;mass_residual=0;mass_residual_sum=0;step_balance=0
+    accepted_in=ieee_value(0.0_wp,ieee_quiet_nan);accepted_out=accepted_in
+    accepted_base=ieee_value(0.0_wp,ieee_quiet_nan);initial_flux_status=0
+    massflow_scale=this%cfg%omega_rho*this%cfg%omega_u*this%cfg%AREA
+    mass_scale=this%cfg%omega_rho*this%cfg%AREA*this%cfg%Lr
+    jacobian_evaluations=0;residual_evaluations=0;linear_solves=0;backtrack_trials=0;newton_iterations=0;prepare_calls=0
+    call cpu_time(wall0);cpu_previous=wall0
+    call system_clock(clock_start,clock_rate)
+    call mass_inventory(U,mass0);mass_previous=mass0
+    call cpu_time(cpu_now)
     do k=1,2
       inventory0(k)=sum(U(lo:hi,k)*this%cfg%cell_width(lo:hi))*this%cfg%omega_rho*this%cfg%AREA*this%cfg%Lr
     enddo
@@ -593,7 +618,10 @@ contains
        'Ml_kg,Mg_kg,Ml_pipe_kg,Mg_pipe_kg,Ml_riser_kg,Mg_riser_kg,'// &
        'Ml_in_integral_kg,Mg_in_integral_kg,Ml_out_integral_kg,Mg_out_integral_kg,balance_l_kg,balance_g_kg,newton_iterations,rejected_steps,'// &
        'mdot_l_base_kg_s,mdot_g_base_kg_s,p_junction_Pa,alpha_pipe_trace,alpha_riser_trace,mdot_g_unconstrained_kg_s,blocking_active,'// &
-       'holdup_liquid_base,holdup_liquid_out'
+       'holdup_liquid_base,holdup_liquid_out,mdot_l_in_kg_s,mdot_g_in_kg_s,'// &
+       'Ml_in_abs_integral_kg,Mg_in_abs_integral_kg,Ml_out_abs_integral_kg,Mg_out_abs_integral_kg,'// &
+       'Ml_base_integral_kg,Mg_base_integral_kg,Ml_base_abs_integral_kg,Mg_base_abs_integral_kg,'// &
+       'Ml_base_right_integral_kg,Mg_base_right_integral_kg,Ml_base_right_abs_integral_kg,Mg_base_right_abs_integral_kg'
     open(newunit=unitfield,file=trim(this%cfg%out_dir)//'/fields.csv',status='replace')
     write(unitfield,'(a)') 'time_s,s_m,theta_rad,alpha,holdup_liquid,p_Pa,ul_m_s,ug_m_s,rhol_kg_m3,rhog_kg_m3'
     diagnose_burr15=trim(this%cfg%pipe_regime_mode)=='AUTO_BURR15'
@@ -601,32 +629,66 @@ contains
       open(newunit=unitburr15,file=trim(this%cfg%out_dir)//'/burr15.csv',status='replace')
       write(unitburr15,'(a)') 'time_s,s_m,closure_id,status,hL_over_D,ug2_m2_s2,ug2_critical_m2_s2,margin_m2_s2,unstable'
     endif
+    open(newunit=unitsteps,file=trim(this%cfg%out_dir)//'/steps.csv',status='replace')
+    write(unitsteps,'(a)') 'step,time_s,dt_s,newton_iterations,rejected_steps_total,residual_norm,'// &
+      'newton_iterations_total,jacobian_evaluations_total,residual_evaluations_total,linear_solves_total,'// &
+      'backtrack_trials_total,prepare_calls_total,cpu_total_s,cpu_since_previous_accept_s,wall_total_s'
+    open(newunit=unitmass,file=trim(this%cfg%out_dir)//'/conservation.csv',status='replace')
+    write(unitmass,'(a)') 'step,time_s,dt_s,residual_norm,flux_status,'// &
+      'Ml_kg,Mg_kg,Ml_pipe_kg,Mg_pipe_kg,Ml_riser_kg,Mg_riser_kg,'// &
+      'mdot_l_in_kg_s,mdot_g_in_kg_s,mdot_l_out_kg_s,mdot_g_out_kg_s,'// &
+      'mdot_l_base_left_kg_s,mdot_g_base_left_kg_s,mdot_l_base_right_kg_s,mdot_g_base_right_kg_s,'// &
+      'Ml_in_integral_kg,Mg_in_integral_kg,Ml_out_integral_kg,Mg_out_integral_kg,'// &
+      'Ml_base_left_integral_kg,Mg_base_left_integral_kg,Ml_base_right_integral_kg,Mg_base_right_integral_kg,'// &
+      'Ml_in_abs_integral_kg,Mg_in_abs_integral_kg,Ml_out_abs_integral_kg,Mg_out_abs_integral_kg,'// &
+      'Ml_base_left_abs_integral_kg,Mg_base_left_abs_integral_kg,Ml_base_right_abs_integral_kg,Mg_base_right_abs_integral_kg,'// &
+      'balance_l_kg,balance_g_kg,balance_l_pipe_kg,balance_g_pipe_kg,balance_l_riser_kg,balance_g_riser_kg,'// &
+      'step_balance_l_kg,step_balance_g_kg,step_balance_l_pipe_kg,step_balance_g_pipe_kg,step_balance_l_riser_kg,step_balance_g_riser_kg,'// &
+      'mass_residual_l_kg,mass_residual_g_kg,mass_residual_l_pipe_kg,mass_residual_g_pipe_kg,mass_residual_l_riser_kg,mass_residual_g_riser_kg,'// &
+      'mass_residual_sum_l_kg,mass_residual_sum_g_kg,mass_residual_sum_l_pipe_kg,mass_residual_sum_g_pipe_kg,'// &
+      'mass_residual_sum_l_riser_kg,mass_residual_sum_g_riser_kg'
+    ! Initial fluxes are diagnostic only and do not contribute to an integral.
+    ! An unavailable diagnostic must not alter the solver's acceptance path.
+    call boundary_flux(U(lo,:),thetav(lo),this%cfg,.true.,fin,code)
+    if(code==0)then
+      accepted_in=fin(:2)
+    else
+      initial_flux_status=3000+code
+    endif
     call boundary_flux(U(hi,:),thetav(hi),this%cfg,.false.,fout,code)
+    if(code==0)accepted_out=fout(:2)
     if(code/=0)then
+      initial_flux_status=3000+code
       finstatus=code
     else
       call write_monitor(0.0_wp,0)
       call write_field()
     endif
+    call write_mass_record(0.0_wp,0.0_wp,initial_flux_status)
     do while(tcur<T.and.step<maxsteps.and.finstatus==0)
       remaining=T-tcur;dt=min(dt,remaining,this%max_dt)
       old=U;trial=U;accepted=.false.;converged=.false.
+      prepare_calls=prepare_calls+1
       call this%prepare_dissipation(old,code)
       if(code/=0)then
         finstatus=8000+code
         exit
       endif
       do it=1,this%cfg%newton_max
+        newton_iterations=newton_iterations+1
         ! A frozen |A| is an inexact Newton matrix. Upgrade to the complete
         ! flux derivative when its convergence slows; the residual never changes.
         if(it>=7)this%cfg%jac_dissipation_fd=.true.
-        call this%assemble(trial,old,dt,r,a,b,c,norm,fin,fout,code,.true.)
+        jacobian_evaluations=jacobian_evaluations+1;residual_evaluations=residual_evaluations+1
+        call this%assemble(trial,old,dt,r,a,b,c,norm,fin,fout,code,.true.,base_mass_flux)
         if(code/=0)then
           lastcode=code;exit
         endif
         if(norm<=this%cfg%tol_res)then
+          call capture_mass_residual(r)
           accepted=.true.;converged=.true.;exit
         endif
+        linear_solves=linear_solves+1
         call this%ti%solve_block_tridiagonal_3x3(a,b,c,-r,dx,info)
         if(info/=0)then
           lastcode=5000+info;exit
@@ -643,7 +705,8 @@ contains
           do i=lo,hi
             work(i,:)=trial(i,:)+lambda*dx(:,i-lo+1)
           enddo
-          call this%assemble(work,old,dt,rt,az,bz,cz,nt,fi2,fo2,code,.false.)
+          residual_evaluations=residual_evaluations+1;backtrack_trials=backtrack_trials+1
+          call this%assemble(work,old,dt,rt,az,bz,cz,nt,fi2,fo2,code,.false.,trial_base_mass_flux)
           if(code==0)then
             if(nt<norm*(1-1e-4_wp*lambda).or.nt<=this%cfg%tol_res)then
               accepted=.true.;exit
@@ -662,7 +725,9 @@ contains
         endif
         trial=work
         if(nt<=this%cfg%tol_res)then
-          norm=nt;fin=fi2;fout=fo2;converged=.true.;exit
+          norm=nt;fin=fi2;fout=fo2;base_mass_flux=trial_base_mass_flux
+          call capture_mass_residual(rt)
+          converged=.true.;exit
         endif
       enddo
       if(.not.converged)then
@@ -677,15 +742,37 @@ contains
       U=trial;call apply_ghost_cells(U,this%cfg%num_dummy_cells)
       this%cfg%jac_dissipation_fd=requested_full_jac
       tcur=tcur+dt;step=step+1
+      accepted_in=fin(:2);accepted_out=fout(:2);accepted_base=base_mass_flux
+      call mass_inventory(U,mass_current)
+      step_balance(:,1)=mass_current(:,1)-mass_previous(:,1)- &
+        dt*this%cfg%omega_t*massflow_scale*(accepted_in-accepted_out)
+      step_balance(:,2)=mass_current(:,2)-mass_previous(:,2)- &
+        dt*this%cfg%omega_t*massflow_scale*(accepted_in-accepted_base(:,1))
+      step_balance(:,3)=mass_current(:,3)-mass_previous(:,3)- &
+        dt*this%cfg%omega_t*massflow_scale*(accepted_base(:,2)-accepted_out)
+      mass_previous=mass_current
+      mass_residual_sum=mass_residual_sum+mass_residual
+      base_sum=base_sum+dt*this%cfg%omega_t*massflow_scale*accepted_base
+      base_abs=base_abs+dt*this%cfg%omega_t*massflow_scale*abs(accepted_base)
+      in_abs=in_abs+dt*this%cfg%omega_t*massflow_scale*abs(accepted_in)
+      out_abs=out_abs+dt*this%cfg%omega_t*massflow_scale*abs(accepted_out)
       in_sum=in_sum+dt*fin(:2)*this%cfg%omega_t*this%cfg%omega_rho*this%cfg%omega_u*this%cfg%AREA
       out_sum=out_sum+dt*fout(:2)*this%cfg%omega_t*this%cfg%omega_rho*this%cfg%omega_u*this%cfg%AREA
       if(tcur*this%cfg%omega_t>=next_output.or.tcur>=T)call write_monitor(dt*this%cfg%omega_t,it)
       if(tcur*this%cfg%omega_t>=next_field.or.tcur>=T)call write_field()
+      call write_mass_record(dt*this%cfg%omega_t,norm,0)
+      call cpu_time(cpu_now);call system_clock(clock_now)
+      elapsed_wall=ieee_value(0.0_wp,ieee_quiet_nan)
+      if(clock_rate>0)elapsed_wall=real(clock_now-clock_start,wp)/real(clock_rate,wp)
+      write(unitsteps,'(i0,2(",",es24.16),2(",",i0),",",es24.16,6(",",i0),3(",",es24.16))') &
+        step,tcur*this%cfg%omega_t,dt*this%cfg%omega_t,it,rej,norm,newton_iterations,jacobian_evaluations, &
+        residual_evaluations,linear_solves,backtrack_trials,prepare_calls,cpu_now-wall0,cpu_now-cpu_previous,elapsed_wall
+      cpu_previous=cpu_now
       call cpu_time(wall1)
       if(wall1-last_print>10.0_wp.or.tcur>=T)then
         write(output_unit,'(a,f12.4,a,i0,a,es11.3,a,i0,a,i0)') 't(s)=',tcur*this%cfg%omega_t, &
            ' step=',step,' dt(s)=',dt*this%cfg%omega_t,' Newton=',it,' rejects=',rej
-        flush(output_unit);flush(unitmon);last_print=wall1
+        flush(output_unit);flush(unitmon);flush(unitsteps);flush(unitmass);last_print=wall1
       endif
       dt_next=dt
       if(it<=5)dt_next=dt*this%dt_growth
@@ -695,7 +782,7 @@ contains
     if(tcur<T.and.finstatus==0)finstatus=7000
     call write_field()
     if(finstatus/=0)call write_monitor(0.0_wp,0)
-    close(unitmon);close(unitfield)
+    close(unitmon);close(unitfield);close(unitsteps);close(unitmass)
     if(diagnose_burr15)close(unitburr15)
     open(newunit=unitstat,file=trim(this%cfg%out_dir)//'/run_status.txt',status='replace')
     write(unitstat,'(a,i0)') 'status=',finstatus
@@ -706,9 +793,52 @@ contains
     write(unitstat,'(a,i0)') 'last_rejection_status=',lastcode
     call cpu_time(wall1)
     write(unitstat,'(a,es24.16)') 'cpu_seconds=',wall1-wall0
+    call system_clock(clock_now)
+    if(clock_rate>0)write(unitstat,'(a,es24.16)') 'wall_seconds=',real(clock_now-clock_start,wp)/real(clock_rate,wp)
+    write(unitstat,'(a,i0)') 'newton_iterations_total=',newton_iterations
+    write(unitstat,'(a,i0)') 'jacobian_evaluations_total=',jacobian_evaluations
+    write(unitstat,'(a,i0)') 'residual_evaluations_total=',residual_evaluations
+    write(unitstat,'(a,i0)') 'linear_solves_total=',linear_solves
+    write(unitstat,'(a,i0)') 'backtrack_trials_total=',backtrack_trials
+    write(unitstat,'(a,i0)') 'prepare_calls_total=',prepare_calls
     close(unitstat)
     if(present(status))status=finstatus
   contains
+    subroutine mass_inventory(state,mass)
+      real(wp),intent(in)::state(:,:)
+      real(wp),intent(out)::mass(2,3)
+      integer::phase
+      do phase=1,2
+        mass(phase,1)=sum(state(lo:hi,phase)*this%cfg%cell_width(lo:hi))*mass_scale
+        mass(phase,2)=sum(state(lo:ib,phase)*this%cfg%cell_width(lo:ib))*mass_scale
+        mass(phase,3)=sum(state(ib+1:hi,phase)*this%cfg%cell_width(ib+1:hi))*mass_scale
+      enddo
+    end subroutine
+    subroutine capture_mass_residual(residual)
+      real(wp),intent(in)::residual(:,:)
+      integer::phase,np
+      np=this%cfg%N_pipe
+      ! Preserve the residual of the assembly that actually met tol_res.
+      ! This is a signed defect in kg, not a corrected conservation balance.
+      do phase=1,2
+        mass_residual(phase,1)=sum(residual(phase,:)*this%cfg%cell_width(lo:hi))*mass_scale
+        mass_residual(phase,2)=sum(residual(phase,1:np)*this%cfg%cell_width(lo:ib))*mass_scale
+        mass_residual(phase,3)=sum(residual(phase,np+1:n)*this%cfg%cell_width(ib+1:hi))*mass_scale
+      enddo
+    end subroutine
+    subroutine write_mass_record(dts,residual_norm,flux_status)
+      real(wp),intent(in)::dts,residual_norm
+      integer,intent(in)::flux_status
+      real(wp)::mass(2,3),error(2,3)
+      call mass_inventory(U,mass)
+      error(:,1)=mass(:,1)-mass0(:,1)-in_sum+out_sum
+      error(:,2)=mass(:,2)-mass0(:,2)-in_sum+base_sum(:,1)
+      error(:,3)=mass(:,3)-mass0(:,3)-base_sum(:,2)+out_sum
+      write(unitmass,'(i0,3(",",es24.16),",",i0,",",*(es24.16,:,","))') &
+        step,tcur*this%cfg%omega_t,dts,residual_norm,flux_status,mass, &
+        accepted_in*massflow_scale,accepted_out*massflow_scale,accepted_base*massflow_scale, &
+        in_sum,out_sum,base_sum,in_abs,out_abs,base_abs,error,step_balance,mass_residual,mass_residual_sum
+    end subroutine
     subroutine write_rejected_state()
       integer::ju,ii
       open(newunit=ju,file=trim(this%cfg%out_dir)//'/last_rejected_state.dat',status='replace')
@@ -734,6 +864,17 @@ contains
         call this%face_pair(U(ib,:),U(ib+1,:),thetav(ib),thetav(ib+1),baseflux,baseplus,cc, &
           blocking_active=blocked,junction_trace=trace,left_cell=ib)
       endif
+      if(step==0)then
+        if(cc==0)then
+          accepted_base(:,1)=baseflux(:2);accepted_base(:,2)=baseplus(:2)
+        else
+          initial_flux_status=2000+cc
+        endif
+      else
+        ! A later failed trial may have overwritten fout or the lagged cache.
+        ! Report only the phase fluxes that advanced the accepted state.
+        baseflux(:2)=accepted_base(:,1)
+      endif
       massflow_scale=this%cfg%omega_rho*this%cfg%omega_u*this%cfg%AREA
       do k=1,4
         ii=indices(k)
@@ -750,10 +891,11 @@ contains
       rgout=this%cfg%nPs/this%cfg%nCg**2
       write(unitmon,'(*(es24.16,:,","))') tcur*this%cfg%omega_t,dts,pr(4,:)*this%cfg%omega_P, &
         this%cfg%nPs*this%cfg%omega_P,pr(1,2:4), &
-        fout(1)/rlout*this%cfg%omega_u,fout(2)/rgout*this%cfg%omega_u, &
-        fout(:2)*this%cfg%omega_rho*this%cfg%omega_u*this%cfg%AREA, &
+        accepted_out(1)/rlout*this%cfg%omega_u,accepted_out(2)/rgout*this%cfg%omega_u, &
+        accepted_out*this%cfg%omega_rho*this%cfg%omega_u*this%cfg%AREA, &
         inventory,mpi,mr,in_sum,out_sum,err,real(nit,wp),real(rej,wp),baseflux(:2)*massflow_scale, &
-        trace(1)*this%cfg%omega_P,trace(4:5),trace(6)*massflow_scale,merge(1.0_wp,0.0_wp,blocked),1-pr(1,3),1-pr(1,4)
+        trace(1)*this%cfg%omega_P,trace(4:5),trace(6)*massflow_scale,merge(1.0_wp,0.0_wp,blocked),1-pr(1,3),1-pr(1,4), &
+        accepted_in*massflow_scale,in_abs,out_abs,base_sum(:,1),base_abs(:,1),base_sum(:,2),base_abs(:,2)
       next_output=tcur*this%cfg%omega_t+this%cfg%output_interval_s
     end subroutine
     subroutine write_field()
