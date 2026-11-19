@@ -5,6 +5,9 @@ program test_chexal_junction
   use module_config,only:sim_config_t
   use module_simulate_pipe_riser,only:pipeline_riser_simulator_t
   use module_steady_state,only:solve_alpha_from_superficials
+  use module_boundary_trace,only:BC_DATA_REQUIRED,BC_SPECTRUM_INVALID
+  use module_jacobian,only:DFduj
+  use module_lapack_small,only:dgeev_3x3
   use module_boundary_conditions,only:boundary_flux
   use module_closure_law,only:lei_fechamento_or_ndim_simp
   use module_chexal_1992,only:CHEXAL_DOMAIN
@@ -113,7 +116,11 @@ program test_chexal_junction
     do k=-1,1
       cfg%nPs=p*(1+real(k,wp)*1e-4_wp)
       call boundary_flux(state,theta,cfg,.false.,f,code,bc)
-      call check(code==0,'vertical CC outlet selects and continues explicit source branch')
+      block
+      integer::boundary_status,jstat
+      real(wp)::jacobian(3,3),er(3),ei(3),ev(3,3)
+      boundary_status=code
+      call check(code==0.or.code==BC_DATA_REQUIRED.or.code==BC_SPECTRUM_INVALID,'vertical CC candidate has explicit boundary qualification status')
       call check(f(1)<0.and.f(2)>0,'vertical outlet keeps falling liquid and rising gas')
       call near(bc(3),state(3),1e-13_wp,'pressure outlet retains total momentum')
       phase_ul=f(1)/bc(1);phase_ug=f(2)/bc(2)
@@ -124,10 +131,23 @@ program test_chexal_junction
       call lei_fechamento_or_ndim_simp(a,rl,rg,phase_ul,phase_ug,theta,cfg%D_H,cfg%AREA,cfg%eps,cfg%G, &
         cfg%mu_l,cfg%mu_g,cfg%sigma,cfg%omega_u,cfg%omega_rho,cfg%tol,residual,model,code)
       call check(code==0.and.abs(residual*cfg%omega_u)<2e-9_wp,'outlet satisfies selected Chexal branch')
+      jacobian=DFduj(a,rl,rg,phase_ul,phase_ug,cfg%nCl,cfg%nCg,theta,cfg%D_H,cfg%AREA,cfg%eps,cfg%G, &
+        cfg%mu_l,cfg%mu_g,cfg%sigma,cfg%omega_u,cfg%omega_rho,cfg%omega_P,cfg%tol,status=jstat,closure_id=model)
+      if(jstat==0)call dgeev_3x3(jacobian,er,ei,ev,jstat)
+      if(jstat==0.and.all(ei==0).and.all(er/=0))then
+        if(sum(merge(1,0,er<0))==1)then
+          call check(boundary_status==0,'one incoming characteristic supplied by pressure')
+        else
+          call check(boundary_status==BC_DATA_REQUIRED,'CC closure success does not supply missing reservoir data')
+        endif
+      else
+        call check(boundary_status==BC_SPECTRUM_INVALID,'unqualified spectrum is an explicit boundary failure')
+      endif
       if(k==0)then
         call near(f(1),gl,2e-9_wp,'vertical CC equal-pressure liquid round trip')
         call near(f(2),gg,2e-9_wp,'vertical CC equal-pressure gas round trip')
       endif
+      end block
     enddo
   enddo
   write(*,'(a,i0,a)')'PASS ',count,' Chexal junction checks'

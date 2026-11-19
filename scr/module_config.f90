@@ -51,6 +51,13 @@ module module_config
     real(wp) :: field_interval_s = 30.0_wp
     real(wp) :: perturbation_amplitude = 0.01_wp
 
+    ! Reduced absent-inventory operator is opt-in; historical mixed path is unchanged.
+    real(wp)::checkpoint_interval_s=60._wp
+    character(16)::boundary_method='LEGACY'
+    character(16)::single_phase_mode='STRICT',source_scheme='POINT'
+    real(wp)::CA=0
+    real(wp),allocatable::z_faces(:),z_quadrature(:,:) ! SI geometry, not a pressure correction
+
     ! --- geometry/physics
     real(wp) :: Lr = 0.0_wp
     real(wp) :: Lp = 0.0_wp

@@ -18,7 +18,7 @@ module module_steady_state
   integer,parameter,public :: STEADY_INTEGRATION=24,STEADY_PHASE_REQUIRED=25
   integer,parameter,public :: PHASE_AUTO=0,PHASE_LIQUID_ONLY=1,PHASE_GAS_ONLY=2
   public :: malha_progressiva,fun_dpds,steady_state_ndim_simp,EstadoEstacionario_ndim_simp
-  public :: solve_alpha_from_superficials
+  public :: solve_alpha_from_superficials,state_at ! same physical state for boundary stationary continuation
 contains
   pure real(wp) function nan_value() result(v)
     v=ieee_value(0.0_wp,ieee_quiet_nan)

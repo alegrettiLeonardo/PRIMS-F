@@ -5,6 +5,7 @@ program main
   use module_feed_contracts,only:feed_contract_t,FLOW_UNSET,gas_eos_coefficient,resolve_feed
   use module_config,           only: sim_config_t
   use module_solver_utils,     only: fluid_dynamics_t
+  use module_single_phase,only:configure_pipe_riser_elevation,global_single_phase,initialize_single_phase_hydrostatic
   use module_catenary,         only: solve_A
   use module_steady_state,     only: EstadoEstacionario_ndim_simp
   use module_boundary_conditions, only: apply_ghost_cells
@@ -49,6 +50,8 @@ program main
   real(wp)           :: T_scenario, time_phys
   real(wp)           :: gamma_g
   character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model
+  character(len=16)::boundary_method
+  character(len=16)::single_phase_mode,source_scheme
   character(len=16)::liquid_flow_basis
   type(feed_contract_t)::feed
   integer::feed_status,initialization_iteration
@@ -57,6 +60,7 @@ program main
   character(len=20) :: dissipation_mode
   character(len=16) :: newton_globalization
   character(len=32) :: pipe_regime_mode
+  real(wp)::checkpoint_interval_s
   real(wp) :: Cg_fixed, P_standard, T_standard, dt_min_s, dt_max_s, dt_start_s
   real(wp) :: perturbation_amplitude, output_interval_s, field_interval_s
   integer(i4) :: n_riser, closure_riser, closure_pipe, sim_status, steady_status, output_closure, output_status
@@ -81,8 +85,8 @@ program main
                     gamma_g, max_iter, max_workers, save_every, newton_max, regime, use_muscl, out_dir, jac_dissipation_fd, jac_dissipation_fd_eps, debug_dfduj_check, debug_dfduj_cell, debug_dfduj_eps, &
                     pb_dp_on, pb_dp_off, &
                     stab_si_on, stab_si_off, stab_use_hysteresis, &
-                    gas_eos, gas_flow_basis, liquid_flow_basis, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
-                    dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode, newton_globalization
+                    gas_eos, gas_flow_basis, liquid_flow_basis, single_phase_mode, source_scheme, boundary_method, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
+                    checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode, newton_globalization
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
   type(pipeline_riser_simulator_t) :: sim
@@ -206,6 +210,8 @@ program main
   gas_eos = 'ISOTHERMAL'
   gas_flow_basis = 'STANDARD'
   liquid_flow_basis = 'LEGACY'
+  single_phase_mode='STRICT';source_scheme='POINT';boundary_method='LEGACY'
+  checkpoint_interval_s=60
   Cg_fixed = 343.0_wp
   P_standard = 101300.0_wp
   T_standard = 293.15_wp
@@ -402,6 +408,9 @@ program main
   cfg%field_interval_s = field_interval_s
   cfg%perturbation_amplitude = perturbation_amplitude
 
+  cfg%checkpoint_interval_s=checkpoint_interval_s
+  cfg%boundary_method=boundary_method
+  cfg%single_phase_mode=single_phase_mode;cfg%source_scheme=source_scheme;cfg%CA=CA
   cfg%Lp   = Lp
   cfg%Lr   = Lr
   cfg%beta = beta_rad
@@ -495,6 +504,17 @@ program main
   end do
   cfg%cell_width(:nd)=cfg%cell_width(nd+1)
   cfg%cell_width(N-nd+1:)=cfg%cell_width(N-nd)
+  if(trim(boundary_method)/='LEGACY'.and.trim(boundary_method)/='STEADY_TRACE')error stop 'Unknown boundary_method'
+  if(trim(single_phase_mode)/='STRICT'.and.trim(single_phase_mode)/='REDUCED')error stop 'Unknown single_phase_mode'
+  if(trim(source_scheme)/='POINT'.and.trim(source_scheme)/='HYDROSTATIC')error stop 'Unknown source_scheme'
+  call configure_pipe_riser_elevation(cfg)
+  if(source_scheme=='HYDROSTATIC')then
+    if(global_single_phase(U,cfg)==0)error stop 'HYDROSTATIC currently requires a declared global single phase; no mixed-flow extension'
+    if(cfg%mul==0.and.cfg%mug==0)then
+      call initialize_single_phase_hydrostatic(cfg,global_single_phase(U,cfg),U)
+      call apply_ghost_cells(U,nd);cfg%U0=U
+    endif
+  endif
   open(newunit=ios,file=trim(out_dir)//'/run_metadata.txt',status='replace')
   write(ios,nml=PARAMS)
   write(ios,'(a,8(es24.16,1x))') 'Lr,CA,Cg,Gl,Gg,omega_P,omega_rho,omega_u: ', &
