@@ -23,6 +23,7 @@ program test_single_phase
  enddo
  dt=.001_wp
  do phase=1,2
+  cfg%outlet_reservoir_phase=phase
   c2=1498._wp**2
   rhot=1+(cfg%nPs-1)/cfg%nCl**2
   if(phase==2)then
@@ -78,8 +79,15 @@ program test_single_phase
   enddo
   call single_phase_face(u,u,cfg,phase,7,f,st)
   call check(st==0.and.f(phase)<0,'negative signed flux is not inadmissible mass')
+  cfg%outlet_reservoir_phase=0
   call single_phase_boundary(u,cfg,phase,.false.,f,st,ub)
-  call check(st==0.and.f(phase)<0,'subsonic pure backflow with declared phase')
+  call check(st==PHASE_DATA_REQUIRED,'unknown external composition cannot be inferred from domain inventory')
+  cfg%outlet_reservoir_phase=3-phase
+  call single_phase_boundary(u,cfg,phase,.false.,f,st)
+  call check(st==PHASE_TRANSITION_REQUIRED,'different reservoir phase needs conservative transition model')
+  cfg%outlet_reservoir_phase=phase
+  call single_phase_boundary(u,cfg,phase,.false.,f,st)
+  call check(st==0.and.f(phase)<0,'subsonic pure backflow with explicitly declared reservoir phase')
   u(:,3)=-2*sqrt(c2)*u(:,phase)
   call single_phase_boundary(u,cfg,phase,.false.,f,st)
   call check(st==PHASE_DATA_REQUIRED,'supersonic incoming boundary requires more data')

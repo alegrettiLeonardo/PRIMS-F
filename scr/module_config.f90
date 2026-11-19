@@ -55,6 +55,7 @@ module module_config
     real(wp)::checkpoint_interval_s=60._wp
     character(16)::boundary_method='LEGACY'
     character(16)::single_phase_mode='STRICT',source_scheme='POINT'
+    integer::outlet_reservoir_phase=0 ! 0 unspecified; 1 liquid; 2 gas (pure reduced model only)
     real(wp)::CA=0
     real(wp),allocatable::z_faces(:),z_quadrature(:,:) ! SI geometry, not a pressure correction
 

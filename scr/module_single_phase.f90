@@ -251,6 +251,13 @@ contains
     if(abs(vb)>=c)then
       status=PHASE_DATA_REQUIRED;return
     endif
+    if(.not.inlet.and.vb<0)then
+      if(cfg%outlet_reservoir_phase==0)then
+        status=PHASE_DATA_REQUIRED;return
+      else if(cfg%outlet_reservoir_phase/=phase)then
+        status=PHASE_TRANSITION_REQUIRED;return
+      endif
+    endif
     call physical_flux([rhob,rhob*vb],cfg,phase,val,status);if(status/=0)return
     if(inlet)then
       ! Use the imposed mass component exactly; velocity is its same state.

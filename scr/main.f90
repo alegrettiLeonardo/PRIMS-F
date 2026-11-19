@@ -51,6 +51,7 @@ program main
   real(wp)           :: gamma_g
   character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model
   character(len=16)::boundary_method
+  integer::outlet_reservoir_phase
   character(len=16)::single_phase_mode,source_scheme
   character(len=16)::liquid_flow_basis
   type(feed_contract_t)::feed
@@ -85,7 +86,7 @@ program main
                     gamma_g, max_iter, max_workers, save_every, newton_max, regime, use_muscl, out_dir, jac_dissipation_fd, jac_dissipation_fd_eps, debug_dfduj_check, debug_dfduj_cell, debug_dfduj_eps, &
                     pb_dp_on, pb_dp_off, &
                     stab_si_on, stab_si_off, stab_use_hysteresis, &
-                    gas_eos, gas_flow_basis, liquid_flow_basis, single_phase_mode, source_scheme, boundary_method, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
+                    gas_eos, gas_flow_basis, liquid_flow_basis, single_phase_mode, source_scheme, outlet_reservoir_phase, boundary_method, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
                     checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode, newton_globalization
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
@@ -211,6 +212,7 @@ program main
   gas_flow_basis = 'STANDARD'
   liquid_flow_basis = 'LEGACY'
   single_phase_mode='STRICT';source_scheme='POINT';boundary_method='LEGACY'
+  outlet_reservoir_phase=0
   checkpoint_interval_s=60
   Cg_fixed = 343.0_wp
   P_standard = 101300.0_wp
@@ -411,6 +413,8 @@ program main
   cfg%checkpoint_interval_s=checkpoint_interval_s
   cfg%boundary_method=boundary_method
   cfg%single_phase_mode=single_phase_mode;cfg%source_scheme=source_scheme;cfg%CA=CA
+  cfg%outlet_reservoir_phase=outlet_reservoir_phase
+  if(outlet_reservoir_phase<0.or.outlet_reservoir_phase>2)error stop 'Unknown outlet_reservoir_phase'
   cfg%Lp   = Lp
   cfg%Lr   = Lr
   cfg%beta = beta_rad

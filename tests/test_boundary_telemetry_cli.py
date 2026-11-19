@@ -71,7 +71,7 @@ def main():
     a.output.mkdir(parents=True,exist_ok=False)
     cases=[('mass',{}),('local',dict(liquid_flow_basis="'LOCAL_VOLUME'",gas_flow_basis="'LOCAL_VOLUME'")),
        ('source',dict(boundary_method="'STEADY_TRACE'")),
-       ('hydro',dict(jl=0,jg=0,mul=0,mug=0,single_phase_mode="'REDUCED'",source_scheme="'HYDROSTATIC'",perturbation_amplitude=0)),
+       ('hydro',dict(jl=0,jg=0,mul=0,mug=0,single_phase_mode="'REDUCED'",source_scheme="'HYDROSTATIC'",outlet_reservoir_phase=1,perturbation_amplitude=0)),
        ('limited',dict(max_iter=2))]
     results=[check_case(a.binary.resolve(),a.output.resolve(),n,e) for n,e in cases]
     (a.output/'summary.json').write_text(json.dumps(results,indent=2)+'\n')
