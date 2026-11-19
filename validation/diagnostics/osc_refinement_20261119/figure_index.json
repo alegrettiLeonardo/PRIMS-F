@@ -1,0 +1,88 @@
+{
+  "inputs": {
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/spatial_first_triplet_v1.json": "18ed9352c60a7a65b4ecaeada250459fe03018a228dddfb7390fb50963ef14eb",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/spatial_second_triplet_v1.json": "fd805904ddb548fe7dd2f8ea2d7d4d77530fe0205fc0c8151283eb0a503d7ebb",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/temporal_triplet_v1.json": "286b80b095768d7f2c33d367b01d63c58be8d8befe0002c37e7953960132f62b"
+  },
+  "script_sha256": "3ec53fde049778df368a3319d29f8108f2e5925ea30ac108b2a6920cda67dc06",
+  "figure_sha256": "e6a2a66b2acb4a280a2ad1fe0cbe1af8320924941db3eec35cffda9109872599",
+  "data": [
+    {
+      "observable": "period_s",
+      "h": [
+        1.1254901960784314,
+        0.5683168316831683,
+        0.2855721393034826,
+        0.143142144638404
+      ],
+      "spatial_values": [
+        23.108617598421368,
+        23.26644593580854,
+        23.3454945974001,
+        23.385039694329635
+      ],
+      "dt_s": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "temporal_values": [
+        23.108617598421368,
+        23.265643211963106,
+        23.344197706077647
+      ]
+    },
+    {
+      "observable": "pressure.mean_semi_amplitude_Pa",
+      "h": [
+        1.1254901960784314,
+        0.5683168316831683,
+        0.2855721393034826,
+        0.143142144638404
+      ],
+      "spatial_values": [
+        9909.017121130099,
+        12770.663814405932,
+        14011.106986342545,
+        14596.904194782208
+      ],
+      "dt_s": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "temporal_values": [
+        9909.017121130099,
+        13763.824658779346,
+        15347.388661800273
+      ]
+    },
+    {
+      "observable": "pressure.mean",
+      "h": [
+        1.1254901960784314,
+        0.5683168316831683,
+        0.2855721393034826,
+        0.143142144638404
+      ],
+      "spatial_values": [
+        266193.0753710758,
+        266550.6094889844,
+        266739.4000383976,
+        266836.2251120554
+      ],
+      "dt_s": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "temporal_values": [
+        266193.0753710758,
+        266592.7929790634,
+        266794.3795316816
+      ]
+    }
+  ],
+  "fixed_other_axis_proven_resolved": false,
+  "interpretation": "Observed discrete trends at fixed other axes. No GCI, asymptotic or experimental validation claimed."
+}

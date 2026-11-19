@@ -1,0 +1,20 @@
+{
+  "source_commit": "a179e51d9d63e8aeed91a94d829b5b483d107864",
+  "files_sha256": {
+    "D_SS1_manifest.json": "d1d777c5ee846ddffa2546e5ce5f166d00505da7eadea936f88c139c923697df",
+    "D_SS3_manifest.json": "fd854201770a1bb0f1869fe5a2ccfe7b22c6a19d40c53d8d7a4b1f28f9115507",
+    "README.md": "404e7e37467416c446bf62db4ff2cc6d55f557518196e6104cc16f6c450d3489",
+    "accepted_zero_updates.json": "acfea7567e96935ea73b8c0df25547142d33dc0f69ef35d216330316a3043a13",
+    "analyze_cycle_conservation.py": "4d4ac7e16c04a0975d60b91078de92b1f275d3ac270ca005d86855156927236b",
+    "archive.json": "c349f334dc1d54c212f10ff6fcd854a0c7c29d15ceb4fe52429c4bf6664a2a95",
+    "audit_accepted_zero_updates.py": "a8c90ea998d309c31f567c59f9264266a26dd0ea24711565c48ec21caeece033",
+    "audit_tolerance_decks.py": "922de914cab47b7eedf2448ff6b4c3e88a13f08c140f8eb47eb2c47016eb9971",
+    "balance_normalizations.json": "7e8db9b952d31611bec9b37cc1d9e19e325b32d8a11f230ae24304b4029c1f4c",
+    "deck_audit.json": "84aacacbe8a1c553b6e30efe22d092e3ada1ec9aaf1b235b8ee36342b9037207",
+    "normalize_smoke_balances.py": "b1a9e0b4dc0f403e0cb69c587a9b2501ea13edb7d087f60ce820d2fcf8bb9d10",
+    "reference_tol8_balance_normalizations.json": "052e4a564189b92d3b6d7c438a90e7c9c057b200269148f18899b40d169f3c56",
+    "run_frozen_active_smoke_tol.py": "7721219ca1b2e63780fb335a23c5a468d67efaf1a445c93a9985d33001dc6135",
+    "summarize_frozen_active_smokes.py": "767565a233bca01fe3e3bf51fef0627257372b248c7e1a9c009c83838392e0ef",
+    "summary.json": "770b35a1d6ee2dfde55fe828526f31435489d9c182f0381ac940372ddfbc3b3e"
+  }
+}

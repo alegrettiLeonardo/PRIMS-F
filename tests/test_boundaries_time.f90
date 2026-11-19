@@ -5,6 +5,7 @@ program test_boundaries_time
   use module_find,only:pressure_fun_uj
   use module_boundary_conditions,only:boundary_flux,apply_boundary_conditions,apply_ghost_cells
   use module_time_step,only:time_integrator_t
+  use module_steady_state,only:fun_dpds
   use,intrinsic::ieee_arithmetic,only:ieee_is_finite
   implicit none
   type(sim_config_t)::cfg
@@ -23,6 +24,8 @@ program test_boundaries_time
       integer,intent(out)::ipiv(*),info
     end subroutine
   end interface
+  real(wp),parameter::lp_static=40.0_wp,lr_static=10.0_wp,ca_static=2.5_wp
+  real(wp)::s_static,gradient
   count=0
   cfg%num_dummy_cells=2;cfg%closure_pipe=2;cfg%closure_riser=2
   cfg%omega_u=1.0_wp;cfg%omega_rho=1000.0_wp;cfg%omega_P=1e5_wp
@@ -59,6 +62,10 @@ program test_boundaries_time
   p=pressure_fun_uj(bc(1),bc(2),cfg%nCg,cfg%nCl,cfg%nrho_l0,cfg%nP_l0)
   call close(p,cfg%nPs,1e-11_wp,'outlet exact prescribed pressure')
   call close(bc(3),state(3),1e-14_wp,'outlet keeps interior momentum')
+  ! A positive density below the liquid EOS vacuum limit implies invalid
+  ! absolute pressure. Exercise the guard with floating-point traps enabled.
+  call boundary_flux([.5_wp*rl,0.0_wp,0.0_wp],theta,cfg,.false.,f,st,bc)
+  call check(st==101.and..not.any(ieee_is_finite(f)),'invalid absolute interior pressure returns a status')
   do i=1,8
     u(i,:)=state
   enddo
@@ -81,6 +88,25 @@ program test_boundaries_time
   cfg%mul=0.0_wp;cfg%mug=.002_wp;state=[0.0_wp,rg,cfg%mug]
   call boundary_flux(state,-2.0_wp*acos(-1.0_wp)/180.0_wp,cfg,.true.,f,st,bc)
   call check(st==0.and.bc(1)==0.0_wp,'absent liquid and zero liquid flux use exact gas-only limit')
+  ! Static liquid is a declared inventory. An EOS pressure gradient balances
+  ! gravity, and neither pressure boundary exchanges mass in this limit.
+  cfg%mul=0.0_wp;cfg%mug=0.0_wp
+  p=cfg%nPs
+  rl=cfg%nrho_l0+(p-cfg%nP_l0)/cfg%nCl**2
+  state=[rl,0.0_wp,0.0_wp]
+  s_static=(lp_static+ca_static*tan(theta))/lr_static
+  gradient=fun_dpds(s_static,p,cfg%mul,cfg%mug,lp_static,lr_static,ca_static,0.0_wp, &
+    cfg%D_H,cfg%AREA,cfg%eps,cfg%G,cfg%nCl,cfg%nCg,cfg%nrho_l0,cfg%nP_l0, &
+    cfg%mu_l,cfg%mu_g,cfg%sigma,cfg%omega_P,cfg%omega_u,cfg%omega_rho,cfg%tol, &
+    status=st,closure_id_riser=2,section_id=2)
+  call check(st==0,'static liquid gradient admitted')
+  call close(gradient,-rl*cfg%omega_rho*cfg%G*lr_static*sin(theta)/cfg%omega_P,1e-13_wp, &
+    'hydrostatic balance with compressible liquid EOS')
+  call boundary_flux(state,theta,cfg,.false.,f,st,bc)
+  call check(st==0.and.all(f(:2)==0.0_wp).and.bc(2)==0.0_wp,'hydrostatic separator has zero mass flux')
+  call close(f(3),cfg%omega_P*p/(cfg%omega_rho*cfg%omega_u**2),1e-13_wp,'static outlet pressure flux')
+  call boundary_flux(state,-.02_wp,cfg,.true.,f,st,bc)
+  call check(st==0.and.all(f(:2)==0.0_wp).and.bc(2)==0.0_wp,'static inlet preserves absent gas')
   cfg%closure_pipe=2;cfg%mul=.5_wp;cfg%mug=.002_wp
   matrix=0.0_wp;matrix(1,2)=1e8_wp;matrix(2,1)=1e-8_wp;matrix(3,3)=3.0_wp
   dt=solver%compute_time_step_lax_wendroff(.4_wp,.2_wp,matrix,status=st)

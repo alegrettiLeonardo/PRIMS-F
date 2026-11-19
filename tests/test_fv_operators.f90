@@ -20,6 +20,7 @@ program test_fv_operators
   real(wp)::state(6,3),old(6,3),saved(6,3),r(3,4),a(3,3,4),b(3,3,4),c(3,3,4),norm,fin(3),fout(3)
   real(wp)::rt(3,4),at(3,3,4),bt(3,3,4),ct(3,3,4),n2,fi2(3),fo2(3),dR(3,4),col(3,4)
   real(wp)::up(3),um(3),vp(6),vm(6),fxp(3),fxm(3),sp(3),sm(3),tmpj(3,3),tmps(3,3),h
+  real(wp)::base_mass_flux(2,2),base_trial_flux(2,2),piece_balance,piece_residual
   integer::st,st2,count,k,m,ii,l
   count=0
   call configure()
@@ -159,7 +160,7 @@ program test_fv_operators
   old(2:5,2)=old(2:5,2)*1.001_wp
   saved=state
   dt=1e-5_wp
-  call sim%assemble(state,old,dt,r,a,b,c,norm,fin,fout,st,.true.)
+  call sim%assemble(state,old,dt,r,a,b,c,norm,fin,fout,st,.true.,base_mass_flux)
   call check(st==0,'full FV assembly status')
   call check(maxval(abs(state-saved))==0.0_wp,'assembly does not mutate physical or ghost states')
   conv=cfg%omega_rho*cfg%AREA*cfg%Lr
@@ -168,6 +169,32 @@ program test_fv_operators
     balance(k)=sum((state(2:5,k)-old(2:5,k))*cfg%cell_width(2:5))*conv+ &
       dt*cfg%omega_t*cfg%omega_rho*cfg%omega_u*cfg%AREA*(fout(k)-fin(k))
     call close(weighted(k),balance(k),1e-12_wp,'weighted phase residual telescopes in physical kg')
+  enddo
+  ! Optional telemetry must not modify assembly, and the independently
+  ! weighted residual must telescope separately on each nonuniform segment.
+  call sim%assemble(state,old,dt,rt,at,bt,ct,n2,fi2,fo2,st,.true.)
+  call check(st==0.and.maxval(abs(rt-r))==0.0_wp,'telemetry leaves residual bytes unchanged')
+  call check(maxval(abs(at-a))+maxval(abs(bt-b))+maxval(abs(ct-c))==0.0_wp, &
+    'telemetry leaves Newton blocks unchanged')
+  call check(n2==norm.and.maxval(abs(fi2-fin))+maxval(abs(fo2-fout))==0.0_wp, &
+    'telemetry leaves norm and boundary fluxes unchanged')
+  call sim%face_pair(state(3,:),state(4,:),cfg%thetav(3),cfg%thetav(4),fm,fp,st,left_cell=3)
+  call check(st==0.and.maxval(abs(base_mass_flux(:,1)-fm(:2)))==0.0_wp, &
+    'telemetry captures the exact pipe-side junction phase flux')
+  call check(maxval(abs(base_mass_flux(:,2)-fp(:2)))==0.0_wp, &
+    'telemetry captures the exact riser-side junction phase flux')
+  call sim%assemble(state,old,dt,rt,at,bt,ct,n2,fi2,fo2,st,.false.,base_trial_flux)
+  call check(st==0.and.maxval(abs(base_trial_flux-base_mass_flux))==0.0_wp, &
+    'line-search assembly captures the same phase fluxes without a Jacobian')
+  do k=1,2
+    piece_residual=sum(r(k,1:2)*cfg%cell_width(2:3))*conv
+    piece_balance=sum((state(2:3,k)-old(2:3,k))*cfg%cell_width(2:3))*conv+ &
+      dt*cfg%omega_t*cfg%omega_rho*cfg%omega_u*cfg%AREA*(base_mass_flux(k,1)-fin(k))
+    call close(piece_residual,piece_balance,1e-12_wp,'pipe phase residual telescopes with accepted interface flux')
+    piece_residual=sum(r(k,3:4)*cfg%cell_width(4:5))*conv
+    piece_balance=sum((state(4:5,k)-old(4:5,k))*cfg%cell_width(4:5))*conv+ &
+      dt*cfg%omega_t*cfg%omega_rho*cfg%omega_u*cfg%AREA*(fout(k)-base_mass_flux(k,2))
+    call close(piece_residual,piece_balance,1e-12_wp,'riser phase residual telescopes with accepted interface flux')
   enddo
   do ii=2,5
     do m=1,3

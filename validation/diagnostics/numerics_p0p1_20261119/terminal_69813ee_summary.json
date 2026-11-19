@@ -1,0 +1,77 @@
+{
+  "schema": "PRIMS-F.numerics_terminal_manifest_check.v1",
+  "frozen_head": "69813ee70551fa4a3f075919aeafc45de9693f11",
+  "binary_sha256": "7442291fd6cdc311627e79500dc5a4804813b42c7bf4daecf88b4b8b2322288a",
+  "plan_sha256": "f391442d0563f762c918bb64f433a6569bda4ca6ab944f475a22ed06b546e4f5",
+  "seal_sha256": "67a6fd473bf5347693c572386ecfea7f91e4cfaba10f3cf84392008dd507c47f",
+  "all_source_hashes_verified": 23,
+  "plan_state_literal": "PREPARED_UNSEALED",
+  "seal_verified": true,
+  "allowed_stage_enum_from_source": [
+    "BOUNDARY",
+    "BOUNDARY_JAC",
+    "CELL",
+    "FACE",
+    "NONE",
+    "RESIDUAL"
+  ],
+  "runs": {
+    "D_SS1": {
+      "manifest_sha256": "b6e0abd2d592df8fdd70c3c38394a09a4a534335294b7b9c30ae4433fe82ebfd",
+      "snapshot_sha256": "1e9629e5293c8ee55ae324b6094b0a73d46aee47b6673dda2e5ee456917f27dc",
+      "snapshot_byte_equal_to_burr15_v1": true,
+      "run_status_sha256": "223a28ed364e708798ba976b574fe40e68b3b7f1e2adf71e80f1fd59481dd44d",
+      "rejected_proposals_sha256": "c8d746515d37b4d0cbb0b6b88f17ff4dd98ee66e58b3496c6b666f1e8853ce73",
+      "sidecar_sha256": "fb64125b73a57edf824dc9f2421ad00367351c25e7162e036fe0f678c2a01915",
+      "reached_time_s": 78.57178847673931,
+      "accepted_steps": 662,
+      "rejected_steps": 24,
+      "termination_reason": "NEWTON_GLOBALIZATION_FAILURE",
+      "terminal_status": 6000,
+      "iteration": 13,
+      "backtrack": 18,
+      "lambda": 7.62939453125e-06,
+      "full_jacobian": "T",
+      "terminal_proposal_status": 3012,
+      "terminal_proposal_index": 53,
+      "terminal_proposal_stage": "FACE",
+      "terminal_proposal_norm": null,
+      "terminal_18_consistent": true,
+      "rejected_proposals_rows": 2353,
+      "all_enum_and_index_checks_passed": true,
+      "stage_status_counts": {
+        "('NONE', 0)": 173,
+        "('FACE', 3012)": 2180
+      },
+      "raw_run": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_2400/runs/D_SS1"
+    },
+    "D_SS3": {
+      "manifest_sha256": "707ceef69ae0bc5d247bdfceb2fe24f15b7f153517dd7425fb01108edf720982",
+      "snapshot_sha256": "e2cafe7245ac084fe8b8db764d4d19bbc6d4dc6e0f891ec4a58ad68f054fac3c",
+      "snapshot_byte_equal_to_burr15_v1": true,
+      "run_status_sha256": "d21476a2eb07f1b50e15db491415f774a8cd5e17b036ca7fa612424c4d6d3325",
+      "rejected_proposals_sha256": "be46ebf5df3acc09b35b2fe33a7d8ac554d9ea10a39846ee2d17ab8b77a91047",
+      "sidecar_sha256": "314e5cdeb339015344f013bc14f0e57763a283c1ac170600862e404fce886775",
+      "reached_time_s": 97.1318523387001,
+      "accepted_steps": 809,
+      "rejected_steps": 24,
+      "termination_reason": "NEWTON_GLOBALIZATION_FAILURE",
+      "terminal_status": 6000,
+      "iteration": 8,
+      "backtrack": 18,
+      "lambda": 7.62939453125e-06,
+      "full_jacobian": "T",
+      "terminal_proposal_status": 1017,
+      "terminal_proposal_index": 69,
+      "terminal_proposal_stage": "CELL",
+      "terminal_proposal_norm": null,
+      "terminal_18_consistent": true,
+      "rejected_proposals_rows": 2288,
+      "all_enum_and_index_checks_passed": true,
+      "stage_status_counts": {
+        "('CELL', 1017)": 2288
+      },
+      "raw_run": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_2400/runs/D_SS3"
+    }
+  }
+}

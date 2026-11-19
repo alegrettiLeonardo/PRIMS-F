@@ -455,13 +455,13 @@ contains
   end subroutine
 
   real(wp) function fun_dpds(s,p,mul,mug,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
-      mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,status,closure_id_riser,section_id) result(dpds)
+      mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,status,closure_id_riser,section_id,closure_id_pipe) result(dpds)
     !! Optional section_id forces the pipe/riser trace at the shared junction;
     !! 1=pipe and2=riser. It never changes the closure's model definition.
     real(wp),intent(in)::s,p,mul,mug,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
     real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol
     integer,intent(out),optional::status
-    integer,intent(in),optional::closure_id_riser,section_id
+    integer,intent(in),optional::closure_id_riser,section_id,closure_id_pipe
     real(wp)::theta,theta_s,sr,pip,pig,pif,rl,rg,alpha,ul,ug,jl,jg,kin
     real(wp)::rl1,rg1,a1,ul1,ug1,jl1,jg1,kp,km,hp,ht,delta,h_theta,source
     real(wp)::rm,j,mu,re,f,fric,scale,geometry_tol,theta_other
@@ -480,6 +480,7 @@ contains
     if(present(closure_id_riser))cid=closure_id_riser
     if(sec==1)then
       theta=-beta;theta_s=0.0_wp;cid=STRATIFIED
+      if(present(closure_id_pipe))cid=closure_id_pipe
     else
       ! Compute the coordinate relative to the exact shared mesh face first.
       ! A sub-ulp roundoff excursion must not select the downhill C4 trace of
@@ -590,19 +591,19 @@ contains
   subroutine steady_state_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G, &
       Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol, &
       vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
-      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures)
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe)
     integer(i4),intent(in)::N
     real(wp),intent(in)::mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
     real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol
     real(wp),allocatable,intent(out)::vns(:),vnp(:),nrhogv(:),nrholv(:),alphav(:),nugv(:),nulv(:)
     real(wp),allocatable,intent(out)::thetav(:),njlv(:),njgv(:)
     real(wp),intent(in),optional::mesh_ratio
-    integer,intent(in),optional::n_riser,closure_id_riser
+    integer,intent(in),optional::n_riser,closure_id_riser,closure_id_pipe
     real(wp),allocatable,intent(out),optional::face_positions(:),face_pressures(:)
     integer,intent(out),optional::status
     real(wp),allocatable::faces(:),pf(:)
     real(wp)::ratio,s,p,theta,kin,rtol
-    integer::nb,na,nt,i,sec,cid,iriser,ierr
+    integer::nb,na,nt,i,sec,cid,iriser,ipipe,ierr
     if(present(status))status=STEADY_INVALID
     if(.not.all(ieee_is_finite([Ps,Lp,Lr,CA,tol])))return
     if(Ps<=0.0_wp.or.Lp<0.0_wp.or.Lr<=0.0_wp.or.CA<=0.0_wp.or.tol<=0.0_wp)return
@@ -614,6 +615,8 @@ contains
     if(present(mesh_ratio))ratio=mesh_ratio
     iriser=BENDIKSEN
     if(present(closure_id_riser))iriser=closure_id_riser
+    ipipe=STRATIFIED
+    if(present(closure_id_pipe))ipipe=closure_id_pipe
     call malha_progressiva((Lp+Lr)/Lr,Lp/Lr,nb,na,ratio,ratio,vns,faces,ierr)
     if(ierr/=0)then
       if(present(status))status=ierr
@@ -629,7 +632,7 @@ contains
     do i=nt,1,-1
       sec=2;cid=iriser
       if(i<=nb)then
-        sec=1;cid=STRATIFIED
+        sec=1;cid=ipipe
       endif
       call advance(vns(i),sec,s,p,ierr)
       if(ierr/=0)exit
@@ -719,24 +722,24 @@ contains
       real(wp),intent(out)::value
       integer,intent(out)::code
       value=fun_dpds(ss,pp,mul,mug,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
-        mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,code,iriser,section)
+        mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,code,iriser,section,ipipe)
     end subroutine
   end subroutine
 
   subroutine EstadoEstacionario_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
       mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
-      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures)
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe)
     integer(i4),intent(in)::N
     real(wp),intent(in)::mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
     real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol
     real(wp),allocatable,intent(out)::vns(:),vnp(:),nrhogv(:),nrholv(:),alphav(:),nugv(:),nulv(:)
     real(wp),allocatable,intent(out)::thetav(:),njlv(:),njgv(:)
     real(wp),intent(in),optional::mesh_ratio
-    integer,intent(in),optional::n_riser,closure_id_riser
+    integer,intent(in),optional::n_riser,closure_id_riser,closure_id_pipe
     real(wp),allocatable,intent(out),optional::face_positions(:),face_pressures(:)
     integer,intent(out),optional::status
     call steady_state_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
       mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
-      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures)
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe)
   end subroutine
 end module module_steady_state

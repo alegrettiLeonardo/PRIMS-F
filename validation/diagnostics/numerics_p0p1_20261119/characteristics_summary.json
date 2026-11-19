@@ -1,0 +1,1213 @@
+{
+  "kind": "offline frozen 9f2ed21 operator audit",
+  "runs": {
+    "D_SS1_fixed": {
+      "states": [
+        {
+          "name": "inlet_interior",
+          "profile": 1,
+          "cell": 3,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.5599344425409956,
+            "rho_l_kg_m3": 997.1274756571538,
+            "rho_g_kg_m3": 2.3389972252694755,
+            "p_Pa": 275180.6845557285,
+            "ul_m_s": 1.2050098213520595,
+            "ug_m_s": 0.2095292616237355
+          },
+          "eigenvalues_m_s": [
+            -254.86167110336885,
+            1.617977723602349,
+            256.1587675849813
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 8.520545846769729e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 2,
+          "phase_flux_constraints_projected_singular_values": [
+            0.7214491059181791,
+            0.16125036862361256
+          ],
+          "jl_relative_to_prescribed_volume_change": 0.0005345637299423167
+        },
+        {
+          "name": "inlet_boundary",
+          "profile": 1,
+          "cell": 3,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.5599286489659063,
+            "rho_l_kg_m3": 997.1274756571538,
+            "rho_g_kg_m3": 2.3389972252694755,
+            "p_Pa": 275180.6845557285,
+            "ul_m_s": 1.2042565787677852,
+            "ug_m_s": 0.10112718999778116
+          },
+          "eigenvalues_m_s": [
+            -246.6819849006359,
+            1.6153988828195465,
+            247.88841319218017
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.3614920804054252e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 2,
+          "phase_flux_constraints_projected_singular_values": [
+            0.7618258600065051,
+            0.1594020858717646
+          ],
+          "jl_relative_to_prescribed_volume_change": -7.769884899122559e-05
+        },
+        {
+          "name": "outlet_interior",
+          "profile": 1,
+          "cell": 104,
+          "closure": 3,
+          "status": 0,
+          "angle": 1.3324674585464422,
+          "primitive_SI": {
+            "alpha": 0.26187785078191333,
+            "rho_l_kg_m3": 997.0983322173323,
+            "rho_g_kg_m3": 1.783123435158366,
+            "p_Pa": 209782.6890229466,
+            "ul_m_s": 0.46693305513009353,
+            "ug_m_s": 0.9775320517562892
+          },
+          "eigenvalues_m_s": [
+            -33.53700096279394,
+            0.9311806228625035,
+            34.51346536459093
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.8303435782735678e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 1,
+          "pressure_constraint_projected_abs": [
+            4.0680920539961874e-05
+          ]
+        },
+        {
+          "name": "outlet_boundary",
+          "profile": 1,
+          "cell": 104,
+          "closure": 3,
+          "status": 0,
+          "angle": 1.3324674585464422,
+          "primitive_SI": {
+            "alpha": 0.26187785078191333,
+            "rho_l_kg_m3": 997.0975377940503,
+            "rho_g_kg_m3": 1.76797082848133,
+            "p_Pa": 207999.99999999997,
+            "ul_m_s": 0.46693866916200544,
+            "ug_m_s": 0.977577329377756
+          },
+          "eigenvalues_m_s": [
+            -33.39253289776821,
+            0.9312279419865325,
+            34.36902198687045
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 2.64413228321736e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 1,
+          "pressure_constraint_projected_abs": [
+            4.0510367115150355e-05
+          ]
+        },
+        {
+          "name": "junction_left_cell",
+          "profile": 1,
+          "cell": 53,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.559977646601362,
+            "rho_l_kg_m3": 997.1303555142949,
+            "rho_g_kg_m3": 2.393926811958527,
+            "p_Pa": 281643.0955001087,
+            "ul_m_s": 1.2037204233520833,
+            "ug_m_s": 0.05307837224270139
+          },
+          "eigenvalues_m_s": [
+            -243.50005300747657,
+            1.6137222365797286,
+            244.66810963440565
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 3.159087814165461e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_right_cell",
+          "profile": 1,
+          "cell": 54,
+          "closure": 3,
+          "status": 0,
+          "angle": 0.04073129559801582,
+          "primitive_SI": {
+            "alpha": 0.0186713499707613,
+            "rho_l_kg_m3": 997.1303809344474,
+            "rho_g_kg_m3": 2.39441166880892,
+            "p_Pa": 281700.13842370064,
+            "ul_m_s": 0.5213825496102112,
+            "ug_m_s": 0.8990138088003331
+          },
+          "eigenvalues_m_s": [
+            -123.33001440696614,
+            0.8968439026584606,
+            124.37180150395953
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.553423093747668e-20,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_mapped_right",
+          "profile": 1,
+          "cell": 54,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.5710627536431477,
+            "rho_l_kg_m3": 997.1303809344474,
+            "rho_g_kg_m3": 2.3944116688089205,
+            "p_Pa": 281700.13842370064,
+            "ul_m_s": 1.1928263117820435,
+            "ug_m_s": 0.02939397000794025
+          },
+          "eigenvalues_m_s": [
+            -244.70825723096252,
+            1.6033709819532829,
+            245.82869232481696
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.550248326145618e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_left_trace",
+          "profile": 1,
+          "cell": 53,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.5599720037852973,
+            "rho_l_kg_m3": 997.1303885460127,
+            "rho_g_kg_m3": 2.3945568496670964,
+            "p_Pa": 281717.21880648425,
+            "ul_m_s": 1.2033022987326314,
+            "ug_m_s": 7.1203017564244335e-09
+          },
+          "eigenvalues_m_s": [
+            -239.9232363761633,
+            1.6123153473381888,
+            241.04949184712527
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 9.76219634511993e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_right_trace",
+          "profile": 1,
+          "cell": 54,
+          "closure": 3,
+          "status": 0,
+          "angle": 0.0,
+          "primitive_SI": {
+            "alpha": 4.46778767565969e-09,
+            "rho_l_kg_m3": 997.1303885460127,
+            "rho_g_kg_m3": 2.394556849670019,
+            "p_Pa": 281717.218806828,
+            "ul_m_s": 0.5294867017175008,
+            "ug_m_s": 0.892311756858383
+          },
+          "eigenvalues_m_s": [
+            -1497.4439421254608,
+            0.8923117563693922,
+            1498.502915418376
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 2.356924582668422e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "inlet_interior",
+          "profile": 2,
+          "cell": 3,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.5599344425407339,
+            "rho_l_kg_m3": 997.1274756571636,
+            "rho_g_kg_m3": 2.3389972254558997,
+            "p_Pa": 275180.68457766116,
+            "ul_m_s": 1.205009821350981,
+            "ug_m_s": 0.20952926147403791
+          },
+          "eigenvalues_m_s": [
+            -254.861671092127,
+            1.6179777235980106,
+            256.15876757361303
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.145375117659321e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 2,
+          "phase_flux_constraints_projected_singular_values": [
+            0.7214491059703723,
+            0.16125036862041456
+          ],
+          "jl_relative_to_prescribed_volume_change": 0.0005345637296416683
+        },
+        {
+          "name": "inlet_boundary",
+          "profile": 2,
+          "cell": 3,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.5599286489657832,
+            "rho_l_kg_m3": 997.1274756571636,
+            "rho_g_kg_m3": 2.3389972254559,
+            "p_Pa": 275180.68457766116,
+            "ul_m_s": 1.2042565787674369,
+            "ug_m_s": 0.10112718998968011
+          },
+          "eigenvalues_m_s": [
+            -246.6819849006736,
+            1.61539888281807,
+            247.8884131922131
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 2.4213539921029856e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 2,
+          "phase_flux_constraints_projected_singular_values": [
+            0.7618258600072427,
+            0.15940208587195517
+          ],
+          "jl_relative_to_prescribed_volume_change": -7.769884900066248e-05
+        },
+        {
+          "name": "outlet_interior",
+          "profile": 2,
+          "cell": 104,
+          "closure": 3,
+          "status": 0,
+          "angle": 1.3324674585464422,
+          "primitive_SI": {
+            "alpha": 0.2618778515450632,
+            "rho_l_kg_m3": 997.0983322173302,
+            "rho_g_kg_m3": 1.7831234351140066,
+            "p_Pa": 209782.68901772777,
+            "ul_m_s": 0.4669330506393359,
+            "ug_m_s": 0.9775320466188863
+          },
+          "eigenvalues_m_s": [
+            -33.53700093911237,
+            0.9311806175364667,
+            34.51346533214012
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 2.4469388424225497e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 1,
+          "pressure_constraint_projected_abs": [
+            4.068092061978346e-05
+          ]
+        },
+        {
+          "name": "outlet_boundary",
+          "profile": 2,
+          "cell": 104,
+          "closure": 3,
+          "status": 0,
+          "angle": 1.3324674585464422,
+          "primitive_SI": {
+            "alpha": 0.2618778515450633,
+            "rho_l_kg_m3": 997.0975377940503,
+            "rho_g_kg_m3": 1.7679708284813291,
+            "p_Pa": 207999.99999999988,
+            "ul_m_s": 0.46693866467122097,
+            "ug_m_s": 0.9775773242400226
+          },
+          "eigenvalues_m_s": [
+            -33.39253287462759,
+            0.9312279366601773,
+            34.369021954960274
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 4.82165300108939e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 1,
+          "pressure_constraint_projected_abs": [
+            4.051036719511336e-05
+          ]
+        },
+        {
+          "name": "junction_left_cell",
+          "profile": 2,
+          "cell": 53,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.5599776466008654,
+            "rho_l_kg_m3": 997.130355514309,
+            "rho_g_kg_m3": 2.3939268122292154,
+            "p_Pa": 281643.09553195495,
+            "ul_m_s": 1.203720423299468,
+            "ug_m_s": 0.05307836549984288
+          },
+          "eigenvalues_m_s": [
+            -243.50005254336165,
+            1.613722236402401,
+            244.66810916492082
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.3010453760959609e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_right_cell",
+          "profile": 2,
+          "cell": 54,
+          "closure": 3,
+          "status": 0,
+          "angle": 0.04073129559801582,
+          "primitive_SI": {
+            "alpha": 0.018671346310495322,
+            "rho_l_kg_m3": 997.1303809344615,
+            "rho_g_kg_m3": 2.3944116690803208,
+            "p_Pa": 281700.13845563063,
+            "ul_m_s": 0.5213825471691543,
+            "ug_m_s": 0.8990138050808729
+          },
+          "eigenvalues_m_s": [
+            -123.33002622584387,
+            0.8968438993623612,
+            124.37181331756317
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 3.486382940566579e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_mapped_right",
+          "profile": 2,
+          "cell": 54,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.5710627539327428,
+            "rho_l_kg_m3": 997.1303809344615,
+            "rho_g_kg_m3": 2.3944116690803208,
+            "p_Pa": 281700.13845563063,
+            "ul_m_s": 1.1928263114518238,
+            "ug_m_s": 0.029393964108983713
+          },
+          "eigenvalues_m_s": [
+            -244.7082569050257,
+            1.6033709815399102,
+            245.82869199339737
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.5314757885976864e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_left_trace",
+          "profile": 2,
+          "cell": 53,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.5599720037833782,
+            "rho_l_kg_m3": 997.1303885460268,
+            "rho_g_kg_m3": 2.394556849939223,
+            "p_Pa": 281717.2188384996,
+            "ul_m_s": 1.2033022986759896,
+            "ug_m_s": 2.0014338174963726e-13
+          },
+          "eigenvalues_m_s": [
+            -239.92323590736723,
+            1.6123153471456622,
+            241.0494913727891
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 6.234979417482356e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_right_trace",
+          "profile": 2,
+          "cell": 54,
+          "closure": 3,
+          "status": 0,
+          "angle": 0.0,
+          "primitive_SI": {
+            "alpha": 2.319241863938088e-13,
+            "rho_l_kg_m3": 997.1303885460268,
+            "rho_g_kg_m3": 2.394556849937624,
+            "p_Pa": 281717.2188383115,
+            "ul_m_s": 0.5294866993293734,
+            "ug_m_s": 0.892311753036327
+          },
+          "eigenvalues_m_s": [
+            -1497.4705119213163,
+            0.8923117530363016,
+            1498.5294853199694
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 3.8763059196487956e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        }
+      ],
+      "linear_characteristic_interface_diagnostics": [
+        {
+          "profile": 1,
+          "incoming_to_left": 1,
+          "incoming_to_right": 2,
+          "constraint_matrix_shape": [
+            3,
+            3
+          ],
+          "row_normalized_singular_values": [
+            1.4378021662626095,
+            0.9461532759397053,
+            0.19369798429284568
+          ],
+          "linear_phase_flux_mismatch_nd": [
+            0.0,
+            4.743384504624082e-19
+          ],
+          "linear_pressure_mismatch_nd": 0.0,
+          "linear_common_pressure_Pa": 281706.954579261,
+          "linear_common_phase_mass_flux_kg_m2_s": [
+            527.9571462523227,
+            -0.002417218908863615
+          ],
+          "linear_left_U": [
+            0.44005858565271566,
+            0.0013448148464469353,
+            0.9990883086868787
+          ],
+          "linear_right_U": [
+            1.001252728952567,
+            -2.813498997362536e-06,
+            0.9990883086868788
+          ],
+          "linear_left_U_relative_increment": [
+            1.7484434287117322e-06,
+            0.00022538612300905243,
+            -0.0004929268126531671
+          ],
+          "linear_right_U_relative_increment": [
+            0.020220917504544064,
+            -1.0627464504495527,
+            0.0347598121345492
+          ],
+          "qualification": "one linear diagnostic only; cell angles differ and source integration/nonlinear wave curves are omitted; not a replacement Riemann solver"
+        },
+        {
+          "profile": 2,
+          "incoming_to_left": 1,
+          "incoming_to_right": 2,
+          "constraint_matrix_shape": [
+            3,
+            3
+          ],
+          "row_normalized_singular_values": [
+            1.4378021560881582,
+            0.9461532886591021,
+            0.1936979976866275
+          ],
+          "linear_phase_flux_mismatch_nd": [
+            0.0,
+            7.318364664277155e-19
+          ],
+          "linear_pressure_mismatch_nd": 0.0,
+          "linear_common_pressure_Pa": 281706.95461134403,
+          "linear_common_phase_mass_flux_kg_m2_s": [
+            527.9571462285112,
+            -0.002417228070044182
+          ],
+          "linear_left_U": [
+            0.44005858565322536,
+            0.0013448148465988843,
+            0.9990883086244822
+          ],
+          "linear_right_U": [
+            1.0012527332052958,
+            -2.813509209923666e-06,
+            0.9990883086244822
+          ],
+          "linear_left_U_relative_increment": [
+            1.748443444486365e-06,
+            0.00022538612381177946,
+            -0.0004929268154457563
+          ],
+          "linear_right_U_relative_increment": [
+            0.020220918032493367,
+            -1.0627466905028788,
+            0.034759813071214195
+          ],
+          "qualification": "one linear diagnostic only; cell angles differ and source integration/nonlinear wave curves are omitted; not a replacement Riemann solver"
+        }
+      ]
+    },
+    "D_SS3_fixed": {
+      "states": [
+        {
+          "name": "inlet_interior",
+          "profile": 1,
+          "cell": 3,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.7237963338435867,
+            "rho_l_kg_m3": 997.1080779827506,
+            "rho_g_kg_m3": 1.9690114289463392,
+            "p_Pa": 231652.22560410787,
+            "ul_m_s": 1.0141358663805424,
+            "ug_m_s": 0.49953176540059424
+          },
+          "eigenvalues_m_s": [
+            -284.5948671139255,
+            1.4117627965033352,
+            285.72595270216135
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 3.0140724594758536e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 2,
+          "phase_flux_constraints_projected_singular_values": [
+            0.6512371953381897,
+            0.2541046427446115
+          ],
+          "jl_relative_to_prescribed_volume_change": 0.00038587241077259193
+        },
+        {
+          "name": "inlet_boundary",
+          "profile": 1,
+          "cell": 3,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.7238077866857746,
+            "rho_l_kg_m3": 997.1080779827506,
+            "rho_g_kg_m3": 1.9690114289463387,
+            "p_Pa": 231652.2256041078,
+            "ul_m_s": 1.0137276776950148,
+            "ug_m_s": 0.40551544464453776
+          },
+          "eigenvalues_m_s": [
+            -312.2329721492111,
+            1.4118405776169947,
+            313.3650657241972
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 3.2105303127586503e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 2,
+          "phase_flux_constraints_projected_singular_values": [
+            0.5324045960366961,
+            0.26282513016108083
+          ],
+          "jl_relative_to_prescribed_volume_change": -5.824642687191073e-05
+        },
+        {
+          "name": "outlet_interior",
+          "profile": 1,
+          "cell": 104,
+          "closure": 3,
+          "status": 0,
+          "angle": 1.3324674585464422,
+          "primitive_SI": {
+            "alpha": 0.6168978968318284,
+            "rho_l_kg_m3": 997.094817901525,
+            "rho_g_kg_m3": 1.716092361971192,
+            "p_Pa": 201896.5502935488,
+            "ul_m_s": 0.10774499696040117,
+            "ug_m_s": 0.8859634299946191
+          },
+          "eigenvalues_m_s": [
+            -34.93070101523447,
+            0.693221668462163,
+            35.3235279553324
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 2.12200942044007e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 1,
+          "pressure_constraint_projected_abs": [
+            8.847568154593297e-05
+          ]
+        },
+        {
+          "name": "outlet_boundary",
+          "profile": 1,
+          "cell": 104,
+          "closure": 3,
+          "status": 0,
+          "angle": 1.3324674585464422,
+          "primitive_SI": {
+            "alpha": 0.6168978968318283,
+            "rho_l_kg_m3": 997.0944183700207,
+            "rho_g_kg_m3": 1.7084718102151313,
+            "p_Pa": 200999.99999999997,
+            "ul_m_s": 0.10775562593453501,
+            "ug_m_s": 0.8860785637147068
+          },
+          "eigenvalues_m_s": [
+            -34.851998651629884,
+            0.6934819038155017,
+            35.24474066440283
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 3.385556533898361e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 1,
+          "pressure_constraint_projected_abs": [
+            8.827751861951301e-05
+          ]
+        },
+        {
+          "name": "junction_left_cell",
+          "profile": 1,
+          "cell": 53,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.7239005604563692,
+            "rho_l_kg_m3": 997.1099006438086,
+            "rho_g_kg_m3": 2.003776354317437,
+            "p_Pa": 235742.2843090921,
+            "ul_m_s": 1.0133733387470616,
+            "ug_m_s": 0.3543943152539772
+          },
+          "eigenvalues_m_s": [
+            -307.8663576949384,
+            1.4111262380916378,
+            308.9325681228543
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 3.379675915714544e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_right_cell",
+          "profile": 1,
+          "cell": 54,
+          "closure": 3,
+          "status": 0,
+          "angle": 0.04073129559801582,
+          "primitive_SI": {
+            "alpha": 0.34085146169385205,
+            "rho_l_kg_m3": 997.1099094002404,
+            "rho_g_kg_m3": 2.0039433720403967,
+            "p_Pa": 235761.93377718067,
+            "ul_m_s": 0.3346159318892606,
+            "ug_m_s": 0.8285081638783414
+          },
+          "eigenvalues_m_s": [
+            -33.048673887998916,
+            0.7753912944296812,
+            33.76737150801277
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.700401047843886e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_mapped_right",
+          "profile": 1,
+          "cell": 54,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.767061961540235,
+            "rho_l_kg_m3": 997.1099094002404,
+            "rho_g_kg_m3": 2.0039433720403967,
+            "p_Pa": 235761.93377718067,
+            "ul_m_s": 0.9468681193383294,
+            "ug_m_s": 0.3681556808206942
+          },
+          "eigenvalues_m_s": [
+            -319.10099908247344,
+            1.3293174498449116,
+            320.0968662825236
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 7.898814654134213e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_left_trace",
+          "profile": 1,
+          "cell": 53,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.7238751147484745,
+            "rho_l_kg_m3": 997.109926532365,
+            "rho_g_kg_m3": 2.004270145375243,
+            "p_Pa": 235800.37833325195,
+            "ul_m_s": 1.0132520572970318,
+            "ug_m_s": 0.31350018747221126
+          },
+          "eigenvalues_m_s": [
+            -304.39204091728254,
+            1.4107782417781527,
+            305.40732888148545
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.6117113235510592e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_right_trace",
+          "profile": 1,
+          "cell": 54,
+          "closure": 3,
+          "status": 0,
+          "angle": 0.0,
+          "primitive_SI": {
+            "alpha": 0.27192298298008893,
+            "rho_l_kg_m3": 997.109926532365,
+            "rho_g_kg_m3": 2.004270145375243,
+            "p_Pa": 235800.37833325195,
+            "ul_m_s": 0.38427817595067154,
+            "ug_m_s": 0.8345561000100739
+          },
+          "eigenvalues_m_s": [
+            -34.84014803231234,
+            0.7967250333258773,
+            35.64315750620977
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.3258929599896833e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "inlet_interior",
+          "profile": 2,
+          "cell": 3,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.7237963338433951,
+            "rho_l_kg_m3": 997.1080779827519,
+            "rho_g_kg_m3": 1.9690114289722163,
+            "p_Pa": 231652.22560715227,
+            "ul_m_s": 1.0141358663784978,
+            "ug_m_s": 0.49953176495636237
+          },
+          "eigenvalues_m_s": [
+            -284.59486716898556,
+            1.411762796500907,
+            285.72595275697137
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.1180018145421262e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 2,
+          "phase_flux_constraints_projected_singular_values": [
+            0.6512371950847371,
+            0.25410464276447686
+          ],
+          "jl_relative_to_prescribed_volume_change": 0.00038587240944942813
+        },
+        {
+          "name": "inlet_boundary",
+          "profile": 2,
+          "cell": 3,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.7238077866857675,
+            "rho_l_kg_m3": 997.1080779827519,
+            "rho_g_kg_m3": 1.9690114289722163,
+            "p_Pa": 231652.22560715227,
+            "ul_m_s": 1.013727677694988,
+            "ug_m_s": 0.4055154446391807
+          },
+          "eigenvalues_m_s": [
+            -312.23297214881916,
+            1.411840577616913,
+            313.36506572379824
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.9854926679295473e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 2,
+          "phase_flux_constraints_projected_singular_values": [
+            0.5324045960380489,
+            0.2628251301608705
+          ],
+          "jl_relative_to_prescribed_volume_change": -5.8246426872798907e-05
+        },
+        {
+          "name": "outlet_interior",
+          "profile": 2,
+          "cell": 104,
+          "closure": 3,
+          "status": 0,
+          "angle": 1.3324674585464422,
+          "primitive_SI": {
+            "alpha": 0.6168978973088237,
+            "rho_l_kg_m3": 997.094817901532,
+            "rho_g_kg_m3": 1.7160923621062836,
+            "p_Pa": 201896.55030944216,
+            "ul_m_s": 0.10774498225810525,
+            "ug_m_s": 0.8859634057449474
+          },
+          "eigenvalues_m_s": [
+            -34.93070118746858,
+            0.6932216375062853,
+            35.32352810427829
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 2.7256151363262093e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 1,
+          "pressure_constraint_projected_abs": [
+            8.847568197366596e-05
+          ]
+        },
+        {
+          "name": "outlet_boundary",
+          "profile": 2,
+          "cell": 104,
+          "closure": 3,
+          "status": 0,
+          "angle": 1.3324674585464422,
+          "primitive_SI": {
+            "alpha": 0.6168978973088237,
+            "rho_l_kg_m3": 997.0944183700207,
+            "rho_g_kg_m3": 1.708471810215131,
+            "p_Pa": 200999.99999999994,
+            "ul_m_s": 0.10775561123213868,
+            "ug_m_s": 0.886078539469208
+          },
+          "eigenvalues_m_s": [
+            -34.851998821619894,
+            0.6934818728865404,
+            35.24474081108442
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 5.1507674723539033e-20,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0,
+          "incoming_count": 1,
+          "pressure_constraint_projected_abs": [
+            8.827751904144038e-05
+          ]
+        },
+        {
+          "name": "junction_left_cell",
+          "profile": 2,
+          "cell": 53,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.7239005604556719,
+            "rho_l_kg_m3": 997.1099006438194,
+            "rho_g_kg_m3": 2.0037763545257925,
+            "p_Pa": 235742.284333605,
+            "ul_m_s": 1.0133733386311679,
+            "ug_m_s": 0.3543942841141205
+          },
+          "eigenvalues_m_s": [
+            -307.8663550072094,
+            1.4111262378000993,
+            308.93256539576936
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.8950865324685192e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_right_cell",
+          "profile": 2,
+          "cell": 54,
+          "closure": 3,
+          "status": 0,
+          "angle": 0.04073129559801582,
+          "primitive_SI": {
+            "alpha": 0.34085145213803203,
+            "rho_l_kg_m3": 997.1099094002489,
+            "rho_g_kg_m3": 2.0039433722007023,
+            "p_Pa": 235761.93379604045,
+            "ul_m_s": 0.33461592240991134,
+            "ug_m_s": 0.8285081466098456
+          },
+          "eigenvalues_m_s": [
+            -33.04867407193072,
+            0.7753912785477249,
+            33.767371671772445
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 4.0115824816982233e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_mapped_right",
+          "profile": 2,
+          "cell": 54,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.7670619638223946,
+            "rho_l_kg_m3": 997.1099094002489,
+            "rho_g_kg_m3": 2.003943372200702,
+            "p_Pa": 235761.93379604036,
+            "ul_m_s": 0.9468681155181387,
+            "ug_m_s": 0.3681556617319934
+          },
+          "eigenvalues_m_s": [
+            -319.10099802844377,
+            1.3293174449922753,
+            320.09686519735783
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 1.8566217270141378e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_left_trace",
+          "profile": 2,
+          "cell": 53,
+          "closure": 1,
+          "status": 0,
+          "angle": -0.03490658503988659,
+          "primitive_SI": {
+            "alpha": 0.7238751147095556,
+            "rho_l_kg_m3": 997.109926532367,
+            "rho_g_kg_m3": 2.0042701454118683,
+            "p_Pa": 235800.3783375609,
+            "ul_m_s": 1.0132520572562331,
+            "ug_m_s": 0.3135001629469285
+          },
+          "eigenvalues_m_s": [
+            -304.3920388625799,
+            1.4107782416070493,
+            305.4073267967107
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 3.721416262889938e-18,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        },
+        {
+          "name": "junction_right_trace",
+          "profile": 2,
+          "cell": 54,
+          "closure": 3,
+          "status": 0,
+          "angle": 0.0,
+          "primitive_SI": {
+            "alpha": 0.2719229673732954,
+            "rho_l_kg_m3": 997.109926532367,
+            "rho_g_kg_m3": 2.004270145411868,
+            "p_Pa": 235800.37833756086,
+            "ul_m_s": 0.3842781677521147,
+            "ug_m_s": 0.8345560825756674
+          },
+          "eigenvalues_m_s": [
+            -34.840148607187906,
+            0.7967250180950362,
+            35.643158062660355
+          ],
+          "eigen_imaginary_max_m_s": 0.0,
+          "eigen_residual_relative": 2.7192040500745825e-19,
+          "positive_count": 2,
+          "negative_count": 1,
+          "zero_count": 0
+        }
+      ],
+      "linear_characteristic_interface_diagnostics": [
+        {
+          "profile": 1,
+          "incoming_to_left": 1,
+          "incoming_to_right": 2,
+          "constraint_matrix_shape": [
+            3,
+            3
+          ],
+          "row_normalized_singular_values": [
+            1.4549893920836336,
+            0.9383294950653793,
+            0.05043438920466753
+          ],
+          "linear_phase_flux_mismatch_nd": [
+            0.0,
+            0.0
+          ],
+          "linear_pressure_mismatch_nd": 0.0,
+          "linear_common_pressure_Pa": 235777.51136679132,
+          "linear_common_phase_mass_flux_kg_m2_s": [
+            278.9358659049241,
+            0.44742245339233644
+          ],
+          "linear_left_U": [
+            0.2761161811648827,
+            0.0014550436585121468,
+            0.5837706408035299
+          ],
+          "linear_right_U": [
+            0.7354886013550445,
+            0.0005317682760346467,
+            0.5837706408035299
+          ],
+          "linear_left_U_relative_increment": [
+            5.582944289342435e-07,
+            0.00014922344231595462,
+            -0.0004077238102399459
+          ],
+          "linear_right_U_relative_increment": [
+            0.11574913425389918,
+            -0.22377297863099002,
+            0.2671014576242459
+          ],
+          "qualification": "one linear diagnostic only; cell angles differ and source integration/nonlinear wave curves are omitted; not a replacement Riemann solver"
+        },
+        {
+          "profile": 2,
+          "incoming_to_left": 1,
+          "incoming_to_right": 2,
+          "constraint_matrix_shape": [
+            3,
+            3
+          ],
+          "row_normalized_singular_values": [
+            1.4549893940164405,
+            0.9383294920421191,
+            0.0504343896924388
+          ],
+          "linear_phase_flux_mismatch_nd": [
+            1.1102230246251565e-16,
+            0.0
+          ],
+          "linear_pressure_mismatch_nd": 0.0,
+          "linear_common_pressure_Pa": 235777.5113856085,
+          "linear_common_phase_mass_flux_kg_m2_s": [
+            278.9358658797916,
+            0.4474224196362623
+          ],
+          "linear_left_U": [
+            0.27611618116556447,
+            0.0014550436586269059,
+            0.5837706406804821
+          ],
+          "linear_right_U": [
+            0.7354886164024481,
+            0.0005317682458342562,
+            0.5837706406804821
+          ],
+          "linear_left_U_relative_increment": [
+            5.58294362241087e-07,
+            0.0001492234181641091,
+            -0.00040772374800344176
+          ],
+          "linear_right_U_relative_increment": [
+            0.11574914090580696,
+            -0.22377300101523467,
+            0.2671014749971963
+          ],
+          "qualification": "one linear diagnostic only; cell angles differ and source integration/nonlinear wave curves are omitted; not a replacement Riemann solver"
+        }
+      ]
+    }
+  }
+}

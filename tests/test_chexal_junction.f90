@@ -8,7 +8,7 @@ program test_chexal_junction
   use module_boundary_conditions,only:boundary_flux
   use module_closure_law,only:lei_fechamento_or_ndim_simp
   use module_chexal_1992,only:CHEXAL_DOMAIN
-  use,intrinsic::ieee_arithmetic,only:ieee_is_finite
+  use,intrinsic::ieee_arithmetic,only:ieee_is_finite,ieee_value,ieee_quiet_nan
   implicit none
   type(sim_config_t)::cfg
   type(pipeline_riser_simulator_t)::sim
@@ -89,6 +89,15 @@ program test_chexal_junction
     call check(code==0.and.f(1)==0.and.bc(1)==0,'Chexal inlet exact absent-liquid inventory')
     call boundary_flux(state,theta,cfg,.false.,f,code,bc)
     call check(code==0.and.f(1)==0.and.bc(1)==0,'Chexal outlet exact absent-liquid inventory')
+    cfg%nPs=0.0_wp
+    call boundary_flux(state,theta,cfg,.false.,f,code,bc)
+    call check(code==101.and..not.any(ieee_is_finite(f)).and..not.any(ieee_is_finite(bc)), &
+      'interior recovery success cannot mask invalid specified outlet pressure')
+    cfg%nPs=ieee_value(0.0_wp,ieee_quiet_nan)
+    call boundary_flux(state,theta,cfg,.false.,f,code,bc)
+    call check(code==101.and..not.any(ieee_is_finite(f)).and..not.any(ieee_is_finite(bc)), &
+      'nonfinite prescribed pressure is rejected before comparison')
+    cfg%nPs=p
     cfg%mul=.3_wp*rl;cfg%mug=0
     state=[.7_wp*rl,.3_wp*rg,.3_wp*rl]
     call boundary_flux(state,theta,cfg,.true.,f,code,bc)

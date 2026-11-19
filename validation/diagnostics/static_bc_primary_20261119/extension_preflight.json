@@ -1,0 +1,18 @@
+{
+  "command": [
+    "python3",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/scripts/prepare_static_bc_extensions.py",
+    "--harness",
+    "/mnt/c/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-burr15-20261119/burr15_harness.py",
+    "--reference-plan",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/plan.json",
+    "--workspace",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119",
+    "--duration-s",
+    "7200"
+  ],
+  "expected_rejection": true,
+  "returncode": 1,
+  "reason": "All initial terminal analyses must exist before extensions",
+  "no_extension_directory_created": true
+}

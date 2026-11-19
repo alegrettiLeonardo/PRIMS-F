@@ -1,0 +1,17 @@
+{
+  "source_commit": "a179e51d9d63e8aeed91a94d829b5b483d107864",
+  "files_sha256": {
+    "D_SS1_manifest.json": "1c9b854f3c6f1bb14f386c9070aac3eb0ab08ae7cd899ccf9f2ace1f712f1af7",
+    "D_SS3_manifest.json": "2c50bf5486c3d6862649b2e4fa91056088c1c57650e0b99b3fa1b0a8afbd965d",
+    "README.md": "1987bed94d9f916b097cb9a13f0f10a38a02ea28a70b486ed119a3e7b2271311",
+    "analyze_cycle_conservation.py": "4d4ac7e16c04a0975d60b91078de92b1f275d3ac270ca005d86855156927236b",
+    "archive.json": "22c7acbd30a680e0c6850fc159b0e472790a71c07a077a7776a8d3b7116aab18",
+    "balance_normalizations.json": "052e4a564189b92d3b6d7c438a90e7c9c057b200269148f18899b40d169f3c56",
+    "normalize_smoke_balances.py": "b6e1c13100db4b9076074bc879c00dee3b60093a251bcf8c02400860c16386c9",
+    "plot_active_smoke_progress.py": "8bbabe8fe9148875cb3eef595b71b65130a5509b82d7c2523f3c63c48898812b",
+    "run_frozen_active_smoke.py": "d5316873cbd295d4c1a87ef8b6961662602c9315f3e14555e9f4da170da88921",
+    "summarize_frozen_active_smokes.py": "767565a233bca01fe3e3bf51fef0627257372b248c7e1a9c009c83838392e0ef",
+    "summary.json": "7cce755f309308c7b7eb2e97a135f3a32a7f771326366258f0cdf64160b9df2c",
+    "SS1_progress.png": "1392df4e8357e9d07cd7fac37d2656896751668ec993e878acb4ecdde1a5fe39"
+  }
+}

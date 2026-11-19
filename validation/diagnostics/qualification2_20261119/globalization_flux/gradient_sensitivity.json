@@ -1,0 +1,66 @@
+[
+  {
+    "case": "D_SS1",
+    "fd_factor": 0.25,
+    "termination": "ORIGINAL_RESIDUAL_CONVERGED",
+    "final_norm": 1.6709772876859093e-12,
+    "final_margin_si": 5.796776159460623e-13,
+    "original_residual_pass": true
+  },
+  {
+    "case": "D_SS1",
+    "fd_factor": 0.5,
+    "termination": "ORIGINAL_RESIDUAL_CONVERGED",
+    "final_norm": 1.6709772876859093e-12,
+    "final_margin_si": 5.796776159460623e-13,
+    "original_residual_pass": true
+  },
+  {
+    "case": "D_SS1",
+    "fd_factor": 2.0,
+    "termination": "ORIGINAL_RESIDUAL_CONVERGED",
+    "final_norm": 1.6709772876859093e-12,
+    "final_margin_si": 5.796776159460623e-13,
+    "original_residual_pass": true
+  },
+  {
+    "case": "D_SS1",
+    "fd_factor": 4.0,
+    "termination": "ORIGINAL_RESIDUAL_CONVERGED",
+    "final_norm": 1.6709772876859093e-12,
+    "final_margin_si": 5.796776159460623e-13,
+    "original_residual_pass": true
+  },
+  {
+    "case": "D_SS3",
+    "fd_factor": 0.25,
+    "termination": "ORIGINAL_RESIDUAL_CONVERGED",
+    "final_norm": 4.0275959284536995e-09,
+    "final_margin_si": 1.1102230246251565e-16,
+    "original_residual_pass": true
+  },
+  {
+    "case": "D_SS3",
+    "fd_factor": 0.5,
+    "termination": "ORIGINAL_RESIDUAL_CONVERGED",
+    "final_norm": 4.0275959284536995e-09,
+    "final_margin_si": 1.1102230246251565e-16,
+    "original_residual_pass": true
+  },
+  {
+    "case": "D_SS3",
+    "fd_factor": 2.0,
+    "termination": "ORIGINAL_RESIDUAL_CONVERGED",
+    "final_norm": 4.0275959284536995e-09,
+    "final_margin_si": 1.1102230246251565e-16,
+    "original_residual_pass": true
+  },
+  {
+    "case": "D_SS3",
+    "fd_factor": 4.0,
+    "termination": "ORIGINAL_RESIDUAL_CONVERGED",
+    "final_norm": 4.0275959284536995e-09,
+    "final_margin_si": 1.1102230246251565e-16,
+    "original_residual_pass": true
+  }
+]

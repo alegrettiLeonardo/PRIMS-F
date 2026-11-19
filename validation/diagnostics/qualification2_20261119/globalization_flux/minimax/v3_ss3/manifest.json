@@ -1,0 +1,21 @@
+{
+  "schema": "primsf_ss3_v3_terminal_evidence_v1",
+  "source_commit": "a179e51d9d63e8aeed91a94d829b5b483d107864",
+  "files_sha256": {
+    "README.md": "f533003f95d70076977cc2686f7efabc2253dec035232a53f53175cecb3e22fa",
+    "analyze_frozen_terminal.py": "054ac2c1327d2a87faf2065ddf53ce1506a66db40eeae2d832f86a1a71610772",
+    "double_geometry.json": "9bc3a64a8103a30494f4f869237bad0a94d10c277e3c6e1343f09ced7000b05b",
+    "double_geometry_provenance.json": "21e70422f09b530ae85646797fe34452cc8df0c0430c316456ece7e518e7d678",
+    "finalize_ss3_precision.py": "f78ca3fa03c1d52b65f96a6f7bc9ac4ebae0ba447e6621e9e2df33683d292766",
+    "high_precision.json": "e100dd130db52d3873a3bc8f7fdc2d138bf056dec7f53e3f5b6273bfe0645f16",
+    "high_precision_qualified.json": "ef83ca7861e5955935430e0543857d57fb24597ac064ec0f05ce625e88f29a1e",
+    "last_rejected_iteration.txt": "7c2d4c079ddfc2aaccd55cace1b2364534fd8170f9c5d9f2615a71054e1c96ef",
+    "last_rejected_state.dat": "9a85ce3c5769d1dd11a9e8860b79a2936db00e42c6922771727f9e6102778139",
+    "probe.log": "7182d7dac81d4e2f5ed2f138a3de9d8de59e12d8057addf61d2156fc6cf6af59",
+    "proposal_cells_exact.csv": "90ca2db8e4d7d52b9adcb4b6a9f3df772c21620b3482390ab8b059e58547b376",
+    "replay_frozen_terminal.f90": "224baedd559b196442ef17271eea09416c5a781ccc48fdcb5b704293dc713bfb",
+    "run_status.txt": "e0d3c26bb928b9e211cc31d83dea88d2941a33edfa46c2c93830791bc26c6d00",
+    "smoke_manifest.json": "2c50bf5486c3d6862649b2e4fa91056088c1c57650e0b99b3fa1b0a8afbd965d",
+    "summary.json": "3f6bc4344ea6ba48457240e458a620b80b0310e35e73975969b16d2a97f611bd"
+  }
+}

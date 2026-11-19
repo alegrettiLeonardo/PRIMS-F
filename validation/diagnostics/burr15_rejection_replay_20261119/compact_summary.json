@@ -1,0 +1,643 @@
+{
+  "schema": "PRIMS-F.burr15_rejection_replay.v1",
+  "frozen_head": "8a85e37319995b37795d2c798d6f865b863b1834",
+  "campaign_binary_sha256": "6b3164d2a18e08e173c1e65e5058bfc024d648a94b64fa10c7bc8ab8a24d37e5",
+  "source_and_binary_match_campaign": true,
+  "snapshot_semantics": "Uold is last accepted; Utrial is the final Newton linearization, not a saved rejected proposal",
+  "proposal_norm_semantics": "null when residual assembly failed; Fortran huge sentinel is not a measured residual",
+  "source_sha256": {
+    "scr/module_roe_solver.f90": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+    "scr/debug_closure_fd.f90": "fa2af5a40578008158e76044651214bf19422551f5bb60aca32add675ed967b5",
+    "scr/module_boundary_conditions.f90": "d9f24ac455573778ccbee722a1fcb930ab45b5865213746f176acc5ff416b994",
+    "scr/module_mesh.f90": "bdb594b3f4ac288787484f613f73235453ad446053d4d34cb46ca0d60ac5f2fd",
+    "scr/mod_roe_solver.f90": "4417a1c8db516a58f68023182ada5665b9f47277139b36b757e0cca00ed358c6",
+    "scr/module_simulate_pipe_riser.f90": "452a2158e2bd49fa00db50f6816252a937c4c18db935d13e9d21ff020252d7e3",
+    "scr/main.f90": "4365b0f395845e01d0ee3bc4826b4a1f0c1f9000aed9e0b290aa501de4027a29",
+    "scr/module_flow_regime.f90": "d7c369d3d1418d1f3bb97ebd10a849ad3ea24aec11522753377c9e2cea046ebd",
+    "scr/module_lapack_small.f90": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+    "scr/module_steady_state.f90": "7e7258450e45beb14c4e1b1115d49bdff6662cac94fc27b33ecd21a37cfcdd6f",
+    "scr/module_config.f90": "fcac25be786649550dc06a687fddd7b4f215c9ba362a9d48a6505503a0470251",
+    "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "scr/module_jacobian.f90": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+    "scr/module_catenary.f90": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+    "scr/module_chexal_1992.f90": "63a60d888a288eee582ab61d418cfe8838d1aa0e79b145e8a163d25c026d0443",
+    "scr/module_time_step.f90": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133",
+    "scr/module_solver_utils.f90": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+    "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "scr/mod_fluid_dynamics.f90": "2f1b2137311d50cdd12410d01a2b1b58b694b8fbf18cf26a0da8a06506ffe9fe",
+    "scr/module_matrix_roe.f90": "f75d32c43cfb344c58aaaf0217f186f042c57dd68c86cd111a8c23bf8f64be6e",
+    "scr/module_closure_law.f90": "2c7e9b7d81651faa6580be044fcf04e8430fc54670afd8b10dd614d2e955d233",
+    "scr/module_find.f90": "e6a9a70050885b092e17b7db0d04a46450b5eb7c4659d0a1f91ed3312afdafce",
+    "scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c"
+  },
+  "probe_source_sha256": "82e43c6972db13138865d8790e74ada0f90837b6fc0aa88e1198f5e1a82e4c8a",
+  "probe_binary_sha256": "71c881e3a8f0199b7923761b21dadb88e885619aa279cf2443e54d0c428f9385",
+  "runs": {
+    "D_SS1_fixed": {
+      "snapshot_sha256": "1e9629e5293c8ee55ae324b6094b0a73d46aee47b6673dda2e5ee456917f27dc",
+      "modes": {
+        "F": {
+          "time_s": 78.57178847673931,
+          "dt_s": 1.3286024999999991e-07,
+          "saved_residual_norm": 2.976406330921032e-07,
+          "terminal_status": 6000,
+          "lagged_dissipation_status": 0,
+          "snapshot_residual_max_absolute_difference": 0.0,
+          "all_old_and_trial_points_faces_boundaries_ok": true,
+          "old_junction": {
+            "junction_SI": {
+              "p_Pa": 281717.21880648425,
+              "jl_m_s": 0.5294866993518667,
+              "jg_m_s": 3.9866594701254724e-09
+            },
+            "junction_gas_terms_kg_s": {
+              "convective": 0.00012070214879111965,
+              "diffusive": 0.00012070212809426683,
+              "net": 2.0696852824540416e-11
+            },
+            "neighbors_SI": {
+              "ulL_m_s": 1.2037204233520833,
+              "ugL_m_s": 0.05307837224270139,
+              "ulR_m_s": 0.5213825496102112,
+              "ugR_m_s": 0.8990138088003331,
+              "alphaL": 0.559977646601362,
+              "alphaR": 0.0186713499707613
+            },
+            "riser_trace_root": {
+              "status": 0,
+              "nroots": 1,
+              "alpha": 4.467787675665141e-09
+            }
+          },
+          "linearization_junction": {
+            "junction_SI": {
+              "p_Pa": 281717.2188384996,
+              "jl_m_s": 0.5294866993292505,
+              "jg_m_s": 2.0694867733244484e-13
+            },
+            "junction_gas_terms_kg_s": {
+              "convective": 0.00012070213028441707,
+              "diffusive": 0.00012070213028334268,
+              "net": 1.0743797782494993e-15
+            },
+            "neighbors_SI": {
+              "ulL_m_s": 1.203720423299468,
+              "ugL_m_s": 0.05307836549984288,
+              "ulR_m_s": 0.5213825471691543,
+              "ugR_m_s": 0.8990138050808729,
+              "alphaL": 0.5599776466008654,
+              "alphaR": 0.018671346310495322
+            },
+            "riser_trace_root": {
+              "status": 0,
+              "nroots": 1,
+              "alpha": 2.319241863936539e-13
+            }
+          },
+          "proposals_summary": {
+            "count": 18,
+            "accepted_count": 0,
+            "assembly_statuses": [
+              3012
+            ],
+            "first": {
+              "k": 0,
+              "lambda": 1.0,
+              "assembly_status": 3012,
+              "residual_norm": null,
+              "accepted_by_Armijo": false,
+              "first_point_failure_cell": 0,
+              "first_point_failure_status": 0,
+              "junction": {
+                "junction_SI": {
+                  "p_Pa": 281717.2188871347,
+                  "jl_m_s": 0.5294866992948974,
+                  "jg_m_s": -6.054984622680933e-09
+                },
+                "junction_gas_terms_kg_s": {
+                  "convective": 0.0001207021021802737,
+                  "diffusive": 0.00012070213361489372,
+                  "net": -3.14346200284859e-11
+                },
+                "neighbors_SI": {
+                  "ulL_m_s": 1.2037204232195113,
+                  "ugL_m_s": 0.05307835526436264,
+                  "ulR_m_s": 0.5213825434607731,
+                  "ugR_m_s": 0.8990137994303788,
+                  "alphaL": 0.5599776466001111,
+                  "alphaR": 0.018671340749927035
+                },
+                "riser_trace_root": {
+                  "status": 12,
+                  "nroots": 0,
+                  "alpha": null
+                }
+              },
+              "first_face_failure_leftcell": 53,
+              "first_face_failure_status": 1012
+            },
+            "last": {
+              "k": 17,
+              "lambda": 7.62939453125e-06,
+              "assembly_status": 3012,
+              "residual_norm": null,
+              "accepted_by_Armijo": false,
+              "first_point_failure_cell": 0,
+              "first_point_failure_status": 0,
+              "junction": {
+                "junction_SI": {
+                  "p_Pa": 281717.21883850044,
+                  "jl_m_s": 0.5294866993292492,
+                  "jg_m_s": -3.240236968306527e-14
+                },
+                "junction_gas_terms_kg_s": {
+                  "convective": 0.00012070213028280985,
+                  "diffusive": 0.00012070213028297807,
+                  "net": -1.6821779778242756e-16
+                },
+                "neighbors_SI": {
+                  "ulL_m_s": 1.2037204232994676,
+                  "ugL_m_s": 0.05307836549971386,
+                  "ulR_m_s": 0.5213825471691261,
+                  "ugR_m_s": 0.8990138050808298,
+                  "alphaL": 0.5599776466008654,
+                  "alphaR": 0.018671346310452922
+                },
+                "riser_trace_root": {
+                  "status": 12,
+                  "nroots": 0,
+                  "alpha": null
+                }
+              },
+              "first_face_failure_leftcell": 53,
+              "first_face_failure_status": 1012
+            }
+          }
+        },
+        "T": {
+          "time_s": 78.57178847673931,
+          "dt_s": 1.3286024999999991e-07,
+          "saved_residual_norm": 2.976406330921032e-07,
+          "terminal_status": 6000,
+          "lagged_dissipation_status": 0,
+          "snapshot_residual_max_absolute_difference": 0.0,
+          "all_old_and_trial_points_faces_boundaries_ok": true,
+          "old_junction": {
+            "junction_SI": {
+              "p_Pa": 281717.21880648425,
+              "jl_m_s": 0.5294866993518667,
+              "jg_m_s": 3.9866594701254724e-09
+            },
+            "junction_gas_terms_kg_s": {
+              "convective": 0.00012070214879111965,
+              "diffusive": 0.00012070212809426683,
+              "net": 2.0696852824540416e-11
+            },
+            "neighbors_SI": {
+              "ulL_m_s": 1.2037204233520833,
+              "ugL_m_s": 0.05307837224270139,
+              "ulR_m_s": 0.5213825496102112,
+              "ugR_m_s": 0.8990138088003331,
+              "alphaL": 0.559977646601362,
+              "alphaR": 0.0186713499707613
+            },
+            "riser_trace_root": {
+              "status": 0,
+              "nroots": 1,
+              "alpha": 4.467787675665141e-09
+            }
+          },
+          "linearization_junction": {
+            "junction_SI": {
+              "p_Pa": 281717.2188384996,
+              "jl_m_s": 0.5294866993292505,
+              "jg_m_s": 2.0694867733244484e-13
+            },
+            "junction_gas_terms_kg_s": {
+              "convective": 0.00012070213028441707,
+              "diffusive": 0.00012070213028334268,
+              "net": 1.0743797782494993e-15
+            },
+            "neighbors_SI": {
+              "ulL_m_s": 1.203720423299468,
+              "ugL_m_s": 0.05307836549984288,
+              "ulR_m_s": 0.5213825471691543,
+              "ugR_m_s": 0.8990138050808729,
+              "alphaL": 0.5599776466008654,
+              "alphaR": 0.018671346310495322
+            },
+            "riser_trace_root": {
+              "status": 0,
+              "nroots": 1,
+              "alpha": 2.319241863936539e-13
+            }
+          },
+          "proposals_summary": {
+            "count": 18,
+            "accepted_count": 0,
+            "assembly_statuses": [
+              3012
+            ],
+            "first": {
+              "k": 0,
+              "lambda": 1.0,
+              "assembly_status": 3012,
+              "residual_norm": null,
+              "accepted_by_Armijo": false,
+              "first_point_failure_cell": 0,
+              "first_point_failure_status": 0,
+              "junction": {
+                "junction_SI": {
+                  "p_Pa": 281717.2188871347,
+                  "jl_m_s": 0.5294866992948974,
+                  "jg_m_s": -6.054984622680933e-09
+                },
+                "junction_gas_terms_kg_s": {
+                  "convective": 0.0001207021021802737,
+                  "diffusive": 0.00012070213361489372,
+                  "net": -3.14346200284859e-11
+                },
+                "neighbors_SI": {
+                  "ulL_m_s": 1.2037204232195113,
+                  "ugL_m_s": 0.05307835526436264,
+                  "ulR_m_s": 0.5213825434607731,
+                  "ugR_m_s": 0.8990137994303788,
+                  "alphaL": 0.5599776466001111,
+                  "alphaR": 0.018671340749927035
+                },
+                "riser_trace_root": {
+                  "status": 12,
+                  "nroots": 0,
+                  "alpha": null
+                }
+              },
+              "first_face_failure_leftcell": 53,
+              "first_face_failure_status": 1012
+            },
+            "last": {
+              "k": 17,
+              "lambda": 7.62939453125e-06,
+              "assembly_status": 3012,
+              "residual_norm": null,
+              "accepted_by_Armijo": false,
+              "first_point_failure_cell": 0,
+              "first_point_failure_status": 0,
+              "junction": {
+                "junction_SI": {
+                  "p_Pa": 281717.21883850044,
+                  "jl_m_s": 0.5294866993292492,
+                  "jg_m_s": -3.240236968306527e-14
+                },
+                "junction_gas_terms_kg_s": {
+                  "convective": 0.00012070213028280985,
+                  "diffusive": 0.00012070213028297807,
+                  "net": -1.6821779778242756e-16
+                },
+                "neighbors_SI": {
+                  "ulL_m_s": 1.2037204232994676,
+                  "ugL_m_s": 0.05307836549971386,
+                  "ulR_m_s": 0.5213825471691261,
+                  "ugR_m_s": 0.8990138050808298,
+                  "alphaL": 0.5599776466008654,
+                  "alphaR": 0.018671346310452922
+                },
+                "riser_trace_root": {
+                  "status": 12,
+                  "nroots": 0,
+                  "alpha": null
+                }
+              },
+              "first_face_failure_leftcell": 53,
+              "first_face_failure_status": 1012
+            }
+          }
+        }
+      }
+    },
+    "D_SS3_fixed": {
+      "snapshot_sha256": "e2cafe7245ac084fe8b8db764d4d19bbc6d4dc6e0f891ec4a58ad68f054fac3c",
+      "modes": {
+        "F": {
+          "time_s": 97.1318523387001,
+          "dt_s": 1.1071687499999994e-07,
+          "saved_residual_norm": 5.069257660924518e-08,
+          "terminal_status": 6000,
+          "lagged_dissipation_status": 0,
+          "snapshot_residual_max_absolute_difference": 0.0,
+          "all_old_and_trial_points_faces_boundaries_ok": true,
+          "old_junction": {
+            "junction_SI": {
+              "p_Pa": 235800.37833325204,
+              "jl_m_s": 0.2797841080520174,
+              "jg_m_s": 0.22693498417896485
+            },
+            "junction_gas_terms_kg_s": {
+              "convective": 0.0011707178794245023,
+              "diffusive": 0.0001846025106487046,
+              "net": 0.0009861153687757977
+            },
+            "neighbors_SI": {
+              "ulL_m_s": 1.0133733387470616,
+              "ugL_m_s": 0.3543943152539772,
+              "ulR_m_s": 0.3346159318892606,
+              "ugR_m_s": 0.8285081638783414,
+              "alphaL": 0.7239005604563692,
+              "alphaR": 0.34085146169385205
+            },
+            "riser_trace_root": {
+              "status": 0,
+              "nroots": 1,
+              "alpha": 0.2719229829800889
+            }
+          },
+          "linearization_junction": {
+            "junction_SI": {
+              "p_Pa": 235800.3783375609,
+              "jl_m_s": 0.2797841080801867,
+              "jg_m_s": 0.2269349664134046
+            },
+            "junction_gas_terms_kg_s": {
+              "convective": 0.0011707178005835597,
+              "diffusive": 0.00018460250898758842,
+              "net": 0.0009861152915959714
+            },
+            "neighbors_SI": {
+              "ulL_m_s": 1.0133733386311679,
+              "ugL_m_s": 0.3543942841141205,
+              "ulR_m_s": 0.33461592240991134,
+              "ugR_m_s": 0.8285081466098456,
+              "alphaL": 0.7239005604556719,
+              "alphaR": 0.34085145213803203
+            },
+            "riser_trace_root": {
+              "status": 0,
+              "nroots": 1,
+              "alpha": 0.27192296737329535
+            }
+          },
+          "cell69_old_and_linearization": [
+            {
+              "profile": 1,
+              "cell": 69,
+              "status": 0,
+              "theta_rad": 0.9012386672268461,
+              "alpha": 0.6382716630309477,
+              "p_Pa": 228440.1927525681,
+              "ul_m_s": 2.9367850460519817e-09,
+              "ug_m_s": 0.6245597120802567,
+              "jl_m_s": 1.062318370743965e-09,
+              "jg_m_s": 0.3986387660915954
+            },
+            {
+              "profile": 2,
+              "cell": 69,
+              "status": 0,
+              "theta_rad": 0.9012386672268461,
+              "alpha": 0.6382716632414496,
+              "p_Pa": 228440.19415709612,
+              "ul_m_s": 2.202834647338875e-14,
+              "ug_m_s": 0.624559709271312,
+              "jl_m_s": 7.968277131359992e-15,
+              "jg_m_s": 0.3986387644301965
+            }
+          ],
+          "proposals_summary": {
+            "count": 18,
+            "accepted_count": 0,
+            "assembly_statuses": [
+              1014
+            ],
+            "first": {
+              "k": 0,
+              "lambda": 1.0,
+              "assembly_status": 1014,
+              "residual_norm": null,
+              "accepted_by_Armijo": false,
+              "first_point_failure_cell": 69,
+              "first_point_failure_status": 14,
+              "junction": {
+                "junction_SI": {
+                  "p_Pa": 235800.37834537373,
+                  "jl_m_s": 0.2797841081312711,
+                  "jg_m_s": 0.2269349341976378
+                },
+                "junction_gas_terms_kg_s": {
+                  "convective": 0.0011707176576147718,
+                  "diffusive": 0.00018460250597539672,
+                  "net": 0.000986115151639375
+                },
+                "neighbors_SI": {
+                  "ulL_m_s": 1.0133733384209926,
+                  "ugL_m_s": 0.35439422765009143,
+                  "ulR_m_s": 0.3346159052204952,
+                  "ugR_m_s": 0.8285081152959474,
+                  "alphaL": 0.723900560454408,
+                  "alphaR": 0.34085143480994656
+                },
+                "riser_trace_root": {
+                  "status": 0,
+                  "nroots": 1,
+                  "alpha": 0.27192293907219706
+                }
+              }
+            },
+            "last": {
+              "k": 17,
+              "lambda": 7.62939453125e-06,
+              "assembly_status": 1014,
+              "residual_norm": null,
+              "accepted_by_Armijo": false,
+              "first_point_failure_cell": 69,
+              "first_point_failure_status": 14,
+              "junction": {
+                "junction_SI": {
+                  "p_Pa": 235800.37833755865,
+                  "jl_m_s": 0.27978410808019405,
+                  "jg_m_s": 0.22693496641348337
+                },
+                "junction_gas_terms_kg_s": {
+                  "convective": 0.001170717800584043,
+                  "diffusive": 0.00018460250898773864,
+                  "net": 0.0009861152915963043
+                },
+                "neighbors_SI": {
+                  "ulL_m_s": 1.0133733386311663,
+                  "ugL_m_s": 0.3543942841136706,
+                  "ulR_m_s": 0.3346159224097802,
+                  "ugR_m_s": 0.8285081466096065,
+                  "alphaL": 0.7239005604556719,
+                  "alphaR": 0.34085145213789975
+                },
+                "riser_trace_root": {
+                  "status": 0,
+                  "nroots": 1,
+                  "alpha": 0.2719229673733618
+                }
+              }
+            }
+          }
+        },
+        "T": {
+          "time_s": 97.1318523387001,
+          "dt_s": 1.1071687499999994e-07,
+          "saved_residual_norm": 5.069257660924518e-08,
+          "terminal_status": 6000,
+          "lagged_dissipation_status": 0,
+          "snapshot_residual_max_absolute_difference": 0.0,
+          "all_old_and_trial_points_faces_boundaries_ok": true,
+          "old_junction": {
+            "junction_SI": {
+              "p_Pa": 235800.37833325204,
+              "jl_m_s": 0.2797841080520174,
+              "jg_m_s": 0.22693498417896485
+            },
+            "junction_gas_terms_kg_s": {
+              "convective": 0.0011707178794245023,
+              "diffusive": 0.0001846025106487046,
+              "net": 0.0009861153687757977
+            },
+            "neighbors_SI": {
+              "ulL_m_s": 1.0133733387470616,
+              "ugL_m_s": 0.3543943152539772,
+              "ulR_m_s": 0.3346159318892606,
+              "ugR_m_s": 0.8285081638783414,
+              "alphaL": 0.7239005604563692,
+              "alphaR": 0.34085146169385205
+            },
+            "riser_trace_root": {
+              "status": 0,
+              "nroots": 1,
+              "alpha": 0.2719229829800889
+            }
+          },
+          "linearization_junction": {
+            "junction_SI": {
+              "p_Pa": 235800.3783375609,
+              "jl_m_s": 0.2797841080801867,
+              "jg_m_s": 0.2269349664134046
+            },
+            "junction_gas_terms_kg_s": {
+              "convective": 0.0011707178005835597,
+              "diffusive": 0.00018460250898758842,
+              "net": 0.0009861152915959714
+            },
+            "neighbors_SI": {
+              "ulL_m_s": 1.0133733386311679,
+              "ugL_m_s": 0.3543942841141205,
+              "ulR_m_s": 0.33461592240991134,
+              "ugR_m_s": 0.8285081466098456,
+              "alphaL": 0.7239005604556719,
+              "alphaR": 0.34085145213803203
+            },
+            "riser_trace_root": {
+              "status": 0,
+              "nroots": 1,
+              "alpha": 0.27192296737329535
+            }
+          },
+          "cell69_old_and_linearization": [
+            {
+              "profile": 1,
+              "cell": 69,
+              "status": 0,
+              "theta_rad": 0.9012386672268461,
+              "alpha": 0.6382716630309477,
+              "p_Pa": 228440.1927525681,
+              "ul_m_s": 2.9367850460519817e-09,
+              "ug_m_s": 0.6245597120802567,
+              "jl_m_s": 1.062318370743965e-09,
+              "jg_m_s": 0.3986387660915954
+            },
+            {
+              "profile": 2,
+              "cell": 69,
+              "status": 0,
+              "theta_rad": 0.9012386672268461,
+              "alpha": 0.6382716632414496,
+              "p_Pa": 228440.19415709612,
+              "ul_m_s": 2.202834647338875e-14,
+              "ug_m_s": 0.624559709271312,
+              "jl_m_s": 7.968277131359992e-15,
+              "jg_m_s": 0.3986387644301965
+            }
+          ],
+          "proposals_summary": {
+            "count": 18,
+            "accepted_count": 0,
+            "assembly_statuses": [
+              1014
+            ],
+            "first": {
+              "k": 0,
+              "lambda": 1.0,
+              "assembly_status": 1014,
+              "residual_norm": null,
+              "accepted_by_Armijo": false,
+              "first_point_failure_cell": 69,
+              "first_point_failure_status": 14,
+              "junction": {
+                "junction_SI": {
+                  "p_Pa": 235800.37834537373,
+                  "jl_m_s": 0.2797841081312711,
+                  "jg_m_s": 0.2269349341976378
+                },
+                "junction_gas_terms_kg_s": {
+                  "convective": 0.0011707176576147718,
+                  "diffusive": 0.00018460250597539672,
+                  "net": 0.000986115151639375
+                },
+                "neighbors_SI": {
+                  "ulL_m_s": 1.0133733384209926,
+                  "ugL_m_s": 0.35439422765009143,
+                  "ulR_m_s": 0.3346159052204952,
+                  "ugR_m_s": 0.8285081152959474,
+                  "alphaL": 0.723900560454408,
+                  "alphaR": 0.34085143480994656
+                },
+                "riser_trace_root": {
+                  "status": 0,
+                  "nroots": 1,
+                  "alpha": 0.27192293907219706
+                }
+              }
+            },
+            "last": {
+              "k": 17,
+              "lambda": 7.62939453125e-06,
+              "assembly_status": 1014,
+              "residual_norm": null,
+              "accepted_by_Armijo": false,
+              "first_point_failure_cell": 69,
+              "first_point_failure_status": 14,
+              "junction": {
+                "junction_SI": {
+                  "p_Pa": 235800.37833755865,
+                  "jl_m_s": 0.27978410808019405,
+                  "jg_m_s": 0.22693496641348337
+                },
+                "junction_gas_terms_kg_s": {
+                  "convective": 0.001170717800584043,
+                  "diffusive": 0.00018460250898773864,
+                  "net": 0.0009861152915963043
+                },
+                "neighbors_SI": {
+                  "ulL_m_s": 1.0133733386311663,
+                  "ugL_m_s": 0.3543942841136706,
+                  "ulR_m_s": 0.3346159224097802,
+                  "ugR_m_s": 0.8285081466096065,
+                  "alphaL": 0.7239005604556719,
+                  "alphaR": 0.34085145213789975
+                },
+                "riser_trace_root": {
+                  "status": 0,
+                  "nroots": 1,
+                  "alpha": 0.2719229673733618
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@ program test_roe_geometry
   use module_config, only: sim_config_t
   use module_simulate_pipe_riser, only: pipeline_riser_simulator_t
   use module_steady_state, only: solve_alpha_from_superficials
+  use module_find, only: PRIMITIVE_NO_PHYSICAL_ROOT
   use module_matrix_roe, only: calculate_roe_matrix
   use module_roe_solver, only: roe_absA_from_A
   use, intrinsic :: ieee_arithmetic, only: ieee_is_finite,ieee_value,ieee_quiet_nan
@@ -95,7 +96,8 @@ program test_roe_geometry
   call sim%point_state(right,theta_right,v,fr,src,jac,ds,code)
   call check(code==0.and.v(5)>0,'frozen SS3 right liquid speed remains positive')
   avg=path_matrix(left,right,.5_wp*(theta_left+theta_right),.5_wp*(theta_left+theta_right),3,code)
-  call check(code==14.and..not.all(ieee_is_finite(avg)),'frozen SS3 reproduces old mean-angle primitive failure')
+  call check(code==10+PRIMITIVE_NO_PHYSICAL_ROOT.and..not.all(ieee_is_finite(avg)), &
+    'frozen SS3 mean-angle path has a certified cocurrent exclusion')
   avg=path_matrix(left,right,theta_left,theta_right,3,code)
   call check(code==0,'frozen SS3 augmented path is admitted without clipping')
   call roe_absA_from_A(avg,diss,speed,code)

@@ -1,0 +1,124 @@
+{
+  "schema": "PRIMS-F.osc_refinement_repository_package.v1",
+  "created_utc": "2026-11-19T16:25:25.893381+00:00",
+  "git_head": "69813ee70551fa4a3f075919aeafc45de9693f11",
+  "binary_sha256": "7442291fd6cdc311627e79500dc5a4804813b42c7bf4daecf88b4b8b2322288a",
+  "copies": {
+    "terminal_index.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/summary/terminal_index.json",
+      "sha256": "149f398eebda20fc02e71e2d6227a2e4823c4b3173ab752b6ea4e4242d4533ca",
+      "size_bytes": 91895
+    },
+    "RESULTS_v2.md": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/summary/RESULTS_v2.md",
+      "sha256": "b3e9c9fcf9d597ead38c2ecf66ca48663365f78e4b511e18ef8f483fb20f03fd",
+      "size_bytes": 4209
+    },
+    "delivery.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/summary/delivery.json",
+      "sha256": "5100a76ab2cafffeb9141744b6800d72e278fce4548f6535dd31f14efa10dda8",
+      "size_bytes": 2700
+    },
+    "figure_index.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/figures_refinement_v1/index.json",
+      "sha256": "d63e84da907bc233e5706b33ecaa20faf6e7494a1e63182aad707c7337c618a9",
+      "size_bytes": 2477
+    },
+    "osc_refinamento.png": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/figures_refinement_v1/osc_refinamento.png",
+      "sha256": "e6a2a66b2acb4a280a2ad1fe0cbe1af8320924941db3eec35cffda9109872599",
+      "size_bytes": 239702
+    },
+    "provenance/build.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/build.json",
+      "sha256": "ec3493564b6a6a1bb541200ff05d77576247fb40fdefe2e80976b975d7f6589f",
+      "size_bytes": 39468
+    },
+    "provenance/refinement_plan.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/plan.json",
+      "sha256": "da9836b9c830df3cb41aaefd8ec6f112e73cb104aad08012eeca0b2fa05d60fd",
+      "size_bytes": 18594
+    },
+    "provenance/refinement_seal.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/seal.json",
+      "sha256": "727b0961c17472b60e37a198efe3bd4161fd03736b4b4df055ffe828850b7fd8",
+      "size_bytes": 3151
+    },
+    "provenance/reference_plan.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_osc3600/plan.json",
+      "sha256": "88066d26bc0d61ed8e995ac4d84c38d1bb25168ae70884cec6eef81ae9a6f115",
+      "size_bytes": 5098
+    },
+    "provenance/reference_seal.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_osc3600/seal.json",
+      "sha256": "5ae2d491b55869a9eae3f2a14fe8a608fa933900b16cac842c5a3d72e060fc91",
+      "size_bytes": 3151
+    },
+    "manifests/D_OSC.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_osc3600/runs/D_OSC/manifest.json",
+      "sha256": "af7c9d6580e0556166618020bb57f8cf1ded0d305b4bfd5ef0d9ebb46b30ded3",
+      "size_bytes": 5618
+    },
+    "decks/D_OSC.nml": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_osc3600/decks/D_OSC.nml",
+      "sha256": "9e37527b7cc77156f2cbaf4c9d83383a5b3706c50630e151c49d1146eb005363",
+      "size_bytes": 1594
+    },
+    "manifests/D_OSC_h_N401_dt0p125.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125/manifest.json",
+      "sha256": "a4f67ddfeb520b4e598e0e0045d291615447e139625700791f5315c80b55def8",
+      "size_bytes": 5675
+    },
+    "decks/D_OSC_h_N401_dt0p125.nml": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/decks/D_OSC_h_N401_dt0p125.nml",
+      "sha256": "488bc2dd2c97bea5c1ea9760be4059c465bf56c220520177ae36a75a384a5580",
+      "size_bytes": 1615
+    },
+    "manifests/D_OSC_h_N201_dt0p125.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N201_dt0p125/manifest.json",
+      "sha256": "9d1a7ca24ed2f2ab3e697ebcbd07ebf06c5ff341e4ff22f1da223601bd0b1ac0",
+      "size_bytes": 5674
+    },
+    "decks/D_OSC_h_N201_dt0p125.nml": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/decks/D_OSC_h_N201_dt0p125.nml",
+      "sha256": "80629d501a7f3956b43d415d05ba0603ca19f8c355b45d06916f4e707cf61089",
+      "size_bytes": 1615
+    },
+    "manifests/D_OSC_dt_N51_dt0p03125.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p03125/manifest.json",
+      "sha256": "071b1c2c6001653ffbad77eb0fcf86b873ae2717a7f6a6a819f51a92b8e6233d",
+      "size_bytes": 5688
+    },
+    "decks/D_OSC_dt_N51_dt0p03125.nml": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/decks/D_OSC_dt_N51_dt0p03125.nml",
+      "sha256": "48c8dac88eac90b99dadb647e80fa834de48f9a2f4ff4a4152be4d7e1a5480eb",
+      "size_bytes": 1617
+    },
+    "manifests/D_OSC_h_N101_dt0p125.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N101_dt0p125/manifest.json",
+      "sha256": "dfeef0f16362912d4d878ee81f2a72dc10b003eaf038cdc4a98d516b4e4be68a",
+      "size_bytes": 5682
+    },
+    "decks/D_OSC_h_N101_dt0p125.nml": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/decks/D_OSC_h_N101_dt0p125.nml",
+      "sha256": "c427964439887fdbf981e1594bfada48be66253ef3adc97588097b9f47f28716",
+      "size_bytes": 1615
+    },
+    "manifests/D_OSC_dt_N51_dt0p0625.json": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p0625/manifest.json",
+      "sha256": "5b427f48d268a74bd598f85a1532b607729fe57c8b35ca702d1bc5c12024c67e",
+      "size_bytes": 5682
+    },
+    "decks/D_OSC_dt_N51_dt0p0625.nml": {
+      "source_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/decks/D_OSC_dt_N51_dt0p0625.nml",
+      "sha256": "db0fff0bb7c53f34d18b71797db52f7cae7f30b976a25c9f5629c9909624a973",
+      "size_bytes": 1615
+    }
+  },
+  "readme_sha256": "4c489cbf1d415b56cd4a7c6bd52f64ca9b2713161bdbcdcf1d8146f560f84826",
+  "copies_are_byte_identical": true,
+  "readme_relative_links_verified": true,
+  "raw_data_included": false,
+  "reference_and_refinement_physics_identical": true,
+  "limits": "Original JSON paths remain external; this map identifies the byte-identical repository copies. No raw CSV, executable, or PDF is included."
+}

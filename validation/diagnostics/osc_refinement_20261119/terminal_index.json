@@ -1,0 +1,2197 @@
+{
+  "schema": "PRIMS-F.osc_refinement_terminal_index.v1",
+  "created_utc": "2026-11-19T16:20:39.115421+00:00",
+  "plan": {
+    "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/plan.json",
+    "sha256": "da9836b9c830df3cb41aaefd8ec6f112e73cb104aad08012eeca0b2fa05d60fd",
+    "size_bytes": 18594
+  },
+  "seal": {
+    "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/seal.json",
+    "sha256": "727b0961c17472b60e37a198efe3bd4161fd03736b4b4df055ffe828850b7fd8",
+    "size_bytes": 3151
+  },
+  "build": {
+    "path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/build.json",
+    "sha256": "ec3493564b6a6a1bb541200ff05d77576247fb40fdefe2e80976b975d7f6589f",
+    "size_bytes": 39468
+  },
+  "git_head": "69813ee70551fa4a3f075919aeafc45de9693f11",
+  "binary_sha256": "7442291fd6cdc311627e79500dc5a4804813b42c7bf4daecf88b4b8b2322288a",
+  "source_sha256": {
+    "scr/debug_closure_fd.f90": "fa2af5a40578008158e76044651214bf19422551f5bb60aca32add675ed967b5",
+    "scr/main.f90": "4365b0f395845e01d0ee3bc4826b4a1f0c1f9000aed9e0b290aa501de4027a29",
+    "scr/mod_fluid_dynamics.f90": "2f1b2137311d50cdd12410d01a2b1b58b694b8fbf18cf26a0da8a06506ffe9fe",
+    "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "scr/mod_roe_solver.f90": "4417a1c8db516a58f68023182ada5665b9f47277139b36b757e0cca00ed358c6",
+    "scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c",
+    "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "scr/module_boundary_conditions.f90": "ffb17c54462b36e4e055cebb4645e6854ef1f68e583c7c6815ebbe2b63f0baf9",
+    "scr/module_catenary.f90": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+    "scr/module_chexal_1992.f90": "63a60d888a288eee582ab61d418cfe8838d1aa0e79b145e8a163d25c026d0443",
+    "scr/module_closure_law.f90": "2c7e9b7d81651faa6580be044fcf04e8430fc54670afd8b10dd614d2e955d233",
+    "scr/module_config.f90": "fcac25be786649550dc06a687fddd7b4f215c9ba362a9d48a6505503a0470251",
+    "scr/module_find.f90": "4976a0fae46a07d25f1e06a7e2df547ae58f79d5e9a750b28ab61253a77541e9",
+    "scr/module_flow_regime.f90": "d7c369d3d1418d1f3bb97ebd10a849ad3ea24aec11522753377c9e2cea046ebd",
+    "scr/module_jacobian.f90": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+    "scr/module_lapack_small.f90": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+    "scr/module_matrix_roe.f90": "f39b1226bb701fff35a64e2f26e077eb75e372d4d0047afcce87ffdf514bdd4a",
+    "scr/module_mesh.f90": "bdb594b3f4ac288787484f613f73235453ad446053d4d34cb46ca0d60ac5f2fd",
+    "scr/module_roe_solver.f90": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+    "scr/module_simulate_pipe_riser.f90": "381a67ae237e6b7a3bd9d470e5a929a6eeb8830f28df454649c29c48528a6bc4",
+    "scr/module_solver_utils.f90": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+    "scr/module_steady_state.f90": "7e7258450e45beb14c4e1b1115d49bdff6662cac94fc27b33ecd21a37cfcdd6f",
+    "scr/module_time_step.f90": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133"
+  },
+  "runs": {
+    "D_OSC": {
+      "folder": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_osc3600/runs/D_OSC",
+      "manifest": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_osc3600/runs/D_OSC/manifest.json",
+        "sha256": "af7c9d6580e0556166618020bb57f8cf1ded0d305b4bfd5ef0d9ebb46b30ded3",
+        "size_bytes": 5618
+      },
+      "status": "COMPLETED",
+      "controls": {
+        "nodes": 51.0,
+        "n_riser": 51.0,
+        "num_dummy_cells": 2.0,
+        "mesh_ratio": 1.0,
+        "x": 6.435,
+        "z": 9.886,
+        "lp": 57.4,
+        "beta_deg": 2.0,
+        "d": 0.05254,
+        "eps": 4.6e-05,
+        "g": 9.81,
+        "rho_l0": 997.05,
+        "p_l0": 101325.0,
+        "cl": 1498.0,
+        "mu_l": 0.00089,
+        "mu_g": 1.85e-05,
+        "sigma": 0.0728,
+        "rg": 287.0,
+        "gamma_g": 1.4,
+        "gas_eos": "BAROTROPIC",
+        "cg_fixed": 343.0,
+        "gas_flow_basis": "STANDARD",
+        "p_standard": 101300.0,
+        "t_standard": 293.15,
+        "ps": 206000.0,
+        "tgas": 293.15,
+        "jl": 0.547,
+        "jg": 1.16,
+        "mul": 545.38635,
+        "mug": 1.396675899947762,
+        "closure_riser": 3.0,
+        "dissipation_mode": "LAGGED",
+        "junction_model": "MATCHED",
+        "time_dim": 3600.0,
+        "perturbation_amplitude": 0.01,
+        "output_interval_s": 0.03125,
+        "dt_start_s": 0.001,
+        "dt_max_s": 0.125,
+        "cfl": 0.5,
+        "tol": 1e-12,
+        "tola": 1e-13,
+        "tol_res": 1e-08,
+        "tol_inc": 1e-08,
+        "quad_points": 3.0,
+        "use_muscl": ".false.",
+        "max_iter": 10000000.0,
+        "newton_max": 25.0,
+        "max_workers": 1.0,
+        "save_every": 0.0,
+        "field_interval_s": 0.25,
+        "regime": "D_OSC",
+        "out_dir": "../PRIMS-F-numerics-results-20261119/v1_osc3600/runs/D_OSC",
+        "dt_min_s": 1e-07,
+        "dt_min": -1.0,
+        "flux_scheme": "ROE",
+        "pipe_regime_mode": "FIXED_STRATIFIED"
+      },
+      "effective_metadata_verified": true,
+      "solver_cost": {
+        "status": 0.0,
+        "reached_time_s": 3600.0,
+        "requested_time_s": 3600.0,
+        "accepted_steps": 28822.0,
+        "rejected_steps": 0.0,
+        "last_rejection_status": 0.0,
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": 821.134189,
+        "wall_seconds": 821.581634681,
+        "newton_iterations_total": 66846.0,
+        "jacobian_evaluations_total": 66846.0,
+        "residual_evaluations_total": 133692.0,
+        "linear_solves_total": 66846.0,
+        "backtrack_trials_total": 66846.0,
+        "prepare_calls_total": 28822.0
+      },
+      "coordinator_wall_seconds": 822.2787827099964,
+      "cost_note": "Use solver_cost.wall_seconds for execution cost; coordinator time can include the documented scheduler reservation.",
+      "mass_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/analysis/D_OSC_mass_v2.json",
+        "sha256": "d4bfe4ae51a4a37c03de423889a1793f77ff032534f53bce257b1a66e299a85c",
+        "size_bytes": 15704
+      },
+      "cycle_analysis": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/analysis/D_OSC_cross.json",
+        "sha256": "03de9c808f34e1398fc6b87266f8741db223c81b0afd1bc632e0fd889062179c",
+        "size_bytes": 385569
+      },
+      "cycle_balance_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/reference_cycle_balances_v2.json",
+        "sha256": "45ca689def16d7f7c25dd17b9087472c0a0a027d6356d14b70dc3efc5b08d69a",
+        "size_bytes": 47237
+      },
+      "artifacts": {
+        "conservation.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_osc3600/runs/D_OSC/conservation.csv",
+          "sha256": "1ba00b785b2be6aebc13f6d88b27d3f92ba63fb3b150eb49315e6b2cc6081d00",
+          "size_bytes": 41293412
+        },
+        "steps.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_osc3600/runs/D_OSC/steps.csv",
+          "sha256": "1cf491d86116244211f566dfb00f0e19099cce1b3dc82dafcf6e5b229b6ffd9b",
+          "size_bytes": 5608524
+        },
+        "run_status.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_osc3600/runs/D_OSC/run_status.txt",
+          "sha256": "5eb59567f2329add17510ccf926a41170dbc710ca9fd39119f3f171f65bcf035",
+          "size_bytes": 435
+        },
+        "run_metadata.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_osc3600/runs/D_OSC/run_metadata.txt",
+          "sha256": "953b6f99f0076e99940d724cd7fcc9914b4ac061452628dd4049729e05c7b06c",
+          "size_bytes": 3294
+        },
+        "manifest.json": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/v1_osc3600/runs/D_OSC/manifest.json",
+          "sha256": "af7c9d6580e0556166618020bb57f8cf1ded0d305b4bfd5ef0d9ebb46b30ded3",
+          "size_bytes": 5618
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "fixed_256eps_contract_passes": false,
+      "fixed_256eps_mismatch_count": 20,
+      "arithmetic_allowance_scale": {
+        "l_system": {
+          "cumulative_identity_allowance_kg": 2.916848009721981e-07,
+          "physical_inventory_limit_kg": 7.187519043151006e-05,
+          "allowance_over_physical_limit": 0.004058212565713405
+        },
+        "l_pipe": {
+          "cumulative_identity_allowance_kg": 2.1075320327031866e-07,
+          "physical_inventory_limit_kg": 5.5707636743071254e-05,
+          "allowance_over_physical_limit": 0.0037832012914554573
+        },
+        "l_riser": {
+          "cumulative_identity_allowance_kg": 8.141553349420924e-08,
+          "physical_inventory_limit_kg": 1.61675536884388e-05,
+          "allowance_over_physical_limit": 0.005035736083711192
+        },
+        "g_system": {
+          "cumulative_identity_allowance_kg": 7.228644867528679e-10,
+          "physical_inventory_limit_kg": 1.7695406353276281e-07,
+          "allowance_over_physical_limit": 0.0040850403337532315
+        },
+        "g_pipe": {
+          "cumulative_identity_allowance_kg": 5.79291312613462e-10,
+          "physical_inventory_limit_kg": 1.5463122688667542e-07,
+          "allowance_over_physical_limit": 0.003746276378173001
+        },
+        "g_riser": {
+          "cumulative_identity_allowance_kg": 1.4481301715138454e-10,
+          "physical_inventory_limit_kg": 2.2322836646087382e-08,
+          "allowance_over_physical_limit": 0.006487213943608127
+        }
+      },
+      "allowances_never_added_to_physical_tolerances": true,
+      "whole_run_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 1.552052708575502e-09,
+          "initial_inventory_kg": 71.87519043151006,
+          "absolute_processed_mass_kg": 8514.958547732842,
+          "relative_inventory": 2.1593719602794715e-11,
+          "relative_processed": 1.822736657935634e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.1695896409054554e-10
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 2.8892827685922384e-08,
+          "initial_inventory_kg": 55.707636743071255,
+          "absolute_processed_mass_kg": 8513.480898836291,
+          "relative_inventory": 5.186511109630941e-10,
+          "relative_processed": 3.393773713625381e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.7799988883390484e-08
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 2.774504537228495e-08,
+          "initial_inventory_kg": 16.1675536884388,
+          "absolute_processed_mass_kg": 8514.966136187122,
+          "relative_inventory": 1.7160942160424094e-09,
+          "relative_processed": 3.2583858735941814e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.768302991929994e-08
+        },
+        "g_system": {
+          "max_abs_balance_kg": 1.8009482793956977e-10,
+          "initial_inventory_kg": 0.17695406353276283,
+          "absolute_processed_mass_kg": 21.804519312768186,
+          "relative_inventory": 1.0177490380503493e-09,
+          "relative_processed": 8.25951837581261e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.1701113819868066e-10
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 2.413006683354979e-09,
+          "initial_inventory_kg": 0.1546312268866754,
+          "absolute_processed_mass_kg": 21.806819118892356,
+          "relative_inventory": 1.5604911969840345e-08,
+          "relative_processed": 1.1065376707162526e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.4145149240053704e-09
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 2.2983552838695687e-09,
+          "initial_inventory_kg": 0.022322836646087384,
+          "absolute_processed_mass_kg": 21.809247129853944,
+          "relative_inventory": 1.0295982183215998e-07,
+          "relative_processed": 1.0538443946207696e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.2975037858066895e-09
+        }
+      },
+      "ten_cycle_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 7.494804776797537e-11,
+          "relative_inventory": 1.0132794329464454e-12,
+          "relative_processed": 1.3714525059772116e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 2.7842617100759526e-10,
+          "relative_inventory": 4.997519247381555e-12,
+          "relative_processed": 5.094854018925773e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 2.717044367273047e-10,
+          "relative_inventory": 1.4885510228309642e-11,
+          "relative_processed": 4.971840382105594e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_system": {
+          "max_abs_balance_kg": 7.485123632022805e-13,
+          "relative_inventory": 4.259740909463282e-12,
+          "relative_processed": 5.348441311847152e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 5.922856649576147e-11,
+          "relative_inventory": 3.7564593771313424e-10,
+          "relative_processed": 4.2321316707639727e-10,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 5.990091755947446e-11,
+          "relative_inventory": 3.3192430888889026e-09,
+          "relative_processed": 4.2801777757626136e-10,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        }
+      },
+      "accommodated": true,
+      "period_20_80_s": 23.108617598421368,
+      "cycle_edges_s": [
+        3352.638132361158,
+        3375.7467534581124,
+        3398.8553411542334,
+        3421.96389394683,
+        3445.072410383737,
+        3468.180906998687,
+        3491.289658012018,
+        3514.398374863754,
+        3537.507056305309,
+        3560.6157011591,
+        3583.724308345372
+      ],
+      "effective_steps_last_ten_cycles": {
+        "available": true,
+        "complete_history_verified": true,
+        "issues": [],
+        "rejections_after_last_accepted_step": 0.0,
+        "full_history_rows": 28822,
+        "window_steps": 1849,
+        "selection": "accepted step endpoint in (start,end]",
+        "requested_window_start_s": 3352.638132361158,
+        "requested_window_end_s": 3583.724308345372,
+        "covered_step_start_s": 3352.5568527591768,
+        "covered_step_end_s": 3583.6818527594846,
+        "sum_accepted_dt_s": 231.125,
+        "min_s": 0.125,
+        "p05_s": 0.125,
+        "median_s": 0.125,
+        "p95_s": 0.125,
+        "max_s": 0.125,
+        "count_mean_s": 0.125,
+        "time_weighted_mean_s": 0.125,
+        "fraction_steps_at_cap": 1.0,
+        "fraction_time_at_cap": 1.0,
+        "histogram": {
+          "kind": "logarithmic_bins",
+          "edges_s": [
+            0.125,
+            0.125
+          ],
+          "counts": [
+            1849
+          ],
+          "time_s": [
+            231.125
+          ]
+        }
+      },
+      "supplementary_fixed_trace": {
+        "artifact": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/reference_fixed_trace_holdup.json",
+          "sha256": "7732a301ce2aaf05607014ae28134ec01ef2a3a54cbb675bebed43148b08aed3",
+          "size_bytes": 26115
+        },
+        "statistics": {
+          "mean": 0.6149111932218755,
+          "minimum": 0.4928666987271497,
+          "maximum": 0.719395565770128,
+          "peak_to_peak": 0.2265288670429783
+        },
+        "accommodated": true,
+        "primary_gates_unchanged": true
+      },
+      "predeclared_observation_gates_pass": true,
+      "interpretation": "Observation gates are separate from mesh/time convergence, model validity, and experimental regime identification."
+    },
+    "D_OSC_h_N401_dt0p125": {
+      "folder": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125",
+      "manifest": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125/manifest.json",
+        "sha256": "a4f67ddfeb520b4e598e0e0045d291615447e139625700791f5315c80b55def8",
+        "size_bytes": 5675
+      },
+      "status": "COMPLETED",
+      "controls": {
+        "nodes": 401.0,
+        "n_riser": 401.0,
+        "num_dummy_cells": 2.0,
+        "mesh_ratio": 1.0,
+        "x": 6.435,
+        "z": 9.886,
+        "lp": 57.4,
+        "beta_deg": 2.0,
+        "d": 0.05254,
+        "eps": 4.6e-05,
+        "g": 9.81,
+        "rho_l0": 997.05,
+        "p_l0": 101325.0,
+        "cl": 1498.0,
+        "mu_l": 0.00089,
+        "mu_g": 1.85e-05,
+        "sigma": 0.0728,
+        "rg": 287.0,
+        "gamma_g": 1.4,
+        "gas_eos": "BAROTROPIC",
+        "cg_fixed": 343.0,
+        "gas_flow_basis": "STANDARD",
+        "p_standard": 101300.0,
+        "t_standard": 293.15,
+        "ps": 206000.0,
+        "tgas": 293.15,
+        "jl": 0.547,
+        "jg": 1.16,
+        "mul": 545.38635,
+        "mug": 1.396675899947762,
+        "closure_riser": 3.0,
+        "dissipation_mode": "LAGGED",
+        "junction_model": "MATCHED",
+        "time_dim": 3600.0,
+        "perturbation_amplitude": 0.01,
+        "output_interval_s": 0.03125,
+        "dt_start_s": 0.001,
+        "dt_max_s": 0.125,
+        "cfl": 0.5,
+        "tol": 1e-12,
+        "tola": 1e-13,
+        "tol_res": 1e-08,
+        "tol_inc": 1e-08,
+        "quad_points": 3.0,
+        "use_muscl": ".false.",
+        "max_iter": 10000000.0,
+        "newton_max": 25.0,
+        "max_workers": 1.0,
+        "save_every": 0.0,
+        "field_interval_s": 0.25,
+        "regime": "D_OSC",
+        "out_dir": "../PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125",
+        "dt_min_s": 1e-07,
+        "dt_min": -1.0,
+        "flux_scheme": "ROE",
+        "pipe_regime_mode": "FIXED_STRATIFIED"
+      },
+      "effective_metadata_verified": true,
+      "solver_cost": {
+        "status": 0.0,
+        "reached_time_s": 3600.0,
+        "requested_time_s": 3600.0,
+        "accepted_steps": 28822.0,
+        "rejected_steps": 0.0,
+        "last_rejection_status": 0.0,
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": 6929.322924,
+        "wall_seconds": 6963.755532826,
+        "newton_iterations_total": 80145.0,
+        "jacobian_evaluations_total": 80145.0,
+        "residual_evaluations_total": 162208.0,
+        "linear_solves_total": 80145.0,
+        "backtrack_trials_total": 82063.0,
+        "prepare_calls_total": 28822.0
+      },
+      "coordinator_wall_seconds": 6964.893227576002,
+      "cost_note": "Use solver_cost.wall_seconds for execution cost; coordinator time can include the documented scheduler reservation.",
+      "mass_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N401_dt0p125_mass_v2.json",
+        "sha256": "bd092c7ae02ddf142b2962604d691f939f58810708cc3b8700cd4aa32ecd30b8",
+        "size_bytes": 15828
+      },
+      "cycle_analysis": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N401_dt0p125_cross.json",
+        "sha256": "5a2514534c75ede828ad4fc4a91b5ffd82ee83b8803844adfdf4cf7f2fee0e68",
+        "size_bytes": 386897
+      },
+      "cycle_balance_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N401_dt0p125_cycles_v2.json",
+        "sha256": "dca85b234fb221d5daea9eb4a97649bc1cf89e6e8b76dc4f31f7611a07cf0b19",
+        "size_bytes": 47371
+      },
+      "artifacts": {
+        "conservation.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125/conservation.csv",
+          "sha256": "71e88dec3af0f2ef0821d61b8b2e0fbebf9ff5294afccbb4eb92c2fd63d4799c",
+          "size_bytes": 41293412
+        },
+        "steps.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125/steps.csv",
+          "sha256": "562b6108630a1da74a8a9812e13f44572ce9402be119a0f767eabda65a94a8e4",
+          "size_bytes": 5611658
+        },
+        "run_status.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125/run_status.txt",
+          "sha256": "13dec617a602fe9bc2bd9eb57335a7dbfe67923ba3b5f1568c7915693f375015",
+          "size_bytes": 435
+        },
+        "run_metadata.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125/run_metadata.txt",
+          "sha256": "569f0d31b0dbe0ef7c556773fa44b4517668dc365ecb46deb443585dbc219fde",
+          "size_bytes": 3294
+        },
+        "manifest.json": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125/manifest.json",
+          "sha256": "a4f67ddfeb520b4e598e0e0045d291615447e139625700791f5315c80b55def8",
+          "size_bytes": 5675
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "fixed_256eps_contract_passes": false,
+      "fixed_256eps_mismatch_count": 20,
+      "arithmetic_allowance_scale": {
+        "l_system": {
+          "cumulative_identity_allowance_kg": 2.9205877594897033e-07,
+          "physical_inventory_limit_kg": 7.187506716079618e-05,
+          "allowance_over_physical_limit": 0.004063422651078537
+        },
+        "l_pipe": {
+          "cumulative_identity_allowance_kg": 2.107490549436554e-07,
+          "physical_inventory_limit_kg": 5.570763674339552e-05,
+          "allowance_over_physical_limit": 0.0037831268254013843
+        },
+        "l_riser": {
+          "cumulative_identity_allowance_kg": 8.179365451592998e-08,
+          "physical_inventory_limit_kg": 1.616743041740068e-05,
+          "allowance_over_physical_limit": 0.0050591623037323915
+        },
+        "g_system": {
+          "cumulative_identity_allowance_kg": 7.228176728193894e-10,
+          "physical_inventory_limit_kg": 1.769542172791942e-07,
+          "allowance_over_physical_limit": 0.004084772230542235
+        },
+        "g_pipe": {
+          "cumulative_identity_allowance_kg": 5.802910903552918e-10,
+          "physical_inventory_limit_kg": 1.5463122720289852e-07,
+          "allowance_over_physical_limit": 0.003752741932222177
+        },
+        "g_riser": {
+          "cumulative_identity_allowance_kg": 1.4376494747795116e-10,
+          "physical_inventory_limit_kg": 2.2322990076295974e-08,
+          "allowance_over_physical_limit": 0.006440219118791361
+        }
+      },
+      "allowances_never_added_to_physical_tolerances": true,
+      "whole_run_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 1.5502337191719562e-09,
+          "initial_inventory_kg": 71.87506716079619,
+          "absolute_processed_mass_kg": 8509.599956987291,
+          "relative_inventory": 2.1568448982507824e-11,
+          "relative_processed": 1.8217468823537922e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 6.392469418745712e-11
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 1.7530510376673192e-09,
+          "initial_inventory_kg": 55.70763674339552,
+          "absolute_processed_mass_kg": 8513.460831088421,
+          "relative_inventory": 3.1468774124135756e-11,
+          "relative_processed": 2.0591520563126812e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.9142666728615074e-10
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 2.1191226551309228e-10,
+          "initial_inventory_kg": 16.16743041740068,
+          "absolute_processed_mass_kg": 8509.587477693702,
+          "relative_inventory": 1.310735596455794e-11,
+          "relative_processed": 2.4902765976444898e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.2750197309869357e-10
+        },
+        "g_system": {
+          "max_abs_balance_kg": 7.394729273357825e-11,
+          "initial_inventory_kg": 0.17695421727919422,
+          "absolute_processed_mass_kg": 21.801171782602538,
+          "relative_inventory": 4.1788940591851477e-10,
+          "relative_processed": 3.3918953288826713e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -6.395362883495064e-11
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 2.3028334794616967e-10,
+          "initial_inventory_kg": 0.1546312272028985,
+          "absolute_processed_mass_kg": 21.793819483777696,
+          "relative_inventory": 1.4892421932602569e-09,
+          "relative_processed": 1.0566452021756988e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.2796770768814744e-10
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 2.920597097499922e-10,
+          "initial_inventory_kg": 0.022322990076295974,
+          "absolute_processed_mass_kg": 21.792899964573635,
+          "relative_inventory": 1.308335974489907e-08,
+          "relative_processed": 1.3401599154989107e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.919213365230981e-10
+        }
+      },
+      "ten_cycle_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 7.312905836442951e-11,
+          "relative_inventory": 9.748726110618152e-13,
+          "relative_processed": 1.3223497444204194e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 8.039791055125534e-11,
+          "relative_inventory": 1.4430294620534564e-12,
+          "relative_processed": 1.4537963527193e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 1.3713474800169934e-11,
+          "relative_inventory": 7.105677040821388e-13,
+          "relative_processed": 2.479742762206771e-13,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_system": {
+          "max_abs_balance_kg": 1.8951507030351422e-13,
+          "relative_inventory": 1.0813013741892463e-12,
+          "relative_processed": 1.3381676514477375e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 1.6424084314792253e-12,
+          "relative_inventory": 1.0304514039796298e-11,
+          "relative_processed": 1.1597047185696083e-11,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 1.464113552618329e-12,
+          "relative_inventory": 9.220699242377623e-11,
+          "relative_processed": 1.0338105921930974e-11,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        }
+      },
+      "accommodated": true,
+      "period_20_80_s": 23.385039694329635,
+      "cycle_edges_s": [
+        3363.1107186993254,
+        3386.495769108358,
+        3409.8808073973455,
+        3433.265832857305,
+        3456.6508454220416,
+        3480.035843210562,
+        3503.420830114031,
+        3526.805805112582,
+        3550.190910819424,
+        3573.576019655744,
+        3596.9611156426217
+      ],
+      "effective_steps_last_ten_cycles": {
+        "available": true,
+        "complete_history_verified": true,
+        "issues": [],
+        "rejections_after_last_accepted_step": 0.0,
+        "full_history_rows": 28822,
+        "window_steps": 1871,
+        "selection": "accepted step endpoint in (start,end]",
+        "requested_window_start_s": 3363.1107186993254,
+        "requested_window_end_s": 3596.9611156426217,
+        "covered_step_start_s": 3363.0568527591904,
+        "covered_step_end_s": 3596.931852759502,
+        "sum_accepted_dt_s": 233.875,
+        "min_s": 0.125,
+        "p05_s": 0.125,
+        "median_s": 0.125,
+        "p95_s": 0.125,
+        "max_s": 0.125,
+        "count_mean_s": 0.125,
+        "time_weighted_mean_s": 0.125,
+        "fraction_steps_at_cap": 1.0,
+        "fraction_time_at_cap": 1.0,
+        "histogram": {
+          "kind": "logarithmic_bins",
+          "edges_s": [
+            0.125,
+            0.125
+          ],
+          "counts": [
+            1871
+          ],
+          "time_s": [
+            233.875
+          ]
+        }
+      },
+      "supplementary_fixed_trace": {
+        "artifact": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N401_dt0p125_fixed_trace_holdup.json",
+          "sha256": "0e51f5262c1c1dd5fbad58af882ccf2e05c3a839a7b69d5e1ce88ebfb96d69fb",
+          "size_bytes": 26199
+        },
+        "statistics": {
+          "mean": 0.6293837853255225,
+          "minimum": 0.4486109451414955,
+          "maximum": 0.774464153861141,
+          "peak_to_peak": 0.3258532087196454
+        },
+        "accommodated": true,
+        "primary_gates_unchanged": true
+      },
+      "predeclared_observation_gates_pass": true,
+      "interpretation": "Observation gates are separate from mesh/time convergence, model validity, and experimental regime identification."
+    },
+    "D_OSC_h_N201_dt0p125": {
+      "folder": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N201_dt0p125",
+      "manifest": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N201_dt0p125/manifest.json",
+        "sha256": "9d1a7ca24ed2f2ab3e697ebcbd07ebf06c5ff341e4ff22f1da223601bd0b1ac0",
+        "size_bytes": 5674
+      },
+      "status": "COMPLETED",
+      "controls": {
+        "nodes": 201.0,
+        "n_riser": 201.0,
+        "num_dummy_cells": 2.0,
+        "mesh_ratio": 1.0,
+        "x": 6.435,
+        "z": 9.886,
+        "lp": 57.4,
+        "beta_deg": 2.0,
+        "d": 0.05254,
+        "eps": 4.6e-05,
+        "g": 9.81,
+        "rho_l0": 997.05,
+        "p_l0": 101325.0,
+        "cl": 1498.0,
+        "mu_l": 0.00089,
+        "mu_g": 1.85e-05,
+        "sigma": 0.0728,
+        "rg": 287.0,
+        "gamma_g": 1.4,
+        "gas_eos": "BAROTROPIC",
+        "cg_fixed": 343.0,
+        "gas_flow_basis": "STANDARD",
+        "p_standard": 101300.0,
+        "t_standard": 293.15,
+        "ps": 206000.0,
+        "tgas": 293.15,
+        "jl": 0.547,
+        "jg": 1.16,
+        "mul": 545.38635,
+        "mug": 1.396675899947762,
+        "closure_riser": 3.0,
+        "dissipation_mode": "LAGGED",
+        "junction_model": "MATCHED",
+        "time_dim": 3600.0,
+        "perturbation_amplitude": 0.01,
+        "output_interval_s": 0.03125,
+        "dt_start_s": 0.001,
+        "dt_max_s": 0.125,
+        "cfl": 0.5,
+        "tol": 1e-12,
+        "tola": 1e-13,
+        "tol_res": 1e-08,
+        "tol_inc": 1e-08,
+        "quad_points": 3.0,
+        "use_muscl": ".false.",
+        "max_iter": 10000000.0,
+        "newton_max": 25.0,
+        "max_workers": 1.0,
+        "save_every": 0.0,
+        "field_interval_s": 0.25,
+        "regime": "D_OSC",
+        "out_dir": "../PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N201_dt0p125",
+        "dt_min_s": 1e-07,
+        "dt_min": -1.0,
+        "flux_scheme": "ROE",
+        "pipe_regime_mode": "FIXED_STRATIFIED"
+      },
+      "effective_metadata_verified": true,
+      "solver_cost": {
+        "status": 0.0,
+        "reached_time_s": 3600.0,
+        "requested_time_s": 3600.0,
+        "accepted_steps": 28822.0,
+        "rejected_steps": 0.0,
+        "last_rejection_status": 0.0,
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": 3437.280157,
+        "wall_seconds": 3456.463070529,
+        "newton_iterations_total": 78074.0,
+        "jacobian_evaluations_total": 78074.0,
+        "residual_evaluations_total": 156148.0,
+        "linear_solves_total": 78074.0,
+        "backtrack_trials_total": 78074.0,
+        "prepare_calls_total": 28822.0
+      },
+      "coordinator_wall_seconds": 3619.17806476001,
+      "cost_note": "Use solver_cost.wall_seconds for execution cost; coordinator time can include the documented scheduler reservation.",
+      "mass_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N201_dt0p125_mass_v2.json",
+        "sha256": "4d00f448abfa4d03a53edce67f542a58451e52df9813f7670a65da0aa1e1cf76",
+        "size_bytes": 15827
+      },
+      "cycle_analysis": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N201_dt0p125_cross.json",
+        "sha256": "d02eb0e7651019d345fc2daaa5841992cd323a98065478602eec54272597efa4",
+        "size_bytes": 387063
+      },
+      "cycle_balance_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N201_dt0p125_cycles_v2.json",
+        "sha256": "6b617314b64bf2768b87a6a14536b1ef2a753beac28d843282580043dc69e98f",
+        "size_bytes": 47391
+      },
+      "artifacts": {
+        "conservation.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N201_dt0p125/conservation.csv",
+          "sha256": "2f8c8fba84b3bc0b6ec849c41b0ac1cd88cff93fc6f6521a3697913b1c677db3",
+          "size_bytes": 41293412
+        },
+        "steps.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N201_dt0p125/steps.csv",
+          "sha256": "c2463aa8231ff78c24629c4a14dda11f155abd38103ceccaeed1fc339e5c89d4",
+          "size_bytes": 5611382
+        },
+        "run_status.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N201_dt0p125/run_status.txt",
+          "sha256": "ccea31462082c3207dab1676c199978149abe1f771a15af7892a068d6fe25016",
+          "size_bytes": 435
+        },
+        "run_metadata.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N201_dt0p125/run_metadata.txt",
+          "sha256": "0a5e9174fed3fac104d8dc2ffcb074d210fa3e5d993420670b515fb419833612",
+          "size_bytes": 3294
+        },
+        "manifest.json": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N201_dt0p125/manifest.json",
+          "sha256": "9d1a7ca24ed2f2ab3e697ebcbd07ebf06c5ff341e4ff22f1da223601bd0b1ac0",
+          "size_bytes": 5674
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "fixed_256eps_contract_passes": false,
+      "fixed_256eps_mismatch_count": 20,
+      "arithmetic_allowance_scale": {
+        "l_system": {
+          "cumulative_identity_allowance_kg": 2.9203450917725176e-07,
+          "physical_inventory_limit_kg": 7.187507319866056e-05,
+          "allowance_over_physical_limit": 0.004063084685424627
+        },
+        "l_pipe": {
+          "cumulative_identity_allowance_kg": 2.107497744265516e-07,
+          "physical_inventory_limit_kg": 5.570763674337966e-05,
+          "allowance_over_physical_limit": 0.003783139740739357
+        },
+        "l_riser": {
+          "cumulative_identity_allowance_kg": 8.176866869859995e-08,
+          "physical_inventory_limit_kg": 1.6167436455280913e-05,
+          "allowance_over_physical_limit": 0.005057614973454318
+        },
+        "g_system": {
+          "cumulative_identity_allowance_kg": 7.228131819813102e-10,
+          "physical_inventory_limit_kg": 1.7695420975084696e-07,
+          "allowance_over_physical_limit": 0.004084747025792928
+        },
+        "g_pipe": {
+          "cumulative_identity_allowance_kg": 5.802002152664576e-10,
+          "physical_inventory_limit_kg": 1.5463122718740403e-07,
+          "allowance_over_physical_limit": 0.0037521542434846536
+        },
+        "g_riser": {
+          "cumulative_identity_allowance_kg": 1.438516007929286e-10,
+          "physical_inventory_limit_kg": 2.232298256344268e-08,
+          "allowance_over_physical_limit": 0.006444103084527233
+        }
+      },
+      "allowances_never_added_to_physical_tolerances": true,
+      "whole_run_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 1.546140993013978e-09,
+          "initial_inventory_kg": 71.87507319866057,
+          "absolute_processed_mass_kg": 8512.362047706698,
+          "relative_inventory": 2.151150495166092e-11,
+          "relative_processed": 1.8163477826116682e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 7.293025153133486e-11
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 2.9212969820946455e-09,
+          "initial_inventory_kg": 55.707636743379666,
+          "absolute_processed_mass_kg": 8513.464677401857,
+          "relative_inventory": 5.243979376744634e-11,
+          "relative_processed": 3.4313843925951055e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.5279691231604415e-09
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 1.4742909115739167e-09,
+          "initial_inventory_kg": 16.167436455280914,
+          "absolute_processed_mass_kg": 8512.353414726542,
+          "relative_inventory": 9.118891023025211e-11,
+          "relative_processed": 1.7319427891978308e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.4550388716291065e-09
+        },
+        "g_system": {
+          "max_abs_balance_kg": 9.226885921975736e-11,
+          "initial_inventory_kg": 0.17695420975084697,
+          "absolute_processed_mass_kg": 21.797493570570087,
+          "relative_inventory": 5.21427884364394e-10,
+          "relative_processed": 4.233003162544077e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -7.29040126511503e-11
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 4.284306243107494e-10,
+          "initial_inventory_kg": 0.15463122718740405,
+          "absolute_processed_mass_kg": 21.796186171535798,
+          "relative_inventory": 2.7706604422890366e-09,
+          "relative_processed": 1.9656219713806997e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 4.2608457558371825e-10
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 4.990017288264426e-10,
+          "initial_inventory_kg": 0.02232298256344268,
+          "absolute_processed_mass_kg": 21.791588440299286,
+          "relative_inventory": 2.2353721211234324e-08,
+          "relative_processed": 2.2898823102938028e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -4.989885882348686e-10
+        }
+      },
+      "ten_cycle_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 7.94670995674096e-11,
+          "relative_inventory": 1.0612736248487922e-12,
+          "relative_processed": 1.43940867952563e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 6.9505290412053e-11,
+          "relative_inventory": 1.2475283161319153e-12,
+          "relative_processed": 1.2589657072612117e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 2.7316815476297052e-11,
+          "relative_inventory": 1.425373260217298e-12,
+          "relative_processed": 4.947878814719722e-13,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_system": {
+          "max_abs_balance_kg": 2.854660952067434e-13,
+          "relative_inventory": 1.6282572705787713e-12,
+          "relative_processed": 2.019096551860411e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 2.487621220126357e-12,
+          "relative_inventory": 1.5629496577905016e-11,
+          "relative_processed": 1.7594741655564502e-11,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 2.368327756130384e-12,
+          "relative_inventory": 1.4657579410642866e-10,
+          "relative_processed": 1.6751017102774796e-11,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        }
+      },
+      "accommodated": true,
+      "period_20_80_s": 23.3454945974001,
+      "cycle_edges_s": [
+        3359.4498683092993,
+        3382.795315315051,
+        3406.1409452442513,
+        3429.4864643900364,
+        3452.8318674235925,
+        3476.1772274193363,
+        3499.5228826693988,
+        3522.8684283994876,
+        3546.2138593743584,
+        3569.5591713812432,
+        3592.9048142833003
+      ],
+      "effective_steps_last_ten_cycles": {
+        "available": true,
+        "complete_history_verified": true,
+        "issues": [],
+        "rejections_after_last_accepted_step": 0.0,
+        "full_history_rows": 28822,
+        "window_steps": 1867,
+        "selection": "accepted step endpoint in (start,end]",
+        "requested_window_start_s": 3359.4498683092993,
+        "requested_window_end_s": 3592.9048142833003,
+        "covered_step_start_s": 3359.431852759186,
+        "covered_step_end_s": 3592.8068527594965,
+        "sum_accepted_dt_s": 233.375,
+        "min_s": 0.125,
+        "p05_s": 0.125,
+        "median_s": 0.125,
+        "p95_s": 0.125,
+        "max_s": 0.125,
+        "count_mean_s": 0.125,
+        "time_weighted_mean_s": 0.125,
+        "fraction_steps_at_cap": 1.0,
+        "fraction_time_at_cap": 1.0,
+        "histogram": {
+          "kind": "logarithmic_bins",
+          "edges_s": [
+            0.125,
+            0.125
+          ],
+          "counts": [
+            1867
+          ],
+          "time_s": [
+            233.375
+          ]
+        }
+      },
+      "supplementary_fixed_trace": {
+        "artifact": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N201_dt0p125_fixed_trace_holdup.json",
+          "sha256": "291f919a455e419f061c976320d310e104fe01377c9d9f561764ed0d29223e0f",
+          "size_bytes": 26198
+        },
+        "statistics": {
+          "mean": 0.6273321678683843,
+          "minimum": 0.45387320590992986,
+          "maximum": 0.7676221607473901,
+          "peak_to_peak": 0.3137489548374603
+        },
+        "accommodated": true,
+        "primary_gates_unchanged": true
+      },
+      "predeclared_observation_gates_pass": true,
+      "interpretation": "Observation gates are separate from mesh/time convergence, model validity, and experimental regime identification."
+    },
+    "D_OSC_dt_N51_dt0p03125": {
+      "folder": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p03125",
+      "manifest": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p03125/manifest.json",
+        "sha256": "071b1c2c6001653ffbad77eb0fcf86b873ae2717a7f6a6a819f51a92b8e6233d",
+        "size_bytes": 5688
+      },
+      "status": "COMPLETED",
+      "controls": {
+        "nodes": 51.0,
+        "n_riser": 51.0,
+        "num_dummy_cells": 2.0,
+        "mesh_ratio": 1.0,
+        "x": 6.435,
+        "z": 9.886,
+        "lp": 57.4,
+        "beta_deg": 2.0,
+        "d": 0.05254,
+        "eps": 4.6e-05,
+        "g": 9.81,
+        "rho_l0": 997.05,
+        "p_l0": 101325.0,
+        "cl": 1498.0,
+        "mu_l": 0.00089,
+        "mu_g": 1.85e-05,
+        "sigma": 0.0728,
+        "rg": 287.0,
+        "gamma_g": 1.4,
+        "gas_eos": "BAROTROPIC",
+        "cg_fixed": 343.0,
+        "gas_flow_basis": "STANDARD",
+        "p_standard": 101300.0,
+        "t_standard": 293.15,
+        "ps": 206000.0,
+        "tgas": 293.15,
+        "jl": 0.547,
+        "jg": 1.16,
+        "mul": 545.38635,
+        "mug": 1.396675899947762,
+        "closure_riser": 3.0,
+        "dissipation_mode": "LAGGED",
+        "junction_model": "MATCHED",
+        "time_dim": 3600.0,
+        "perturbation_amplitude": 0.01,
+        "output_interval_s": 0.03125,
+        "dt_start_s": 0.001,
+        "dt_max_s": 0.03125,
+        "cfl": 0.5,
+        "tol": 1e-12,
+        "tola": 1e-13,
+        "tol_res": 1e-08,
+        "tol_inc": 1e-08,
+        "quad_points": 3.0,
+        "use_muscl": ".false.",
+        "max_iter": 10000000.0,
+        "newton_max": 25.0,
+        "max_workers": 1.0,
+        "save_every": 0.0,
+        "field_interval_s": 0.25,
+        "regime": "D_OSC",
+        "out_dir": "../PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p03125",
+        "dt_min_s": 1e-07,
+        "dt_min": -1.0,
+        "flux_scheme": "ROE",
+        "pipe_regime_mode": "FIXED_STRATIFIED"
+      },
+      "effective_metadata_verified": true,
+      "solver_cost": {
+        "status": 0.0,
+        "reached_time_s": 3600.0,
+        "requested_time_s": 3600.0,
+        "accepted_steps": 115215.0,
+        "rejected_steps": 0.0,
+        "last_rejection_status": 0.0,
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": 3022.722384,
+        "wall_seconds": 3041.173866429,
+        "newton_iterations_total": 225642.0,
+        "jacobian_evaluations_total": 225642.0,
+        "residual_evaluations_total": 451284.0,
+        "linear_solves_total": 225642.0,
+        "backtrack_trials_total": 225642.0,
+        "prepare_calls_total": 115215.0
+      },
+      "coordinator_wall_seconds": 3042.0475800519926,
+      "cost_note": "Use solver_cost.wall_seconds for execution cost; coordinator time can include the documented scheduler reservation.",
+      "mass_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_dt_N51_dt0p03125_mass_v2.json",
+        "sha256": "3695302e367797033a4e195502d4dc71c6d6801959a12d631dd589328d3b172a",
+        "size_bytes": 15879
+      },
+      "cycle_analysis": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_dt_N51_dt0p03125_cross.json",
+        "sha256": "6b7d129503f408a3c2a80559ce7a7f761de6a48f05e28abc0e16f612b48376fd",
+        "size_bytes": 387510
+      },
+      "cycle_balance_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_dt_N51_dt0p03125_cycles_v2.json",
+        "sha256": "b86240473b0325e3e4bc483495ed8fd3ab16e4b426b0ac9c8c936d57ab7702e1",
+        "size_bytes": 47366
+      },
+      "artifacts": {
+        "conservation.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p03125/conservation.csv",
+          "sha256": "f423ade472c996a8d9a40b24ee53830b8e158010eec1e8bf1d19ccd90916d922",
+          "size_bytes": 165109797
+        },
+        "steps.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p03125/steps.csv",
+          "sha256": "685a8ed406b450808d00e5b4ab296c4845454640dffe9f697eb24bbabe5ab6b3",
+          "size_bytes": 22892621
+        },
+        "run_status.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p03125/run_status.txt",
+          "sha256": "215b6fb1e2396bc9e415f80d22738d393edaf2858d709c8eb5250a0d909064a6",
+          "size_bytes": 441
+        },
+        "run_metadata.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p03125/run_metadata.txt",
+          "sha256": "ef009a9a020c2c689eb6d7f2ade210e3c940bd9829c04cdacd34f561aff81e6a",
+          "size_bytes": 3294
+        },
+        "manifest.json": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p03125/manifest.json",
+          "sha256": "071b1c2c6001653ffbad77eb0fcf86b873ae2717a7f6a6a819f51a92b8e6233d",
+          "size_bytes": 5688
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "fixed_256eps_contract_passes": false,
+      "fixed_256eps_mismatch_count": 20,
+      "arithmetic_allowance_scale": {
+        "l_system": {
+          "cumulative_identity_allowance_kg": 1.163736048970027e-06,
+          "physical_inventory_limit_kg": 7.187519043151006e-05,
+          "allowance_over_physical_limit": 0.01619106734859996
+        },
+        "l_pipe": {
+          "cumulative_identity_allowance_kg": 8.395309524727585e-07,
+          "physical_inventory_limit_kg": 5.5707636743071254e-05,
+          "allowance_over_physical_limit": 0.015070302772755421
+        },
+        "l_riser": {
+          "cumulative_identity_allowance_kg": 3.246890299271544e-07,
+          "physical_inventory_limit_kg": 1.61675536884388e-05,
+          "allowance_over_physical_limit": 0.020082755634164687
+        },
+        "g_system": {
+          "cumulative_identity_allowance_kg": 2.8772771496986946e-09,
+          "physical_inventory_limit_kg": 1.7695406353276281e-07,
+          "allowance_over_physical_limit": 0.01626002303793363
+        },
+        "g_pipe": {
+          "cumulative_identity_allowance_kg": 2.3130196588795926e-09,
+          "physical_inventory_limit_kg": 1.5463122688667542e-07,
+          "allowance_over_physical_limit": 0.014958295975849273
+        },
+        "g_riser": {
+          "cumulative_identity_allowance_kg": 5.65495772699587e-10,
+          "physical_inventory_limit_kg": 2.2322836646087382e-08,
+          "allowance_over_physical_limit": 0.025332612591541043
+        }
+      },
+      "allowances_never_added_to_physical_tolerances": true,
+      "whole_run_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 5.147740012034774e-09,
+          "initial_inventory_kg": 71.87519043151006,
+          "absolute_processed_mass_kg": 8509.596376296537,
+          "relative_inventory": 7.16205408448978e-11,
+          "relative_processed": 6.049335108741224e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.355724368192444e-09
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 4.067260306328535e-09,
+          "initial_inventory_kg": 55.707636743071255,
+          "absolute_processed_mass_kg": 8513.46011568061,
+          "relative_inventory": 7.30108212108712e-11,
+          "relative_processed": 4.777446832501402e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.0007726054757796e-08
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 7.646121957805008e-09,
+          "initial_inventory_kg": 16.1675536884388,
+          "absolute_processed_mass_kg": 8509.583181584896,
+          "relative_inventory": 4.72930048982775e-10,
+          "relative_processed": 8.985307264345855e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -7.652001686565353e-09
+        },
+        "g_system": {
+          "max_abs_balance_kg": 2.372924079452332e-09,
+          "initial_inventory_kg": 0.17695406353276283,
+          "absolute_processed_mass_kg": 21.800275715557632,
+          "relative_inventory": 1.3409830958829538e-08,
+          "relative_processed": 1.0884835175542801e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.355817146024221e-09
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 3.720346697377863e-09,
+          "initial_inventory_kg": 0.1546312268866754,
+          "absolute_processed_mass_kg": 21.793085102615944,
+          "relative_inventory": 2.405947862073418e-08,
+          "relative_processed": 1.7071225482119965e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 3.7230509970289573e-09
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 6.078769487771751e-09,
+          "initial_inventory_kg": 0.022322836646087384,
+          "absolute_processed_mass_kg": 21.791269516340755,
+          "relative_inventory": 2.7231169515533784e-07,
+          "relative_processed": 2.789543529445784e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -6.078868143053178e-09
+        }
+      },
+      "ten_cycle_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 2.7468161079013953e-10,
+          "relative_inventory": 3.655380170526262e-12,
+          "relative_processed": 4.975601992436663e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 3.800764147854352e-10,
+          "relative_inventory": 6.821857990084787e-12,
+          "relative_processed": 6.884759646196612e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 1.1738165994756855e-10,
+          "relative_inventory": 6.041258311858267e-12,
+          "relative_processed": 2.1262674244987775e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_system": {
+          "max_abs_balance_kg": 3.798350522998817e-13,
+          "relative_inventory": 2.1682733037024123e-12,
+          "relative_processed": 2.68670386831828e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 1.3745088400796135e-11,
+          "relative_inventory": 8.612939728925096e-11,
+          "relative_processed": 9.722372700180011e-11,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 1.338242017201452e-11,
+          "relative_inventory": 8.5828297917573e-10,
+          "relative_processed": 9.465847542484154e-11,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        }
+      },
+      "accommodated": true,
+      "period_20_80_s": 23.344197706077647,
+      "cycle_edges_s": [
+        3362.681210142498,
+        3386.025446887212,
+        3409.3695931164443,
+        3432.7137776991517,
+        3456.058026004089,
+        3479.4021623984763,
+        3502.746412227548,
+        3526.090551219404,
+        3549.4348000781597,
+        3572.778935115647,
+        3596.1231872032745
+      ],
+      "effective_steps_last_ten_cycles": {
+        "available": true,
+        "complete_history_verified": true,
+        "issues": [],
+        "rejections_after_last_accepted_step": 0.0,
+        "full_history_rows": 115215,
+        "window_steps": 7470,
+        "selection": "accepted step endpoint in (start,end]",
+        "requested_window_start_s": 3362.681210142498,
+        "requested_window_end_s": 3596.1231872032745,
+        "covered_step_start_s": 3362.6547399970427,
+        "covered_step_end_s": 3596.0922399950578,
+        "sum_accepted_dt_s": 233.4375,
+        "min_s": 0.03125,
+        "p05_s": 0.03125,
+        "median_s": 0.03125,
+        "p95_s": 0.03125,
+        "max_s": 0.03125,
+        "count_mean_s": 0.03125,
+        "time_weighted_mean_s": 0.03125,
+        "fraction_steps_at_cap": 1.0,
+        "fraction_time_at_cap": 1.0,
+        "histogram": {
+          "kind": "logarithmic_bins",
+          "edges_s": [
+            0.03125,
+            0.03125
+          ],
+          "counts": [
+            7470
+          ],
+          "time_s": [
+            233.4375
+          ]
+        }
+      },
+      "supplementary_fixed_trace": {
+        "artifact": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_dt_N51_dt0p03125_fixed_trace_holdup.json",
+          "sha256": "9f629e35b82233d31aa823a79e9ceb176a8ebd89ac39eb2389545741d0f07f41",
+          "size_bytes": 26223
+        },
+        "statistics": {
+          "mean": 0.6324097579053837,
+          "minimum": 0.440725206859382,
+          "maximum": 0.7835799218666273,
+          "peak_to_peak": 0.34285471500724535
+        },
+        "accommodated": true,
+        "primary_gates_unchanged": true
+      },
+      "predeclared_observation_gates_pass": true,
+      "interpretation": "Observation gates are separate from mesh/time convergence, model validity, and experimental regime identification."
+    },
+    "D_OSC_h_N101_dt0p125": {
+      "folder": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N101_dt0p125",
+      "manifest": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N101_dt0p125/manifest.json",
+        "sha256": "dfeef0f16362912d4d878ee81f2a72dc10b003eaf038cdc4a98d516b4e4be68a",
+        "size_bytes": 5682
+      },
+      "status": "COMPLETED",
+      "controls": {
+        "nodes": 101.0,
+        "n_riser": 101.0,
+        "num_dummy_cells": 2.0,
+        "mesh_ratio": 1.0,
+        "x": 6.435,
+        "z": 9.886,
+        "lp": 57.4,
+        "beta_deg": 2.0,
+        "d": 0.05254,
+        "eps": 4.6e-05,
+        "g": 9.81,
+        "rho_l0": 997.05,
+        "p_l0": 101325.0,
+        "cl": 1498.0,
+        "mu_l": 0.00089,
+        "mu_g": 1.85e-05,
+        "sigma": 0.0728,
+        "rg": 287.0,
+        "gamma_g": 1.4,
+        "gas_eos": "BAROTROPIC",
+        "cg_fixed": 343.0,
+        "gas_flow_basis": "STANDARD",
+        "p_standard": 101300.0,
+        "t_standard": 293.15,
+        "ps": 206000.0,
+        "tgas": 293.15,
+        "jl": 0.547,
+        "jg": 1.16,
+        "mul": 545.38635,
+        "mug": 1.396675899947762,
+        "closure_riser": 3.0,
+        "dissipation_mode": "LAGGED",
+        "junction_model": "MATCHED",
+        "time_dim": 3600.0,
+        "perturbation_amplitude": 0.01,
+        "output_interval_s": 0.03125,
+        "dt_start_s": 0.001,
+        "dt_max_s": 0.125,
+        "cfl": 0.5,
+        "tol": 1e-12,
+        "tola": 1e-13,
+        "tol_res": 1e-08,
+        "tol_inc": 1e-08,
+        "quad_points": 3.0,
+        "use_muscl": ".false.",
+        "max_iter": 10000000.0,
+        "newton_max": 25.0,
+        "max_workers": 1.0,
+        "save_every": 0.0,
+        "field_interval_s": 0.25,
+        "regime": "D_OSC",
+        "out_dir": "../PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N101_dt0p125",
+        "dt_min_s": 1e-07,
+        "dt_min": -1.0,
+        "flux_scheme": "ROE",
+        "pipe_regime_mode": "FIXED_STRATIFIED"
+      },
+      "effective_metadata_verified": true,
+      "solver_cost": {
+        "status": 0.0,
+        "reached_time_s": 3600.0,
+        "requested_time_s": 3600.0,
+        "accepted_steps": 28822.0,
+        "rejected_steps": 0.0,
+        "last_rejection_status": 0.0,
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": 1793.0072360000001,
+        "wall_seconds": 1803.44814029,
+        "newton_iterations_total": 76800.0,
+        "jacobian_evaluations_total": 76800.0,
+        "residual_evaluations_total": 153600.0,
+        "linear_solves_total": 76800.0,
+        "backtrack_trials_total": 76800.0,
+        "prepare_calls_total": 28822.0
+      },
+      "coordinator_wall_seconds": 1804.2664454460028,
+      "cost_note": "Use solver_cost.wall_seconds for execution cost; coordinator time can include the documented scheduler reservation.",
+      "mass_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N101_dt0p125_mass_v2.json",
+        "sha256": "93eb9a208f7ec2e57dfce0eb1ead5d1b347cd679b55140adebabd6eed1ec551d",
+        "size_bytes": 15811
+      },
+      "cycle_analysis": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N101_dt0p125_cross.json",
+        "sha256": "462e5e8e833d3fa6ab5e0ca6ec7f3b24d28239f1c5455625e11920f8471e8c1f",
+        "size_bytes": 386857
+      },
+      "cycle_balance_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N101_dt0p125_cycles_v2.json",
+        "sha256": "2d66a7c12954cc4508673f79cce30547aa030920b4b5effd39f090900d760f5a",
+        "size_bytes": 47358
+      },
+      "artifacts": {
+        "conservation.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N101_dt0p125/conservation.csv",
+          "sha256": "4cf3ac90a2ba3ef6dadefcfeec9a757a72a6705ce959faeeb36fe34021d4be51",
+          "size_bytes": 41293412
+        },
+        "steps.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N101_dt0p125/steps.csv",
+          "sha256": "b47ce85b0c1602d2ff3a1ee4db2accf67483041f064cc560b35a4bf83a68227c",
+          "size_bytes": 5611117
+        },
+        "run_status.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N101_dt0p125/run_status.txt",
+          "sha256": "8a765bcc83ff712f9e1ed079da3cbcc310adbd6e038fbf1e112302ff60a3e4f7",
+          "size_bytes": 435
+        },
+        "run_metadata.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N101_dt0p125/run_metadata.txt",
+          "sha256": "b536acdf793bd34e23609fe87105ee71f54823ff32a02e6b84ae88e3dcf17d00",
+          "size_bytes": 3294
+        },
+        "manifest.json": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N101_dt0p125/manifest.json",
+          "sha256": "dfeef0f16362912d4d878ee81f2a72dc10b003eaf038cdc4a98d516b4e4be68a",
+          "size_bytes": 5682
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "fixed_256eps_contract_passes": false,
+      "fixed_256eps_mismatch_count": 20,
+      "arithmetic_allowance_scale": {
+        "l_system": {
+          "cumulative_identity_allowance_kg": 2.919120224772298e-07,
+          "physical_inventory_limit_kg": 7.187509707384337e-05,
+          "allowance_over_physical_limit": 0.004061379175284088
+        },
+        "l_pipe": {
+          "cumulative_identity_allowance_kg": 2.1075115752590824e-07,
+          "physical_inventory_limit_kg": 5.570763674331683e-05,
+          "allowance_over_physical_limit": 0.003783164568566836
+        },
+        "l_riser": {
+          "cumulative_identity_allowance_kg": 8.164480094292599e-08,
+          "physical_inventory_limit_kg": 1.616746033052658e-05,
+          "allowance_over_physical_limit": 0.0050499459577314325
+        },
+        "g_system": {
+          "cumulative_identity_allowance_kg": 7.228866084110519e-10,
+          "physical_inventory_limit_kg": 1.7695417997968093e-07,
+          "allowance_over_physical_limit": 0.004085162659023136
+        },
+        "g_pipe": {
+          "cumulative_identity_allowance_kg": 5.798981702622198e-10,
+          "physical_inventory_limit_kg": 1.5463122712614238e-07,
+          "allowance_over_physical_limit": 0.0037502009202136162
+        },
+        "g_riser": {
+          "cumulative_identity_allowance_kg": 1.4422827783868438e-10,
+          "physical_inventory_limit_kg": 2.23229528535385e-08,
+          "allowance_over_physical_limit": 0.006460985640428935
+        }
+      },
+      "allowances_never_added_to_physical_tolerances": true,
+      "whole_run_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 1.5384102880489081e-09,
+          "initial_inventory_kg": 71.87509707384338,
+          "absolute_processed_mass_kg": 8514.609160875816,
+          "relative_inventory": 2.140394031702481e-11,
+          "relative_processed": 1.806789083306164e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 8.37378929836792e-11
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 4.955836629960686e-09,
+          "initial_inventory_kg": 55.70763674331683,
+          "absolute_processed_mass_kg": 8513.482653849114,
+          "relative_inventory": 8.896153058503654e-11,
+          "relative_processed": 5.821162538834861e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 3.59314478992146e-09
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 3.4824552130885422e-09,
+          "initial_inventory_kg": 16.16746033052658,
+          "absolute_processed_mass_kg": 8514.61850434292,
+          "relative_inventory": 2.1539902630923092e-10,
+          "relative_processed": 4.089972100702222e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -3.5094068969377807e-09
+        },
+        "g_system": {
+          "max_abs_balance_kg": 1.2338352561869215e-10,
+          "initial_inventory_kg": 0.17695417997968094,
+          "absolute_processed_mass_kg": 21.805341304351508,
+          "relative_inventory": 6.972625661222575e-10,
+          "relative_processed": 5.658408364104328e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -8.37727656910143e-11
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 6.109273087417932e-10,
+          "initial_inventory_kg": 0.15463122712614238,
+          "absolute_processed_mass_kg": 21.806790764650717,
+          "relative_inventory": 3.950866329499031e-09,
+          "relative_processed": 2.801546157503009e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 6.012142601002452e-10
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 7.311506955431923e-10,
+          "initial_inventory_kg": 0.0223229528535385,
+          "absolute_processed_mass_kg": 21.810040767195627,
+          "relative_inventory": 3.2753314507282794e-08,
+          "relative_processed": 3.3523582250378573e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -6.849870257912595e-10
+        }
+      },
+      "ten_cycle_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 7.669598289794521e-11,
+          "relative_inventory": 1.0281304347528534e-12,
+          "relative_processed": 1.3939295139675028e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 7.179323802120052e-11,
+          "relative_inventory": 1.2886037341313111e-12,
+          "relative_processed": 1.3048128405879e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 3.197087039552571e-11,
+          "relative_inventory": 1.6930544085726951e-12,
+          "relative_processed": 5.81062242983886e-13,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_system": {
+          "max_abs_balance_kg": 3.7758685067501574e-13,
+          "relative_inventory": 2.15227039317667e-12,
+          "relative_processed": 2.679725058164117e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 3.6352587606813813e-12,
+          "relative_inventory": 2.2907100896845678e-11,
+          "relative_processed": 2.5799486969883144e-11,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 3.2801816818306406e-12,
+          "relative_inventory": 1.9593751944543094e-10,
+          "relative_processed": 2.3279484017577668e-11,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        }
+      },
+      "accommodated": true,
+      "period_20_80_s": 23.26644593580854,
+      "cycle_edges_s": [
+        3350.075067114415,
+        3373.34158141405,
+        3396.6080573068493,
+        3419.874495707129,
+        3443.140897421551,
+        3466.4072632496814,
+        3489.6735939647197,
+        3512.9400283007517,
+        3536.2065662415857,
+        3559.47306539944,
+        3582.7395264725005
+      ],
+      "effective_steps_last_ten_cycles": {
+        "available": true,
+        "complete_history_verified": true,
+        "issues": [],
+        "rejections_after_last_accepted_step": 0.0,
+        "full_history_rows": 28822,
+        "window_steps": 1861,
+        "selection": "accepted step endpoint in (start,end]",
+        "requested_window_start_s": 3350.075067114415,
+        "requested_window_end_s": 3582.7395264725005,
+        "covered_step_start_s": 3350.056852759173,
+        "covered_step_end_s": 3582.6818527594833,
+        "sum_accepted_dt_s": 232.625,
+        "min_s": 0.125,
+        "p05_s": 0.125,
+        "median_s": 0.125,
+        "p95_s": 0.125,
+        "max_s": 0.125,
+        "count_mean_s": 0.125,
+        "time_weighted_mean_s": 0.125,
+        "fraction_steps_at_cap": 1.0,
+        "fraction_time_at_cap": 1.0,
+        "histogram": {
+          "kind": "logarithmic_bins",
+          "edges_s": [
+            0.125,
+            0.125
+          ],
+          "counts": [
+            1861
+          ],
+          "time_s": [
+            232.625
+          ]
+        }
+      },
+      "supplementary_fixed_trace": {
+        "artifact": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N101_dt0p125_fixed_trace_holdup.json",
+          "sha256": "4c4a56f0670cdbd59b004976ce66a8dffc472185e699bcfeb3585660009feb82",
+          "size_bytes": 26172
+        },
+        "statistics": {
+          "mean": 0.6232073226721875,
+          "minimum": 0.4652608714130809,
+          "maximum": 0.7531124935515289,
+          "peak_to_peak": 0.2878516221384479
+        },
+        "accommodated": true,
+        "primary_gates_unchanged": true
+      },
+      "predeclared_observation_gates_pass": true,
+      "interpretation": "Observation gates are separate from mesh/time convergence, model validity, and experimental regime identification."
+    },
+    "D_OSC_dt_N51_dt0p0625": {
+      "folder": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p0625",
+      "manifest": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p0625/manifest.json",
+        "sha256": "5b427f48d268a74bd598f85a1532b607729fe57c8b35ca702d1bc5c12024c67e",
+        "size_bytes": 5682
+      },
+      "status": "COMPLETED",
+      "controls": {
+        "nodes": 51.0,
+        "n_riser": 51.0,
+        "num_dummy_cells": 2.0,
+        "mesh_ratio": 1.0,
+        "x": 6.435,
+        "z": 9.886,
+        "lp": 57.4,
+        "beta_deg": 2.0,
+        "d": 0.05254,
+        "eps": 4.6e-05,
+        "g": 9.81,
+        "rho_l0": 997.05,
+        "p_l0": 101325.0,
+        "cl": 1498.0,
+        "mu_l": 0.00089,
+        "mu_g": 1.85e-05,
+        "sigma": 0.0728,
+        "rg": 287.0,
+        "gamma_g": 1.4,
+        "gas_eos": "BAROTROPIC",
+        "cg_fixed": 343.0,
+        "gas_flow_basis": "STANDARD",
+        "p_standard": 101300.0,
+        "t_standard": 293.15,
+        "ps": 206000.0,
+        "tgas": 293.15,
+        "jl": 0.547,
+        "jg": 1.16,
+        "mul": 545.38635,
+        "mug": 1.396675899947762,
+        "closure_riser": 3.0,
+        "dissipation_mode": "LAGGED",
+        "junction_model": "MATCHED",
+        "time_dim": 3600.0,
+        "perturbation_amplitude": 0.01,
+        "output_interval_s": 0.03125,
+        "dt_start_s": 0.001,
+        "dt_max_s": 0.0625,
+        "cfl": 0.5,
+        "tol": 1e-12,
+        "tola": 1e-13,
+        "tol_res": 1e-08,
+        "tol_inc": 1e-08,
+        "quad_points": 3.0,
+        "use_muscl": ".false.",
+        "max_iter": 10000000.0,
+        "newton_max": 25.0,
+        "max_workers": 1.0,
+        "save_every": 0.0,
+        "field_interval_s": 0.25,
+        "regime": "D_OSC",
+        "out_dir": "../PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p0625",
+        "dt_min_s": 1e-07,
+        "dt_min": -1.0,
+        "flux_scheme": "ROE",
+        "pipe_regime_mode": "FIXED_STRATIFIED"
+      },
+      "effective_metadata_verified": true,
+      "solver_cost": {
+        "status": 0.0,
+        "reached_time_s": 3600.0,
+        "requested_time_s": 3600.0,
+        "accepted_steps": 57618.0,
+        "rejected_steps": 0.0,
+        "last_rejection_status": 0.0,
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": 1547.012308,
+        "wall_seconds": 1557.737037435,
+        "newton_iterations_total": 114911.0,
+        "jacobian_evaluations_total": 114911.0,
+        "residual_evaluations_total": 229822.0,
+        "linear_solves_total": 114911.0,
+        "backtrack_trials_total": 114911.0,
+        "prepare_calls_total": 57618.0
+      },
+      "coordinator_wall_seconds": 1558.6659692800022,
+      "cost_note": "Use solver_cost.wall_seconds for execution cost; coordinator time can include the documented scheduler reservation.",
+      "mass_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_dt_N51_dt0p0625_mass_v2.json",
+        "sha256": "9449c5fa14ed49ca6f4fc8bae44f9862f4df49390b0a0eefbaed43bd508212a6",
+        "size_bytes": 15841
+      },
+      "cycle_analysis": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_dt_N51_dt0p0625_cross.json",
+        "sha256": "b11ac47f9c16d87c35d8add24263d7ba6bc21a3b01ae8851fbfb00efd18ff4c7",
+        "size_bytes": 387628
+      },
+      "cycle_balance_audit": {
+        "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_dt_N51_dt0p0625_cycles_v2.json",
+        "sha256": "f294697e7bdd94d038dc2052826811186c77fadd169bc8f93f484a07f8992e29",
+        "size_bytes": 47458
+      },
+      "artifacts": {
+        "conservation.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p0625/conservation.csv",
+          "sha256": "0f7082ff9e9ca3900be26776afe97ba3a1386d1cb5c67276bfa1d78b62d597af",
+          "size_bytes": 82558080
+        },
+        "steps.csv": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p0625/steps.csv",
+          "sha256": "ac215dc32907962cca023822b2075baf2917895fcaba3c27b84fdabd0d38bffd",
+          "size_bytes": 11307404
+        },
+        "run_status.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p0625/run_status.txt",
+          "sha256": "71c4796920d6770744b8da8a8711fec852fa1ec618dd5acd2c9fae2c6d62980e",
+          "size_bytes": 439
+        },
+        "run_metadata.txt": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p0625/run_metadata.txt",
+          "sha256": "ea3a9fe8f87c0190f6fe3f3d74a0e6fa1f70a0e71eb9d82e2dac502ef0ae241e",
+          "size_bytes": 3294
+        },
+        "manifest.json": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_dt_N51_dt0p0625/manifest.json",
+          "sha256": "5b427f48d268a74bd598f85a1532b607729fe57c8b35ca702d1bc5c12024c67e",
+          "size_bytes": 5682
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "fixed_256eps_contract_passes": false,
+      "fixed_256eps_mismatch_count": 20,
+      "arithmetic_allowance_scale": {
+        "l_system": {
+          "cumulative_identity_allowance_kg": 5.823571036631735e-07,
+          "physical_inventory_limit_kg": 7.187519043151006e-05,
+          "allowance_over_physical_limit": 0.00810233823614147
+        },
+        "l_pipe": {
+          "cumulative_identity_allowance_kg": 4.203351443290526e-07,
+          "physical_inventory_limit_kg": 5.5707636743071254e-05,
+          "allowance_over_physical_limit": 0.007545377418677388
+        },
+        "l_riser": {
+          "cumulative_identity_allowance_kg": 1.625058958628531e-07,
+          "physical_inventory_limit_kg": 1.61675536884388e-05,
+          "allowance_over_physical_limit": 0.010051359593075536
+        },
+        "g_system": {
+          "cumulative_identity_allowance_kg": 1.4411450934444191e-09,
+          "physical_inventory_limit_kg": 1.7695406353276281e-07,
+          "allowance_over_physical_limit": 0.008144176317135508
+        },
+        "g_pipe": {
+          "cumulative_identity_allowance_kg": 1.1572067941307505e-09,
+          "physical_inventory_limit_kg": 1.5463122688667542e-07,
+          "allowance_over_physical_limit": 0.007483655257930745
+        },
+        "g_riser": {
+          "cumulative_identity_allowance_kg": 2.8517834978859464e-10,
+          "physical_inventory_limit_kg": 2.2322836646087382e-08,
+          "allowance_over_physical_limit": 0.012775184189621307
+        }
+      },
+      "allowances_never_added_to_physical_tolerances": true,
+      "whole_run_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 4.14638634538278e-09,
+          "initial_inventory_kg": 71.87519043151006,
+          "absolute_processed_mass_kg": 8515.60501616423,
+          "relative_inventory": 5.768870065581079e-11,
+          "relative_processed": 4.869162364285513e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 7.768271734636161e-10
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 1.1338670447003096e-07,
+          "initial_inventory_kg": 55.707636743071255,
+          "absolute_processed_mass_kg": 8513.487365116282,
+          "relative_inventory": 2.035388882012369e-09,
+          "relative_processed": 1.331847920919329e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.1831121515733125e-07
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 1.1753218132071197e-07,
+          "initial_inventory_kg": 16.1675536884388,
+          "absolute_processed_mass_kg": 8515.619070904566,
+          "relative_inventory": 7.2696329689480265e-09,
+          "relative_processed": 1.3801953838245984e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.1753438798386763e-07
+        },
+        "g_system": {
+          "max_abs_balance_kg": 8.076612711960252e-10,
+          "initial_inventory_kg": 0.17695406353276283,
+          "absolute_processed_mass_kg": 21.805322909356256,
+          "relative_inventory": 4.564242578393729e-09,
+          "relative_processed": 3.7039638190795735e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -7.768322250270697e-10
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 2.0873082817729482e-08,
+          "initial_inventory_kg": 0.1546312268866754,
+          "absolute_processed_mass_kg": 21.80864074184496,
+          "relative_inventory": 1.34986207106969e-07,
+          "relative_processed": 9.57101502326993e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.0851472717755223e-08
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 2.166117418767044e-08,
+          "initial_inventory_kg": 0.022322836646087384,
+          "absolute_processed_mass_kg": 21.811872349410148,
+          "relative_inventory": 9.703593916442105e-07,
+          "relative_processed": 9.930910029489612e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.162830494278229e-08
+        }
+      },
+      "ten_cycle_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 8.236611392931081e-11,
+          "relative_inventory": 1.1011778552204398e-12,
+          "relative_processed": 1.4970221393643183e-12,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 1.0274092687723169e-09,
+          "relative_inventory": 1.844075420859546e-11,
+          "relative_processed": 1.867339573963388e-11,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 1.1060947713303904e-09,
+          "relative_inventory": 5.795886593336787e-11,
+          "relative_processed": 2.0103514374146635e-11,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_system": {
+          "max_abs_balance_kg": 8.348877145181177e-14,
+          "relative_inventory": 4.761788880641182e-13,
+          "relative_processed": 5.925393476211661e-13,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 1.8513512944906552e-10,
+          "relative_inventory": 1.1642648481749992e-09,
+          "relative_processed": 1.3139454091394849e-09,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 1.851429148880257e-10,
+          "relative_inventory": 1.13473215406531e-08,
+          "relative_processed": 1.3140013001235884e-09,
+          "all_cycles_pass_inventory_1e6": true,
+          "all_cycles_pass_processed_1e6": true
+        }
+      },
+      "accommodated": true,
+      "period_20_80_s": 23.265643211963106,
+      "cycle_edges_s": [
+        3351.499782630268,
+        3374.765387201411,
+        3398.031075438406,
+        3421.296730224565,
+        3444.5623519947235,
+        3467.8279570044706,
+        3491.09364509296,
+        3514.3592997337178,
+        3537.624921361644,
+        3560.8905268099384,
+        3584.156214749899
+      ],
+      "effective_steps_last_ten_cycles": {
+        "available": true,
+        "complete_history_verified": true,
+        "issues": [],
+        "rejections_after_last_accepted_step": 0.0,
+        "full_history_rows": 57618,
+        "window_steps": 3723,
+        "selection": "accepted step endpoint in (start,end]",
+        "requested_window_start_s": 3351.499782630268,
+        "requested_window_end_s": 3584.156214749899,
+        "covered_step_start_s": 3351.4512368652495,
+        "covered_step_end_s": 3584.1387368655596,
+        "sum_accepted_dt_s": 232.6875,
+        "min_s": 0.0625,
+        "p05_s": 0.0625,
+        "median_s": 0.0625,
+        "p95_s": 0.0625,
+        "max_s": 0.0625,
+        "count_mean_s": 0.0625,
+        "time_weighted_mean_s": 0.0625,
+        "fraction_steps_at_cap": 1.0,
+        "fraction_time_at_cap": 1.0,
+        "histogram": {
+          "kind": "logarithmic_bins",
+          "edges_s": [
+            0.0625,
+            0.0625
+          ],
+          "counts": [
+            3723
+          ],
+          "time_s": [
+            232.6875
+          ]
+        }
+      },
+      "supplementary_fixed_trace": {
+        "artifact": {
+          "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_dt_N51_dt0p0625_fixed_trace_holdup.json",
+          "sha256": "1a496baf1bf77ab055cf5de072b6c9f07a85d28c6221bdcb93bb6dae8dab457f",
+          "size_bytes": 26221
+        },
+        "statistics": {
+          "mean": 0.6266438814279999,
+          "minimum": 0.4553265739619602,
+          "maximum": 0.7649958102515233,
+          "peak_to_peak": 0.30966923628956305
+        },
+        "accommodated": true,
+        "primary_gates_unchanged": true
+      },
+      "predeclared_observation_gates_pass": true,
+      "interpretation": "Observation gates are separate from mesh/time convergence, model validity, and experimental regime identification."
+    }
+  },
+  "comparison_artifacts": {
+    "six_run_cross_v1.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/six_run_cross_v1.json",
+      "sha256": "de1abdaa338ab8fb0edda25efa7ffad97b0031b895db13f9a19d1ada0e39bba0",
+      "size_bytes": 2726660
+    },
+    "adjacent_orders_v1.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/adjacent_orders_v1.json",
+      "sha256": "1a3b2d885666d80e9c2402611a4f243154321630a69ae3fa5055c2d29fb854d3",
+      "size_bytes": 242812
+    },
+    "adjacent_phase_index.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/adjacent_phase_index.json",
+      "sha256": "308a550fcb8c6ac7f6d463bd0ffc4c69d737e58c8dded0891ec46697d0ae3556",
+      "size_bytes": 1867
+    },
+    "channel_locations_final.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/channel_locations_final.json",
+      "sha256": "f61dda06bb789ea105fc11b3f595013d69c22ad5783ffba696335596a63fc502",
+      "size_bytes": 23331
+    },
+    "fixed_trace_comparison.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/fixed_trace_comparison.json",
+      "sha256": "1a4611d7f5867d2f47e6b7acae901d3beaf7a0ec9fc7dd92de77094b3a670f9e",
+      "size_bytes": 24058
+    },
+    "initial_perturbation_audit.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/initial_perturbation_audit.json",
+      "sha256": "13f0f8a004b3dea40e9de276a78c1f455646cfc26b58954f8557942979ec75b6",
+      "size_bytes": 905
+    },
+    "monitor_cadence_final.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/monitor_cadence_final.json",
+      "sha256": "7573d315e00ceb5173ca909ea4bdeacaf8e7285f067c312997a672ece1b6858d",
+      "size_bytes": 18010
+    },
+    "environment.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/environment.json",
+      "sha256": "45c365ac6c6376a07a6d6b85a00f5e3cfd37e0f9b578e6f255ca76d144decb59",
+      "size_bytes": 572
+    },
+    "spatial_first_triplet_v1.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/spatial_first_triplet_v1.json",
+      "sha256": "18ed9352c60a7a65b4ecaeada250459fe03018a228dddfb7390fb50963ef14eb",
+      "size_bytes": 46388
+    },
+    "spatial_second_triplet_v1.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/spatial_second_triplet_v1.json",
+      "sha256": "fd805904ddb548fe7dd2f8ea2d7d4d77530fe0205fc0c8151283eb0a503d7ebb",
+      "size_bytes": 43689
+    },
+    "temporal_triplet_v1.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/temporal_triplet_v1.json",
+      "sha256": "286b80b095768d7f2c33d367b01d63c58be8d8befe0002c37e7953960132f62b",
+      "size_bytes": 42888
+    },
+    "scheduler_events.jsonl": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/scheduler_events.jsonl",
+      "sha256": "c16c73b4949c71fc4cd57874f2e70b9bdc0177aa18a5cbe6f6c244778e5dc58b",
+      "size_bytes": 1196
+    },
+    "analysis_watcher_events.jsonl": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis_watcher_events.jsonl",
+      "sha256": "ac5ff780b2ff14e241579c1368c0b14aa422592910c6daa0b415b8aa9ad9ca97",
+      "size_bytes": 501
+    },
+    "PROTOCOL.md": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/PROTOCOL.md",
+      "sha256": "542833c454229190b946ca6dcf6935e2d2f9eb625609637c9445f080a94d1a52",
+      "size_bytes": 3758
+    },
+    "METHODS_ADDENDUM.md": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/METHODS_ADDENDUM.md",
+      "sha256": "96e8f98de381af004f0f1e7190908fd4d6c946b65fcf9513c49752db726e33bf",
+      "size_bytes": 4715
+    },
+    "analysis_tests_v1/manifest.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis_tests_v1/manifest.json",
+      "sha256": "3730781214ef68582dd420e214c104187c3a443034ea1a1144c36a4cf48786d4",
+      "size_bytes": 1638
+    },
+    "analysis_tests_integrated_v1/manifest.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis_tests_integrated_v1/manifest.json",
+      "sha256": "f279960de6cc7d645dc1770dce5f9ab4d7d81362914b0a02779c42dd5c322092",
+      "size_bytes": 3292
+    },
+    "analysis_tests_integrated_v1/cli_equivalence.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis_tests_integrated_v1/cli_equivalence.json",
+      "sha256": "2b0c3e2ffbb71f1425267930551c503d2ecff0ca50e3710f5bfa764161d3c5b8",
+      "size_bytes": 1012
+    },
+    "plot_tools/manifest.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/plot_tools/manifest.json",
+      "sha256": "2d9d3d4cfb51629c726694a25a407c1b23860220b6f65ea170ea3b49f23e2aba",
+      "size_bytes": 369
+    },
+    "plot_tools/execution.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/plot_tools/execution.json",
+      "sha256": "5d42151faf3ff8ceb12d4560ad54e935539b857f37a9bc0ee67b9515c9703be5",
+      "size_bytes": 712
+    },
+    "figures_refinement_v1/index.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/figures_refinement_v1/index.json",
+      "sha256": "d63e84da907bc233e5706b33ecaa20faf6e7494a1e63182aad707c7337c618a9",
+      "size_bytes": 2477
+    },
+    "figures_refinement_v1/osc_refinamento.png": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/figures_refinement_v1/osc_refinamento.png",
+      "sha256": "e6a2a66b2acb4a280a2ad1fe0cbe1af8320924941db3eec35cffda9109872599",
+      "size_bytes": 239702
+    }
+  },
+  "other_axis_proven_resolved": false,
+  "note": "All original 3600s evidence remains intact. Any duration extension must have a separate plan and index.",
+  "script_sha256": "0aad6e8c6243d0e80c3d0317062fac76c58b8cdf6e6d8e24573bb68213abd7ea"
+}

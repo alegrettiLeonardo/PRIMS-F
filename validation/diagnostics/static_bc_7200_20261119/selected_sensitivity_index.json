@@ -1,0 +1,584 @@
+{
+  "schema": "PRIMS-F.static_bc_selected_evidence.v1",
+  "selection": "Longest completed duration per original physical axis at tol_res=tol_inc=1e-8; retain failures, do not replace by the distinct tolerance study.",
+  "cohort_metrics_sha256": {
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/metrics_3600.json": "aa0941ef864d3e990d882e15699505c57a29d9f4d4baebefaa6c242fca8cd45b",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/metrics_7200.json": "d6107e2f44919a92e9d3e0ef0d04a3671a6be0d4519012922bd11bdf3b6b74bc"
+  },
+  "runs": [
+    {
+      "axis": "ps",
+      "static_offset": -5000.0,
+      "original_run": "D_OSC_bc_Ps_minus",
+      "selected_run": "D_OSC_bc_Ps_minus",
+      "duration_s": 3600.0,
+      "period_mean_s": 23.13372656158449,
+      "pressure_last_cycles": {
+        "time_weighted_mean": 260908.777296823,
+        "mean_cycle_peak_to_peak": 22712.363819802784,
+        "minimum": 249332.4953899482,
+        "maximum": 272045.5778713374
+      },
+      "completed": true,
+      "cycles_available": true,
+      "accommodated": true,
+      "arithmetic_contract_passes": true,
+      "comparison_qualified": true,
+      "phase_region_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 1.4752004062756896e-09,
+          "initial_inventory_kg": 71.7377292408305,
+          "absolute_processed_mass_kg": 8516.288359789221,
+          "relative_inventory": 2.0563801250570658e-11,
+          "relative_processed": 1.732210493530307e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.0131038592261586e-11
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 3.980039764428511e-08,
+          "initial_inventory_kg": 55.70485494492025,
+          "absolute_processed_mass_kg": 8513.484904124736,
+          "relative_inventory": 7.144870529442879e-10,
+          "relative_processed": 4.674983052475026e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 3.872678810315755e-08
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 3.873446985380724e-08,
+          "initial_inventory_kg": 16.03287429591027,
+          "absolute_processed_mass_kg": 8516.299953531947,
+          "relative_inventory": 2.415940469494468e-09,
+          "relative_processed": 4.548274493049411e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -3.873691914174981e-08
+        },
+        "g_system": {
+          "max_abs_balance_kg": 8.170231158288743e-11,
+          "initial_inventory_kg": 0.1736078986206083,
+          "absolute_processed_mass_kg": 21.802041078642645,
+          "relative_inventory": 4.706140229335676e-10,
+          "relative_processed": 3.7474615926177345e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.0181202242954321e-11
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 2.296864920481312e-09,
+          "initial_inventory_kg": 0.15150782940571686,
+          "absolute_processed_mass_kg": 21.80708511255447,
+          "relative_inventory": 1.516004109814436e-08,
+          "relative_processed": 1.053265444980995e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.2911215844097055e-09
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 2.308986779553379e-09,
+          "initial_inventory_kg": 0.0221000692148915,
+          "absolute_processed_mass_kg": 21.807034889390515,
+          "relative_inventory": 1.0447871258238116e-07,
+          "relative_processed": 1.058826562742255e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.30130278665266e-09
+        }
+      },
+      "boundary_audit": {
+        "input_frames": 12501,
+        "four_buckets_complete": true,
+        "all_status_zero": true,
+        "expected_incoming_count": true,
+        "negative_ul_samples": 0,
+        "negative_ug_samples": 0
+      },
+      "provenance": {
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_Ps_minus/manifest.json": "4dbc647f555de9009b732beb3d116fe782cd51a1793553fc80f8ecf1fdc68775",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_Ps_minus/cross_summary.json": "45269f181aca3de76f5771f6a7ac14543b337525674640b1d6c8ce36a48e857b",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_Ps_minus/accepted_conservation.json": "3e212ac57cc7bb9cd61ba804f7907e0aca367749a3644ee1a619932bf29328a6",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_Ps_minus/cycle_conservation.json": "164eb8b079911a12cdf64609b59bee33768e22adea141781870fb508737a219e",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/boundary_audit/D_OSC_bc_Ps_minus/summary.json": "cda5833e4a8302847c6b548d139ba8bc8cf4c1a4a5322ef1857d7a0b72b068f4"
+      }
+    },
+    {
+      "axis": "ps",
+      "static_offset": 5000.0,
+      "original_run": "D_OSC_bc_Ps_plus",
+      "selected_run": "D_OSC_bc_Ps_plus_T7200",
+      "duration_s": 7200.0,
+      "period_mean_s": 23.077148634719286,
+      "pressure_last_cycles": {
+        "time_weighted_mean": 271463.9865116661,
+        "mean_cycle_peak_to_peak": 15874.717969116138,
+        "minimum": 263411.51479816297,
+        "maximum": 279287.0629043548
+      },
+      "completed": true,
+      "cycles_available": true,
+      "accommodated": true,
+      "arithmetic_contract_passes": true,
+      "comparison_qualified": true,
+      "phase_region_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 9.724317351356149e-09,
+          "initial_inventory_kg": 72.00945326816529,
+          "absolute_processed_mass_kg": 17026.000342411426,
+          "relative_inventory": 1.350422327904992e-10,
+          "relative_processed": 5.711451401262496e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.0703819305880287e-10
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 7.488051778636873e-08,
+          "initial_inventory_kg": 55.71046540203122,
+          "absolute_processed_mass_kg": 17026.944815541603,
+          "relative_inventory": 1.3441014582448375e-09,
+          "relative_processed": 4.397765929094948e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 8.472166487372639e-08
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 8.460483513772488e-08,
+          "initial_inventory_kg": 16.298987866134052,
+          "absolute_processed_mass_kg": 17025.99853720114,
+          "relative_inventory": 5.190803001548111e-09,
+          "relative_processed": 4.9691555507224216e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -8.461462668066759e-08
+        },
+        "g_system": {
+          "max_abs_balance_kg": 2.7656232859385455e-10,
+          "initial_inventory_kg": 0.18029063831058936,
+          "absolute_processed_mass_kg": 43.60593248391885,
+          "relative_inventory": 1.533980528248042e-09,
+          "relative_processed": 6.342309700540086e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.0706877458760385e-10
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 8.533426409940148e-09,
+          "initial_inventory_kg": 0.15775085287468985,
+          "absolute_processed_mass_kg": 43.60372708408833,
+          "relative_inventory": 5.4094328204480245e-08,
+          "relative_processed": 1.9570405973516256e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 8.535803402466467e-09
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 8.663374018169634e-09,
+          "initial_inventory_kg": 0.022539785435899434,
+          "absolute_processed_mass_kg": 43.60547696442504,
+          "relative_inventory": 3.843592053175163e-07,
+          "relative_processed": 1.9867628154228275e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -8.642872177054072e-09
+        }
+      },
+      "boundary_audit": {
+        "input_frames": 26901,
+        "four_buckets_complete": true,
+        "all_status_zero": true,
+        "expected_incoming_count": true,
+        "negative_ul_samples": 0,
+        "negative_ug_samples": 0
+      },
+      "provenance": {
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/runs/D_OSC_bc_Ps_plus_T7200/manifest.json": "23b4a7a1a3ee88f6484077b318507cfc231e657b663d183a09d052d298f98809",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/analysis/D_OSC_bc_Ps_plus_T7200/cross_summary.json": "31c038a5b99be6dbb41b6ff6cd040c68784f1ab25518fac8424fa0008574a285",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/analysis/D_OSC_bc_Ps_plus_T7200/accepted_conservation.json": "89f5a2d5df863f3a58fef58a25e51760cf3e17499a37ac69652b53692f85bfd9",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/analysis/D_OSC_bc_Ps_plus_T7200/cycle_conservation.json": "bd02ca2acd4089a57882539f7dd0388978c13921bcf47a9b6fba4684a61acbd9",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/boundary_audit/D_OSC_bc_Ps_plus_T7200/summary.json": "d849e37ad54eaa9db05d087f9b101b2b3cd220381cd205229ce4d3aef5f18fcb"
+      }
+    },
+    {
+      "axis": "jg",
+      "static_offset": -0.05999999999999983,
+      "original_run": "D_OSC_bc_jg_minus",
+      "selected_run": "D_OSC_bc_jg_minus",
+      "duration_s": 3600.0,
+      "period_mean_s": 23.99813364675156,
+      "pressure_last_cycles": {
+        "time_weighted_mean": 268167.443793132,
+        "mean_cycle_peak_to_peak": 34502.52889457008,
+        "minimum": 250464.5989972023,
+        "maximum": 284967.7943023065
+      },
+      "completed": true,
+      "cycles_available": true,
+      "accommodated": true,
+      "arithmetic_contract_passes": true,
+      "comparison_qualified": true,
+      "phase_region_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 1.4406396076083183e-09,
+          "initial_inventory_kg": 72.22075817210114,
+          "absolute_processed_mass_kg": 8509.74853186811,
+          "relative_inventory": 1.99477220133205e-11,
+          "relative_processed": 1.6929285303946116e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.0143545608254526e-11
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 7.520156941609457e-09,
+          "initial_inventory_kg": 55.715353391118086,
+          "absolute_processed_mass_kg": 8513.462938277575,
+          "relative_inventory": 1.3497458929890392e-10,
+          "relative_processed": 8.83325269180172e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 6.2105675499007115e-09
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 6.2154867919161916e-09,
+          "initial_inventory_kg": 16.505404780983046,
+          "absolute_processed_mass_kg": 8509.738159763669,
+          "relative_inventory": 3.7657281807941237e-10,
+          "relative_processed": 7.303969493802624e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -6.200424004292457e-09
+        },
+        "g_system": {
+          "max_abs_balance_kg": 6.883849046346313e-11,
+          "initial_inventory_kg": 0.17682451520418008,
+          "absolute_processed_mass_kg": 20.676370493574673,
+          "relative_inventory": 3.8930399658653107e-10,
+          "relative_processed": 3.329331445519182e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.0130982675620065e-11
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 6.389986317856255e-10,
+          "initial_inventory_kg": 0.1551379428339444,
+          "absolute_processed_mass_kg": 20.668643642891247,
+          "relative_inventory": 4.1189061818977e-09,
+          "relative_processed": 3.091633117422304e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 5.741996033254214e-10
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 7.05754121810287e-10,
+          "initial_inventory_kg": 0.021686572370235715,
+          "absolute_processed_mass_kg": 20.67061721233896,
+          "relative_inventory": 3.2543368761165644e-08,
+          "relative_processed": 3.414286639631638e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -5.843305860010415e-10
+        }
+      },
+      "boundary_audit": {
+        "input_frames": 12314,
+        "four_buckets_complete": true,
+        "all_status_zero": true,
+        "expected_incoming_count": true,
+        "negative_ul_samples": 0,
+        "negative_ug_samples": 0
+      },
+      "provenance": {
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_jg_minus/manifest.json": "d35a4e23572ab5121933a86a06bc4f6c2b97d011190de2bbab0523d75e7ac165",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_jg_minus/cross_summary.json": "e49c45fcffaa27fa997fbfe632cfc80363305f0a04cb9e31f8eb6cc77827524b",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_jg_minus/accepted_conservation.json": "369a1e82eb401ac7a17bc4202b50e11648a3ee0ca812cb1320fc34d906003e21",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_jg_minus/cycle_conservation.json": "af4aec0cb8a50aeea11a8ed800db71ab9874cc124bbddfa2dd0e2060bb5df71c",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/boundary_audit/D_OSC_bc_jg_minus/summary.json": "9c325d3a1b39ff24d8c857dd63f87995ba5921a12e110c5c52b35e846c4b0bed"
+      }
+    },
+    {
+      "axis": "jg",
+      "static_offset": 0.06000000000000005,
+      "original_run": "D_OSC_bc_jg_plus",
+      "selected_run": "D_OSC_bc_jg_plus_T7200",
+      "duration_s": 7200.0,
+      "period_mean_s": null,
+      "pressure_last_cycles": null,
+      "completed": true,
+      "cycles_available": false,
+      "accommodated": false,
+      "arithmetic_contract_passes": true,
+      "comparison_qualified": false,
+      "phase_region_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 0.0014299136910267407,
+          "initial_inventory_kg": 71.54593192030077,
+          "absolute_processed_mass_kg": 17026.94674993507,
+          "relative_inventory": 1.9985953815230275e-05,
+          "relative_processed": 8.397945398121325e-08,
+          "passes_inventory_1e6": false,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 0.0014299249738454747
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 4.949522917740978e-06,
+          "initial_inventory_kg": 55.70044589576236,
+          "absolute_processed_mass_kg": 17026.94667810456,
+          "relative_inventory": 8.885966419377504e-08,
+          "relative_processed": 2.906876383248273e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 4.965517759423125e-06
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 0.0014249641681089997,
+          "initial_inventory_kg": 15.845486024538383,
+          "absolute_processed_mass_kg": 17026.946807286196,
+          "relative_inventory": 8.992871319329016e-05,
+          "relative_processed": 8.368876606222949e-08,
+          "passes_inventory_1e6": false,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 0.0014249594560860513
+        },
+        "g_system": {
+          "max_abs_balance_kg": 1.890584808705853e-06,
+          "initial_inventory_kg": 0.1770866294060224,
+          "absolute_processed_mass_kg": 45.85963687607496,
+          "relative_inventory": 1.0676044911166837e-05,
+          "relative_processed": 4.1225463991673556e-08,
+          "passes_inventory_1e6": false,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.8905377853148128e-06
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 4.219947221884013e-06,
+          "initial_inventory_kg": 0.1541601859813805,
+          "absolute_processed_mass_kg": 45.85963042556874,
+          "relative_inventory": 2.7373781336730474e-05,
+          "relative_processed": 9.201877953929626e-08,
+          "passes_inventory_1e6": false,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 4.219893202351068e-06
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 2.3293624167308735e-06,
+          "initial_inventory_kg": 0.022926443424641865,
+          "absolute_processed_mass_kg": 45.859695942699716,
+          "relative_inventory": 0.00010160155997974032,
+          "relative_processed": 5.0793237260912945e-08,
+          "passes_inventory_1e6": false,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.329355417036255e-06
+        }
+      },
+      "boundary_audit": {
+        "input_frames": 27074,
+        "four_buckets_complete": true,
+        "all_status_zero": true,
+        "expected_incoming_count": true,
+        "negative_ul_samples": 0,
+        "negative_ug_samples": 0
+      },
+      "provenance": {
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/runs/D_OSC_bc_jg_plus_T7200/manifest.json": "676fba47b28791f8c8bb7e6850736eec6a06064831646f16eab6e447838f9844",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/analysis/D_OSC_bc_jg_plus_T7200/cross_summary.json": "a2facb7aeac92509ff74b7e1a96491d0f3a5aeb6be0d2a7c07af7e84c1937150",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/analysis/D_OSC_bc_jg_plus_T7200/accepted_conservation.json": "14034c0dd27ef1281213502e6e7168be71bacd0afade10d8f2369aa147723dac",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/analysis/D_OSC_bc_jg_plus_T7200/cycle_conservation.json": "d84ecb34056881427f6ab4fec4c95610b763bb9bcb98eaabe44268d72a86cbd9",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/boundary_audit/D_OSC_bc_jg_plus_T7200/summary.json": "374563fcfbebc4b4f3c32c3fad1d1fbc19a865790360d3ba81843d52690fb73b"
+      }
+    },
+    {
+      "axis": "jl",
+      "static_offset": -0.0030000000000000027,
+      "original_run": "D_OSC_bc_jl_minus",
+      "selected_run": "D_OSC_bc_jl_minus",
+      "duration_s": 3600.0,
+      "period_mean_s": 23.180319248610978,
+      "pressure_last_cycles": {
+        "time_weighted_mean": 266144.8096642307,
+        "mean_cycle_peak_to_peak": 20977.294519115905,
+        "minimum": 255463.26895181971,
+        "maximum": 276441.62423407106
+      },
+      "completed": true,
+      "cycles_available": true,
+      "accommodated": true,
+      "arithmetic_contract_passes": true,
+      "comparison_qualified": true,
+      "phase_region_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 6.530171958729625e-10,
+          "initial_inventory_kg": 71.6242393376258,
+          "absolute_processed_mass_kg": 8464.786610986142,
+          "relative_inventory": 9.117265354745877e-12,
+          "relative_processed": 7.714514563491003e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 6.073123138225906e-11
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 3.170953277731314e-08,
+          "initial_inventory_kg": 55.48132543497087,
+          "absolute_processed_mass_kg": 8466.772713111295,
+          "relative_inventory": 5.715352423308557e-10,
+          "relative_processed": 3.7451734978321865e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 3.1099800806129795e-08
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 3.107197699137032e-08,
+          "initial_inventory_kg": 16.142913902654918,
+          "absolute_processed_mass_kg": 8464.777823461578,
+          "relative_inventory": 1.9248059661806235e-09,
+          "relative_processed": 3.6707374534094716e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -3.103906957474754e-08
+        },
+        "g_system": {
+          "max_abs_balance_kg": 1.3347156713194863e-10,
+          "initial_inventory_kg": 0.17744291939835033,
+          "absolute_processed_mass_kg": 21.79967161011146,
+          "relative_inventory": 7.521943821962924e-10,
+          "relative_processed": 6.122641180981817e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -6.069892692891498e-11
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 2.8300259913294212e-09,
+          "initial_inventory_kg": 0.15507498266234132,
+          "absolute_processed_mass_kg": 21.796305076632763,
+          "relative_inventory": 1.8249403886708734e-08,
+          "relative_processed": 1.2983971280358966e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.8192915151637635e-09
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 2.7713102923598854e-09,
+          "initial_inventory_kg": 0.022367936736009,
+          "absolute_processed_mass_kg": 21.793885384937624,
+          "relative_inventory": 1.2389655447739596e-07,
+          "relative_processed": 1.2715999205333149e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.7585925882348485e-09
+        }
+      },
+      "boundary_audit": {
+        "input_frames": 12501,
+        "four_buckets_complete": true,
+        "all_status_zero": true,
+        "expected_incoming_count": true,
+        "negative_ul_samples": 0,
+        "negative_ug_samples": 0
+      },
+      "provenance": {
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_jl_minus/manifest.json": "1166d676e4c3559ce81816070349a69058181ba201c46f575231b8de63cd018d",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_jl_minus/cross_summary.json": "0211f4e4987bbc4a3135b66ca4863189ee7cf2693626b214545946ab40df0548",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_jl_minus/accepted_conservation.json": "8725e0b8a0975fa5a1ee117576cd757d1550227e78c2c4ac479a45aa40d7b166",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_jl_minus/cycle_conservation.json": "cb21d9e60f3cffe42b2f4e2c752c8fb8a53543f788077dcace7d12b192594657",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/boundary_audit/D_OSC_bc_jl_minus/summary.json": "dc84fac7305195ff611b714f501bea452c5d99c626bdf43ccb86901a45b658b6"
+      }
+    },
+    {
+      "axis": "jl",
+      "static_offset": 0.0030000000000000027,
+      "original_run": "D_OSC_bc_jl_plus",
+      "selected_run": "D_OSC_bc_jl_plus",
+      "duration_s": 3600.0,
+      "period_mean_s": 23.036970378316802,
+      "pressure_last_cycles": {
+        "time_weighted_mean": 266240.5188246908,
+        "mean_cycle_peak_to_peak": 18568.06240843385,
+        "minimum": 256802.3195775329,
+        "maximum": 275373.1863874038
+      },
+      "completed": true,
+      "cycles_available": true,
+      "accommodated": true,
+      "arithmetic_contract_passes": true,
+      "comparison_qualified": true,
+      "phase_region_balances": {
+        "l_system": {
+          "max_abs_balance_kg": 1.4633769751526415e-09,
+          "initial_inventory_kg": 72.12579368259064,
+          "absolute_processed_mass_kg": 8557.932231786683,
+          "relative_inventory": 2.0289232193307066e-11,
+          "relative_processed": 1.7099656032764879e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.26892850985209e-10
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 2.7234818844590336e-08,
+          "initial_inventory_kg": 55.93371255367319,
+          "absolute_processed_mass_kg": 8560.156761649108,
+          "relative_inventory": 4.869124111591233e-10,
+          "relative_processed": 3.1815794503445013e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.5787091886629773e-08
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 2.5778717827051878e-08,
+          "initial_inventory_kg": 16.192081128917444,
+          "absolute_processed_mass_kg": 8557.923873307625,
+          "relative_inventory": 1.5920571062983162e-09,
+          "relative_processed": 3.012263045182761e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.5660199035644566e-08
+        },
+        "g_system": {
+          "max_abs_balance_kg": 1.841254926304714e-10,
+          "initial_inventory_kg": 0.17646537597220424,
+          "absolute_processed_mass_kg": 21.800784392521027,
+          "relative_inventory": 1.0434086098537185e-09,
+          "relative_processed": 8.445819623519484e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.2696893975014724e-10
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 2.5815358739578187e-09,
+          "initial_inventory_kg": 0.15418745212876867,
+          "absolute_processed_mass_kg": 21.796753687815148,
+          "relative_inventory": 1.6742840213754007e-08,
+          "relative_processed": 1.184367136011154e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.3988512520825558e-09
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 2.746680216603181e-09,
+          "initial_inventory_kg": 0.02227792384343554,
+          "absolute_processed_mass_kg": 21.795446778529577,
+          "relative_inventory": 1.232915704311703e-07,
+          "relative_processed": 1.2602082648330482e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.2718823123324085e-09
+        }
+      },
+      "boundary_audit": {
+        "input_frames": 12501,
+        "four_buckets_complete": true,
+        "all_status_zero": true,
+        "expected_incoming_count": true,
+        "negative_ul_samples": 0,
+        "negative_ug_samples": 0
+      },
+      "provenance": {
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_jl_plus/manifest.json": "65a74c442dab303dfc3782c07507a1cdaf74c8a3327d93cd6094c3546db50b1c",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_jl_plus/cross_summary.json": "a6a736a670649811e1e4b5e3dc8aedd14c47bdb5aac72cb060ce2946b64315dd",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_jl_plus/accepted_conservation.json": "2ccfbefc472215bf19f23f38847680d4856e3f703a430ed988a7590de0d7f393",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/D_OSC_bc_jl_plus/cycle_conservation.json": "e6e1945ded88c7e914caa22efcee7813701d4f686006d3a446c761d86fab1e87",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/boundary_audit/D_OSC_bc_jl_plus/summary.json": "3ae63e85f758845b4a1ab15c151c80a5eb3e3ae2da427ebfefb8754bdfc51d1f"
+      }
+    }
+  ],
+  "all_six_completed": true,
+  "qualified_cyclic_comparisons": 5,
+  "experimental_validation": false
+}

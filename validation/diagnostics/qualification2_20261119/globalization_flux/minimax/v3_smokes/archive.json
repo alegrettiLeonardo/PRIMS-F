@@ -1,0 +1,420 @@
+{
+  "schema": "primsf_active_smokes_v3_archive_v1",
+  "source_commit": "a179e51d9d63e8aeed91a94d829b5b483d107864",
+  "path_windows": "C:/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-qualification2-20261119/active_set_smokes_v3_a179e51_20261119.zip",
+  "sha256": "3b139e38cef4b35ac542c0038fcbe187b8b6485651a2c1d5b4ae9d308fe03c26",
+  "bytes": 9861134,
+  "crc_verified": true,
+  "bibliographic_pdfs": 0,
+  "elf_or_pe_members": 0,
+  "members": [
+    {
+      "name": "results/D_SS1/D_SS1.nml",
+      "bytes": 1679,
+      "crc32": "8952c116",
+      "sha256": "c0bd03a61c6521bcc9517994ceef1664a174d8dabfe53d8ef327e97ab318f559"
+    },
+    {
+      "name": "results/D_SS1/build_manifest.json",
+      "bytes": 41665,
+      "crc32": "a9540213",
+      "sha256": "531d28a4735f024b6741875703e8957009e39049cabc27648e9d62dc72aec49f"
+    },
+    {
+      "name": "results/D_SS1/manifest.json",
+      "bytes": 9530,
+      "crc32": "e742990d",
+      "sha256": "1c9b854f3c6f1bb14f386c9070aac3eb0ab08ae7cd899ccf9f2ace1f712f1af7"
+    },
+    {
+      "name": "results/D_SS1/output/active_set.csv",
+      "bytes": 2956739,
+      "crc32": "cb1fca7e",
+      "sha256": "e4c1b4371b4b592909f47d0cf76de9a7c321e6c732b752bfb6722a0738ad1329"
+    },
+    {
+      "name": "results/D_SS1/output/conservation.csv",
+      "bytes": 2991501,
+      "crc32": "1c88a95e",
+      "sha256": "4694256984a4f76c4b1228bdf0ff1e9fd6d41d4da655466975b568d95d28c9c6"
+    },
+    {
+      "name": "results/D_SS1/output/fields.csv",
+      "bytes": 7599082,
+      "crc32": "2985accc",
+      "sha256": "d6eee94bbff4d327dd5d119cb0169c0a0b0bd85714eaf57dfc1a36a68a123408"
+    },
+    {
+      "name": "results/D_SS1/output/last_rejected_iteration.txt",
+      "bytes": 221,
+      "crc32": "eb0a5d1f",
+      "sha256": "f9a5589d4b9fe7f499b7e7b91adb01c581a1d914a3cd7d47e4eab8659e6cc197"
+    },
+    {
+      "name": "results/D_SS1/output/last_rejected_state.dat",
+      "bytes": 29131,
+      "crc32": "5eae1d8a",
+      "sha256": "595db7bfc29c1444c7828a8193c006ce4f9915d2756a3a2072c5d2c9b53c4c44"
+    },
+    {
+      "name": "results/D_SS1/output/monitor.csv",
+      "bytes": 811748,
+      "crc32": "bfd889b7",
+      "sha256": "48497d6a3f27dcd4553dc67ea05d6857c4390c3355c406ce628a8336a1224a68"
+    },
+    {
+      "name": "results/D_SS1/output/rejected_proposals.csv",
+      "bytes": 12443648,
+      "crc32": "32208349",
+      "sha256": "7937eba18e05c1b27040c68dfcebf43a7f15e5ac6ce2d51847c80ccad2c2c9f9"
+    },
+    {
+      "name": "results/D_SS1/output/run_metadata.txt",
+      "bytes": 3336,
+      "crc32": "74022bb5",
+      "sha256": "f59cd0acf2ad5d444224d2c54bd6c20df20e69669944c9ff65e4b701d6db4ea2"
+    },
+    {
+      "name": "results/D_SS1/output/steps.csv",
+      "bytes": 396978,
+      "crc32": "68989b9d",
+      "sha256": "55d6bbf06918ab0d5e1b2e6c7d5a71bdcf0bd32abd7ace442d27dae633dd4ea9"
+    },
+    {
+      "name": "results/D_SS1/solver.log",
+      "bytes": 16261,
+      "crc32": "98eef1de",
+      "sha256": "81e44b4abc3c72d84bbf4779de5a09a160e5d470dd950d630a55cb70f390e37f"
+    },
+    {
+      "name": "results/D_SS3/D_SS3.nml",
+      "bytes": 1677,
+      "crc32": "8a0a4aa2",
+      "sha256": "8e2bc315a957da2c45d20259881489e9bb2489a208d48a3a99cf1168b25089c3"
+    },
+    {
+      "name": "results/D_SS3/build_manifest.json",
+      "bytes": 41665,
+      "crc32": "a9540213",
+      "sha256": "531d28a4735f024b6741875703e8957009e39049cabc27648e9d62dc72aec49f"
+    },
+    {
+      "name": "results/D_SS3/manifest.json",
+      "bytes": 10212,
+      "crc32": "fabb8676",
+      "sha256": "2c50bf5486c3d6862649b2e4fa91056088c1c57650e0b99b3fa1b0a8afbd965d"
+    },
+    {
+      "name": "results/D_SS3/output/active_set.csv",
+      "bytes": 79340,
+      "crc32": "017c52dd",
+      "sha256": "d634aa8ceb575ef59e6c19d0a53e0d5e24e603d7b26f58a38d1f1b96b215ca4b"
+    },
+    {
+      "name": "results/D_SS3/output/conservation.csv",
+      "bytes": 1164456,
+      "crc32": "4047f6b5",
+      "sha256": "e4cc2692a516e49dbcbadadaec1e8b3143518e434dbfefe4a52aece18f1362c6"
+    },
+    {
+      "name": "results/D_SS3/output/fields.csv",
+      "bytes": 9843082,
+      "crc32": "db5d5089",
+      "sha256": "c03328362fc4d542f3eac17f2471f1b2fb2850b324348520dbac8e61f1d6a15a"
+    },
+    {
+      "name": "results/D_SS3/output/last_rejected_iteration.txt",
+      "bytes": 222,
+      "crc32": "4e14dde8",
+      "sha256": "7c2d4c079ddfc2aaccd55cace1b2364534fd8170f9c5d9f2615a71054e1c96ef"
+    },
+    {
+      "name": "results/D_SS3/output/last_rejected_state.dat",
+      "bytes": 29131,
+      "crc32": "6f488c28",
+      "sha256": "9a85ce3c5769d1dd11a9e8860b79a2936db00e42c6922771727f9e6102778139"
+    },
+    {
+      "name": "results/D_SS3/output/monitor.csv",
+      "bytes": 1002998,
+      "crc32": "2eea0f62",
+      "sha256": "812142f73859c83262ad9e5eda018a6c1ea2cffe956206061900eebc7dc79c11"
+    },
+    {
+      "name": "results/D_SS3/output/rejected_proposals.csv",
+      "bytes": 663003,
+      "crc32": "b37ce8bb",
+      "sha256": "6392682a3752291df54e4aaafa6990c310c3bc6d5ffde3543dd57887b139e31a"
+    },
+    {
+      "name": "results/D_SS3/output/run_metadata.txt",
+      "bytes": 3336,
+      "crc32": "65ea1450",
+      "sha256": "32cdde562b0c6527566a01b7215d0f0d552b774f9765a73aa3c91308e5e5a4fa"
+    },
+    {
+      "name": "results/D_SS3/output/run_status.txt",
+      "bytes": 451,
+      "crc32": "5d458226",
+      "sha256": "e0d3c26bb928b9e211cc31d83dea88d2941a33edfa46c2c93830791bc26c6d00"
+    },
+    {
+      "name": "results/D_SS3/output/steps.csv",
+      "bytes": 149476,
+      "crc32": "5bb194b1",
+      "sha256": "7fb4d4cbe101a9ecdce6a3acbf30c137c61965f62190b0e00b20e65df80b5baa"
+    },
+    {
+      "name": "results/D_SS3/solver.log",
+      "bytes": 11490,
+      "crc32": "d5775f61",
+      "sha256": "5d4c321ce5eea509d611bf9a8b78efe360994d7b4ac0aae011bd881da4cca4c9"
+    },
+    {
+      "name": "results/SS1_progress.png",
+      "bytes": 257387,
+      "crc32": "427ed6e2",
+      "sha256": "1392df4e8357e9d07cd7fac37d2656896751668ec993e878acb4ecdde1a5fe39"
+    },
+    {
+      "name": "results/SS3_terminal_80digits/compile.log",
+      "bytes": 0,
+      "crc32": "00000000",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "results/SS3_terminal_80digits/double_geometry.json",
+      "bytes": 3404,
+      "crc32": "6ab18609",
+      "sha256": "9bc3a64a8103a30494f4f869237bad0a94d10c277e3c6e1343f09ced7000b05b"
+    },
+    {
+      "name": "results/SS3_terminal_80digits/double_geometry.log",
+      "bytes": 3404,
+      "crc32": "6ab18609",
+      "sha256": "9bc3a64a8103a30494f4f869237bad0a94d10c277e3c6e1343f09ced7000b05b"
+    },
+    {
+      "name": "results/SS3_terminal_80digits/double_geometry.npz",
+      "bytes": 768204,
+      "crc32": "8bda45b5",
+      "sha256": "34584544ff857fbd75532a07c652bcefd8d8968a2face5a35ad42c5eea89de8e"
+    },
+    {
+      "name": "results/SS3_terminal_80digits/double_geometry_provenance.json",
+      "bytes": 442,
+      "crc32": "e0078a0a",
+      "sha256": "21e70422f09b530ae85646797fe34452cc8df0c0430c316456ece7e518e7d678"
+    },
+    {
+      "name": "results/SS3_terminal_80digits/fixture/last_rejected_state.dat",
+      "bytes": 29131,
+      "crc32": "6f488c28",
+      "sha256": "9a85ce3c5769d1dd11a9e8860b79a2936db00e42c6922771727f9e6102778139"
+    },
+    {
+      "name": "results/SS3_terminal_80digits/fixture/probe_parameters.dat",
+      "bytes": 46,
+      "crc32": "9fdded3c",
+      "sha256": "96b04713bbd5788e13f900e28c0d05e151480b59aad69443a54ea99f2be10ea7"
+    },
+    {
+      "name": "results/SS3_terminal_80digits/high_precision.json",
+      "bytes": 43117,
+      "crc32": "95cf443a",
+      "sha256": "e100dd130db52d3873a3bc8f7fdc2d138bf056dec7f53e3f5b6273bfe0645f16"
+    },
+    {
+      "name": "results/SS3_terminal_80digits/high_precision_qualified.json",
+      "bytes": 43294,
+      "crc32": "3d799b9b",
+      "sha256": "ef83ca7861e5955935430e0543857d57fb24597ac064ec0f05ce625e88f29a1e"
+    },
+    {
+      "name": "results/SS3_terminal_80digits/probe.log",
+      "bytes": 183,
+      "crc32": "6a301e23",
+      "sha256": "7182d7dac81d4e2f5ed2f138a3de9d8de59e12d8057addf61d2156fc6cf6af59"
+    },
+    {
+      "name": "results/SS3_terminal_80digits/proposal_cells_exact.csv",
+      "bytes": 15830,
+      "crc32": "552cf495",
+      "sha256": "90ca2db8e4d7d52b9adcb4b6a9f3df772c21620b3482390ab8b059e58547b376"
+    },
+    {
+      "name": "results/balance_normalizations.json",
+      "bytes": 10000,
+      "crc32": "1359742d",
+      "sha256": "052e4a564189b92d3b6d7c438a90e7c9c057b200269148f18899b40d169f3c56"
+    },
+    {
+      "name": "results/summary.json",
+      "bytes": 99544,
+      "crc32": "0e1a2e30",
+      "sha256": "7cce755f309308c7b7eb2e97a135f3a32a7f771326366258f0cdf64160b9df2c"
+    },
+    {
+      "name": "compact/D_SS1_manifest.json",
+      "bytes": 9530,
+      "crc32": "e742990d",
+      "sha256": "1c9b854f3c6f1bb14f386c9070aac3eb0ab08ae7cd899ccf9f2ace1f712f1af7"
+    },
+    {
+      "name": "compact/D_SS3_manifest.json",
+      "bytes": 10212,
+      "crc32": "fabb8676",
+      "sha256": "2c50bf5486c3d6862649b2e4fa91056088c1c57650e0b99b3fa1b0a8afbd965d"
+    },
+    {
+      "name": "compact/README.md",
+      "bytes": 5720,
+      "crc32": "919040d9",
+      "sha256": "5c36b4ad8f2e919c1eab3cf9747dd129d7a2a11f1070be53736849affa33b5ce"
+    },
+    {
+      "name": "compact/analyze_cycle_conservation.py",
+      "bytes": 7902,
+      "crc32": "e9b1c28a",
+      "sha256": "4d4ac7e16c04a0975d60b91078de92b1f275d3ac270ca005d86855156927236b"
+    },
+    {
+      "name": "compact/balance_normalizations.json",
+      "bytes": 10000,
+      "crc32": "1359742d",
+      "sha256": "052e4a564189b92d3b6d7c438a90e7c9c057b200269148f18899b40d169f3c56"
+    },
+    {
+      "name": "compact/normalize_smoke_balances.py",
+      "bytes": 2111,
+      "crc32": "b0cd76e2",
+      "sha256": "b6e1c13100db4b9076074bc879c00dee3b60093a251bcf8c02400860c16386c9"
+    },
+    {
+      "name": "compact/plot_active_smoke_progress.py",
+      "bytes": 2230,
+      "crc32": "482f8350",
+      "sha256": "8bbabe8fe9148875cb3eef595b71b65130a5509b82d7c2523f3c63c48898812b"
+    },
+    {
+      "name": "compact/run_frozen_active_smoke.py",
+      "bytes": 8940,
+      "crc32": "1731060c",
+      "sha256": "d5316873cbd295d4c1a87ef8b6961662602c9315f3e14555e9f4da170da88921"
+    },
+    {
+      "name": "compact/summarize_frozen_active_smokes.py",
+      "bytes": 3778,
+      "crc32": "ed3b2e0d",
+      "sha256": "767565a233bca01fe3e3bf51fef0627257372b248c7e1a9c009c83838392e0ef"
+    },
+    {
+      "name": "compact/summary.json",
+      "bytes": 99544,
+      "crc32": "0e1a2e30",
+      "sha256": "7cce755f309308c7b7eb2e97a135f3a32a7f771326366258f0cdf64160b9df2c"
+    },
+    {
+      "name": "ss3_terminal/README.md",
+      "bytes": 5279,
+      "crc32": "8be69118",
+      "sha256": "f533003f95d70076977cc2686f7efabc2253dec035232a53f53175cecb3e22fa"
+    },
+    {
+      "name": "ss3_terminal/analyze_frozen_terminal.py",
+      "bytes": 7478,
+      "crc32": "52262cc4",
+      "sha256": "054ac2c1327d2a87faf2065ddf53ce1506a66db40eeae2d832f86a1a71610772"
+    },
+    {
+      "name": "ss3_terminal/double_geometry.json",
+      "bytes": 3404,
+      "crc32": "6ab18609",
+      "sha256": "9bc3a64a8103a30494f4f869237bad0a94d10c277e3c6e1343f09ced7000b05b"
+    },
+    {
+      "name": "ss3_terminal/double_geometry_provenance.json",
+      "bytes": 442,
+      "crc32": "e0078a0a",
+      "sha256": "21e70422f09b530ae85646797fe34452cc8df0c0430c316456ece7e518e7d678"
+    },
+    {
+      "name": "ss3_terminal/finalize_ss3_precision.py",
+      "bytes": 3062,
+      "crc32": "181c63c1",
+      "sha256": "f78ca3fa03c1d52b65f96a6f7bc9ac4ebae0ba447e6621e9e2df33683d292766"
+    },
+    {
+      "name": "ss3_terminal/high_precision.json",
+      "bytes": 43117,
+      "crc32": "95cf443a",
+      "sha256": "e100dd130db52d3873a3bc8f7fdc2d138bf056dec7f53e3f5b6273bfe0645f16"
+    },
+    {
+      "name": "ss3_terminal/high_precision_qualified.json",
+      "bytes": 43294,
+      "crc32": "3d799b9b",
+      "sha256": "ef83ca7861e5955935430e0543857d57fb24597ac064ec0f05ce625e88f29a1e"
+    },
+    {
+      "name": "ss3_terminal/last_rejected_iteration.txt",
+      "bytes": 222,
+      "crc32": "4e14dde8",
+      "sha256": "7c2d4c079ddfc2aaccd55cace1b2364534fd8170f9c5d9f2615a71054e1c96ef"
+    },
+    {
+      "name": "ss3_terminal/last_rejected_state.dat",
+      "bytes": 29131,
+      "crc32": "6f488c28",
+      "sha256": "9a85ce3c5769d1dd11a9e8860b79a2936db00e42c6922771727f9e6102778139"
+    },
+    {
+      "name": "ss3_terminal/manifest.json",
+      "bytes": 1593,
+      "crc32": "7924f14b",
+      "sha256": "df1728f40abb0db0780c6e4c1022cc142435f892d6244e675160258aa3b3dccb"
+    },
+    {
+      "name": "ss3_terminal/probe.log",
+      "bytes": 183,
+      "crc32": "6a301e23",
+      "sha256": "7182d7dac81d4e2f5ed2f138a3de9d8de59e12d8057addf61d2156fc6cf6af59"
+    },
+    {
+      "name": "ss3_terminal/proposal_cells_exact.csv",
+      "bytes": 15830,
+      "crc32": "552cf495",
+      "sha256": "90ca2db8e4d7d52b9adcb4b6a9f3df772c21620b3482390ab8b059e58547b376"
+    },
+    {
+      "name": "ss3_terminal/replay_frozen_terminal.f90",
+      "bytes": 3457,
+      "crc32": "2f7781d2",
+      "sha256": "224baedd559b196442ef17271eea09416c5a781ccc48fdcb5b704293dc713bfb"
+    },
+    {
+      "name": "ss3_terminal/run_status.txt",
+      "bytes": 451,
+      "crc32": "5d458226",
+      "sha256": "e0d3c26bb928b9e211cc31d83dea88d2941a33edfa46c2c93830791bc26c6d00"
+    },
+    {
+      "name": "ss3_terminal/smoke_manifest.json",
+      "bytes": 10212,
+      "crc32": "fabb8676",
+      "sha256": "2c50bf5486c3d6862649b2e4fa91056088c1c57650e0b99b3fa1b0a8afbd965d"
+    },
+    {
+      "name": "ss3_terminal/summary.json",
+      "bytes": 44522,
+      "crc32": "fe35d3c4",
+      "sha256": "3f6bc4344ea6ba48457240e458a620b80b0310e35e73975969b16d2a97f611bd"
+    }
+  ],
+  "excluded": [
+    "D_SS1/prims_f",
+    "D_SS3/prims_f",
+    "SS3_terminal_80digits/offline_api.mod",
+    "SS3_terminal_80digits/probe"
+  ]
+}

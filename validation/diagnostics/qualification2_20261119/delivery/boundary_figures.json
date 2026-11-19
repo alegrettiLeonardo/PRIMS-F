@@ -1,0 +1,299 @@
+{
+  "schema": "PRIMS-F.static_bc_experimental_figures.v1",
+  "script_sha256": "87aba839ddb2b5ad86022e39bf462fffb04e6cc1fed7ba20a8db3edf928a7846",
+  "digitization_sha256": "c514f55c7855437274d9fe49b352469b493c9bb5ef954319b83a6389f20afe91",
+  "nominal_hashes": {
+    "manifest.json": "af7c9d6580e0556166618020bb57f8cf1ded0d305b4bfd5ef0d9ebb46b30ded3",
+    "monitor.csv": "8876c5c408c79636f50cfd284280cfe4b7db8c2e8decd79ccacc57d8e0ef7458",
+    "run_metadata.txt": "953b6f99f0076e99940d724cd7fcc9914b4ac061452628dd4049729e05c7b06c"
+  },
+  "runs": [
+    {
+      "run": "D_OSC_bc_Ps_minus",
+      "axis": "ps",
+      "value": 201000.0,
+      "time_window_s": [
+        3300.0568527591063,
+        3600.0
+      ],
+      "statistics": {
+        "mean": 260935.6956968305,
+        "std": 7983.753057116382,
+        "minimum": 249332.4953899482,
+        "maximum": 272045.5778713374,
+        "peak_to_peak": 22713.082481389225,
+        "initial": 249599.73038281075,
+        "final": 250454.53843525358,
+        "change": 854.8080524428224,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "spectrum": {
+        "frequency_resolution_Hz": 0.003332576576813067,
+        "three_largest_local_peaks": [
+          {
+            "frequency_bin_Hz": 0.043323495498569876,
+            "relative_power": 1.0,
+            "bin_half_width_Hz": 0.0016662882884065336
+          },
+          {
+            "frequency_bin_Hz": 0.08664699099713975,
+            "relative_power": 0.013403324777145497,
+            "bin_half_width_Hz": 0.0016662882884065336
+          }
+        ],
+        "ratio_two_strongest_frequency_bins": 2.0,
+        "window_excursion_Pa": 22713.082481389225,
+        "window_excursion_at_least_100Pa": true,
+        "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+        "window": "Hann, mean removed, relative power normalized separately for each series"
+      },
+      "input_hashes": {
+        "manifest.json": "4dbc647f555de9009b732beb3d116fe782cd51a1793553fc80f8ecf1fdc68775",
+        "monitor.csv": "a634878d9e000e5e8b6166edc072567dfcc9f507d49b9b6af23685b7884f7f79",
+        "run_metadata.txt": "fc1be5d456e95cc41de1f9c374d0d630a0f3a9d060626dece8b96c13a0dd6bac"
+      }
+    },
+    {
+      "run": "D_OSC_bc_Ps_plus_T7200",
+      "axis": "ps",
+      "value": 211000.0,
+      "time_window_s": [
+        6900.056852763903,
+        7200.0
+      ],
+      "statistics": {
+        "mean": 271463.9715565329,
+        "std": 5598.5343977876755,
+        "minimum": 263411.51479816297,
+        "maximum": 279287.0629043548,
+        "peak_to_peak": 15875.548106191854,
+        "initial": 272843.6449653297,
+        "final": 272838.82921090507,
+        "change": -4.815754424605984,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "spectrum": {
+        "frequency_resolution_Hz": 0.003332576576873698,
+        "three_largest_local_peaks": [
+          {
+            "frequency_bin_Hz": 0.04332349549935807,
+            "relative_power": 1.0,
+            "bin_half_width_Hz": 0.001666288288436849
+          },
+          {
+            "frequency_bin_Hz": 0.08664699099871614,
+            "relative_power": 0.006622684159336922,
+            "bin_half_width_Hz": 0.001666288288436849
+          },
+          {
+            "frequency_bin_Hz": 0.009997729730621093,
+            "relative_power": 3.324593764053371e-13,
+            "bin_half_width_Hz": 0.001666288288436849
+          }
+        ],
+        "ratio_two_strongest_frequency_bins": 2.0,
+        "window_excursion_Pa": 15875.548106191854,
+        "window_excursion_at_least_100Pa": true,
+        "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+        "window": "Hann, mean removed, relative power normalized separately for each series"
+      },
+      "input_hashes": {
+        "manifest.json": "23b4a7a1a3ee88f6484077b318507cfc231e657b663d183a09d052d298f98809",
+        "monitor.csv": "99395c8d49fe66f4e932d593391b298c099e30751e331bf4c9b005d97017526e",
+        "run_metadata.txt": "972ed7759e6c403e9e8dd69d1d888199f23b82302c1103cdde9b151d4e8d74d9"
+      }
+    },
+    {
+      "run": "D_OSC_bc_jg_minus",
+      "axis": "jg",
+      "value": 1.1,
+      "time_window_s": [
+        3300.0568527590503,
+        3600.0
+      ],
+      "statistics": {
+        "mean": 267873.870016263,
+        "std": 12059.665136749005,
+        "minimum": 250464.5989972023,
+        "maximum": 284967.7943023065,
+        "peak_to_peak": 34503.19530510419,
+        "initial": 252426.01992218383,
+        "final": 278123.1691423328,
+        "change": 25697.149220148975,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "spectrum": {
+        "frequency_resolution_Hz": 0.003332576576813067,
+        "three_largest_local_peaks": [
+          {
+            "frequency_bin_Hz": 0.043323495498569876,
+            "relative_power": 1.0,
+            "bin_half_width_Hz": 0.0016662882884065336
+          },
+          {
+            "frequency_bin_Hz": 0.08331441442032668,
+            "relative_power": 0.03852984066935238,
+            "bin_half_width_Hz": 0.0016662882884065336
+          }
+        ],
+        "ratio_two_strongest_frequency_bins": 1.923076923076923,
+        "window_excursion_Pa": 34503.19530510419,
+        "window_excursion_at_least_100Pa": true,
+        "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+        "window": "Hann, mean removed, relative power normalized separately for each series"
+      },
+      "input_hashes": {
+        "manifest.json": "d35a4e23572ab5121933a86a06bc4f6c2b97d011190de2bbab0523d75e7ac165",
+        "monitor.csv": "837392f76a655fa2931cb9e95177c86d4df0c1c3c5db363d10ac30175bfa7ffb",
+        "run_metadata.txt": "2026b1c41030497eb4ab173e6d1548940281df632fde59e0dbfeb2fad6521bb5"
+      }
+    },
+    {
+      "run": "D_OSC_bc_jg_plus_T7200",
+      "axis": "jg",
+      "value": 1.22,
+      "time_window_s": [
+        6900.056852763301,
+        7200.000000000001
+      ],
+      "statistics": {
+        "mean": 264711.26168363274,
+        "std": 0.0,
+        "minimum": 264711.26168363274,
+        "maximum": 264711.26168363274,
+        "peak_to_peak": 0.0,
+        "initial": 264711.26168363274,
+        "final": 264711.26168363274,
+        "change": 0.0,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "spectrum": {
+        "frequency_resolution_Hz": 0.0033325765768648053,
+        "three_largest_local_peaks": [],
+        "ratio_two_strongest_frequency_bins": null,
+        "window_excursion_Pa": 0.0,
+        "window_excursion_at_least_100Pa": false,
+        "peaks_interpretation": "NO_SPECTRAL_VARIATION; no period inferred"
+      },
+      "input_hashes": {
+        "manifest.json": "676fba47b28791f8c8bb7e6850736eec6a06064831646f16eab6e447838f9844",
+        "monitor.csv": "9f677ba7cf11b324df76a9270a96294b53423329688151746349b1efc841947e",
+        "run_metadata.txt": "476a17552004e7e70d817866f0250ea684a2c724fcb8d2db03bcf702d015ea1a"
+      }
+    },
+    {
+      "run": "D_OSC_bc_jl_minus",
+      "axis": "jl",
+      "value": 0.544,
+      "time_window_s": [
+        3300.0568527591063,
+        3600.0
+      ],
+      "statistics": {
+        "mean": 266108.21795369673,
+        "std": 7382.13192804396,
+        "minimum": 255463.26895181971,
+        "maximum": 276441.62423407106,
+        "peak_to_peak": 20978.355282251345,
+        "initial": 272941.5702501242,
+        "final": 275432.83399624727,
+        "change": 2491.2637461230624,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "spectrum": {
+        "frequency_resolution_Hz": 0.003332576576813067,
+        "three_largest_local_peaks": [
+          {
+            "frequency_bin_Hz": 0.043323495498569876,
+            "relative_power": 1.0,
+            "bin_half_width_Hz": 0.0016662882884065336
+          },
+          {
+            "frequency_bin_Hz": 0.08664699099713975,
+            "relative_power": 0.011379610464715462,
+            "bin_half_width_Hz": 0.0016662882884065336
+          }
+        ],
+        "ratio_two_strongest_frequency_bins": 2.0,
+        "window_excursion_Pa": 20978.355282251345,
+        "window_excursion_at_least_100Pa": true,
+        "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+        "window": "Hann, mean removed, relative power normalized separately for each series"
+      },
+      "input_hashes": {
+        "manifest.json": "1166d676e4c3559ce81816070349a69058181ba201c46f575231b8de63cd018d",
+        "monitor.csv": "de1436bd08050f81625ff46af2ec288f570df8880f7414578af923ae15ad87bd",
+        "run_metadata.txt": "ea242aae944b981f2f5553c43d20698c671096e87c23620ea1aa97382e5121b7"
+      }
+    },
+    {
+      "run": "D_OSC_bc_jl_plus",
+      "axis": "jl",
+      "value": 0.55,
+      "time_window_s": [
+        3300.0568527591063,
+        3600.0
+      ],
+      "statistics": {
+        "mean": 266256.2924780923,
+        "std": 6548.159691593118,
+        "minimum": 256802.3195775329,
+        "maximum": 275373.3788761662,
+        "peak_to_peak": 18571.059298633278,
+        "initial": 275357.99701655284,
+        "final": 275333.98585779965,
+        "change": -24.011158753186464,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "spectrum": {
+        "frequency_resolution_Hz": 0.003332576576813067,
+        "three_largest_local_peaks": [
+          {
+            "frequency_bin_Hz": 0.043323495498569876,
+            "relative_power": 1.0,
+            "bin_half_width_Hz": 0.0016662882884065336
+          },
+          {
+            "frequency_bin_Hz": 0.08664699099713975,
+            "relative_power": 0.008972945888623834,
+            "bin_half_width_Hz": 0.0016662882884065336
+          }
+        ],
+        "ratio_two_strongest_frequency_bins": 2.0,
+        "window_excursion_Pa": 18571.059298633278,
+        "window_excursion_at_least_100Pa": true,
+        "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+        "window": "Hann, mean removed, relative power normalized separately for each series"
+      },
+      "input_hashes": {
+        "manifest.json": "65a74c442dab303dfc3782c07507a1cdaf74c8a3327d93cd6094c3546db50b1c",
+        "monitor.csv": "f07c000f4dd22991d8d6d43881d67f1161517c19582787504a76ae4ac0750dcb",
+        "run_metadata.txt": "a8e4fba7e9a21ee2db826827ec2fc31dd5d3cda7d0f2dfbd3a04ec3c9cb05bd6"
+      }
+    }
+  ],
+  "qualification_caption": "JG+ a 7200 s / tol_res=1e-8: FAIL de conserva\u00e7\u00e3o por invent\u00e1rio; sem per\u00edodo qualificado.",
+  "figure_hashes": {
+    "pressao_contornos_fig18.png": "4e38fd33a77d4c5a4a54a66149e407723f313fbda1ef995afe515abe4d7cc389",
+    "espectros_contornos_fig18.png": "9d1dccafac6cc07ea6e08ee7f12d27f48f93d1f0ff6d080b2b449c19397bfe51"
+  },
+  "limitations": "Independent time origins; static offsets of measured-signal deviations; no synchronized forcing, confidence interval or experimental validation inferred."
+}

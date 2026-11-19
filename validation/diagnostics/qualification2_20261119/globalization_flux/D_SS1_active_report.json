@@ -1,0 +1,124 @@
+{
+  "case": "D_SS1",
+  "method": "linear equality active-set Gauss-Newton with exact-residual feasible line search",
+  "max_iterations": 30,
+  "max_backtracks": 30,
+  "constraint_index": 0,
+  "residual_scaling": "1e-8 * original fixed Uold component scales",
+  "variable_scaling": "1e-8 * original fixed Uold component scales",
+  "margin_scaling_si": 1e-08,
+  "iterations": [
+    {
+      "iteration": 0,
+      "norm": 2.976406330921032e-07,
+      "objective": 690.3226758939036,
+      "margin_si": 2.0694867733244484e-13,
+      "predicted_unconstrained_margin_scaled": -0.6055632990935846,
+      "linear_constrained_inf_norm": 0.0001671015904627371,
+      "multiplier": 4.6147558078414726e-08,
+      "gradient": [
+        {
+          "variable": 150,
+          "h": 4.400578162370214e-06,
+          "values": [
+            -0.0002245567660372029,
+            -0.0001124641163329257,
+            0.00011283463111266758,
+            0.0002260388303986632
+          ],
+          "derivative": 25.59880265067989
+        },
+        {
+          "variable": 151,
+          "h": 1.3445118122930926e-08,
+          "values": [
+            -0.0013656929415913313,
+            -0.0006828430369775182,
+            0.0006828361699588218,
+            0.0013656654724505562
+          ],
+          "derivative": 50787.1777109546
+        },
+        {
+          "variable": 152,
+          "h": 9.995810289178467e-06,
+          "values": [
+            -0.0006228631890378961,
+            -0.0003115296230865063,
+            0.00031172605687428194,
+            0.0006236489242297984
+          ],
+          "derivative": 31.175839495365512
+        },
+        {
+          "variable": 153,
+          "h": 9.814077671885243e-06,
+          "values": [
+            0.0725307555857727,
+            0.03627471131942165,
+            -0.0362933923170769,
+            -0.07260547959071509
+          ],
+          "derivative": -3697.143094445102
+        },
+        {
+          "variable": 154,
+          "h": 4.4839165020099093e-10,
+          "values": [
+            0.0013805689988635724,
+            0.0006902810256352568,
+            -0.0006902740769753051,
+            -0.001380541206033959
+          ],
+          "derivative": -1539452.286907731
+        },
+        {
+          "variable": 155,
+          "h": 9.65526778295673e-06,
+          "values": [
+            -5.5270911284067105e-06,
+            -2.7635424957032177e-06,
+            2.7635363411300677e-06,
+            5.5270658451386285e-06
+          ],
+          "derivative": 0.2862209043687239
+        }
+      ],
+      "accepted_lambda": 1.0,
+      "accepted_norm": 1.6709772876859093e-12,
+      "accepted_margin_si": 5.796776159460623e-13,
+      "accepted_objective": 1.3971981112554932e-08
+    },
+    {
+      "iteration": 1,
+      "norm": 1.6709772876859093e-12,
+      "objective": 1.3971981112554932e-08,
+      "margin_si": 5.796776159460623e-13,
+      "predicted_unconstrained_margin_scaled": -0.6054913007887245,
+      "linear_constrained_inf_norm": 0.0001670816735691184,
+      "multiplier": 4.6142044084103885e-08,
+      "gradient": null
+    }
+  ],
+  "invalid_proposals": [],
+  "termination": "ORIGINAL_RESIDUAL_CONVERGED",
+  "final_norm": 1.6709772876859093e-12,
+  "final_margin_si": 5.796776159460623e-13,
+  "final_mass_min_normalized": [
+    0.44001493459314145,
+    4.483915167414432e-05
+  ],
+  "max_delta_over_old_scale": 2.9764051462382714e-07,
+  "original_residual_pass": true,
+  "calls": 4,
+  "final_boundary_mass_flux_normalized": [
+    [
+      1.0,
+      0.0002506325817868205
+    ],
+    [
+      0.6503286745909977,
+      0.0008565094803901374
+    ]
+  ]
+}

@@ -26,10 +26,10 @@ SOURCES = [
     'module_config', 'module_lapack_small', 'module_chexal_1992', 'module_closure_law', 'module_find',
     'module_catenary', 'module_steady_state', 'module_jacobian', 'module_matrix_roe',
     'module_roe_solver', 'module_boundary_conditions', 'module_solver_utils',
-    'module_time_step', 'module_simulate_pipe_riser',
+    'module_time_step', 'module_active_set', 'module_simulate_pipe_riser',
 ]
 TESTS = ['test_chexal_velocity_reference', 'test_chexal_derivative_tail', 'test_chexal_1992_core', 'test_chexal_integration', 'test_geometry', 'test_closure_physics', 'test_primitives_numerics', 'test_steady',
-         'test_boundaries_time', 'test_fv_operators', 'test_roe_geometry', 'test_chexal_junction']
+         'test_boundaries_time', 'test_fv_operators', 'test_roe_geometry', 'test_chexal_junction', 'test_burr15', 'test_active_set', "test_active_replay"]
 
 def run_command(command: list[str], cwd: Path, log: Path, timeout: float) -> dict:
     start = time.perf_counter()
@@ -84,6 +84,12 @@ def main() -> int:
         summary['git_head'] = None
     required = [(root / 'scr' / (name + '.f90')) for name in SOURCES]
     required += [(root / 'tests' / (name + '.f90')) for name in TESTS]
+    replay_support = root / 'validation/diagnostics/qualification2_20261119/globalization_flux'
+    required += [replay_support / 'offline_api.f90',
+                 replay_support / 'fixtures/D_SS1_active_terminal/last_rejected_state.dat',
+                 replay_support / 'fixtures/D_SS1_active_terminal/probe_parameters.dat',
+                 replay_support / 'fixtures/D_SS3_active_terminal/last_rejected_state.dat',
+                 replay_support / 'fixtures/D_SS3_active_terminal/probe_parameters.dat']
     missing = [str(path.relative_to(root)) for path in required if not path.is_file()]
     if missing:
         summary['status'] = 'MISSING_REQUIRED_FILES'
@@ -129,7 +135,10 @@ def main() -> int:
             link.pop('output')
             entry = {'name': name, 'link': link, 'status': link['status']}
             if link['status'] == 'PASS':
-                run = run_command([str(executable)], build, logs / (name + '.log'), args.timeout)
+                run_args = [str(executable)]
+                if name == 'test_active_replay':
+                    run_args += [str(root), str(build)]
+                run = run_command(run_args, build, logs / (name + '.log'), args.timeout)
                 output = run.pop('output')
                 matches = re.findall(r'PASS[^\n]*?:\s*(\d+)\s+assertions', output)
                 matches += re.findall(r'PASS\s+(\d+)\s+[^\n]*\bchecks\b', output)

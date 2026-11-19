@@ -1,0 +1,14 @@
+{
+  "monitor.csv": {
+    "baseline_rows": 636,
+    "smoke_rows": 636,
+    "compared_rows": 636,
+    "equal_prefix": true
+  },
+  "fields.csv": {
+    "baseline_rows": 30295,
+    "smoke_rows": 30295,
+    "compared_rows": 30295,
+    "equal_prefix": true
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "case": "D_SS1",
+  "source_operator": "69813ee",
+  "states": {
+    "accepted_old": {
+      "roe_gas_mass_flux_kg_s": 2.0696852824540416e-11,
+      "roe_jg_m_s": 3.9866594701254724e-09,
+      "hll_mass_fluxes_kg_s": [
+        4.0644206191447845,
+        -0.007008377795597048
+      ],
+      "hll_pressure_reconstruction_Pa": 283878.43681608135,
+      "hll_jg_m_s": -1.3396869339839415,
+      "hll_mapped_intermediate_phase_mass_density_kg_m3": [
+        433.25700157560806,
+        1.3540461526245988
+      ],
+      "mapped_vs_original_right_phase_mass_ratio": [
+        0.43709846476414604,
+        30.584974012988493
+      ],
+      "wave_speeds_m_s": [
+        -244.70825723096252,
+        245.82869232481696
+      ],
+      "hll_trace_admissible_bhagwat": false,
+      "physical_cell_mass_min_kg_m3": [
+        438.7168905351412,
+        0.044706898242405944
+      ],
+      "explicit_mass_update_min_kg_m3": [
+        438.7168905360917,
+        0.04470513035995878
+      ],
+      "interface_mass_cancellation_nd": [
+        -1.6543612251060553e-24,
+        0.0
+      ],
+      "momentum_update_defined": false
+    },
+    "linearization": {
+      "roe_gas_mass_flux_kg_s": 1.0743797782494993e-15,
+      "roe_jg_m_s": 2.0694867733244484e-13,
+      "hll_mass_fluxes_kg_s": [
+        4.064420691563919,
+        -0.007008377990136176
+      ],
+      "hll_pressure_reconstruction_Pa": 283878.4369016946,
+      "hll_jg_m_s": -1.3396869707670536,
+      "hll_mapped_intermediate_phase_mass_density_kg_m3": [
+        433.2570014321877,
+        1.3540461531227468
+      ],
+      "mapped_vs_original_right_phase_mass_ratio": [
+        0.43709846283870385,
+        30.584980024270852
+      ],
+      "wave_speeds_m_s": [
+        -244.7082569050257,
+        245.82869199339737
+      ],
+      "hll_trace_admissible_bhagwat": false,
+      "physical_cell_mass_min_kg_m3": [
+        438.7168905355185,
+        0.0447068894832898
+      ]
+    }
+  },
+  "hll_source": "Harten, Lax, van Leer1983, p50, Eqs3.13\u20133.15",
+  "wave_bound_limit": "Endpoint eigenvalue/phase-speed envelope; no proof that it bounds every nonlinear wave.",
+  "positivity_limit": "Mapped HLL intermediate and explicit mass update are checked separately from trace domain.",
+  "existing_rusanov_prepare_failure": {
+    "status": 1012,
+    "index": -1,
+    "stage": "PREPARE"
+  }
+}

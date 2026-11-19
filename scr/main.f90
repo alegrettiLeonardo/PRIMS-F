@@ -49,9 +49,11 @@ program main
   real(wp)           :: gamma_g
   character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model
   character(len=20) :: dissipation_mode
+  character(len=16) :: newton_globalization
+  character(len=32) :: pipe_regime_mode
   real(wp) :: Cg_fixed, P_standard, T_standard, dt_min_s, dt_max_s, dt_start_s
   real(wp) :: perturbation_amplitude, output_interval_s, field_interval_s
-  integer(i4) :: n_riser, closure_riser, sim_status, steady_status
+  integer(i4) :: n_riser, closure_riser, closure_pipe, sim_status, steady_status, output_closure, output_status
   integer(i4)        :: quad_points, max_iter, max_workers, save_every, newton_max
   character(len=32)  :: regime
 
@@ -73,8 +75,8 @@ program main
                     gamma_g, max_iter, max_workers, save_every, newton_max, regime, use_muscl, out_dir, jac_dissipation_fd, jac_dissipation_fd_eps, debug_dfduj_check, debug_dfduj_cell, debug_dfduj_eps, &
                     pb_dp_on, pb_dp_off, &
                     stab_si_on, stab_si_off, stab_use_hysteresis, &
-                    gas_eos, gas_flow_basis, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, &
-                    dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode
+                    gas_eos, gas_flow_basis, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
+                    dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode, newton_globalization
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
   type(pipeline_riser_simulator_t) :: sim
@@ -192,6 +194,9 @@ program main
   use_muscl = .false.
   n_riser = 0
   closure_riser = 2
+  ! Sentinel distinguishes an explicitly supplied drift closure from a default.
+  closure_pipe = -1
+  pipe_regime_mode = 'FIXED_STRATIFIED'
   gas_eos = 'ISOTHERMAL'
   gas_flow_basis = 'STANDARD'
   Cg_fixed = 343.0_wp
@@ -206,6 +211,7 @@ program main
   flux_scheme = 'ROE'
   junction_model = 'MATCHED'
   dissipation_mode = 'LAGGED'
+  newton_globalization = 'LINE_SEARCH'
   ! ------------------------------ Read -----------------------------------
   infile = 'input_params.nml'
   if (command_argument_count() >= 1) then
@@ -250,6 +256,19 @@ program main
 
   end if
 
+  select case(trim(pipe_regime_mode))
+  case('FIXED_STRATIFIED','AUTO_BURR15')
+    if(closure_pipe/=-1.and.closure_pipe/=1) &
+      error stop 'FIXED_STRATIFIED and diagnostic AUTO_BURR15 require closure_pipe=1 or omission'
+    closure_pipe=1
+  case('FIXED_DRIFT')
+    if(closure_pipe<2.or.closure_pipe>7) &
+      error stop 'FIXED_DRIFT requires explicit closure_pipe in 2..7'
+  case default
+    error stop 'Unknown pipe_regime_mode: use FIXED_STRATIFIED, FIXED_DRIFT or AUTO_BURR15'
+  end select
+  if(trim(pipe_regime_mode)=='AUTO_BURR15') &
+    write(output_unit,'(a)') '[MODEL] AUTO_BURR15 is diagnostic only; pipe operator remains stratified'
   if(closure_riser<1.or.closure_riser>7)error stop 'Unsupported riser closure ID: use 1..7'
   select case(closure_riser)
   case(5)
@@ -269,6 +288,8 @@ program main
       trim(junction_model)/='CONSERVATIVE') error stop 'Unknown junction_model'
   if (trim(dissipation_mode)/='LAGGED'.and.trim(dissipation_mode)/='FULLY_IMPLICIT') error stop 'Unknown dissipation_mode'
   if (mu_l<=0.0_wp .or. mu_g<=0.0_wp .or. eps<0.0_wp .or. eps/D>=1.0_wp) error stop 'Invalid viscosities/roughness'
+  if(trim(newton_globalization)/='LINE_SEARCH'.and.trim(newton_globalization)/='ACTIVE_SET') &
+    error stop 'Unknown newton_globalization'
   beta_rad = beta_deg * (acos(-1.0_wp)/180.0_wp)
 
   ! ---------------------- Geometry & properties --------------------------
@@ -320,7 +341,7 @@ program main
                                     nCl, nCg, nrho_l0, nP_l0, mu_l, mu_g, sigma, omega_P, omega_u, omega_rho, tol, &
                                     vns, vnp, nrhogv, nrholv, alphav, nugv, nulv, thetav, njlv, njgv, &
                                     mesh_ratio=mesh_ratio, n_riser=n_riser, face_positions=physical_faces, &
-                                    closure_id_riser=closure_riser, status=steady_status)
+                                    closure_id_riser=closure_riser, status=steady_status, closure_id_pipe=closure_pipe)
   if (steady_status/=0) then
     write(error_unit,'(a,i0)') 'Steady initialization failed, status=',steady_status
     error stop 2
@@ -362,9 +383,12 @@ program main
   cfg%nCells         = N
   cfg%N_pipe         = nodes
   cfg%closure_riser  = closure_riser
+  cfg%closure_pipe   = closure_pipe
+  cfg%pipe_regime_mode = trim(pipe_regime_mode)
   cfg%flux_scheme    = flux_scheme
   cfg%junction_model = junction_model
   cfg%dissipation_mode = dissipation_mode
+  cfg%newton_globalization = newton_globalization
   cfg%gas_eos        = gas_eos
   cfg%output_interval_s = output_interval_s
   cfg%field_interval_s = field_interval_s
@@ -488,12 +512,21 @@ program main
   write(20,'(a)') '# s_nd  s_m   alpha   P_Pa   ul_mps   ug_mps'
 
   do i = nd+1, N-nd
+    ! This legacy output used implicit Bendiksen in every riser. Recover with
+    ! the simulated section closure, including a horizontal fixed-drift pipe.
+    ! Only this post-processing file changes; monitor/fields use the operator.
+    output_closure=cfg%closure_riser
+    if(i<=nd+cfg%N_pipe)output_closure=cfg%closure_pipe
     call compute_primitive_variables( &
       U(i,1), U(i,2), U(i,3), thetav_ext(i), &
       nCg, nCl, nrho_l0, nP_l0, &
       D, AREA, eps, G, mu_l, mu_g, sigma, njl, &
       omega_u, omega_rho, tol, tola, max_iter, &
-      alpha_i, nrhol_i, nrhog_i, P_nd, ul_nd, ug_nd, phase)
+      alpha_i, nrhol_i, nrhog_i, P_nd, ul_nd, ug_nd, phase,status=output_status,closure_id=output_closure)
+    if(output_status/=0)then
+      write(error_unit,'(a,i0,a,i0)') 'Final output recovery failed at cell ',i,', status=',output_status
+      error stop 4
+    endif
 
     rho_l_dim = nrhol_i * omega_rho
     rho_g_dim = nrhog_i * omega_rho

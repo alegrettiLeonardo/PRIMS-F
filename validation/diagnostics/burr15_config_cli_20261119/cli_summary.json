@@ -1,0 +1,159 @@
+{
+  "binary": "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/tmp/pipe_config_check/prims_f",
+  "cases": [
+    {
+      "case": "default",
+      "expected": "PASS",
+      "returncode": 0,
+      "passed": true,
+      "status": {
+        "status": "0",
+        "reached_time_s": "  2.0000000000000000E-03",
+        "requested_time_s": "  2.0000000000000000E-03",
+        "accepted_steps": "2",
+        "rejected_steps": "0",
+        "last_rejection_status": "0",
+        "cpu_seconds": "  1.1984999999999996E-02"
+      }
+    },
+    {
+      "case": "explicit_stratified",
+      "expected": "PASS",
+      "returncode": 0,
+      "passed": true,
+      "status": {
+        "status": "0",
+        "reached_time_s": "  2.0000000000000000E-03",
+        "requested_time_s": "  2.0000000000000000E-03",
+        "accepted_steps": "2",
+        "rejected_steps": "0",
+        "last_rejection_status": "0",
+        "cpu_seconds": "  1.2371999999999994E-02"
+      }
+    },
+    {
+      "case": "auto_diagnostic",
+      "expected": "PASS",
+      "returncode": 0,
+      "passed": true,
+      "status": {
+        "status": "0",
+        "reached_time_s": "  2.0000000000000000E-03",
+        "requested_time_s": "  2.0000000000000000E-03",
+        "accepted_steps": "2",
+        "rejected_steps": "0",
+        "last_rejection_status": "0",
+        "cpu_seconds": "  1.1830999999999994E-02"
+      }
+    },
+    {
+      "case": "drift_horizontal",
+      "expected": "PASS",
+      "returncode": 0,
+      "passed": true,
+      "status": {
+        "status": "0",
+        "reached_time_s": "  2.0000000000000000E-03",
+        "requested_time_s": "  2.0000000000000000E-03",
+        "accepted_steps": "2",
+        "rejected_steps": "0",
+        "last_rejection_status": "0",
+        "cpu_seconds": "  4.7600000000000003E-03"
+      }
+    },
+    {
+      "case": "drift_downhill",
+      "expected": "PASS",
+      "returncode": 0,
+      "passed": true,
+      "status": {
+        "status": "0",
+        "reached_time_s": "  2.0000000000000000E-03",
+        "requested_time_s": "  2.0000000000000000E-03",
+        "accepted_steps": "2",
+        "rejected_steps": "0",
+        "last_rejection_status": "0",
+        "cpu_seconds": "  4.5330000000000092E-03"
+      }
+    },
+    {
+      "case": "drift_missing_id",
+      "expected": "REJECT_CONFIG",
+      "returncode": 1,
+      "passed": true,
+      "status": null
+    },
+    {
+      "case": "drift_id1",
+      "expected": "REJECT_CONFIG",
+      "returncode": 1,
+      "passed": true,
+      "status": null
+    },
+    {
+      "case": "drift_id8",
+      "expected": "REJECT_CONFIG",
+      "returncode": 1,
+      "passed": true,
+      "status": null
+    },
+    {
+      "case": "stratified_drift_id",
+      "expected": "REJECT_CONFIG",
+      "returncode": 1,
+      "passed": true,
+      "status": null
+    },
+    {
+      "case": "auto_drift_id",
+      "expected": "REJECT_CONFIG",
+      "returncode": 1,
+      "passed": true,
+      "status": null
+    },
+    {
+      "case": "unknown_mode",
+      "expected": "REJECT_CONFIG",
+      "returncode": 1,
+      "passed": true,
+      "status": null
+    },
+    {
+      "case": "domain_horizontal_countercurrent",
+      "expected": "REJECT_DOMAIN",
+      "returncode": 2,
+      "passed": true,
+      "status": null
+    },
+    {
+      "case": "default_stratified_auto_physical_identity",
+      "expected": "PASS",
+      "passed": true
+    },
+    {
+      "case": "default_legacy_output_matches_operator_fields",
+      "expected": "PASS",
+      "passed": true
+    },
+    {
+      "case": "explicit_stratified_legacy_output_matches_operator_fields",
+      "expected": "PASS",
+      "passed": true
+    },
+    {
+      "case": "auto_diagnostic_legacy_output_matches_operator_fields",
+      "expected": "PASS",
+      "passed": true
+    },
+    {
+      "case": "drift_horizontal_legacy_output_matches_operator_fields",
+      "expected": "PASS",
+      "passed": true
+    },
+    {
+      "case": "drift_downhill_legacy_output_matches_operator_fields",
+      "expected": "PASS",
+      "passed": true
+    }
+  ]
+}

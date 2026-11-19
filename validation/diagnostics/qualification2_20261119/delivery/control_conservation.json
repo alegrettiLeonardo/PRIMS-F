@@ -1,0 +1,388 @@
+{
+  "schema": "PRIMS-F.accepted_conservation.v2",
+  "run_dir": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/active_control_a179e51_r2/runs/D_Stable_ACTIVE_tol1e10",
+  "analyzer_sha256": "b87df308ccd98c1e61509e323d43386ff0fbac9f26c4811b4aca1454ef0f75a0",
+  "artifacts": {
+    "conservation.csv": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/active_control_a179e51_r2/runs/D_Stable_ACTIVE_tol1e10/conservation.csv",
+      "sha256": "897c30b000f80253e65b396fda4dcd7fef37957cb2232ebffe150e850be5b354",
+      "size_bytes": 27536612
+    },
+    "steps.csv": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/active_control_a179e51_r2/runs/D_Stable_ACTIVE_tol1e10/steps.csv",
+      "sha256": "89a68e2b32abed2f3f2f1fec631e956733cc147164103e8ca307fc8b590b79dd",
+      "size_bytes": 3681124
+    },
+    "run_status.txt": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/active_control_a179e51_r2/runs/D_Stable_ACTIVE_tol1e10/run_status.txt",
+      "sha256": "640f324b360813e0c31ddc9356a22ca20482ff8965e7a4469a3a88ace126ed5d",
+      "size_bytes": 432
+    },
+    "run_metadata.txt": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/active_control_a179e51_r2/runs/D_Stable_ACTIVE_tol1e10/run_metadata.txt",
+      "sha256": "da95837bff76fbb605c20be94b96e19cfa2afeec760d1be7ae7118fd69f6f284",
+      "size_bytes": 3336
+    },
+    "manifest.json": {
+      "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/active_control_a179e51_r2/runs/D_Stable_ACTIVE_tol1e10/manifest.json",
+      "sha256": "2bab42335034ca0999076877a65f0cbb42efe20d435382aa26d91d0c165b968f",
+      "size_bytes": 5876
+    }
+  },
+  "status": {
+    "status": 0.0,
+    "reached_time_s": 2400.0,
+    "requested_time_s": 2400.0,
+    "accepted_steps": 19222.0,
+    "rejected_steps": 0.0,
+    "last_rejection_status": 0.0,
+    "termination_reason": "COMPLETED",
+    "cpu_seconds": 282.834313,
+    "wall_seconds": 284.231144742,
+    "newton_iterations_total": 19934.0,
+    "jacobian_evaluations_total": 19934.0,
+    "residual_evaluations_total": 24257.0,
+    "linear_solves_total": 4323.0,
+    "backtrack_trials_total": 4323.0,
+    "prepare_calls_total": 19222.0
+  },
+  "ledger": {
+    "accepted_steps": 19222,
+    "final_time_s": 2400.0,
+    "accepted_time_dt_norm_sha256": "ef4d7b7f77cd797c9d7ccd037f13acfeb7b254909b2b5d9458378d427fd4ef10",
+    "arithmetic_contract_passes": true,
+    "mismatches": [],
+    "max_identity_error_kg_or_s": {
+      "l_in_signed_integral": 6.843947630841285e-10,
+      "l_in_absolute_integral": 6.843947630841285e-10,
+      "l_out_signed_integral": 5.375113687478006e-10,
+      "l_out_absolute_integral": 5.375113687478006e-10,
+      "l_base_left_signed_integral": 1.134594640461728e-09,
+      "l_base_left_absolute_integral": 1.134594640461728e-09,
+      "l_base_right_signed_integral": 1.134594640461728e-09,
+      "l_base_right_absolute_integral": 1.134594640461728e-09,
+      "l_balance": 3.5792879771179287e-10,
+      "l_initial_residual": 0.0,
+      "l_residual_accumulator": 2.0889950061659182e-19,
+      "l_cumulative_defect": 5.097548461628892e-13,
+      "l_pipe_balance": 8.680913765601872e-10,
+      "l_pipe_initial_residual": 0.0,
+      "l_pipe_residual_accumulator": 3.8753411698109347e-22,
+      "l_pipe_cumulative_defect": 5.749636771169502e-13,
+      "l_riser_balance": 1.0736869171523722e-09,
+      "l_riser_initial_residual": 0.0,
+      "l_riser_residual_accumulator": 2.753915869760544e-19,
+      "l_riser_cumulative_defect": 5.27191440569252e-13,
+      "l_inventory_partition": 8.526512829121202e-14,
+      "g_in_signed_integral": 4.2454928461665986e-13,
+      "g_in_absolute_integral": 4.2454928461665986e-13,
+      "g_out_signed_integral": 9.330314298949816e-13,
+      "g_out_absolute_integral": 9.330314298949816e-13,
+      "g_base_left_signed_integral": 1.802114013571554e-12,
+      "g_base_left_absolute_integral": 1.802114013571554e-12,
+      "g_base_right_signed_integral": 1.802114013571554e-12,
+      "g_base_right_absolute_integral": 1.802114013571554e-12,
+      "g_balance": 1.3237189122605741e-12,
+      "g_initial_residual": 0.0,
+      "g_residual_accumulator": 1.847921488443464e-21,
+      "g_cumulative_defect": 2.712439817064454e-15,
+      "g_pipe_balance": 1.4114820423571928e-12,
+      "g_pipe_initial_residual": 0.0,
+      "g_pipe_residual_accumulator": 2.419503291717606e-22,
+      "g_pipe_cumulative_defect": 2.0037065713197937e-15,
+      "g_riser_balance": 2.735353610283653e-12,
+      "g_riser_initial_residual": 0.0,
+      "g_riser_residual_accumulator": 8.304893350032398e-22,
+      "g_riser_cumulative_defect": 1.3986916091667353e-15,
+      "g_inventory_partition": 3.885780586188048e-16,
+      "accepted_time": 4.547473508864641e-13,
+      "l_step_balance": 1.5890338090490674e-17,
+      "l_accepted_residual": 1.530759521400012e-13,
+      "l_pipe_step_balance": 1.589660285271977e-17,
+      "l_pipe_accepted_residual": 6.071049486850717e-14,
+      "l_riser_step_balance": 2.7554252313941483e-17,
+      "l_riser_accepted_residual": 2.461743150445701e-14,
+      "g_step_balance": 1.6211020011586922e-20,
+      "g_accepted_residual": 6.679006763531676e-16,
+      "g_pipe_step_balance": 1.620524368173808e-20,
+      "g_pipe_accepted_residual": 3.117457423431133e-16,
+      "g_riser_step_balance": 2.6310960924086704e-20,
+      "g_riser_accepted_residual": 1.9842041241582036e-17
+    },
+    "max_identity_roundoff_allowance_kg_or_s": {
+      "l_in_signed_integral": 6.751651177376535e-09,
+      "l_in_absolute_integral": 6.751651177376535e-09,
+      "l_out_signed_integral": 6.7516488005991554e-09,
+      "l_out_absolute_integral": 6.7516488005991554e-09,
+      "l_base_left_signed_integral": 6.751651418198983e-09,
+      "l_base_left_absolute_integral": 6.751651418198983e-09,
+      "l_base_right_signed_integral": 6.751651418198983e-09,
+      "l_base_right_absolute_integral": 6.751651418198983e-09,
+      "l_balance": 1.3512625334025546e-08,
+      "l_initial_residual": 9.325294339835113e-12,
+      "l_residual_accumulator": 3.5966941308741547e-10,
+      "l_cumulative_defect": 2.0661943066148768e-07,
+      "l_pipe_balance": 1.3510065265265623e-08,
+      "l_pipe_initial_residual": 6.7626759383178935e-12,
+      "l_pipe_residual_accumulator": 3.571067929780155e-10,
+      "l_pipe_cumulative_defect": 1.438523283219954e-07,
+      "l_riser_balance": 1.350586290515789e-08,
+      "l_riser_initial_residual": 2.5626184015172255e-12,
+      "l_riser_residual_accumulator": 3.529067496476581e-10,
+      "l_riser_cumulative_defect": 6.311744646903062e-08,
+      "l_inventory_partition": 4.6633187688208805e-12,
+      "g_in_signed_integral": 9.470945870726277e-12,
+      "g_in_absolute_integral": 9.470945870726277e-12,
+      "g_out_signed_integral": 9.470949215365204e-12,
+      "g_out_absolute_integral": 9.470949215365204e-12,
+      "g_base_left_signed_integral": 9.470935612718414e-12,
+      "g_base_left_absolute_integral": 9.470935612718414e-12,
+      "g_base_right_signed_integral": 9.470935612718414e-12,
+      "g_base_right_absolute_integral": 9.470935612718414e-12,
+      "g_balance": 1.8975211201003574e-11,
+      "g_initial_residual": 3.3316202033690185e-14,
+      "g_residual_accumulator": 5.247649108695626e-13,
+      "g_cumulative_defect": 6.788091389893991e-10,
+      "g_pipe_balance": 1.897313039588239e-11,
+      "g_pipe_initial_residual": 3.124864639213821e-14,
+      "g_pipe_residual_accumulator": 5.226973462658847e-13,
+      "g_pipe_cumulative_defect": 6.201361148142714e-10,
+      "g_riser_balance": 1.8943952030557843e-11,
+      "g_riser_initial_residual": 2.0675556415519667e-15,
+      "g_riser_residual_accumulator": 4.935157285799663e-13,
+      "g_riser_cumulative_defect": 5.916447233910395e-11,
+      "g_inventory_partition": 1.665866117142122e-14,
+      "accepted_time": 1.3642420526593924e-10,
+      "l_step_balance": 9.344884627070798e-12,
+      "l_accepted_residual": 9.363131608758307e-12,
+      "l_pipe_step_balance": 6.780927712778911e-12,
+      "l_pipe_accepted_residual": 6.780927712778911e-12,
+      "l_riser_step_balance": 2.582204134256967e-12,
+      "l_riser_accepted_residual": 2.582204134256967e-12,
+      "g_step_balance": 3.334291862910494e-14,
+      "g_accepted_residual": 3.336856058196095e-14,
+      "g_pipe_step_balance": 3.1277269586554964e-14,
+      "g_pipe_accepted_residual": 3.1277269586554964e-14,
+      "g_riser_step_balance": 2.1010591450762486e-15,
+      "g_riser_accepted_residual": 2.1010591450762486e-15
+    },
+    "fixed_256eps_contract_passes": false,
+    "fixed_256eps_mismatches": [
+      {
+        "row": 2718,
+        "identity": "g_in_signed_integral",
+        "error": 3.452793606584237e-14,
+        "tolerance": 3.4509614759928096e-14
+      },
+      {
+        "row": 2718,
+        "identity": "g_in_absolute_integral",
+        "error": 3.452793606584237e-14,
+        "tolerance": 3.4509614759928096e-14
+      },
+      {
+        "row": 2719,
+        "identity": "g_in_signed_integral",
+        "error": 3.452793606584237e-14,
+        "tolerance": 3.452241290305935e-14
+      },
+      {
+        "row": 2719,
+        "identity": "g_in_absolute_integral",
+        "error": 3.452793606584237e-14,
+        "tolerance": 3.452241290305935e-14
+      },
+      {
+        "row": 2722,
+        "identity": "g_in_signed_integral",
+        "error": 3.4638958368304884e-14,
+        "tolerance": 3.456080733245312e-14
+      },
+      {
+        "row": 2722,
+        "identity": "g_in_absolute_integral",
+        "error": 3.4638958368304884e-14,
+        "tolerance": 3.456080733245312e-14
+      },
+      {
+        "row": 2723,
+        "identity": "g_in_signed_integral",
+        "error": 3.4638958368304884e-14,
+        "tolerance": 3.457360547558438e-14
+      },
+      {
+        "row": 2723,
+        "identity": "g_in_absolute_integral",
+        "error": 3.4638958368304884e-14,
+        "tolerance": 3.457360547558438e-14
+      },
+      {
+        "row": 2724,
+        "identity": "g_in_signed_integral",
+        "error": 3.4638958368304884e-14,
+        "tolerance": 3.4586403618715635e-14
+      },
+      {
+        "row": 2724,
+        "identity": "g_in_absolute_integral",
+        "error": 3.4638958368304884e-14,
+        "tolerance": 3.4586403618715635e-14
+      },
+      {
+        "row": 2725,
+        "identity": "g_in_signed_integral",
+        "error": 3.4638958368304884e-14,
+        "tolerance": 3.459920176184689e-14
+      },
+      {
+        "row": 2725,
+        "identity": "g_in_absolute_integral",
+        "error": 3.4638958368304884e-14,
+        "tolerance": 3.459920176184689e-14
+      },
+      {
+        "row": 2726,
+        "identity": "g_in_signed_integral",
+        "error": 3.4638958368304884e-14,
+        "tolerance": 3.461199990497815e-14
+      },
+      {
+        "row": 2726,
+        "identity": "g_in_absolute_integral",
+        "error": 3.4638958368304884e-14,
+        "tolerance": 3.461199990497815e-14
+      },
+      {
+        "row": 2727,
+        "identity": "g_in_signed_integral",
+        "error": 3.47499806707674e-14,
+        "tolerance": 3.4624798048109404e-14
+      },
+      {
+        "row": 2727,
+        "identity": "g_in_absolute_integral",
+        "error": 3.47499806707674e-14,
+        "tolerance": 3.4624798048109404e-14
+      },
+      {
+        "row": 2728,
+        "identity": "g_in_signed_integral",
+        "error": 3.47499806707674e-14,
+        "tolerance": 3.463759619124066e-14
+      },
+      {
+        "row": 2728,
+        "identity": "g_in_absolute_integral",
+        "error": 3.47499806707674e-14,
+        "tolerance": 3.463759619124066e-14
+      },
+      {
+        "row": 2729,
+        "identity": "g_in_signed_integral",
+        "error": 3.47499806707674e-14,
+        "tolerance": 3.465039433437192e-14
+      },
+      {
+        "row": 2729,
+        "identity": "g_in_absolute_integral",
+        "error": 3.47499806707674e-14,
+        "tolerance": 3.465039433437192e-14
+      }
+    ],
+    "roundoff_policy": {
+      "unit_roundoff": 1.1102230246251565e-16,
+      "recurrence": "gamma_n=n*u/(1-n*u)",
+      "gamma_n_final": 2.1340706979390302e-12,
+      "magnitude": "Sum of absolute contributions in each independent accumulator",
+      "local_term": "256*epsilon*local ledger scale; accumulated for per-step residual identities",
+      "scope": "Recurrence bound assumes finite normal arithmetic; local ledger allowance is operational, not a proof of every solver operator."
+    },
+    "max_junction_integral_mismatch_kg": {
+      "l": 0.0,
+      "g": 0.0
+    },
+    "balances": {
+      "l_system": {
+        "max_abs_balance_kg": 7.808625923644286e-07,
+        "initial_inventory_kg": 82.0261564726594,
+        "absolute_processed_mass_kg": 6163.317801657741,
+        "relative_inventory": 9.519677941080933e-09,
+        "relative_processed": 1.266951693054674e-10,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": 7.80504804454667e-07
+      },
+      "l_pipe": {
+        "max_abs_balance_kg": 1.4620127330999821e-09,
+        "initial_inventory_kg": 59.48512663249196,
+        "absolute_processed_mass_kg": 6163.318996410108,
+        "relative_inventory": 2.45777863453585e-11,
+        "relative_processed": 2.3721192006312625e-13,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": -1.0114029776294003e-09
+      },
+      "l_riser": {
+        "max_abs_balance_kg": 7.823246050975285e-07,
+        "initial_inventory_kg": 22.541029840167486,
+        "absolute_processed_mass_kg": 6163.317911576449,
+        "relative_inventory": 3.470669311228398e-08,
+        "relative_processed": 1.2693237900775852e-10,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": 7.815162074322964e-07
+      },
+      "g_system": {
+        "max_abs_balance_kg": 6.064613700118571e-09,
+        "initial_inventory_kg": 0.2930524122350142,
+        "absolute_processed_mass_kg": 8.645658422137952,
+        "relative_inventory": 2.0694638388627343e-08,
+        "relative_processed": 7.014634865274813e-10,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": -6.063686717761021e-09
+      },
+      "g_pipe": {
+        "max_abs_balance_kg": 1.741604194194224e-09,
+        "initial_inventory_kg": 0.2748660004833321,
+        "absolute_processed_mass_kg": 8.645652213475199,
+        "relative_inventory": 6.336193603907861e-09,
+        "relative_processed": 2.0144277738581048e-10,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": -1.7426450775360816e-09
+      },
+      "g_riser": {
+        "max_abs_balance_kg": 4.323008617745927e-09,
+        "initial_inventory_kg": 0.01818641175168204,
+        "absolute_processed_mass_kg": 8.645653740070388,
+        "relative_inventory": 2.377054185714286e-07,
+        "relative_processed": 5.000210218586352e-10,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": -4.321041640224936e-09
+      }
+    }
+  },
+  "steps": {
+    "accepted_steps": 19222,
+    "min_dt_s": 0.001,
+    "max_dt_s": 0.125,
+    "last_accepted_counters": {
+      "newton_iterations_total": 19934.0,
+      "jacobian_evaluations_total": 19934.0,
+      "residual_evaluations_total": 24257.0,
+      "linear_solves_total": 4323.0,
+      "backtrack_trials_total": 4323.0,
+      "prepare_calls_total": 19222.0,
+      "rejected_steps_total": 0.0
+    },
+    "cpu_to_last_accept_s": 282.83241,
+    "wall_to_last_accept_s": 284.228856305
+  },
+  "limits": [
+    "The balance criteria are separate from arithmetic-contract verification.",
+    "Mass residuals are measured nonlinear-solve defects, never balance corrections.",
+    "No regime classification or experimental validation is inferred."
+  ]
+}

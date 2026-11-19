@@ -7,6 +7,8 @@ program test_chexal_integration
   use module_steady_state,only:solve_alpha_from_superficials,PHASE_LIQUID_ONLY,PHASE_GAS_ONLY
   use module_jacobian,only:DFduj
   use module_roe_solver,only:roe_eigenstructure
+  use module_matrix_roe,only:calculate_roe_matrix
+  use module_chexal_1992,only:CHEXAL_BRANCH_REQUIRED
   use module_boundary_conditions,only:boundary_flux
   use module_config,only:sim_config_t
   use module_simulate_pipe_riser,only:pipeline_riser_simulator_t
@@ -173,6 +175,7 @@ contains
           matrix=DFduj(ac,rl,rg,liquid,gas,cl,cg,theta,diam,area,rough,g, &
             .001_wp,.000018_wp,.072_wp,wu,wr,wpres,tol,cc_status,branch_id)
           call check(cc_status==0,'countercurrent same branch Jacobian')
+          if(scale_id==1.and.case_id==1)call check_roe_history(uc,branch_id,liquid,gas,matrix)
           do jj=1,3
             hh=2e-6_wp*abs(uc(jj));plus=uc;minus=uc
             plus(jj)=plus(jj)+hh;minus(jj)=minus(jj)-hh
@@ -195,6 +198,35 @@ contains
       enddo
     enddo
   end subroutine
+  subroutine check_roe_history(u,branch_id,liquid,gas,expected)
+    real(wp),intent(in)::u(3),liquid,gas,expected(3,3)
+    integer,intent(in)::branch_id
+    real(wp)::actual(3,3)
+    integer::code
+    actual=equal_roe(u,branch_id,code)
+    call check(code==0,'equal-state Roe without history uses declared vertical branch')
+    call check(maxval(abs(actual-expected)/(1+abs(expected)))<2e-8_wp,'unhinted Roe returns same branch Jacobian')
+    actual=equal_roe(u,branch_id,code,liquid,gas)
+    call check(code==0,'equal-state Roe with physical history uses declared vertical branch')
+    call check(maxval(abs(actual-expected)/(1+abs(expected)))<2e-8_wp,'hinted Roe returns same branch Jacobian')
+    actual=equal_roe(u,CHEXAL_1992,code)
+    call check(code==10+CHEXAL_BRANCH_REQUIRED.and..not.any(ieee_is_finite(actual)), &
+      'unhinted AUTO keeps vertical branch ambiguity')
+    actual=equal_roe(u,CHEXAL_1992,code,liquid,gas)
+    call check(code==10+CHEXAL_BRANCH_REQUIRED.and..not.any(ieee_is_finite(actual)), &
+      'CC velocity history does not replace explicit branch selection in AUTO')
+    actual=equal_roe(u,branch_id,code,liquid)
+    call check(code==1.and..not.any(ieee_is_finite(actual)),'incomplete Roe history is invalid')
+  end subroutine
+  function equal_roe(u,branch_id,code,liquid,gas) result(matrix)
+    real(wp),intent(in)::u(3)
+    integer,intent(in)::branch_id
+    integer,intent(out)::code
+    real(wp),optional,intent(in)::liquid,gas
+    real(wp)::matrix(3,3)
+    matrix=calculate_roe_matrix(u,u,cl,cg,theta,rl0,p0,diam,area,rough,g,.001_wp,.000018_wp,.072_wp, &
+      0.0_wp,wu,wr,wpres,tol,tol,3_i4,ul_prev=liquid,ug_prev=gas,status=code,closure_id=branch_id)
+  end function
     subroutine cc_recover(u,qq,status,branch_id,liquid,gas)
       real(wp),intent(in)::u(3)
       real(wp),intent(out)::qq(6)
