@@ -49,6 +49,7 @@ program main
   real(wp)           :: gamma_g
   character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model
   character(len=20) :: dissipation_mode
+  character(len=16) :: newton_globalization
   character(len=32) :: pipe_regime_mode
   real(wp) :: Cg_fixed, P_standard, T_standard, dt_min_s, dt_max_s, dt_start_s
   real(wp) :: perturbation_amplitude, output_interval_s, field_interval_s
@@ -75,7 +76,7 @@ program main
                     pb_dp_on, pb_dp_off, &
                     stab_si_on, stab_si_off, stab_use_hysteresis, &
                     gas_eos, gas_flow_basis, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
-                    dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode
+                    dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode, newton_globalization
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
   type(pipeline_riser_simulator_t) :: sim
@@ -210,6 +211,7 @@ program main
   flux_scheme = 'ROE'
   junction_model = 'MATCHED'
   dissipation_mode = 'LAGGED'
+  newton_globalization = 'LINE_SEARCH'
   ! ------------------------------ Read -----------------------------------
   infile = 'input_params.nml'
   if (command_argument_count() >= 1) then
@@ -286,6 +288,8 @@ program main
       trim(junction_model)/='CONSERVATIVE') error stop 'Unknown junction_model'
   if (trim(dissipation_mode)/='LAGGED'.and.trim(dissipation_mode)/='FULLY_IMPLICIT') error stop 'Unknown dissipation_mode'
   if (mu_l<=0.0_wp .or. mu_g<=0.0_wp .or. eps<0.0_wp .or. eps/D>=1.0_wp) error stop 'Invalid viscosities/roughness'
+  if(trim(newton_globalization)/='LINE_SEARCH'.and.trim(newton_globalization)/='ACTIVE_SET') &
+    error stop 'Unknown newton_globalization'
   beta_rad = beta_deg * (acos(-1.0_wp)/180.0_wp)
 
   ! ---------------------- Geometry & properties --------------------------
@@ -384,6 +388,7 @@ program main
   cfg%flux_scheme    = flux_scheme
   cfg%junction_model = junction_model
   cfg%dissipation_mode = dissipation_mode
+  cfg%newton_globalization = newton_globalization
   cfg%gas_eos        = gas_eos
   cfg%output_interval_s = output_interval_s
   cfg%field_interval_s = field_interval_s

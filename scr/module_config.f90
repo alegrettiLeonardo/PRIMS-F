@@ -46,6 +46,7 @@ module module_config
     character(len=16) :: gas_eos = 'ISOTHERMAL'
     character(len=16) :: junction_model = 'MATCHED'
     character(len=20) :: dissipation_mode = 'LAGGED'
+    character(len=16) :: newton_globalization = 'LINE_SEARCH'
     real(wp) :: output_interval_s = 1.0_wp
     real(wp) :: field_interval_s = 30.0_wp
     real(wp) :: perturbation_amplitude = 0.01_wp

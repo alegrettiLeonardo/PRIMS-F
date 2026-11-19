@@ -79,6 +79,7 @@ SRC := \
   $(DIR_SRC)/module_boundary_conditions.f90 \
   $(DIR_SRC)/module_solver_utils.f90 \
   $(DIR_SRC)/module_time_step.f90 \
+  $(DIR_SRC)/module_active_set.f90 \
   $(DIR_SRC)/module_simulate_pipe_riser.f90 \
   $(DIR_SRC)/main.f90
 
@@ -163,8 +164,11 @@ $(DIR_OBJ)/module_boundary_conditions.o: \
 $(DIR_OBJ)/module_time_step.o:        $(DIR_OBJ)/module_lapack_small.o
 
 $(DIR_OBJ)/module_simulate_pipe_riser.o: \
+                                      $(DIR_OBJ)/module_active_set.o \
                                       $(DIR_OBJ)/module_roe_solver.o $(DIR_OBJ)/module_boundary_conditions.o \
                                       $(DIR_OBJ)/module_time_step.o $(DIR_OBJ)/module_catenary.o $(DIR_OBJ)/module_solver_utils.o \
                                       $(DIR_OBJ)/module_flow_regime.o $(DIR_OBJ)/module_config.o
 
 $(DIR_OBJ)/main.o:                    $(DIR_OBJ)/module_simulate_pipe_riser.o $(DIR_OBJ)/module_steady_state.o
+
+$(DIR_OBJ)/module_active_set.o: $(DIR_OBJ)/module_time_step.o

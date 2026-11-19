@@ -5,7 +5,9 @@ module module_simulate_pipe_riser
   !! force permits the pressure/phase-flux continuity prescribed by Burr.
   use mod_kinds, only: wp,i4
   use module_config, only: sim_config_t,first_physical_cell,last_physical_cell
-  use module_find, only: compute_primitive_variables
+  use module_find, only: compute_primitive_variables,pressure_fun_uj
+  use module_closure_law, only: CdUd_bhagwat
+  use module_active_set, only: active_set_direction
   use module_flow_regime, only: burr15_result_t,burr15_stability,BURR15_NOT_EVALUATED
   use module_jacobian, only: DFduj
   use module_roe_solver, only: roe_solver_t,roe_absA_from_A
@@ -35,6 +37,7 @@ module module_simulate_pipe_riser
     procedure :: init,ensure_prev_arrays,update_prev_arrays,process_cell,simulate
     procedure :: point_state,face_pair,assemble
     procedure :: prepare_dissipation
+    procedure :: admissibility_margin,constrained_direction
   end type
 contains
   subroutine prepare_dissipation(this,U,status)
@@ -435,6 +438,142 @@ contains
     end subroutine
   end subroutine
 
+  subroutine admissibility_margin(this,U,kind,index,margin,status)
+    !! A margin is diagnostic; status zero here never accepts a physical state.
+    class(pipeline_riser_simulator_t), intent(in) :: this
+    real(wp), intent(in) :: U(:,:)
+    integer, intent(in) :: kind,index
+    real(wp), intent(out) :: margin
+    integer, intent(out) :: status
+    real(wp) :: fm(3),fp(3),p,rl,rg,alpha,ug,cd,ud
+    integer :: physical_status
+    margin=ieee_value(0.0_wp,ieee_quiet_nan)
+    status=-100
+    if(kind==1)then
+      if(.not.allocated(this%lagged_dissipation))return
+      call this%face_pair(U(index,:),U(index+1,:),this%cfg%thetav(index),this%cfg%thetav(index+1), &
+        fm,fp,physical_status,dissipation_matrix=this%lagged_dissipation(:,:,index),left_cell=index)
+      ! 1012 is the Bhagwat riser trace refusal AFTER raw flux was computed.
+      ! Other failures do not establish that fm(2) is defined.
+      if(physical_status/=0.and.physical_status/=1012)return
+      margin=fm(2)
+    else if(kind==2)then
+      if(minval(U(index,:))<=0.0_wp)return
+      if(this%cfg%thetav(index)<0.0_wp.or.this%cfg%thetav(index)>acos(-1.0_wp)/2)return
+      p=pressure_fun_uj(U(index,1),U(index,2),this%cfg%nCg,this%cfg%nCl,this%cfg%nrho_l0,this%cfg%nP_l0)
+      if(.not.ieee_is_finite(p).or.p<=0.0_wp)return
+      rl=this%cfg%nrho_l0+(p-this%cfg%nP_l0)/this%cfg%nCl**2
+      rg=p/this%cfg%nCg**2
+      if(.not.all(ieee_is_finite([rl,rg])).or.rg<=0.0_wp.or.rl<=rg)return
+      alpha=U(index,2)/rg
+      if(.not.ieee_is_finite(alpha).or.alpha<=0.0_wp.or.alpha>=1.0_wp)return
+      ug=U(index,3)/U(index,2)
+      call CdUd_bhagwat(alpha,rl,rg,0.0_wp,ug,this%cfg%thetav(index),this%cfg%D_H,this%cfg%AREA, &
+        this%cfg%eps,this%cfg%G,this%cfg%mu_l,this%cfg%mu_g,this%cfg%sigma,this%cfg%omega_u, &
+        this%cfg%omega_rho,this%cfg%tol,cd,ud,physical_status)
+      if(physical_status/=0)return
+      ! CdUd_bhagwat returns Ud in SI, despite its normalized input velocities.
+      margin=(ug-cd*alpha*ug)*this%cfg%omega_u-ud
+    else
+      return
+    endif
+    if(.not.ieee_is_finite(margin))return
+    status=0
+  end subroutine admissibility_margin
+
+  subroutine constrained_direction(this,U,Uold,a,b,c,direction,active,status,kind,index,margin,predicted)
+    class(pipeline_riser_simulator_t), intent(in) :: this
+    real(wp), intent(in) :: U(:,:),Uold(:,:),a(:,:,:),b(:,:,:),c(:,:,:)
+    real(wp), intent(inout) :: direction(:,:)
+    logical, intent(out) :: active
+    integer, intent(out) :: status,kind,index
+    real(wp), intent(out) :: margin,predicted
+    real(wp) :: work(size(U,1),3),gradient(3,size(direction,2)),scale(3,size(direction,2))
+    real(wp) :: gtrial,h,values(4),coarse,fine
+    integer :: lo,hi,ib,i,j,k,q,attempt,code,last_cell
+    integer, parameter :: offsets(4)=[-2,-1,1,2]
+    active=.false.
+    status=0
+    kind=0
+    index=0
+    margin=ieee_value(0.0_wp,ieee_quiet_nan)
+    predicted=margin
+    if(this%cfg%closure_riser/=3.or.trim(this%cfg%junction_model)/='MATCHED')return
+    if(this%cfg%closure_pipe/=1.or..not.allocated(this%lagged_dissipation))return
+    lo=first_physical_cell(this%cfg)
+    hi=last_physical_cell(this%cfg)
+    ib=lo+this%cfg%N_pipe-1
+    if(ib<lo.or.ib>=hi)return
+    work=U
+    do i=lo,hi
+      work(i,:)=U(i,:)+direction(:,i-lo+1)
+    enddo
+    call this%admissibility_margin(work,1,ib,gtrial,code)
+    if(code==0.and.gtrial<0.0_wp)then
+      kind=1
+      index=ib
+    else
+      do i=ib+1,hi
+        call this%admissibility_margin(work,2,i,gtrial,code)
+        if(code/=0)cycle
+        if(gtrial<0.0_wp)then
+          kind=2
+          index=i
+          exit
+        endif
+      enddo
+    endif
+    if(kind==0)return
+    call this%admissibility_margin(U,kind,index,margin,status)
+    if(status/=0)return
+    if(margin<0.0_wp)then
+      status=-103
+      return
+    endif
+    gradient=0.0_wp
+    last_cell=index
+    if(kind==1)last_cell=index+1
+    do i=index,last_cell
+      do k=1,3
+        h=1e-5_wp*max(abs(U(i,k)),merge(1e-5_wp,1e-2_wp,k==2))
+        ! A derivative is used only after two fourth-order stencils agree.
+        do attempt=1,8
+          do q=1,4
+            work=U
+            work(i,k)=U(i,k)+offsets(q)*h
+            call this%admissibility_margin(work,kind,index,values(q),code)
+            if(code/=0)exit
+          enddo
+          if(code==0)then
+            coarse=(values(1)-8*values(2)+8*values(3)-values(4))/(12*h)
+            do q=1,4
+              work=U
+              work(i,k)=U(i,k)+offsets(q)*h/2
+              call this%admissibility_margin(work,kind,index,values(q),code)
+              if(code/=0)exit
+            enddo
+            if(code==0)then
+              fine=(values(1)-8*values(2)+8*values(3)-values(4))/(6*h)
+              if(abs(coarse-fine)<=1e-5_wp*max(abs(coarse),abs(fine),1e-8_wp))exit
+            endif
+          endif
+          h=h/2
+        enddo
+        if(attempt>8.or.code/=0)then
+          status=-104
+          return
+        endif
+        gradient(k,i-lo+1)=fine
+      enddo
+    enddo
+    do i=lo,hi
+      j=i-lo+1
+      scale(:,j)=this%cfg%tol_res*[max(Uold(i,1),1e-3_wp),max(Uold(i,2),1e-7_wp),max(abs(Uold(i,3)),1.0_wp)]
+    enddo
+    predicted=margin+sum(gradient*direction)
+    call active_set_direction(a,b,c,scale,gradient,margin,direction,active,status)
+  end subroutine constrained_direction
+
   subroutine process_cell(this,i,U,delta_s,thetav,CFL,flux,source_avg,dt,dflux_dUL,dflux_dUR,dSrc_dU,status)
     class(pipeline_riser_simulator_t),intent(inout)::this
     integer(i4),intent(in)::i
@@ -595,6 +734,9 @@ contains
     real(wp)::base_mass_flux(2,2),trial_base_mass_flux(2,2),accepted_base(2,2),accepted_in(2),accepted_out(2)
     real(wp)::base_sum(2,2),base_abs(2,2),in_abs(2),out_abs(2),massflow_scale,mass_scale
     real(wp)::mass0(2,3),mass_previous(2,3),mass_current(2,3),mass_residual(2,3),mass_residual_sum(2,3)
+    integer :: unitactive,active_kind,active_index,active_status,active_candidate_status
+    real(wp) :: active_margin,active_predicted,active_candidate_margin
+    logical :: active_direction
     real(wp)::step_balance(2,3),cpu_previous,cpu_now,elapsed_wall
     lo=first_physical_cell(this%cfg);hi=last_physical_cell(this%cfg);n=hi-lo+1
     if(present(status))status=1
@@ -672,6 +814,11 @@ contains
     open(newunit=unittrials,file=trim(this%cfg%out_dir)//'/rejected_proposals.csv',status='replace')
     write(unittrials,'(a)') 'time_s,attempt_dt_s,iteration,backtrack,lambda,linearization_norm,proposal_norm,'// &
       'assembly_status,extended_index,stage,full_jacobian'
+    if(trim(this%cfg%newton_globalization)=='ACTIVE_SET')then
+      open(newunit=unitactive,file=trim(this%cfg%out_dir)//'/active_set.csv',status='replace')
+      write(unitactive,'(a)') 'time_s,dt_s,iteration,constraint_kind,extended_index,margin_status,'// &
+        'margin_before,linear_predicted_margin,active,accepted,lambda,proposal_norm,margin_after'
+    endif
     ! Initial fluxes are diagnostic only and do not contribute to an integral.
     ! An unavailable diagnostic must not alter the solver's acceptance path.
     call boundary_flux(U(lo,:),thetav(lo),this%cfg,.true.,fin,code)
@@ -755,6 +902,57 @@ contains
             last_trial_index,trim(last_trial_stage),linearized_fd
           lambda=lambda*0.5_wp
         enddo
+        if(.not.accepted.and.trim(this%cfg%newton_globalization)=='ACTIVE_SET')then
+          ! The original Newton ray was exhausted. Change only its direction;
+          ! retain the same residual, lagged viscosity, step size and tolerance.
+          active_candidate_margin=ieee_value(0.0_wp,ieee_quiet_nan)
+          call this%constrained_direction(trial,old,a,b,c,dx,active_direction,active_status, &
+            active_kind,active_index,active_margin,active_predicted)
+          if(active_direction.and.active_status==0)then
+            linear_solves=linear_solves+2
+            lambda=1.0_wp
+            do i=lo,hi
+              do k=1,2
+                if(dx(k,i-lo+1)<0.0_wp)lambda=min(lambda,-0.90_wp*trial(i,k)/dx(k,i-lo+1))
+              enddo
+            enddo
+            do ls=1,this%max_backtrack
+              work=trial
+              do i=lo,hi
+                work(i,:)=trial(i,:)+lambda*dx(:,i-lo+1)
+              enddo
+              residual_evaluations=residual_evaluations+1
+              backtrack_trials=backtrack_trials+1
+              call this%assemble(work,old,dt,rt,az,bz,cz,nt,fi2,fo2,code,.false.,trial_base_mass_flux, &
+                last_trial_index,last_trial_stage)
+              last_trial_status=code
+              last_backtrack=ls
+              last_lambda=lambda
+              proposal_norm=ieee_value(0.0_wp,ieee_quiet_nan)
+              if(code==0)then
+                proposal_norm=nt
+                call this%admissibility_margin(work,active_kind,active_index, &
+                  active_candidate_margin,active_candidate_status)
+                if(active_candidate_status==0.and.active_candidate_margin>=0.0_wp)then
+                  if(nt<norm*(1-1e-4_wp*lambda).or.nt<=this%cfg%tol_res)then
+                    accepted=.true.
+                    exit
+                  endif
+                endif
+              else
+                lastcode=code
+              endif
+              write(unittrials,'(2(es25.16e3,","),2(i0,","),3(es25.16e3,","),2(i0,","),a,",",l1)') &
+                tcur*this%cfg%omega_t,dt*this%cfg%omega_t,it,ls,lambda,norm,proposal_norm,code, &
+                last_trial_index,trim(last_trial_stage),linearized_fd
+              lambda=lambda*0.5_wp
+            enddo
+          endif
+          write(unitactive,'(2(es25.16e3,","),4(i0,","),2(es25.16e3,","),2(l1,","),2(es25.16e3,","),es25.16e3)') &
+            tcur*this%cfg%omega_t,dt*this%cfg%omega_t,it,active_kind,active_index,active_status, &
+            active_margin,active_predicted,active_direction,accepted,last_lambda,proposal_norm,active_candidate_margin
+          flush(unitactive)
+        endif
         if(.not.accepted)then
           if(.not.this%cfg%jac_dissipation_fd)then
             this%cfg%jac_dissipation_fd=.true.
@@ -834,6 +1032,7 @@ contains
     call write_field()
     if(finstatus/=0)call write_monitor(0.0_wp,0)
     close(unitmon);close(unitfield);close(unittrials);close(unitsteps);close(unitmass)
+    if(trim(this%cfg%newton_globalization)=='ACTIVE_SET')close(unitactive)
     if(diagnose_burr15)close(unitburr15)
     open(newunit=unitstat,file=trim(this%cfg%out_dir)//'/run_status.txt',status='replace')
     write(unitstat,'(a,i0)') 'status=',finstatus

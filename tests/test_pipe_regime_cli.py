@@ -134,6 +134,12 @@ def main():
               closure_riser=2, beta_deg=0, jl=-.1, mul=-1),
          'REJECT_DOMAIN', 'Steady initialization failed'),
     ]
+    cases.extend([
+        ('unknown_newton_globalization', dict(newton_globalization="'UNKNOWN'"),
+         'REJECT_CONFIG', 'Unknown newton_globalization'),
+        ('active_set_stratified', dict(newton_globalization="'ACTIVE_SET'"),
+         'PASS', None),
+    ])
     env = dict(os.environ, OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1')
     results = []
     for name, extra, expected, message in cases:
@@ -161,6 +167,10 @@ def main():
             case='default_stratified_auto_physical_identity', expected='PASS',
             passed=default == stratified == auto,
         ))
+    if all(result['passed'] for result in results if result['case'] in ('default','active_set_stratified')):
+        default = read_physical_monitor(out / 'default/monitor.csv')
+        active = read_physical_monitor(out / 'active_set_stratified/monitor.csv')
+        results.append(dict(case='inactive_active_set_physical_identity',expected='PASS',passed=default==active))
     for result in results[:5]:
         if not result['passed']:
             continue
