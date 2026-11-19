@@ -136,7 +136,7 @@ $(DIR_OBJ)/mod_rootfinding.o:         $(DIR_OBJ)/mod_kinds.o
 $(DIR_OBJ)/mod_void_helpers.o:        $(DIR_OBJ)/mod_kinds.o $(DIR_OBJ)/mod_rootfinding.o
 $(DIR_OBJ)/module_config.o:           $(DIR_OBJ)/mod_kinds.o
 $(DIR_OBJ)/module_lapack_small.o:     $(DIR_OBJ)/mod_kinds.o
-$(DIR_OBJ)/module_flow_regime.o:      $(DIR_OBJ)/mod_kinds.o
+$(DIR_OBJ)/module_flow_regime.o:      $(DIR_OBJ)/mod_void_helpers.o
 
 # catenary usa mod_rootfinding
 $(DIR_OBJ)/module_catenary.o:         $(DIR_OBJ)/mod_kinds.o $(DIR_OBJ)/mod_rootfinding.o

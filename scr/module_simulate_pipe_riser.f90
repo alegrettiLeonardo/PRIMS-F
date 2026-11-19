@@ -6,6 +6,7 @@ module module_simulate_pipe_riser
   use mod_kinds, only: wp,i4
   use module_config, only: sim_config_t,first_physical_cell,last_physical_cell
   use module_find, only: compute_primitive_variables
+  use module_flow_regime, only: burr15_result_t,burr15_stability,BURR15_NOT_EVALUATED
   use module_jacobian, only: DFduj
   use module_roe_solver, only: roe_solver_t,roe_absA_from_A
   use module_time_step, only: time_integrator_t
@@ -54,7 +55,7 @@ contains
     if(.not.allocated(this%lagged_dissipation))allocate(this%lagged_dissipation(3,3,size(U,1)))
     this%lagged_dissipation=0
     do i=lo,hi-1
-      call this%face_pair(U(i,:),U(i+1,:),this%cfg%thetav(i),this%cfg%thetav(i+1),fm,fp,status,used_dissipation=dmat)
+      call this%face_pair(U(i,:),U(i+1,:),this%cfg%thetav(i),this%cfg%thetav(i+1),fm,fp,status,used_dissipation=dmat,left_cell=i)
       if(status/=0)return
       this%lagged_dissipation(:,:,i)=dmat
     enddo
@@ -87,26 +88,41 @@ contains
     integer::i,code
     call this%ensure_prev_arrays(size(U,1))
     do i=1,size(U,1)
-      call this%point_state(U(i,:),thetav(i),v,f,s,a,ds,code,.false.)
+      call this%point_state(U(i,:),thetav(i),v,f,s,a,ds,code,.false.,cell_closure(this,thetav(i),i))
       if(code/=0)cycle
       this%ul_prev(i)=v(5);this%ug_prev(i)=v(6)
-      this%idx_prev(i)=merge(0,1,thetav(i)<0.0_wp)
+      this%idx_prev(i)=merge(0,1,cell_closure(this,thetav(i),i)==1)
     enddo
   end subroutine
 
-  subroutine point_state(this,U,theta,v,F,S,A,dS,status,need_jac)
+  integer function cell_closure(this,theta,i) result(cid)
+    class(pipeline_riser_simulator_t), intent(in) :: this
+    real(wp), intent(in) :: theta
+    integer, intent(in), optional :: i
+    logical :: in_pipe
+    ! The supplied mesh section resolves the shared horizontal angle.
+    ! Retain the signed-angle convention for nonhorizontal operators.
+    in_pipe=theta<0.0_wp
+    if(theta==0.0_wp.and.present(i).and.this%cfg%N_pipe>0)in_pipe=i<=this%cfg%num_dummy_cells+this%cfg%N_pipe
+    cid=this%cfg%closure_riser
+    if(in_pipe)cid=this%cfg%closure_pipe
+  end function cell_closure
+
+  subroutine point_state(this,U,theta,v,F,S,A,dS,status,need_jac,closure_id)
     class(pipeline_riser_simulator_t),intent(in)::this
     real(wp),intent(in)::U(3),theta
     real(wp),intent(out)::v(6),F(3),S(3),A(3,3),dS(3,3)
     integer,intent(out)::status
     logical,intent(in),optional::need_jac
+    integer,intent(in),optional::closure_id
     real(wp)::alpha,rl,rg,p,ul,ug,rhom,j,mu,re,ff,fr,fe,pip,grav,drag
     real(wp)::da(3),dp(3),dul(3),dug(3),dj(3),dr(3),dre(3),dm(3),den
     integer::cid,idx,code
     logical::want
     v=ieee_value(0.0_wp,ieee_quiet_nan);F=v(:3);S=F;A=0;dS=0
     status=1;want=.true.;if(present(need_jac))want=need_jac
-    cid=this%cfg%closure_riser;if(theta<0)cid=this%cfg%closure_pipe
+    cid=cell_closure(this,theta)
+    if(present(closure_id))cid=closure_id
     call compute_primitive_variables(U(1),U(2),U(3),theta,this%cfg%nCg,this%cfg%nCl, &
        this%cfg%nrho_l0,this%cfg%nP_l0,this%cfg%D_H,this%cfg%AREA,this%cfg%eps,this%cfg%G, &
        this%cfg%mu_l,this%cfg%mu_g,this%cfg%sigma,this%cfg%njl,this%cfg%omega_u,this%cfg%omega_rho, &
@@ -162,7 +178,7 @@ contains
     status=0
   end subroutine
 
-  subroutine face_pair(this,UL,UR,thetaL,thetaR,FM,FP,status,JL,JR,KL,KR,speed,fd_one_sided,blocking_active,junction_trace,dissipation_matrix,used_dissipation)
+  subroutine face_pair(this,UL,UR,thetaL,thetaR,FM,FP,status,JL,JR,KL,KR,speed,fd_one_sided,blocking_active,junction_trace,dissipation_matrix,used_dissipation,left_cell)
     use module_lapack_small,only:dgeev_3x3
     use module_matrix_roe,only:calculate_roe_matrix
     class(pipeline_riser_simulator_t),intent(in)::this
@@ -170,6 +186,7 @@ contains
     real(wp),intent(out)::FM(3),FP(3)
     integer,intent(out)::status
     integer,intent(out),optional::fd_one_sided
+    integer,intent(in),optional::left_cell
     logical,intent(out),optional::blocking_active
     real(wp),intent(out),optional::junction_trace(6)
     real(wp),intent(in),optional::dissipation_matrix(3,3)
@@ -177,7 +194,7 @@ contains
     real(wp),intent(out),optional::JL(3,3),JR(3,3),KL(3,3),KR(3,3),speed
     real(wp)::vl(6),vr(6),fl(3),fr(3),sl(3),sr(3),al(3,3),ar(3,3),ds(3,3),ab(3,3),aa(3,3),amax
     real(wp)::up(3),um(3),fm1(3),fp1(3),fm2(3),fp2(3),h,lj(3,3),rj(3,3),lk(3,3),rk(3,3)
-    integer::code,k,cp,cm,n_one_sided
+    integer::code,k,cp,cm,n_one_sided,id_left,id_right
     logical::jac,match,blocking_mode,base_blocked
     real(wp)::base_trace(6),override_speed,eig_real(3),eig_imag(3),eig_vec(3,3)
     if(present(used_dissipation))used_dissipation=ieee_value(0.0_wp,ieee_quiet_nan)
@@ -195,7 +212,14 @@ contains
     if(present(fd_one_sided))fd_one_sided=0
     jac=present(JL).or.present(JR).or.present(KL).or.present(KR)
     blocking_mode=trim(this%cfg%junction_model)=='BLOCKING'
-    match=thetaL<0.and.thetaR>=0.and.(trim(this%cfg%junction_model)=='MATCHED'.or.blocking_mode)
+    id_left=cell_closure(this,thetaL);id_right=cell_closure(this,thetaR)
+    match=thetaL<0.and.thetaR>=0
+    if(present(left_cell).and.this%cfg%N_pipe>0)then
+      id_left=cell_closure(this,thetaL,left_cell)
+      id_right=cell_closure(this,thetaR,left_cell+1)
+      if(thetaL==0.0_wp.and.thetaR>=0.0_wp)match=left_cell==this%cfg%num_dummy_cells+this%cfg%N_pipe
+    endif
+    match=match.and.(trim(this%cfg%junction_model)=='MATCHED'.or.blocking_mode)
     if(present(blocking_active))blocking_active=.false.
     if(present(junction_trace))junction_trace=ieee_value(0.0_wp,ieee_quiet_nan)
     call basic(UL,UR,FM,FP,status,al,ar,ab,amax,base_blocked,base_trace)
@@ -302,14 +326,14 @@ contains
       real(wp),intent(out),optional::trace(6)
       real(wp)::mapped(3),vm(6),fs(3),ss(3),scratch(3,3),a0(3,3),pstar,rls,rgs,astl,astr
       real(wp)::pip,kin,jsl,jsg,ax(3,3),raw_gas_flux,path_theta,path_theta_right
-      integer::ic,q,id_left,id_right
+      integer::ic,q
       logical::active
       active=.false.
       if(present(was_blocked))was_blocked=.false.
       if(present(trace))trace=ieee_value(0.0_wp,ieee_quiet_nan)
-      call this%point_state(x,thetaL,vl,fl,sl,amat,scratch,istat)
+      call this%point_state(x,thetaL,vl,fl,sl,amat,scratch,istat,closure_id=id_left)
       if(istat/=0)return
-      call this%point_state(y,thetaR,vr,fr,sr,bmat,scratch,istat)
+      call this%point_state(y,thetaR,vr,fr,sr,bmat,scratch,istat,closure_id=id_right)
       if(istat/=0)return
       if(match)then
         ! Map the right trace to the pipe closure with the SAME p and phase fluxes.
@@ -320,7 +344,7 @@ contains
           istat=800+ic;return
         endif
         mapped=[(1-astl)*vr(2),astl*vr(3),fr(1)+fr(2)]
-        call this%point_state(mapped,thetaL,vm,fs,ss,bmat,scratch,istat)
+        call this%point_state(mapped,thetaL,vm,fs,ss,bmat,scratch,istat,closure_id=id_left)
         if(istat/=0)return
         a0=0.5_wp*(amat+bmat)
       else
@@ -329,9 +353,6 @@ contains
       if(present(dissipation_matrix))then
         dmat=dissipation_matrix;sp=override_speed
       else
-        id_left=this%cfg%closure_riser;id_right=this%cfg%closure_riser
-        if(thetaL<0.0_wp)id_left=this%cfg%closure_pipe
-        if(thetaR<0.0_wp)id_right=this%cfg%closure_pipe
         if(match.or.id_left==id_right)then
           path_theta=thetaL;path_theta_right=thetaR
           if(match)path_theta_right=thetaL
@@ -422,9 +443,9 @@ contains
     integer,intent(out),optional::status
     real(wp)::fp(3),v(6),f(3),a(3,3),ds(3,3),jl(3,3),jr(3,3),sp
     integer::code
-    call this%face_pair(U(i,:),U(i+1,:),thetav(i),thetav(i+1),flux,fp,code,jl,jr,speed=sp)
+    call this%face_pair(U(i,:),U(i+1,:),thetav(i),thetav(i+1),flux,fp,code,jl,jr,speed=sp,left_cell=i)
     if(code==0)then
-      call this%point_state(U(i,:),thetav(i),v,f,source_avg,a,ds,code)
+      call this%point_state(U(i,:),thetav(i),v,f,source_avg,a,ds,code,closure_id=cell_closure(this,thetav(i),i))
       dt=CFL*delta_s(i)/max(sp,tiny(1.0_wp))
       if(present(dflux_dUL))dflux_dUL=jl
       if(present(dflux_dUR))dflux_dUR=jr
@@ -448,7 +469,7 @@ contains
     R=0;A=0;B=0;C=0;status=0;norm=huge(1.0_wp)
     do i=lo,hi
       l=i-lo+1;ds=this%cfg%cell_width(i)
-      call this%point_state(U(i,:),this%cfg%thetav(i),v,f,s,fj,sj,code,with_jac)
+      call this%point_state(U(i,:),this%cfg%thetav(i),v,f,s,fj,sj,code,with_jac,cell_closure(this,this%cfg%thetav(i),i))
       if(code/=0)then
         status=1000+code;return
       endif
@@ -464,14 +485,14 @@ contains
       l=i-lo+1
       if(with_jac.and.allocated(this%lagged_dissipation))then
         call this%face_pair(U(i,:),U(i+1,:),this%cfg%thetav(i),this%cfg%thetav(i+1),fm,fp,code,jl,jr,kl,kr, &
-            dissipation_matrix=this%lagged_dissipation(:,:,i))
+            dissipation_matrix=this%lagged_dissipation(:,:,i),left_cell=i)
       else if(with_jac)then
-        call this%face_pair(U(i,:),U(i+1,:),this%cfg%thetav(i),this%cfg%thetav(i+1),fm,fp,code,jl,jr,kl,kr)
+        call this%face_pair(U(i,:),U(i+1,:),this%cfg%thetav(i),this%cfg%thetav(i+1),fm,fp,code,jl,jr,kl,kr,left_cell=i)
       else if(allocated(this%lagged_dissipation))then
         call this%face_pair(U(i,:),U(i+1,:),this%cfg%thetav(i),this%cfg%thetav(i+1),fm,fp,code, &
-            dissipation_matrix=this%lagged_dissipation(:,:,i))
+            dissipation_matrix=this%lagged_dissipation(:,:,i),left_cell=i)
       else
-        call this%face_pair(U(i,:),U(i+1,:),this%cfg%thetav(i),this%cfg%thetav(i+1),fm,fp,code)
+        call this%face_pair(U(i,:),U(i+1,:),this%cfg%thetav(i),this%cfg%thetav(i+1),fm,fp,code,left_cell=i)
       endif
       if(code/=0)then
         status=2000+code;return
@@ -540,7 +561,8 @@ contains
     real(wp)::tcur,dt,norm,nt,lambda,fin(3),fout(3),fi2(3),fo2(3),inventory0(2),inventory(2),in_sum(2),out_sum(2)
     real(wp)::next_output,next_field,last_print,wall0,wall1,remaining,dt_next
     integer::lo,hi,n,step,it,code,ls,info,maxsteps,rej,unitmon,unitfield,unitstat,i,k,lastcode,finstatus
-    logical::accepted,converged,requested_full_jac
+    logical::accepted,converged,requested_full_jac,diagnose_burr15
+    integer::unitburr15
     lo=first_physical_cell(this%cfg);hi=last_physical_cell(this%cfg);n=hi-lo+1
     if(present(status))status=1
     requested_full_jac=this%cfg%jac_dissipation_fd
@@ -574,6 +596,11 @@ contains
        'holdup_liquid_base,holdup_liquid_out'
     open(newunit=unitfield,file=trim(this%cfg%out_dir)//'/fields.csv',status='replace')
     write(unitfield,'(a)') 'time_s,s_m,theta_rad,alpha,holdup_liquid,p_Pa,ul_m_s,ug_m_s,rhol_kg_m3,rhog_kg_m3'
+    diagnose_burr15=trim(this%cfg%pipe_regime_mode)=='AUTO_BURR15'
+    if(diagnose_burr15)then
+      open(newunit=unitburr15,file=trim(this%cfg%out_dir)//'/burr15.csv',status='replace')
+      write(unitburr15,'(a)') 'time_s,s_m,closure_id,status,hL_over_D,ug2_m2_s2,ug2_critical_m2_s2,margin_m2_s2,unstable'
+    endif
     call boundary_flux(U(hi,:),thetav(hi),this%cfg,.false.,fout,code)
     if(code/=0)then
       finstatus=code
@@ -669,6 +696,7 @@ contains
     call write_field()
     if(finstatus/=0)call write_monitor(0.0_wp,0)
     close(unitmon);close(unitfield)
+    if(diagnose_burr15)close(unitburr15)
     open(newunit=unitstat,file=trim(this%cfg%out_dir)//'/run_status.txt',status='replace')
     write(unitstat,'(a,i0)') 'status=',finstatus
     write(unitstat,'(a,es24.16)') 'reached_time_s=',tcur*this%cfg%omega_t
@@ -701,15 +729,15 @@ contains
       ib=lo+this%cfg%N_pipe-1;indices=[lo,ib,ib+1,hi]
       if(allocated(this%lagged_dissipation))then
         call this%face_pair(U(ib,:),U(ib+1,:),thetav(ib),thetav(ib+1),baseflux,baseplus,cc, &
-          blocking_active=blocked,junction_trace=trace,dissipation_matrix=this%lagged_dissipation(:,:,ib))
+          blocking_active=blocked,junction_trace=trace,dissipation_matrix=this%lagged_dissipation(:,:,ib),left_cell=ib)
       else
         call this%face_pair(U(ib,:),U(ib+1,:),thetav(ib),thetav(ib+1),baseflux,baseplus,cc, &
-          blocking_active=blocked,junction_trace=trace)
+          blocking_active=blocked,junction_trace=trace,left_cell=ib)
       endif
       massflow_scale=this%cfg%omega_rho*this%cfg%omega_u*this%cfg%AREA
       do k=1,4
         ii=indices(k)
-        call this%point_state(U(ii,:),thetav(ii),v,f,s,aj,sj,cc,.false.)
+        call this%point_state(U(ii,:),thetav(ii),v,f,s,aj,sj,cc,.false.,cell_closure(this,thetav(ii),ii))
         pr(:,k)=v
       enddo
       conv=this%cfg%omega_rho*this%cfg%AREA*this%cfg%Lr
@@ -729,12 +757,26 @@ contains
       next_output=tcur*this%cfg%omega_t+this%cfg%output_interval_s
     end subroutine
     subroutine write_field()
-      real(wp)::v(6),f(3),s(3),aj(3,3),sj(3,3)
-      integer::ii,cc
+      real(wp)::v(6),f(3),s(3),aj(3,3),sj(3,3),nan
+      type(burr15_result_t)::criterion
+      integer::ii,cc,cid
       do ii=lo,hi
-        call this%point_state(U(ii,:),thetav(ii),v,f,s,aj,sj,cc,.false.)
+        cid=cell_closure(this,thetav(ii),ii)
+        call this%point_state(U(ii,:),thetav(ii),v,f,s,aj,sj,cc,.false.,cid)
         write(unitfield,'(*(es24.16,:,","))') tcur*this%cfg%omega_t,vns(ii)*this%cfg%Lr,thetav(ii), &
           v(1),1-v(1),v(4)*this%cfg%omega_P,v(5:6)*this%cfg%omega_u,v(2:3)*this%cfg%omega_rho
+        if(diagnose_burr15.and.ii<lo+this%cfg%N_pipe)then
+          if(cc==0.and.cid==1)then
+            criterion=burr15_stability(v(1),v(5)*this%cfg%omega_u,v(6)*this%cfg%omega_u, &
+              v(2)*this%cfg%omega_rho,v(3)*this%cfg%omega_rho,thetav(ii),this%cfg%D_H,this%cfg%AREA,this%cfg%G)
+          else
+            nan=ieee_value(0.0_wp,ieee_quiet_nan)
+            criterion=burr15_result_t(BURR15_NOT_EVALUATED,nan,nan,nan,nan,.false.)
+          endif
+          write(unitburr15,'(2(es24.16,","),2(i0,","),4(es24.16,","),i0)') &
+            tcur*this%cfg%omega_t,vns(ii)*this%cfg%Lr,cid,criterion%status,criterion%hL_over_D, &
+            criterion%ug2,criterion%critical_ug2,criterion%margin,merge(1,0,criterion%unstable)
+        endif
       enddo
       next_field=tcur*this%cfg%omega_t+this%cfg%field_interval_s
     end subroutine

@@ -14,6 +14,7 @@ module module_flow_regime
   !!   instead of the final aux value). Here we apply the corrected check.
   !!
   use mod_kinds, only: wp, i4
+  use mod_void_helpers, only: alpha2gamma
   use, intrinsic :: ieee_arithmetic, only: ieee_is_finite, ieee_value, ieee_quiet_nan
   implicit none
   public
@@ -22,7 +23,70 @@ module module_flow_regime
   integer(i4), parameter :: MODE_DF      = 1_i4
   integer(i4), parameter :: MODE_DF_PIPE = 2_i4
 
+  integer, parameter :: BURR15_OK = 0, BURR15_INVALID_STATE = 1, BURR15_PHASE_ABSENT = 2
+  integer, parameter :: BURR15_DIRECTION = 3, BURR15_ANGLE = 4, BURR15_NOT_EVALUATED = 5
+  integer, parameter :: BURR15_GEOMETRY = 6, BURR15_NUMERIC = 7
+
+  type :: burr15_result_t
+    integer :: status
+    real(wp) :: hL_over_D, ug2, critical_ug2, margin
+    logical :: unstable
+  end type
+
 contains
+
+  function burr15_stability(alpha, ul, ug, rhol, rhog, theta, diameter, area, g) result(test)
+    !! Burr, sistema_oleoduto_riser.pdf, p. 3, Eq. (15). Inputs in SI.
+    !! The liquid headroom multiplies the root in the published inequality.
+    !! Use the squared comparison only after checking the velocity directions.
+    !! This test describes a *stratified candidate* and its loss of stability.
+    real(wp), intent(in) :: alpha, ul, ug, rhol, rhog, theta, diameter, area, g
+    type(burr15_result_t) :: test
+    real(wp), parameter :: pi = acos(-1.0_wp)
+    real(wp) :: gamma, half_angle, headroom, area_per_d, length_factor, nan
+    integer :: code
+
+    nan = ieee_value(0.0_wp, ieee_quiet_nan)
+    test = burr15_result_t(BURR15_INVALID_STATE, nan, nan, nan, nan, .false.)
+    if (.not. all(ieee_is_finite([alpha, ul, ug, rhol, rhog, theta, diameter, area, g]))) return
+    if (alpha < 0.0_wp .or. alpha > 1.0_wp .or. rhog <= 0.0_wp .or. rhol <= rhog .or. g <= 0.0_wp) return
+    test%status = BURR15_GEOMETRY
+    if (diameter <= 0.0_wp .or. area <= 0.0_wp) return
+    if (diameter < 1.0_wp) then
+      if (area > huge(area)*diameter) return
+    endif
+    area_per_d = area/diameter
+    if (abs(area_per_d - (pi/4)*diameter) > 32*epsilon(area)*(pi/4)*diameter) return
+    if (alpha == 0.0_wp .or. alpha == 1.0_wp) then
+      test%status = BURR15_PHASE_ABSENT
+      return
+    endif
+    test%status = BURR15_ANGLE
+    if (theta > 0.0_wp .or. theta <= -pi/2) return
+    test%status = BURR15_DIRECTION
+    if (ug < 0.0_wp .or. ul < 0.0_wp) return
+
+    test%status = BURR15_NUMERIC
+    gamma = alpha2gamma(alpha, 1e-14_wp, code)
+    if (code /= 0) return
+    if (gamma <= 0.0_wp .or. gamma >= 1.0_wp) return
+    half_angle = (pi/2)*gamma
+    test%hL_over_D = sin(half_angle)**2
+    headroom = sin((pi/2)*(1.0_wp-gamma))**2
+    ! S_l = pi*D*gamma (wall wetted by liquid). A/S_l has units of length.
+    length_factor = (alpha*headroom**2/(pi*gamma))*area_per_d
+    length_factor = length_factor*((rhol-rhog)/rhol)*cos(theta)
+    if (length_factor > 1.0_wp) then
+      if (g > huge(g)/length_factor) return
+    endif
+    if (ug >= sqrt(huge(ug))) return
+    test%ug2 = ug**2
+    test%critical_ug2 = g*length_factor
+    if (test%critical_ug2 <= 0.0_wp) return
+    test%margin = test%ug2-test%critical_ug2
+    test%unstable = test%margin >= 0.0_wp
+    test%status = BURR15_OK
+  end function burr15_stability
 
   pure real(wp) function clamp(x, lo, hi) result(y)
     real(wp), intent(in) :: x, lo, hi

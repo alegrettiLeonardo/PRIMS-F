@@ -34,6 +34,9 @@ module module_config
     integer(i4) :: num_dummy_cells = 2
     integer(i4) :: nCells = 0
     integer(i4) :: N_pipe = 0          ! number of pipe cells in the extended vector (Python: nodes-1)
+    ! Fixed policy is independent of the scenario label and geometric angle.
+    ! AUTO_BURR15 currently records diagnostics with the stratified operator.
+    character(len=STR_LEN) :: pipe_regime_mode = 'FIXED_STRATIFIED'
     integer(i4) :: closure_pipe = 1
     ! 1 stratified; 2 Bendiksen; 3 Bhagwat; 4 Montgomery;
     ! 5 Chexal1992 auto, 6 Chexal1992 high-alpha, 7 Chexal1992 low-alpha.
