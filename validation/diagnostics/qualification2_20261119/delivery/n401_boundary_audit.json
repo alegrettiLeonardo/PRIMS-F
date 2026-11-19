@@ -1,0 +1,104 @@
+{
+  "run": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125",
+  "input_frames": 12501,
+  "boundary_summary": {
+    "1_1": {
+      "samples": 12501,
+      "status_counts": {
+        "0": 12501
+      },
+      "incoming_counts": {
+        "2": 12501
+      },
+      "eigen_min_m_s": -310.3794396562457,
+      "eigen_max_m_s": 312.526188535402,
+      "max_imaginary_m_s": 0.0,
+      "min_constraint_singular_value": 0.36207267181565905,
+      "negative_ul_samples": 0,
+      "negative_ug_samples": 0
+    },
+    "1_2": {
+      "samples": 12501,
+      "status_counts": {
+        "0": 12501
+      },
+      "incoming_counts": {
+        "2": 12501
+      },
+      "eigen_min_m_s": -310.1417581788698,
+      "eigen_max_m_s": 312.28575611442994,
+      "max_imaginary_m_s": 0.0,
+      "min_constraint_singular_value": 0.3614450967810511,
+      "negative_ul_samples": 0,
+      "negative_ug_samples": 0
+    },
+    "2_1": {
+      "samples": 12501,
+      "status_counts": {
+        "0": 12501
+      },
+      "incoming_counts": {
+        "1": 12501
+      },
+      "eigen_min_m_s": -33.016600005014226,
+      "eigen_max_m_s": 35.00384564102863,
+      "max_imaginary_m_s": 0.0,
+      "min_constraint_singular_value": 9.188533708794734e-05,
+      "negative_ul_samples": 0,
+      "negative_ug_samples": 0
+    },
+    "2_2": {
+      "samples": 12501,
+      "status_counts": {
+        "0": 12501
+      },
+      "incoming_counts": {
+        "1": 12501
+      },
+      "eigen_min_m_s": -33.00589220176292,
+      "eigen_max_m_s": 34.98348047303193,
+      "max_imaginary_m_s": 0.0,
+      "min_constraint_singular_value": 9.18321911183516e-05,
+      "negative_ul_samples": 0,
+      "negative_ug_samples": 0
+    }
+  },
+  "provenance": {
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125/fields.csv": "f08d8d64bfe5b056696da8c9760f80af43171119d488e9306316391fa94ed37f",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/osc_3600/runs/D_OSC_h_N401_dt0p125/manifest.json": "a4f67ddfeb520b4e598e0e0045d291615447e139625700791f5315c80b55def8",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/validation/diagnostics/qualification2_20261119/probe_boundary_series.f90": "7e04d4a3799f63452b67b0036bf973bd719278677a8c1bd7930507eca69c4816",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/scripts/audit_boundary_series.py": "c9f7708104a7ef16c33416e63c5a86f23081b0ab3abada0f36f7bc18ea8477b9"
+  },
+  "command": [
+    "gfortran",
+    "-std=f2018",
+    "-O2",
+    "-ffree-line-length-none",
+    "-fopenmp",
+    "-I/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/validation/diagnostics/qualification2_20261119/probe_boundary_series.f90",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/mod_kinds.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/mod_rootfinding.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/mod_void_helpers.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_boundary_conditions.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_catenary.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_chexal_1992.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_closure_law.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_config.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_find.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_flow_regime.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_jacobian.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_lapack_small.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_matrix_roe.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_roe_solver.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_simulate_pipe_riser.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_solver_utils.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_steady_state.o",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/builds/release_69813ee_r1/obj/module_time_step.o",
+    "-llapack",
+    "-lblas",
+    "-o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/boundary_audit/N401_v1/probe"
+  ],
+  "scope": "Accepted field sampling only; rows reconstruct conservative states from printed primitives. Interior and imposed states share the documented branch. Unsampled Newton proposals are separate."
+}

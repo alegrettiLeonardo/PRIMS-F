@@ -1,0 +1,31 @@
+{
+  "checked_utc": "2026-11-19 15:41:47 UTC",
+  "service": "GitHub connector, read-only",
+  "pull_request_url": "https://github.com/alegrettiLeonardo/PRIMS-F/pull/2",
+  "state": "closed",
+  "draft": false,
+  "merged": true,
+  "head_sha": "ee5810e57488bde45b3ec02024b644d55be59724",
+  "base_sha": "4572f95ee61795c852b8d87c0f142505dcd11378",
+  "merge_commit_sha": "e4c6aeb4e42d4b3580d5445c64e954dc2c947097",
+  "updated_at": "2026-11-19T15:38:32Z",
+  "closed_at": "2026-11-19T15:38:32Z",
+  "merged_at": "2026-11-19T15:38:32Z",
+  "comparison": {
+    "base": "ee5810e57488bde45b3ec02024b644d55be59724",
+    "head": "e4c6aeb4e42d4b3580d5445c64e954dc2c947097",
+    "status": "ahead",
+    "ahead_by": 1,
+    "behind_by": 0,
+    "total_commits": 1,
+    "changed_files": []
+  },
+  "local_main_preserved": "4572f95ee61795c852b8d87c0f142505dcd11378",
+  "continuation_includes_ee5810e": true,
+  "git_fetch_main": {
+    "returncode": 1,
+    "reason": "Connection reset by peer"
+  },
+  "remote_mutations_by_this_run": [],
+  "interpretation": "PR #2 was merged remotely during local qualification. It cannot remain draft in its present closed/merged state; no reopen, merge, push or remote publication was performed here."
+}

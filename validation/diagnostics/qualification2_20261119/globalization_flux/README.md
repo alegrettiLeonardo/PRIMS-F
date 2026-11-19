@@ -124,14 +124,30 @@ passou 14/14 programas.
 
 ## Comparação de fluxo
 
-Harten, Lax e van Leer (1983), p.50, Eqs.(3.13)–(3.15),
+Harten, Lax e van Leer (1983), *SIAM Review* 25(1), pp.35–61,
 [DOI](https://doi.org/10.1137/1025002),
 [artigo primário na SIAM](https://epubs.siam.org/doi/10.1137/1025002),
-define o estado intermediário e fluxo de duas ondas a partir da forma
-integral. Aplicou-se essa álgebra ao **mesmo par mapeado** usado pelo
-MATCHED. As velocidades usadas foram o envelope dos autovalores e
-velocidades de fase dos endpoints, sem multiplicador espectral.
-Não se demonstrou que esse envelope limita todas as ondas não lineares.
+é a referência bibliográfica para o esquema aproximado de Riemann.
+Não há neste pacote comprovação da conferência visual da numeração de
+equações citada no registro anterior. Recuperou-se o texto integral
+extraído pelo índice, mas o PDF acessível para imagem não foi obtido
+(link direto404; captura do índice sem arquivo em cache). Por isso, a
+fórmula usada abaixo não é atribuída a uma equação numerada do artigo.
+
+Para o diagnóstico, a fórmula conservativa é apresentada como derivação
+própria: para duas velocidades estimadas `S_L<0<S_R`, a conservação
+integral com um estado intermediário fornece
+
+\[
+ U_*={S_R U_R-S_L U_L-(F_R-F_L)\over S_R-S_L},\qquad
+ F_*={S_R F_L-S_L F_R+S_L S_R(U_R-U_L)\over S_R-S_L}.
+\]
+
+Aplicou-se essa álgebra ao **mesmo par mapeado** usado pelo MATCHED.
+As velocidades usadas foram o envelope dos autovalores e velocidades
+de fase dos endpoints, sem multiplicador espectral. Não se demonstrou
+que esse envelope limita todas as ondas não lineares, e essa comparação
+não foi promovida a fluxo de produção.
 
 No SS1 aceito, HLL dá massas intermediárias positivas
 `[433.2570016,1.35404615] kg/m3`. A atualização explícita das equações

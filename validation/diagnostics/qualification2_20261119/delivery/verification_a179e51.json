@@ -1,0 +1,85 @@
+{
+  "git_head": "a179e51d9d63e8aeed91a94d829b5b483d107864",
+  "build_manifest_sha256": "531d28a4735f024b6741875703e8957009e39049cabc27648e9d62dc72aec49f",
+  "binary_sha256": "02ce51462ec3c954cec9364b17444b7279be72ec150f87e307f1b5fc8dd0a4c3",
+  "verifier_sha256": "18a0d123649cc120ac03c65a94a28ea02538a4c3285f3e8e49050925b13d7fca",
+  "started_utc": "2026-11-19T15:34:19.549205+00:00",
+  "tasks": [
+    {
+      "name": "debug",
+      "command": [
+        "make",
+        "check_all",
+        "FC=gfortran",
+        "LIBS=-llapack -lblas"
+      ],
+      "returncode": 0,
+      "wall_s": 2.3735931429982884,
+      "log": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/verification_a179e51/debug.log",
+      "log_sha256": "627ea7527cb1d8196a77699bb50827038636ec63d7cc9fbb35d471cc903182cb"
+    },
+    {
+      "name": "fortran",
+      "command": [
+        "make",
+        "test",
+        "FC=gfortran",
+        "LIBS=-llapack -lblas"
+      ],
+      "returncode": 0,
+      "wall_s": 12.496471431004466,
+      "log": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/verification_a179e51/fortran.log",
+      "log_sha256": "c02c9f3949cc7dc74dcc249ff2658e5b0d68f8323617ff0cd14d6cb587bb1247"
+    },
+    {
+      "name": "python",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_*.py"
+      ],
+      "returncode": 0,
+      "wall_s": 0.9266683919995558,
+      "log": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/verification_a179e51/python.log",
+      "log_sha256": "86cb4c6bf6c9a52ebe6a83e487634e8110cef62d5e15982c3fccb0744b136399"
+    },
+    {
+      "name": "cli",
+      "command": [
+        "python3",
+        "tests/test_pipe_regime_cli.py",
+        "--binary",
+        "/home/leonardoab/Documentos/PRIMS-F-active-run-a179e51-20261119/bin/prims_f_check_all",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-active-run-a179e51-20261119/tmp/q2_final_cli"
+      ],
+      "returncode": 0,
+      "wall_s": 1.2258891879901057,
+      "log": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/verification_a179e51/cli.log",
+      "log_sha256": "69baaf76661894e90368e47ad07d92056f51baffd74028a5a76e138f79f0c103"
+    },
+    {
+      "name": "accepted_telemetry",
+      "command": [
+        "python3",
+        "tests/test_accepted_telemetry_cli.py",
+        "--binary",
+        "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/builds/release_a179e51/bin/prims_f",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-active-run-a179e51-20261119/tmp/q2_final_telemetry"
+      ],
+      "returncode": 0,
+      "wall_s": 0.6555433439934859,
+      "log": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/verification_a179e51/accepted_telemetry.log",
+      "log_sha256": "16541b9f19249d187589c3213212e830242c55377a39997b3910cca46d001db5"
+    }
+  ],
+  "completed_utc": "2026-11-19T15:34:37.230382+00:00",
+  "sources_unchanged": true,
+  "binary_unchanged": true
+}

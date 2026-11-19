@@ -1,0 +1,353 @@
+{
+  "experiment": {
+    "frequency_resolution_Hz": 0.0033272058823531985,
+    "three_largest_local_peaks": [
+      {
+        "frequency_bin_Hz": 0.026617647058825588,
+        "relative_power": 1.0,
+        "bin_half_width_Hz": 0.0016636029411765992
+      },
+      {
+        "frequency_bin_Hz": 0.053235294117651176,
+        "relative_power": 0.9310129888655069,
+        "bin_half_width_Hz": 0.0016636029411765992
+      },
+      {
+        "frequency_bin_Hz": 0.0033272058823531985,
+        "relative_power": 0.09201008514594308,
+        "bin_half_width_Hz": 0.0016636029411765992
+      }
+    ],
+    "ratio_two_strongest_frequency_bins": 2.0,
+    "window_excursion_Pa": 64525.13966480445,
+    "window_excursion_at_least_100Pa": true,
+    "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+    "window": "Hann, mean removed, relative power normalized separately for each series"
+  },
+  "digitization_sha256": "c514f55c7855437274d9fe49b352469b493c9bb5ef954319b83a6389f20afe91",
+  "interpretation": "Bins of a finite published excerpt. A ratio near two is compatible with a harmonic or subharmonic structure; the largest peak alone does not identify a physical mode. Calibration, curve thickness and nonstationarity add uncertainty beyond bin width.",
+  "runs": [
+    {
+      "frequency_resolution_Hz": 0.003332576576813067,
+      "three_largest_local_peaks": [
+        {
+          "frequency_bin_Hz": 0.043323495498569876,
+          "relative_power": 1.0,
+          "bin_half_width_Hz": 0.0016662882884065336
+        },
+        {
+          "frequency_bin_Hz": 0.08664699099713975,
+          "relative_power": 0.01025443932260098,
+          "bin_half_width_Hz": 0.0016662882884065336
+        }
+      ],
+      "ratio_two_strongest_frequency_bins": 2.0,
+      "window_excursion_Pa": 19819.429627287347,
+      "window_excursion_at_least_100Pa": true,
+      "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+      "window": "Hann, mean removed, relative power normalized separately for each series",
+      "run": "D_OSC",
+      "status": "COMPLETED",
+      "start_s": 3300.0568527591063,
+      "end_s": 3600.0,
+      "pressure_column": "p_junction_Pa",
+      "statistics": {
+        "mean": 266203.7228569042,
+        "std": 6979.641403032123,
+        "minimum": 256110.36628192614,
+        "maximum": 275929.7959092135,
+        "peak_to_peak": 19819.429627287347,
+        "initial": 258770.29554571083,
+        "final": 258128.8829038063,
+        "change": -641.4126419045206,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "manifest_sha256": "af7c9d6580e0556166618020bb57f8cf1ded0d305b4bfd5ef0d9ebb46b30ded3",
+      "monitor_sha256": "8876c5c408c79636f50cfd284280cfe4b7db8c2e8decd79ccacc57d8e0ef7458"
+    },
+    {
+      "frequency_resolution_Hz": 0.003332576576813067,
+      "three_largest_local_peaks": [
+        {
+          "frequency_bin_Hz": 0.043323495498569876,
+          "relative_power": 1.0,
+          "bin_half_width_Hz": 0.0016662882884065336
+        },
+        {
+          "frequency_bin_Hz": 0.08664699099713975,
+          "relative_power": 0.013403324777145497,
+          "bin_half_width_Hz": 0.0016662882884065336
+        }
+      ],
+      "ratio_two_strongest_frequency_bins": 2.0,
+      "window_excursion_Pa": 22713.082481389225,
+      "window_excursion_at_least_100Pa": true,
+      "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+      "window": "Hann, mean removed, relative power normalized separately for each series",
+      "run": "D_OSC_bc_Ps_minus",
+      "status": "COMPLETED",
+      "start_s": 3300.0568527591063,
+      "end_s": 3600.0,
+      "pressure_column": "p_junction_Pa",
+      "statistics": {
+        "mean": 260935.6956968305,
+        "std": 7983.753057116382,
+        "minimum": 249332.4953899482,
+        "maximum": 272045.5778713374,
+        "peak_to_peak": 22713.082481389225,
+        "initial": 249599.73038281075,
+        "final": 250454.53843525358,
+        "change": 854.8080524428224,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "manifest_sha256": "4dbc647f555de9009b732beb3d116fe782cd51a1793553fc80f8ecf1fdc68775",
+      "monitor_sha256": "a634878d9e000e5e8b6166edc072567dfcc9f507d49b9b6af23685b7884f7f79"
+    },
+    {
+      "frequency_resolution_Hz": 0.003332576576873698,
+      "three_largest_local_peaks": [
+        {
+          "frequency_bin_Hz": 0.04332349549935807,
+          "relative_power": 1.0,
+          "bin_half_width_Hz": 0.001666288288436849
+        },
+        {
+          "frequency_bin_Hz": 0.08664699099871614,
+          "relative_power": 0.006622684159336922,
+          "bin_half_width_Hz": 0.001666288288436849
+        },
+        {
+          "frequency_bin_Hz": 0.009997729730621093,
+          "relative_power": 3.324593764053371e-13,
+          "bin_half_width_Hz": 0.001666288288436849
+        }
+      ],
+      "ratio_two_strongest_frequency_bins": 2.0,
+      "window_excursion_Pa": 15875.548106191854,
+      "window_excursion_at_least_100Pa": true,
+      "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+      "window": "Hann, mean removed, relative power normalized separately for each series",
+      "run": "D_OSC_bc_Ps_plus_T7200",
+      "status": "COMPLETED",
+      "start_s": 6900.056852763903,
+      "end_s": 7200.0,
+      "pressure_column": "p_junction_Pa",
+      "statistics": {
+        "mean": 271463.9715565329,
+        "std": 5598.5343977876755,
+        "minimum": 263411.51479816297,
+        "maximum": 279287.0629043548,
+        "peak_to_peak": 15875.548106191854,
+        "initial": 272843.6449653297,
+        "final": 272838.82921090507,
+        "change": -4.815754424605984,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "manifest_sha256": "23b4a7a1a3ee88f6484077b318507cfc231e657b663d183a09d052d298f98809",
+      "monitor_sha256": "99395c8d49fe66f4e932d593391b298c099e30751e331bf4c9b005d97017526e"
+    },
+    {
+      "frequency_resolution_Hz": 0.003332576576813067,
+      "three_largest_local_peaks": [
+        {
+          "frequency_bin_Hz": 0.043323495498569876,
+          "relative_power": 1.0,
+          "bin_half_width_Hz": 0.0016662882884065336
+        },
+        {
+          "frequency_bin_Hz": 0.08331441442032668,
+          "relative_power": 0.03852984066935238,
+          "bin_half_width_Hz": 0.0016662882884065336
+        }
+      ],
+      "ratio_two_strongest_frequency_bins": 1.923076923076923,
+      "window_excursion_Pa": 34503.19530510419,
+      "window_excursion_at_least_100Pa": true,
+      "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+      "window": "Hann, mean removed, relative power normalized separately for each series",
+      "run": "D_OSC_bc_jg_minus",
+      "status": "COMPLETED",
+      "start_s": 3300.0568527590503,
+      "end_s": 3600.0,
+      "pressure_column": "p_junction_Pa",
+      "statistics": {
+        "mean": 267873.870016263,
+        "std": 12059.665136749005,
+        "minimum": 250464.5989972023,
+        "maximum": 284967.7943023065,
+        "peak_to_peak": 34503.19530510419,
+        "initial": 252426.01992218383,
+        "final": 278123.1691423328,
+        "change": 25697.149220148975,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "manifest_sha256": "d35a4e23572ab5121933a86a06bc4f6c2b97d011190de2bbab0523d75e7ac165",
+      "monitor_sha256": "837392f76a655fa2931cb9e95177c86d4df0c1c3c5db363d10ac30175bfa7ffb"
+    },
+    {
+      "frequency_resolution_Hz": 0.0033325765768648053,
+      "three_largest_local_peaks": [],
+      "ratio_two_strongest_frequency_bins": null,
+      "window_excursion_Pa": 0.0,
+      "window_excursion_at_least_100Pa": false,
+      "peaks_interpretation": "NO_SPECTRAL_VARIATION; no period inferred",
+      "run": "D_OSC_bc_jg_plus_T7200",
+      "status": "COMPLETED",
+      "start_s": 6900.056852763301,
+      "end_s": 7200.000000000001,
+      "pressure_column": "p_junction_Pa",
+      "statistics": {
+        "mean": 264711.26168363274,
+        "std": 0.0,
+        "minimum": 264711.26168363274,
+        "maximum": 264711.26168363274,
+        "peak_to_peak": 0.0,
+        "initial": 264711.26168363274,
+        "final": 264711.26168363274,
+        "change": 0.0,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "manifest_sha256": "676fba47b28791f8c8bb7e6850736eec6a06064831646f16eab6e447838f9844",
+      "monitor_sha256": "9f677ba7cf11b324df76a9270a96294b53423329688151746349b1efc841947e"
+    },
+    {
+      "frequency_resolution_Hz": 0.003332576576813067,
+      "three_largest_local_peaks": [
+        {
+          "frequency_bin_Hz": 0.043323495498569876,
+          "relative_power": 1.0,
+          "bin_half_width_Hz": 0.0016662882884065336
+        },
+        {
+          "frequency_bin_Hz": 0.08664699099713975,
+          "relative_power": 0.011379610464715462,
+          "bin_half_width_Hz": 0.0016662882884065336
+        }
+      ],
+      "ratio_two_strongest_frequency_bins": 2.0,
+      "window_excursion_Pa": 20978.355282251345,
+      "window_excursion_at_least_100Pa": true,
+      "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+      "window": "Hann, mean removed, relative power normalized separately for each series",
+      "run": "D_OSC_bc_jl_minus",
+      "status": "COMPLETED",
+      "start_s": 3300.0568527591063,
+      "end_s": 3600.0,
+      "pressure_column": "p_junction_Pa",
+      "statistics": {
+        "mean": 266108.21795369673,
+        "std": 7382.13192804396,
+        "minimum": 255463.26895181971,
+        "maximum": 276441.62423407106,
+        "peak_to_peak": 20978.355282251345,
+        "initial": 272941.5702501242,
+        "final": 275432.83399624727,
+        "change": 2491.2637461230624,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "manifest_sha256": "1166d676e4c3559ce81816070349a69058181ba201c46f575231b8de63cd018d",
+      "monitor_sha256": "de1436bd08050f81625ff46af2ec288f570df8880f7414578af923ae15ad87bd"
+    },
+    {
+      "frequency_resolution_Hz": 0.003332576576813067,
+      "three_largest_local_peaks": [
+        {
+          "frequency_bin_Hz": 0.043323495498569876,
+          "relative_power": 1.0,
+          "bin_half_width_Hz": 0.0016662882884065336
+        },
+        {
+          "frequency_bin_Hz": 0.08664699099713975,
+          "relative_power": 0.008972945888623834,
+          "bin_half_width_Hz": 0.0016662882884065336
+        }
+      ],
+      "ratio_two_strongest_frequency_bins": 2.0,
+      "window_excursion_Pa": 18571.059298633278,
+      "window_excursion_at_least_100Pa": true,
+      "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+      "window": "Hann, mean removed, relative power normalized separately for each series",
+      "run": "D_OSC_bc_jl_plus",
+      "status": "COMPLETED",
+      "start_s": 3300.0568527591063,
+      "end_s": 3600.0,
+      "pressure_column": "p_junction_Pa",
+      "statistics": {
+        "mean": 266256.2924780923,
+        "std": 6548.159691593118,
+        "minimum": 256802.3195775329,
+        "maximum": 275373.3788761662,
+        "peak_to_peak": 18571.059298633278,
+        "initial": 275357.99701655284,
+        "final": 275333.98585779965,
+        "change": -24.011158753186464,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "manifest_sha256": "65a74c442dab303dfc3782c07507a1cdaf74c8a3327d93cd6094c3546db50b1c",
+      "monitor_sha256": "f07c000f4dd22991d8d6d43881d67f1161517c19582787504a76ae4ac0750dcb"
+    },
+    {
+      "frequency_resolution_Hz": 0.003332576576813067,
+      "three_largest_local_peaks": [
+        {
+          "frequency_bin_Hz": 0.043323495498569876,
+          "relative_power": 1.0,
+          "bin_half_width_Hz": 0.0016662882884065336
+        },
+        {
+          "frequency_bin_Hz": 0.08664699099713975,
+          "relative_power": 0.018768592195241317,
+          "bin_half_width_Hz": 0.0016662882884065336
+        }
+      ],
+      "ratio_two_strongest_frequency_bins": 2.0,
+      "window_excursion_Pa": 29195.117860650178,
+      "window_excursion_at_least_100Pa": true,
+      "peaks_interpretation": "Finite-window frequency bins; cycle qualification is separate",
+      "window": "Hann, mean removed, relative power normalized separately for each series",
+      "run": "D_OSC_h_N401_dt0p125",
+      "status": "COMPLETED",
+      "start_s": 3300.0568527591063,
+      "end_s": 3600.0,
+      "pressure_column": "p_junction_Pa",
+      "statistics": {
+        "mean": 266665.12272993074,
+        "std": 10218.54370795088,
+        "minimum": 251945.98413409654,
+        "maximum": 281141.1019947467,
+        "peak_to_peak": 29195.117860650178,
+        "initial": 275410.7731272187,
+        "final": 280808.3070650377,
+        "change": 5397.533937819011,
+        "sample_count": 2402,
+        "covered_duration_s": 300.0,
+        "coverage_fraction": 1.0,
+        "method": "time-weighted piecewise-linear observations; missing segments excluded"
+      },
+      "manifest_sha256": "a4f67ddfeb520b4e598e0e0045d291615447e139625700791f5315c80b55def8",
+      "monitor_sha256": "37ea4257b01d2e0deb55954927c89b69c2465727247b03258e8ddf9b80118597"
+    }
+  ],
+  "script_sha256": "2400845808e2d13db6e82aa4e085c573e42b79c2e92b6507f53db19bc854dbbf"
+}

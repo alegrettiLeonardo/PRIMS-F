@@ -1,0 +1,17 @@
+{
+  "monitor.csv": {
+    "identical": true,
+    "old_sha256": "ea3d5e28def9fedd2a6ef2398ece7d2589763a1291a56a364695ae66b11eaa80",
+    "new_sha256": "ea3d5e28def9fedd2a6ef2398ece7d2589763a1291a56a364695ae66b11eaa80"
+  },
+  "fields.csv": {
+    "identical": true,
+    "old_sha256": "62e65e0f3a3a55c732b78ac650d272f873529ac8f9af843498f93dfb58d643c9",
+    "new_sha256": "62e65e0f3a3a55c732b78ac650d272f873529ac8f9af843498f93dfb58d643c9"
+  },
+  "conservation.csv": {
+    "identical": true,
+    "old_sha256": "897c30b000f80253e65b396fda4dcd7fef37957cb2232ebffe150e850be5b354",
+    "new_sha256": "897c30b000f80253e65b396fda4dcd7fef37957cb2232ebffe150e850be5b354"
+  }
+}

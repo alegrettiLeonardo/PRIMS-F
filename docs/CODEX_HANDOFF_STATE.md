@@ -1,5 +1,37 @@
 # Estado para continuação no Codex
 
+
+## Atualização da qualificação — 19/11/2026
+
+- Continuação local: `audit/qualification2-20261119`, worktree
+  `/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119`.
+- Leia [QUALIFICATION2_RESULTS_20261119.md](QUALIFICATION2_RESULTS_20261119.md)
+  e o índice `validation/diagnostics/qualification2_20261119/delivery/index.json`.
+- Operador novo `a179e51`: globalização ACTIVE_SET opt-in, experimental;
+  LINE_SEARCH segue padrão. Release/debug, 15 programas Fortran, 103 testes
+  Python dos analisadores, 21 checks CLI e 5 de telemetria aprovados.
+- Controle estável novo 2400 s reproduz byte a byte os campos e seis balanços
+  do 69813ee/tol 1e-10. SS1/SS3 seguem BLOCKED: com tol 1e-10 a conservação
+  passa nas trajetórias registradas, mas SS1 sofre TIMEOUT perto 78,578 s e
+  SS3 para perto 97,132 s. Replays específicos não qualificam os regimes.
+- OSC usa freeze separado 69813ee: N51/101/201/401 e dt.125/.0625/.03125
+  completaram 3600 s, dez intervalos acomodados e balanços PASS. Amplitude
+  ainda muda 4,013% com h e10,318% com dt: convergência 1% FAIL.
+- Seis sensibilidades estáticas + duas extensões 7200 preservadas. jg+
+  com tol 1e-8 falha inventário; estudo separado tol 1e-10 passa (3,383e-8),
+  sem período qualificado. AUTO_BURR15 continua apenas diagnóstico.
+- Nenhum regime foi validado experimentalmente. Convergência, frentes
+  materiais/observação experimental e continuação de domínio seguem abertas.
+  Não extrapolar Chexal vertical; não escolher parâmetros para forçar ciclos.
+- Todos os solvers/campanhas desta continuação terminaram; dados externos
+  em `/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119`.
+- PR#2 foi incorporado externamente às 15:38:32UTC, merge e4c6aeb, árvore
+  igual a ee 5810e. Não houve push/merge por esta execução; main local 4572f95
+  foi preservada. O PR fechado não pode continuar draft.
+
+O estado histórico abaixo permanece preservado.
+
+
 ## Onde continuar e o que foi preservado
 
 Repositório `alegrettiLeonardo/PRIMS-F`; PR #1 incorporado em `4572f95`.

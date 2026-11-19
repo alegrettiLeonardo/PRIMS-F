@@ -34,6 +34,7 @@ def main():
     parser.add_argument('--nominal', type=Path, required=True)
     parser.add_argument('--digitization', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--caption', default='')
     parser.add_argument('runs', type=Path, nargs='+')
     args = parser.parse_args()
     if args.output.exists():
@@ -59,7 +60,7 @@ def main():
     expf, exppower = spectrum(te, pe)
     summaries = []
     for axis, axp, axf in zip(groups, ap, af):
-        axp.fill_between(te-te[0], lo/1e5, hi/1e5, color='#a8bbd0', alpha=.5, label='Envelope gráfico experimental')
+        axp.fill_between(te-te[0], lo/1e5, hi/1e5, color='#a8bbd0', alpha=.5, label='Envelope da digitalização')
         axp.plot(te-te[0], pe/1e5, color='#235789', lw=1, label='Experimento, Fig.18(a)')
         use = expf <= .1
         axf.plot(expf[use], exppower[use], color='#235789', label='Experimento digitalizado')
@@ -88,14 +89,17 @@ def main():
     af[-1].set_xlabel('Frequência (Hz)')
     fp.suptitle('Sensibilidade estática; os offsets não reconstruem o forçamento experimental', fontsize=11)
     ff.suptitle('Hann e média removida; bins finitos, sem inferência de modos físicos', fontsize=11)
+    if args.caption:
+        fp.supxlabel(args.caption, fontsize=9)
+        ff.supxlabel(args.caption, fontsize=9)
     paths = (args.output/'pressao_contornos_fig18.png', args.output/'espectros_contornos_fig18.png')
     fp.savefig(paths[0], dpi=170)
     ff.savefig(paths[1], dpi=170)
     plt.close(fp)
     plt.close(ff)
-    index = dict(schema='PRIMS-F.static_bc_experimental_figures.v1', script_sha256=sha(__file__),
+    index = dict(schema='PRIMS-F.static_bc_experimental_figures.v1', script_sha256=sha(Path(__file__)),
         digitization_sha256=sha(args.digitization), nominal_hashes=nominal['input_hashes'],
-        runs=summaries, figure_hashes={path.name: sha(path) for path in paths},
+        runs=summaries, qualification_caption=args.caption, figure_hashes={path.name: sha(path) for path in paths},
         limitations='Independent time origins; static offsets of measured-signal deviations; no synchronized forcing, confidence interval or experimental validation inferred.')
     with (args.output/'index.json').open('x') as stream:
         json.dump(index, stream, indent=2, allow_nan=False)

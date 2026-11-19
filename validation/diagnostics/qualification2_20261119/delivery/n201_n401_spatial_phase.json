@@ -1,0 +1,223 @@
+{
+  "schema": "PRIMS-F.spatial_phase_comparison.v1",
+  "phase_points": 256,
+  "phase_marker": "p_junction_Pa peak; same ten enclosed intervals as phase report",
+  "spatial_rule": "Fixed physical reference cell centres; linear interpolation inside each segment; no extrapolation",
+  "front_rule": "Piecewise-linear isovoid crossings, half-open levels; no material identity or inferred velocity",
+  "local_transport_rule": "Cell-centred A*rho*j; accepted face ledger remains conservation authority",
+  "phase_report": {
+    "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis/D_OSC_h_N201_dt0p125__D_OSC_h_N401_dt0p125_phase.json",
+    "sha256": "a736320fc9ca8bd3f6dd5b64c73edaf081d09b4b3af6bdce7d65fb45698101f3"
+  },
+  "script_sha256": "37f19106045add02a8f150876feb0271fc056944e947742e38be9cbcd8e6de48",
+  "runs": [
+    {
+      "run": "D_OSC_h_N201_dt0p125",
+      "status": "SETTLED",
+      "window_s": [
+        3339.9695225437113,
+        3573.4243202836983
+      ],
+      "frames": 935,
+      "positions_per_segment": {
+        "pipe": 201,
+        "riser": 201
+      },
+      "isovoid_counts": {
+        "0.4": 626,
+        "0.5": 582,
+        "0.6": 0
+      },
+      "output_hashes": {
+        "D_OSC_h_N201_dt0p125_phase_fields.npz": "db550f88a1b907a05ec4b999da1e7a7e016686eb89a10c9d4bb6b7575eaace73",
+        "D_OSC_h_N201_dt0p125_isovoid_crossings.csv": "67caf8bd2162e18f1de09728557152580709267e912efec1be34af1a1f2cd9e8"
+      },
+      "field_source_sha256": "e4d4c57daecfa331047b10b621d8f4b5059d41c05e55c34a11ba0839a6c2ccc0"
+    },
+    {
+      "run": "D_OSC_h_N401_dt0p125",
+      "status": "SETTLED",
+      "window_s": [
+        3343.604199469027,
+        3577.4545254044115
+      ],
+      "frames": 938,
+      "positions_per_segment": {
+        "pipe": 201,
+        "riser": 201
+      },
+      "isovoid_counts": {
+        "0.4": 628,
+        "0.5": 586,
+        "0.6": 0
+      },
+      "output_hashes": {
+        "D_OSC_h_N401_dt0p125_phase_fields.npz": "07213b76479c092ec5efe829e1a84b417915a48b18a30fc8c1b2274960455f4d",
+        "D_OSC_h_N401_dt0p125_isovoid_crossings.csv": "5ecc0cd9cd4838b43eefd294ad84927e6257eb9b18fe2da00409ed43962fb214"
+      },
+      "field_source_sha256": "f08d8d64bfe5b056696da8c9760f80af43171119d488e9306316391fa94ed37f"
+    }
+  ],
+  "comparisons": [
+    {
+      "reference": "D_OSC_h_N201_dt0p125",
+      "run": "D_OSC_h_N401_dt0p125",
+      "channels": {
+        "pipe": {
+          "p_Pa": {
+            "rms_absolute": 417.1740333795435,
+            "maximum_absolute": 669.700470743468,
+            "rms_relative_to_reference_space_phase_range": 0.014642608748611547,
+            "mean_difference": 103.4441258590001
+          },
+          "liquid_fraction": {
+            "rms_absolute": 7.2971731403875444e-06,
+            "maximum_absolute": 2.7663404036204486e-05,
+            "rms_relative_to_reference_space_phase_range": 0.019058003720358527,
+            "mean_difference": -2.5897283011365015e-06
+          },
+          "ul_m_s": {
+            "rms_absolute": 0.00011914239447110459,
+            "maximum_absolute": 0.0006505528394535887,
+            "rms_relative_to_reference_space_phase_range": 0.012327830951646319,
+            "mean_difference": 2.1448297858673496e-06
+          },
+          "ug_m_s": {
+            "rms_absolute": 0.017117266283492232,
+            "maximum_absolute": 0.06360049956297242,
+            "rms_relative_to_reference_space_phase_range": 0.010333576208479184,
+            "mean_difference": -0.0017330832248877064
+          },
+          "jl_m_s": {
+            "rms_absolute": 5.190587727550182e-05,
+            "maximum_absolute": 0.00026932481109687156,
+            "rms_relative_to_reference_space_phase_range": 0.01228395502529766,
+            "mean_difference": -2.1974061987468986e-06
+          },
+          "jg_m_s": {
+            "rms_absolute": 0.009437496619108447,
+            "maximum_absolute": 0.03509744842913287,
+            "rms_relative_to_reference_space_phase_range": 0.010335372630210905,
+            "mean_difference": -0.0009511807837217197
+          },
+          "mdot_l_local_kg_s": {
+            "rms_absolute": 0.00011218996010388898,
+            "maximum_absolute": 0.0005820945729955174,
+            "rms_relative_to_reference_space_phase_range": 0.012284594213006933,
+            "mean_difference": -4.695736863275234e-06
+          },
+          "mdot_g_local_kg_s": {
+            "rms_absolute": 4.51059332078667e-05,
+            "maximum_absolute": 0.00016456724042880969,
+            "rms_relative_to_reference_space_phase_range": 0.010313735769559216,
+            "mean_difference": -4.083254050078078e-06
+          }
+        },
+        "riser": {
+          "p_Pa": {
+            "rms_absolute": 305.93006712751765,
+            "maximum_absolute": 682.6998341380386,
+            "rms_relative_to_reference_space_phase_range": 0.004123315923579393,
+            "mean_difference": 33.49832774966163
+          },
+          "liquid_fraction": {
+            "rms_absolute": 0.004995947939751287,
+            "maximum_absolute": 0.008119870945399787,
+            "rms_relative_to_reference_space_phase_range": 0.013940010416485333,
+            "mean_difference": 0.000838259803233921
+          },
+          "ul_m_s": {
+            "rms_absolute": 0.013004995914149688,
+            "maximum_absolute": 0.043628915479954955,
+            "rms_relative_to_reference_space_phase_range": 0.010193834636177276,
+            "mean_difference": 0.0022753928350756165
+          },
+          "ug_m_s": {
+            "rms_absolute": 0.019494973979034574,
+            "maximum_absolute": 0.057490113445786584,
+            "rms_relative_to_reference_space_phase_range": 0.012572065509623628,
+            "mean_difference": 0.005135535211620516
+          },
+          "jl_m_s": {
+            "rms_absolute": 0.009031890885385538,
+            "maximum_absolute": 0.03520632942386448,
+            "rms_relative_to_reference_space_phase_range": 0.00959922399632383,
+            "mean_difference": 0.0021406328474852967
+          },
+          "jg_m_s": {
+            "rms_absolute": 0.014943994991232569,
+            "maximum_absolute": 0.03799179414475273,
+            "rms_relative_to_reference_space_phase_range": 0.015159922365830782,
+            "mean_difference": 0.0021868469421674587
+          },
+          "mdot_l_local_kg_s": {
+            "rms_absolute": 0.019525050519671544,
+            "maximum_absolute": 0.07610762400823079,
+            "rms_relative_to_reference_space_phase_range": 0.009599359112680391,
+            "mean_difference": 0.004627669038177329
+          },
+          "mdot_g_local_kg_s": {
+            "rms_absolute": 6.474825712925109e-05,
+            "maximum_absolute": 0.00016577888166978937,
+            "rms_relative_to_reference_space_phase_range": 0.014532024382482378,
+            "mean_difference": 8.601294158756094e-06
+          }
+        }
+      },
+      "geometric_isovoid": {
+        "pipe": {
+          "0.4": {
+            "matched_crossings": 0,
+            "topology_mismatch_phases": 0,
+            "no_crossing_in_either_phases": 256,
+            "rms_position_difference_m": null,
+            "maximum_position_difference_m": null,
+            "interpretation": "Ordered isovoid crossings of phase-mean fields; no material front identity"
+          },
+          "0.5": {
+            "matched_crossings": 0,
+            "topology_mismatch_phases": 0,
+            "no_crossing_in_either_phases": 256,
+            "rms_position_difference_m": null,
+            "maximum_position_difference_m": null,
+            "interpretation": "Ordered isovoid crossings of phase-mean fields; no material front identity"
+          },
+          "0.6": {
+            "matched_crossings": 0,
+            "topology_mismatch_phases": 0,
+            "no_crossing_in_either_phases": 256,
+            "rms_position_difference_m": null,
+            "maximum_position_difference_m": null,
+            "interpretation": "Ordered isovoid crossings of phase-mean fields; no material front identity"
+          }
+        },
+        "riser": {
+          "0.4": {
+            "matched_crossings": 172,
+            "topology_mismatch_phases": 0,
+            "no_crossing_in_either_phases": 84,
+            "rms_position_difference_m": 0.073537004808498,
+            "maximum_position_difference_m": 0.19693714817169905,
+            "interpretation": "Ordered isovoid crossings of phase-mean fields; no material front identity"
+          },
+          "0.5": {
+            "matched_crossings": 158,
+            "topology_mismatch_phases": 4,
+            "no_crossing_in_either_phases": 94,
+            "rms_position_difference_m": 0.26289374032481266,
+            "maximum_position_difference_m": 0.5498793295855435,
+            "interpretation": "Ordered isovoid crossings of phase-mean fields; no material front identity"
+          },
+          "0.6": {
+            "matched_crossings": 0,
+            "topology_mismatch_phases": 0,
+            "no_crossing_in_either_phases": 256,
+            "rms_position_difference_m": null,
+            "maximum_position_difference_m": null,
+            "interpretation": "Ordered isovoid crossings of phase-mean fields; no material front identity"
+          }
+        }
+      }
+    }
+  ]
+}

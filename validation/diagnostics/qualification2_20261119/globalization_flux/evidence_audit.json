@@ -46,12 +46,12 @@
   },
   "local_manifest_hash_checks": 68,
   "file_count_excluding_this_audit": 99,
-  "total_bytes_excluding_this_audit": 1314995,
+  "total_bytes_excluding_this_audit": 1315730,
   "files_sha256": {
     "ACTIVE_SET_MINIMAX.md": "1826fa8322c9488813b7f6dfda9f5ed12a48ec75a5c932127818b0e5110e001b",
     "D_SS1_active_report.json": "9c661e8765caf4f5c7f1182dcb5225162274cc2eafec5a4b63a410cffedab066",
     "D_SS3_active_report.json": "bffe0dc48476ff83be45c52b340c72d7404b72b48337e36189ab1679a34627fd",
-    "README.md": "3b86604400e5aa8b441a7ad5a5127fcd02c8f9f5ccfc24867bcfd96cb2940bfe",
+    "README.md": "4e2c49436a0fe648d8952525c2955e18280e2b0424b07ff82141695f4c4e26cc",
     "active_replay.py": "03b220ce484e02030ac60bd3d9c22003c3d38cd1b56c0c4f4d532c325a5ecf06",
     "build_api.py": "06ac216134092c0776696f19af0eda1fc2a8f6c34bfc284739066ff58fbcf3a4",
     "build_manifest.json": "cb35239f2a9f98035b7491cc7a1c3e05c9520ff272a01425063d1fff049c6604",
@@ -147,5 +147,18 @@
     "replay_active_fortran.f90": "217583ecedbb80afac10690a92415045b33878b851808d5ae9af6ef0145a4c84",
     "run_fortran_replay.py": "74981a83c8cc9143b2e0c27c0ca76c80709cf5cc1a01f4bb8c594eb2719641e6",
     "rusanov_interface.json": "63aa424f222d5cfaef918e7fea4abed3f498067616da0ecad788f9d81075e837"
+  },
+  "reference_revision": {
+    "file": "README.md",
+    "previous_sha256": "3b86604400e5aa8b441a7ad5a5127fcd02c8f9f5ccfc24867bcfd96cb2940bfe",
+    "current_sha256": "4e2c49436a0fe648d8952525c2955e18280e2b0424b07ff82141695f4c4e26cc",
+    "change": "HLL1983 exact equation/page attribution removed because visual verification of the full PDF is not documented; DOI and article page range retained. Diagnostic conservative formulas explicitly presented as own derivation; no production-flow promotion.",
+    "evidence_available": "Indexed full extracted text; direct PDF returned404 and visual screenshot returned cache miss.",
+    "data_and_operator_unchanged": true,
+    "historical_zip_manifests_unchanged": true,
+    "old_hash_references_before_update": [
+      "validation/diagnostics/qualification2_20261119/globalization_flux/evidence_audit.json"
+    ],
+    "other_current_package_index_references_found": []
   }
 }
