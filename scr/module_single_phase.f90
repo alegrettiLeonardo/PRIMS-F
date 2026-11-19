@@ -66,6 +66,7 @@ contains
     phase=0
     if(trim(cfg%single_phase_mode)/='REDUCED')return
     lo=first_physical_cell(cfg);hi=last_physical_cell(cfg)
+    if(.not.all(ieee_is_finite(u(lo:hi,:))))return
     if(all(u(lo:hi,2)==0._wp).and.all(u(lo:hi,1)>0._wp))phase=1
     if(all(u(lo:hi,1)==0._wp).and.all(u(lo:hi,2)>0._wp))phase=2
   end function
@@ -133,7 +134,8 @@ contains
     integer,intent(out)::status
     real(wp)::p,pip
     status=PHASE_INVALID;f=ieee_value(0._wp,ieee_quiet_nan)
-    if(w(1)<=0.or..not.all(ieee_is_finite(w)))return
+    if(.not.all(ieee_is_finite(w)))return
+    if(w(1)<=0)return
     p=pressure(w(1),cfg,phase)
     if(p<=0)return
     pip=cfg%omega_P/(cfg%omega_rho*cfg%omega_u**2)
@@ -188,6 +190,8 @@ contains
     f=ieee_value(0._wp,ieee_quiet_nan)
     if(present(ub))ub=f
     i=last_physical_cell(cfg);if(inlet)i=first_physical_cell(cfg)
+    status=PHASE_INVALID
+    if(.not.all(ieee_is_finite(u(i,:))))return
     call coefficients(cfg,phase,c2,p0,rho0,mu);c=sqrt(c2)
     call hydro_factors(cfg,phase,i,fl,fr,status);if(status/=0)return
     rho=u(i,phase)*fr;if(inlet)rho=u(i,phase)*fl
@@ -293,6 +297,12 @@ contains
     integer::lo,hi,i,j,k,l,t,cp,cm,idx(2)
     lo=first_physical_cell(cfg);hi=last_physical_cell(cfg);idx=[phase,3]
     a=0;b=0;c=0;norm=huge(1._wp)
+    r=ieee_value(0._wp,ieee_quiet_nan);fin=r(:,1);fout=fin;base=fin(1)
+    status=PHASE_INVALID
+    if(.not.all(ieee_is_finite(u(lo:hi,:))).or..not.all(ieee_is_finite(old(lo:hi,:))))return
+    if(global_single_phase(old,cfg)/=phase)then
+      status=PHASE_TRANSITION_REQUIRED;return
+    endif
     call residual(u,r,fin,fout,base,status);if(status/=0)return
     norm=0
     do i=lo,hi

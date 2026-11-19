@@ -7,7 +7,7 @@ module module_simulate_pipe_riser
   use module_config, only: sim_config_t,first_physical_cell,last_physical_cell
   use module_find, only: compute_primitive_variables,pressure_fun_uj
   use module_closure_law, only: CdUd_bhagwat
-  use module_single_phase,only:global_single_phase,single_phase_assemble,single_phase_face,single_phase_boundary
+  use module_single_phase,only:global_single_phase,single_phase_assemble,single_phase_face,single_phase_boundary,PHASE_TRANSITION_REQUIRED,PHASE_INVALID
   use module_active_set, only: active_set_direction
   use module_flow_regime, only: burr15_result_t,burr15_stability,BURR15_NOT_EVALUATED
   use module_jacobian, only: DFduj
@@ -650,7 +650,23 @@ contains
     if(present(failure_stage))failure_stage='NONE'
     if(present(boundary_one_sided_count))boundary_one_sided_count=0
     if(present(base_mass_flux))base_mass_flux=ieee_value(0.0_wp,ieee_quiet_nan)
+    fin=ieee_value(0._wp,ieee_quiet_nan);fout=fin
     pure_phase=global_single_phase(U,this%cfg)
+    if(trim(this%cfg%single_phase_mode)=='REDUCED')then
+      if(.not.all(ieee_is_finite(U(lo:hi,:))) .or. .not.all(ieee_is_finite(Uold(lo:hi,:))))then
+        call failure(PHASE_INVALID,lo,'CELL');return
+      endif
+      if(any(U(lo:hi,:2)<0))then
+        call failure(PHASE_INVALID,lo,'CELL');return
+      endif
+      block
+        integer::accepted_phase
+        accepted_phase=global_single_phase(Uold,this%cfg)
+        if(pure_phase/=accepted_phase.and.(pure_phase>0.or.accepted_phase>0))then
+          call failure(PHASE_TRANSITION_REQUIRED,0,'PHASE_TRANSITION');return
+        endif
+      end block
+    endif
     if(pure_phase>0)then
       call single_phase_assemble(U,Uold,dt,this%cfg,pure_phase,R,A,B,C,norm,fin,fout,status,with_jac,pure_base)
       if(present(base_mass_flux))base_mass_flux=pure_base

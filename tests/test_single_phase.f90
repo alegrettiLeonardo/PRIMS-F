@@ -1,5 +1,6 @@
 program test_single_phase
  use mod_kinds,only:wp
+ use,intrinsic::ieee_arithmetic,only:ieee_value,ieee_quiet_nan
  use module_config,only:sim_config_t
  use module_single_phase
  implicit none
@@ -95,6 +96,13 @@ program test_single_phase
  u=0;u(:,1)=1+(cfg%nPs-1)/cfg%nCl**2;cfg%mug=.001_wp
  call single_phase_assemble(u,u,dt,cfg,1,r,a,b,c,norm,fi,fo,st,.false.,base)
  call check(st==PHASE_TRANSITION_REQUIRED,'new phase injection requires transition model, no velocity invented')
+ cfg%mug=0;old=u;old(:,1)=.9_wp*u(:,1);old(:,2)=.1_wp*cfg%nPs/cfg%nCg**2;old(:,3)=.1_wp
+ call single_phase_assemble(u,old,dt,cfg,1,r,a,b,c,norm,fi,fo,st,.false.,base)
+ call check(st==PHASE_TRANSITION_REQUIRED,'reduced operator cannot silently replace a mixed accepted inventory')
+ old=u;u(lo,1)=ieee_value(0._wp,ieee_quiet_nan)
+ call check(global_single_phase(u,cfg)==0,'nonfinite state never selects a pure physical model')
+ call single_phase_assemble(u,old,dt,cfg,1,r,a,b,c,norm,fi,fo,st,.false.,base)
+ call check(st==PHASE_INVALID,'nonfinite reduced state returns explicit status with traps enabled')
  write(*,'(a,i0,a)')'PASS single-phase: ',checks,' assertions'
 contains
  subroutine check(ok,label)
