@@ -1,0 +1,64 @@
+{
+  "schema": "PRIMS-F.static_bc_repository_evidence.v1",
+  "source_freeze": "69813ee70551fa4a3f075919aeafc45de9693f11",
+  "binary_sha256": "7442291fd6cdc311627e79500dc5a4804813b42c7bf4daecf88b4b8b2322288a",
+  "external_root": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static",
+  "artifacts": {
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/plan.json": "1bf8ef2788972e85e67fe49c67b7cb072ca64e6cb77da39ef8213ec6b84ea3a3",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/seal.json": "57b8cdfe451cf4eb73ed537ef360328f2d5781248185f018578015e4261d61eb",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/execution_index.json": "5ec176c08fa4e7b40f40ea46f8cdf4f1d248e5d0c8d3b482dcd7137e270f522c",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/analysis/aggregate.json": "c8ecd5ad8e81390ee5542dbe3eeaaa939bbbd62328ee6f8c431288b6eeec62c4",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/boundary_audit_index.json": "9df266585a50d46b7f462fc487f0aff3234ede6b50c55cf01d74d957291878f5",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/cycle_analysis_index.json": "f0351cdb787c0ab0efe8e2b6b6bb0ebf9cbf0891b67d897c70f01846e539e47e",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/metrics_3600.json": "aa0941ef864d3e990d882e15699505c57a29d9f4d4baebefaa6c242fca8cd45b"
+  },
+  "cases": [
+    {
+      "name": "D_OSC_bc_Ps_minus",
+      "deck_sha256": "b2dd6db9501a7292802bf2007bce402cc11e2147f3fee012f99f5363bdbb0b35",
+      "manifest_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_Ps_minus/manifest.json",
+      "manifest_sha256": "4dbc647f555de9009b732beb3d116fe782cd51a1793553fc80f8ecf1fdc68775"
+    },
+    {
+      "name": "D_OSC_bc_Ps_plus",
+      "deck_sha256": "04e172a162e1cf9474e7057317baf171704b74ec15f6d9ad7ba652e479351449",
+      "manifest_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_Ps_plus/manifest.json",
+      "manifest_sha256": "3cead550458d898ecd1ced63aabf5ff700e603a155d2863a8cdaa3aa4ba253da"
+    },
+    {
+      "name": "D_OSC_bc_jg_minus",
+      "deck_sha256": "865c37a7c5a1995b2663d0dd2aa096b6b9ea6ccfae9387d4698b73cc3c500605",
+      "manifest_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_jg_minus/manifest.json",
+      "manifest_sha256": "d35a4e23572ab5121933a86a06bc4f6c2b97d011190de2bbab0523d75e7ac165"
+    },
+    {
+      "name": "D_OSC_bc_jg_plus",
+      "deck_sha256": "3bb63f9b74845c186c7da797b28108ee27776648366d7a402dfb68edc53f1072",
+      "manifest_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_jg_plus/manifest.json",
+      "manifest_sha256": "395ba8c93f36c5c3ef8d6bf60216e09ebc365df67e6d51378a7dcc2ade96ea3c"
+    },
+    {
+      "name": "D_OSC_bc_jl_minus",
+      "deck_sha256": "e27400224978204fb013452248b1059b723e6cd938c85d820fefdda5f3d3ffb2",
+      "manifest_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_jl_minus/manifest.json",
+      "manifest_sha256": "1166d676e4c3559ce81816070349a69058181ba201c46f575231b8de63cd018d"
+    },
+    {
+      "name": "D_OSC_bc_jl_plus",
+      "deck_sha256": "f50023e1d65eef80a3f1cc9da81171085fdace9eebee127a5c92015b349167c7",
+      "manifest_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_jl_plus/manifest.json",
+      "manifest_sha256": "65a74c442dab303dfc3782c07507a1cdaf74c8a3327d93cd6094c3546db50b1c"
+    }
+  ],
+  "analysis_tools": {
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis_tools/manifest.json": "3f393252045ba76c43a6dd16a6a0f630ebdc62f0370b2562496e98c149176f2f",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/phase_analysis_tools/manifest.json": "9e0a78903d2c6cb0523d35a89096601862144aa01072b2ae35b81ecdd8b2a5e9",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/boundary_audit_tools/manifest.json": "c6bb89b489d56908fd545b13e3daee3c56967cd747eacf3dd1df76926eb6f3ca",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/cycle_analysis_tools/manifest.json": "1348bdaa5a76826f83a4cb4aa5db6851d610589e3ff7863df24d49246f60fe38"
+  },
+  "limits": [
+    "Experimental period/flow classification is not established.",
+    "Four variants satisfy the numerical cycle comparison criteria; Ps+ is provisional and jg+ has no resolved cycles.",
+    "The separate 7200s cohort will preserve this 3600s evidence."
+  ]
+}

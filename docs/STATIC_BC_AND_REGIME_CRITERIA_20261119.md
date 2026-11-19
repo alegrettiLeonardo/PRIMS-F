@@ -33,6 +33,18 @@ e Tstandard=293,15 K. Variar Ps não muda mug porque a base do jg é padrão.
 Alterar jg/jl também altera apenas seu override correspondente; não se
 mantém um fluxo de massa antigo incompatível com a vazão pretendida.
 
+A conversão STANDARD da alimentação e a EOS local são operações distintas.
+No freeze 69813ee, main.f90/315 usa a densidade ideal de referência, enquanto
+module_find.f90/121 usa rho_g=p/Cg². O [cálculo independente Decimal60](../validation/diagnostics/static_bc_primary_20261119/standard_vs_barotropic.json)
+confirma rho_std_ideal=1,20403094823 kg/m³ e mug=1,39667589995 kg/m²/s.
+A EOS BAROTROPIC com Cg=343 m/s daria rho_g=0,861035792909 kg/m³ em Pstd;
+a razão de densidades é 0,715127625394. Portanto a mesma massa corresponde
+a jg_model(Pstd)=1,62208808443 m/s (razão 1,39835179692), embora a prescrição
+experimental STANDARD seja 1,16 m/s. Isso limita a equivalência dos observáveis
+com a fonte ideal e não autoriza reescalar a alimentação. Os seis casos e as
+extensões preservam EOS e massa prescrita. ISOTHERMAL já é uma opção do
+programa, mas não participa deste freeze/refinamento.
+
 [Gerador](../scripts/prepare_static_bc_sensitivity.py) e
 [quatro testes](../tests/test_static_bc_sensitivity.py) executados: **PASS**.
 O gerador confere hashes, controles, metadados efetivos e conjunto exato de
@@ -48,8 +60,39 @@ aceitos P2, para seis combinações fase/trecho, sem o piso absoluto legado do
 analisador de ciclos. O resumo distingue término, disponibilidade de dez
 intervalos e acomodação. Resultados não acomodados permanecem identificados;
 eventual extensão deve mudar somente a duração em uma nova coorte, sem
-sobrescrever 3600 s. Ausência de ciclos não prova estabilidade física e não
-autoriza ajustar parâmetros para produzir oscilação.
+sobrescrever 3600 s. A nova coorte de 7200 s foi autorizada com até dois
+workers externos, um thread por solver e teto global de quatro. Os seis
+casos básicos permaneceram sequenciais; max_workers=1 do deck e os demais
+controles numéricos continuam idênticos. O novo plano declarou o teto antes
+da selagem. Ausência de ciclos não prova estabilidade física e não autoriza
+ajustar parâmetros para produzir oscilação.
+
+Os [seis resultados básicos de 3600 s](../validation/diagnostics/static_bc_3600_20261119/README.md)
+foram concluídos e auditados. O pacote conserva o resultado provisório Ps+
+e a ausência de ciclos resolvidos jg+, além das quatro comparações periódicas
+que satisfizeram os critérios numéricos. As extensões de 7200 s têm plano e
+selagem separados; o pacote de 3600 s não será substituído.
+
+### Compatibilidade do observável alpha_p e da pressão
+
+Baliño2010/p.652 chama alpha_p exp de fração de vazio experimental no
+oleoduto e informa médias, salvo entradas marcadas Max. O texto não define
+janela nem ponderação espacial/volumétrica. O densitômetro gama é descrito
+na base do riser; a Fig.9 mostra G1 no trecho final do oleoduto junto a P4,
+antes da curva da base, sem coordenada métrica ou extensão do feixe.
+A associação de G1 à coluna alpha_p é uma inferência, não um mapeamento
+instrumental explicitamente fornecido. Na p.655, alpha_p sim é identificado
+como o valor do estado estacionário; a p.645 assume alpha_p constante no
+transiente. Assim, alpha_p exp=0,75 do caso13 não valida diretamente uma
+média espaço-tempo de todo o oleoduto no modelo distribuído. Pressão de base,
+fração local e médias espaciais devem permanecer observáveis distintos.
+
+A Fig.18 identifica pressão na base do riser, mas não associa explicitamente
+essa série a P4 ou P5. A Fig.9 mostra P4 no trecho final do oleoduto e P5 na
+curva/base do riser, sem fornecer coordenada métrica ou extensão da tomada.
+O traço de pressão na junção é um proxy numérico fixo; a pressão da primeira
+célula é outro observável. Nenhum dos dois recebe equivalência instrumental
+exata apenas a partir desse desenho.
 
 ## P2: diferença de densidade e perímetro na fonte primária
 

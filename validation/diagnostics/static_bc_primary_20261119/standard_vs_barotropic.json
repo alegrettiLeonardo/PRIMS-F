@@ -1,0 +1,37 @@
+{
+  "schema": "PRIMS-F.standard_input_barotropic_observation.v1",
+  "method": "Independent Python Decimal, 60 digits; no Fortran call",
+  "source_freeze": "69813ee70551fa4a3f075919aeafc45de9693f11",
+  "inputs": {
+    "P_standard_Pa": "101300",
+    "R_g_J_kg_K": "287",
+    "T_standard_K": "293.15",
+    "Cg_fixed_m_s": "343",
+    "jg_standard_m_s": "1.16"
+  },
+  "equations": {
+    "rho_standard_ideal": "P_standard/(R_g*T_standard)",
+    "mug": "rho_standard_ideal*jg_standard",
+    "rho_standard_barotropic": "P_standard/Cg_fixed**2",
+    "density_ratio": "rho_standard_barotropic/rho_standard_ideal",
+    "jg_model_at_Pstandard": "mug/rho_standard_barotropic"
+  },
+  "decimal_results": {
+    "rho_standard_ideal_kg_m3": "1.20403094823082925402972993692803329924091375608329802261985",
+    "mug_kg_m2_s": "1.39667589994776193467448672683651862711945995705662570623903",
+    "rho_standard_barotropic_kg_m3": "0.861035792909416994619588776785183044479766083859616316330781",
+    "density_ratio": "0.715127625394180996013565776164693282560837746177188076396743",
+    "jg_model_at_Pstandard_m_s": "1.62208808443192738255201074951223672223077339079718615709097",
+    "superficial_velocity_ratio": "1.39835179692407532978621616337261786399204602654929841128532"
+  },
+  "source_sha256": {
+    "scr/main.f90": "4365b0f395845e01d0ee3bc4826b4a1f0c1f9000aed9e0b290aa501de4027a29",
+    "scr/module_find.f90": "4976a0fae46a07d25f1e06a7e2df547ae58f79d5e9a750b28ab61253a77541e9"
+  },
+  "interpretation": [
+    "The standard-flow prescription fixes injected mass with ideal reference density.",
+    "BAROTROPIC gas density differs; the same mass flux gives a different superficial velocity at the same pressure.",
+    "This is not a reason to rescale the prescribed mass input or the experimental STANDARD flow.",
+    "The ISOTHERMAL option is outside this frozen comparison; no physical parameter was changed."
+  ]
+}

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Index terminal BC sensitivities, hypotheses and common-window metrics."""
+"""Index terminal BC sensitivities and metrics of each final ten-cycle window."""
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 
 
@@ -26,9 +27,42 @@ def channel_metrics(rows):
                 minimum=min(r['minimum'] for r in rows),maximum=max(r['maximum'] for r in rows))
 
 
+def validate_terminal_identity(manifest, cross_document):
+    if cross_document.get('provisional_running_snapshot', False):
+        raise ValueError('Provisional running snapshots cannot qualify terminal evidence')
+    if manifest['status'] not in ('COMPLETED', 'FAILED'):
+        raise ValueError('A terminal manifest is required')
+    state = manifest.get('run_status', {})
+    normal = (manifest['status'] == 'COMPLETED' and manifest.get('returncode') == 0
+              and state.get('status') == 0 and state.get('termination_reason') == 'COMPLETED'
+              and math.isfinite(state.get('reached_time_s', float('nan')))
+              and math.isfinite(state.get('requested_time_s', float('nan')))
+              and math.isclose(state.get('reached_time_s', -1),
+                               state.get('requested_time_s', float('inf')), rel_tol=0., abs_tol=1e-6))
+    if (manifest['status'] == 'COMPLETED') != normal:
+        raise ValueError('Manifest completion fields disagree')
+    runs = cross_document.get('runs', [])
+    if len(runs) != 1 or runs[0].get('manifest') != manifest or runs[0].get('completed') != normal:
+        raise ValueError('Cycle summary terminal identity differs')
+
+
+def cycle_metrics_qualified(result):
+    physical = result['phase_region_balances']
+    cycle = result.get('cycle_balance_audit', {})
+    return bool(result['completed'] and result['cycles_available'] and result['accommodated']
+                and result['arithmetic_contract_passes'] and len(physical) == 6
+                and all(v['passes_inventory_1e6'] is True and v['passes_processed_1e6'] is True
+                        for v in physical.values())
+                and cycle.get('intervals') == 10 and len(cycle.get('phase_regions', {})) == 6
+                and all(v['passes_inventory_1e6'] is True and v['passes_processed_1e6'] is True
+                        for v in cycle['phase_regions'].values()))
+
+
 def summarize(run, analysis, boundary=None):
     manifest_path=run/'manifest.json';manifest=read(manifest_path)
-    cross_path=analysis/'cross_summary.json';cross=read(cross_path)['runs'][0]
+    cross_path=analysis/'cross_summary.json';cross_document=read(cross_path)
+    validate_terminal_identity(manifest,cross_document)
+    cross=cross_document['runs'][0]
     cons_path=analysis/'accepted_conservation.json';cons=read(cons_path)
     if cross['manifest']!=manifest:raise ValueError('Cycle summary belongs to a different run manifest')
     if cons['artifacts']['manifest.json']['sha256']!=sha(manifest_path):
@@ -42,7 +76,8 @@ def summarize(run, analysis, boundary=None):
                 analysis_available=cross.get('analysis_available',False),
                 cycles_available=cross.get('cycles_available',False),
                 accommodated=cross.get('accommodated',False),
-                cycle_edges_s=cross.get('cycle_edges_s',[]),pressure_column=cross.get('pressure_column'),
+                cycle_edges_s=cross.get('cycle_edges_s',[]),common_window=cross.get('common_window'),
+                pressure_column=cross.get('pressure_column'),
                 period_mean_s=cross.get('period_mean_s'),period_cv=cross.get('period_cv'),
                 cycle_channels=channels,
                 arithmetic_contract_passes=cons['ledger']['arithmetic_contract_passes'],
@@ -77,6 +112,7 @@ def summarize(run, analysis, boundary=None):
              negative_ul_samples=sum(v['negative_ul_samples'] for v in buckets.values()),
              negative_ug_samples=sum(v['negative_ug_samples'] for v in buckets.values()))
         result['provenance'][str(boundary)]=sha(boundary)
+    result['cycle_metrics_qualified']=cycle_metrics_qualified(result)
     return result
 
 
@@ -97,6 +133,9 @@ def main():
         if m['status']=='RUNNING':pending.append(job['name']);continue
         if m['plan_sha256']!=plan_hash:raise ValueError('Mixed campaigns')
         r=summarize(run,analysis,boundary);r.update(axis=job['axis'],static_offset=job['static_offset'],controls=job['parameters'])
+        r['comparison_qualified']=bool(nominal['cycle_metrics_qualified'] and r['cycle_metrics_qualified']
+              and all(r['boundary_audit'][key] for key in ['four_buckets_complete','all_status_zero','expected_incoming_count']))
+        r['comparison_status']='QUALIFIED_NUMERICAL_SENSITIVITY' if r['comparison_qualified'] else 'EXPLORATORY_PROVISIONAL'
         r['relative_difference_from_nominal']={}
         for key,left,right in [('period_mean_s',nominal['period_mean_s'],r['period_mean_s'])]:
             r['relative_difference_from_nominal'][key]=(right-left)/abs(left) if left and right is not None else None
@@ -109,6 +148,8 @@ def main():
         rows.append(r)
     if pending and not a.allow_partial:raise ValueError('Terminal analyses pending: '+', '.join(pending))
     result=dict(schema='PRIMS-F.static_bc_metrics.v1',complete_campaign=not pending,
+                all_simulations_completed=not pending and all(r['completed'] for r in rows),
+                all_comparisons_qualified=not pending and all(r['comparison_qualified'] for r in rows),
                 pending_runs=pending,plan_sha256=plan_hash,seal_sha256=sha(base/'seal.json'),
                 summarizer_sha256=sha(__file__),nominal=nominal,runs=rows,
                 hypotheses=['Offsets are static, one axis at a time; published signal deviations have no stated statistical definition.',
