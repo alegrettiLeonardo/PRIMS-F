@@ -223,6 +223,12 @@ contains
       id_right=cell_closure(this,thetaR,left_cell+1)
       if(thetaL==0.0_wp.and.thetaR>=0.0_wp)match=left_cell==this%cfg%num_dummy_cells+this%cfg%N_pipe
     endif
+    ! Both traces share this cfg: area, EOS, material properties and wall law
+    ! are global scalars, not section-specific fields. With identical closure
+    ! and inclination the physical face operator is identical. Cell widths
+    ! belong to residual integration and must not create a point junction.
+    ! Exact equality is intentional: a geometric bend is never rounded away.
+    match=match.and.(id_left/=id_right.or.thetaL/=thetaR)
     match=match.and.(trim(this%cfg%junction_model)=='MATCHED'.or.blocking_mode)
     if(present(blocking_active))blocking_active=.false.
     if(present(junction_trace))junction_trace=ieee_value(0.0_wp,ieee_quiet_nan)
