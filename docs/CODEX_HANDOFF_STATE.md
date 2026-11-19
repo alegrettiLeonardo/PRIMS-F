@@ -1,3 +1,36 @@
+## Atualização: auditoria P0 dos contornos, 19/11/2026
+
+Branch local `audit/boundary-contract-20261119`, base `2c3e3af`; worktree
+`/home/leonardoab/Documentos/PRIMS-F-boundary-audit-20261119`.
+Escopo vigente: inspeção/instrumentação/testes/protótipos; **não alterar solver,
+física ou defaults sem aprovação**. Nenhum push/merge nesta etapa; main intacta.
+
+Leia primeiro [BOUNDARY_CONTRACT_AUDIT_20261119.md](BOUNDARY_CONTRACT_AUDIT_20261119.md)
+e seus detalhes. Produção e Makefile não mudaram; binário SHA256
+02ce51462ec3c954cec9364b17444b7279be72ec150f87e307f1b5fc8dd0a4c3.
+Protocolo:08cd4a5; instrumentos:4ffe7b4; controles/manifestos:957eaa4.
+
+Demonstrados: massa líquida fixa difere do contrato Ql com EOS compressível;
+controle hidrostático não preservado pela pressão central usada na face;
+MATCHED horizontal desnecessário quebra invariância da partição no momento.
+Protótipos volume/partition corrigem apenas seus controles; permanecem externos.
+Jacobiano completo de contorno passou; contornos externos são admissíveis nas
+propostas dos replays que falham em FACE53(SS1) ou CELL69(SS3). Não inferir causa
+histórica/global dos contornos a partir dessa localização.
+
+Dados: `/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119`.
+Onze execuções com manifestos; janelas OSC120s v1/v2, checkpoints atômicos,
+983 estados exatos de extremidade por variante; seis balanços<=1,28e-8.
+Semi-excursão muda−0,01059% no protótipo Q; só quatro intervalos entre picos.
+Não atribuir essa evidência a dez ciclos, convergência ou validação física.
+SS1/SS3 continuam BLOCKED; OSC não ganhou qualificação experimental.
+Reversão de reservatório, NSCBC/Riemann não linear com fontes e evolução
+exatamente monofásica continuam abertos. Não extrapolar Chexal à catenária.
+
+Relatórios/campanhas anteriores abaixo são preservados com seus próprios SHAs.
+
+---
+
 # Estado para continuação no Codex
 
 

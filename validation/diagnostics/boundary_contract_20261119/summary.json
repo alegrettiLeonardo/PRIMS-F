@@ -1,0 +1,563 @@
+{
+  "operator_base": "2c3e3af8c99d490ffc1dcbf9357da6c0d59d633d",
+  "scope": "isolated boundary audit; production unchanged",
+  "run_manifest_index": [
+    {
+      "run": "windows/plain",
+      "manifest_sha256": "a207943b54b56053db210dc566c0dc76cb1c4c3a696dcf79cde53d3cf82000f0",
+      "status": "0",
+      "reached_time_s": "1.2000000000000000E+02"
+    },
+    {
+      "run": "windows/standard",
+      "manifest_sha256": "c730dcaec8731964bfd60b82a0cbe13175ed0e2708f0fd209c8bf6cadb35d851",
+      "status": "0",
+      "reached_time_s": "1.2000000000000000E+02"
+    },
+    {
+      "run": "windows/volume",
+      "manifest_sha256": "f1b7e74ae5084bfc4342b70cad8e1713e04316f5ea9ab880aedc341787005bc6",
+      "status": "0",
+      "reached_time_s": "1.2000000000000000E+02"
+    },
+    {
+      "run": "windows_v2/standard",
+      "manifest_sha256": "4b598234c531602cfade4a172d319d13f6bd37e95f968ffd947e09c0fc3f751c",
+      "status": "0",
+      "reached_time_s": "1.2000000000000000E+02"
+    },
+    {
+      "run": "windows_v2/volume",
+      "manifest_sha256": "111430c1d515515b46eaf559382595a7f74541996084154bfd1a165743a46585",
+      "status": "0",
+      "reached_time_s": "1.2000000000000000E+02"
+    },
+    {
+      "run": "controls/draining_standard",
+      "manifest_sha256": "90ffeba1abe0d6a1b57bd996f6a476a265ea89def573db447966eb2255773e8f",
+      "status": "0",
+      "reached_time_s": "1.9999999999999998E+00"
+    },
+    {
+      "run": "controls/draining_volume",
+      "manifest_sha256": "70fcbfc91032a4f76bfba670e732a0d2147c0312bdb4db8355729097292306e9",
+      "status": "0",
+      "reached_time_s": "1.9999999999999998E+00"
+    },
+    {
+      "run": "controls/filling_standard",
+      "manifest_sha256": "e72064aa56639aa68f68bd8a260949f5079b8c0cf863dec8e9255878a2912d9a",
+      "status": "0",
+      "reached_time_s": "1.9999999999999998E+00"
+    },
+    {
+      "run": "controls/filling_volume",
+      "manifest_sha256": "a8a8b560313f783d8a99cf6481e2e30b5d43ae8ebe84ea69493929438721769b",
+      "status": "0",
+      "reached_time_s": "1.9999999999999998E+00"
+    },
+    {
+      "run": "controls/near_absent_gas_standard",
+      "manifest_sha256": "84e456197b8d628c5e8ba9c76aa2547814066316eaee5429709b6eb8bbe41f10",
+      "status": "0",
+      "reached_time_s": "1.9999999999999998E+00"
+    },
+    {
+      "run": "controls/near_absent_gas_volume",
+      "manifest_sha256": "6614d391c174e626a9fe516598669303c1b2bd47cf4955a7b80eb28815978a31",
+      "status": "0",
+      "reached_time_s": "1.9999999999999998E+00"
+    }
+  ],
+  "window_metrics": {
+    "windows/standard": {
+      "phase": {
+        "l": {
+          "max_instantaneous_abs_kg_s": 9.149759221121156e-05,
+          "max_instantaneous_relative": 7.737519887186812e-05,
+          "integrated_signed_error_kg": -0.010381450889597688,
+          "relative_to_prescribed_mass": -7.31595038312517e-05,
+          "relative_to_initial_inventory": -0.00014639471425181575,
+          "prescribed_mass_kg": 141.90160329057647,
+          "initial_inventory_kg": 70.91411013474433,
+          "inventory_change_kg": 2.465646655951872,
+          "balances": {
+            "global": {
+              "error_kg": -2.6432189770275727e-12,
+              "relative_M0": 3.727352669313873e-14,
+              "relative_processed": 9.395880391768934e-15,
+              "max_step_defect_kg": 1.2452538999951912e-13,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            },
+            "pipe": {
+              "error_kg": 1.2894929568574298e-09,
+              "relative_M0": 2.3150050693614436e-11,
+              "relative_processed": 4.544089838131975e-12,
+              "max_step_defect_kg": 3.820037173954752e-11,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            },
+            "riser": {
+              "error_kg": -1.292107754125027e-09,
+              "relative_M0": 8.493672290011605e-11,
+              "relative_processed": 4.5932136349789155e-12,
+              "max_step_defect_kg": 3.8229072685247445e-11,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            }
+          }
+        },
+        "g": {
+          "max_instantaneous_abs_kg_s": 0.0,
+          "max_instantaneous_relative": 0.0,
+          "integrated_signed_error_kg": 0.0,
+          "relative_to_prescribed_mass": 0.0,
+          "relative_to_initial_inventory": 0.0,
+          "prescribed_mass_kg": 0.3633681883634092,
+          "initial_inventory_kg": 0.17435302048142076,
+          "inventory_change_kg": 0.0007348282247305327,
+          "balances": {
+            "global": {
+              "error_kg": 3.15636405900932e-12,
+              "relative_M0": 1.810329439830763e-11,
+              "relative_processed": 4.347599623592933e-12,
+              "max_step_defect_kg": 4.2309417688096707e-14,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            },
+            "pipe": {
+              "error_kg": -2.9162050552145047e-10,
+              "relative_M0": 1.934432550342767e-09,
+              "relative_processed": 4.0421572998624283e-10,
+              "max_step_defect_kg": 6.983528447364329e-12,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            },
+            "riser": {
+              "error_kg": 2.9477681406930856e-10,
+              "relative_M0": 1.249025723884013e-08,
+              "relative_processed": 4.0900728824305803e-10,
+              "max_step_defect_kg": 6.962690271344538e-12,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            }
+          }
+        }
+      },
+      "pressure_max_abs_Pa": 1.3499201756417278e-10,
+      "flux_recompute_max_nd": 0.0,
+      "accepted_steps": 982,
+      "dt_min_used_s": 0.001,
+      "dt_max_used_s": 0.125,
+      "pressure_window": {
+        "definition": "diagnostic 120-s reconstructed window, no regime/convergence claim",
+        "mean_time_trapezoid_Pa": 266108.7431805591,
+        "semi_excursion_Pa": 9922.028645139551,
+        "peak_times_s": [
+          9.55685275983729,
+          32.68185275983726,
+          55.80685275983772,
+          78.93185275983858,
+          102.05685275983824
+        ],
+        "mean_peak_spacing_s": 23.125000000000234,
+        "complete_peak_intervals": 4
+      }
+    },
+    "windows/volume": {
+      "phase": {
+        "l": {
+          "max_instantaneous_abs_kg_s": 0.0,
+          "max_instantaneous_relative": 0.0,
+          "integrated_signed_error_kg": 0.0,
+          "relative_to_prescribed_mass": 0.0,
+          "relative_to_initial_inventory": 0.0,
+          "prescribed_mass_kg": 141.9016033433767,
+          "initial_inventory_kg": 70.91411013474433,
+          "inventory_change_kg": 2.4711309986965944,
+          "balances": {
+            "global": {
+              "error_kg": -3.268496584496461e-12,
+              "relative_M0": 4.609092010441886e-14,
+              "relative_processed": 1.1617930790517583e-14,
+              "max_step_defect_kg": 1.5290893551345164e-13,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            },
+            "pipe": {
+              "error_kg": 1.2753957889799494e-09,
+              "relative_M0": 2.2896966604039107e-11,
+              "relative_processed": 4.49413112587302e-12,
+              "max_step_defect_kg": 3.7987389872162075e-11,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            },
+            "riser": {
+              "error_kg": -1.2785790204361547e-09,
+              "relative_M0": 8.404741138499451e-11,
+              "relative_processed": 4.544923121636151e-12,
+              "max_step_defect_kg": 3.802176629097431e-11,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            }
+          }
+        },
+        "g": {
+          "max_instantaneous_abs_kg_s": 0.0,
+          "max_instantaneous_relative": 0.0,
+          "integrated_signed_error_kg": 0.0,
+          "relative_to_prescribed_mass": 0.0,
+          "relative_to_initial_inventory": 0.0,
+          "prescribed_mass_kg": 0.3633681883634092,
+          "initial_inventory_kg": 0.17435302048142076,
+          "inventory_change_kg": 0.000731182123358709,
+          "balances": {
+            "global": {
+              "error_kg": 3.154199124111301e-12,
+              "relative_M0": 1.8090877435916953e-11,
+              "relative_processed": 4.344595806673768e-12,
+              "max_step_defect_kg": 4.210996514594084e-14,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            },
+            "pipe": {
+              "error_kg": -2.9662816647402224e-10,
+              "relative_M0": 1.967650318518615e-09,
+              "relative_processed": 4.111571317686583e-10,
+              "max_step_defect_kg": 6.915236287242943e-12,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            },
+            "riser": {
+              "error_kg": 2.9978236559813354e-10,
+              "relative_M0": 1.2702352027959446e-08,
+              "relative_processed": 4.1595073940808655e-10,
+              "max_step_defect_kg": 6.894805689924843e-12,
+              "junction_max_abs_mismatch_kg_s": 0.0
+            }
+          }
+        }
+      },
+      "pressure_max_abs_Pa": 1.7998935675223038e-10,
+      "flux_recompute_max_nd": 0.0,
+      "accepted_steps": 982,
+      "dt_min_used_s": 0.001,
+      "dt_max_used_s": 0.125,
+      "pressure_window": {
+        "definition": "diagnostic 120-s reconstructed window, no regime/convergence claim",
+        "mean_time_trapezoid_Pa": 266109.2988008412,
+        "semi_excursion_Pa": 9920.97763266282,
+        "peak_times_s": [
+          9.55685275983729,
+          32.68185275983726,
+          55.80685275983772,
+          78.93185275983858,
+          102.05685275983824
+        ],
+        "mean_peak_spacing_s": 23.125000000000234,
+        "complete_peak_intervals": 4
+      }
+    }
+  },
+  "characteristic_ranks": {
+    "standard": {
+      "1_interior": {
+        "frames": 983,
+        "incoming_counts": [
+          2
+        ],
+        "legacy_ranks": [
+          2
+        ],
+        "physical_ranks": [
+          2
+        ],
+        "source_projection_max_relative": 2.7755575615628914e-17,
+        "min_eig_abs_m_s": 1.6412024575986435
+      },
+      "1_boundary": {
+        "frames": 983,
+        "incoming_counts": [
+          2
+        ],
+        "legacy_ranks": [
+          2
+        ],
+        "physical_ranks": [
+          2
+        ],
+        "source_projection_max_relative": 3.5561831257524545e-17,
+        "min_eig_abs_m_s": 1.6408341942378308
+      },
+      "2_interior": {
+        "frames": 983,
+        "incoming_counts": [
+          1
+        ],
+        "legacy_ranks": [
+          1
+        ],
+        "physical_ranks": [
+          1
+        ],
+        "source_projection_max_relative": 2.275198432110739e-16,
+        "min_eig_abs_m_s": 1.3094582952878664
+      },
+      "2_boundary": {
+        "frames": 983,
+        "incoming_counts": [
+          1
+        ],
+        "legacy_ranks": [
+          1
+        ],
+        "physical_ranks": [
+          1
+        ],
+        "source_projection_max_relative": 2.950561700699499e-16,
+        "min_eig_abs_m_s": 1.3095863437606878
+      }
+    },
+    "volume": {
+      "1_interior": {
+        "frames": 983,
+        "incoming_counts": [
+          2
+        ],
+        "legacy_ranks": [
+          2
+        ],
+        "physical_ranks": [
+          2
+        ],
+        "source_projection_max_relative": 2.7755575615628914e-17,
+        "min_eig_abs_m_s": 1.6412258235690784
+      },
+      "1_boundary": {
+        "frames": 983,
+        "incoming_counts": [
+          2
+        ],
+        "legacy_ranks": [
+          2
+        ],
+        "physical_ranks": [
+          2
+        ],
+        "source_projection_max_relative": 3.5453411040275995e-17,
+        "min_eig_abs_m_s": 1.6408577793048391
+      },
+      "2_interior": {
+        "frames": 983,
+        "incoming_counts": [
+          1
+        ],
+        "legacy_ranks": [
+          1
+        ],
+        "physical_ranks": [
+          1
+        ],
+        "source_projection_max_relative": 2.356466664854736e-16,
+        "min_eig_abs_m_s": 1.3095236046918963
+      },
+      "2_boundary": {
+        "frames": 983,
+        "incoming_counts": [
+          1
+        ],
+        "legacy_ranks": [
+          1
+        ],
+        "physical_ranks": [
+          1
+        ],
+        "source_projection_max_relative": 3.0634538824312835e-16,
+        "min_eig_abs_m_s": 1.3096516582423812
+      }
+    }
+  },
+  "regressions": [
+    {
+      "variant": "standard",
+      "mode": "contract",
+      "returncode": 1,
+      "output": "relative prescribed-Q error=  4.9813504760964911E-05\n",
+      "compile": [
+        "gfortran",
+        "-std=f2018",
+        "-O2",
+        "-I/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/standard",
+        "/mnt/c/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-boundary-audit-20261119/test_boundary_contract.f90",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/standard/audit.so",
+        "-Wl,-rpath,/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/standard",
+        "-o",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/standard/regression"
+      ]
+    },
+    {
+      "variant": "standard",
+      "mode": "partition",
+      "returncode": 1,
+      "output": "partition residual difference=  5.9709837005317290E-06\n",
+      "compile": [
+        "gfortran",
+        "-std=f2018",
+        "-O2",
+        "-I/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/standard",
+        "/mnt/c/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-boundary-audit-20261119/test_boundary_contract.f90",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/standard/audit.so",
+        "-Wl,-rpath,/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/standard",
+        "-o",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/standard/regression"
+      ]
+    },
+    {
+      "variant": "volume",
+      "mode": "contract",
+      "returncode": 0,
+      "output": "relative prescribed-Q error=  0.0000000000000000E+00\nPASS contract\n",
+      "compile": [
+        "gfortran",
+        "-std=f2018",
+        "-O2",
+        "-I/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/volume",
+        "/mnt/c/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-boundary-audit-20261119/test_boundary_contract.f90",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/volume/audit.so",
+        "-Wl,-rpath,/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/volume",
+        "-o",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/volume/regression"
+      ]
+    },
+    {
+      "variant": "volume",
+      "mode": "partition",
+      "returncode": 1,
+      "output": "partition residual difference=  5.9709837005317290E-06\n",
+      "compile": [
+        "gfortran",
+        "-std=f2018",
+        "-O2",
+        "-I/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/volume",
+        "/mnt/c/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-boundary-audit-20261119/test_boundary_contract.f90",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/volume/audit.so",
+        "-Wl,-rpath,/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/volume",
+        "-o",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/volume/regression"
+      ]
+    },
+    {
+      "variant": "partition",
+      "mode": "contract",
+      "returncode": 1,
+      "output": "relative prescribed-Q error=  4.9813504760964911E-05\n",
+      "compile": [
+        "gfortran",
+        "-std=f2018",
+        "-O2",
+        "-I/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/partition",
+        "/mnt/c/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-boundary-audit-20261119/test_boundary_contract.f90",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/partition/audit.so",
+        "-Wl,-rpath,/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/partition",
+        "-o",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/partition/regression"
+      ]
+    },
+    {
+      "variant": "partition",
+      "mode": "partition",
+      "returncode": 0,
+      "output": "partition residual difference=  0.0000000000000000E+00\nPASS partition\n",
+      "compile": [
+        "gfortran",
+        "-std=f2018",
+        "-O2",
+        "-I/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/partition",
+        "/mnt/c/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-boundary-audit-20261119/test_boundary_contract.f90",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/partition/audit.so",
+        "-Wl,-rpath,/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/partition",
+        "-o",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119/variants/partition/regression"
+      ]
+    }
+  ],
+  "hydrostatic": [
+    {
+      "ds_nd": 1.0,
+      "length_m": 12.546253993197219,
+      "status": 0,
+      "momentum_residual_nd": 0.03964777998475355,
+      "hydrostatic_lower_face_reference_Pa": 291843.4396922862,
+      "executed_lower_face_pressure_Pa": 252312.62065430402,
+      "exact_lower_face_midpoint_source_residual_nd": -4.196032410419548e-12,
+      "predefined_truncation_bound": 1.4196032410419547e-11,
+      "stationary_test_pass": false,
+      "phase_fluxes_in": [
+        0.0,
+        0.0
+      ],
+      "phase_fluxes_out": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "ds_nd": 0.5,
+      "length_m": 6.273126996598609,
+      "status": 0,
+      "momentum_residual_nd": 0.039647254648692176,
+      "hydrostatic_lower_face_reference_Pa": 252312.62065430402,
+      "executed_lower_face_pressure_Pa": 232547.47302996338,
+      "exact_lower_face_midpoint_source_residual_nd": -1.206298949618656e-12,
+      "predefined_truncation_bound": 1.1206298949618655e-11,
+      "stationary_test_pass": false,
+      "phase_fluxes_in": [
+        0.0,
+        0.0
+      ],
+      "phase_fluxes_out": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "ds_nd": 0.25,
+      "length_m": 3.1365634982993047,
+      "status": 0,
+      "momentum_residual_nd": 0.03964699198277777,
+      "hydrostatic_lower_face_reference_Pa": 232547.47302996338,
+      "executed_lower_face_pressure_Pa": 222664.96469078094,
+      "exact_lower_face_midpoint_source_residual_nd": -3.02098623894409e-13,
+      "predefined_truncation_bound": 1.0302098623894408e-11,
+      "stationary_test_pass": false,
+      "phase_fluxes_in": [
+        0.0,
+        0.0
+      ],
+      "phase_fluxes_out": [
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "hydrostatic_independent": [
+    {
+      "ds_nd": 1.0,
+      "independent_midpoint_hydrostatic_residual_nd": -4.1249137439081094e-12,
+      "independent_executed_residual_nd": 0.03964777998482466,
+      "difference_from_Fortran": 7.110978472724128e-14
+    },
+    {
+      "ds_nd": 0.5,
+      "independent_midpoint_hydrostatic_residual_nd": -1.0312106724086334e-12,
+      "independent_executed_residual_nd": 0.039647254648867265,
+      "difference_from_Fortran": 1.750891098772911e-13
+    },
+    {
+      "ds_nd": 0.25,
+      "independent_midpoint_hydrostatic_residual_nd": -2.5778490453376436e-13,
+      "independent_executed_residual_nd": 0.03964699198282209,
+      "difference_from_Fortran": 4.431871536425547e-14
+    }
+  ],
+  "status": {
+    "physical_inlet_Q": "FAIL standard / PASS isolated volume prototype",
+    "interface_partition": "FAIL standard / PASS isolated partition prototype",
+    "hydrostatic_stationarity": "FAIL",
+    "boundary_jacobian_tested_states": "PASS",
+    "SS1_regime": "BLOCKED",
+    "SS3_regime": "BLOCKED",
+    "OSC_experimental_qualification": "NOT_VERIFIED"
+  },
+  "results_root": "/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119"
+}
