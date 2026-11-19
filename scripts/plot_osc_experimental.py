@@ -132,7 +132,7 @@ def space_time(fields, pipe_length, target):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--run",type=Path,required=True,help="completed D_OSC experiment-compatible benchmark")
+    parser.add_argument("--run",type=Path,required=True,help="completed D_OSC reference calculation")
     parser.add_argument("--digitization",type=Path,required=True)
     parser.add_argument("--output",type=Path,required=True)
     args = parser.parse_args()
@@ -167,6 +167,8 @@ def main():
         "experiment_time_s": [float(te[0]),float(te[-1])],
         "digitized_pressure_sample_range_Pa": [float(pe.min()),float(pe.max())],
         "digitized_pressure_envelope_range_Pa": [float(lower.min()),float(upper.max())],
+        "digitized_300s_excursion_interval_Pa": [
+            max(0.0,float(lower.max()-upper.min())),float(upper.max()-lower.min())],
         "spectral_bins": frequency_peaks,
         "model_time_s": [float(time[use][0]),float(time[-1])],
         "model_junction_pressure": time_statistics(data,"p_junction_Pa",left,float(time[-1])),
