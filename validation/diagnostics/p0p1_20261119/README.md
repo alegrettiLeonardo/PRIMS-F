@@ -2,13 +2,13 @@
 
 Os programas deste diretório são ferramentas isoladas. Não ativam MUSCL/TVD,
 SDIRK2, Rusanov ou outro fechamento no transiente padrão. As evidências estão
-identificadas pelos operadores `1365094`, `18aa7f7` e `994736f`.
+identificadas pelos operadores `1365094`, `18aa7f7`, `994736f`, `71a0693` e `1603419`.
 O relatório de decisão é [QUALIFICATION_P0P1](../../../docs/QUALIFICATION_P0P1.md).
 
 ## Compilar e reproduzir
 
 GNU Fortran 13.3.0; Fortran 2018; release `-O2`; BLAS/LAPACK 3.12.0.
-Não reutilizar objetos de outro operador. Os dois manifestos `frozen_*_BUILD.json`
+Não reutilizar objetos de outro operador. Os manifestos `frozen_*_BUILD.json`
 registram hashes dos fontes/binários; o primeiro também registra o Makefile.
 Executáveis e PDFs ficam fora do Git. Use diretórios de saída novos.
 
@@ -110,3 +110,59 @@ temporais independentes; a banda é incerteza gráfica, não intervalo estatíst
 Os limiares de frentes são cruzamentos geométricos de alfa, testados pelas
 regressões existentes; não são prova automática de interface material,
 penetração, blowdown, SS1/SS3/OSC ou severe slugging validado.
+
+O parâmetro `initial_phase` foi acrescentado em71a0693: AUTO mantém o
+caminho histórico, LIQUID/GAS declaram o inventário puro para a ODE de IC.
+É separado de `outlet_reservoir_phase`, que informa a composição externa.
+`CONTROL_METRICS_994736f.json` registra o estudo novo de tolerância e os
+controles2400 s para cada EOS e base de alimentação. `PURE_CLI_71a0693.json`
+preserva a qualificação da nova inicialização pelo programa principal.
+
+Também é possível reproduzir os refinamentos sem os campos privados:
+`run_restart_refinement.py --initial-u common_initial_U.txt --output NOVA`.
+Sem argumento de IC, usa o common_initial_U.txt ao lado do script. Para a
+reprodução do operador histórico18aa7f7, crie worktree destacada nesse SHA,
+copie para ela apenas estes diagnósticos e compile novamente os módulos desse
+operador; não ligue objetos1603419 com um manifesto18aa7f7.
+
+`compose_accepted_history.py --segments LISTA.json --output NOVA` gera apenas
+um conjunto de **análise**, sem run_status fictício. Cada item informa pasta,
+offset_s e, se houve timeout, through_step definido pelo checkpoint. Verifica
+U completo idêntico no reinício e reintegra os mesmos fluxos/pesos BE com soma
+compensada independente; não altera inventários para fechar o balanço.
+Os casos N101 e N201 foram testados assim até900 s, com auditoria aritmética
+completa. Caudas dos arquivos brutos após o checkpoint ficam preservadas,
+mas não são contadas duas vezes. Custo desperdiçado é reportado separadamente.
+
+O driver `continue_accepted.f90` usa os mesmos parâmetros de
+`restart_refinement.f90` e aceita um sexto argumento opcional: o **próximo
+dt físico** exportado no checkpoint. Compilação idêntica à do driver acima.
+Não adivinhar esse valor a partir de dt_max. A reconstrução dos objetos18aa7f7
+em outra worktree foi conferida por SHA256: todos coincidiram bit a bit.
+Em N201, preservar0,125 s ou reiniciar0,001 s muda A em0,00761% na janela
+comparada; a análise principal usa o reinício que preserva o controlador.
+
+```sh
+# U_EXATO vem das linhas conservativas do checkpoint, sem arredondamento
+/tmp/primsf_continue NOVA U_EXATO N DT_MAX DURACAO DT_SEGUINTE
+python3 validation/diagnostics/p0p1_20261119/analyze_refinement.py \
+  --runs HISTORIAS_DE_ANALISE --output ANALISE_NOVA
+python3 validation/diagnostics/p0p1_20261119/analyze_spatial.py \
+  --summary ANALISE_NOVA/summary.json --output CAMPOS_NOVOS
+python3 validation/diagnostics/p0p1_20261119/collect_run_index.py \
+  --results RESULTADOS --output INDICE_NOVO.json
+```
+
+`step_metadata.py` inclui todos os passos positivos: steps.csv começa em1,
+enquanto o ledger inclui um estado inicial0. Uma discrepância de pós-processamento
+que descartava o primeiro incremento foi corrigida com três regressões;
+não afetava os U, os fluxos ou os balanços físicos. A composição deve conter
+exatamente tantos registros de passo quanto os incrementos do ledger.
+Os índices de entrega conservam TIMEOUT como interrupção externa, CPU como
+limite inferior quando não há término e hashes dos arquivos brutos.
+
+Os registros completos P0_EVIDENCE e FINAL_CHECKS_994736f foram preservados
+byte a byte. HYDROSTATIC_GRID_994736f acrescenta um índice conciso dos20
+controles sem reescrever a evidência anterior. As ferramentas de continuação
+passam a registrar todos os incrementos; o índice final de passos prevalece
+sobre contagens de pós-processamento antigas que descartavam o primeiro.
