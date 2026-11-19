@@ -1,0 +1,70 @@
+{
+  "old_source": "3940bb7",
+  "new_simulate_sha256": "5cf28374c54dd115bc7ca223cd4b7b33814ea6c75000cb549dd1ae88f5b10f6a",
+  "runs": [
+    {
+      "version": "late",
+      "case": "D_SS1",
+      "mode": "LINE_SEARCH",
+      "returncode": 0,
+      "snapshot_sha256": "7116c087b594159629fb76bbd3df8383682eb488019171374d541d8c2063294a",
+      "run_status": "status=6000\nreached_time_s=  0.0000000000000000E+00\nrequested_time_s=  1.7797851562499996E-07\naccepted_steps=0\nrejected_steps=1\nlast_rejection_status=6000\ntermination_reason=NEWTON_GLOBALIZATION_FAILURE\ncpu_seconds=  8.1773199999999990E-01\nwall_seconds=  7.5230103210000001E+00\nnewton_iterations_total=9\njacobian_evaluations_total=9\nresidual_evaluations_total=94\nlinear_solves_total=9\nbacktrack_trials_total=85\nprepare_calls_total=1\n"
+    },
+    {
+      "version": "late",
+      "case": "D_SS1",
+      "mode": "ACTIVE_SET",
+      "returncode": 0,
+      "snapshot_sha256": "7116c087b594159629fb76bbd3df8383682eb488019171374d541d8c2063294a",
+      "run_status": "status=6100\nreached_time_s=  0.0000000000000000E+00\nrequested_time_s=  1.7797851562499996E-07\naccepted_steps=0\nrejected_steps=1\nlast_rejection_status=6100\ntermination_reason=MAX_NEWTON\ncpu_seconds=  3.2235559999999999E+00\nwall_seconds=  3.6433283250000002E+01\nnewton_iterations_total=25\njacobian_evaluations_total=25\nresidual_evaluations_total=472\nlinear_solves_total=43\nbacktrack_trials_total=447\nprepare_calls_total=1\n"
+    },
+    {
+      "version": "late",
+      "case": "D_SS3",
+      "mode": "LINE_SEARCH",
+      "returncode": 0,
+      "snapshot_sha256": "683f5c44e2acad1de051e130040613156b0b666dddb18a2007b80430d6d2b1fe",
+      "run_status": "status=6000\nreached_time_s=  0.0000000000000000E+00\nrequested_time_s=  1.3286024999999991E-07\naccepted_steps=0\nrejected_steps=1\nlast_rejection_status=6000\ntermination_reason=NEWTON_GLOBALIZATION_FAILURE\ncpu_seconds=  6.4649999999999999E-02\nwall_seconds=  7.3679299799999998E-01\nnewton_iterations_total=1\njacobian_evaluations_total=1\nresidual_evaluations_total=19\nlinear_solves_total=1\nbacktrack_trials_total=18\nprepare_calls_total=1\n"
+    },
+    {
+      "version": "late",
+      "case": "D_SS3",
+      "mode": "ACTIVE_SET",
+      "returncode": 0,
+      "snapshot_sha256": "683f5c44e2acad1de051e130040613156b0b666dddb18a2007b80430d6d2b1fe",
+      "run_status": "status=6000\nreached_time_s=  0.0000000000000000E+00\nrequested_time_s=  1.3286024999999991E-07\naccepted_steps=0\nrejected_steps=1\nlast_rejection_status=6000\ntermination_reason=NEWTON_GLOBALIZATION_FAILURE\ncpu_seconds=  3.5994399999999999E-01\nwall_seconds=  4.0931795099999997E+00\nnewton_iterations_total=4\njacobian_evaluations_total=4\nresidual_evaluations_total=109\nlinear_solves_total=12\nbacktrack_trials_total=105\nprepare_calls_total=1\n"
+    },
+    {
+      "version": "early",
+      "case": "D_SS1",
+      "mode": "LINE_SEARCH",
+      "returncode": 0,
+      "snapshot_sha256": "7116c087b594159629fb76bbd3df8383682eb488019171374d541d8c2063294a",
+      "run_status": "status=6000\nreached_time_s=  0.0000000000000000E+00\nrequested_time_s=  1.7797851562499996E-07\naccepted_steps=0\nrejected_steps=1\nlast_rejection_status=6000\ntermination_reason=NEWTON_GLOBALIZATION_FAILURE\ncpu_seconds=  8.1851399999999996E-01\nwall_seconds=  8.8786811579999991E+00\nnewton_iterations_total=9\njacobian_evaluations_total=9\nresidual_evaluations_total=94\nlinear_solves_total=9\nbacktrack_trials_total=85\nprepare_calls_total=1\n"
+    },
+    {
+      "version": "early",
+      "case": "D_SS1",
+      "mode": "ACTIVE_SET",
+      "returncode": 0,
+      "snapshot_sha256": "7116c087b594159629fb76bbd3df8383682eb488019171374d541d8c2063294a",
+      "run_status": "status=0\nreached_time_s=  1.7797851562499996E-07\nrequested_time_s=  1.7797851562499996E-07\naccepted_steps=1\nrejected_steps=0\nlast_rejection_status=3012\ntermination_reason=COMPLETED\ncpu_seconds=  7.2563999999999990E-02\nwall_seconds=  8.4444392999999995E-01\nnewton_iterations_total=1\njacobian_evaluations_total=1\nresidual_evaluations_total=3\nlinear_solves_total=3\nbacktrack_trials_total=2\nprepare_calls_total=1\n"
+    },
+    {
+      "version": "early",
+      "case": "D_SS3",
+      "mode": "LINE_SEARCH",
+      "returncode": 0,
+      "snapshot_sha256": "683f5c44e2acad1de051e130040613156b0b666dddb18a2007b80430d6d2b1fe",
+      "run_status": "status=6000\nreached_time_s=  0.0000000000000000E+00\nrequested_time_s=  1.3286024999999991E-07\naccepted_steps=0\nrejected_steps=1\nlast_rejection_status=6000\ntermination_reason=NEWTON_GLOBALIZATION_FAILURE\ncpu_seconds=  6.5581999999999988E-02\nwall_seconds=  4.8999189300000001E-01\nnewton_iterations_total=1\njacobian_evaluations_total=1\nresidual_evaluations_total=19\nlinear_solves_total=1\nbacktrack_trials_total=18\nprepare_calls_total=1\n"
+    },
+    {
+      "version": "early",
+      "case": "D_SS3",
+      "mode": "ACTIVE_SET",
+      "returncode": 0,
+      "snapshot_sha256": "683f5c44e2acad1de051e130040613156b0b666dddb18a2007b80430d6d2b1fe",
+      "run_status": "status=6000\nreached_time_s=  0.0000000000000000E+00\nrequested_time_s=  1.3286024999999991E-07\naccepted_steps=0\nrejected_steps=1\nlast_rejection_status=6000\ntermination_reason=NEWTON_GLOBALIZATION_FAILURE\ncpu_seconds=  3.0695599999999995E-01\nwall_seconds=  1.3423301270000001E+00\nnewton_iterations_total=4\njacobian_evaluations_total=4\nresidual_evaluations_total=58\nlinear_solves_total=12\nbacktrack_trials_total=54\nprepare_calls_total=1\n"
+    }
+  ]
+}

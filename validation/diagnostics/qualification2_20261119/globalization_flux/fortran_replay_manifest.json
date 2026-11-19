@@ -1,0 +1,67 @@
+{
+  "sources": {
+    "mod_kinds": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "mod_rootfinding": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c",
+    "mod_void_helpers": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "module_flow_regime": "d7c369d3d1418d1f3bb97ebd10a849ad3ea24aec11522753377c9e2cea046ebd",
+    "module_config": "509ef6f54b02dc527138b50db2e4c5d10f0ec10b9b5ceb145b754c2032bc1f1a",
+    "module_lapack_small": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+    "module_chexal_1992": "63a60d888a288eee582ab61d418cfe8838d1aa0e79b145e8a163d25c026d0443",
+    "module_closure_law": "2c7e9b7d81651faa6580be044fcf04e8430fc54670afd8b10dd614d2e955d233",
+    "module_find": "4976a0fae46a07d25f1e06a7e2df547ae58f79d5e9a750b28ab61253a77541e9",
+    "module_catenary": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+    "module_steady_state": "7e7258450e45beb14c4e1b1115d49bdff6662cac94fc27b33ecd21a37cfcdd6f",
+    "module_jacobian": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+    "module_matrix_roe": "f39b1226bb701fff35a64e2f26e077eb75e372d4d0047afcce87ffdf514bdd4a",
+    "module_roe_solver": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+    "module_boundary_conditions": "ffb17c54462b36e4e055cebb4645e6854ef1f68e583c7c6815ebbe2b63f0baf9",
+    "module_solver_utils": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+    "module_time_step": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133",
+    "module_active_set": "829eb72ca1c38496186b614805eadea2fcd39eb92e565e6c42d338234ce802be",
+    "module_simulate_pipe_riser": "f84139fecc1f76eba9a2c9f5597855aaa04ffb94247b5d5bf9df6cedd27f63b4"
+  },
+  "compile_command": [
+    "gfortran",
+    "-std=f2018",
+    "-O2",
+    "-fopenmp",
+    "-ffree-line-length-none",
+    "-I/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release",
+    "-J/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/offline_replay/fortran",
+    "/mnt/c/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-qualification2-20261119/offline_api.f90",
+    "/mnt/c/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-qualification2-20261119/replay_active_fortran.f90",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/mod_kinds.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/mod_rootfinding.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/mod_void_helpers.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_flow_regime.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_config.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_lapack_small.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_chexal_1992.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_closure_law.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_find.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_catenary.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_steady_state.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_jacobian.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_matrix_roe.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_roe_solver.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_boundary_conditions.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_solver_utils.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_time_step.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_active_set.o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-20261119/tmp/release/module_simulate_pipe_riser.o",
+    "-llapack",
+    "-lblas",
+    "-o",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/offline_replay/fortran/replay"
+  ],
+  "runs": {
+    "D_SS1": {
+      "returncode": 0,
+      "log": "initial_norm   2.9764063309210322E-007\noriginal_full_proposal 1 3012 53 FACE\nactive_direction 1 0 1 53 T  9.3776711656418099E-016  -2.7440535470708294E-011\naccepted 1 0 T  1.0000000000000000E+000   1.6709772876859093E-012\nfinal_norm   1.6709772876859093E-012\nfinal_margin   2.6267508133892559E-015\nmass_min_nd   4.4001493459314145E-001   4.4839151674144322E-005\nphase_balance_kg  -8.6595977766585847E-013   1.0292256233795499E-016\nintegral_residual_kg  -8.6595977766704219E-013   1.0292256235461993E-016\nbalance_identity_error_kg   1.1837204981639579E-024  -1.6664945467778400E-026\nPASS frozen snapshot active-set replay\n"
+    },
+    "D_SS3": {
+      "returncode": 0,
+      "log": "initial_norm   5.0692576609245183E-008\noriginal_full_proposal 1 1017 69 CELL\nactive_direction 1 0 2 69 T  2.4687196731321137E-012  -5.9849752871560266E-007\naccepted 1 0 T  5.0000000000000000E-001   2.5346288287899279E-008\noriginal_full_proposal 2 1017 69 CELL\nactive_direction 2 0 2 69 T  1.2342904476270178E-012  -5.9849752497868822E-007\naccepted 2 0 T  1.0000000000000000E+000   4.0275959284536995E-009\nfinal_norm   4.0275959284536995E-009\nfinal_margin   1.1102230246251565E-016\nmass_min_nd   2.7611602701281285E-001   6.8506792416786954E-004\nphase_balance_kg   5.8637176755970898E-013  -4.3047595676994712E-015\nintegral_residual_kg   5.8637176760267047E-013  -4.3047595676753423E-015\nbalance_identity_error_kg  -4.2961491116081138E-023  -2.4128888507995088E-026\nPASS frozen snapshot active-set replay\n"
+    }
+  }
+}

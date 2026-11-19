@@ -1,0 +1,23 @@
+{
+  "scope": "Identical frozen operator, only tol_res tightened; out_dir differs by cohort.",
+  "cases": [
+    {
+      "case": "D_SS1",
+      "verified": true,
+      "reference_deck_sha256": "c0bd03a61c6521bcc9517994ceef1664a174d8dabfe53d8ef327e97ab318f559",
+      "tight_deck_sha256": "4b91a981a258274a4597d085e81f6bd3d0f61b45d91d34a93a613e51b592b987",
+      "tol_res_reference": "1e-08",
+      "tol_res_tight": "1e-10",
+      "tol_inc_unchanged": "1e-08"
+    },
+    {
+      "case": "D_SS3",
+      "verified": true,
+      "reference_deck_sha256": "8e2bc315a957da2c45d20259881489e9bb2489a208d48a3a99cf1168b25089c3",
+      "tight_deck_sha256": "7ef78eab28e5ed537216085c886bdc14ffdd58715f190321c30826c62a120ec7",
+      "tol_res_reference": "1e-08",
+      "tol_res_tight": "1e-10",
+      "tol_inc_unchanged": "1e-08"
+    }
+  ]
+}

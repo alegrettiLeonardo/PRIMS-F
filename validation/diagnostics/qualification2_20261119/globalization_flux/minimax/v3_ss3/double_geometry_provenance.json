@@ -1,0 +1,6 @@
+{
+  "physical_api_build_manifest": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/offline_replay/build_manifest.json",
+  "physical_api_build_manifest_sha256": "cb35239f2a9f98035b7491cc7a1c3e05c9520ff272a01425063d1fff049c6604",
+  "residual_bitwise_equal_to_a179_snapshot": true,
+  "scope": "Independent double geometry of the same unchanged physical residual; production direction replay uses a179 objects separately."
+}

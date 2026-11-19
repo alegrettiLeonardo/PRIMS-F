@@ -1,0 +1,38 @@
+{
+  "schema": "primsf_active_minimax_evidence_v1",
+  "operator_commit": "a179e51d9d63e8aeed91a94d829b5b483d107864",
+  "scope": "versioned local replays and historical smokes; no completed v3 trajectory",
+  "files": {
+    "SS3_v1_cell_si.json": "81402ec958cb1fe43a3fa676cef93b8cb520f86b9083f134564b5c8eb897591a",
+    "SS3_v1_local_geometry.json": "8c6c4ff5be44d4c58a8dd17e7ea05abe1d914acc08d8ea79779c285a29f94d92",
+    "SS3_v2_local_geometry.json": "9646f824c391aa98d8f06f2f55f4b7a9e00bef7d2ae9505ec0bea95682467651",
+    "cell_api.f90": "c9ae0a70bbaf8db4bc888b90d1cbaf465a7e9b4acbcf65796912ea6fecacf322",
+    "direction_replays.json": "560ef7bad462a4b2144c8003f1c7283cef0182f6c21fc94634c6058da1eef870",
+    "fixtures/D_SS3_active_terminal_v2/last_rejected_state.dat": "a92b9f0652254d6366697e73e3bdf4773cfc6d402b190a601ee12f8b268ea7c1",
+    "fixtures/D_SS3_active_terminal_v2/probe_parameters.dat": "96b04713bbd5788e13f900e28c0d05e151480b59aad69443a54ea99f2be10ea7",
+    "inspect_cell.py": "edae029ad9744c7d23437d0f1de8469ffe94f0d208a5da70ea69bf74c2681438",
+    "inspect_terminal_geometry.py": "92a064950d0582f695bb853d34303ad837ebb0cd6f5b81b053abd7a15fe7b7f5",
+    "operator_unit_summary.json": "20ea252595d3bd0db2a683771a6891972a25d92e6b413c05bcf8995bb76d2925",
+    "replay_minimax.f90": "f6b9a328ccbbcd8ce6746a965d8cb9cc2d0d99cdff9cb0ab7d015f4c964b62a7",
+    "run_frozen_active_smoke.py": "d5316873cbd295d4c1a87ef8b6961662602c9315f3e14555e9f4da170da88921",
+    "run_minimax_replays.py": "52e7ae01a13988c41acb0f8b185bdd3a484d8cb20ffe058fe723faebcff80c81",
+    "run_minimax_steps.py": "19e238c462ccd53f7d607305686e829c91c2d32a8af072ddc10445c662ab26e4",
+    "summarize_active_smokes.py": "714b63a8e4e0ea4028b14b6f4516507fe3afbc141bcdd42ccf7062f689d340f6",
+    "trigger_comparison.json": "06f49c40ad9d7464e7f477b5a44c394541904b7e49db965e69096e15dfb23900",
+    "v1_smokes_manifest.json": "0cc9452e321dcc84816700c4f613ba7e4e577c206a9cb05716b2dace4da97116",
+    "v1_smokes_summary.json": "973c721f7c3ec76603a55e4d5b8d13b341cedaa75e7ea39f6953d159e985197c",
+    "v2_smokes_manifest.json": "68bddbb0a7031702c2bc1001de48ba8915a9e7193231b8c13b34d43464e667bc",
+    "v2_smokes_summary.json": "ed3804e3cc1173430f5b2a71af7bcd248ae7c9d302fec939f39fe3e031268f74",
+    "whole_step_replays.json": "273ae122ce5f3f5aa27c0eff17bf1e283d44b7a10735600ae4664e589d1048a9",
+    "historical_archive.json": "bc2e5eac57d3a24d0e875ebce36dd3bbf54d6048d1b2b53355d52c95ff78c163",
+    "summarize_frozen_active_smokes.py": "1251fecc84f0fb7f55daeed72de488351c23f1ae2882f09c6519382cb53b5133",
+    "v3_ss3/manifest.json": "df1728f40abb0db0780c6e4c1022cc142435f892d6244e675160258aa3b3dccb",
+    "v3_smokes/manifest.json": "0e6cff1e89981cfcdb2416b8ef4f72aa355bcbeddcd9a2e05c29b35b91d96e8d",
+    "v3_tol10/manifest.json": "2aa61d55f7b59af129ff0e8f95c57944dcf2df88227f2f06e940f93777735468"
+  },
+  "original_results": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119",
+  "source_sha256": {
+    "module_active_set.f90": "67267f05590043d07c129e2357bd93eba99aaf355c5f7e16c257894f0fa2168a",
+    "module_simulate_pipe_riser.f90": "46b1fecef59c980a9cbaf748b15600f6a808e159039a8cbbc84a7a2cf4ef796f"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "mode": "Rusanov only at MATCHED, original Roe spectral radius, no multiplier",
+  "states": {
+    "accepted_old": {
+      "gas_mass_flux_kg_s": -0.007012236549435196,
+      "jg_m_s": -1.340418865229115,
+      "minimum_phase_masses_normalized": [
+        0.44001493459218816,
+        4.483917380513108e-05
+      ],
+      "status": 3012,
+      "index": 53,
+      "stage": 2
+    },
+    "linearization": {
+      "gas_mass_flux_kg_s": -0.007012236753623397,
+      "jg_m_s": -1.3404189038422092,
+      "minimum_phase_masses_normalized": [
+        0.4400149345925666,
+        4.483916502009909e-05
+      ],
+      "status": 3012,
+      "index": 53,
+      "stage": 2
+    }
+  }
+}

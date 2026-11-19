@@ -1,0 +1,25 @@
+{
+  "scope": "Accepted steps after78.5s with zero additional linear solves; indicates initial residual stopping before Newton update, not proof of a globally stationary flow.",
+  "runs": [
+    {
+      "case": "D_SS1",
+      "observed_steps": 1437,
+      "zero_solve_accepted_steps": 0,
+      "observed_time_increment_s": 0.1687106357155027,
+      "zero_solve_time_increment_s": 0,
+      "unchanged_six_inventories": 0,
+      "first_examples": [],
+      "last_examples": []
+    },
+    {
+      "case": "D_SS3",
+      "observed_steps": 161,
+      "zero_solve_accepted_steps": 0,
+      "observed_time_increment_s": 18.69999943124,
+      "zero_solve_time_increment_s": 0,
+      "unchanged_six_inventories": 0,
+      "first_examples": [],
+      "last_examples": []
+    }
+  ]
+}

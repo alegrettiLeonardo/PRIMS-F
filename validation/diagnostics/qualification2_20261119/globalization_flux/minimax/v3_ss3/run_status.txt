@@ -1,0 +1,15 @@
+status=6000
+reached_time_s=  9.7131852741709523E+01
+requested_time_s=  1.1000000000000000E+02
+accepted_steps=812
+rejected_steps=24
+last_rejection_status=6000
+termination_reason=NEWTON_GLOBALIZATION_FAILURE
+cpu_seconds=  4.4541384999999998E+01
+wall_seconds=  4.4740079082999998E+01
+newton_iterations_total=2080
+jacobian_evaluations_total=2080
+residual_evaluations_total=8637
+linear_solves_total=2876
+backtrack_trials_total=6557
+prepare_calls_total=836
