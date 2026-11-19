@@ -1,0 +1,615 @@
+{
+  "scope": "new same-binary controlled experiments: tol_res only, then EOS only, then liquid contract only; no promotion of defaults",
+  "reports": [
+    {
+      "name": "control_eos_tol_994736f/BARO_tol10",
+      "operator": "994736f",
+      "status": {
+        "status": "0",
+        "reached_time_s": "2.4000000000000000E+03",
+        "requested_time_s": "2.4000000000000000E+03",
+        "accepted_steps": "19222",
+        "rejected_steps": "0",
+        "last_rejection_status": "0",
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": "2.4949467700000000E+02",
+        "wall_seconds": "3.6201939296500001E+02",
+        "newton_iterations_total": "19934",
+        "jacobian_evaluations_total": "19934",
+        "residual_evaluations_total": "24257",
+        "linear_solves_total": "4323",
+        "backtrack_trials_total": "4323",
+        "prepare_calls_total": "19222"
+      },
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 7.808625923644286e-07,
+          "initial_inventory_kg": 82.0261564726594,
+          "absolute_processed_mass_kg": 6163.317801657741,
+          "relative_inventory": 9.519677941080933e-09,
+          "relative_processed": 1.266951693054674e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 7.80504804454667e-07
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 1.4620127330999821e-09,
+          "initial_inventory_kg": 59.48512663249196,
+          "absolute_processed_mass_kg": 6163.318996410108,
+          "relative_inventory": 2.45777863453585e-11,
+          "relative_processed": 2.3721192006312625e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.0114029776294003e-09
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 7.823246050975285e-07,
+          "initial_inventory_kg": 22.541029840167486,
+          "absolute_processed_mass_kg": 6163.317911576449,
+          "relative_inventory": 3.470669311228398e-08,
+          "relative_processed": 1.2693237900775852e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 7.815162074322964e-07
+        },
+        "g_system": {
+          "max_abs_balance_kg": 6.064613700118571e-09,
+          "initial_inventory_kg": 0.2930524122350142,
+          "absolute_processed_mass_kg": 8.645658422137952,
+          "relative_inventory": 2.0694638388627343e-08,
+          "relative_processed": 7.014634865274813e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -6.063686717761021e-09
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 1.741604194194224e-09,
+          "initial_inventory_kg": 0.2748660004833321,
+          "absolute_processed_mass_kg": 8.645652213475199,
+          "relative_inventory": 6.336193603907861e-09,
+          "relative_processed": 2.0144277738581048e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.7426450775360816e-09
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 4.323008617745927e-09,
+          "initial_inventory_kg": 0.01818641175168204,
+          "absolute_processed_mass_kg": 8.645653740070388,
+          "relative_inventory": 2.377054185714286e-07,
+          "relative_processed": 5.000210218586352e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -4.321041640224936e-09
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "Ql_nominal_m3_s": 0.0012878238483718034,
+      "Ql_actual_min_m3_s": 0.0012875964626264998,
+      "Ql_actual_max_m3_s": 0.001287596579507216,
+      "max_relative_Ql_nominal_error": 0.00017656587552017941,
+      "integrated_Ql_nominal_error_m3": -0.0005456691432909715,
+      "max_abs_boundary_mass_error_kg_s": 0.0,
+      "max_abs_boundary_pressure_error_Pa": 5.820766091346741e-11,
+      "manifest": {
+        "name": "BARO_tol10",
+        "operator": "994736ff3a2730cafaf342fbe22d94e079e9f9ad",
+        "command": [
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/frozen_994736f/prims_f",
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/control_eos_tol_994736f/BARO_tol10/input.nml"
+        ],
+        "returncode": 0,
+        "timeout": false,
+        "wall_s": 362.200151320998,
+        "status": "status=0\nreached_time_s=  2.4000000000000000E+03\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=19222\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  2.4949467700000000E+02\nwall_seconds=  3.6201939296500001E+02\nnewton_iterations_total=19934\njacobian_evaluations_total=19934\nresidual_evaluations_total=24257\nlinear_solves_total=4323\nbacktrack_trials_total=4323\nprepare_calls_total=19222\n",
+        "hashes": {
+          "run_status.txt": "d82b1c03361e8223f7298323203cdd14b2724208f099244eb4fdcfd65c4035f8",
+          "stdout.log": "97942ab26c739f2c233806b37238829d1819402c9f880c4d9f1c28a83dfb735d",
+          "checkpoint.dat": "8258adad99550cc170fe3e79fa04ae09ae9c7b2e4a3b8a0dce64985514081093",
+          "steps.csv": "ff394634906b5a3bd56bcfc7c54f09f6823fec9e0cb1eb3f793d4f01966d38dc",
+          "conservation.csv": "897c30b000f80253e65b396fda4dcd7fef37957cb2232ebffe150e850be5b354",
+          "results_D_Stable.dat": "0d605e12e2e26904f17d168fbe32d6da5d673cd99d056254635c7f33bbb0cb44",
+          "run_metadata.txt": "48de154aaea7b54c94eaed6dab12c7e8c905a5da3fa97da4f24d7d5245ca4085",
+          "boundary_conditions.csv": "c98b85e2527314d536eb96ccd4df6be7f1411c437b710e00d9c1dbf17243bc7d",
+          "fields.csv": "b7939cfb6cf1c322c66f9bfd6de1356962e2bd0d6a10fa0c99fc363642b10e53",
+          "inlet_contract.txt": "9d621d7f2124f5253d218f6640d9e2f6eddbd96cc1df161bb29e5a5f7886bf2b",
+          "monitor.csv": "4c328988e4da3f55cce1934411badf7d1f3998fadd84aca87173b8cdc07c53fa",
+          "input.nml": "d267cf83108dc7549c0845a80539330a6979de424f1d118d994a8fed798c7b24",
+          "rejected_proposals.csv": "e25dac85d6bc9cc6571672790b89fb445c0f78e8451c1b94919a38625f4bffa2"
+        }
+      }
+    },
+    {
+      "name": "control_eos_tol_994736f/BARO_tol8",
+      "operator": "994736f",
+      "status": {
+        "status": "0",
+        "reached_time_s": "2.4000000000000000E+03",
+        "requested_time_s": "2.4000000000000000E+03",
+        "accepted_steps": "19222",
+        "rejected_steps": "0",
+        "last_rejection_status": "0",
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": "2.3877212599999999E+02",
+        "wall_seconds": "3.3940291287299999E+02",
+        "newton_iterations_total": "19452",
+        "jacobian_evaluations_total": "19452",
+        "residual_evaluations_total": "22129",
+        "linear_solves_total": "2677",
+        "backtrack_trials_total": "2677",
+        "prepare_calls_total": "19222"
+      },
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 0.0005078293238511833,
+          "initial_inventory_kg": 82.0261564726594,
+          "absolute_processed_mass_kg": 6163.318309090089,
+          "relative_inventory": 6.191065700127626e-06,
+          "relative_processed": 8.239543998598958e-08,
+          "passes_inventory_1e6": false,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 0.0005078300670796663
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 3.056506557186367e-06,
+          "initial_inventory_kg": 59.48512663249196,
+          "absolute_processed_mass_kg": 6163.318999466701,
+          "relative_inventory": 5.138270236978603e-08,
+          "relative_processed": 4.959189289814206e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 3.0544120215089912e-06
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 0.0005047728172939969,
+          "initial_inventory_kg": 22.541029840167486,
+          "absolute_processed_mass_kg": 6163.318422065389,
+          "relative_inventory": 2.239351178154717e-05,
+          "relative_processed": 8.189951950021795e-08,
+          "passes_inventory_1e6": false,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 0.0005047756550581573
+        },
+        "g_system": {
+          "max_abs_balance_kg": 6.544501154337468e-07,
+          "initial_inventory_kg": 0.2930524122350142,
+          "absolute_processed_mass_kg": 8.645657772261579,
+          "relative_inventory": 2.2332186602473984e-06,
+          "relative_processed": 7.569697213015546e-08,
+          "passes_inventory_1e6": false,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -6.544504135393649e-07
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 1.2382208218753021e-06,
+          "initial_inventory_kg": 0.2748660004833321,
+          "absolute_processed_mass_kg": 8.645653453655026,
+          "relative_inventory": 4.504816236631595e-06,
+          "relative_processed": 1.4321888200964538e-07,
+          "passes_inventory_1e6": false,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.2382226041323308e-06
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 1.892670937309049e-06,
+          "initial_inventory_kg": 0.01818641175168204,
+          "absolute_processed_mass_kg": 8.64565433037384,
+          "relative_inventory": 0.00010407060849339881,
+          "relative_processed": 2.1891586975201324e-07,
+          "passes_inventory_1e6": false,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.8926730176716954e-06
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "Ql_nominal_m3_s": 0.0012878238483718034,
+      "Ql_actual_min_m3_s": 0.0012875964626264998,
+      "Ql_actual_max_m3_s": 0.0012875965795072163,
+      "max_relative_Ql_nominal_error": 0.00017656587552017941,
+      "integrated_Ql_nominal_error_m3": -0.000545669142942888,
+      "max_abs_boundary_mass_error_kg_s": 0.0,
+      "max_abs_boundary_pressure_error_Pa": 5.820766091346741e-11,
+      "manifest": {
+        "name": "BARO_tol8",
+        "operator": "994736ff3a2730cafaf342fbe22d94e079e9f9ad",
+        "command": [
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/frozen_994736f/prims_f",
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/control_eos_tol_994736f/BARO_tol8/input.nml"
+        ],
+        "returncode": 0,
+        "timeout": false,
+        "wall_s": 339.6021204319986,
+        "status": "status=0\nreached_time_s=  2.4000000000000000E+03\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=19222\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  2.3877212599999999E+02\nwall_seconds=  3.3940291287299999E+02\nnewton_iterations_total=19452\njacobian_evaluations_total=19452\nresidual_evaluations_total=22129\nlinear_solves_total=2677\nbacktrack_trials_total=2677\nprepare_calls_total=19222\n",
+        "hashes": {
+          "run_status.txt": "ac347f57702138cb5d2d9a4b551d262578476151e068106b1a983be1d61c0647",
+          "stdout.log": "783c2ca15e41667e8b164fbd4781081d50b6ca6e7199a4f2b97aa49d12baa35f",
+          "checkpoint.dat": "1bd22c1dc6554a540814417f9d117fda895d055e5e3a9566e9ed788899f1144a",
+          "steps.csv": "45e3ef52f26cf7b57b9d48c337d10b8f04f8aa8da5689e2da2fd820e81fcd304",
+          "conservation.csv": "ef21783e44fe0634f09001f93f80c9d5bd8c61a73e7fb6bca61098407272ead2",
+          "results_D_Stable.dat": "55ff4fd8ce5a631e4ad90ed460dde8cd8c781677f81c2dd22e97a424b259584c",
+          "run_metadata.txt": "c16672e68fae38822727860299f68b7a3942ae3da47cc74839da538b9b9a387d",
+          "boundary_conditions.csv": "30e01cc2d357e8a39f14c637cee06c7f18871ebbf8c2e9160aa720d998bf339b",
+          "fields.csv": "963fdb859c3a00cd79eae644cb93e81d8a5278ddaa7ed97519456c25f8db347c",
+          "inlet_contract.txt": "9d621d7f2124f5253d218f6640d9e2f6eddbd96cc1df161bb29e5a5f7886bf2b",
+          "monitor.csv": "ffeb5b934125ebfebe84660cac28df89a0b11fabbd431fb657c31f7efe25c2a1",
+          "input.nml": "08223f5d83046033a1ed902c42894f241581bdc21599e6835d07ad39336ff1dc",
+          "rejected_proposals.csv": "e25dac85d6bc9cc6571672790b89fb445c0f78e8451c1b94919a38625f4bffa2"
+        }
+      }
+    },
+    {
+      "name": "control_eos_tol_994736f/ISO_tol10",
+      "operator": "994736f",
+      "status": {
+        "status": "0",
+        "reached_time_s": "2.4000000000000000E+03",
+        "requested_time_s": "2.4000000000000000E+03",
+        "accepted_steps": "19222",
+        "rejected_steps": "0",
+        "last_rejection_status": "0",
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": "2.5633771299999995E+02",
+        "wall_seconds": "3.2648066681799997E+02",
+        "newton_iterations_total": "20093",
+        "jacobian_evaluations_total": "20093",
+        "residual_evaluations_total": "25474",
+        "linear_solves_total": "5381",
+        "backtrack_trials_total": "5381",
+        "prepare_calls_total": "19222"
+      },
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 4.76845343655441e-07,
+          "initial_inventory_kg": 83.14880099227763,
+          "absolute_processed_mass_kg": 6163.318081647886,
+          "relative_inventory": 5.734843292565668e-09,
+          "relative_processed": 7.736828398899491e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -4.788486244116863e-07
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 3.388322511455044e-09,
+          "initial_inventory_kg": 59.621281532492766,
+          "absolute_processed_mass_kg": 6163.319023935934,
+          "relative_inventory": 5.683075613878671e-11,
+          "relative_processed": 5.497561457221535e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.0075289746454767e-09
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 4.80233666166896e-07,
+          "initial_inventory_kg": 23.527519459784916,
+          "absolute_processed_mass_kg": 6163.31821909242,
+          "relative_inventory": 2.041157237114389e-08,
+          "relative_processed": 7.791803848116297e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -4.808561533863317e-07
+        },
+        "g_system": {
+          "max_abs_balance_kg": 5.656342061399755e-09,
+          "initial_inventory_kg": 0.38589207134655473,
+          "absolute_processed_mass_kg": 8.645657317373356,
+          "relative_inventory": 1.4657834356798725e-08,
+          "relative_processed": 6.542408348794251e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 5.654707988830608e-09
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 1.9036177079101435e-09,
+          "initial_inventory_kg": 0.3668496666973716,
+          "absolute_processed_mass_kg": 8.64565088590654,
+          "relative_inventory": 5.189094827447427e-09,
+          "relative_processed": 2.201821161913062e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.9051174628996907e-09
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 3.7527243534896115e-09,
+          "initial_inventory_kg": 0.019042404649182932,
+          "absolute_processed_mass_kg": 8.645651307737133,
+          "relative_inventory": 1.9707197817848245e-07,
+          "relative_processed": 4.3405918419717416e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 3.749590525930919e-09
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "Ql_nominal_m3_s": 0.0012878238483718034,
+      "Ql_actual_min_m3_s": 0.0012875947709366574,
+      "Ql_actual_max_m3_s": 0.001287594881876292,
+      "max_relative_Ql_nominal_error": 0.00017787947896416077,
+      "integrated_Ql_nominal_error_m3": -0.0005497299109876715,
+      "max_abs_boundary_mass_error_kg_s": 0.0,
+      "max_abs_boundary_pressure_error_Pa": 0.0,
+      "manifest": {
+        "name": "ISO_tol10",
+        "operator": "994736ff3a2730cafaf342fbe22d94e079e9f9ad",
+        "command": [
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/frozen_994736f/prims_f",
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/control_eos_tol_994736f/ISO_tol10/input.nml"
+        ],
+        "returncode": 0,
+        "timeout": false,
+        "wall_s": 326.7766514350078,
+        "status": "status=0\nreached_time_s=  2.4000000000000000E+03\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=19222\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  2.5633771299999995E+02\nwall_seconds=  3.2648066681799997E+02\nnewton_iterations_total=20093\njacobian_evaluations_total=20093\nresidual_evaluations_total=25474\nlinear_solves_total=5381\nbacktrack_trials_total=5381\nprepare_calls_total=19222\n",
+        "hashes": {
+          "run_status.txt": "c14db477cffceeebd58ca87ae7998b363fc87624bcd228fcb078c8d268442f59",
+          "stdout.log": "d1645aae5ee7cbc6b3510afd85ece2ced51c39fbbc2e3ed2b2851984c42ff566",
+          "checkpoint.dat": "76f1379731417f5a7fc39f93d3a310f737641a77e2da041e731d483a8f0a7410",
+          "steps.csv": "e1520fb1b4546b38b6c6b610e8ddba2b19605260b6ac85a1e493200af2414326",
+          "conservation.csv": "df2fc333d26aeb0c10954b5419e3f9a4b01c3127e6ab9fe658a8aa0b559d39f9",
+          "results_D_Stable.dat": "455bbe632faf326a58f958780a3f0f04e0a08307f7815967903b0d7edabd5676",
+          "run_metadata.txt": "58e643699a582c2fa715f2a8f419d4dc4bd2faf60250e7c8c315188b11f7ed09",
+          "boundary_conditions.csv": "78b866bd3ee2e9991416961050091a99a0f311fe869bc00a22f0696e4a25a740",
+          "fields.csv": "2eafe75005771de295deac5788431b162481f8921b6f5b3bd93934aae67ec1e6",
+          "inlet_contract.txt": "500819e79054227c554a7ab529860eb20693513f16b362a929729f62d7e5df96",
+          "monitor.csv": "084c7933f9e3f56ab086baab7438a4c53cd58ac222efc02c7627638e8f4a94f2",
+          "input.nml": "c15c998dadf252cfc9473d53bd774c42c1a416e7043f9de5d54379ca4405c770",
+          "rejected_proposals.csv": "e25dac85d6bc9cc6571672790b89fb445c0f78e8451c1b94919a38625f4bffa2"
+        }
+      }
+    },
+    {
+      "name": "local_volume_controls_994736f/BAROTROPIC",
+      "operator": "994736f",
+      "status": {
+        "status": "0",
+        "reached_time_s": "2.4000000000000000E+03",
+        "requested_time_s": "2.4000000000000000E+03",
+        "accepted_steps": "19222",
+        "rejected_steps": "0",
+        "last_rejection_status": "0",
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": "2.4949265300000002E+02",
+        "wall_seconds": "4.0735603046199998E+02",
+        "newton_iterations_total": "19932",
+        "jacobian_evaluations_total": "19932",
+        "residual_evaluations_total": "24253",
+        "linear_solves_total": "4321",
+        "backtrack_trials_total": "4321",
+        "prepare_calls_total": "19222"
+      },
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 8.539523150830064e-07,
+          "initial_inventory_kg": 82.03446174553116,
+          "absolute_processed_mass_kg": 6164.406117371733,
+          "relative_inventory": 1.0409677797752181e-08,
+          "relative_processed": 1.385295353394236e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 8.557863741520259e-07
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 3.112745616817847e-10,
+          "initial_inventory_kg": 59.4929737795549,
+          "absolute_processed_mass_kg": 6164.407312156531,
+          "relative_inventory": 5.232123087932712e-12,
+          "relative_processed": 5.049545656529463e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -7.171674984748366e-10
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 8.542633622710127e-07,
+          "initial_inventory_kg": 22.54148796597629,
+          "absolute_processed_mass_kg": 6164.406225775358,
+          "relative_inventory": 3.7897381200407986e-08,
+          "relative_processed": 1.3857999148386165e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 8.56503541650501e-07
+        },
+        "g_system": {
+          "max_abs_balance_kg": 6.148782816239873e-09,
+          "initial_inventory_kg": 0.2930184510878742,
+          "absolute_processed_mass_kg": 8.645658430688181,
+          "relative_inventory": 2.0984285438038492e-08,
+          "relative_processed": 7.111989058478729e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -6.1473906079003946e-09
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 1.5740511116746347e-09,
+          "initial_inventory_kg": 0.27483381167493537,
+          "absolute_processed_mass_kg": 8.645652222004582,
+          "relative_inventory": 5.727283342911141e-09,
+          "relative_processed": 1.8206273757674642e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.573108004144472e-09
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 4.574731704565238e-09,
+          "initial_inventory_kg": 0.018184639412939043,
+          "absolute_processed_mass_kg": 8.645653757149997,
+          "relative_inventory": 2.515712080224229e-07,
+          "relative_processed": 5.291365850479396e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -4.5742826037559245e-09
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "Ql_nominal_m3_s": 0.0012878238483718034,
+      "Ql_actual_min_m3_s": 0.0012878238483718034,
+      "Ql_actual_max_m3_s": 0.0012878238483718034,
+      "max_relative_Ql_nominal_error": 0.0,
+      "integrated_Ql_nominal_error_m3": 0.0,
+      "max_abs_boundary_mass_error_kg_s": 0.0,
+      "max_abs_boundary_pressure_error_Pa": 0.0,
+      "manifest": {
+        "operator": "994736f",
+        "eos": "BAROTROPIC",
+        "command": [
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/frozen_994736f/prims_f",
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/local_volume_controls_994736f/BAROTROPIC/input.nml"
+        ],
+        "returncode": 0,
+        "timeout": false,
+        "wall_s": 408.18186123500345,
+        "status": "status=0\nreached_time_s=  2.4000000000000000E+03\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=19222\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  2.4949265300000002E+02\nwall_seconds=  4.0735603046199998E+02\nnewton_iterations_total=19932\njacobian_evaluations_total=19932\nresidual_evaluations_total=24253\nlinear_solves_total=4321\nbacktrack_trials_total=4321\nprepare_calls_total=19222\n",
+        "hashes": {
+          "run_status.txt": "3fd8e132893566ca4165c782517624067540c168c3308c2fd136eaeeb0a316aa",
+          "stdout.log": "91fb4af2da3cf249dcfc42cae287d9b1f91e4f1a8ad023d45b0da8e3ee72594d",
+          "checkpoint.dat": "2ebd9bfd9beebd304f12436b9386cb62fd86c3216e487fbfda9008a8b21dc895",
+          "steps.csv": "1afa663c794af5628154fbb5fdbb8cb0bef9dc135c5d08aab73bd8ed6affe247",
+          "conservation.csv": "a6ad17ec813e19e35842d1be2779860d92a18f1ebdf338918b2169da2b7db95d",
+          "results_D_Stable.dat": "955263914451c648cdfecc32f45fde5fdcc135a9ddd7fd107b0f2ae8211a0e9e",
+          "run_metadata.txt": "f174edbafadfa8419836177fefa9467418b45f2d00bfa183130e8cbb3c138cc2",
+          "boundary_conditions.csv": "9e3526fe07cde7fbdb7af4e5fa21b593eaa1188fab5e3759d7691abad6bd089c",
+          "fields.csv": "12d970b5b93036f24461672cc3ab2320cc94666ad8356d5849c6c17534b65cde",
+          "inlet_contract.txt": "c86f5f85e9dfc5724007977277a8a807fa80a0c907c17ff05eb454bcc84f52d7",
+          "monitor.csv": "2d3510ea6f7e02237fc48f9f774a762e704eb8e264491094ae170be5e4c6fcb0",
+          "input.nml": "0ab71854bc8a367cb784023890b18a45b3067d7f757b1a31c06ffab4fbf9815b",
+          "rejected_proposals.csv": "e25dac85d6bc9cc6571672790b89fb445c0f78e8451c1b94919a38625f4bffa2"
+        }
+      }
+    },
+    {
+      "name": "local_volume_controls_994736f/ISOTHERMAL",
+      "operator": "994736f",
+      "status": {
+        "status": "0",
+        "reached_time_s": "2.4000000000000000E+03",
+        "requested_time_s": "2.4000000000000000E+03",
+        "accepted_steps": "19222",
+        "rejected_steps": "0",
+        "last_rejection_status": "0",
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": "2.5520878600000000E+02",
+        "wall_seconds": "4.0624375565999998E+02",
+        "newton_iterations_total": "20094",
+        "jacobian_evaluations_total": "20094",
+        "residual_evaluations_total": "25475",
+        "linear_solves_total": "5381",
+        "backtrack_trials_total": "5381",
+        "prepare_calls_total": "19222"
+      },
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 4.233588697388768e-07,
+          "initial_inventory_kg": 83.1571102889578,
+          "absolute_processed_mass_kg": 6164.414496846946,
+          "relative_inventory": 5.0910724082134616e-09,
+          "relative_processed": 6.867787199504865e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -4.247261587996124e-07
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 1.906755642266944e-09,
+          "initial_inventory_kg": 59.629215582612126,
+          "absolute_processed_mass_kg": 6164.415439169963,
+          "relative_inventory": 3.1976869452949063e-11,
+          "relative_processed": 3.093165379722831e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.4680213994980717e-09
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 4.2526562538114376e-07,
+          "initial_inventory_kg": 23.527894706345684,
+          "absolute_processed_mass_kg": 6164.414632946087,
+          "relative_inventory": 1.807495446103156e-08,
+          "relative_processed": 6.898718705719208e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -4.2719418019911037e-07
+        },
+        "g_system": {
+          "max_abs_balance_kg": 5.505817135542657e-09,
+          "initial_inventory_kg": 0.3858463030153971,
+          "absolute_processed_mass_kg": 8.645657326360602,
+          "relative_inventory": 1.4269456756523462e-08,
+          "relative_processed": 6.368303678605702e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 5.50493834011515e-09
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 2.0392576516314875e-09,
+          "initial_inventory_kg": 0.3668058439603992,
+          "absolute_processed_mass_kg": 8.64565089487985,
+          "relative_inventory": 5.5595015325100656e-09,
+          "relative_processed": 2.358709224356008e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.038701611477105e-09
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 3.466559483911169e-09,
+          "initial_inventory_kg": 0.01904045905499789,
+          "absolute_processed_mass_kg": 8.645651325697688,
+          "relative_inventory": 1.8206281024517835e-07,
+          "relative_processed": 4.009598991816182e-10,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 3.4662367286380475e-09
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "Ql_nominal_m3_s": 0.0012878238483718034,
+      "Ql_actual_min_m3_s": 0.0012878238483718034,
+      "Ql_actual_max_m3_s": 0.0012878238483718034,
+      "max_relative_Ql_nominal_error": 0.0,
+      "integrated_Ql_nominal_error_m3": 0.0,
+      "max_abs_boundary_mass_error_kg_s": 0.0,
+      "max_abs_boundary_pressure_error_Pa": 5.820766091346741e-11,
+      "manifest": {
+        "operator": "994736f",
+        "eos": "ISOTHERMAL",
+        "command": [
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/frozen_994736f/prims_f",
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/local_volume_controls_994736f/ISOTHERMAL/input.nml"
+        ],
+        "returncode": 0,
+        "timeout": false,
+        "wall_s": 407.0205807240127,
+        "status": "status=0\nreached_time_s=  2.4000000000000000E+03\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=19222\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  2.5520878600000000E+02\nwall_seconds=  4.0624375565999998E+02\nnewton_iterations_total=20094\njacobian_evaluations_total=20094\nresidual_evaluations_total=25475\nlinear_solves_total=5381\nbacktrack_trials_total=5381\nprepare_calls_total=19222\n",
+        "hashes": {
+          "run_status.txt": "5b3caf3a0a4b82496c8078cca910839b869c51b8cf6ca22c84cefb7b0eb0aad1",
+          "stdout.log": "a5428313f9a0e13e757fd367b9cc6ea9c4f5619344657f1d353f299f086fce2c",
+          "checkpoint.dat": "91dff2f4aa91ca204235feeecc093c123c8d078425ffa1fa63faa2183fa54217",
+          "steps.csv": "37bbce041d779b135a963d436e58c581ba5647fd019291ed7c89d2a2c46fe5e3",
+          "conservation.csv": "da7e4e782da164025715d342edae482617abaa87f253b4b6436718d45e887715",
+          "results_D_Stable.dat": "3e0aad1ac36dd114f11477e9ef159ebb174400d34a41bc4e5b472a589d5e306b",
+          "run_metadata.txt": "700b3d20b76c8c137caabd8e4b2edb7ec796eb1381397c81acb2a0c94c3854e9",
+          "boundary_conditions.csv": "a812e8ab06f4950fd55b7f129de751787e143622d563abc2074206d1828feb24",
+          "fields.csv": "bfc605558c08d0ffbde709415a0145d039cc6102a713b13c98924037fe8df66a",
+          "inlet_contract.txt": "d18aa56a4238a5efff3d63077b089fc233568000af019c7a27ebedfa7732f598",
+          "monitor.csv": "43f3dee5391c1f25c61d287184e2a74c98bebe8fff77b2ac6f6b252c2b4e2e67",
+          "input.nml": "05a61a38f54dbde7506df4e335e42f51c2cfc187295f112d7eed972eb1867a88",
+          "rejected_proposals.csv": "e25dac85d6bc9cc6571672790b89fb445c0f78e8451c1b94919a38625f4bffa2"
+        }
+      }
+    }
+  ]
+}

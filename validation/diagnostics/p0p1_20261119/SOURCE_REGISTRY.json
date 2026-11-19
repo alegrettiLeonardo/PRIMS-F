@@ -1,0 +1,54 @@
+{
+  "local_references": [
+    {
+      "filename": "sistema_oleoduto_riser.pdf",
+      "sha256": "9f115779783f87a58719e730f1c3a35c331d221361bff1c78ffed9306f7feb1d",
+      "use": "section4, equations24-29, PDF page5; equations15/54 remain only diagnostic",
+      "local_access": true,
+      "pdf_not_distributed": true
+    },
+    {
+      "filename": "Dissertacao_Leonardo.pdf",
+      "sha256": "dcc6c069d89099950fe737112b331a678727cc3c6929deb4f105072f0f0e8e81",
+      "use": "section4.3.1, equations4.28-4.30; PDF98 / printed96, this file version",
+      "local_access": true,
+      "pdf_not_distributed": true
+    },
+    {
+      "filename": "chexal1992(1).pdf",
+      "sha256": "b0b6b68f5e13fec48e931d89d87f9d65cb9c3bb134235c2307ded24e9c00700e",
+      "use": "1992: vertical countercurrent p262; horizontal co-current p264; branch multiplicity p268; not extended",
+      "local_access": true,
+      "pdf_not_distributed": true
+    },
+    {
+      "filename": "Sci-Hub. Modeling and simulation of severe slugging in air\u2013water pipeline\u2013riser systems _ International Journal of Multiphase Flow, 2010.pdf",
+      "sha256": "c60944a348bf516f20ed7fd965cff7aa6b8417b07ef3b4b9433c64d28db8a3a5",
+      "use": "Balino et al2010, DOI10.1016/j.ijmultiphaseflow.2010.04.003, equations78-79 p649 and Table3 p653",
+      "local_access": true,
+      "pdf_not_distributed": true
+    }
+  ],
+  "additional_primary_references": [
+    {
+      "doi": "10.1137/030601624",
+      "location": "section2.7, equations2.34-2.37, preprintp9",
+      "model_limit": "relaxation system, not directly the three PRIMS-F equations"
+    },
+    {
+      "doi": "10.1002/cnm.849",
+      "location": "section5, equations11-23",
+      "model_limit": "four equations; source projection cannot be copied without adaptation"
+    },
+    {
+      "doi": "10.1016/j.jcp.2013.11.028",
+      "location": "preprintsection2.2, equations2.7 and2.13-2.16",
+      "model_limit": "Euler with energy; own barotropic two-equation specialization derived and tested"
+    },
+    {
+      "doi": "10.1002/fld.4921",
+      "location": "equations7b and12, section3.2.2",
+      "model_limit": "laminar friction; no imported turbulent-wall coefficients"
+    }
+  ]
+}

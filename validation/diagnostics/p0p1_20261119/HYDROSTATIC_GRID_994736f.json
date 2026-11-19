@@ -1,0 +1,727 @@
+{
+  "hydrostatic_cases": [
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N16_G0",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 0.0,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "8ac3b3ad3db622623f388e1cbc1590f7f725ce2c57dbc85e58c88492c9a31da6",
+        "monitor.csv": "fcf150455c4d1dfa217c081cf7ae3505863bcfe9ea54a2d0c29d5b22081de672",
+        "steps.csv": "235911f00de873c8f436002b068dce8fe97c876d68dfe4e3217c12a0adb8881a",
+        "run_status.txt": "30686d493beb3b8939086ec00aec29066a31f78bd6dad7f92bd4c5bce01987d5"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N16_G19.62",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 6.355360682164246e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 5.794101424262782e-15,
+      "hashes": {
+        "conservation.csv": "410e7009224de6e7f6d780b1a85ba6d2e800628d9139c5345aeb75fbae7302b0",
+        "monitor.csv": "5bef88dec8f29b76f1a84e2023f1ab93233cf0bae571fbfc66e302ab38961d2b",
+        "steps.csv": "86f9e4f2a17aff26a665f18f943ca9604546d6c44b315e91981a65d6f67c2f58",
+        "run_status.txt": "adfe8ddf27330fc765d4ec5dfc7f7abd5c8c03bdb1b60eea65fcab5456fc091b"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N16_G4.905",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 9.531486711011894e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 5.302278912922943e-14,
+      "hashes": {
+        "conservation.csv": "4060f6a7d9952cf542e972ed74ff7558c9cbb50afc00c0052d36fdf330e01240",
+        "monitor.csv": "7f82cd9d9ae5005d050be7cc176890ee85f95edfa7b07722a70023e14ef96516",
+        "steps.csv": "b844fbccd1d9a951b3df32a72901fb8f70a50fac80895ecb6dd66995dbeca3b3",
+        "run_status.txt": "9df59c7e61bd6ef81d978301c06e11e3136089a7bb29cde89d2fba2de310c849"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N16_G9.81",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 9.532374889431594e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "7f107591b719bef2e07481f0a4daf0fcb83fdbe37b093ba77be8d05279958efb",
+        "monitor.csv": "459c0120a7976aea58d668e24ca0a9b5d9fc9f380d70aca8fbbdb7aaa8cfc56d",
+        "steps.csv": "8b395926ae1a910661196b2c3f94ae2ab930ed4bf8e2a41f6fa356c5924816a0",
+        "run_status.txt": "1b72d653dd1cf1b2f43bfc2e8a1b6a7f6cef6b100081dbcf774aef057a7cd7ee"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N201_G0",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 0.0,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "040d13c00f649cdc811c253c1ab8458be5b0055fd2e98d6adfe773724aef41af",
+        "monitor.csv": "d9d675455cca2b65a7a06d8b581c97323f57d11f5d31f5071559732d72ad62d4",
+        "steps.csv": "f0479c6cc5808328d3b052d9899a7447ebe9139f5e062dd311fd793c04d351e0",
+        "run_status.txt": "39885c4144070e2f0cc1b097e3496d556d0eac74eba9f9dbf83f145fe5d0cf50"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N201_G19.62",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 4.7791113697279775e-12,
+      "max_residual": 8.897416137187975e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 8.3526204876471e-14,
+      "hashes": {
+        "conservation.csv": "4091ee1086f945f7060d32674675fe71b23ca82dcf0d9e419d6992727337438a",
+        "monitor.csv": "c1b5cd443b41332e19c3dad769efe366bc69a545ff8b4e02ed908c4af44a9d25",
+        "steps.csv": "efc11119bd8073831e29666e6e3af74193e79a875eac4b3e15c3caf6ca1653bf",
+        "run_status.txt": "7d811fd45f5c639e0e6b4534cdebfdd5f0630fd52776eeaecc826b13881c2545"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N201_G4.905",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 3.992964890831523e-12,
+      "max_residual": 8.58086934840685e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 6.177226850498873e-14,
+      "hashes": {
+        "conservation.csv": "005b853ade7facd88ab79342b2bcbd8af03666ee16aefc2563475fe0e2da9000",
+        "monitor.csv": "386954a24a281cd244cf8bb5073e5779d6c98de51569f0d1c88a8a0be1346f0d",
+        "steps.csv": "d6ccaa30ecdd602e72294646988a204d0cd0de7eebe7094a2cd778c7c640609e",
+        "run_status.txt": "2ffd64e2257503fc4baa8475a4528e68551d8f59bfded92cd81bdb75e92f0c9a"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N201_G9.81",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 3.439570191826709e-12,
+      "max_residual": 8.897416137187975e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 5.204252215637036e-14,
+      "hashes": {
+        "conservation.csv": "1d1cf902235c9986571629e87e3082901c2be61395778df2f03c3b25b8b0c279",
+        "monitor.csv": "67d7f4b32a0f43dd18454dbe8012e3673e4d7c67429a9ee418ea513af69cbde8",
+        "steps.csv": "ba3b623f15460bf9cfd829828f43f3b545e1821d42345c74b5558484e7d04441",
+        "run_status.txt": "36e5b1eabbf2bb2262d577835bbb27b40b3ca750db1085fa70a70f8442df4585"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N32_G0",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 0.0,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "b5cb257f1781c56a812d21dd88ddd0b489c8b56c95568c1a17083634a1cc76a4",
+        "monitor.csv": "8df2d045fe32552d0e88bc42f385396bc63f4f894f1ab9fdef5e27853f709d39",
+        "steps.csv": "2f69f4085b56c4e067aea980a21d0c8ec595615668e5bc60e6e2bd39b2aeaa62",
+        "run_status.txt": "6a70ba2a547f1dfa0ecd97277210641ddf8505a1b084d0fa445ae11d4f20fbc1"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N32_G19.62",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 1.9063861600443488e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 2.651040745321167e-14,
+      "hashes": {
+        "conservation.csv": "2b7647bbe760a6f5427155560ad33f96ef553a2ec5de11206ac6c96f36298086",
+        "monitor.csv": "878ea470e204dc1e912ed6fd50837c3d95e64baea29da498307211db0729510b",
+        "steps.csv": "50b0b7b8db3a757dd013949686cebcd72e32bd85ef3adfa447ffc695f20aad64",
+        "run_status.txt": "b65db09de66886702e3bc028fa7f64ae7845ce49b53391ae83cddb10393ad587"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N32_G4.905",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 1.9062973422023788e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 5.794438993464036e-15,
+      "hashes": {
+        "conservation.csv": "a46336ccd3cf3636f62e2cad9cc4eca5659f3653e75dc51963a07cc512189601",
+        "monitor.csv": "b8f0d2a149b08e44a28b9a57a8a9192f50cbee3c836f5810917b02f51017c77e",
+        "steps.csv": "4d5b30f7c66a32f7700d9dd78e0aad4a23b55ef412408881cfffd0d85dc47777",
+        "run_status.txt": "4b8e4de6796a302a4388a79b7160fd09d89ea666808d36922e6cb70d7e6496f8"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N32_G9.81",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 1.2709833185908792e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "6856d92e30f39ab1d2669de5e9a857c98485bc1579c459ec70a0ecc465886e9c",
+        "monitor.csv": "25112e88fa6995b9c3f2b50b287ee503bb68fe9187e18d5105ffc5ca5c394c74",
+        "steps.csv": "1a186c0842c813e0eb196115792849127121e9e7f360bf7b64f106febb780884",
+        "run_status.txt": "7f05e9a3a13aefd0dbfcdae21bff5f271e2b9012d843400e931b936a339fac67"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N64_G0",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 0.0,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "1f783a25132723ba48a1d307f386aad371c086f97ce1b8ad6206a532185d31e4",
+        "monitor.csv": "a1b0cff0b20be9e0d2d047a1dcad0a37148ac9cdd676dc68a0d7a7e7ca95d875",
+        "steps.csv": "31a2889ec095d71dee42ed1f0835b68b8a2df7f98ffc64fde27574feff3d0d95",
+        "run_status.txt": "7a75c179d1b9e7956db0b0c4c41a14df5468990a371ec76b3b071c7eaef6b007"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N64_G19.62",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 5.083222731627757e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 1.3254583616949463e-14,
+      "hashes": {
+        "conservation.csv": "0462fd6a3f31ebdb40994df2ff42ca797a25fc8647c2ba75f0df2bfbb465f6d0",
+        "monitor.csv": "4dd2346d9222f9ad644fa473d5c9bdd609b63c8f90c6d45cd82cda24d1f25798",
+        "steps.csv": "7b4c4a38d15bcfc914c96089d6a3d93763b76541190b9527bc103f798477925a",
+        "run_status.txt": "0883d7ff1554170a8242650dba6f554f4053d090731815ca725a7f546bd5df19"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N64_G4.905",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 3.8125946844047576e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 2.651015429912257e-14,
+      "hashes": {
+        "conservation.csv": "a1c92f39fc9bab104c058b676a2fe1679b231a7dcde48cdb4cd9e02b736a5ede",
+        "monitor.csv": "789a1c0bb87a2bbd2e41f2604111df6358003ec06fe461e7ad8455d546e061d1",
+        "steps.csv": "9f6eb7ed39ee9d1b66d65d5f6e4e960c389173b9936e91edcfc0288bfba011b4",
+        "run_status.txt": "86d03308952051dddf0f7749dc5c9c900760d50634070c4ed96e24649afb6128"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N64_G9.81",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 3.8129499557726376e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 2.651230577468129e-14,
+      "hashes": {
+        "conservation.csv": "bc35064294d3fad56e301f8e036e7af4fb133c1c73ac93d73285a2731b5de728",
+        "monitor.csv": "f2a78a9a9223aa3a623e07894103af57f2b16d56acbc6e235d5ed7bdf630a398",
+        "steps.csv": "5b99c3d8ae6fcdaef7c3f2c933dd252e8970fc10bafb9cabdb608cbd4cab321d",
+        "run_status.txt": "9be12c522e0a9bd2fa77cd01e353897f372a18afcdd6298b4a5cd0a023523595"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N8_G0",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 0.0,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "343b2334bc82941f5b8a8bcc3a3661803501714239e8c9c2e0700a6a37c8b27f",
+        "monitor.csv": "37655ad490b900881e33f94c55061a858dacb45d77ad317977653ed01ae22aef",
+        "steps.csv": "d81ca89382acebfdd64b771b8f48b7cada5d5c264a7d5a9b254380053c30e20e",
+        "run_status.txt": "79dac4589e28798b1845378c0036db6c26afd10baf5ac7ab606d374e43ca3f91"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N8_G19.62",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 3.177458296477198e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 2.6509167233898925e-14,
+      "hashes": {
+        "conservation.csv": "1ab3375eaa037dfd8cfa89322b74628968e12b6b8b0d84c83d15f72565bdec26",
+        "monitor.csv": "112dde15307d8166e8749245c2325ba06e678d883ce462a1fea076674a8de766",
+        "steps.csv": "2de3c6c0464a7f05d7af8e228000138a9598d4f6cf6be2a6498965ffac504356",
+        "run_status.txt": "77feed38529395ffefcfac31495f6cb3f57f9e4a25491898c3a7da3f7982562f"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N8_G4.905",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 4.765521310901022e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "3ad0c3304e3d112ce5b21043b123e2190622b01b9167411124a254c895bfffe7",
+        "monitor.csv": "059b46e9e7b748028015c9ef019a76737fb252ab0a3a69eb0693c6c22e1c616e",
+        "steps.csv": "03d3856bad995992ed217bf7452fcfba6c8d3b0d1a08a8b0cb7d3ccca2197007",
+        "run_status.txt": "e8679da12b94823aae0c24f8e72d92a23802ebf1423a26890be0c1806b1f4bdd"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/HYDRO_N8_G9.81",
+      "operator": "18aa7f7",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 1.589173237448449e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 1.3254912637241772e-14,
+      "hashes": {
+        "conservation.csv": "b3517f35f9c88447ea2871b9b849f6f79769e154a8676ec2b211b494faaf2ebb",
+        "monitor.csv": "03f764eb840127b42299b450ea66d39f6137397836c26832690822012adb5191",
+        "steps.csv": "9eedbaa419dd0ae54711374dfedf7d7e0adca256861413e1ba3e6d95ed694047",
+        "run_status.txt": "d61e948b6783a41c464df38533d970cdde469fc6b9e47d65b2b8a3795169522a"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N16_G0",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 0.0,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "8ac3b3ad3db622623f388e1cbc1590f7f725ce2c57dbc85e58c88492c9a31da6",
+        "monitor.csv": "fcf150455c4d1dfa217c081cf7ae3505863bcfe9ea54a2d0c29d5b22081de672",
+        "steps.csv": "eaac31595fc281001ac26890e9a68e85f0515017f3fc54889e66d079818d42ab",
+        "run_status.txt": "c4d3cc3600e5d525cd84be2da2fa503e8bc50cc9db037eb66d6abc1f9be9d397"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N16_G19.62",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 6.355360682164246e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 5.794101424262782e-15,
+      "hashes": {
+        "conservation.csv": "410e7009224de6e7f6d780b1a85ba6d2e800628d9139c5345aeb75fbae7302b0",
+        "monitor.csv": "5bef88dec8f29b76f1a84e2023f1ab93233cf0bae571fbfc66e302ab38961d2b",
+        "steps.csv": "758a87c3c0e6afbfcd01c22faa228a9c38256096ba121c8be73b131dea82138c",
+        "run_status.txt": "077e2ed087c4aeb1d5785e6981734b2699e1d0da49151cc7329b7de5bfae50f4"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N16_G4.905",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 9.531486711011894e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 5.302278912922943e-14,
+      "hashes": {
+        "conservation.csv": "4060f6a7d9952cf542e972ed74ff7558c9cbb50afc00c0052d36fdf330e01240",
+        "monitor.csv": "7f82cd9d9ae5005d050be7cc176890ee85f95edfa7b07722a70023e14ef96516",
+        "steps.csv": "988f470d6084e825631540e3b22122fe1b2e5e7b1557e11ea00b691b94a63867",
+        "run_status.txt": "069520a4154f14dd7c4503070cd8b6912b14ceb1e2e64b18b21e0511b35a3cd4"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N16_G9.81",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 9.532374889431594e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "7f107591b719bef2e07481f0a4daf0fcb83fdbe37b093ba77be8d05279958efb",
+        "monitor.csv": "459c0120a7976aea58d668e24ca0a9b5d9fc9f380d70aca8fbbdb7aaa8cfc56d",
+        "steps.csv": "b63e7b915264d3f0a26ab26f9d5fe2e72d83d9d38c7c818b47f6176b79df9a47",
+        "run_status.txt": "842764e49a5761c1f2b157a94c439a160c4dbe873cc6eff03d9a96d4f98a3cb5"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N201_G0",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 0.0,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "040d13c00f649cdc811c253c1ab8458be5b0055fd2e98d6adfe773724aef41af",
+        "monitor.csv": "d9d675455cca2b65a7a06d8b581c97323f57d11f5d31f5071559732d72ad62d4",
+        "steps.csv": "b653e200d9d5f601e6b5f62a05eceda61c5f9f021738af88884a7d8060ea4b1b",
+        "run_status.txt": "47b8bbe34bf7dde2de41ce190d05868489a2c34a31dcceb46f5f8f0f5f7c3cce"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N201_G19.62",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 4.7791113697279775e-12,
+      "max_residual": 8.897416137187975e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 8.3526204876471e-14,
+      "hashes": {
+        "conservation.csv": "4091ee1086f945f7060d32674675fe71b23ca82dcf0d9e419d6992727337438a",
+        "monitor.csv": "c1b5cd443b41332e19c3dad769efe366bc69a545ff8b4e02ed908c4af44a9d25",
+        "steps.csv": "66be75d8daee9df0590e6ceed0d9234478c765dd3b76cdcc48a6aab5fdfd2d97",
+        "run_status.txt": "b010977231fc4a975ecd3a1b7680b590d8dc5c65a6ffb84c791e39789ce2def8"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N201_G4.905",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 3.992964890831523e-12,
+      "max_residual": 8.58086934840685e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 6.177226850498873e-14,
+      "hashes": {
+        "conservation.csv": "005b853ade7facd88ab79342b2bcbd8af03666ee16aefc2563475fe0e2da9000",
+        "monitor.csv": "386954a24a281cd244cf8bb5073e5779d6c98de51569f0d1c88a8a0be1346f0d",
+        "steps.csv": "56f68ad53e5c1e8b698eecaec0546ab6a2350eafca808257b442d6415432e9ca",
+        "run_status.txt": "3a13b047a3ff9f5f2aeae8d7c311a8c6c91bdc8a40a6d6895a3185189b4c348d"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N201_G9.81",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 3.439570191826709e-12,
+      "max_residual": 8.897416137187975e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 5.204252215637036e-14,
+      "hashes": {
+        "conservation.csv": "1d1cf902235c9986571629e87e3082901c2be61395778df2f03c3b25b8b0c279",
+        "monitor.csv": "67d7f4b32a0f43dd18454dbe8012e3673e4d7c67429a9ee418ea513af69cbde8",
+        "steps.csv": "d1c6a0390630465060a884598b7493ce3cf50843a13453e89847ff83cd32ef7f",
+        "run_status.txt": "fe285c4471cb73c770d486ce0af113d35ccadf50191dcf5dbded115fc091dd54"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N32_G0",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 0.0,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "b5cb257f1781c56a812d21dd88ddd0b489c8b56c95568c1a17083634a1cc76a4",
+        "monitor.csv": "8df2d045fe32552d0e88bc42f385396bc63f4f894f1ab9fdef5e27853f709d39",
+        "steps.csv": "97bd8d1615d538f176709db149b5de050acdf128fd89584976472e0a0fd413a7",
+        "run_status.txt": "c588123635928d5f5379a5bc4a8187bc13927660bf62ed4c56ea1066dbc14e1a"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N32_G19.62",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 1.9063861600443488e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 2.651040745321167e-14,
+      "hashes": {
+        "conservation.csv": "2b7647bbe760a6f5427155560ad33f96ef553a2ec5de11206ac6c96f36298086",
+        "monitor.csv": "878ea470e204dc1e912ed6fd50837c3d95e64baea29da498307211db0729510b",
+        "steps.csv": "3c9dd0c8956499a29875cc5df817cdd861d3ba43cff0cece3d5484c6572c2757",
+        "run_status.txt": "10746496ecc8a1d4b1416604b714b7c7527591d339a54076bd416c25deab235c"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N32_G4.905",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 1.9062973422023788e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 5.794438993464036e-15,
+      "hashes": {
+        "conservation.csv": "a46336ccd3cf3636f62e2cad9cc4eca5659f3653e75dc51963a07cc512189601",
+        "monitor.csv": "b8f0d2a149b08e44a28b9a57a8a9192f50cbee3c836f5810917b02f51017c77e",
+        "steps.csv": "b69c4c8e05cd80502a4ac7f879ed66610fb13dc75fbf12437b7a51f55fc7ab95",
+        "run_status.txt": "f7975eb9bc7f7346fb7b4b08e05dfa561df5471da97b8c04a297db857e67e4c4"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N32_G9.81",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 1.2709833185908792e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "6856d92e30f39ab1d2669de5e9a857c98485bc1579c459ec70a0ecc465886e9c",
+        "monitor.csv": "25112e88fa6995b9c3f2b50b287ee503bb68fe9187e18d5105ffc5ca5c394c74",
+        "steps.csv": "7ebfca36e0b0f81f782dfdc95885ff1cb062fb510793a4724f5155591e95c23e",
+        "run_status.txt": "f6f614a6e2be6c9820340fadc69cdd56cd6fa435fc2ab659944626ddfbb24c82"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N64_G0",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 0.0,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "1f783a25132723ba48a1d307f386aad371c086f97ce1b8ad6206a532185d31e4",
+        "monitor.csv": "a1b0cff0b20be9e0d2d047a1dcad0a37148ac9cdd676dc68a0d7a7e7ca95d875",
+        "steps.csv": "54c66ba9305417b9a0eb2edc1c385543de1cd0e42250a8a2941871048a25dbd4",
+        "run_status.txt": "a93288e97ac1540075930eefd63271c3bf6469a02433267906a88fb47ac0e81b"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N64_G19.62",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 5.083222731627757e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 1.3254583616949463e-14,
+      "hashes": {
+        "conservation.csv": "0462fd6a3f31ebdb40994df2ff42ca797a25fc8647c2ba75f0df2bfbb465f6d0",
+        "monitor.csv": "4dd2346d9222f9ad644fa473d5c9bdd609b63c8f90c6d45cd82cda24d1f25798",
+        "steps.csv": "7f0d09a792eca10dc6ccd10e6023e98de255e14cfd75f0067dc29862187f7b86",
+        "run_status.txt": "7bdd4733d5ec4097db8fda0cdab79b46def0a640bb04188788a9da2697484493"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N64_G4.905",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 3.8125946844047576e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 2.651015429912257e-14,
+      "hashes": {
+        "conservation.csv": "a1c92f39fc9bab104c058b676a2fe1679b231a7dcde48cdb4cd9e02b736a5ede",
+        "monitor.csv": "789a1c0bb87a2bbd2e41f2604111df6358003ec06fe461e7ad8455d546e061d1",
+        "steps.csv": "71afa94d46326660e69fd53f617f9893bf5b5e916e36e2f296c9362b9014c95d",
+        "run_status.txt": "3ca06ff31d50b302fcecafe32ae5ec485cbd155d1835186e06fed837b458ab53"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N64_G9.81",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 3.8129499557726376e-11,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 2.651230577468129e-14,
+      "hashes": {
+        "conservation.csv": "bc35064294d3fad56e301f8e036e7af4fb133c1c73ac93d73285a2731b5de728",
+        "monitor.csv": "f2a78a9a9223aa3a623e07894103af57f2b16d56acbc6e235d5ed7bdf630a398",
+        "steps.csv": "782f78c1f89f7bb3ffb549ef3d9b22e842c265e3dee9e53265782d98a65f979d",
+        "run_status.txt": "5342fe47ddbfabd5f5daaad7f1910fbc451cf31eaf743fb28213d595f5dc5cba"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N8_G0",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 0.0,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "343b2334bc82941f5b8a8bcc3a3661803501714239e8c9c2e0700a6a37c8b27f",
+        "monitor.csv": "37655ad490b900881e33f94c55061a858dacb45d77ad317977653ed01ae22aef",
+        "steps.csv": "c95d0c7c2515d1391d5d9cb86904a6a9b7f6c1d55437bfbfedf60e6f78eadfaa",
+        "run_status.txt": "07ac84245f59060602506c2d58fdbb13b494f00b72fb1c68d43e727f3bc3ad45"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N8_G19.62",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 3.177458296477198e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 2.6509167233898925e-14,
+      "hashes": {
+        "conservation.csv": "1ab3375eaa037dfd8cfa89322b74628968e12b6b8b0d84c83d15f72565bdec26",
+        "monitor.csv": "112dde15307d8166e8749245c2325ba06e678d883ce462a1fea076674a8de766",
+        "steps.csv": "eee0e84f0acec151fb128d3d6d160c89a6767c48b261ed6681c699a5843564c9",
+        "run_status.txt": "3e9d56ace22cd4070247f96dd5d4d95b23a965549b42179b6c4f04c7fccd2051"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N8_G4.905",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 4.765521310901022e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 0,
+      "hashes": {
+        "conservation.csv": "3ad0c3304e3d112ce5b21043b123e2190622b01b9167411124a254c895bfffe7",
+        "monitor.csv": "059b46e9e7b748028015c9ef019a76737fb252ab0a3a69eb0693c6c22e1c616e",
+        "steps.csv": "6898dc27d169cf1b94bb26c3751400b7dc89d7f9733e9e2e9d3cc15bcead252c",
+        "run_status.txt": "ff61527f71251524aae76ac82957be02e8e63994f727dabbf5eba2b70a501dac"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/guard_qualification_994736f/HYDRO_N8_G9.81",
+      "operator": "994736f",
+      "status": 0.0,
+      "time_s": 1.0,
+      "accepted": 109.0,
+      "rejected": 0.0,
+      "max_abs_ul_m_s": 0.0,
+      "max_residual": 1.589173237448449e-12,
+      "max_gas_mass_kg": 0.0,
+      "max_balance_M0": 1.3254912637241772e-14,
+      "hashes": {
+        "conservation.csv": "b3517f35f9c88447ea2871b9b849f6f79769e154a8676ec2b211b494faaf2ebb",
+        "monitor.csv": "03f764eb840127b42299b450ea66d39f6137397836c26832690822012adb5191",
+        "steps.csv": "1b9fe3f6ba8d50e65a61735e192461316f4d506523408bfea0605206e480ee47",
+        "run_status.txt": "8de3a7d48ecdb84ef6cb9e8e97414a05b3e7d8a3a33161ff2fdd398b88258059"
+      }
+    }
+  ],
+  "full_hydrostatic_metrics_local_source": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_analysis_v2/summary.json",
+  "full_hydrostatic_metrics_sha256": "c731d1c91dd8ef0345d41e4486cae2fda9157aa1952420a0fc01e0c7627ca216",
+  "original_versioned_evidence": "P0_EVIDENCE.json at a3af8be"
+}

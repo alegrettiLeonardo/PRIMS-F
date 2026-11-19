@@ -1,0 +1,4213 @@
+{
+  "analysis_script_sha256": "4b0a2030c1f020680fb699c603deaad64b13b61e7ebf3858c75b41261674a0ce",
+  "settling_range_over_mean_limit": 0.005,
+  "period_amplitude_target": 0.01,
+  "runs": [
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N101_dt0.0625",
+      "time_s": 900.0,
+      "cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 640.4921090252642,
+        "window_end_s": 874.7188295587054,
+        "window_is_end_of_run": false,
+        "mean_period_s": 23.422672053344115,
+        "period_cv": 7.947870695362591e-06,
+        "first_semi_amplitude_Pa": 15999.781385559923,
+        "last_semi_amplitude_Pa": 16003.770102974217,
+        "mean_semi_amplitude_Pa": 16002.54223602035,
+        "amplitude_cv": 8.139461168969431e-05,
+        "relative_amplitude_change": 0.0002492982446555825,
+        "relative_difference_last_five_vs_first_five_amplitudes": 0.0001325775434399823,
+        "growth_rate_s_inv": 9.764311224369495e-07,
+        "log_amplitude_r_squared": 0.8684071760128532,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": true,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 640.4921090252642,
+          "window_end_s": 874.7188295587054,
+          "full_window_observed": true,
+          "mean_Pa": 266957.21533380664,
+          "rms_about_mean_Pa": 11233.40097424172,
+          "peak_to_peak_Pa": 32006.81501948912,
+          "minimum_Pa": 250568.60279409276,
+          "maximum_Pa": 282575.4178135819
+        },
+        "peak_records": [
+          {
+            "peak_time_s": 640.4921090252642,
+            "peak_pressure_Pa": 282571.2831394059,
+            "left_trough_time_s": 626.4402622631737,
+            "right_trough_time_s": 649.8624127103242,
+            "trough_baseline_Pa": 250571.72036828604,
+            "semi_amplitude_Pa": 15999.781385559923,
+            "peak_to_interpolated_trough_Pa": 31999.562771119847
+          },
+          {
+            "peak_time_s": 663.9149527788004,
+            "peak_pressure_Pa": 282572.4558993232,
+            "left_trough_time_s": 649.8624127103242,
+            "right_trough_time_s": 673.2838873142858,
+            "trough_baseline_Pa": 250570.75522967527,
+            "semi_amplitude_Pa": 16000.850334823976,
+            "peak_to_interpolated_trough_Pa": 32001.70066964795
+          },
+          {
+            "peak_time_s": 687.3376874911521,
+            "peak_pressure_Pa": 282573.3782636021,
+            "left_trough_time_s": 673.2838873142858,
+            "right_trough_time_s": 696.7058823089277,
+            "trough_baseline_Pa": 250570.1204638427,
+            "semi_amplitude_Pa": 16001.628899879695,
+            "peak_to_interpolated_trough_Pa": 32003.25779975939
+          },
+          {
+            "peak_time_s": 710.7600884742695,
+            "peak_pressure_Pa": 282574.0331870062,
+            "left_trough_time_s": 696.7058823089277,
+            "right_trough_time_s": 720.1289868395869,
+            "trough_baseline_Pa": 250569.59282692045,
+            "semi_amplitude_Pa": 16002.220180042874,
+            "peak_to_interpolated_trough_Pa": 32004.440360085748
+          },
+          {
+            "peak_time_s": 734.1828682968683,
+            "peak_pressure_Pa": 282574.51615014015,
+            "left_trough_time_s": 720.1289868395869,
+            "right_trough_time_s": 743.5513397630104,
+            "trough_baseline_Pa": 250569.14168242033,
+            "semi_amplitude_Pa": 16002.687233859906,
+            "peak_to_interpolated_trough_Pa": 32005.374467719812
+          },
+          {
+            "peak_time_s": 757.6054411026812,
+            "peak_pressure_Pa": 282574.9179611812,
+            "left_trough_time_s": 743.5513397630104,
+            "right_trough_time_s": 766.9739172213845,
+            "trough_baseline_Pa": 250568.87521299007,
+            "semi_amplitude_Pa": 16003.021374095566,
+            "peak_to_interpolated_trough_Pa": 32006.042748191132
+          },
+          {
+            "peak_time_s": 781.0280211401279,
+            "peak_pressure_Pa": 282575.1736999272,
+            "left_trough_time_s": 766.9739172213845,
+            "right_trough_time_s": 790.3968052234213,
+            "trough_baseline_Pa": 250568.65688592521,
+            "semi_amplitude_Pa": 16003.258407001005,
+            "peak_to_interpolated_trough_Pa": 32006.51681400201
+          },
+          {
+            "peak_time_s": 804.4509711167384,
+            "peak_pressure_Pa": 282575.36506565294,
+            "left_trough_time_s": 790.3968052234213,
+            "right_trough_time_s": 813.8189313549104,
+            "trough_baseline_Pa": 250568.4447817489,
+            "semi_amplitude_Pa": 16003.460141952019,
+            "peak_to_interpolated_trough_Pa": 32006.920283904037
+          },
+          {
+            "peak_time_s": 827.8733464373809,
+            "peak_pressure_Pa": 282575.544458598,
+            "left_trough_time_s": 813.8189313549104,
+            "right_trough_time_s": 837.2420255393963,
+            "trough_baseline_Pa": 250568.35409052685,
+            "semi_amplitude_Pa": 16003.595184035585,
+            "peak_to_interpolated_trough_Pa": 32007.19036807117
+          },
+          {
+            "peak_time_s": 851.2960799485583,
+            "peak_pressure_Pa": 282575.642305707,
+            "left_trough_time_s": 837.2420255393963,
+            "right_trough_time_s": 860.6646482685562,
+            "trough_baseline_Pa": 250568.25960170876,
+            "semi_amplitude_Pa": 16003.691351999107,
+            "peak_to_interpolated_trough_Pa": 32007.382703998213
+          },
+          {
+            "peak_time_s": 874.7188295587054,
+            "peak_pressure_Pa": 282575.75743435166,
+            "left_trough_time_s": 860.6646482685562,
+            "right_trough_time_s": 884.0869687318847,
+            "trough_baseline_Pa": 250568.21722840323,
+            "semi_amplitude_Pa": 16003.770102974217,
+            "peak_to_interpolated_trough_Pa": 32007.540205948433
+          }
+        ]
+      },
+      "settled": true,
+      "settling_variation": {
+        "period": 2.4534176407004167e-05,
+        "amplitude": 0.00024433595504511486,
+        "mean": 1.9541565926734077e-06
+      },
+      "period_s": 23.422672053344115,
+      "semi_amplitude_Pa": 16002.419449324963,
+      "mean_Pa": 266957.21533297177,
+      "window_s": [
+        640.4921090252642,
+        874.7188295587054
+      ],
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 6.821210263296962e-13,
+          "initial_inventory_kg": 71.25836382794442,
+          "absolute_processed_mass_kg": 2124.8945360965427,
+          "relative_inventory": 9.572504751536241e-15,
+          "relative_processed": 3.210140619885827e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -4.691491838284978e-13
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 1.1368683772161603e-12,
+          "initial_inventory_kg": 55.70265512773731,
+          "absolute_processed_mass_kg": 2128.3504875160447,
+          "relative_inventory": 2.040959043350975e-14,
+          "relative_processed": 5.341546817051625e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 9.005446194601522e-13
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 1.5916157281026244e-12,
+          "initial_inventory_kg": 15.555708700207083,
+          "absolute_processed_mass_kg": 2124.876696017449,
+          "relative_inventory": 1.023171466357837e-13,
+          "relative_processed": 7.490391000502339e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.36969380328865e-12
+        },
+        "g_system": {
+          "max_abs_balance_kg": 5.226929999935237e-13,
+          "initial_inventory_kg": 0.17434152937405795,
+          "absolute_processed_mass_kg": 5.443829821392232,
+          "relative_inventory": 2.998098054262569e-12,
+          "relative_processed": 9.601567593820331e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 5.224326888552234e-13
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 6.141753772226366e-13,
+          "initial_inventory_kg": 0.15139453820328883,
+          "absolute_processed_mass_kg": 5.438456710580139,
+          "relative_inventory": 4.056786886181701e-12,
+          "relative_processed": 1.1293192350465917e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 6.092538538549427e-13
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 3.174682738915635e-13,
+          "initial_inventory_kg": 0.022946991170769145,
+          "absolute_processed_mass_kg": 5.431763706521654,
+          "relative_inventory": 1.3834854056856401e-11,
+          "relative_processed": 5.844662821219465e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -8.682116499971937e-14
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "per_cycle_balances_kg": {
+        "l_system": [
+          0.0,
+          -9.947598300641403e-14,
+          -1.4210854715202004e-14,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          5.684341886080802e-14,
+          -2.5579538487363607e-13
+        ],
+        "l_pipe": [
+          6.394884621840902e-14,
+          -1.5631940186722204e-13,
+          9.947598300641403e-14,
+          -8.526512829121202e-14,
+          2.842170943040401e-14,
+          4.973799150320701e-14,
+          0.0,
+          -1.1368683772161603e-13,
+          5.684341886080802e-14,
+          -2.1316282072803006e-14
+        ],
+        "l_riser": [
+          -1.1368683772161603e-13,
+          0.0,
+          -1.1368683772161603e-13,
+          7.993605777301127e-14,
+          -7.993605777301127e-14,
+          1.1368683772161603e-13,
+          0.0,
+          0.0,
+          -5.861977570020827e-14,
+          -1.3677947663381929e-13
+        ],
+        "g_system": [
+          1.4183099139586375e-14,
+          1.4488410471358293e-14,
+          1.6181500583911657e-14,
+          1.3988810110276972e-14,
+          1.4654943925052066e-14,
+          1.4654943925052066e-14,
+          1.554312234475219e-14,
+          1.432187701766452e-14,
+          1.454392162258955e-14,
+          1.4072076837123859e-14
+        ],
+        "g_pipe": [
+          -1.887379141862766e-15,
+          5.745404152435185e-15,
+          1.0796918914479647e-14,
+          7.993605777301127e-15,
+          -1.2351231148954867e-14,
+          1.1962653090336062e-14,
+          2.7977620220553945e-14,
+          1.709743457922741e-14,
+          4.440892098500626e-15,
+          1.8041124150158794e-15
+        ],
+        "g_riser": [
+          1.5910883721659275e-14,
+          8.895661984809067e-15,
+          5.016820292524926e-15,
+          6.349087922075114e-15,
+          2.687780553678465e-14,
+          2.248201624865942e-15,
+          -1.1549788903053582e-14,
+          -3.3237301799715624e-15,
+          1.020364348569558e-14,
+          1.1969591984239969e-14
+        ]
+      },
+      "cycle_balance_definition": "linear interpolation of accepted BE inventories and cumulative accepted flux integrals at the same peak markers; no re-integration of sampled monitors",
+      "actual_dt_s": {
+        "min": 0.001,
+        "max": 0.0625,
+        "mean": 0.062421972534327144,
+        "accepted": 14418,
+        "sum_duration_s": 899.9999999999287
+      },
+      "hashes": {
+        "monitor.csv": "7297a576a41b8e9f393c230bc625cbe63c8dfaf4090597025508aa99d0a696ed",
+        "steps.csv": "8c8525fa1d8a0b6a692e9b61c4326d6d68eeccdb822240c7270421b576763c3a",
+        "conservation.csv": "0782c9a54dce4d7f875248563650417e5213bc703e52118a2e7f46b8ac49d16f",
+        "checkpoint.dat": "3fded51fe356188c68d692236f7f9a17d27e821b4bbd8dc48a9b531cc9232ee0"
+      },
+      "base_run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N101_dt0.0625",
+      "analysis_history": {
+        "kind": "derived analysis chronology; not a solver output/status",
+        "completed_analysis_history": true,
+        "segments": [
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/restart_refinement_18aa7f7/N101_dt0.0625",
+            "operator": "18aa7f79f7b16442fa19ebbd9ef8819b0eff187a",
+            "source_manifest_sha256": "ad967d8bb734823721bb60c6d01f33671bb20726fe9b2fb75fac9d8ddeca8797",
+            "offset_s": 0.0,
+            "through_step": 9140,
+            "through_time_s": 570.1387368633955,
+            "source_sha256": {
+              "conservation.csv": "be6d8011321e31f29c31066b39fd7b7f240462051c6af4960bb906a8ac634d23",
+              "monitor.csv": "c3d9c0eabd5aa9263d766b22962042fcf3abca300b46fbf7a0de4f3249cd6212",
+              "steps.csv": "b4bff128a3f0d7deeb2460c23659b3cf66ad17326f4915361166525fa1352b54",
+              "fields.csv": "20b70c30b0b19a2dd3e28437f1de26dbda0a237216980ababc855a535a4aaf7d",
+              "checkpoint.dat": "f5bd73d2e40cd8775effb756294bf3901729208a9c706bf8ef15c4a60885e8be"
+            }
+          },
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/controller_preserving_18aa7f7/N101_dt0.0625",
+            "operator": "18aa7f7",
+            "source_manifest_sha256": "6bcfd3546606d5f9976e35a9c072b204840903477eddf69a63e500495a644601",
+            "offset_s": 570.1387368633955,
+            "through_step": 5278,
+            "through_time_s": 329.8612631366045,
+            "source_sha256": {
+              "conservation.csv": "bac667e118c3f8f614ac02e631e16d20b4669777473c266e55426745b983b526",
+              "monitor.csv": "698a1db6766c8346f4ad4e3c0535bb07c81ecc53ffd69ae8a70e83854cf089a4",
+              "steps.csv": "e7728580d7ffeff958831945c4babcb146f11bf333fc73657aba32b3985e7455",
+              "fields.csv": "209c0fd080a0e7d87427dbdda6c1f1a6366db5fab8f9387e5fe0fd36ae880626",
+              "checkpoint.dat": "3fded51fe356188c68d692236f7f9a17d27e821b4bbd8dc48a9b531cc9232ee0"
+            }
+          }
+        ],
+        "accepted_steps": 14418,
+        "reached_time_s": 900.0,
+        "sum_rule": "compensated independent re-integration of the original accepted BE fluxes and mass residuals; states are unchanged; step_balance remains the original measured quantity",
+        "balances": {
+          "l_system": {
+            "max_abs_balance_kg": 6.821210263296962e-13,
+            "initial_inventory_kg": 71.25836382794442,
+            "absolute_processed_mass_kg": 2124.8945360965427,
+            "relative_inventory": 9.572504751536241e-15,
+            "relative_processed": 3.210140619885827e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -4.691491838284978e-13
+          },
+          "l_pipe": {
+            "max_abs_balance_kg": 1.1368683772161603e-12,
+            "initial_inventory_kg": 55.70265512773731,
+            "absolute_processed_mass_kg": 2128.3504875160447,
+            "relative_inventory": 2.040959043350975e-14,
+            "relative_processed": 5.341546817051625e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 9.005446194601522e-13
+          },
+          "l_riser": {
+            "max_abs_balance_kg": 1.5916157281026244e-12,
+            "initial_inventory_kg": 15.555708700207083,
+            "absolute_processed_mass_kg": 2124.876696017449,
+            "relative_inventory": 1.023171466357837e-13,
+            "relative_processed": 7.490391000502339e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -1.36969380328865e-12
+          },
+          "g_system": {
+            "max_abs_balance_kg": 5.226929999935237e-13,
+            "initial_inventory_kg": 0.17434152937405795,
+            "absolute_processed_mass_kg": 5.443829821392232,
+            "relative_inventory": 2.998098054262569e-12,
+            "relative_processed": 9.601567593820331e-14,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 5.224326888552234e-13
+          },
+          "g_pipe": {
+            "max_abs_balance_kg": 6.141753772226366e-13,
+            "initial_inventory_kg": 0.15139453820328883,
+            "absolute_processed_mass_kg": 5.438456710580139,
+            "relative_inventory": 4.056786886181701e-12,
+            "relative_processed": 1.1293192350465917e-13,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 6.092538538549427e-13
+          },
+          "g_riser": {
+            "max_abs_balance_kg": 3.174682738915635e-13,
+            "initial_inventory_kg": 0.022946991170769145,
+            "absolute_processed_mass_kg": 5.431763706521654,
+            "relative_inventory": 1.3834854056856401e-11,
+            "relative_processed": 5.844662821219465e-14,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -8.682116499971937e-14
+          }
+        },
+        "arithmetic_contract_passes": true,
+        "files": {
+          "checkpoint.dat": "3fded51fe356188c68d692236f7f9a17d27e821b4bbd8dc48a9b531cc9232ee0",
+          "steps.csv": "8c8525fa1d8a0b6a692e9b61c4326d6d68eeccdb822240c7270421b576763c3a",
+          "conservation.csv": "0782c9a54dce4d7f875248563650417e5213bc703e52118a2e7f46b8ac49d16f",
+          "fields.csv": "9264a20d576a527a8e563c9efbc01aea94654f681c03471143b8901a6052edf0",
+          "monitor.csv": "7297a576a41b8e9f393c230bc625cbe63c8dfaf4090597025508aa99d0a696ed"
+        }
+      },
+      "n": 101,
+      "dt_max_s": 0.0625,
+      "full_phase_waveforms_reference": {
+        "file": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_analysis_final_v2/summary.json",
+        "sha256": "64f84b68ab8e061667cfad63c28c235f5de6622e82c915aa2ca886fb35ceccba"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N101_dt0.125",
+      "time_s": 900.0,
+      "cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 636.6532924979737,
+        "window_end_s": 869.3168774516803,
+        "window_is_end_of_run": false,
+        "mean_period_s": 23.26635849537066,
+        "period_cv": 1.4439336242986152e-05,
+        "first_semi_amplitude_Pa": 12768.860096417135,
+        "last_semi_amplitude_Pa": 12774.216020584368,
+        "mean_semi_amplitude_Pa": 12772.262775169178,
+        "amplitude_cv": 0.0001372209799146429,
+        "relative_amplitude_change": 0.0004194520205242913,
+        "relative_difference_last_five_vs_first_five_amplitudes": 0.0002363433366441292,
+        "growth_rate_s_inv": 1.7198543566790092e-06,
+        "log_amplitude_r_squared": 0.9353040501296697,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": true,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 636.6532924979737,
+          "window_end_s": 869.3168774516803,
+          "full_window_observed": true,
+          "mean_Pa": 266542.4464188121,
+          "rms_about_mean_Pa": 8983.498298984061,
+          "peak_to_peak_Pa": 25548.19797614307,
+          "minimum_Pa": 253518.6515648778,
+          "maximum_Pa": 279066.84954102087
+        },
+        "peak_records": [
+          {
+            "peak_time_s": 636.6532924979737,
+            "peak_pressure_Pa": 279061.13973310794,
+            "left_trough_time_s": 623.1335774368727,
+            "right_trough_time_s": 646.3976229935139,
+            "trough_baseline_Pa": 253523.41954027367,
+            "semi_amplitude_Pa": 12768.860096417135,
+            "peak_to_interpolated_trough_Pa": 25537.72019283427
+          },
+          {
+            "peak_time_s": 659.9197102592728,
+            "peak_pressure_Pa": 279062.28126445797,
+            "left_trough_time_s": 646.3976229935139,
+            "right_trough_time_s": 669.6638635960538,
+            "trough_baseline_Pa": 253522.37080086168,
+            "semi_amplitude_Pa": 12769.955231798143,
+            "peak_to_interpolated_trough_Pa": 25539.910463596287
+          },
+          {
+            "peak_time_s": 683.1859804680034,
+            "peak_pressure_Pa": 279063.2449192301,
+            "left_trough_time_s": 669.6638635960538,
+            "right_trough_time_s": 692.9301411589446,
+            "trough_baseline_Pa": 253521.3821080251,
+            "semi_amplitude_Pa": 12770.931405602503,
+            "peak_to_interpolated_trough_Pa": 25541.862811205006
+          },
+          {
+            "peak_time_s": 706.4519421565658,
+            "peak_pressure_Pa": 279064.167318867,
+            "left_trough_time_s": 692.9301411589446,
+            "right_trough_time_s": 716.1967801032091,
+            "trough_baseline_Pa": 253520.89950979425,
+            "semi_amplitude_Pa": 12771.633904536371,
+            "peak_to_interpolated_trough_Pa": 25543.267809072742
+          },
+          {
+            "peak_time_s": 729.7185513670404,
+            "peak_pressure_Pa": 279064.6950966064,
+            "left_trough_time_s": 716.1967801032091,
+            "right_trough_time_s": 739.4634837271386,
+            "trough_baseline_Pa": 253520.38022693887,
+            "semi_amplitude_Pa": 12772.15743483376,
+            "peak_to_interpolated_trough_Pa": 25544.31486966752
+          },
+          {
+            "peak_time_s": 752.9844480368505,
+            "peak_pressure_Pa": 279065.227175127,
+            "left_trough_time_s": 739.4634837271386,
+            "right_trough_time_s": 762.7287303121561,
+            "trough_baseline_Pa": 253519.7811306462,
+            "semi_amplitude_Pa": 12772.723022240403,
+            "peak_to_interpolated_trough_Pa": 25545.446044480806
+          },
+          {
+            "peak_time_s": 776.2515523843646,
+            "peak_pressure_Pa": 279065.7413960841,
+            "left_trough_time_s": 762.7287303121561,
+            "right_trough_time_s": 785.9946499714836,
+            "trough_baseline_Pa": 253519.44499577387,
+            "semi_amplitude_Pa": 12773.148200155105,
+            "peak_to_interpolated_trough_Pa": 25546.29640031021
+          },
+          {
+            "peak_time_s": 799.5178108485086,
+            "peak_pressure_Pa": 279066.1179464985,
+            "left_trough_time_s": 785.9946499714836,
+            "right_trough_time_s": 809.2612233942723,
+            "trough_baseline_Pa": 253519.1580386288,
+            "semi_amplitude_Pa": 12773.479953934846,
+            "peak_to_interpolated_trough_Pa": 25546.959907869692
+          },
+          {
+            "peak_time_s": 822.7841186148656,
+            "peak_pressure_Pa": 279066.4280436254,
+            "left_trough_time_s": 809.2612233942723,
+            "right_trough_time_s": 832.5277390947964,
+            "trough_baseline_Pa": 253518.88533511502,
+            "semi_amplitude_Pa": 12773.77135425518,
+            "peak_to_interpolated_trough_Pa": 25547.54270851036
+          },
+          {
+            "peak_time_s": 846.0504744523708,
+            "peak_pressure_Pa": 279066.68318887823,
+            "left_trough_time_s": 832.5277390947964,
+            "right_trough_time_s": 855.7941951492801,
+            "trough_baseline_Pa": 253518.65538387193,
+            "semi_amplitude_Pa": 12774.013902503153,
+            "peak_to_interpolated_trough_Pa": 25548.027805006306
+          },
+          {
+            "peak_time_s": 869.3168774516803,
+            "peak_pressure_Pa": 279066.89366525615,
+            "left_trough_time_s": 855.7941951492801,
+            "right_trough_time_s": 879.0605900915493,
+            "trough_baseline_Pa": 253518.46162408742,
+            "semi_amplitude_Pa": 12774.216020584368,
+            "peak_to_interpolated_trough_Pa": 25548.432041168737
+          }
+        ]
+      },
+      "settled": true,
+      "settling_variation": {
+        "period": 5.190660602148289e-05,
+        "amplitude": 0.00040352167775039227,
+        "mean": 4.26053032281763e-06
+      },
+      "period_s": 23.26635849537066,
+      "semi_amplitude_Pa": 12772.06745062766,
+      "mean_Pa": 266542.4464166281,
+      "window_s": [
+        636.6532924979737,
+        869.3168774516803
+      ],
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 2.2737367544323206e-13,
+          "initial_inventory_kg": 71.25836382794442,
+          "absolute_processed_mass_kg": 2130.6528849577226,
+          "relative_inventory": 3.190834917178747e-15,
+          "relative_processed": 1.0671549413256196e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.5087878769824362e-14
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 2.2737367544323206e-13,
+          "initial_inventory_kg": 55.70265512773731,
+          "absolute_processed_mass_kg": 2128.3739742420416,
+          "relative_inventory": 4.08191808670195e-15,
+          "relative_processed": 1.0682975745566733e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.7494367255251607e-14
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 2.2737367544323206e-13,
+          "initial_inventory_kg": 15.555708700207083,
+          "absolute_processed_mass_kg": 2130.6585316045757,
+          "relative_inventory": 1.4616735233683385e-14,
+          "relative_processed": 1.0671521131638087e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 4.2582246025075976e-14
+        },
+        "g_system": {
+          "max_abs_balance_kg": 4.440892098500626e-16,
+          "initial_inventory_kg": 0.17434152937405795,
+          "absolute_processed_mass_kg": 5.446385146197391,
+          "relative_inventory": 2.5472370894329393e-15,
+          "relative_processed": 8.153834110687545e-17,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.220901005090041e-16
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 8.615330671091215e-14,
+          "initial_inventory_kg": 0.15139453820328883,
+          "absolute_processed_mass_kg": 5.451282905830271,
+          "relative_inventory": 5.690648271288864e-13,
+          "relative_processed": 1.5804225940790785e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -5.17890503223414e-14
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 8.615330671091215e-14,
+          "initial_inventory_kg": 0.022946991170769145,
+          "absolute_processed_mass_kg": 5.4471452265768185,
+          "relative_inventory": 3.754448941465489e-12,
+          "relative_processed": 1.5816230911297728e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 5.166696022183236e-14
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "per_cycle_balances_kg": {
+        "l_system": [
+          -5.684341886080802e-14,
+          1.1368683772161603e-13,
+          -2.2737367544323206e-13,
+          1.1368683772161603e-13,
+          4.263256414560601e-14,
+          -4.263256414560601e-14,
+          0.0,
+          -9.947598300641403e-14,
+          -1.4210854715202004e-14,
+          1.4210854715202004e-14
+        ],
+        "l_pipe": [
+          1.4210854715202004e-14,
+          -2.1316282072803006e-14,
+          7.105427357601002e-15,
+          0.0,
+          4.973799150320701e-14,
+          1.4210854715202004e-14,
+          4.973799150320701e-14,
+          0.0,
+          -1.1368683772161603e-13,
+          1.2079226507921703e-13
+        ],
+        "l_riser": [
+          0.0,
+          0.0,
+          -1.1368683772161603e-13,
+          1.1368683772161603e-13,
+          0.0,
+          -6.394884621840902e-14,
+          -4.973799150320701e-14,
+          0.0,
+          1.1368683772161603e-13,
+          -2.184918912462308e-13
+        ],
+        "g_system": [
+          -5.551115123125783e-17,
+          0.0,
+          -4.163336342344337e-16,
+          1.1102230246251565e-16,
+          3.0531133177191805e-16,
+          0.0,
+          -3.0531133177191805e-16,
+          2.220446049250313e-16,
+          5.551115123125783e-17,
+          -4.163336342344337e-16
+        ],
+        "g_pipe": [
+          -3.885780586188048e-16,
+          -1.812439087700568e-14,
+          -1.4988010832439613e-14,
+          -4.385380947269368e-15,
+          -6.772360450213455e-15,
+          -1.9734214262712158e-14,
+          1.609823385706477e-15,
+          -1.7486012637846216e-14,
+          1.7708057242771247e-14,
+          9.71445146547012e-16
+        ],
+        "g_riser": [
+          3.608224830031759e-16,
+          1.8332557694122897e-14,
+          1.475555788665872e-14,
+          4.4998726966838376e-15,
+          6.904199434387692e-15,
+          1.9709928134048482e-14,
+          -1.5994150448506161e-15,
+          1.7406215357951282e-14,
+          -1.7638668303732175e-14,
+          -1.3773704399255848e-15
+        ]
+      },
+      "cycle_balance_definition": "linear interpolation of accepted BE inventories and cumulative accepted flux integrals at the same peak markers; no re-integration of sampled monitors",
+      "actual_dt_s": {
+        "min": 0.001,
+        "max": 0.125,
+        "mean": 0.12424075096631003,
+        "accepted": 7244,
+        "sum_duration_s": 899.9999999999499
+      },
+      "hashes": {
+        "monitor.csv": "4696e7052ec045a62e56eacdc9a0d620f13baa21ddace81e39db8d3795c6aa4c",
+        "steps.csv": "07182bec574435baf73b7e417f929683a137f4c67d04707554882d4cff1b32a4",
+        "conservation.csv": "d32b20de5e33060a0b443248b1536abda73a151e7256c7774b022ab5f5c86d26",
+        "checkpoint.dat": "e66613f097637af51d19a6b4a107370c7b1f10bc59ff5acee6afb79a21435429"
+      },
+      "base_run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N101_dt0.125",
+      "analysis_history": {
+        "kind": "derived analysis chronology; not a solver output/status",
+        "completed_analysis_history": true,
+        "segments": [
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/restart_refinement_18aa7f7/N101_dt0.125",
+            "operator": "18aa7f79f7b16442fa19ebbd9ef8819b0eff187a",
+            "source_manifest_sha256": "eb22cdfb0cea3d49be7060b99144a5cdbc2ecbaf5551a3f1a7d88721ab350fdd",
+            "offset_s": 0.0,
+            "through_step": 4822,
+            "through_time_s": 600.0,
+            "source_sha256": {
+              "conservation.csv": "b56dff5a692dc636d594fb9cab377ffe75251900016735f3d3ffad827437dbf3",
+              "monitor.csv": "7246078cb9253066d40e5c9133f55cb5c605d250a06fa456f84c102a2ac4e0c7",
+              "steps.csv": "eb191f13f65fde5a6dcb542c3c32841e6a23265fafd249dae879b7206257d94f",
+              "fields.csv": "efe71fae44de93b067c0b82c8d2e504374405a46ca9c0bee77836e8d4aa35395",
+              "checkpoint.dat": "f3e81956953acad225194d679e1977ed1d272595d3eb851f54e4a640ea4a34fb"
+            }
+          },
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_extensions_18aa7f7_r2/N101_dt0.125",
+            "operator": "18aa7f7",
+            "source_manifest_sha256": "c5395171ba1600ab9119ca6c67dd35c42ce6e4b7c6fbb6a3792410feabb7898f",
+            "offset_s": 600,
+            "through_step": 2422,
+            "through_time_s": 300.0,
+            "source_sha256": {
+              "conservation.csv": "fc12643e420a06d95f94d8af85eadaacb7102f6916d040180febd3f0033c6e06",
+              "monitor.csv": "54e0979e2e8f35d54acf9879b54bff02c3ad263e6b3b71a06cd2942410dfcfe1",
+              "steps.csv": "a5aa1e7b4bdd1866df5560f20469de061896a40e67254d611fb00319ea8d455a",
+              "fields.csv": "8fa7d788338fc5b4334314e61758bf111a4cbb5eeceda16d1ce157545a7fb783",
+              "checkpoint.dat": "e66613f097637af51d19a6b4a107370c7b1f10bc59ff5acee6afb79a21435429"
+            }
+          }
+        ],
+        "accepted_steps": 7244,
+        "reached_time_s": 900.0,
+        "sum_rule": "compensated independent re-integration of the original accepted BE fluxes and mass residuals; states are unchanged; step_balance remains the original measured quantity",
+        "balances": {
+          "l_system": {
+            "max_abs_balance_kg": 2.2737367544323206e-13,
+            "initial_inventory_kg": 71.25836382794442,
+            "absolute_processed_mass_kg": 2130.6528849577226,
+            "relative_inventory": 3.190834917178747e-15,
+            "relative_processed": 1.0671549413256196e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 1.5087878769824362e-14
+          },
+          "l_pipe": {
+            "max_abs_balance_kg": 2.2737367544323206e-13,
+            "initial_inventory_kg": 55.70265512773731,
+            "absolute_processed_mass_kg": 2128.3739742420416,
+            "relative_inventory": 4.08191808670195e-15,
+            "relative_processed": 1.0682975745566733e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -2.7494367255251607e-14
+          },
+          "l_riser": {
+            "max_abs_balance_kg": 2.2737367544323206e-13,
+            "initial_inventory_kg": 15.555708700207083,
+            "absolute_processed_mass_kg": 2130.6585316045757,
+            "relative_inventory": 1.4616735233683385e-14,
+            "relative_processed": 1.0671521131638087e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 4.2582246025075976e-14
+          },
+          "g_system": {
+            "max_abs_balance_kg": 4.440892098500626e-16,
+            "initial_inventory_kg": 0.17434152937405795,
+            "absolute_processed_mass_kg": 5.446385146197391,
+            "relative_inventory": 2.5472370894329393e-15,
+            "relative_processed": 8.153834110687545e-17,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -1.220901005090041e-16
+          },
+          "g_pipe": {
+            "max_abs_balance_kg": 8.615330671091215e-14,
+            "initial_inventory_kg": 0.15139453820328883,
+            "absolute_processed_mass_kg": 5.451282905830271,
+            "relative_inventory": 5.690648271288864e-13,
+            "relative_processed": 1.5804225940790785e-14,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -5.17890503223414e-14
+          },
+          "g_riser": {
+            "max_abs_balance_kg": 8.615330671091215e-14,
+            "initial_inventory_kg": 0.022946991170769145,
+            "absolute_processed_mass_kg": 5.4471452265768185,
+            "relative_inventory": 3.754448941465489e-12,
+            "relative_processed": 1.5816230911297728e-14,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 5.166696022183236e-14
+          }
+        },
+        "arithmetic_contract_passes": true,
+        "files": {
+          "checkpoint.dat": "e66613f097637af51d19a6b4a107370c7b1f10bc59ff5acee6afb79a21435429",
+          "steps.csv": "07182bec574435baf73b7e417f929683a137f4c67d04707554882d4cff1b32a4",
+          "conservation.csv": "d32b20de5e33060a0b443248b1536abda73a151e7256c7774b022ab5f5c86d26",
+          "fields.csv": "1f75de5e795946a0c92f1dcc773128ec981371bebdaab33358224f8e0b03076c",
+          "monitor.csv": "4696e7052ec045a62e56eacdc9a0d620f13baa21ddace81e39db8d3795c6aa4c"
+        }
+      },
+      "n": 101,
+      "dt_max_s": 0.125,
+      "full_phase_waveforms_reference": {
+        "file": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_analysis_final_v2/summary.json",
+        "sha256": "64f84b68ab8e061667cfad63c28c235f5de6622e82c915aa2ca886fb35ceccba"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N201_dt0.125",
+      "time_s": 900.0,
+      "cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 638.640991928377,
+        "window_end_s": 872.09592742421,
+        "window_is_end_of_run": false,
+        "mean_period_s": 23.345493549583296,
+        "period_cv": 2.3474719257844645e-05,
+        "first_semi_amplitude_Pa": 14023.267683518148,
+        "last_semi_amplitude_Pa": 14014.913402641614,
+        "mean_semi_amplitude_Pa": 14017.768962818775,
+        "amplitude_cv": 0.00019447665529109652,
+        "relative_amplitude_change": -0.0005957442348728526,
+        "relative_difference_last_five_vs_first_five_amplitudes": -0.0003264001302373254,
+        "growth_rate_s_inv": -2.39473456759746e-06,
+        "log_amplitude_r_squared": 0.9091745514806836,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": true,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 638.640991928377,
+          "window_end_s": 872.09592742421,
+          "full_window_observed": true,
+          "mean_Pa": 266735.9980603074,
+          "rms_about_mean_Pa": 9853.847384035624,
+          "peak_to_peak_Pa": 28042.784630407463,
+          "minimum_Pa": 252436.41628788458,
+          "maximum_Pa": 280479.20091829204
+        },
+        "peak_records": [
+          {
+            "peak_time_s": 638.640991928377,
+            "peak_pressure_Pa": 280480.0050722973,
+            "left_trough_time_s": 624.9025999759182,
+            "right_trough_time_s": 648.245985662338,
+            "trough_baseline_Pa": 252433.469705261,
+            "semi_amplitude_Pa": 14023.267683518148,
+            "peak_to_interpolated_trough_Pa": 28046.535367036297
+          },
+          {
+            "peak_time_s": 661.98688645763,
+            "peak_pressure_Pa": 280477.902074929,
+            "left_trough_time_s": 648.245985662338,
+            "right_trough_time_s": 671.5923227210502,
+            "trough_baseline_Pa": 252435.1320438382,
+            "semi_amplitude_Pa": 14021.385015545384,
+            "peak_to_interpolated_trough_Pa": 28042.770031090768
+          },
+          {
+            "peak_time_s": 685.332416284921,
+            "peak_pressure_Pa": 280476.2489288402,
+            "left_trough_time_s": 671.5923227210502,
+            "right_trough_time_s": 694.9386342790143,
+            "trough_baseline_Pa": 252436.6759450717,
+            "semi_amplitude_Pa": 14019.786491884253,
+            "peak_to_interpolated_trough_Pa": 28039.572983768507
+          },
+          {
+            "peak_time_s": 708.6779867089748,
+            "peak_pressure_Pa": 280474.8406750982,
+            "left_trough_time_s": 694.9386342790143,
+            "right_trough_time_s": 718.2864373145521,
+            "trough_baseline_Pa": 252437.75850547297,
+            "semi_amplitude_Pa": 14018.541084812605,
+            "peak_to_interpolated_trough_Pa": 28037.08216962521
+          },
+          {
+            "peak_time_s": 732.0237552944311,
+            "peak_pressure_Pa": 280473.8962421718,
+            "left_trough_time_s": 718.2864373145521,
+            "right_trough_time_s": 741.6296541290412,
+            "trough_baseline_Pa": 252438.50841457947,
+            "semi_amplitude_Pa": 14017.693913796174,
+            "peak_to_interpolated_trough_Pa": 28035.38782759235
+          },
+          {
+            "peak_time_s": 755.3687678611357,
+            "peak_pressure_Pa": 280473.0988966564,
+            "left_trough_time_s": 741.6296541290412,
+            "right_trough_time_s": 764.9755625951655,
+            "trough_baseline_Pa": 252439.11673449926,
+            "semi_amplitude_Pa": 14016.99108107858,
+            "peak_to_interpolated_trough_Pa": 28033.98216215716
+          },
+          {
+            "peak_time_s": 778.7149400539992,
+            "peak_pressure_Pa": 280472.36321594473,
+            "left_trough_time_s": 764.9755625951655,
+            "right_trough_time_s": 788.3212329830918,
+            "trough_baseline_Pa": 252439.64080391583,
+            "semi_amplitude_Pa": 14016.361206014451,
+            "peak_to_interpolated_trough_Pa": 28032.722412028903
+          },
+          {
+            "peak_time_s": 802.060418746372,
+            "peak_pressure_Pa": 280471.83993496577,
+            "left_trough_time_s": 788.3212329830918,
+            "right_trough_time_s": 811.6668471078074,
+            "trough_baseline_Pa": 252440.11276112255,
+            "semi_amplitude_Pa": 14015.863586921609,
+            "peak_to_interpolated_trough_Pa": 28031.727173843217
+          },
+          {
+            "peak_time_s": 825.4060185895452,
+            "peak_pressure_Pa": 280471.427089415,
+            "left_trough_time_s": 811.6668471078074,
+            "right_trough_time_s": 835.0121757139565,
+            "trough_baseline_Pa": 252440.48436711504,
+            "semi_amplitude_Pa": 14015.47136114999,
+            "peak_to_interpolated_trough_Pa": 28030.94272229998
+          },
+          {
+            "peak_time_s": 848.7517393679217,
+            "peak_pressure_Pa": 280471.09505007445,
+            "left_trough_time_s": 835.0121757139565,
+            "right_trough_time_s": 858.3576585868465,
+            "trough_baseline_Pa": 252440.72752278703,
+            "semi_amplitude_Pa": 14015.183763643712,
+            "peak_to_interpolated_trough_Pa": 28030.367527287424
+          },
+          {
+            "peak_time_s": 872.09592742421,
+            "peak_pressure_Pa": 280470.7473732006,
+            "left_trough_time_s": 858.3576585868465,
+            "right_trough_time_s": 881.704013267348,
+            "trough_baseline_Pa": 252440.92056791738,
+            "semi_amplitude_Pa": 14014.913402641614,
+            "peak_to_interpolated_trough_Pa": 28029.826805283228
+          }
+        ]
+      },
+      "settled": true,
+      "settling_variation": {
+        "period": 8.49901318625112e-05,
+        "amplitude": 0.0005766791578370232,
+        "mean": 7.868707421346821e-06
+      },
+      "period_s": 23.345493549583296,
+      "semi_amplitude_Pa": 14018.054518836492,
+      "mean_Pa": 266735.9980484062,
+      "window_s": [
+        638.640991928377,
+        872.09592742421
+      ],
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 4.547473508864641e-13,
+          "initial_inventory_kg": 71.25836382794438,
+          "absolute_processed_mass_kg": 2128.295461225231,
+          "relative_inventory": 6.3816698343574975e-15,
+          "relative_processed": 2.1366739683064127e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.2009863853770446e-14
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 6.821210263296962e-13,
+          "initial_inventory_kg": 55.70265512773729,
+          "absolute_processed_mass_kg": 2128.360242727046,
+          "relative_inventory": 1.2245754260105856e-14,
+          "relative_processed": 3.204913400636076e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.4353611463654317e-13
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 4.547473508864641e-13,
+          "initial_inventory_kg": 15.555708700207079,
+          "absolute_processed_mass_kg": 2128.2873763570747,
+          "relative_inventory": 2.9233470467366776e-14,
+          "relative_processed": 2.1366820850332788e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.3152625078277275e-13
+        },
+        "g_system": {
+          "max_abs_balance_kg": 1.3322676295501878e-15,
+          "initial_inventory_kg": 0.17434152937405767,
+          "absolute_processed_mass_kg": 5.443065836818752,
+          "relative_inventory": 7.64171126829883e-15,
+          "relative_processed": 2.447641953066736e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 7.363537581875586e-17
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 4.1744385725905886e-14,
+          "initial_inventory_kg": 0.15139453820328883,
+          "absolute_processed_mass_kg": 5.444237504073483,
+          "relative_inventory": 2.7573244201090373e-13,
+          "relative_processed": 7.667627596090718e-15,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -4.183792217558242e-15
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 4.1300296516055823e-14,
+          "initial_inventory_kg": 0.02294699117076917,
+          "absolute_processed_mass_kg": 5.436780515441356,
+          "relative_inventory": 1.7998131523520111e-12,
+          "relative_processed": 7.596461986787244e-15,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 4.257427593377121e-15
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "per_cycle_balances_kg": {
+        "l_system": [
+          5.684341886080802e-14,
+          -5.684341886080802e-14,
+          0.0,
+          0.0,
+          0.0,
+          -8.526512829121202e-14,
+          1.9895196601282805e-13,
+          -2.7000623958883807e-13,
+          1.5631940186722204e-13,
+          0.0
+        ],
+        "l_pipe": [
+          1.2789769243681803e-13,
+          -4.973799150320701e-14,
+          0.0,
+          8.526512829121202e-14,
+          -8.526512829121202e-14,
+          -8.526512829121202e-14,
+          8.526512829121202e-14,
+          -9.237055564881302e-14,
+          9.237055564881302e-14,
+          -3.552713678800501e-14
+        ],
+        "l_riser": [
+          -1.4033219031261979e-13,
+          8.704148513061227e-14,
+          -2.3092638912203256e-14,
+          -8.348877145181177e-14,
+          8.348877145181177e-14,
+          0.0,
+          1.1013412404281553e-13,
+          -1.1013412404281553e-13,
+          6.394884621840902e-14,
+          -2.1316282072803006e-14
+        ],
+        "g_system": [
+          1.942890293094024e-16,
+          -1.1102230246251565e-16,
+          2.220446049250313e-16,
+          -1.1102230246251565e-16,
+          1.1102230246251565e-16,
+          1.1102230246251565e-16,
+          1.1102230246251565e-16,
+          2.498001805406602e-16,
+          -4.440892098500626e-16,
+          -1.1102230246251565e-16
+        ],
+        "g_pipe": [
+          1.1213252548714081e-14,
+          -9.992007221626409e-16,
+          -1.73749903353837e-14,
+          8.409939411535561e-15,
+          6.966649479522857e-15,
+          1.6375789613221059e-15,
+          -5.273559366969494e-16,
+          6.38378239159465e-16,
+          -1.2823075934420558e-14,
+          -7.216449660063518e-16
+        ],
+        "g_riser": [
+          -1.1282641487753153e-14,
+          9.159339953157541e-16,
+          1.73749903353837e-14,
+          -8.403000517631654e-15,
+          -6.519090822720841e-15,
+          -1.7728873924482969e-15,
+          6.522560269672795e-16,
+          -2.740863092043355e-16,
+          1.2014694794615366e-14,
+          1.1657341758564144e-15
+        ]
+      },
+      "cycle_balance_definition": "linear interpolation of accepted BE inventories and cumulative accepted flux integrals at the same peak markers; no re-integration of sampled monitors",
+      "actual_dt_s": {
+        "min": 0.001,
+        "max": 0.125,
+        "mean": 0.12424075096631085,
+        "accepted": 7244,
+        "sum_duration_s": 899.9999999999558
+      },
+      "hashes": {
+        "monitor.csv": "b5a430e7af2cd473437df3936f4ede26c450e200b242d05a3bb2b4086483fd88",
+        "steps.csv": "0e9a44f0af493e479b737bf358b7db41c634c774528879d144b9c22b8af21666",
+        "conservation.csv": "d200f13ded23267cc064765a0862813f147fb2e520b5abc4f9cbfcfe225046ec",
+        "checkpoint.dat": "ae2e1cbe468cb62e8171e4e6dff96e9b5b20e715fb8c51ea414dc605ecb35e70"
+      },
+      "base_run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N201_dt0.125",
+      "analysis_history": {
+        "kind": "derived analysis chronology; not a solver output/status",
+        "completed_analysis_history": true,
+        "segments": [
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/restart_refinement_18aa7f7/N201_dt0.125",
+            "operator": "18aa7f79f7b16442fa19ebbd9ef8819b0eff187a",
+            "source_manifest_sha256": "023a82769840e9e57c82e6f4d0cd02c42d751a497e56bdbb3d8244f10098443b",
+            "offset_s": 0.0,
+            "through_step": 4822,
+            "through_time_s": 600.0,
+            "source_sha256": {
+              "conservation.csv": "910850c7a88de5fe074d6f1b1a105d0edce91aa0930ac8dcb84465355498a8ee",
+              "monitor.csv": "cc2a32e693b610b4ae603dd8a08b1313ba291a4716a38d6f6b720d922eb3feaf",
+              "steps.csv": "53dc41d38cf326ba480414ccd188df929d5b77ea441b6ebd5ba33b939b9a694e",
+              "fields.csv": "ffad4852dd166628cda388b40ff5e39f6576346453c3829dc664e80b191bcd9e",
+              "checkpoint.dat": "5bfcd0cd6287dab7600f11c65b020e7358e3943aaac994c625fb855a54512f91"
+            }
+          },
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_extensions_18aa7f7_r2/N201_dt0.125",
+            "operator": "18aa7f7",
+            "source_manifest_sha256": "062ca694d32a69221d5b24e2d545678fb3aecf6f5e23f8e48aa0d6fd3b6ed3f0",
+            "offset_s": 600,
+            "through_step": 1945,
+            "through_time_s": 240.43185275984078,
+            "source_sha256": {
+              "conservation.csv": "887a3521758c90886555ecd52f886e2b88ae5ad0044cfb9da25c9e2a9d695021",
+              "monitor.csv": "8d0bbb8a92723e3a44627ee8043106d063e77cc4c8bb8b1f46f12153e9c173f1",
+              "steps.csv": "36321a3a792f2f7153f30635f815e85e1f6da814e474a167009bdaffb217984f",
+              "fields.csv": "467a02fec587712418fc14927eea4e71b4101c589b4a83e378fa1fa8087ae010",
+              "checkpoint.dat": "24a484bbd0696959d6b6fdd3a6bca46d61dda1ca20719d46e5fe982e16b1a021"
+            }
+          },
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/controller_preserving_18aa7f7/N201_dt0.125",
+            "operator": "18aa7f7",
+            "source_manifest_sha256": "b4f079e0441f919494d76042e14b2a49f50504b3299bf23e42f30ef99068cae6",
+            "offset_s": 840.4318527598408,
+            "through_step": 477,
+            "through_time_s": 59.56814724015919,
+            "source_sha256": {
+              "conservation.csv": "6daca10410f39bc4a9725dda9936754dec8d97e21c3f137bf84303d1e4c55fa4",
+              "monitor.csv": "7e700f7a729d6cb9a9d396c45a0eb330e23149f3a00abe3671b0663c781171c7",
+              "steps.csv": "61a4cdd5891695ee1de4ba7fb7e6e1eaddf44a79db6ae25ea8db09c6a46b74e4",
+              "fields.csv": "4b712d4d5abb1800c3dc54f7a8f762d7a616643a10d9c273f4080cfd0fee8c4b",
+              "checkpoint.dat": "ae2e1cbe468cb62e8171e4e6dff96e9b5b20e715fb8c51ea414dc605ecb35e70"
+            }
+          }
+        ],
+        "accepted_steps": 7244,
+        "reached_time_s": 900.0,
+        "sum_rule": "compensated independent re-integration of the original accepted BE fluxes and mass residuals; states are unchanged; step_balance remains the original measured quantity",
+        "balances": {
+          "l_system": {
+            "max_abs_balance_kg": 4.547473508864641e-13,
+            "initial_inventory_kg": 71.25836382794438,
+            "absolute_processed_mass_kg": 2128.295461225231,
+            "relative_inventory": 6.3816698343574975e-15,
+            "relative_processed": 2.1366739683064127e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 1.2009863853770446e-14
+          },
+          "l_pipe": {
+            "max_abs_balance_kg": 6.821210263296962e-13,
+            "initial_inventory_kg": 55.70265512773729,
+            "absolute_processed_mass_kg": 2128.360242727046,
+            "relative_inventory": 1.2245754260105856e-14,
+            "relative_processed": 3.204913400636076e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 2.4353611463654317e-13
+          },
+          "l_riser": {
+            "max_abs_balance_kg": 4.547473508864641e-13,
+            "initial_inventory_kg": 15.555708700207079,
+            "absolute_processed_mass_kg": 2128.2873763570747,
+            "relative_inventory": 2.9233470467366776e-14,
+            "relative_processed": 2.1366820850332788e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -2.3152625078277275e-13
+          },
+          "g_system": {
+            "max_abs_balance_kg": 1.3322676295501878e-15,
+            "initial_inventory_kg": 0.17434152937405767,
+            "absolute_processed_mass_kg": 5.443065836818752,
+            "relative_inventory": 7.64171126829883e-15,
+            "relative_processed": 2.447641953066736e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 7.363537581875586e-17
+          },
+          "g_pipe": {
+            "max_abs_balance_kg": 4.1744385725905886e-14,
+            "initial_inventory_kg": 0.15139453820328883,
+            "absolute_processed_mass_kg": 5.444237504073483,
+            "relative_inventory": 2.7573244201090373e-13,
+            "relative_processed": 7.667627596090718e-15,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -4.183792217558242e-15
+          },
+          "g_riser": {
+            "max_abs_balance_kg": 4.1300296516055823e-14,
+            "initial_inventory_kg": 0.02294699117076917,
+            "absolute_processed_mass_kg": 5.436780515441356,
+            "relative_inventory": 1.7998131523520111e-12,
+            "relative_processed": 7.596461986787244e-15,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 4.257427593377121e-15
+          }
+        },
+        "arithmetic_contract_passes": true,
+        "files": {
+          "checkpoint.dat": "ae2e1cbe468cb62e8171e4e6dff96e9b5b20e715fb8c51ea414dc605ecb35e70",
+          "steps.csv": "0e9a44f0af493e479b737bf358b7db41c634c774528879d144b9c22b8af21666",
+          "conservation.csv": "d200f13ded23267cc064765a0862813f147fb2e520b5abc4f9cbfcfe225046ec",
+          "fields.csv": "fcebd3b99d5ec322b58272a0e510d9ba09990cf5c680b485d8518e2ef25849fd",
+          "monitor.csv": "b5a430e7af2cd473437df3936f4ede26c450e200b242d05a3bb2b4086483fd88"
+        }
+      },
+      "n": 201,
+      "dt_max_s": 0.125,
+      "full_phase_waveforms_reference": {
+        "file": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_analysis_final_v2/summary.json",
+        "sha256": "64f84b68ab8e061667cfad63c28c235f5de6622e82c915aa2ca886fb35ceccba"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N401_dt0.125",
+      "time_s": 900.0,
+      "cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 639.6568083941379,
+        "window_end_s": 873.5096563854897,
+        "window_is_end_of_run": false,
+        "mean_period_s": 23.385284799135185,
+        "period_cv": 1.0298968939732545e-05,
+        "first_semi_amplitude_Pa": 14613.707387692877,
+        "last_semi_amplitude_Pa": 14600.021348464565,
+        "mean_semi_amplitude_Pa": 14604.561661721207,
+        "amplitude_cv": 0.000308087509156482,
+        "relative_amplitude_change": -0.000936520683302966,
+        "relative_difference_last_five_vs_first_five_amplitudes": -0.0005152625184381421,
+        "growth_rate_s_inv": -3.766795449506124e-06,
+        "log_amplitude_r_squared": 0.8994615145052262,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": true,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 639.6568083941379,
+          "window_end_s": 873.5096563854897,
+          "full_window_observed": true,
+          "mean_Pa": 266835.18853913574,
+          "rms_about_mean_Pa": 10264.130973231684,
+          "peak_to_peak_Pa": 29222.20825096441,
+          "minimum_Pa": 251931.20445099997,
+          "maximum_Pa": 281153.4127019644
+        },
+        "peak_records": [
+          {
+            "peak_time_s": 639.6568083941379,
+            "peak_pressure_Pa": 281157.03583889344,
+            "left_trough_time_s": 625.8160292455107,
+            "right_trough_time_s": 649.1997014909658,
+            "trough_baseline_Pa": 251929.6210635077,
+            "semi_amplitude_Pa": 14613.707387692877,
+            "peak_to_interpolated_trough_Pa": 29227.414775385754
+          },
+          {
+            "peak_time_s": 663.042611449371,
+            "peak_pressure_Pa": 281153.51362155663,
+            "left_trough_time_s": 649.1997014909658,
+            "right_trough_time_s": 672.5854795419586,
+            "trough_baseline_Pa": 251932.55833137938,
+            "semi_amplitude_Pa": 14610.477645088627,
+            "peak_to_interpolated_trough_Pa": 29220.955290177255
+          },
+          {
+            "peak_time_s": 686.4280031799985,
+            "peak_pressure_Pa": 281150.67519859003,
+            "left_trough_time_s": 672.5854795419586,
+            "right_trough_time_s": 695.9734224154299,
+            "trough_baseline_Pa": 251934.76790781273,
+            "semi_amplitude_Pa": 14607.953645388654,
+            "peak_to_interpolated_trough_Pa": 29215.907290777308
+          },
+          {
+            "peak_time_s": 709.8132081238739,
+            "peak_pressure_Pa": 281148.6082305045,
+            "left_trough_time_s": 695.9734224154299,
+            "right_trough_time_s": 719.3584036521327,
+            "trough_baseline_Pa": 251936.75467158706,
+            "semi_amplitude_Pa": 14605.926779458721,
+            "peak_to_interpolated_trough_Pa": 29211.853558917443
+          },
+          {
+            "peak_time_s": 733.1986175506116,
+            "peak_pressure_Pa": 281146.7218425583,
+            "left_trough_time_s": 719.3584036521327,
+            "right_trough_time_s": 742.7417075269312,
+            "trough_baseline_Pa": 251938.13913071068,
+            "semi_amplitude_Pa": 14604.291355923808,
+            "peak_to_interpolated_trough_Pa": 29208.582711847615
+          },
+          {
+            "peak_time_s": 756.5836345658636,
+            "peak_pressure_Pa": 281145.35724440694,
+            "left_trough_time_s": 742.7417075269312,
+            "right_trough_time_s": 766.1271471483491,
+            "trough_baseline_Pa": 251939.15596330236,
+            "semi_amplitude_Pa": 14603.100640552293,
+            "peak_to_interpolated_trough_Pa": 29206.201281104586
+          },
+          {
+            "peak_time_s": 779.9691034551217,
+            "peak_pressure_Pa": 281144.30620227405,
+            "left_trough_time_s": 766.1271471483491,
+            "right_trough_time_s": 789.5125888202471,
+            "trough_baseline_Pa": 251940.04262250033,
+            "semi_amplitude_Pa": 14602.131789886858,
+            "peak_to_interpolated_trough_Pa": 29204.263579773717
+          },
+          {
+            "peak_time_s": 803.3543228354902,
+            "peak_pressure_Pa": 281143.47736123094,
+            "left_trough_time_s": 789.5125888202471,
+            "right_trough_time_s": 812.8979445422259,
+            "trough_baseline_Pa": 251940.7033303304,
+            "semi_amplitude_Pa": 14601.387015450266,
+            "peak_to_interpolated_trough_Pa": 29202.77403090053
+          },
+          {
+            "peak_time_s": 826.7395359027491,
+            "peak_pressure_Pa": 281142.8301569115,
+            "left_trough_time_s": 812.8979445422259,
+            "right_trough_time_s": 836.2832261194568,
+            "trough_baseline_Pa": 251941.21681931757,
+            "semi_amplitude_Pa": 14600.80666879697,
+            "peak_to_interpolated_trough_Pa": 29201.61333759394
+          },
+          {
+            "peak_time_s": 850.124642222417,
+            "peak_pressure_Pa": 281142.36303822964,
+            "left_trough_time_s": 836.2832261194568,
+            "right_trough_time_s": 859.6684432228633,
+            "trough_baseline_Pa": 251941.6150337704,
+            "semi_amplitude_Pa": 14600.374002229626,
+            "peak_to_interpolated_trough_Pa": 29200.748004459252
+          },
+          {
+            "peak_time_s": 873.5096563854897,
+            "peak_pressure_Pa": 281141.966515747,
+            "left_trough_time_s": 859.6684432228633,
+            "right_trough_time_s": 883.0536036868441,
+            "trough_baseline_Pa": 251941.9238188179,
+            "semi_amplitude_Pa": 14600.021348464565,
+            "peak_to_interpolated_trough_Pa": 29200.04269692913
+          }
+        ]
+      },
+      "settled": true,
+      "settling_variation": {
+        "period": 3.3734554320553745e-05,
+        "amplitude": 0.0009129319504667679,
+        "mean": 5.3017061621279694e-06
+      },
+      "period_s": 23.385284799135185,
+      "semi_amplitude_Pa": 14605.015693046871,
+      "mean_Pa": 266835.188535268,
+      "window_s": [
+        639.6568083941379,
+        873.5096563854897
+      ],
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 6.821210263296962e-13,
+          "initial_inventory_kg": 71.25836382794424,
+          "absolute_processed_mass_kg": 2126.4463416624367,
+          "relative_inventory": 9.572504751536266e-15,
+          "relative_processed": 3.207797972444581e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -9.052097215977708e-15
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 4.547473508864641e-13,
+          "initial_inventory_kg": 55.702655127737295,
+          "absolute_processed_mass_kg": 2128.3540058547615,
+          "relative_inventory": 8.163836173403902e-15,
+          "relative_processed": 2.1366151948196912e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 4.467983759333983e-14
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 2.8421709430404007e-13,
+          "initial_inventory_kg": 15.555708700207084,
+          "absolute_processed_mass_kg": 2126.43201992196,
+          "relative_inventory": 1.8270919042104232e-14,
+          "relative_processed": 1.336591490540435e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -5.373193480931755e-14
+        },
+        "g_system": {
+          "max_abs_balance_kg": 8.881784197001252e-16,
+          "initial_inventory_kg": 0.17434152937405797,
+          "absolute_processed_mass_kg": 5.443148370102131,
+          "relative_inventory": 5.094474178865878e-15,
+          "relative_processed": 1.6317365600002194e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 5.4110976897799674e-18
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 4.0523140398818214e-14,
+          "initial_inventory_kg": 0.15139453820328896,
+          "absolute_processed_mass_kg": 5.440876641031107,
+          "relative_inventory": 2.6766580142015896e-13,
+          "relative_processed": 7.447906481323684e-15,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.5200624012666534e-16
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 4.0523140398818214e-14,
+          "initial_inventory_kg": 0.02294699117076911,
+          "absolute_processed_mass_kg": 5.433502185682265,
+          "relative_inventory": 1.7659457005604455e-12,
+          "relative_processed": 7.458014925548406e-15,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.4659514243683974e-16
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "per_cycle_balances_kg": {
+        "l_system": [
+          2.4158453015843406e-13,
+          -9.947598300641403e-14,
+          -1.1368683772161603e-13,
+          9.947598300641403e-14,
+          -1.4210854715202004e-14,
+          2.842170943040401e-14,
+          -4.263256414560601e-14,
+          -7.105427357601002e-14,
+          0.0,
+          5.684341886080802e-14
+        ],
+        "l_pipe": [
+          9.947598300641403e-14,
+          1.4210854715202004e-14,
+          0.0,
+          9.947598300641403e-14,
+          1.4210854715202004e-14,
+          -7.815970093361102e-14,
+          7.815970093361102e-14,
+          -6.394884621840902e-14,
+          0.0,
+          1.4921397450962104e-13
+        ],
+        "l_riser": [
+          -1.0125233984581428e-13,
+          -1.2434497875801753e-14,
+          -5.329070518200751e-15,
+          5.329070518200751e-15,
+          -1.1368683772161603e-13,
+          1.1368683772161603e-13,
+          -4.263256414560601e-14,
+          4.263256414560601e-14,
+          0.0,
+          -1.1368683772161603e-13
+        ],
+        "g_system": [
+          1.6653345369377348e-16,
+          0.0,
+          2.220446049250313e-16,
+          1.6653345369377348e-16,
+          -3.0531133177191805e-16,
+          -8.326672684688674e-17,
+          0.0,
+          2.7755575615628914e-17,
+          -2.7755575615628914e-16,
+          -2.7755575615628914e-17
+        ],
+        "g_pipe": [
+          -9.797718192317006e-15,
+          4.801714581503802e-15,
+          7.355227538141662e-15,
+          -1.7208456881689926e-15,
+          -9.43689570931383e-16,
+          -5.051514762044462e-15,
+          6.38378239159465e-15,
+          1.582067810090848e-15,
+          3.3029134982598407e-15,
+          -6.328271240363392e-15
+        ],
+        "g_riser": [
+          9.985068327722502e-15,
+          -4.999473057765158e-15,
+          -7.16093850883226e-15,
+          2.1024848528838902e-15,
+          5.620504062164855e-16,
+          5.197231534026514e-15,
+          -6.529499163576702e-15,
+          -1.536964999715451e-15,
+          -3.587408148320037e-15,
+          6.2901073238919025e-15
+        ]
+      },
+      "cycle_balance_definition": "linear interpolation of accepted BE inventories and cumulative accepted flux integrals at the same peak markers; no re-integration of sampled monitors",
+      "actual_dt_s": {
+        "min": 0.001,
+        "max": 0.125,
+        "mean": 0.12386457473162278,
+        "accepted": 7266,
+        "sum_duration_s": 899.9999999999711
+      },
+      "hashes": {
+        "monitor.csv": "b5dbee6afd479d8271f89d38c163871388569f17a4c17f38fc3239915cba11ff",
+        "steps.csv": "a184b75a4d0ec2ad5834a59f6d3b7d88305bfb3665763da3db87d932e42aa90e",
+        "conservation.csv": "d2aaa0f43f7aeea5f1147cc0e0c5c4de7c1e434366f38e6ffcdc461d14d03151",
+        "checkpoint.dat": "f3b38c329034c538a3d9b043f7a9454c2ad0e5ef09ba470309bd38512582f102"
+      },
+      "base_run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N401_dt0.125",
+      "analysis_history": {
+        "kind": "derived analysis chronology; not a solver output/status",
+        "completed_analysis_history": true,
+        "segments": [
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/restart_refinement_18aa7f7/N401_dt0.125",
+            "operator": "18aa7f79f7b16442fa19ebbd9ef8819b0eff187a",
+            "source_manifest_sha256": "8de277536e77da47f9bf2bbc235ff6e2d5c58451a910ad54bd942952fdeda4e5",
+            "offset_s": 0.0,
+            "through_step": 2185,
+            "through_time_s": 270.4318527598439,
+            "source_sha256": {
+              "conservation.csv": "be5ff7f555fc64b8ee6439bb46201e89fa17efc47821985cea01b1da66caec5a",
+              "monitor.csv": "81ff80466626f32f257ace40923185d63ee2f4bc5d06033e503c7ca01f926a30",
+              "steps.csv": "93e3a4062bb79ee4d5a9e45d352b46cc9f9205b9ff6c221ad651780d75d4f219",
+              "fields.csv": "597b3c83812819b9f74e3389d28704382f7bcae0d950e58557487f21b70e910e",
+              "checkpoint.dat": "218c9c8b3d143f1c3e1e5fad2ae44cfbbec76dd89e71afddeea812f053b3e799"
+            }
+          },
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_resumes_18aa7f7/N401_dt0.125",
+            "operator": "18aa7f7",
+            "source_manifest_sha256": "c90f474468eac9ef849dfad984900ae95760114954a18880de35651e4fbf9794",
+            "offset_s": 270.4318527598439,
+            "through_step": 2659,
+            "through_time_s": 329.5681472401561,
+            "source_sha256": {
+              "conservation.csv": "f7e327f55acedd0bca9c8610a8a3b0debc5323cd904f1fbe5b148d51d1f1ce13",
+              "monitor.csv": "b0d86526d40cb1dcc2e09efd16e542334b1cba8a5ccbe8beadc79e079eb2194a",
+              "steps.csv": "469c1553126cf3e4322f668ccfafa0d298a38749bb3eff9777ac9386b9e42aca",
+              "fields.csv": "1f0b65760ef4db882e65e594a1b7c8c68cf3e9ca5425d8bf4bc0d1f16384aee7",
+              "checkpoint.dat": "5eca2bc1c88223270b76e0f3683e75f39c2dcb48863937546b95954bcacf1c41"
+            }
+          },
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_resumes_18aa7f7/N401_dt0.125_extension",
+            "operator": "18aa7f7",
+            "source_manifest_sha256": "5b9b72db8128a4177fdb2432abec7c8a998c3e1d0506eb5b26bb5383204f65f9",
+            "offset_s": 600.0,
+            "through_step": 2422,
+            "through_time_s": 300.0,
+            "source_sha256": {
+              "conservation.csv": "848645954bac14e8bde38405dee1d81b438edcbb305a6213a1b96864d374aa0d",
+              "monitor.csv": "25942481832574d2a92efaf395c215ec15fa1295ee535984684c4e52de2da365",
+              "steps.csv": "f9bf1e9ba467409b9611f357919eeee9d59dc070e87ce3873815aba8fd0becdb",
+              "fields.csv": "f508ab8161136d066033a49854a7369ebb44c39bd5070fd3a76881579488941e",
+              "checkpoint.dat": "f3b38c329034c538a3d9b043f7a9454c2ad0e5ef09ba470309bd38512582f102"
+            }
+          }
+        ],
+        "accepted_steps": 7266,
+        "reached_time_s": 900.0,
+        "sum_rule": "compensated independent re-integration of the original accepted BE fluxes and mass residuals; states are unchanged; step_balance remains the original measured quantity",
+        "balances": {
+          "l_system": {
+            "max_abs_balance_kg": 6.821210263296962e-13,
+            "initial_inventory_kg": 71.25836382794424,
+            "absolute_processed_mass_kg": 2126.4463416624367,
+            "relative_inventory": 9.572504751536266e-15,
+            "relative_processed": 3.207797972444581e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -9.052097215977708e-15
+          },
+          "l_pipe": {
+            "max_abs_balance_kg": 4.547473508864641e-13,
+            "initial_inventory_kg": 55.702655127737295,
+            "absolute_processed_mass_kg": 2128.3540058547615,
+            "relative_inventory": 8.163836173403902e-15,
+            "relative_processed": 2.1366151948196912e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 4.467983759333983e-14
+          },
+          "l_riser": {
+            "max_abs_balance_kg": 2.8421709430404007e-13,
+            "initial_inventory_kg": 15.555708700207084,
+            "absolute_processed_mass_kg": 2126.43201992196,
+            "relative_inventory": 1.8270919042104232e-14,
+            "relative_processed": 1.336591490540435e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -5.373193480931755e-14
+          },
+          "g_system": {
+            "max_abs_balance_kg": 8.881784197001252e-16,
+            "initial_inventory_kg": 0.17434152937405797,
+            "absolute_processed_mass_kg": 5.443148370102131,
+            "relative_inventory": 5.094474178865878e-15,
+            "relative_processed": 1.6317365600002194e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 5.4110976897799674e-18
+          },
+          "g_pipe": {
+            "max_abs_balance_kg": 4.0523140398818214e-14,
+            "initial_inventory_kg": 0.15139453820328896,
+            "absolute_processed_mass_kg": 5.440876641031107,
+            "relative_inventory": 2.6766580142015896e-13,
+            "relative_processed": 7.447906481323684e-15,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 2.5200624012666534e-16
+          },
+          "g_riser": {
+            "max_abs_balance_kg": 4.0523140398818214e-14,
+            "initial_inventory_kg": 0.02294699117076911,
+            "absolute_processed_mass_kg": 5.433502185682265,
+            "relative_inventory": 1.7659457005604455e-12,
+            "relative_processed": 7.458014925548406e-15,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -2.4659514243683974e-16
+          }
+        },
+        "arithmetic_contract_passes": true,
+        "files": {
+          "checkpoint.dat": "f3b38c329034c538a3d9b043f7a9454c2ad0e5ef09ba470309bd38512582f102",
+          "steps.csv": "a184b75a4d0ec2ad5834a59f6d3b7d88305bfb3665763da3db87d932e42aa90e",
+          "conservation.csv": "d2aaa0f43f7aeea5f1147cc0e0c5c4de7c1e434366f38e6ffcdc461d14d03151",
+          "fields.csv": "b5adbe6b1c95a7c8d3fc1a1e9a8b4e2439a1717d6b7199555a6f6035776b83b4",
+          "monitor.csv": "b5dbee6afd479d8271f89d38c163871388569f17a4c17f38fc3239915cba11ff"
+        }
+      },
+      "n": 401,
+      "dt_max_s": 0.125,
+      "full_phase_waveforms_reference": {
+        "file": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_analysis_final_v2/summary.json",
+        "sha256": "64f84b68ab8e061667cfad63c28c235f5de6622e82c915aa2ca886fb35ceccba"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N51_dt0.03125",
+      "time_s": 900.0,
+      "cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 638.3923281013281,
+        "window_end_s": 871.8338498623096,
+        "window_is_end_of_run": false,
+        "mean_period_s": 23.344152176098156,
+        "period_cv": 5.691994631079989e-06,
+        "first_semi_amplitude_Pa": 15351.39988559064,
+        "last_semi_amplitude_Pa": 15356.817077399144,
+        "mean_semi_amplitude_Pa": 15355.097075625288,
+        "amplitude_cv": 0.00011546157013753229,
+        "relative_amplitude_change": 0.0003528793366649463,
+        "relative_difference_last_five_vs_first_five_amplitudes": 0.00018979334058122355,
+        "growth_rate_s_inv": 1.4010193857588074e-06,
+        "log_amplitude_r_squared": 0.882504472206111,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": true,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 638.3923281013281,
+          "window_end_s": 871.8338498623096,
+          "full_window_observed": true,
+          "mean_Pa": 266775.6318771317,
+          "rms_about_mean_Pa": 10776.503556820977,
+          "peak_to_peak_Pa": 30713.255524295557,
+          "minimum_Pa": 251019.48696194316,
+          "maximum_Pa": 281732.7424862387
+        },
+        "peak_records": [
+          {
+            "peak_time_s": 638.3923281013281,
+            "peak_pressure_Pa": 281727.1455870886,
+            "left_trough_time_s": 624.4667524525588,
+            "right_trough_time_s": 647.8105292763586,
+            "trough_baseline_Pa": 251024.34581590732,
+            "semi_amplitude_Pa": 15351.39988559064,
+            "peak_to_interpolated_trough_Pa": 30702.79977118128
+          },
+          {
+            "peak_time_s": 661.736569014747,
+            "peak_pressure_Pa": 281728.64774316025,
+            "left_trough_time_s": 647.8105292763586,
+            "right_trough_time_s": 671.1545524667557,
+            "trough_baseline_Pa": 251023.07555275693,
+            "semi_amplitude_Pa": 15352.786095201664,
+            "peak_to_interpolated_trough_Pa": 30705.572190403327
+          },
+          {
+            "peak_time_s": 685.080679394468,
+            "peak_pressure_Pa": 281729.7703343662,
+            "left_trough_time_s": 671.1545524667557,
+            "right_trough_time_s": 694.4983308312909,
+            "trough_baseline_Pa": 251022.16114526134,
+            "semi_amplitude_Pa": 15353.80459455242,
+            "peak_to_interpolated_trough_Pa": 30707.60918910484
+          },
+          {
+            "peak_time_s": 708.4245885872452,
+            "peak_pressure_Pa": 281730.6622631117,
+            "left_trough_time_s": 694.4983308312909,
+            "right_trough_time_s": 717.8418540829947,
+            "trough_baseline_Pa": 251021.39711200364,
+            "semi_amplitude_Pa": 15354.632575554017,
+            "peak_to_interpolated_trough_Pa": 30709.265151108033
+          },
+          {
+            "peak_time_s": 731.7686780759235,
+            "peak_pressure_Pa": 281731.3487575057,
+            "left_trough_time_s": 717.8418540829947,
+            "right_trough_time_s": 741.186376700475,
+            "trough_baseline_Pa": 251020.82061399316,
+            "semi_amplitude_Pa": 15355.264071756275,
+            "peak_to_interpolated_trough_Pa": 30710.52814351255
+          },
+          {
+            "peak_time_s": 755.1129385935059,
+            "peak_pressure_Pa": 281731.8742460826,
+            "left_trough_time_s": 741.186376700475,
+            "right_trough_time_s": 764.5306257746794,
+            "trough_baseline_Pa": 251020.42754047707,
+            "semi_amplitude_Pa": 15355.723352802772,
+            "peak_to_interpolated_trough_Pa": 30711.446705605544
+          },
+          {
+            "peak_time_s": 778.4571640825326,
+            "peak_pressure_Pa": 281732.23345248046,
+            "left_trough_time_s": 764.5306257746794,
+            "right_trough_time_s": 787.8745829556026,
+            "trough_baseline_Pa": 251020.13931409142,
+            "semi_amplitude_Pa": 15356.047069194523,
+            "peak_to_interpolated_trough_Pa": 30712.094138389046
+          },
+          {
+            "peak_time_s": 801.8011376141355,
+            "peak_pressure_Pa": 281732.5445348293,
+            "left_trough_time_s": 787.8745829556026,
+            "right_trough_time_s": 811.2182317038468,
+            "trough_baseline_Pa": 251019.91874611867,
+            "semi_amplitude_Pa": 15356.312894355331,
+            "peak_to_interpolated_trough_Pa": 30712.625788710662
+          },
+          {
+            "peak_time_s": 825.1452736557692,
+            "peak_pressure_Pa": 281732.7885094701,
+            "left_trough_time_s": 811.2182317038468,
+            "right_trough_time_s": 834.5628222803798,
+            "trough_baseline_Pa": 251019.6835262708,
+            "semi_amplitude_Pa": 15356.552491599665,
+            "peak_to_interpolated_trough_Pa": 30713.10498319933
+          },
+          {
+            "peak_time_s": 848.489567687698,
+            "peak_pressure_Pa": 281732.977042228,
+            "left_trough_time_s": 834.5628222803798,
+            "right_trough_time_s": 857.9071594515525,
+            "trough_baseline_Pa": 251019.52159448457,
+            "semi_amplitude_Pa": 15356.727723871707,
+            "peak_to_interpolated_trough_Pa": 30713.455447743414
+          },
+          {
+            "peak_time_s": 871.8338498623096,
+            "peak_pressure_Pa": 281733.0786667084,
+            "left_trough_time_s": 857.9071594515525,
+            "right_trough_time_s": 881.2511894487932,
+            "trough_baseline_Pa": 251019.4445119101,
+            "semi_amplitude_Pa": 15356.817077399144,
+            "peak_to_interpolated_trough_Pa": 30713.63415479829
+          }
+        ]
+      },
+      "settled": true,
+      "settling_variation": {
+        "period": 1.648546276986125e-05,
+        "amplitude": 0.0003469791128832491,
+        "mean": 2.492302605123237e-06
+      },
+      "period_s": 23.344152176098156,
+      "semi_amplitude_Pa": 15354.925075447904,
+      "mean_Pa": 266775.6318765682,
+      "window_s": [
+        638.3923281013281,
+        871.8338498623096
+      ],
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 2.2737367544323206e-13,
+          "initial_inventory_kg": 71.25836382794435,
+          "absolute_processed_mass_kg": 2128.7847735247633,
+          "relative_inventory": 3.1908349171787503e-15,
+          "relative_processed": 1.068091421317126e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -9.402462656453475e-14
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 1.3242242857813835e-09,
+          "initial_inventory_kg": 55.70265512773727,
+          "absolute_processed_mass_kg": 2128.3624484221573,
+          "relative_inventory": 2.3773090936952174e-11,
+          "relative_processed": 6.221798767231049e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.3241436520197255e-09
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 1.3242242857813835e-09,
+          "initial_inventory_kg": 15.555708700207084,
+          "absolute_processed_mass_kg": 2128.778894351069,
+          "relative_inventory": 8.512786600097203e-11,
+          "relative_processed": 6.220581617449079e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -1.32423767664629e-09
+        },
+        "g_system": {
+          "max_abs_balance_kg": 1.1057821325266559e-13,
+          "initial_inventory_kg": 0.17434152937405795,
+          "absolute_processed_mass_kg": 5.442705031010372,
+          "relative_inventory": 6.342620352688018e-13,
+          "relative_processed": 2.031677495337977e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.1008818559588568e-13
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 2.1677371009332091e-10,
+          "initial_inventory_kg": 0.15139453820328883,
+          "absolute_processed_mass_kg": 5.4448181579924695,
+          "relative_inventory": 1.43184630480026e-09,
+          "relative_processed": 3.981284660078463e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.1677339480717672e-10
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 2.166635759692781e-10,
+          "initial_inventory_kg": 0.022946991170769142,
+          "absolute_processed_mass_kg": 5.4370003635502995,
+          "relative_inventory": 9.441916561386638e-09,
+          "relative_processed": 3.984983657933752e-11,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.1666330662158083e-10
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "per_cycle_balances_kg": {
+        "l_system": [
+          4.263256414560601e-14,
+          -7.105427357601002e-14,
+          0.0,
+          7.105427357601002e-14,
+          -1.1368683772161603e-13,
+          1.1368683772161603e-13,
+          -7.105427357601002e-14,
+          -1.4210854715202004e-14,
+          5.684341886080802e-14,
+          1.1368683772161603e-13
+        ],
+        "l_pipe": [
+          3.296918293926865e-11,
+          3.2599700716673397e-11,
+          3.304023721284466e-11,
+          3.2670754990249407e-11,
+          3.247180302423658e-11,
+          3.3082869776990265e-11,
+          3.3310243452433497e-11,
+          3.2173375075217336e-11,
+          3.3082869776990265e-11,
+          3.328182174300309e-11
+        ],
+        "l_riser": [
+          -3.296918293926865e-11,
+          -3.26281224261038e-11,
+          -3.3010039146574854e-11,
+          -3.270095305651921e-11,
+          -3.2514435588382185e-11,
+          -3.296918293926865e-11,
+          -3.338840315336711e-11,
+          -3.2175151432056737e-11,
+          -3.303490814232646e-11,
+          -3.3164582191602676e-11
+        ],
+        "g_system": [
+          3.0253577421035516e-15,
+          2.9698465908722937e-15,
+          3.191891195797325e-15,
+          3.0253577421035516e-15,
+          3.247402347028583e-15,
+          2.9698465908722937e-15,
+          3.552713678800501e-15,
+          2.6645352591003757e-15,
+          3.1086244689504383e-15,
+          3.4416913763379853e-15
+        ],
+        "g_pipe": [
+          5.1728898942116075e-12,
+          5.269340519475918e-12,
+          5.298206318116172e-12,
+          5.243222522821611e-12,
+          5.252853707560234e-12,
+          5.270450742500543e-12,
+          5.299760630350647e-12,
+          5.113687251423471e-12,
+          5.246802992076027e-12,
+          5.277694947736222e-12
+        ],
+        "g_riser": [
+          -5.169958211537207e-12,
+          -5.2660167892959464e-12,
+          -5.295160143692357e-12,
+          -5.2399751204745826e-12,
+          -5.249585488531494e-12,
+          -5.267793146135347e-12,
+          -5.296211386118799e-12,
+          -5.110717404832599e-12,
+          -5.243996209491897e-12,
+          -5.27458285382032e-12
+        ]
+      },
+      "cycle_balance_definition": "linear interpolation of accepted BE inventories and cumulative accepted flux integrals at the same peak markers; no re-integration of sampled monitors",
+      "actual_dt_s": {
+        "min": 0.001,
+        "max": 0.03125,
+        "mean": 0.031217481789810275,
+        "accepted": 28830,
+        "sum_duration_s": 900.0000000002302
+      },
+      "hashes": {
+        "monitor.csv": "1cd2d136886027e06f7b2d8c7c61170bcaf5240cd0ef35cc6d90cabea1372f5c",
+        "steps.csv": "14f38a8e9094ee122e7d8cc5dd7760d0c26179bab24facc5333a75ad2ce62697",
+        "conservation.csv": "ecc26b0a2affe213073da87b16b93971824dc3b93d3e56810e60e077e8cbae49",
+        "checkpoint.dat": "e5cd2060ddabd4c86d0f830dee2115571169c60278eaebb27e2953ca6782f0c7"
+      },
+      "base_run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N51_dt0.03125",
+      "analysis_history": {
+        "kind": "derived analysis chronology; not a solver output/status",
+        "completed_analysis_history": true,
+        "segments": [
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/restart_refinement_18aa7f7/N51_dt0.03125",
+            "operator": "18aa7f79f7b16442fa19ebbd9ef8819b0eff187a",
+            "source_manifest_sha256": "486f576755dd8484ba8327e631f03a882eb6aff3de97f0c0245b967ab2c28ffe",
+            "offset_s": 0.0,
+            "through_step": 19215,
+            "through_time_s": 600.0,
+            "source_sha256": {
+              "conservation.csv": "9d317507a4696320b93cc52e981bae2cd81ac6bbec05dfcd03c227a4951173b4",
+              "monitor.csv": "b967f9434a030413ba867afc8e1e308f46d02275b6d7a48cc8eb0abee173ef2a",
+              "steps.csv": "dde5eb44ec1454e81687bbb8870f126689a21483ae3ea3d2a73c3d3f4b4ef64a",
+              "fields.csv": "941dfbf1d078b0c276d1925b75de9f38f8216efd42fd43a093cec87216762e30",
+              "checkpoint.dat": "14529e5684256e09cfbe4eb24669a52ca5e4d5755157a96b318142a5487d12c6"
+            }
+          },
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_extensions_18aa7f7_r2/N51_dt0.03125",
+            "operator": "18aa7f7",
+            "source_manifest_sha256": "328efbad98334bc7950f562034c5e13b0dbb0edc74465e58fbeaf0f066bde6f4",
+            "offset_s": 600,
+            "through_step": 9615,
+            "through_time_s": 300.0,
+            "source_sha256": {
+              "conservation.csv": "730bb2eb0338032a9162f4ac6a29ca1cb36e9629a6f011fdd8c06e7f533c42b0",
+              "monitor.csv": "6d66cab7a20f178234d9af4e991e5a32f5f6501b7a73f21db02c39612e04461c",
+              "steps.csv": "ea6183259c74d569a2655f190e4d891454c1721ca23ef76a318d308fb608b022",
+              "fields.csv": "d0f314e31bca2e39ae8b2a58faefb2360a2e44bc860ab60c1e3f909ced50102d",
+              "checkpoint.dat": "e5cd2060ddabd4c86d0f830dee2115571169c60278eaebb27e2953ca6782f0c7"
+            }
+          }
+        ],
+        "accepted_steps": 28830,
+        "reached_time_s": 900.0,
+        "sum_rule": "compensated independent re-integration of the original accepted BE fluxes and mass residuals; states are unchanged; step_balance remains the original measured quantity",
+        "balances": {
+          "l_system": {
+            "max_abs_balance_kg": 2.2737367544323206e-13,
+            "initial_inventory_kg": 71.25836382794435,
+            "absolute_processed_mass_kg": 2128.7847735247633,
+            "relative_inventory": 3.1908349171787503e-15,
+            "relative_processed": 1.068091421317126e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -9.402462656453475e-14
+          },
+          "l_pipe": {
+            "max_abs_balance_kg": 1.3242242857813835e-09,
+            "initial_inventory_kg": 55.70265512773727,
+            "absolute_processed_mass_kg": 2128.3624484221573,
+            "relative_inventory": 2.3773090936952174e-11,
+            "relative_processed": 6.221798767231049e-13,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 1.3241436520197255e-09
+          },
+          "l_riser": {
+            "max_abs_balance_kg": 1.3242242857813835e-09,
+            "initial_inventory_kg": 15.555708700207084,
+            "absolute_processed_mass_kg": 2128.778894351069,
+            "relative_inventory": 8.512786600097203e-11,
+            "relative_processed": 6.220581617449079e-13,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -1.32423767664629e-09
+          },
+          "g_system": {
+            "max_abs_balance_kg": 1.1057821325266559e-13,
+            "initial_inventory_kg": 0.17434152937405795,
+            "absolute_processed_mass_kg": 5.442705031010372,
+            "relative_inventory": 6.342620352688018e-13,
+            "relative_processed": 2.031677495337977e-14,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 1.1008818559588568e-13
+          },
+          "g_pipe": {
+            "max_abs_balance_kg": 2.1677371009332091e-10,
+            "initial_inventory_kg": 0.15139453820328883,
+            "absolute_processed_mass_kg": 5.4448181579924695,
+            "relative_inventory": 1.43184630480026e-09,
+            "relative_processed": 3.981284660078463e-11,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 2.1677339480717672e-10
+          },
+          "g_riser": {
+            "max_abs_balance_kg": 2.166635759692781e-10,
+            "initial_inventory_kg": 0.022946991170769142,
+            "absolute_processed_mass_kg": 5.4370003635502995,
+            "relative_inventory": 9.441916561386638e-09,
+            "relative_processed": 3.984983657933752e-11,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -2.1666330662158083e-10
+          }
+        },
+        "arithmetic_contract_passes": true,
+        "files": {
+          "checkpoint.dat": "e5cd2060ddabd4c86d0f830dee2115571169c60278eaebb27e2953ca6782f0c7",
+          "steps.csv": "14f38a8e9094ee122e7d8cc5dd7760d0c26179bab24facc5333a75ad2ce62697",
+          "conservation.csv": "ecc26b0a2affe213073da87b16b93971824dc3b93d3e56810e60e077e8cbae49",
+          "fields.csv": "7de91bd69f82eaddfbffe025b22f112cb3e11bbefdbfcaf07acaa916dabea6d9",
+          "monitor.csv": "1cd2d136886027e06f7b2d8c7c61170bcaf5240cd0ef35cc6d90cabea1372f5c"
+        }
+      },
+      "n": 51,
+      "dt_max_s": 0.03125,
+      "full_phase_waveforms_reference": {
+        "file": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_analysis_final_v2/summary.json",
+        "sha256": "64f84b68ab8e061667cfad63c28c235f5de6622e82c915aa2ca886fb35ceccba"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N51_dt0.0625",
+      "time_s": 900.0,
+      "cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 636.4549944946,
+        "window_end_s": 869.1093385321212,
+        "window_is_end_of_run": false,
+        "mean_period_s": 23.265434403752124,
+        "period_cv": 1.3157765021967995e-05,
+        "first_semi_amplitude_Pa": 13758.960889805909,
+        "last_semi_amplitude_Pa": 13771.001617946618,
+        "mean_semi_amplitude_Pa": 13766.79898799777,
+        "amplitude_cv": 0.00028753099900523735,
+        "relative_amplitude_change": 0.0008751190033275957,
+        "relative_difference_last_five_vs_first_five_amplitudes": 0.0004888232750788202,
+        "growth_rate_s_inv": 3.574344160654689e-06,
+        "log_amplitude_r_squared": 0.9199178715375221,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": true,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 636.4549944946,
+          "window_end_s": 869.1093385321212,
+          "full_window_observed": true,
+          "mean_Pa": 266573.8381183505,
+          "rms_about_mean_Pa": 9672.535986731311,
+          "peak_to_peak_Pa": 27539.263524364622,
+          "minimum_Pa": 252480.5895607046,
+          "maximum_Pa": 280019.8530850692
+        },
+        "peak_records": [
+          {
+            "peak_time_s": 636.4549944946,
+            "peak_pressure_Pa": 280008.1043963472,
+            "left_trough_time_s": 622.7926361965547,
+            "right_trough_time_s": 646.0584199683844,
+            "trough_baseline_Pa": 252490.18261673537,
+            "semi_amplitude_Pa": 13758.960889805909,
+            "peak_to_interpolated_trough_Pa": 27517.921779611817
+          },
+          {
+            "peak_time_s": 659.7196056832738,
+            "peak_pressure_Pa": 280010.9841639515,
+            "left_trough_time_s": 646.0584199683844,
+            "right_trough_time_s": 669.3228076583733,
+            "trough_baseline_Pa": 252487.77371512307,
+            "semi_amplitude_Pa": 13761.605224414205,
+            "peak_to_interpolated_trough_Pa": 27523.21044882841
+          },
+          {
+            "peak_time_s": 682.9852223607064,
+            "peak_pressure_Pa": 280013.27575142833,
+            "left_trough_time_s": 669.3228076583733,
+            "right_trough_time_s": 692.5874995733745,
+            "trough_baseline_Pa": 252485.80606745958,
+            "semi_amplitude_Pa": 13763.734841984377,
+            "peak_to_interpolated_trough_Pa": 27527.469683968753
+          },
+          {
+            "peak_time_s": 706.2508328111674,
+            "peak_pressure_Pa": 280015.1090748097,
+            "left_trough_time_s": 692.5874995733745,
+            "right_trough_time_s": 715.8525998574422,
+            "trough_baseline_Pa": 252484.22424044984,
+            "semi_amplitude_Pa": 13765.442417179933,
+            "peak_to_interpolated_trough_Pa": 27530.884834359866
+          },
+          {
+            "peak_time_s": 729.5163469850684,
+            "peak_pressure_Pa": 280016.64488797623,
+            "left_trough_time_s": 715.8525998574422,
+            "right_trough_time_s": 739.1177219175574,
+            "trough_baseline_Pa": 252482.94867641648,
+            "semi_amplitude_Pa": 13766.848105779878,
+            "peak_to_interpolated_trough_Pa": 27533.696211559756
+          },
+          {
+            "peak_time_s": 752.7816911567173,
+            "peak_pressure_Pa": 280017.8541505268,
+            "left_trough_time_s": 739.1177219175574,
+            "right_trough_time_s": 762.3828485731756,
+            "trough_baseline_Pa": 252481.92063448625,
+            "semi_amplitude_Pa": 13767.96675802028,
+            "peak_to_interpolated_trough_Pa": 27535.93351604056
+          },
+          {
+            "peak_time_s": 776.0471248337117,
+            "peak_pressure_Pa": 280018.80532531446,
+            "left_trough_time_s": 762.3828485731756,
+            "right_trough_time_s": 785.6487085420898,
+            "trough_baseline_Pa": 252481.11447494396,
+            "semi_amplitude_Pa": 13768.845425185253,
+            "peak_to_interpolated_trough_Pa": 27537.690850370505
+          },
+          {
+            "peak_time_s": 799.312753971185,
+            "peak_pressure_Pa": 280019.58824740024,
+            "left_trough_time_s": 785.6487085420898,
+            "right_trough_time_s": 808.9140770415133,
+            "trough_baseline_Pa": 252480.45767588515,
+            "semi_amplitude_Pa": 13769.565285757548,
+            "peak_to_interpolated_trough_Pa": 27539.130571515096
+          },
+          {
+            "peak_time_s": 822.5784015612384,
+            "peak_pressure_Pa": 280020.2559109667,
+            "left_trough_time_s": 808.9140770415133,
+            "right_trough_time_s": 832.1794142786761,
+            "trough_baseline_Pa": 252479.91203564548,
+            "semi_amplitude_Pa": 13770.17193766062,
+            "peak_to_interpolated_trough_Pa": 27540.34387532124
+          },
+          {
+            "peak_time_s": 845.8438446137229,
+            "peak_pressure_Pa": 280020.76522836916,
+            "left_trough_time_s": 832.1794142786761,
+            "right_trough_time_s": 855.4447135586199,
+            "trough_baseline_Pa": 252479.47249988743,
+            "semi_amplitude_Pa": 13770.646364240863,
+            "peak_to_interpolated_trough_Pa": 27541.292728481727
+          },
+          {
+            "peak_time_s": 869.1093385321212,
+            "peak_pressure_Pa": 280021.17314402456,
+            "left_trough_time_s": 855.4447135586199,
+            "right_trough_time_s": 878.7102969454091,
+            "trough_baseline_Pa": 252479.16990813133,
+            "semi_amplitude_Pa": 13771.001617946618,
+            "peak_to_interpolated_trough_Pa": 27542.003235893237
+          }
+        ]
+      },
+      "settled": true,
+      "settling_variation": {
+        "period": 4.454683121661515e-05,
+        "amplitude": 0.0008488415630852378,
+        "mean": 4.761653514524947e-06
+      },
+      "period_s": 23.265434403752124,
+      "semi_amplitude_Pa": 13766.378725002887,
+      "mean_Pa": 266573.8381151333,
+      "window_s": [
+        636.4549944946,
+        869.1093385321212
+      ],
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 6.821210263296962e-13,
+          "initial_inventory_kg": 71.25836382794435,
+          "absolute_processed_mass_kg": 2131.0030058482425,
+          "relative_inventory": 9.57250475153625e-15,
+          "relative_processed": 3.2009388276680487e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -5.050134784681055e-13
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 2.0463630789890885e-11,
+          "initial_inventory_kg": 55.70265512773727,
+          "absolute_processed_mass_kg": 2128.3771387203406,
+          "relative_inventory": 3.673726278031758e-13,
+          "relative_processed": 9.61466387587417e-15,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.0009860103152302e-11
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 2.0691004465334117e-11,
+          "initial_inventory_kg": 15.555708700207084,
+          "absolute_processed_mass_kg": 2131.011816973445,
+          "relative_inventory": 1.330122906265188e-12,
+          "relative_processed": 9.709474297857426e-15,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.051487358162041e-11
+        },
+        "g_system": {
+          "max_abs_balance_kg": 4.760636329592671e-13,
+          "initial_inventory_kg": 0.17434152937405795,
+          "absolute_processed_mass_kg": 5.446792364224695,
+          "relative_inventory": 2.7306381598721105e-12,
+          "relative_processed": 8.740256670809054e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 4.753609438470521e-13
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 6.9819705572626845e-12,
+          "initial_inventory_kg": 0.15139453820328883,
+          "absolute_processed_mass_kg": 5.452247758761285,
+          "relative_inventory": 4.611771758824924e-11,
+          "relative_processed": 1.2805673671089633e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 6.979606321578577e-12
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 6.506351013513267e-12,
+          "initial_inventory_kg": 0.022946991170769142,
+          "absolute_processed_mass_kg": 5.448517297535263,
+          "relative_inventory": 2.8353830639902523e-10,
+          "relative_processed": 1.1941507493160635e-12,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -6.504245377731525e-12
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "per_cycle_balances_kg": {
+        "l_system": [
+          2.842170943040401e-14,
+          2.842170943040401e-14,
+          -5.684341886080802e-14,
+          0.0,
+          0.0,
+          -1.1368683772161603e-13,
+          0.0,
+          1.1368683772161603e-13,
+          -1.1368683772161603e-13,
+          5.684341886080802e-14
+        ],
+        "l_pipe": [
+          2.913225216616411e-13,
+          5.115907697472721e-13,
+          5.115907697472721e-13,
+          2.8421709430404007e-13,
+          2.5579538487363607e-13,
+          5.400124791776761e-13,
+          4.263256414560601e-13,
+          3.694822225952521e-13,
+          3.694822225952521e-13,
+          5.329070518200751e-13
+        ],
+        "l_riser": [
+          -3.6770586575585185e-13,
+          -4.831690603168681e-13,
+          -4.831690603168681e-13,
+          -3.694822225952521e-13,
+          -2.540190280342358e-13,
+          -5.968558980384842e-13,
+          -4.831690603168681e-13,
+          -2.646771690706373e-13,
+          -4.742872761198669e-13,
+          -5.364597654988756e-13
+        ],
+        "g_system": [
+          1.2490009027033011e-14,
+          1.3461454173580023e-14,
+          1.3905543383430086e-14,
+          1.3627987627273797e-14,
+          1.2212453270876722e-14,
+          1.379452108096757e-14,
+          1.3739009929736312e-14,
+          1.3128387266192476e-14,
+          1.27675647831893e-14,
+          1.3850032232198828e-14
+        ],
+        "g_pipe": [
+          1.0055845045542355e-13,
+          1.547373340571312e-13,
+          1.3902767825868523e-13,
+          1.5865087021893487e-13,
+          1.1751710715657282e-13,
+          1.653122083666858e-13,
+          1.5804024755539103e-13,
+          1.5040746426109308e-13,
+          1.1526890553170688e-13,
+          1.5237811012980274e-13
+        ],
+        "g_riser": [
+          -8.785333571736942e-14,
+          -1.411544492402328e-13,
+          -1.254621406765466e-13,
+          -1.4521370217401852e-13,
+          -1.0476688960814329e-13,
+          -1.5188891810957728e-13,
+          -1.440479679981621e-13,
+          -1.373172409113721e-13,
+          -1.0215439605332222e-13,
+          -1.3884726701718364e-13
+        ]
+      },
+      "cycle_balance_definition": "linear interpolation of accepted BE inventories and cumulative accepted flux integrals at the same peak markers; no re-integration of sampled monitors",
+      "actual_dt_s": {
+        "min": 0.001,
+        "max": 0.0625,
+        "mean": 0.06234413965086788,
+        "accepted": 14436,
+        "sum_duration_s": 899.9999999999287
+      },
+      "hashes": {
+        "monitor.csv": "a4b9323958616775e9963e9b12970f6cde13a6ce9fb42ac21067c2595556fd42",
+        "steps.csv": "a2fcf1aad4e3ce483d6479c5b1bdfd0c2397172d463e2088038a3101548155f2",
+        "conservation.csv": "929075950291b71b61392c260bd9be3d9ada02f8d01ba02d78c20c797a28e150",
+        "checkpoint.dat": "e8f6a892114b3acd0107bcc530889311c749b9b6e0a8b8271df6151bbf69ae33"
+      },
+      "base_run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N51_dt0.0625",
+      "analysis_history": {
+        "kind": "derived analysis chronology; not a solver output/status",
+        "completed_analysis_history": true,
+        "segments": [
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/restart_refinement_18aa7f7/N51_dt0.0625",
+            "operator": "18aa7f79f7b16442fa19ebbd9ef8819b0eff187a",
+            "source_manifest_sha256": "c22eb9ae5b9485e6bd29d850caef7c1f9da1751abb970495cf242a328c24bc78",
+            "offset_s": 0.0,
+            "through_step": 9618,
+            "through_time_s": 600.0,
+            "source_sha256": {
+              "conservation.csv": "19b8dc59a7cbeb1b762dc4ef8e44aba8ff38a9c4297c5313769f52dccbf5b773",
+              "monitor.csv": "53ee1504edcfdbcd649bc7bc8fadd13ea6cad7800158d888cc7851c2e032b144",
+              "steps.csv": "ba3d6254e688703aa5e0ebeb168fd48812781a0baf2099235dae02ea7c634a2b",
+              "fields.csv": "82205a0b6b64243660e31e88e3db86e5cc7c7a35e74a9bb9fc28f73753501e71",
+              "checkpoint.dat": "5b3bca0c4790e0b1a74841ca7479287ef95a99b383b46e712b53bb7cd5307fbb"
+            }
+          },
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_extensions_18aa7f7_r2/N51_dt0.0625",
+            "operator": "18aa7f7",
+            "source_manifest_sha256": "8dda7ae3242e50d70dfff338418f2f79b6ccf2a8bc599f48116f42e1fcfe3391",
+            "offset_s": 600,
+            "through_step": 4818,
+            "through_time_s": 300.0,
+            "source_sha256": {
+              "conservation.csv": "49836802b04b61813234d0c476e08996a24d518151e7833d511040a6a8adc54e",
+              "monitor.csv": "a07c33cb2d95b1b264c0013cb357d389e1867dfb943f7a802e0d2026a14aa8f5",
+              "steps.csv": "a1e3144604e45cfd1b3762f7b1591f9f487c1a521e1fedd9fe65ed85bd3a4bba",
+              "fields.csv": "d9419afb109f538364a3f42c520856f08a34479894eaca16b2b5dd5ffc39a2c3",
+              "checkpoint.dat": "e8f6a892114b3acd0107bcc530889311c749b9b6e0a8b8271df6151bbf69ae33"
+            }
+          }
+        ],
+        "accepted_steps": 14436,
+        "reached_time_s": 900.0,
+        "sum_rule": "compensated independent re-integration of the original accepted BE fluxes and mass residuals; states are unchanged; step_balance remains the original measured quantity",
+        "balances": {
+          "l_system": {
+            "max_abs_balance_kg": 6.821210263296962e-13,
+            "initial_inventory_kg": 71.25836382794435,
+            "absolute_processed_mass_kg": 2131.0030058482425,
+            "relative_inventory": 9.57250475153625e-15,
+            "relative_processed": 3.2009388276680487e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -5.050134784681055e-13
+          },
+          "l_pipe": {
+            "max_abs_balance_kg": 2.0463630789890885e-11,
+            "initial_inventory_kg": 55.70265512773727,
+            "absolute_processed_mass_kg": 2128.3771387203406,
+            "relative_inventory": 3.673726278031758e-13,
+            "relative_processed": 9.61466387587417e-15,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 2.0009860103152302e-11
+          },
+          "l_riser": {
+            "max_abs_balance_kg": 2.0691004465334117e-11,
+            "initial_inventory_kg": 15.555708700207084,
+            "absolute_processed_mass_kg": 2131.011816973445,
+            "relative_inventory": 1.330122906265188e-12,
+            "relative_processed": 9.709474297857426e-15,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -2.051487358162041e-11
+          },
+          "g_system": {
+            "max_abs_balance_kg": 4.760636329592671e-13,
+            "initial_inventory_kg": 0.17434152937405795,
+            "absolute_processed_mass_kg": 5.446792364224695,
+            "relative_inventory": 2.7306381598721105e-12,
+            "relative_processed": 8.740256670809054e-14,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 4.753609438470521e-13
+          },
+          "g_pipe": {
+            "max_abs_balance_kg": 6.9819705572626845e-12,
+            "initial_inventory_kg": 0.15139453820328883,
+            "absolute_processed_mass_kg": 5.452247758761285,
+            "relative_inventory": 4.611771758824924e-11,
+            "relative_processed": 1.2805673671089633e-12,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 6.979606321578577e-12
+          },
+          "g_riser": {
+            "max_abs_balance_kg": 6.506351013513267e-12,
+            "initial_inventory_kg": 0.022946991170769142,
+            "absolute_processed_mass_kg": 5.448517297535263,
+            "relative_inventory": 2.8353830639902523e-10,
+            "relative_processed": 1.1941507493160635e-12,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -6.504245377731525e-12
+          }
+        },
+        "arithmetic_contract_passes": true,
+        "files": {
+          "checkpoint.dat": "e8f6a892114b3acd0107bcc530889311c749b9b6e0a8b8271df6151bbf69ae33",
+          "steps.csv": "a2fcf1aad4e3ce483d6479c5b1bdfd0c2397172d463e2088038a3101548155f2",
+          "conservation.csv": "929075950291b71b61392c260bd9be3d9ada02f8d01ba02d78c20c797a28e150",
+          "fields.csv": "6994dee4be592a9875f4df9791515d9fc4a924f0feacde2ccaa918f03ed8927a",
+          "monitor.csv": "a4b9323958616775e9963e9b12970f6cde13a6ce9fb42ac21067c2595556fd42"
+        }
+      },
+      "n": 51,
+      "dt_max_s": 0.0625,
+      "full_phase_waveforms_reference": {
+        "file": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_analysis_final_v2/summary.json",
+        "sha256": "64f84b68ab8e061667cfad63c28c235f5de6622e82c915aa2ca886fb35ceccba"
+      }
+    },
+    {
+      "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N51_dt0.125",
+      "time_s": 600.0,
+      "cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 355.56919883841636,
+        "window_end_s": 586.6531714766023,
+        "window_is_end_of_run": true,
+        "mean_period_s": 23.108397263818595,
+        "period_cv": 4.108565645505845e-06,
+        "first_semi_amplitude_Pa": 9899.682624766894,
+        "last_semi_amplitude_Pa": 9910.788260693109,
+        "mean_semi_amplitude_Pa": 9906.16223344528,
+        "amplitude_cv": 0.00037035686901284667,
+        "relative_amplitude_change": 0.001121817370026701,
+        "relative_difference_last_five_vs_first_five_amplitudes": 0.0006575165701403485,
+        "growth_rate_s_inv": 4.772862130855295e-06,
+        "log_amplitude_r_squared": 0.975405156587005,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": true,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 355.56919883841636,
+          "window_end_s": 586.6531714766023,
+          "full_window_observed": true,
+          "mean_Pa": 266174.60826169944,
+          "rms_about_mean_Pa": 6978.718781032052,
+          "peak_to_peak_Pa": 19819.228463990323,
+          "minimum_Pa": 256093.79889313976,
+          "maximum_Pa": 275913.0273571301
+        },
+        "peak_records": [
+          {
+            "peak_time_s": 355.56919883841636,
+            "peak_pressure_Pa": 275902.00530441117,
+            "left_trough_time_s": 342.54305096825095,
+            "right_trough_time_s": 365.65091829367407,
+            "trough_baseline_Pa": 256102.64005487738,
+            "semi_amplitude_Pa": 9899.682624766894,
+            "peak_to_interpolated_trough_Pa": 19799.36524953379
+          },
+          {
+            "peak_time_s": 378.67742901988396,
+            "peak_pressure_Pa": 275903.8662070525,
+            "left_trough_time_s": 365.65091829367407,
+            "right_trough_time_s": 388.75880261349147,
+            "trough_baseline_Pa": 256100.99127948817,
+            "semi_amplitude_Pa": 9901.43746378216,
+            "peak_to_interpolated_trough_Pa": 19802.87492756432
+          },
+          {
+            "peak_time_s": 401.7857403276627,
+            "peak_pressure_Pa": 275905.5273762341,
+            "left_trough_time_s": 388.75880261349147,
+            "right_trough_time_s": 411.86676128135355,
+            "trough_baseline_Pa": 256099.4957906931,
+            "semi_amplitude_Pa": 9903.015792770515,
+            "peak_to_interpolated_trough_Pa": 19806.03158554103
+          },
+          {
+            "peak_time_s": 424.89412700847754,
+            "peak_pressure_Pa": 275907.0096742181,
+            "left_trough_time_s": 411.86676128135355,
+            "right_trough_time_s": 434.97508294183507,
+            "trough_baseline_Pa": 256098.1635527536,
+            "semi_amplitude_Pa": 9904.423060732239,
+            "peak_to_interpolated_trough_Pa": 19808.846121464478
+          },
+          {
+            "peak_time_s": 448.0025838719704,
+            "peak_pressure_Pa": 275908.33177729533,
+            "left_trough_time_s": 434.97508294183507,
+            "right_trough_time_s": 458.0834047214357,
+            "trough_baseline_Pa": 256096.99200255144,
+            "semi_amplitude_Pa": 9905.669887371943,
+            "peak_to_interpolated_trough_Pa": 19811.339774743887
+          },
+          {
+            "peak_time_s": 471.11097300853504,
+            "peak_pressure_Pa": 275909.48947415495,
+            "left_trough_time_s": 458.0834047214357,
+            "right_trough_time_s": 481.19172021555033,
+            "trough_baseline_Pa": 256095.94850787995,
+            "semi_amplitude_Pa": 9906.770483137501,
+            "peak_to_interpolated_trough_Pa": 19813.540966275003
+          },
+          {
+            "peak_time_s": 494.2192944167752,
+            "peak_pressure_Pa": 275910.54379743745,
+            "left_trough_time_s": 481.19172021555033,
+            "right_trough_time_s": 504.30002368805157,
+            "trough_baseline_Pa": 256095.0184490443,
+            "semi_amplitude_Pa": 9907.76267419658,
+            "peak_to_interpolated_trough_Pa": 19815.52534839316
+          },
+          {
+            "peak_time_s": 517.3276783608032,
+            "peak_pressure_Pa": 275911.48610343545,
+            "left_trough_time_s": 504.30002368805157,
+            "right_trough_time_s": 527.4083097494103,
+            "trough_baseline_Pa": 256094.18896180007,
+            "semi_amplitude_Pa": 9908.648570817692,
+            "peak_to_interpolated_trough_Pa": 19817.297141635383
+          },
+          {
+            "peak_time_s": 540.4361212949385,
+            "peak_pressure_Pa": 275912.3279006533,
+            "left_trough_time_s": 527.4083097494103,
+            "right_trough_time_s": 550.5165734692929,
+            "trough_baseline_Pa": 256093.448643922,
+            "semi_amplitude_Pa": 9909.439628365653,
+            "peak_to_interpolated_trough_Pa": 19818.879256731307
+          },
+          {
+            "peak_time_s": 563.5446199793565,
+            "peak_pressure_Pa": 275913.0794478358,
+            "left_trough_time_s": 550.5165734692929,
+            "right_trough_time_s": 573.6248102904891,
+            "trough_baseline_Pa": 256092.7872053082,
+            "semi_amplitude_Pa": 9910.146121263795,
+            "peak_to_interpolated_trough_Pa": 19820.29224252759
+          },
+          {
+            "peak_time_s": 586.6531714766023,
+            "peak_pressure_Pa": 275913.74992336857,
+            "left_trough_time_s": 573.6248102904891,
+            "right_trough_time_s": 596.7332989004994,
+            "trough_baseline_Pa": 256092.17340198235,
+            "semi_amplitude_Pa": 9910.788260693109,
+            "peak_to_interpolated_trough_Pa": 19821.576521386218
+          }
+        ]
+      },
+      "settled": true,
+      "settling_variation": {
+        "period": 1.3904719333234233e-05,
+        "amplitude": 0.0010563106985851385,
+        "mean": 3.2334944758894867e-06
+      },
+      "period_s": 23.108397263818595,
+      "semi_amplitude_Pa": 9905.699630720497,
+      "mean_Pa": 266174.6082608275,
+      "window_s": [
+        355.56919883841636,
+        586.6531714766023
+      ],
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 2.2737367544323206e-13,
+          "initial_inventory_kg": 71.25836382794435,
+          "absolute_processed_mass_kg": 1419.3572583364246,
+          "relative_inventory": 3.1908349171787503e-15,
+          "relative_processed": 1.601948164267876e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -3.3960992791135374e-14
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 2.2737367544323206e-13,
+          "initial_inventory_kg": 55.70265512773727,
+          "absolute_processed_mass_kg": 1418.913654263227,
+          "relative_inventory": 4.081918086701953e-15,
+          "relative_processed": 1.602448991593475e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -4.42131875968845e-14
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 1.4210854715202004e-13,
+          "initial_inventory_kg": 15.555708700207084,
+          "absolute_processed_mass_kg": 1419.3586942028762,
+          "relative_inventory": 9.135459521052116e-15,
+          "relative_processed": 1.0012165898052246e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.025219480574915e-14
+        },
+        "g_system": {
+          "max_abs_balance_kg": 6.661338147750939e-16,
+          "initial_inventory_kg": 0.17434152937405795,
+          "absolute_processed_mass_kg": 3.633650032224309,
+          "relative_inventory": 3.820855634149409e-15,
+          "relative_processed": 1.833236026770926e-16,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 1.0386780086657072e-16
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 4.6629367034256575e-14,
+          "initial_inventory_kg": 0.15139453820328883,
+          "absolute_processed_mass_kg": 3.634498151645803,
+          "relative_inventory": 3.0799900437388185e-13,
+          "relative_processed": 1.2829657655250558e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 3.729694565632152e-15
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 4.6407322429331543e-14,
+          "initial_inventory_kg": 0.022946991170769142,
+          "absolute_processed_mass_kg": 3.6344663002362583,
+          "relative_inventory": 2.022370692696617e-12,
+          "relative_processed": 1.2768675947363946e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -3.625826764765566e-15
+        }
+      },
+      "arithmetic_contract_passes": true,
+      "junction_mismatch_kg": {
+        "l": 0.0,
+        "g": 0.0
+      },
+      "per_cycle_balances_kg": {
+        "l_system": [
+          5.684341886080802e-14,
+          4.263256414560601e-14,
+          -4.263256414560601e-14,
+          0.0,
+          1.4210854715202004e-14,
+          2.842170943040401e-14,
+          -8.526512829121202e-14,
+          -1.4210854715202004e-14,
+          1.1368683772161603e-13,
+          5.684341886080802e-14
+        ],
+        "l_pipe": [
+          0.0,
+          1.0658141036401503e-13,
+          -6.394884621840902e-14,
+          7.105427357601002e-15,
+          4.263256414560601e-14,
+          -7.105427357601002e-14,
+          -5.684341886080802e-14,
+          -1.4210854715202004e-14,
+          1.0658141036401503e-13,
+          -2.842170943040401e-14
+        ],
+        "l_riser": [
+          -1.7763568394002505e-15,
+          -7.105427357601002e-15,
+          8.881784197001252e-15,
+          -1.7763568394002505e-14,
+          -3.197442310920451e-14,
+          4.973799150320701e-14,
+          0.0,
+          0.0,
+          -9.059419880941277e-14,
+          9.059419880941277e-14
+        ],
+        "g_system": [
+          -1.1102230246251565e-16,
+          0.0,
+          0.0,
+          0.0,
+          8.326672684688674e-17,
+          1.3877787807814457e-16,
+          -8.326672684688674e-17,
+          -1.3877787807814457e-16,
+          0.0,
+          5.551115123125783e-17
+        ],
+        "g_pipe": [
+          -6.189493362285248e-15,
+          8.326672684688674e-17,
+          -8.326672684688674e-17,
+          -1.915134717478395e-15,
+          1.2878587085651816e-14,
+          1.3877787807814457e-16,
+          8.326672684688674e-16,
+          -1.201816424156732e-14,
+          -1.0769163338864018e-14,
+          7.216449660063518e-16
+        ],
+        "g_riser": [
+          5.873773689657469e-15,
+          1.734723475976807e-17,
+          8.326672684688674e-17,
+          2.0435042547006788e-15,
+          -1.2857770403940094e-14,
+          -2.0122792321330962e-16,
+          -7.251144129583054e-16,
+          1.2059797604990763e-14,
+          1.054017984003508e-14,
+          -6.661338147750939e-16
+        ]
+      },
+      "cycle_balance_definition": "linear interpolation of accepted BE inventories and cumulative accepted flux integrals at the same peak markers; no re-integration of sampled monitors",
+      "actual_dt_s": {
+        "min": 0.001,
+        "max": 0.125,
+        "mean": 0.1244296972210617,
+        "accepted": 4822,
+        "sum_duration_s": 599.9999999999595
+      },
+      "hashes": {
+        "monitor.csv": "3ac8c190b92470e6dcb70cff17ee42b187b586929e763e457256f0d6fb49c45e",
+        "steps.csv": "7e200f14009b1de6eb6dbded8ef73a46113be00f836a46d782769f428b984a26",
+        "conservation.csv": "75e6a74b41472949e7854bd46c0d281af25320886437a151ed405a4cf207142e",
+        "checkpoint.dat": "81f958c9a576c946c3c49c25591ada52aa4e529446925df57835bb8335fa095d"
+      },
+      "base_run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N51_dt0.125",
+      "analysis_history": {
+        "kind": "derived analysis chronology; not a solver output/status",
+        "completed_analysis_history": true,
+        "segments": [
+          {
+            "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/restart_refinement_18aa7f7/N51_dt0.125",
+            "operator": "18aa7f79f7b16442fa19ebbd9ef8819b0eff187a",
+            "source_manifest_sha256": "e4d39b34bef0517c840b2cb8756c915275e440e30761025ccdd800d6b7b57cf0",
+            "offset_s": 0.0,
+            "through_step": 4822,
+            "through_time_s": 600.0,
+            "source_sha256": {
+              "conservation.csv": "fe95397f6a3d4fd05bdecc196f34dafaab0e93bb4f95e1c9d1183cda08cfc73b",
+              "monitor.csv": "282ff583d1a45017b32cc089ae29ed1052c721c60987db5c1eb8ff383b1492e6",
+              "steps.csv": "1308096e02834cf717062b2f4252f7f1d30c85fcdb91ddd1e8e78e398a22754c",
+              "fields.csv": "435afb881c9635d0f0029a9b30c947b1e84e5799563c0dedfc5d526bb9e23dbc",
+              "checkpoint.dat": "81f958c9a576c946c3c49c25591ada52aa4e529446925df57835bb8335fa095d"
+            }
+          }
+        ],
+        "accepted_steps": 4822,
+        "reached_time_s": 600.0,
+        "sum_rule": "compensated independent re-integration of the original accepted BE fluxes and mass residuals; states are unchanged; step_balance remains the original measured quantity",
+        "balances": {
+          "l_system": {
+            "max_abs_balance_kg": 2.2737367544323206e-13,
+            "initial_inventory_kg": 71.25836382794435,
+            "absolute_processed_mass_kg": 1419.3572583364246,
+            "relative_inventory": 3.1908349171787503e-15,
+            "relative_processed": 1.601948164267876e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -3.3960992791135374e-14
+          },
+          "l_pipe": {
+            "max_abs_balance_kg": 2.2737367544323206e-13,
+            "initial_inventory_kg": 55.70265512773727,
+            "absolute_processed_mass_kg": 1418.913654263227,
+            "relative_inventory": 4.081918086701953e-15,
+            "relative_processed": 1.602448991593475e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -4.42131875968845e-14
+          },
+          "l_riser": {
+            "max_abs_balance_kg": 1.4210854715202004e-13,
+            "initial_inventory_kg": 15.555708700207084,
+            "absolute_processed_mass_kg": 1419.3586942028762,
+            "relative_inventory": 9.135459521052116e-15,
+            "relative_processed": 1.0012165898052246e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 1.025219480574915e-14
+          },
+          "g_system": {
+            "max_abs_balance_kg": 6.661338147750939e-16,
+            "initial_inventory_kg": 0.17434152937405795,
+            "absolute_processed_mass_kg": 3.633650032224309,
+            "relative_inventory": 3.820855634149409e-15,
+            "relative_processed": 1.833236026770926e-16,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 1.0386780086657072e-16
+          },
+          "g_pipe": {
+            "max_abs_balance_kg": 4.6629367034256575e-14,
+            "initial_inventory_kg": 0.15139453820328883,
+            "absolute_processed_mass_kg": 3.634498151645803,
+            "relative_inventory": 3.0799900437388185e-13,
+            "relative_processed": 1.2829657655250558e-14,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": 3.729694565632152e-15
+          },
+          "g_riser": {
+            "max_abs_balance_kg": 4.6407322429331543e-14,
+            "initial_inventory_kg": 0.022946991170769142,
+            "absolute_processed_mass_kg": 3.6344663002362583,
+            "relative_inventory": 2.022370692696617e-12,
+            "relative_processed": 1.2768675947363946e-14,
+            "passes_inventory_1e6": true,
+            "passes_processed_1e6": true,
+            "final_residual_sum_kg": -3.625826764765566e-15
+          }
+        },
+        "arithmetic_contract_passes": true,
+        "files": {
+          "checkpoint.dat": "81f958c9a576c946c3c49c25591ada52aa4e529446925df57835bb8335fa095d",
+          "steps.csv": "7e200f14009b1de6eb6dbded8ef73a46113be00f836a46d782769f428b984a26",
+          "conservation.csv": "75e6a74b41472949e7854bd46c0d281af25320886437a151ed405a4cf207142e",
+          "fields.csv": "ec1e7fac9c6716322c5f798f7c70738d0edd416908d28e11f32c7258c6ae815a",
+          "monitor.csv": "3ac8c190b92470e6dcb70cff17ee42b187b586929e763e457256f0d6fb49c45e"
+        }
+      },
+      "n": 51,
+      "dt_max_s": 0.125,
+      "full_phase_waveforms_reference": {
+        "file": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_analysis_final_v2/summary.json",
+        "sha256": "64f84b68ab8e061667cfad63c28c235f5de6622e82c915aa2ca886fb35ceccba"
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "axis": "space",
+      "coarse": "N51_dt0.125",
+      "fine": "N101_dt0.125",
+      "both_settled": true,
+      "period_s_relative_difference": 0.0067892546048189985,
+      "semi_amplitude_Pa_relative_difference": 0.2244247324082445,
+      "mean_Pa_relative_difference": 0.0013800359407883252,
+      "waveforms": {
+        "p_riser_base_Pa": {
+          "available": true,
+          "phase_fixed_rmse": 2085.795284839746,
+          "mean_difference": 367.83983209723374,
+          "phase_fixed_max_absolute_error": 3155.049153979111,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9995947080245073,
+          "lag_adjusted_rmse": 2050.6755366977204,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "p_junction_Pa": {
+          "available": true,
+          "phase_fixed_rmse": 2085.6534222623795,
+          "mean_difference": 358.035363854724,
+          "phase_fixed_max_absolute_error": 3147.5995995530393,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9995945965169847,
+          "lag_adjusted_rmse": 2050.3876209278324,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "holdup_liquid_base": {
+          "available": true,
+          "phase_fixed_rmse": 0.02348735784942414,
+          "mean_difference": 0.006506340438719671,
+          "phase_fixed_max_absolute_error": 0.032451213202179474,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726526386176249,
+          "best_lag_correlation": 0.9997469975797683,
+          "lag_adjusted_rmse": 0.022647787062304563,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "holdup_liquid_out": {
+          "available": true,
+          "phase_fixed_rmse": 0.02371745740884412,
+          "mean_difference": -0.00450852209881758,
+          "phase_fixed_max_absolute_error": 0.036194903560143765,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9991073086549476,
+          "lag_adjusted_rmse": 0.023412918410167637,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_l_base_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.0008216594933378998,
+          "mean_difference": -6.85637102648684e-10,
+          "phase_fixed_max_absolute_error": 0.001908071500450692,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9964766729337113,
+          "lag_adjusted_rmse": 0.0008122862113729947,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_g_base_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.00032323613554556356,
+          "mean_difference": 4.409948425095761e-09,
+          "phase_fixed_max_absolute_error": 0.0006531320580617497,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9986799945585614,
+          "lag_adjusted_rmse": 0.00031779703451452837,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_l_out_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.14953141808149234,
+          "mean_difference": 2.8313042792493803e-06,
+          "phase_fixed_max_absolute_error": 0.3028892787092068,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9984702768122616,
+          "lag_adjusted_rmse": 0.14646029673605596,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_g_out_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.00019902825620113398,
+          "mean_difference": -2.7971814313583476e-09,
+          "phase_fixed_max_absolute_error": 0.0004605670261565199,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9959323166951154,
+          "lag_adjusted_rmse": 0.00019607820527476109,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.5338699701969674,
+          "mean_difference": 0.08444086731111611,
+          "phase_fixed_max_absolute_error": 0.7833042741332719,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9996326940744299,
+          "lag_adjusted_rmse": 0.524411940109109,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.0006304862885204283,
+          "mean_difference": 5.805310517414952e-06,
+          "phase_fixed_max_absolute_error": 0.0011609307952077375,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9989495215429297,
+          "lag_adjusted_rmse": 0.0006230643397324131,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_pipe_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.002950169797807691,
+          "mean_difference": -0.0009964940206899087,
+          "phase_fixed_max_absolute_error": 0.005459842159581285,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.999209833789284,
+          "lag_adjusted_rmse": 0.002923209066642884,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_pipe_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.00116712296356162,
+          "mean_difference": 0.00022219601135439748,
+          "phase_fixed_max_absolute_error": 0.0017780521970187924,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9996667928274267,
+          "lag_adjusted_rmse": 0.001150926465762722,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_riser_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.5315473616145715,
+          "mean_difference": 0.08543736133180602,
+          "phase_fixed_max_absolute_error": 0.7810056863209667,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9996328397461353,
+          "lag_adjusted_rmse": 0.5220649233798675,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_riser_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.001006652952434008,
+          "mean_difference": -0.000216390700836986,
+          "phase_fixed_max_absolute_error": 0.001530665554104988,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176842574508328,
+          "best_lag_correlation": 0.9996403503312608,
+          "lag_adjusted_rmse": 0.0009898790302888215,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        }
+      }
+    },
+    {
+      "axis": "space",
+      "coarse": "N101_dt0.125",
+      "fine": "N201_dt0.125",
+      "both_settled": true,
+      "period_s_relative_difference": 0.0033897357554065395,
+      "semi_amplitude_Pa_relative_difference": 0.08888445015922586,
+      "mean_Pa_relative_difference": 0.0007256299606887121,
+      "waveforms": {
+        "p_riser_base_Pa": {
+          "available": true,
+          "phase_fixed_rmse": 918.0522828789946,
+          "mean_difference": 193.55272743082605,
+          "phase_fixed_max_absolute_error": 1410.1183386557386,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9999100041005812,
+          "lag_adjusted_rmse": 900.5045054577537,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "p_junction_Pa": {
+          "available": true,
+          "phase_fixed_rmse": 918.5492910709038,
+          "mean_difference": 189.3765088650398,
+          "phase_fixed_max_absolute_error": 1407.819681273133,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9999104417040603,
+          "lag_adjusted_rmse": 900.7967364552044,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "holdup_liquid_base": {
+          "available": true,
+          "phase_fixed_rmse": 0.010191066082052452,
+          "mean_difference": 0.003212582071619341,
+          "phase_fixed_max_absolute_error": 0.013837746466934697,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9999473640042277,
+          "lag_adjusted_rmse": 0.009692472315730954,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "holdup_liquid_out": {
+          "available": true,
+          "phase_fixed_rmse": 0.010704139156666577,
+          "mean_difference": -0.002259812236870329,
+          "phase_fixed_max_absolute_error": 0.016546584975642542,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9997889631233042,
+          "lag_adjusted_rmse": 0.010577984231064418,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_l_base_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.000410757081849401,
+          "mean_difference": 9.488776009369815e-08,
+          "phase_fixed_max_absolute_error": 0.0010150936445507686,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9993654304687112,
+          "lag_adjusted_rmse": 0.0004045759289349229,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_g_base_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.00014168113725239654,
+          "mean_difference": 5.5583689575079004e-08,
+          "phase_fixed_max_absolute_error": 0.0003032621478437575,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9997412944076621,
+          "lag_adjusted_rmse": 0.0001389477357127411,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_l_out_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.0665130720706053,
+          "mean_difference": 1.799141992608888e-05,
+          "phase_fixed_max_absolute_error": 0.14391998384454485,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9996958927095416,
+          "lag_adjusted_rmse": 0.0647477451313382,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_g_out_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 9.316063544593713e-05,
+          "mean_difference": 2.587183934926393e-08,
+          "phase_fixed_max_absolute_error": 0.00022994698580207883,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9992104098134774,
+          "lag_adjusted_rmse": 9.162468750139628e-05,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.23498560924923786,
+          "mean_difference": 0.044100432129738465,
+          "phase_fixed_max_absolute_error": 0.3479811896340692,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9999187979719839,
+          "lag_adjusted_rmse": 0.23011439387855825,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.0002820692794342515,
+          "mean_difference": 6.9034979932325324e-06,
+          "phase_fixed_max_absolute_error": 0.0005492644039588601,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9997692140609582,
+          "lag_adjusted_rmse": 0.0002793430134832339,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_pipe_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.0014900678158037953,
+          "mean_difference": -0.0006189652457635475,
+          "phase_fixed_max_absolute_error": 0.0028682043644963073,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9998626862383707,
+          "lag_adjusted_rmse": 0.0014734317035082775,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_pipe_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.0005114087364110345,
+          "mean_difference": 0.0001187567994505867,
+          "phase_fixed_max_absolute_error": 0.000793633963107665,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9999150098723569,
+          "lag_adjusted_rmse": 0.0005046111217803037,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_riser_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.2339063181931269,
+          "mean_difference": 0.04471939737551267,
+          "phase_fixed_max_absolute_error": 0.3470366260769495,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9999189541905512,
+          "lag_adjusted_rmse": 0.22901648010013503,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_riser_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.00044465828341441364,
+          "mean_difference": -0.00011185330145734376,
+          "phase_fixed_max_absolute_error": 0.0006860490494568026,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09119333417805975,
+          "best_lag_correlation": 0.9999168518847783,
+          "lag_adjusted_rmse": 0.00043633360858198506,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        }
+      }
+    },
+    {
+      "axis": "space",
+      "coarse": "N201_dt0.125",
+      "fine": "N401_dt0.125",
+      "both_settled": true,
+      "period_s_relative_difference": 0.0017015507783493418,
+      "semi_amplitude_Pa_relative_difference": 0.040189013592763084,
+      "mean_Pa_relative_difference": 0.0003717294087271033,
+      "waveforms": {
+        "p_riser_base_Pa": {
+          "available": true,
+          "phase_fixed_rmse": 435.55692149884055,
+          "mean_difference": 99.1917180805467,
+          "phase_fixed_max_absolute_error": 673.0366841529612,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.999942971571035,
+          "lag_adjusted_rmse": 435.55692149884055,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "p_junction_Pa": {
+          "available": true,
+          "phase_fixed_rmse": 435.9212029699062,
+          "mean_difference": 97.25958508905023,
+          "phase_fixed_max_absolute_error": 672.2389140192536,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9999425424864825,
+          "lag_adjusted_rmse": 435.9212029699062,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "holdup_liquid_base": {
+          "available": true,
+          "phase_fixed_rmse": 0.004795607418909139,
+          "mean_difference": 0.0015863471962994646,
+          "phase_fixed_max_absolute_error": 0.0064726136791404265,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09134876874662182,
+          "best_lag_correlation": 0.9999308908276033,
+          "lag_adjusted_rmse": 0.004692509677112979,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "holdup_liquid_out": {
+          "available": true,
+          "phase_fixed_rmse": 0.005140632153308404,
+          "mean_difference": -0.0011239350485938715,
+          "phase_fixed_max_absolute_error": 0.007994767576316564,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9999262926377176,
+          "lag_adjusted_rmse": 0.005140632153308404,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_l_base_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.0002063263327225635,
+          "mean_difference": -1.3219565442312842e-08,
+          "phase_fixed_max_absolute_error": 0.0005224248423614242,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9997831005703692,
+          "lag_adjusted_rmse": 0.0002063263327225635,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_g_base_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 6.695476799717364e-05,
+          "mean_difference": -1.2635946664008024e-09,
+          "phase_fixed_max_absolute_error": 0.00014770648394339322,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9999066246811238,
+          "lag_adjusted_rmse": 6.695476799717364e-05,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_l_out_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.031711246858428375,
+          "mean_difference": 3.6130910232579083e-06,
+          "phase_fixed_max_absolute_error": 0.07096765138187067,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9998747531672787,
+          "lag_adjusted_rmse": 0.031711246858428375,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_g_out_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 4.5456676498715065e-05,
+          "mean_difference": -9.803586455223862e-09,
+          "phase_fixed_max_absolute_error": 0.0001150821041463147,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9997777852911599,
+          "lag_adjusted_rmse": 4.5456676498715065e-05,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.11149299269383965,
+          "mean_difference": 0.022530711903357314,
+          "phase_fixed_max_absolute_error": 0.1663163781426391,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9999416159106782,
+          "lag_adjusted_rmse": 0.11149299269383965,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.0001347734573241068,
+          "mean_difference": 4.4688896029265734e-06,
+          "phase_fixed_max_absolute_error": 0.00026996702928730465,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9999305871383494,
+          "lag_adjusted_rmse": 0.0001347734573241068,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_pipe_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.0007479750502309137,
+          "mean_difference": -0.0003201395014684749,
+          "phase_fixed_max_absolute_error": 0.0014555906658415552,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9999087570319144,
+          "lag_adjusted_rmse": 0.0007479750502309137,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_pipe_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.00024209142451886073,
+          "mean_difference": 6.121451803350886e-05,
+          "phase_fixed_max_absolute_error": 0.0003792801617333863,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9999576156175508,
+          "lag_adjusted_rmse": 0.00024209142451886073,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_riser_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.11096213797857654,
+          "mean_difference": 0.022850851404822237,
+          "phase_fixed_max_absolute_error": 0.16587466586491928,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9999413714503094,
+          "lag_adjusted_rmse": 0.11096213797857654,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_riser_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.00021137534484325234,
+          "mean_difference": -5.674562843061004e-05,
+          "phase_fixed_max_absolute_error": 0.0003290302113416535,
+          "best_lag_fraction": 0.0,
+          "best_lag_s": 0.0,
+          "best_lag_correlation": 0.9999444556114939,
+          "lag_adjusted_rmse": 0.00021137534484325234,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        }
+      }
+    },
+    {
+      "axis": "time",
+      "coarse": "N51_dt0.125",
+      "fine": "N51_dt0.0625",
+      "both_settled": true,
+      "period_s_relative_difference": 0.006749804762218518,
+      "semi_amplitude_Pa_relative_difference": 0.28044260378152425,
+      "mean_Pa_relative_difference": 0.0014976332903807732,
+      "waveforms": {
+        "p_riser_base_Pa": {
+          "available": true,
+          "phase_fixed_rmse": 2791.198221376795,
+          "mean_difference": 399.23085194802843,
+          "phase_fixed_max_absolute_error": 4106.74591272953,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9991867347491524,
+          "lag_adjusted_rmse": 2743.326501020353,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "p_junction_Pa": {
+          "available": true,
+          "phase_fixed_rmse": 2789.4812112447826,
+          "mean_difference": 399.81520023511257,
+          "phase_fixed_max_absolute_error": 4104.906919197412,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9991870916166935,
+          "lag_adjusted_rmse": 2741.7424507299925,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "holdup_liquid_base": {
+          "available": true,
+          "phase_fixed_rmse": 0.032474480364998524,
+          "mean_difference": 0.011597151864029542,
+          "phase_fixed_max_absolute_error": 0.045704174373058404,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9994150317412662,
+          "lag_adjusted_rmse": 0.03164937341608281,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "holdup_liquid_out": {
+          "available": true,
+          "phase_fixed_rmse": 0.03166115783541603,
+          "mean_difference": -0.006321699580832951,
+          "phase_fixed_max_absolute_error": 0.04759892362287632,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9985661502489704,
+          "lag_adjusted_rmse": 0.03109095001313166,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_l_base_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.0011745988201171435,
+          "mean_difference": 1.8431168591348523e-08,
+          "phase_fixed_max_absolute_error": 0.0027736362548793636,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9931820709362631,
+          "lag_adjusted_rmse": 0.0011590174169863838,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_g_base_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.00044780722031539786,
+          "mean_difference": 4.440300819738563e-09,
+          "phase_fixed_max_absolute_error": 0.0009135812666982027,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9973353438436254,
+          "lag_adjusted_rmse": 0.00043713727047561666,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_l_out_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.20286283624469365,
+          "mean_difference": 1.9995134774575263e-06,
+          "phase_fixed_max_absolute_error": 0.4124419262795609,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9972852678508312,
+          "lag_adjusted_rmse": 0.19771246209415622,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_g_out_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.0002739426351545848,
+          "mean_difference": 2.268780615634347e-09,
+          "phase_fixed_max_absolute_error": 0.000657154646428809,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9922770245928557,
+          "lag_adjusted_rmse": 0.0002670050111150642,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.7125861181583598,
+          "mean_difference": 0.11297196054168523,
+          "phase_fixed_max_absolute_error": 1.0367235237318795,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.999294815996,
+          "lag_adjusted_rmse": 0.7000117530664441,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.0008420603124089646,
+          "mean_difference": -3.423710926772627e-05,
+          "phase_fixed_max_absolute_error": 0.0015106638915341475,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9980300843225803,
+          "lag_adjusted_rmse": 0.000826938457161641,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_pipe_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.00424397942810849,
+          "mean_difference": -0.0016878782642919532,
+          "phase_fixed_max_absolute_error": 0.008034205507158276,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9984322031929386,
+          "lag_adjusted_rmse": 0.004209014072094561,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_pipe_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.0015771543435040163,
+          "mean_difference": 0.00026345044768813497,
+          "phase_fixed_max_absolute_error": 0.0023476490397587035,
+          "best_lag_fraction": -0.0078125,
+          "best_lag_s": -0.18176120627931347,
+          "best_lag_correlation": 0.9992994171913766,
+          "lag_adjusted_rmse": 0.0015517528839240856,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_riser_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.7093870013152004,
+          "mean_difference": 0.1146598388059843,
+          "phase_fixed_max_absolute_error": 1.0338570849014275,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9992973184036918,
+          "lag_adjusted_rmse": 0.6967592956650571,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_riser_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.00134476745554342,
+          "mean_difference": -0.00029768755695585083,
+          "phase_fixed_max_absolute_error": 0.002035584840796162,
+          "best_lag_fraction": -0.01171875,
+          "best_lag_s": -0.2726418094189702,
+          "best_lag_correlation": 0.9993058424514988,
+          "lag_adjusted_rmse": 0.0013226019771136674,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        }
+      }
+    },
+    {
+      "axis": "time",
+      "coarse": "N51_dt0.0625",
+      "fine": "N51_dt0.03125",
+      "both_settled": true,
+      "period_s_relative_difference": 0.003372055311849366,
+      "semi_amplitude_Pa_relative_difference": 0.10345516781355434,
+      "mean_Pa_relative_difference": 0.0007564175184046518,
+      "waveforms": {
+        "p_riser_base_Pa": {
+          "available": true,
+          "phase_fixed_rmse": 1160.082021592177,
+          "mean_difference": 201.79239850101294,
+          "phase_fixed_max_absolute_error": 1715.1480208749417,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.999876108579556,
+          "lag_adjusted_rmse": 1133.7053971866558,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "p_junction_Pa": {
+          "available": true,
+          "phase_fixed_rmse": 1159.3705764694296,
+          "mean_difference": 201.99053199554328,
+          "phase_fixed_max_absolute_error": 1714.488845051208,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9998763188412324,
+          "lag_adjusted_rmse": 1133.068994139748,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "holdup_liquid_base": {
+          "available": true,
+          "phase_fixed_rmse": 0.013498380097780815,
+          "mean_difference": 0.005710975762872383,
+          "phase_fixed_max_absolute_error": 0.018561159375873437,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9998773633727939,
+          "lag_adjusted_rmse": 0.013034042895259558,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "holdup_liquid_out": {
+          "available": true,
+          "phase_fixed_rmse": 0.01355640126782786,
+          "mean_difference": -0.003107209533942279,
+          "phase_fixed_max_absolute_error": 0.020399437819918598,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9997573909494075,
+          "lag_adjusted_rmse": 0.01323834028997978,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_l_base_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.0005954806160414636,
+          "mean_difference": 4.463843739088702e-09,
+          "phase_fixed_max_absolute_error": 0.0015161028649965935,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9989306253233428,
+          "lag_adjusted_rmse": 0.000584550474422593,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_g_base_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.0001899252605036049,
+          "mean_difference": 9.060263373751598e-09,
+          "phase_fixed_max_absolute_error": 0.0004160594230742708,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9995422250617554,
+          "lag_adjusted_rmse": 0.0001834623430414578,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_l_out_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.08603561020803145,
+          "mean_difference": 3.506669450370481e-06,
+          "phase_fixed_max_absolute_error": 0.1881956055830849,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9995275496315049,
+          "lag_adjusted_rmse": 0.08291080394185778,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "mdot_g_out_kg_s": {
+          "available": true,
+          "phase_fixed_rmse": 0.0001256059621387854,
+          "mean_difference": 1.3160641790764538e-09,
+          "phase_fixed_max_absolute_error": 0.0003300355744912647,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9986633391130503,
+          "lag_adjusted_rmse": 0.0001210117112822453,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.29537637260342225,
+          "mean_difference": 0.056320387881001466,
+          "phase_fixed_max_absolute_error": 0.4331614626365621,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9998930000183602,
+          "lag_adjusted_rmse": 0.28845091052231125,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.0003571257662384008,
+          "mean_difference": -1.494603265533856e-05,
+          "phase_fixed_max_absolute_error": 0.0006769271281514,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9996788285130471,
+          "lag_adjusted_rmse": 0.00034847660292615596,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_pipe_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.002194946041816317,
+          "mean_difference": -0.0010910479873444956,
+          "phase_fixed_max_absolute_error": 0.0043307259391838215,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9997837191730495,
+          "lag_adjusted_rmse": 0.0021730964156323612,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_pipe_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.0006553832848000595,
+          "mean_difference": 0.0001338016181392787,
+          "phase_fixed_max_absolute_error": 0.0009835223144371297,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9998946064742082,
+          "lag_adjusted_rmse": 0.0006417248683488599,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Ml_riser_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.2939181051397831,
+          "mean_difference": 0.057411435868349514,
+          "phase_fixed_max_absolute_error": 0.43015456922462647,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.9998929153335508,
+          "lag_adjusted_rmse": 0.2869679048218305,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        },
+        "Mg_riser_kg": {
+          "available": true,
+          "phase_fixed_rmse": 0.0005597386022845305,
+          "mean_difference": -0.00014874765079463115,
+          "phase_fixed_max_absolute_error": 0.000857228562545137,
+          "best_lag_fraction": -0.00390625,
+          "best_lag_s": -0.09118809443788342,
+          "best_lag_correlation": 0.999895738028618,
+          "lag_adjusted_rmse": 0.0005477244488101111,
+          "lag_convention": "fine(phi+lag) compared with coarse(phi); diagnostic only, fixed-phase error retained"
+        }
+      }
+    }
+  ],
+  "orders": [
+    {
+      "axis": "space",
+      "observable": "period_s",
+      "h": [
+        0.5683168316831683,
+        0.2855721393034826,
+        0.143142144638404
+      ],
+      "values": [
+        23.26635849537066,
+        23.345493549583296,
+        23.385284799135185
+      ],
+      "asymptotic_region_proven": false,
+      "observed_order": 1.0026339801791002,
+      "formal_extrapolate": 23.42512954107665,
+      "estimated_finest_error_relative": 0.0017009400896416057
+    },
+    {
+      "axis": "space",
+      "observable": "semi_amplitude_Pa",
+      "h": [
+        0.5683168316831683,
+        0.2855721393034826,
+        0.143142144638404
+      ],
+      "values": [
+        12772.06745062766,
+        14018.054518836492,
+        14605.015693046871
+      ],
+      "asymptotic_region_proven": false,
+      "observed_order": 1.097269224417297,
+      "formal_extrapolate": 15122.775978993923,
+      "estimated_finest_error_relative": 0.034237119340142265
+    },
+    {
+      "axis": "time",
+      "observable": "period_s",
+      "h": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "values": [
+        23.108397263818595,
+        23.265434403752124,
+        23.344152176098156
+      ],
+      "asymptotic_region_proven": false,
+      "observed_order": 0.9963445036403905,
+      "formal_extrapolate": 23.4232703798579,
+      "estimated_finest_error_relative": 0.003377760768529557
+    },
+    {
+      "axis": "time",
+      "observable": "semi_amplitude_Pa",
+      "h": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "values": [
+        9905.699630720497,
+        13766.378725002887,
+        15354.925075447904
+      ],
+      "asymptotic_region_proven": false,
+      "observed_order": 1.2811474547070796,
+      "formal_extrapolate": 16465.54658924657,
+      "estimated_finest_error_relative": 0.06745123872923829
+    }
+  ],
+  "interpretation": "new common-initial-value campaign; settling and discretization convergence are separate; no experimental validation or GCI claimed",
+  "spatial_analysis": {
+    "runs": [
+      {
+        "name": "N101_dt0.0625",
+        "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N101_dt0.0625",
+        "window_s": [
+          640.4921090252642,
+          874.7188295587054
+        ],
+        "frames": 237,
+        "field_support_time_s": [
+          639.5137368633946,
+          876.5137368634164
+        ],
+        "crossing_count_scope": "raw field support includes up to2s interpolation padding outside cycle markers",
+        "field_dt_max_s": 1.0625,
+        "crossing_counts": {
+          "0.4": 158,
+          "0.5": 144,
+          "0.6": 0
+        },
+        "fields_sha256": "9264a20d576a527a8e563c9efbc01aea94654f681c03471143b8901a6052edf0"
+      },
+      {
+        "name": "N101_dt0.125",
+        "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N101_dt0.125",
+        "window_s": [
+          636.6532924979737,
+          869.3168774516803
+        ],
+        "frames": 226,
+        "field_support_time_s": [
+          635.3068527598372,
+          870.8068527598439
+        ],
+        "crossing_count_scope": "raw field support includes up to2s interpolation padding outside cycle markers",
+        "field_dt_max_s": 1.125,
+        "crossing_counts": {
+          "0.4": 148,
+          "0.5": 137,
+          "0.6": 0
+        },
+        "fields_sha256": "1f75de5e795946a0c92f1dcc773128ec981371bebdaab33358224f8e0b03076c"
+      },
+      {
+        "name": "N201_dt0.125",
+        "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N201_dt0.125",
+        "window_s": [
+          638.640991928377,
+          872.09592742421
+        ],
+        "frames": 225,
+        "field_support_time_s": [
+          637.5568527598372,
+          873.5568527598407
+        ],
+        "crossing_count_scope": "raw field support includes up to2s interpolation padding outside cycle markers",
+        "field_dt_max_s": 1.125,
+        "crossing_counts": {
+          "0.4": 149,
+          "0.5": 141,
+          "0.6": 0
+        },
+        "fields_sha256": "fcebd3b99d5ec322b58272a0e510d9ba09990cf5c680b485d8518e2ef25849fd"
+      },
+      {
+        "name": "N401_dt0.125",
+        "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N401_dt0.125",
+        "window_s": [
+          639.6568083941379,
+          873.5096563854897
+        ],
+        "frames": 227,
+        "field_support_time_s": [
+          638.6818527598372,
+          874.8068527598443
+        ],
+        "crossing_count_scope": "raw field support includes up to2s interpolation padding outside cycle markers",
+        "field_dt_max_s": 1.125,
+        "crossing_counts": {
+          "0.4": 153,
+          "0.5": 141,
+          "0.6": 0
+        },
+        "fields_sha256": "b5adbe6b1c95a7c8d3fc1a1e9a8b4e2439a1717d6b7199555a6f6035776b83b4"
+      },
+      {
+        "name": "N51_dt0.03125",
+        "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N51_dt0.03125",
+        "window_s": [
+          638.3923281013281,
+          871.8338498623096
+        ],
+        "frames": 237,
+        "field_support_time_s": [
+          636.6859899996848,
+          872.873489999708
+        ],
+        "crossing_count_scope": "raw field support includes up to2s interpolation padding outside cycle markers",
+        "field_dt_max_s": 1.03125,
+        "crossing_counts": {
+          "0.4": 157,
+          "0.5": 144,
+          "0.6": 0
+        },
+        "fields_sha256": "7de91bd69f82eaddfbffe025b22f112cb3e11bbefdbfcaf07acaa916dabea6d9"
+      },
+      {
+        "name": "N51_dt0.0625",
+        "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N51_dt0.0625",
+        "window_s": [
+          636.4549944946,
+          869.1093385321212
+        ],
+        "frames": 234,
+        "field_support_time_s": [
+          634.7637368633477,
+          870.3262368633646
+        ],
+        "crossing_count_scope": "raw field support includes up to2s interpolation padding outside cycle markers",
+        "field_dt_max_s": 1.0625,
+        "crossing_counts": {
+          "0.4": 155,
+          "0.5": 142,
+          "0.6": 0
+        },
+        "fields_sha256": "6994dee4be592a9875f4df9791515d9fc4a924f0feacde2ccaa918f03ed8927a"
+      },
+      {
+        "name": "N51_dt0.125",
+        "run": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_composite_final_v2/N51_dt0.125",
+        "window_s": [
+          355.56919883841636,
+          586.6531714766023
+        ],
+        "frames": 235,
+        "field_support_time_s": [
+          353.80685275985246,
+          587.8068527598766
+        ],
+        "crossing_count_scope": "raw field support includes up to2s interpolation padding outside cycle markers",
+        "field_dt_max_s": 1.0000000000001705,
+        "crossing_counts": {
+          "0.4": 154,
+          "0.5": 124,
+          "0.6": 0
+        },
+        "fields_sha256": "ec1e7fac9c6716322c5f798f7c70738d0edd416908d28e11f32c7258c6ae815a"
+      }
+    ],
+    "comparisons": [
+      {
+        "coarse": "N51_dt0.125",
+        "fine": "N101_dt0.125",
+        "axis": "space",
+        "channels": {
+          "p_Pa": {
+            "rms_absolute": 1745.57655634767,
+            "max_absolute": 3191.683316365641,
+            "fine_rms": 253835.8580008253
+          },
+          "alpha": {
+            "rms_absolute": 0.016756805430943576,
+            "max_absolute": 0.03659409336039232,
+            "fine_rms": 0.48545920139115467
+          },
+          "ul_m_s": {
+            "rms_absolute": 0.04403701380389673,
+            "max_absolute": 0.1859315084106845,
+            "fine_rms": 1.084087803561625
+          },
+          "ug_m_s": {
+            "rms_absolute": 0.08279602612241513,
+            "max_absolute": 0.2510130326681337,
+            "fine_rms": 1.475258696882832
+          },
+          "jl_m_s": {
+            "rms_absolute": 0.03011579199278858,
+            "max_absolute": 0.14462111500912944,
+            "fine_rms": 0.5576100043164985
+          },
+          "jg_m_s": {
+            "rms_absolute": 0.05541624198897069,
+            "max_absolute": 0.15609424957098517,
+            "fine_rms": 0.6903012605895739
+          }
+        }
+      },
+      {
+        "coarse": "N101_dt0.125",
+        "fine": "N201_dt0.125",
+        "axis": "space",
+        "channels": {
+          "p_Pa": {
+            "rms_absolute": 768.0151282720475,
+            "max_absolute": 1442.7397756893188,
+            "fine_rms": 253997.1574035605
+          },
+          "alpha": {
+            "rms_absolute": 0.007408056590471071,
+            "max_absolute": 0.016730992933891187,
+            "fine_rms": 0.4859147515043599
+          },
+          "ul_m_s": {
+            "rms_absolute": 0.01930842121349011,
+            "max_absolute": 0.0871822984330568,
+            "fine_rms": 1.0892644172717836
+          },
+          "ug_m_s": {
+            "rms_absolute": 0.037765431371239326,
+            "max_absolute": 0.12518752363788366,
+            "fine_rms": 1.4883356561027112
+          },
+          "jl_m_s": {
+            "rms_absolute": 0.013334329258406783,
+            "max_absolute": 0.06912090884135824,
+            "fine_rms": 0.5625928468940274
+          },
+          "jg_m_s": {
+            "rms_absolute": 0.02558392885070168,
+            "max_absolute": 0.07556233227208287,
+            "fine_rms": 0.6997612169019556
+          }
+        }
+      },
+      {
+        "coarse": "N201_dt0.125",
+        "fine": "N401_dt0.125",
+        "axis": "space",
+        "channels": {
+          "p_Pa": {
+            "rms_absolute": 365.26444683419214,
+            "max_absolute": 696.6237442761776,
+            "fine_rms": 254081.1803770104
+          },
+          "alpha": {
+            "rms_absolute": 0.0035308105884797373,
+            "max_absolute": 0.007985035761144288,
+            "fine_rms": 0.48613802618391627
+          },
+          "ul_m_s": {
+            "rms_absolute": 0.009105701923012799,
+            "max_absolute": 0.04353080304950363,
+            "fine_rms": 1.09183040880346
+          },
+          "ug_m_s": {
+            "rms_absolute": 0.01817729887998919,
+            "max_absolute": 0.06414452017541672,
+            "fine_rms": 1.494940760665085
+          },
+          "jl_m_s": {
+            "rms_absolute": 0.006341333522619101,
+            "max_absolute": 0.03546745636966819,
+            "fine_rms": 0.5650809756403935
+          },
+          "jg_m_s": {
+            "rms_absolute": 0.012392512239198298,
+            "max_absolute": 0.03774079682581055,
+            "fine_rms": 0.7045853950912769
+          }
+        }
+      },
+      {
+        "coarse": "N51_dt0.125",
+        "fine": "N51_dt0.0625",
+        "axis": "time",
+        "channels": {
+          "p_Pa": {
+            "rms_absolute": 2352.6720510770515,
+            "max_absolute": 4096.683764152054,
+            "fine_rms": 253886.07634375305
+          },
+          "alpha": {
+            "rms_absolute": 0.022497322485337055,
+            "max_absolute": 0.04725847827795193,
+            "fine_rms": 0.4859058935873426
+          },
+          "ul_m_s": {
+            "rms_absolute": 0.06107286954315848,
+            "max_absolute": 0.23667518054943026,
+            "fine_rms": 1.0805136924272996
+          },
+          "ug_m_s": {
+            "rms_absolute": 0.10703692268698603,
+            "max_absolute": 0.32057394251505045,
+            "fine_rms": 1.4725996820793164
+          },
+          "jl_m_s": {
+            "rms_absolute": 0.040039875357924734,
+            "max_absolute": 0.18840076043431886,
+            "fine_rms": 0.5561205108470959
+          },
+          "jg_m_s": {
+            "rms_absolute": 0.0712248019615442,
+            "max_absolute": 0.20214388234209757,
+            "fine_rms": 0.6927842740761246
+          }
+        }
+      },
+      {
+        "coarse": "N51_dt0.0625",
+        "fine": "N51_dt0.03125",
+        "axis": "time",
+        "channels": {
+          "p_Pa": {
+            "rms_absolute": 980.9801516709921,
+            "max_absolute": 1714.9615461557405,
+            "fine_rms": 254064.3962575875
+          },
+          "alpha": {
+            "rms_absolute": 0.009420166945788849,
+            "max_absolute": 0.020307122207391448,
+            "fine_rms": 0.48659697155857295
+          },
+          "ul_m_s": {
+            "rms_absolute": 0.025900210232105293,
+            "max_absolute": 0.10650494016017964,
+            "fine_rms": 1.0838382999154734
+          },
+          "ug_m_s": {
+            "rms_absolute": 0.04575929037182262,
+            "max_absolute": 0.14880519099575196,
+            "fine_rms": 1.483842292098104
+          },
+          "jl_m_s": {
+            "rms_absolute": 0.016716616744475065,
+            "max_absolute": 0.08528082204616205,
+            "fine_rms": 0.5602655837427518
+          },
+          "jg_m_s": {
+            "rms_absolute": 0.03084765660689603,
+            "max_absolute": 0.09457552341538578,
+            "fine_rms": 0.7030381940897557
+          }
+        }
+      }
+    ],
+    "common_grid_domains_m": [
+      [
+        0.5627450980392157,
+        56.83725490196078
+      ],
+      [
+        57.523002490129386,
+        69.8232515030677
+      ]
+    ],
+    "scope": "Geometric alpha-level candidates and phase averages on common interior observation domains. No material-front speed, complete blocking criterion or experimental regime classification. 1s field sampling does not resolve acoustic fronts."
+  }
+}

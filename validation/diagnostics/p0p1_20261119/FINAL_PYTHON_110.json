@@ -1,0 +1,28 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "cwd": "/home/leonardoab/Documentos/PRIMS-F-p0p1-20261119",
+  "returncode": 0,
+  "log_sha256": "630b09ffacefa78c3a269082b7ed16bb1d76434feaf877256443534bd1694044",
+  "production_operator": "1603419806f5cc2db62fd2e326877ee232bd8df0",
+  "analysis_sources": {
+    "validation/diagnostics/p0p1_20261119/step_metadata.py": "9e8498c5c7026871fc83ddc61413515e5c33a22e54c7ad32b6aa5029302ad3ef",
+    "validation/diagnostics/p0p1_20261119/analyze_spatial.py": "4de746747272a5aa17247f48d6417e4b24786acf45eab3cc6c7239518de47f43",
+    "validation/diagnostics/p0p1_20261119/linear_waves.py": "ce9dfad47e3947ae61c399ea61f99218c72e4214ffdc4812365a0cc355a11e5e",
+    "validation/diagnostics/p0p1_20261119/run_restart_refinement.py": "0fcaa84514c3a3c2d8d0af6bb27fd9d61fd124a44b37602e270028a6a30204ad",
+    "validation/diagnostics/p0p1_20261119/analyze_refinement.py": "4b0a2030c1f020680fb699c603deaad64b13b61e7ebf3858c75b41261674a0ce",
+    "validation/diagnostics/p0p1_20261119/compose_accepted_history.py": "36166f8a3573ec23a7ebfeb8b9c08baf0160d7a08c440f3fa247ebdc987c7242",
+    "validation/diagnostics/p0p1_20261119/collect_run_index.py": "0faf1347e88702d4b781118945bfc36a0d8bf9a30c789cd84f84853f47730531",
+    "validation/diagnostics/p0p1_20261119/run_p0_campaign.py": "5c0242cd98dc942ccd6eec029b91769d9edd8ebed87502b7322ac31aa2e92dab",
+    "validation/diagnostics/p0p1_20261119/plot_refinement.py": "3b7472b2ebd9aa1f55c2f8182685b269684e167f38df189fffca84090493cc67"
+  }
+}

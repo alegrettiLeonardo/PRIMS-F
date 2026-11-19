@@ -1,0 +1,170 @@
+[
+  {
+    "phase": "GAS",
+    "operator": "71a0693",
+    "status": "status=0\nreached_time_s=  1.0000000000000000E+00\nrequested_time_s=  1.0000000000000000E+00\naccepted_steps=109\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  3.2711999999999998E-02\nwall_seconds=  4.8799632000000003E-02\nnewton_iterations_total=109\njacobian_evaluations_total=109\nresidual_evaluations_total=218\nlinear_solves_total=109\nbacktrack_trials_total=109\nprepare_calls_total=109\n",
+    "balances": {
+      "l_system": {
+        "max_abs_balance_kg": 0.0,
+        "initial_inventory_kg": 0.0,
+        "absolute_processed_mass_kg": 0.0,
+        "relative_inventory": null,
+        "relative_processed": null,
+        "passes_inventory_1e6": null,
+        "passes_processed_1e6": null,
+        "final_residual_sum_kg": 0.0
+      },
+      "l_pipe": {
+        "max_abs_balance_kg": 0.0,
+        "initial_inventory_kg": 0.0,
+        "absolute_processed_mass_kg": 0.0,
+        "relative_inventory": null,
+        "relative_processed": null,
+        "passes_inventory_1e6": null,
+        "passes_processed_1e6": null,
+        "final_residual_sum_kg": 0.0
+      },
+      "l_riser": {
+        "max_abs_balance_kg": 0.0,
+        "initial_inventory_kg": 0.0,
+        "absolute_processed_mass_kg": 0.0,
+        "relative_inventory": null,
+        "relative_processed": null,
+        "passes_inventory_1e6": null,
+        "passes_processed_1e6": null,
+        "final_residual_sum_kg": 0.0
+      },
+      "g_system": {
+        "max_abs_balance_kg": 5.586351693731562e-16,
+        "initial_inventory_kg": 0.7201405571344247,
+        "absolute_processed_mass_kg": 0.0005221866574045327,
+        "relative_inventory": 7.757307428928473e-16,
+        "relative_processed": 1.0697997764818167e-12,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": -1.8964128334074537e-16
+      },
+      "g_pipe": {
+        "max_abs_balance_kg": 1.8743145056843158e-16,
+        "initial_inventory_kg": 0.5910066110811292,
+        "absolute_processed_mass_kg": 0.000522073304853784,
+        "relative_inventory": 3.171393467588509e-16,
+        "relative_processed": 3.59013664988914e-13,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": -1.6996141918044337e-17
+      },
+      "g_riser": {
+        "max_abs_balance_kg": 2.783756840492313e-16,
+        "initial_inventory_kg": 0.1291339460532955,
+        "absolute_processed_mass_kg": 0.0005221792318514783,
+        "relative_inventory": 2.155712673214071e-15,
+        "relative_processed": 5.331037066759651e-13,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": -1.7264514142270105e-16
+      }
+    },
+    "arithmetic_contract_passes": true,
+    "hashes": {
+      "run_status.txt": "c0017df58efcf34ecc88b0749b98d082f5c4a6bc00cbd9da1e30ccfef348e145",
+      "stdout.log": "d3c5fd52057aa92e00ad7363c1e626464e451ed9e18c22d8f509b4fb07125e30",
+      "checkpoint.dat": "61d7733c9c6c7456eeef4dc7a2bef34d36bbeaf096a0485723018db555381fab",
+      "steps.csv": "850f0766d58ba9f07c5e6fa51bcada1b7f35007dff9a40b7b05a0afb28a4ba98",
+      "conservation.csv": "4f04e57bbb946917c9db3efc453943a4eb5536f62e4e68315b782011c8082be1",
+      "results_D_Stable.dat": "6e9896336f1333b8c7a85d3cc4ce8d1af033589ae9e773b5b7384e4cacccc8b0",
+      "run_metadata.txt": "630d39105d58d1b4f7233b131b3873b1169f4097103ba251669189f7dbbe4675",
+      "boundary_conditions.csv": "d5f4431fc85b4e96b9754b30e6e1dd49eea596092c4691ce209b36d8d749d789",
+      "fields.csv": "fb334ab8df4a12202c4a8bdb3da37fb47b34d34a683d7ebde3ad83a9b235533b",
+      "inlet_contract.txt": "42cfddaf8d0cf5b194a10793f2aca4ad6417f02e30723fc79a7e5fab3875f798",
+      "monitor.csv": "40cdbddb7d673c63847b16186541b53a204a216c2fc973e52c4068753e46e023",
+      "input.nml": "133e646f4e45ee8650b68fa5e8440c77fbca3e317b840526f991b5df769ac99a",
+      "rejected_proposals.csv": "e25dac85d6bc9cc6571672790b89fb445c0f78e8451c1b94919a38625f4bffa2"
+    }
+  },
+  {
+    "phase": "LIQUID",
+    "operator": "71a0693",
+    "status": "status=0\nreached_time_s=  1.0000000000000000E+00\nrequested_time_s=  1.0000000000000000E+00\naccepted_steps=1538\nrejected_steps=405\nlast_rejection_status=6000\ntermination_reason=COMPLETED\ncpu_seconds=  1.0000920000000000E+00\nwall_seconds=  1.3486908030000000E+00\nnewton_iterations_total=3634\njacobian_evaluations_total=3634\nresidual_evaluations_total=21115\nlinear_solves_total=3634\nbacktrack_trials_total=17481\nprepare_calls_total=1943\n",
+    "balances": {
+      "l_system": {
+        "max_abs_balance_kg": 2.766606388426851e-13,
+        "initial_inventory_kg": 151.22689953906408,
+        "absolute_processed_mass_kg": 0.004324269644283638,
+        "relative_inventory": 1.8294406596044753e-15,
+        "relative_processed": 6.397858172614417e-11,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": -1.9923513990540208e-13
+      },
+      "l_pipe": {
+        "max_abs_balance_kg": 2.4254469960238723e-13,
+        "initial_inventory_kg": 124.10165388844588,
+        "absolute_processed_mass_kg": 0.004323327369866434,
+        "relative_inventory": 1.954403442684245e-15,
+        "relative_processed": 5.610139571963074e-11,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": -2.107528425176002e-13
+      },
+      "l_riser": {
+        "max_abs_balance_kg": 2.604817403439874e-14,
+        "initial_inventory_kg": 27.1252456506182,
+        "absolute_processed_mass_kg": 0.004324281296914015,
+        "relative_inventory": 9.602926502457347e-16,
+        "relative_processed": 6.0237001818054225e-12,
+        "passes_inventory_1e6": true,
+        "passes_processed_1e6": true,
+        "final_residual_sum_kg": 1.1517702612198137e-14
+      },
+      "g_system": {
+        "max_abs_balance_kg": 0.0,
+        "initial_inventory_kg": 0.0,
+        "absolute_processed_mass_kg": 0.0,
+        "relative_inventory": null,
+        "relative_processed": null,
+        "passes_inventory_1e6": null,
+        "passes_processed_1e6": null,
+        "final_residual_sum_kg": 0.0
+      },
+      "g_pipe": {
+        "max_abs_balance_kg": 0.0,
+        "initial_inventory_kg": 0.0,
+        "absolute_processed_mass_kg": 0.0,
+        "relative_inventory": null,
+        "relative_processed": null,
+        "passes_inventory_1e6": null,
+        "passes_processed_1e6": null,
+        "final_residual_sum_kg": 0.0
+      },
+      "g_riser": {
+        "max_abs_balance_kg": 0.0,
+        "initial_inventory_kg": 0.0,
+        "absolute_processed_mass_kg": 0.0,
+        "relative_inventory": null,
+        "relative_processed": null,
+        "passes_inventory_1e6": null,
+        "passes_processed_1e6": null,
+        "final_residual_sum_kg": 0.0
+      }
+    },
+    "arithmetic_contract_passes": true,
+    "hashes": {
+      "run_status.txt": "2a34b626c49d2543c30792032ca53c22e424a0cc35ef50ddc1a0b4ad5ef6929a",
+      "last_rejected_iteration.txt": "ec3cf294c44078a38515c1f1d81cffccf996eceddce26b8c13a7bc739bd2edb1",
+      "stdout.log": "17106285c45bb8ce116254095e53ef5c1be8da6e71f83ebddbdde98801b34930",
+      "checkpoint.dat": "976b25cdd80fac87e41f7d213bb8d009305eb4b19ac48d7377c300601938bd84",
+      "steps.csv": "c84736ef2dc3ace3bff9827cbe535fa90a2ad0b2ae8cf6ec3d2a6800d52c4b4a",
+      "conservation.csv": "e42708ad43fda1b9159daef54f8e6a77c933e582db3739eae9e92d5675afd5d9",
+      "results_D_Stable.dat": "4aeb0bb118235613c4fff13505b7f4d5b5620068567fbc85d43a0707fdad6e2b",
+      "last_rejected_state.dat": "15b96aa391e986e56d37de3efce952a4d9f1f1f80751a3cc411c632a7cbcf9d1",
+      "run_metadata.txt": "4d8e068c28fc1d7b90fb47156fe5f636c5d4694567acb9ee215360bf1dad6714",
+      "boundary_conditions.csv": "68f66b899a1a02a43d9e74872163dd7347c410fb4fb241924d20a487062176ad",
+      "fields.csv": "70d2004723aeed411ea1f640d34ac09986eeacad106f9ef0a2828a6afa096cf0",
+      "inlet_contract.txt": "ca58de83257776c7fe3ee31aa1c2a8650ed6e5f10f2bb42a5785981032b481ae",
+      "monitor.csv": "d9c2cc9edc31ca990b8429a382df1e23e65579defb432c7164f15690ea411525",
+      "input.nml": "aff7b5f8146ef49f96dabba611e246a5921edec01256e0c9a9e287be2174c992",
+      "rejected_proposals.csv": "a25a9325ee88c8057f0bbbd45fed542747fb1fb980d277cef4fa14256385f33c"
+    }
+  }
+]

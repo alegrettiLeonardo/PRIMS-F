@@ -1,0 +1,118 @@
+{
+  "operator": "18aa7f7",
+  "module_objects_bitwise_equal": true,
+  "reset_dt_start_s": 0.001,
+  "preserved_next_dt_s": 0.125,
+  "last_ten_cycles": {
+    "period_s": {
+      "reset": 23.34576139254633,
+      "preserved": 23.345493549583296,
+      "relative_difference": 1.1473004949102748e-05
+    },
+    "semi_amplitude_Pa": {
+      "reset": 14019.121754811942,
+      "preserved": 14018.054518836492,
+      "relative_difference": 7.613295939288849e-05
+    },
+    "mean_Pa": {
+      "reset": 266736.49353967933,
+      "preserved": 266735.9980484062,
+      "relative_difference": 1.8576093093711127e-06
+    }
+  },
+  "settling_preserved": {
+    "period": 8.49901318625112e-05,
+    "amplitude": 0.0005766791578370232,
+    "mean": 7.868707421346821e-06
+  },
+  "common_time_interpolation_diagnostics": {
+    "p_riser_base_Pa": {
+      "max_abs_difference": 23.095012781908736,
+      "rms_difference": 9.271643003615997
+    },
+    "p_junction_Pa": {
+      "max_abs_difference": 23.09323110774858,
+      "rms_difference": 9.271391119683045
+    },
+    "Ml_kg": {
+      "max_abs_difference": 0.005646267281377959,
+      "rms_difference": 0.0024043284072278615
+    },
+    "Mg_kg": {
+      "max_abs_difference": 9.591546138609797e-06,
+      "rms_difference": 2.710681418698625e-06
+    },
+    "mdot_l_base_kg_s": {
+      "max_abs_difference": 2.0064964227239912e-05,
+      "rms_difference": 4.153843877058229e-06
+    },
+    "mdot_g_base_kg_s": {
+      "max_abs_difference": 5.516865114489275e-06,
+      "rms_difference": 1.4142865573417441e-06
+    }
+  },
+  "interpolation_note": "Piecewise linear monitor interpolation; this is not a pointwise exact-error estimate. Preferred chronology preserves the controller at the timeout inside the last ten-cycle window.",
+  "manifest": {
+    "operator": "18aa7f7",
+    "source": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/refinement_extensions_18aa7f7_r2/N201_dt0.125",
+    "absolute_time_offset_s": 840.4318527598408,
+    "requested_total_time_s": 900,
+    "source_accepted_prefix_step": 1945,
+    "source_prefix_time_s": 240.4318527598408,
+    "command": [
+      "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/controller_preserving_18aa7f7/continuation",
+      "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/controller_preserving_18aa7f7/N201_dt0.125",
+      "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/controller_preserving_18aa7f7/N201_dt0.125/initial_U.txt",
+      "201",
+      ".125",
+      "59.56814724015919",
+      "0.125"
+    ],
+    "next_dt_s": 0.125,
+    "worktree_sha": "18aa7f79f7b16442fa19ebbd9ef8819b0eff187a",
+    "module_object_hashes": {
+      "module_chexal_1992.o": "a117afb3707a46042a2db58614aaca6b385ac6f1eb14e8ac76cf6dee522968ce",
+      "module_solver_utils.o": "f5a096167a9ff639d02b9b2ae9534dcdbaf5ddbda99493155175d59ddb46e2ea",
+      "module_single_phase.o": "2b12e5d62e223428c84a8354c1877920095218c2ee67cd9383cbae857f1b8e2e",
+      "module_jacobian.o": "854f723c6392508147991930f917e68ac676ff9e7a85de15db926914a332490b",
+      "module_active_set.o": "50abd7288949de2ea11d5c4d312ad8b9ff2862d24ab3bf24685523a7a26ab3c3",
+      "module_catenary.o": "9bb7bbd86e0187c0cb563dbb2ad5f87a9a4ab6121094f423af3610f83c8222de",
+      "module_time_step.o": "fd6eb87325fdac6ecf606f435bd1eb11ed4505b0402c87be6418bc7425ba8810",
+      "module_lapack_small.o": "5291d16b079df58ff6ab0da95dad346c0f558a565a6ebed1c165179e4d34b1a3",
+      "module_simulate_pipe_riser.o": "a5beda21537fd43a1e3cbd7ed84bec694bd2d185d01fbe7734a50e10fae6e88d",
+      "module_boundary_trace.o": "9fda0aef4d0d9bd6eae1c106e62c3e50254984aba150ae3d38c1e3f696e0535b",
+      "module_matrix_roe.o": "bb832d2f916eea167f1e7d846b39cfcc04e9b25513e1d1ea7f5be6f0aea7f2f6",
+      "module_steady_state.o": "3969b0a8435588e6ef238449a48936778920b5b23a8d0ca46635604bff440c3f",
+      "module_roe_solver.o": "b70bc5d08064f4f90b88c45198e5badc89f50f641d4e8c329e5880b1634c84dc",
+      "mod_void_helpers.o": "b966c285646ee136e70eb5ee17c373bff49a48c3717033eaf0df2bc4f2375e4f",
+      "module_boundary_conditions.o": "9cc78db38fe860a550409718ba5bb101dc7522585967df54a08476b23e3b7d64",
+      "mod_rootfinding.o": "8c99135d70fdea96b1dcd121c5f47cba75019cf854d185ef0824cbbaf767c068",
+      "module_feed_contracts.o": "49ae0966e6ba4daedea2cbddfbc81cee55a2728303ba38f833e007ee5de1c843",
+      "module_find.o": "a6e55c271fb599aa0bdafc0c68bd577105a05f6257d57ebaa689c12870b40416",
+      "mod_kinds.o": "89ef7b8b56c6581c8a136b80b35eb06fa602ef59d91dc3d68d4eb4d5ee6fe737",
+      "module_config.o": "702979f98a74d63383068af7bbf0aa75b31b9d5610faa6cfe62b6fa5cd17b973",
+      "module_flow_regime.o": "27f89397abc7bdab4d088020142a9081ffe646b420be4fcefb32817654bc2411",
+      "module_closure_law.o": "e6c5e8cc0ef7e179e72b1e22ed9cf1369ef9a498016be2df801ddda5c2d6eedf"
+    },
+    "old_object_hash_mismatches": [],
+    "driver_sha256": "6627b843b925cacd75cf2211e4e8ec173f8eb7588a04f95fadbf754eac9e9788",
+    "binary_sha256": "6fe72b93bd66d441c279b9402047dca373613feaf97d01afe7939fcf0d04a764",
+    "restart": "exact accepted U and recorded next dt; all other frozen solver state is autonomous and reconstructed from U; no branch history for the unique co-current Bhagwat states",
+    "returncode": 0,
+    "timeout": false,
+    "wall_s": 236.01514863499324,
+    "files": {
+      "run_status.txt": "653a9d23e96005fa1e3a523d7a0306fafc9a68518d39fd0e7a28973fa93d0fe2",
+      "PROTOCOL.json": "c78eca9ed6faa1fb4fcdd212b393b3dcaae5d59551e92bf0db1759e826d79213",
+      "initial_U.txt": "26ff95b2e4dd49daf75caff8d82caf43b41f6906a5ceea5bc3ff0b1d25c54ab7",
+      "stdout.log": "3d4b101ffed6725418d8ff5f4d1a3e4b06d5d1d35e8ecb7809150d99a395157a",
+      "checkpoint.dat": "ae2e1cbe468cb62e8171e4e6dff96e9b5b20e715fb8c51ea414dc605ecb35e70",
+      "steps.csv": "61a4cdd5891695ee1de4ba7fb7e6e1eaddf44a79db6ae25ea8db09c6a46b74e4",
+      "conservation.csv": "6daca10410f39bc4a9725dda9936754dec8d97e21c3f137bf84303d1e4c55fa4",
+      "boundary_conditions.csv": "c25552d576cbff331e67211c3bbd631b95ca47fb4b5e975ac175811c8e58ac46",
+      "fields.csv": "4b712d4d5abb1800c3dc54f7a8f762d7a616643a10d9c273f4080cfd0fee8c4b",
+      "monitor.csv": "7e700f7a729d6cb9a9d396c45a0eb330e23149f3a00abe3671b0663c781171c7",
+      "rejected_proposals.csv": "e25dac85d6bc9cc6571672790b89fb445c0f78e8451c1b94919a38625f4bffa2"
+    }
+  }
+}

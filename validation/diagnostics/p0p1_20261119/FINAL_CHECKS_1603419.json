@@ -1,0 +1,175 @@
+{
+  "operator": "1603419806f5cc2db62fd2e326877ee232bd8df0",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "wall_s": 0.7193609610112617,
+      "log_sha256": "e24437a11026f31515d19f70fc7d10bd52d72bfd1a3cdb57bc0adce5f1eb8617"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_feed_contract_cli.py",
+        "--binary",
+        "bin/prims_f",
+        "--baseline",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-audit-20261119/bin/prims_f",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/final_checks_1603419/feed"
+      ],
+      "returncode": 0,
+      "wall_s": 2.529455460011377,
+      "log_sha256": "48fa424b04269be8ed6aabb74ec290b80ab7f479e4f71242d0c2d3b35e251af4"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_initial_inventory_cli.py",
+        "--binary",
+        "bin/prims_f_check_all",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/final_checks_1603419/initial_debug"
+      ],
+      "returncode": 0,
+      "wall_s": 0.5679560150019825,
+      "log_sha256": "131fc3eecb411af183b149b533e7705b84fd61254ac6bb13c7f011860f5a9b76"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_initial_inventory_cli.py",
+        "--binary",
+        "bin/prims_f",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/final_checks_1603419/initial_release"
+      ],
+      "returncode": 0,
+      "wall_s": 0.3160550559987314,
+      "log_sha256": "131fc3eecb411af183b149b533e7705b84fd61254ac6bb13c7f011860f5a9b76"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_boundary_telemetry_cli.py",
+        "--binary",
+        "bin/prims_f_check_all",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/final_checks_1603419/boundary"
+      ],
+      "returncode": 0,
+      "wall_s": 3.121716224006377,
+      "log_sha256": "d4d2eea3bface165bf81e9ed5dd44474899eb99632f6f1b0f44e898a637fcb99"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_pipe_regime_cli.py",
+        "--binary",
+        "bin/prims_f_check_all",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/final_checks_1603419/pipe"
+      ],
+      "returncode": 0,
+      "wall_s": 0.7649442460096907,
+      "log_sha256": "69baaf76661894e90368e47ad07d92056f51baffd74028a5a76e138f79f0c103"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_accepted_telemetry_cli.py",
+        "--binary",
+        "bin/prims_f",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/final_checks_1603419/accepted"
+      ],
+      "returncode": 0,
+      "wall_s": 0.4188534519926179,
+      "log_sha256": "16541b9f19249d187589c3213212e830242c55377a39997b3910cca46d001db5"
+    }
+  ],
+  "fortran_status": "PASS",
+  "fortran_programs": 20,
+  "fortran_assertions": 3982,
+  "fortran_summary_sha256": "4e01e3ddf7a3a04b977450556488510ece3d1b01d79af3a81cf27830813650c8",
+  "compiler_version": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": [
+    "-std=f2018",
+    "-O0",
+    "-g3",
+    "-Wall",
+    "-Wextra",
+    "-Wno-unused-dummy-argument",
+    "-Wno-unused-parameter",
+    "-fimplicit-none",
+    "-ffree-line-length-none",
+    "-fopenmp",
+    "-fcheck=all",
+    "-fbacktrace",
+    "-ffpe-trap=invalid,zero,overflow",
+    "-finit-real=snan",
+    "-finit-integer=-999",
+    "-J/home/leonardoab/Documentos/PRIMS-F-p0p1-20261119/tmp/unit_tests",
+    "-I/home/leonardoab/Documentos/PRIMS-F-p0p1-20261119/tmp/unit_tests",
+    "-I/home/leonardoab/Documentos/PRIMS-F-p0p1-20261119/scr"
+  ],
+  "source_hashes": {
+    "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c",
+    "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "scr/module_flow_regime.f90": "d7c369d3d1418d1f3bb97ebd10a849ad3ea24aec11522753377c9e2cea046ebd",
+    "scr/module_config.f90": "1dfaf58d113627ed473b2b19203763185c5bd4a19d3f28a88cd6bf52cf81f56f",
+    "scr/module_lapack_small.f90": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+    "scr/module_chexal_1992.f90": "63a60d888a288eee582ab61d418cfe8838d1aa0e79b145e8a163d25c026d0443",
+    "scr/module_closure_law.f90": "2c7e9b7d81651faa6580be044fcf04e8430fc54670afd8b10dd614d2e955d233",
+    "scr/module_find.f90": "4976a0fae46a07d25f1e06a7e2df547ae58f79d5e9a750b28ab61253a77541e9",
+    "scr/module_catenary.f90": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+    "scr/module_steady_state.f90": "9b7e3e9dab1c1e562dc32e41cf87cc39ff9d469822734faed5bab80658bb1276",
+    "scr/module_jacobian.f90": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+    "scr/module_matrix_roe.f90": "f39b1226bb701fff35a64e2f26e077eb75e372d4d0047afcce87ffdf514bdd4a",
+    "scr/module_roe_solver.f90": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+    "scr/module_feed_contracts.f90": "0ba9ee97989a1a9d5e40ae1e42b874c9c897f01ddebb5e40bdd68a64bc302bd6",
+    "scr/module_boundary_trace.f90": "d7dd9f9b3c3d86a739e8dd770c6d4c308ad6fc74ea257f0b03982f0c2b2aa44f",
+    "scr/module_boundary_conditions.f90": "7209ccf6afe96d53ac2b054e202b1536849b3e4f6f206cd10f0d5a09c5629784",
+    "scr/module_solver_utils.f90": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+    "scr/module_time_step.f90": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133",
+    "scr/module_active_set.f90": "67267f05590043d07c129e2357bd93eba99aaf355c5f7e16c257894f0fa2168a",
+    "scr/module_single_phase.f90": "a1105d3f0c98b7ef07b3354f243ee1a06fbb0d977e5f87fa53454dfd8a8b0e4a",
+    "scr/module_simulate_pipe_riser.f90": "46c60312aaac82552a60220c95ebb9d0f9dc11b8b7bb140c30382040d4666bd7",
+    "tests/test_chexal_velocity_reference.f90": "94305a19fc06582be1af53a92c616654179af71cce720b0c318fdb531cd79a70",
+    "tests/test_chexal_derivative_tail.f90": "0cdb5ae9089dfff5f36403a04de34ed37beb42fbe2883e184b10d5c9f1e8d9e3",
+    "tests/test_chexal_1992_core.f90": "4f2af4cb6d15f87f7cc5c9bbe193b3359ea685858eaf7af3eddfe62c46547908",
+    "tests/test_chexal_integration.f90": "008c413c4a2cf3de8db23267a63aefe64549802b8508a6a0a79b692101472595",
+    "tests/test_geometry.f90": "cea60253a701249a1730633fce23db60d81ce418c33cc4ec9a7b2e741693d213",
+    "tests/test_closure_physics.f90": "cfb986acaa8d6b68b78be813e8f808c2a601a08e311d5e8143b23ae13e4039eb",
+    "tests/test_primitives_numerics.f90": "afc32b4f886c75764d382ee5a76b5b64046f710ceeef807f008841914c800644",
+    "tests/test_steady.f90": "50bebcb6a429c0b43a07a063803a37e9d4980c9767627c92feafccdc6137f49f",
+    "tests/test_boundaries_time.f90": "57fcde9aa0f74db5806feff18db6b48eeb8d6a846e90a516df588d4c5526ddbd",
+    "tests/test_fv_operators.f90": "f55cc39ca86d54fc020b2a96705c2b8c5e6ec145920eb1f280efecdaedcf9967",
+    "tests/test_roe_geometry.f90": "1df3e5450cade6d376944a9df81567677509a10fabb436bd532e1f942c7c24bc",
+    "tests/test_chexal_junction.f90": "73d26688fb5402f4769eb9b3b0dd22e01b5c88a9ed261043d7567162364a6f12",
+    "tests/test_burr15.f90": "6d1d1738dab7ae0590db1dcd9437bc93de3fad11f17e6c5a4073188aa81023fe",
+    "tests/test_active_set.f90": "7d4da1a74bef5bb90be526b032beaff3ebca7e8a908b9e223ec06b4a225c9253",
+    "tests/test_active_replay.f90": "cd70ca5b7ed2cf7ee36d1ffae7af1341eadac2226f4790b713845f1f357eaa03",
+    "tests/test_feed_contracts.f90": "3cd5a6fd1e220d8ec64c93aafe7ee3c0a5308a506a8de6830b72b559a9a746ef",
+    "tests/test_partition_invariance.f90": "b6517b15a5b81ea96fee72c35ccacb0be81c1e1ee873fe597654c43fd5bf4403",
+    "tests/test_single_phase.f90": "13945910d7d69062bc4783cab5594cf8b2d131e5814f7d1aca9615917be654ad",
+    "tests/test_source_boundary.f90": "884c900ca5276da03335e00dd6040a74245ea06cf45b2a4c3016a460f8aeda5e",
+    "tests/test_initial_inventory.f90": "da65b72e3ac551877eade59e77368fbdda11f138a967e1695a79ab0998a28a39",
+    "validation/diagnostics/qualification2_20261119/globalization_flux/offline_api.f90": "3e6f4523d411cb732d8d37a48789ce45d33af354e5735d62a169dd9712c6afdb",
+    "validation/diagnostics/qualification2_20261119/globalization_flux/fixtures/D_SS1_active_terminal/last_rejected_state.dat": "7116c087b594159629fb76bbd3df8383682eb488019171374d541d8c2063294a",
+    "validation/diagnostics/qualification2_20261119/globalization_flux/fixtures/D_SS1_active_terminal/probe_parameters.dat": "ca4cce11bac0f5919e363f5907ceeaaa425c347c97d6dc7f3f3d812b616ea597",
+    "validation/diagnostics/qualification2_20261119/globalization_flux/fixtures/D_SS3_active_terminal/last_rejected_state.dat": "683f5c44e2acad1de051e130040613156b0b666dddb18a2007b80430d6d2b1fe",
+    "validation/diagnostics/qualification2_20261119/globalization_flux/fixtures/D_SS3_active_terminal/probe_parameters.dat": "96b04713bbd5788e13f900e28c0d05e151480b59aad69443a54ea99f2be10ea7"
+  }
+}
