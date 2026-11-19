@@ -130,6 +130,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--objects",type=Path,required=True)
     parser.add_argument("--runs",type=Path,required=True)
+    parser.add_argument("--suffix",default="_fixed",help="scenario directory suffix in --runs")
     parser.add_argument("--output",type=Path,required=True)
     args = parser.parse_args()
     out = args.output.resolve()
@@ -139,10 +140,13 @@ def main():
     report["script_sha256"] = digest(Path(__file__))
     env = dict(os.environ,OMP_NUM_THREADS="1",OPENBLAS_NUM_THREADS="1")
     report["cases"] = {}
-    for name in ("D_SS1_fixed","D_SS3_fixed"):
+    for regime in ("D_SS1","D_SS3"):
+        name = regime+args.suffix
         previous = args.runs/name
         manifest = json.loads((previous/"manifest.json").read_text())
         controls = manifest["controls"]
+        if controls["gas_eos"]!="BAROTROPIC" or controls["g"]!=9.81:
+            raise ValueError("Replay requires the frozen BAROTROPIC, g=9.81 snapshots")
         scales = (previous/"run_metadata.txt").read_text().split(
             "Lr,CA,Cg,Gl,Gg,omega_P,omega_rho,omega_u:")[1].splitlines()[0].split()
         case = {"snapshot_sha256":digest(previous/"last_rejected_state.dat"),"modes":{}}
@@ -155,7 +159,7 @@ def main():
             captured = subprocess.run([binary],cwd=folder,env=env,capture_output=True,text=True,check=True)
             (folder/"probe.log").write_text(captured.stdout)
             rows = []
-            if name == "D_SS3_fixed":
+            if regime == "D_SS3":
                 with (folder/"proposal_cells.csv").open() as stream:
                     rows = [bound(row,controls,scales[-1]) for row in csv.DictReader(stream) if row["cell"]=="69"]
             case["modes"][flag] = {"bounds_cell69":rows,

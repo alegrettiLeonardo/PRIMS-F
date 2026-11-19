@@ -3,7 +3,7 @@
 Veja [a transcrição de Bhagwat–Ghajar](BHAGWAT_SOURCE_STATUS.md) para a
 correlação efetivamente implementada. A referência é Azevedo, Baliño e
 Burr (2015), p. 121, Eqs. (116)–(128). O certificado usa o ramo ascendente
-dessa versão, com (0\le\theta\le\pi/2), (0<\alpha<1) e
+dessa versão, com \(0\le\theta\le\pi/2\), \(0<\alpha<1\) e
 \(\rho_l>\rho_g>0\). Ângulo descendente pode cruzar uma troca em \(C_4\).
 
 Fixadas as massas de fase \(m_l,m_g\) e o momento \(M>0\), o intervalo
@@ -79,3 +79,9 @@ python3 scripts/replay_root_bounds.py --objects DIR_OBJ --runs BURR15_V1_RUNS \
 O conjunto desta execução está em
 `PRIMS-F-numerics-results-20261119/replay_burr15_base`, com SHA de cada
 snapshot, probe, objeto compilado, log, Jacobiano e proposta.
+
+Na nova campanha, ambos os snapshots terminais foram reproduzidos
+byte a byte. Com os objetos do release `69813ee`, o replay em
+`PRIMS-F-numerics-results-20261119/replay_69813ee` usa os diretórios de
+cenário sem sufixo (`--suffix=`). Confirme a procedência no manifesto
+daquele replay antes de comparar os status das propostas.
