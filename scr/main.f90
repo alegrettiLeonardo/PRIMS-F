@@ -7,7 +7,7 @@ program main
   use module_solver_utils,     only: fluid_dynamics_t
   use module_single_phase,only:configure_pipe_riser_elevation,global_single_phase,initialize_single_phase_hydrostatic
   use module_catenary,         only: solve_A
-  use module_steady_state,     only: EstadoEstacionario_ndim_simp
+  use module_steady_state,     only: EstadoEstacionario_ndim_simp,PHASE_AUTO,PHASE_LIQUID_ONLY,PHASE_GAS_ONLY
   use module_boundary_conditions, only: apply_ghost_cells
   use module_find,             only: compute_primitive_variables, set_stability_params
   use module_simulate_pipe_riser, only: pipeline_riser_simulator_t
@@ -51,8 +51,8 @@ program main
   real(wp)           :: gamma_g
   character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model
   character(len=16)::boundary_method
-  integer::outlet_reservoir_phase
-  character(len=16)::single_phase_mode,source_scheme
+  integer::outlet_reservoir_phase,initial_phase_hint
+  character(len=16)::single_phase_mode,source_scheme,initial_phase
   character(len=16)::liquid_flow_basis
   type(feed_contract_t)::feed
   integer::feed_status,initialization_iteration
@@ -86,7 +86,7 @@ program main
                     gamma_g, max_iter, max_workers, save_every, newton_max, regime, use_muscl, out_dir, jac_dissipation_fd, jac_dissipation_fd_eps, debug_dfduj_check, debug_dfduj_cell, debug_dfduj_eps, &
                     pb_dp_on, pb_dp_off, &
                     stab_si_on, stab_si_off, stab_use_hysteresis, &
-                    gas_eos, gas_flow_basis, liquid_flow_basis, single_phase_mode, source_scheme, outlet_reservoir_phase, boundary_method, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
+                    gas_eos, gas_flow_basis, liquid_flow_basis, single_phase_mode, source_scheme, initial_phase, outlet_reservoir_phase, boundary_method, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
                     checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode, newton_globalization
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
@@ -212,7 +212,7 @@ program main
   gas_flow_basis = 'STANDARD'
   liquid_flow_basis = 'LEGACY'
   single_phase_mode='STRICT';source_scheme='POINT';boundary_method='LEGACY'
-  outlet_reservoir_phase=0
+  outlet_reservoir_phase=0;initial_phase='AUTO';initial_phase_hint=PHASE_AUTO
   checkpoint_interval_s=60
   Cg_fixed = 343.0_wp
   P_standard = 101300.0_wp
@@ -333,6 +333,15 @@ program main
   ! target nondimensional final time
   omega_t = Lr / max(omega_u, 1.0e-16_wp)
   ntime   = time_dim / omega_t
+  select case(trim(initial_phase))
+  case('AUTO');initial_phase_hint=PHASE_AUTO
+  case('LIQUID');initial_phase_hint=PHASE_LIQUID_ONLY
+  case('GAS');initial_phase_hint=PHASE_GAS_ONLY
+  case default;error stop 'Unknown initial_phase'
+  end select
+  if(initial_phase_hint/=PHASE_AUTO.and.single_phase_mode/='REDUCED') &
+    error stop 'Explicit pure inventory evolution requires single_phase_mode=REDUCED'
+
   ! ------------------------ Steady-state (IC) ----------------------------
   ! For a local volumetric contract the steady mass flux is unknown until
   ! the inlet FACE pressure is known. Iterate the actual steady ODE, with
@@ -342,7 +351,7 @@ program main
                                     nCl, nCg, nrho_l0, nP_l0, mu_l, mu_g, sigma, omega_P, omega_u, omega_rho, tol, &
                                     vns, vnp, nrhogv, nrholv, alphav, nugv, nulv, thetav, njlv, njgv, &
                                     mesh_ratio=mesh_ratio, n_riser=n_riser, face_positions=physical_faces, &
-                                    closure_id_riser=closure_riser, status=steady_status, closure_id_pipe=closure_pipe, &
+                                    closure_id_riser=closure_riser, status=steady_status, closure_id_pipe=closure_pipe, phase_hint=initial_phase_hint, &
                                     face_pressures=initial_face_pressures)
   if (steady_status/=0) then
     write(error_unit,'(a,i0)') 'Steady initialization failed, status=',steady_status
@@ -535,6 +544,7 @@ program main
   write(ios,'(a,es25.16)')'initial_liquid_mass_flux_kg_m2_s=',ml_flux
   write(ios,'(a,es25.16)')'initial_gas_mass_flux_kg_m2_s=',mg_flux
   write(ios,'(a,es25.16)')'steady_inlet_contract_relative_error=',inlet_contract_error
+  write(ios,'(a,a)')'initial_inventory=',trim(initial_phase)
   write(ios,'(a,i0)')'initialization_iterations=',initialization_iteration
   close(ios)
 
