@@ -2,7 +2,7 @@ from pathlib import Path
 import csv,json,hashlib,subprocess,os,time,concurrent.futures,shutil,sys
 import numpy as np
 import argparse
-p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--initial-fields',type=Path,required=True);args=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--initial-fields',type=Path);p.add_argument('--initial-u',type=Path);args=p.parse_args()
 b=Path(__file__).resolve().parents[3];out=args.output.resolve();out.mkdir();r=out.parent;v=b/'validation/diagnostics/p0p1_20261119'
 source=r'''program restart_refinement
  use mod_kinds,only:wp
@@ -65,17 +65,23 @@ objs=list((b/'tmp/release').glob('*.o'));objs=[p for p in objs if p.name!='main.
 cmd=['gfortran','-std=f2018','-O2','-ffree-line-length-none','-fopenmp','-I'+str(b/'tmp/release'),str(v/'restart_refinement.f90'),*map(str,objs),'-llapack','-lblas','-o',str(out/'restart')]
 with (out/'build.log').open('w')as f:p=subprocess.run(cmd,cwd=out,stdout=f,stderr=subprocess.STDOUT)
 assert p.returncode==0,(out/'build.log').read_text()[-2000:]
-src=args.initial_fields.resolve()
-with src.open()as f:fields=list(csv.DictReader(f))
-fields=[x for x in fields if x['time_s']==fields[-1]['time_s']][-102:]
-edges=np.r_[np.linspace(0,57.4,52),57.4+np.linspace(0,12.54625399319708,52)[1:]]
-U=[]
-for x in fields:
- a=float(x['alpha']);rl=float(x['rhol_kg_m3']);rg=float(x['rhog_kg_m3']);ul=float(x['ul_m_s']);ug=float(x['ug_m_s'])
- U.append([(1-a)*rl/997.05,a*rg/997.05,((1-a)*rl*ul+a*rg*ug)/(997.05*1.16)])
+if args.initial_fields and args.initial_u:p.error('Choose one initial representation')
+if args.initial_fields:
+ src=args.initial_fields.resolve()
+ with src.open()as f:fields=list(csv.DictReader(f))
+ fields=[x for x in fields if x['time_s']==fields[-1]['time_s']][-102:]
+ edges=np.r_[np.linspace(0,57.4,52),57.4+np.linspace(0,12.54625399319708,52)[1:]]
+ U=[]
+ for x in fields:
+  a=float(x['alpha']);rl=float(x['rhol_kg_m3']);rg=float(x['rhog_kg_m3']);ul=float(x['ul_m_s']);ug=float(x['ug_m_s'])
+  U.append([(1-a)*rl/997.05,a*rg/997.05,((1-a)*rl*ul+a*rg*ug)/(997.05*1.16)])
+else:
+ src=(args.initial_u or v/'common_initial_U.txt').resolve()
+ U=np.loadtxt(src);assert U.shape==(102,3)
+ edges=np.r_[np.linspace(0,57.4,52),57.4+np.linspace(0,12.54625399319708,52)[1:]]
 U=np.array(U);np.savetxt(out/'common_initial_U.txt',U,fmt='%.17e')
 jobs=[(51,.125),(101,.125),(201,.125),(401,.125),(51,.0625),(51,.03125),(101,.0625)]
-protocol=dict(operator=subprocess.check_output(['git','rev-parse','HEAD'],cwd=b,text=True).strip(),driver_sha256=hashlib.sha256((v/'restart_refinement.f90').read_bytes()).hexdigest(),binary_sha256=hashlib.sha256((out/'restart').read_bytes()).hexdigest(),module_objects={p.name:hashlib.sha256(p.read_bytes()).hexdigest()for p in objs},initial_field_source=str(src),initial_field_sha256=hashlib.sha256(src.read_bytes()).hexdigest(),initial_U_sha256=hashlib.sha256((out/'common_initial_U.txt').read_bytes()).hexdigest(),initial_definition='New initial-value campaign: conservative overlap projection of the same piecewise constant FV U reconstructed from 1365094 field at 2400s. Not a bitwise continuation; time starts at zero. Geometry, feed, EOS, solver and tolerances held fixed.',duration_s=600,settling_limit=.005,convergence_target=.01,last_complete_cycles=10,wall_cap_s=2400,jobs=jobs)
+protocol=dict(operator=subprocess.check_output(['git','rev-parse','HEAD'],cwd=b,text=True).strip(),driver_sha256=hashlib.sha256((v/'restart_refinement.f90').read_bytes()).hexdigest(),binary_sha256=hashlib.sha256((out/'restart').read_bytes()).hexdigest(),module_objects={p.name:hashlib.sha256(p.read_bytes()).hexdigest()for p in objs},initial_representation='primitive_fields' if args.initial_fields else 'conservative_U',initial_field_source=str(src),initial_field_sha256=hashlib.sha256(src.read_bytes()).hexdigest(),initial_U_sha256=hashlib.sha256((out/'common_initial_U.txt').read_bytes()).hexdigest(),initial_definition='New initial-value campaign: conservative overlap projection of the same piecewise constant FV U reconstructed from 1365094 field at 2400s. Not a bitwise continuation; time starts at zero. Geometry, feed, EOS, solver and tolerances held fixed.',duration_s=600,settling_limit=.005,convergence_target=.01,last_complete_cycles=10,wall_cap_s=2400,jobs=jobs)
 (out/'PROTOCOL.json').write_text(json.dumps(protocol,indent=2)+'\n')
 env=dict(os.environ,OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='1')
 def run(job):

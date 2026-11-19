@@ -12,6 +12,8 @@ sys.path.insert(0,str(ROOT/'scripts'))
 from analyze_osc_envelopes import last_ten_cycles,pressure_envelope
 from analyze_accepted_conservation import audit_ledger
 from cycle_waveform import wave_difference
+sys.path.insert(0,str(Path(__file__).parent))
+from step_metadata import statistics as step_statistics
 
 def data(path):
  with path.open()as f:rows=list(csv.DictReader(f))
@@ -21,7 +23,7 @@ def data(path):
 
 def integral(t,y,l,r):
  inside=(t>l)&(t<r);x=np.r_[l,t[inside],r];v=np.r_[np.interp(l,t,y),y[inside],np.interp(r,t,y)]
- return float(np.trapz(v,x))
+ return float((np.diff(x)*(v[1:]+v[:-1])/2).sum())
 
 def cycle_markers(summary):
  edges=sorted(set([x['peak_time_s']for x in summary['peak_records']]+[summary['window_end_s']]))
@@ -49,7 +51,7 @@ def summarize(folder):
    masskey=f'M{phase}{mass}_kg';balance=c[masskey]-c[fi]+c[fo]
    result['per_cycle_balances_kg'][phase+'_'+region]=np.diff(np.interp(edges,c['time_s'],balance)).tolist()
  result['cycle_balance_definition']='linear interpolation of accepted BE inventories and cumulative accepted flux integrals at the same peak markers; no re-integration of sampled monitors'
- steps=data(folder/'steps.csv');result['actual_dt_s']=dict(min=float(np.min(steps['dt_s'][1:])),max=float(np.max(steps['dt_s'])),mean=float(np.mean(steps['dt_s'][1:])),accepted=len(steps['dt_s'])-1)
+ with (folder/'steps.csv').open()as f:result['actual_dt_s']=step_statistics(list(csv.DictReader(f)))
  result['hashes']={name:hashlib.sha256((folder/name).read_bytes()).hexdigest()for name in ['monitor.csv','steps.csv','conservation.csv','checkpoint.dat']}
  return result
 
@@ -57,10 +59,12 @@ def main():
  p=argparse.ArgumentParser();p.add_argument('--runs',type=Path,required=True);p.add_argument('--extensions',type=Path);p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(exist_ok=False)
  result=[]
  for folder in sorted(a.runs.glob('N*')):
-  if not(folder/'run_status.txt').exists():continue
+  if not(folder/'run_status.txt').exists() and not(folder/'analysis_history.json').exists():continue
   use=folder
   if a.extensions and(a.extensions/folder.name/'run_status.txt').exists():use=a.extensions/folder.name
-  d=summarize(use);d['base_run']=str(folder);n,dt=folder.name.split('_dt');d.update(n=int(n[1:]),dt_max_s=float(dt));result.append(d)
+  d=summarize(use);d['base_run']=str(folder);
+  if (use/'analysis_history.json').exists():d['analysis_history']=json.loads((use/'analysis_history.json').read_text())
+  n,dt=folder.name.split('_dt');d.update(n=int(n[1:]),dt_max_s=float(dt));result.append(d)
  comparisons=[]
  for axis,cohort in [('space',sorted([x for x in result if x['dt_max_s']==.125],key=lambda x:x['n'])),('time',sorted([x for x in result if x['n']==51],key=lambda x:-x['dt_max_s']))]:
   for coarse,fine in zip(cohort,cohort[1:]):
@@ -88,6 +92,6 @@ def main():
     order=brentq(fun,.05,8);r=h[1]/h[2];ext=y[2]+(y[2]-y[1])/(r**order-1);entry.update(observed_order=order,formal_extrapolate=float(ext),estimated_finest_error_relative=float(abs(ext-y[2])/abs(ext)))
    except(ValueError,ZeroDivisionError):entry['reason']='No positive observed order in [0.05,8] for the signed differences'
    orders.append(entry)
- (a.output/'summary.json').write_text(json.dumps(dict(runs=result,comparisons=comparisons,orders=orders,interpretation='new common-initial-value campaign; settling and discretization convergence are separate; no experimental validation or GCI claimed'),indent=2,allow_nan=False)+'\n')
+ (a.output/'summary.json').write_text(json.dumps(dict(analysis_script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),settling_range_over_mean_limit=.005,period_amplitude_target=.01,runs=result,comparisons=comparisons,orders=orders,interpretation='new common-initial-value campaign; settling and discretization convergence are separate; no experimental validation or GCI claimed'),indent=2,allow_nan=False)+'\n')
  for x in result:print(x['n'],x['dt_max_s'],x.get('period_s'),x.get('semi_amplitude_Pa'),x.get('settling_variation'),x['settled'])
 if __name__=='__main__':main()
