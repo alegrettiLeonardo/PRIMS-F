@@ -15,7 +15,7 @@ def plot(report,output):
     phase=np.arange(report["phase_grid_points"])/report["phase_grid_points"]
     fig,axes=plt.subplots(3,2,figsize=(12,9),sharex=True,layout="constrained")
     panels=[("p_junction_Pa","Pressão na junção (bar)",1e-5),
-            ("holdup_liquid_base","Fração líquida na base",1),
+            ("holdup_liquid_base","Fração líquida · primeiro centro do riser",1),
             ("mdot_l_base_kg_s","Vazão líquida na base (kg/s)",1),
             ("mdot_g_base_kg_s","Vazão gasosa na base (kg/s)",1),
             ("Ml_riser_kg","Inventário líquido no riser (kg)",1),
@@ -28,6 +28,8 @@ def plot(report,output):
     for ax in axes[-1,:]:
         ax.set_xlabel("Fase do ciclo · pico de pressão em 0")
     axes[0,0].legend(fontsize=8,frameon=False)
+    labels=[run["run"]+": "+run.get("status","NOT_VERIFIED") for run in report["runs"]]
+    fig.suptitle(" | ".join(labels)+"\nSéries sem ciclos úteis não recebem curva de fase",fontsize=9)
     fig.savefig(output,dpi=180)
     plt.close(fig)
 

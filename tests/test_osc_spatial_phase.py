@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from compare_osc_spatial_phase import crossings, sample_positions, phase_average, compare_fields
+from compare_osc_spatial_phase import crossings, sample_positions, phase_average, compare_fields, compare_isovoid
 
 
 class SpatialPhaseTest(unittest.TestCase):
@@ -37,6 +37,20 @@ class SpatialPhaseTest(unittest.TestCase):
         result = compare_fields(a, b)
         self.assertAlmostEqual(result['pipe']['p_Pa']['rms_absolute'], 2.)
         self.assertAlmostEqual(result['riser']['jg_m_s']['mean_difference'], 2.)
+
+    def test_geometric_crossing_shift_and_topology_mismatch_reported_separately(self):
+        x = np.linspace(0, 1, 11)
+        a = np.zeros((2, 11, 8))
+        b = a.copy()
+        a[:, :, 1] = 1-x
+        b[:, :, 1] = 1-x+.1
+        # Second phase deliberately has no crossing in the comparison.
+        b[1, :, 1] = .9
+        result = compare_isovoid({'pipe': a, 'riser': a}, {'pipe': b, 'riser': b},
+                                {'pipe': x, 'riser': x})
+        self.assertEqual(result['pipe']['0.5']['topology_mismatch_phases'], 1)
+        self.assertEqual(result['pipe']['0.5']['matched_crossings'], 1)
+        self.assertAlmostEqual(result['pipe']['0.5']['rms_position_difference_m'], .1)
 
 
 if __name__ == '__main__':

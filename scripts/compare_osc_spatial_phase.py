@@ -135,6 +135,32 @@ def compare_fields(first, second):
     return result
 
 
+def compare_isovoid(first, second, positions):
+    """Ordered geometric crossings at each phase, with explicit topology mismatch."""
+    result = {}
+    for segment in ('pipe', 'riser'):
+        result[segment] = {}
+        for level in LEVELS:
+            errors = []
+            mismatch = 0
+            empty = 0
+            for a, b in zip(first[segment], second[segment]):
+                left = crossings(positions[segment], 1-a[:, 1], level)
+                right = crossings(positions[segment], 1-b[:, 1], level)
+                if [item[1] for item in left] != [item[1] for item in right]:
+                    mismatch += 1
+                    continue
+                if not left:
+                    empty += 1
+                errors.extend(last[0]-initial[0] for initial, last in zip(left, right))
+            result[segment][str(level)] = dict(matched_crossings=len(errors),
+                topology_mismatch_phases=mismatch, no_crossing_in_either_phases=empty,
+                rms_position_difference_m=float(np.sqrt(np.mean(np.array(errors)**2))) if errors else None,
+                maximum_position_difference_m=max(map(abs, errors)) if errors else None,
+                interpretation='Ordered isovoid crossings of phase-mean fields; no material front identity')
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--phase-report', type=Path, required=True)
@@ -193,7 +219,8 @@ def main():
             reference = (path.name, averaged)
         else:
             index['comparisons'].append(dict(reference=reference[0], run=path.name,
-                channels=compare_fields(reference[1], averaged)))
+                channels=compare_fields(reference[1], averaged),
+                geometric_isovoid=compare_isovoid(reference[1], averaged, fixed)))
     with (args.output/'index.json').open('x') as stream:
         json.dump(index, stream, indent=2, allow_nan=False)
         stream.write('\n')

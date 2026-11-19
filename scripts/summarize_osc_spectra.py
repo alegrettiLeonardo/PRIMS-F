@@ -17,6 +17,18 @@ def sha(path):
 
 
 def spectral_peaks(time,signal):
+    time,signal=np.asarray(time),np.asarray(signal)
+    if len(time)<2 or len(signal)!=len(time) or not np.isfinite(signal).all() or not np.isfinite(time).all():
+        raise ValueError('Finite pressure samples and at least two timestamps are required')
+    if np.any(np.diff(time)<=0):
+        raise ValueError('Time must increase')
+    excursion=float(np.ptp(signal))
+    useful=excursion>=100.
+    if excursion==0:
+        return {"frequency_resolution_Hz":float((len(time)-1)/(len(time)*(time[-1]-time[0]))),
+                "three_largest_local_peaks":[],"ratio_two_strongest_frequency_bins":None,
+                "window_excursion_Pa":0.,"window_excursion_at_least_100Pa":False,
+                "peaks_interpretation":"NO_SPECTRAL_VARIATION; no period inferred"}
     frequency,power=spectrum(time,signal)
     peaks=[index for index in find_peaks(power)[0] if 0<frequency[index]<=.1]
     selected=sorted(peaks,key=lambda index:power[index],reverse=True)[:3]
@@ -29,6 +41,9 @@ def spectral_peaks(time,signal):
         ratio=ordered[1]["frequency_bin_Hz"]/ordered[0]["frequency_bin_Hz"]
     return {"frequency_resolution_Hz":step,"three_largest_local_peaks":records,
             "ratio_two_strongest_frequency_bins":ratio,
+            "window_excursion_Pa":excursion,"window_excursion_at_least_100Pa":useful,
+            "peaks_interpretation":("Finite-window frequency bins; cycle qualification is separate" if useful else
+                                    "NO_USEFUL_WINDOW_VARIATION; normalized peaks do not qualify a period"),
             "window":"Hann, mean removed, relative power normalized separately for each series"}
 
 
