@@ -1,0 +1,492 @@
+{
+  "operator": "18aa7f79f7b16442fa19ebbd9ef8819b0eff187a",
+  "binary_sha256": "2c6d36d2759570e827a009d1aa959f007c6f9a3f6ef02a0442eef127ec8faed2",
+  "environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "cases": [
+    {
+      "name": "D_SS1_LEGACY",
+      "benchmark": "D_SS1",
+      "changes": {
+        "boundary_method": "'LEGACY'",
+        "time_dim": 110
+      },
+      "wall_cap_s": 180
+    },
+    {
+      "name": "D_SS1_STEADY_TRACE",
+      "benchmark": "D_SS1",
+      "changes": {
+        "boundary_method": "'STEADY_TRACE'",
+        "time_dim": 110
+      },
+      "wall_cap_s": 180
+    },
+    {
+      "name": "D_SS3_LEGACY",
+      "benchmark": "D_SS3",
+      "changes": {
+        "boundary_method": "'LEGACY'",
+        "time_dim": 110
+      },
+      "wall_cap_s": 180
+    },
+    {
+      "name": "D_SS3_STEADY_TRACE",
+      "benchmark": "D_SS3",
+      "changes": {
+        "boundary_method": "'STEADY_TRACE'",
+        "time_dim": 110
+      },
+      "wall_cap_s": 180
+    },
+    {
+      "name": "D_Stable",
+      "benchmark": "D_Stable",
+      "changes": {
+        "time_dim": 2400
+      },
+      "wall_cap_s": 900
+    },
+    {
+      "name": "D_OSC",
+      "benchmark": "D_OSC",
+      "changes": {
+        "time_dim": 2400
+      },
+      "wall_cap_s": 900
+    },
+    {
+      "name": "OSC_SOURCE_120",
+      "benchmark": "D_OSC",
+      "changes": {
+        "time_dim": 120,
+        "boundary_method": "'STEADY_TRACE'"
+      },
+      "wall_cap_s": 180
+    },
+    {
+      "name": "HYDRO_N8_G0",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 8,
+        "n_riser": 8,
+        "G": 0,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N8_G4.905",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 8,
+        "n_riser": 8,
+        "G": 4.905,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N8_G9.81",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 8,
+        "n_riser": 8,
+        "G": 9.81,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N8_G19.62",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 8,
+        "n_riser": 8,
+        "G": 19.62,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N16_G0",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 16,
+        "n_riser": 16,
+        "G": 0,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N16_G4.905",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 16,
+        "n_riser": 16,
+        "G": 4.905,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N16_G9.81",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 16,
+        "n_riser": 16,
+        "G": 9.81,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N16_G19.62",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 16,
+        "n_riser": 16,
+        "G": 19.62,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N32_G0",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 32,
+        "n_riser": 32,
+        "G": 0,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N32_G4.905",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 32,
+        "n_riser": 32,
+        "G": 4.905,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N32_G9.81",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 32,
+        "n_riser": 32,
+        "G": 9.81,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N32_G19.62",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 32,
+        "n_riser": 32,
+        "G": 19.62,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N64_G0",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 64,
+        "n_riser": 64,
+        "G": 0,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N64_G4.905",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 64,
+        "n_riser": 64,
+        "G": 4.905,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N64_G9.81",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 64,
+        "n_riser": 64,
+        "G": 9.81,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N64_G19.62",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 64,
+        "n_riser": 64,
+        "G": 19.62,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N201_G0",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 201,
+        "n_riser": 201,
+        "G": 0,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N201_G4.905",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 201,
+        "n_riser": 201,
+        "G": 4.905,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N201_G9.81",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 201,
+        "n_riser": 201,
+        "G": 9.81,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    },
+    {
+      "name": "HYDRO_N201_G19.62",
+      "benchmark": "D_OSC",
+      "changes": {
+        "nodes": 201,
+        "n_riser": 201,
+        "G": 19.62,
+        "time_dim": 1,
+        "jl": 0,
+        "jg": 0,
+        "mul": 0,
+        "mug": 0,
+        "gas_eos": "'ISOTHERMAL'",
+        "single_phase_mode": "'REDUCED'",
+        "source_scheme": "'HYDROSTATIC'",
+        "perturbation_amplitude": 0,
+        "dt_max_s": 0.01,
+        "field_interval_s": 0.25
+      },
+      "wall_cap_s": 90
+    }
+  ]
+}

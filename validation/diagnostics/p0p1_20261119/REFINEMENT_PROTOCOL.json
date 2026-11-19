@@ -1,0 +1,68 @@
+{
+  "operator": "18aa7f79f7b16442fa19ebbd9ef8819b0eff187a",
+  "driver_sha256": "dbdcbf8fe8e426e8945f629917adea36478f479838dbe65b785da0e7d400a330",
+  "binary_sha256": "67e2059069726755ff05a736970efdea4691e75b17384e70e5ccf49670621474",
+  "module_objects": {
+    "module_chexal_1992.o": "a117afb3707a46042a2db58614aaca6b385ac6f1eb14e8ac76cf6dee522968ce",
+    "module_solver_utils.o": "f5a096167a9ff639d02b9b2ae9534dcdbaf5ddbda99493155175d59ddb46e2ea",
+    "module_single_phase.o": "2b12e5d62e223428c84a8354c1877920095218c2ee67cd9383cbae857f1b8e2e",
+    "module_jacobian.o": "854f723c6392508147991930f917e68ac676ff9e7a85de15db926914a332490b",
+    "module_active_set.o": "50abd7288949de2ea11d5c4d312ad8b9ff2862d24ab3bf24685523a7a26ab3c3",
+    "module_catenary.o": "9bb7bbd86e0187c0cb563dbb2ad5f87a9a4ab6121094f423af3610f83c8222de",
+    "module_time_step.o": "fd6eb87325fdac6ecf606f435bd1eb11ed4505b0402c87be6418bc7425ba8810",
+    "module_lapack_small.o": "5291d16b079df58ff6ab0da95dad346c0f558a565a6ebed1c165179e4d34b1a3",
+    "module_simulate_pipe_riser.o": "a5beda21537fd43a1e3cbd7ed84bec694bd2d185d01fbe7734a50e10fae6e88d",
+    "module_boundary_trace.o": "9fda0aef4d0d9bd6eae1c106e62c3e50254984aba150ae3d38c1e3f696e0535b",
+    "module_matrix_roe.o": "bb832d2f916eea167f1e7d846b39cfcc04e9b25513e1d1ea7f5be6f0aea7f2f6",
+    "module_steady_state.o": "3969b0a8435588e6ef238449a48936778920b5b23a8d0ca46635604bff440c3f",
+    "module_roe_solver.o": "b70bc5d08064f4f90b88c45198e5badc89f50f641d4e8c329e5880b1634c84dc",
+    "mod_void_helpers.o": "b966c285646ee136e70eb5ee17c373bff49a48c3717033eaf0df2bc4f2375e4f",
+    "module_boundary_conditions.o": "9cc78db38fe860a550409718ba5bb101dc7522585967df54a08476b23e3b7d64",
+    "mod_rootfinding.o": "8c99135d70fdea96b1dcd121c5f47cba75019cf854d185ef0824cbbaf767c068",
+    "module_feed_contracts.o": "49ae0966e6ba4daedea2cbddfbc81cee55a2728303ba38f833e007ee5de1c843",
+    "module_find.o": "a6e55c271fb599aa0bdafc0c68bd577105a05f6257d57ebaa689c12870b40416",
+    "mod_kinds.o": "89ef7b8b56c6581c8a136b80b35eb06fa602ef59d91dc3d68d4eb4d5ee6fe737",
+    "module_config.o": "702979f98a74d63383068af7bbf0aa75b31b9d5610faa6cfe62b6fa5cd17b973",
+    "module_flow_regime.o": "27f89397abc7bdab4d088020142a9081ffe646b420be4fcefb32817654bc2411",
+    "module_closure_law.o": "e6c5e8cc0ef7e179e72b1e22ed9cf1369ef9a498016be2df801ddda5c2d6eedf"
+  },
+  "initial_field_source": "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/feed_qualified_1365094/A_BARO_MASS/fields.csv",
+  "initial_field_sha256": "fb3a425657d1f192c677af445a30ba9e19fca13543d92e7af4fb5d778e2facf2",
+  "initial_U_sha256": "192c5f7eab7cc9aef50d4e4769a452d6a451d07f105ed3979e3ec2705d0e8ba6",
+  "initial_definition": "New initial-value campaign: conservative overlap projection of the same piecewise constant FV U reconstructed from 1365094 field at 2400s. Not a bitwise continuation; time starts at zero. Geometry, feed, EOS, solver and tolerances held fixed.",
+  "duration_s": 600,
+  "settling_limit": 0.005,
+  "convergence_target": 0.01,
+  "last_complete_cycles": 10,
+  "wall_cap_s": 2400,
+  "jobs": [
+    [
+      51,
+      0.125
+    ],
+    [
+      101,
+      0.125
+    ],
+    [
+      201,
+      0.125
+    ],
+    [
+      401,
+      0.125
+    ],
+    [
+      51,
+      0.0625
+    ],
+    [
+      51,
+      0.03125
+    ],
+    [
+      101,
+      0.0625
+    ]
+  ]
+}
