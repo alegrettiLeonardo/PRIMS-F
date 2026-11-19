@@ -5,16 +5,27 @@ on:
 jobs:
   operators:
     runs-on: ubuntu-latest
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      PYTHONPATH: scripts
     steps:
       - uses: actions/checkout@v4
       - name: Install compiler and linear algebra libraries
-        run: sudo apt-get update && sudo apt-get install -y gfortran liblapack-dev libblas-dev
+        run: sudo apt-get update && sudo apt-get install -y gfortran liblapack-dev libblas-dev python3-numpy python3-scipy python3-matplotlib
       - name: Build executable
         run: make -j2 FC=gfortran LIBS='-llapack -lblas'
+      - name: Build with runtime checks
+        run: make check_all FC=gfortran LIBS='-llapack -lblas'
       - name: Verify physical and numerical operators
         run: make test FC=gfortran LIBS='-llapack -lblas'
       - name: Verify analysis safeguards
-        run: python3 -m unittest discover -s tests -p 'test_validation_evidence.py' -v
+        run: /usr/bin/python3 -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Verify configuration and accepted-step telemetry
+        run: |
+          /usr/bin/python3 tests/test_pipe_regime_cli.py --binary bin/prims_f_check_all --output tmp/ci_pipe_cli
+          /usr/bin/python3 tests/test_accepted_telemetry_cli.py --binary bin/prims_f --output tmp/ci_telemetry
       - name: Preserve test evidence
         if: always()
         uses: actions/upload-artifact@v4
