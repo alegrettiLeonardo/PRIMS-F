@@ -1,5 +1,6 @@
 import csv
 import importlib.util
+import math
 from pathlib import Path
 import tempfile
 import unittest
@@ -50,6 +51,20 @@ def fixture():
 
 
 class AcceptedConservationTests(unittest.TestCase):
+    def test_recurrence_bound_is_gamma_n_not_physical_tolerance(self):
+        self.assertEqual(audit.gamma_n(0), 0)
+        values = [.1] * 20000
+        naive = 0.0
+        for value in values:
+            naive += value
+        reference = math.fsum(values)
+        observed_roundoff = abs(naive - reference)
+        self.assertGreater(observed_roundoff, 256 * audit.EPS * reference)
+        recurrence_bound = audit.gamma_n(len(values)) * math.fsum(abs(v) for v in values)
+        self.assertLessEqual(observed_roundoff, recurrence_bound)
+        self.assertGreater(abs(naive + 1e-3 - reference), recurrence_bound)
+        with self.assertRaises(ValueError): audit.gamma_n(1 / audit.UNIT_ROUNDOFF)
+
     def test_status_retains_textual_termination_reason(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'run_status.txt'

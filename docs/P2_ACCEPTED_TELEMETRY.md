@@ -44,19 +44,27 @@ os traços aceitos.
 índices, tempos/dt, sinais, inventários, integrais e identidade com o residual.
 Associa `steps.csv` e `conservation.csv` por hash dos pares índice/tempo/dt/norma,
 verifica o status final e registra hashes dos arquivos e do analisador. Recusa
-sobrescrita. A tolerância aritmética de 256 eps escalada é uma verificação
-operacional, não um limite formal para somas simples com N arbitrário: uma
-eventual falha numa série longa exige examinar arredondamento. O critério físico
-de balanço 1e-6 é separado, em inventário inicial e massa absoluta processada;
+sobrescrita. Na auditoria v1, o limite fixo de 256 eps foi ultrapassado após
+2718 adições de fluxo gasoso constante: diferença de 3,45e-14 kg entre a soma
+simples Fortran e a soma compensada independente. Os JSONs v1 permanecem intactos.
+
+A auditoria v2 usa o limite de recorrência `gamma_n = n*u/(1-n*u)`, com
+`u = epsilon/2`, multiplicado pela soma das magnitudes das contribuições do
+acumulador correspondente. Isso decorre do modelo de arredondamento relativo
+por operação; pressupõe aritmética finita normal e `n*u < 1`. O termo local
+256 eps continua separado e é acumulado nas identidades de defeito por passo;
+não constitui uma prova geral de erro para todo operador físico. Os limites e
+erros máximos ficam no JSON junto do resultado do antigo limite fixo. O critério
+físico de balanço 1e-6 é separado, em inventário inicial e massa absoluta processada;
 escala nula é reportada indisponível, nunca substituída por valor artificial.
 
-Testes específicos: 14 testes Python de sinais/defeitos/contratos e cinco
+Testes específicos: 15 testes Python de sinais/defeitos/contratos e cinco
 contratos CLI curtos (saída esparsa/frequente, término por limite de passos,
 rejeição real e estado final invariável com amostragem). A fixture Fortran FV
 inclui o telescópio por trecho em malha não uniforme, os dois fluxos de junção
 e identidade dos operadores com/sem saída opcional. Logs locais em
 `tmp/p2_cli_v3`, `tmp/p2_cli_freeze`, `tmp/p2_unit_tests` e
-`/tmp/primsf_p2_python_final.log`. O parser preserva também o campo textual
+`/tmp/primsf_p2_python_final.log` e `/tmp/primsf_p2_gamma_tests.log`. O parser preserva também o campo textual
 `termination_reason` da telemetria P1; 5/5 smokes foram repetidos com o binário
 congelado `69813ee`, sem alterar esse solver.
 

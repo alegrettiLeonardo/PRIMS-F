@@ -18,6 +18,15 @@ PHASES = ('l', 'g')
 REGIONS = ('', '_pipe', '_riser')
 FACES = ('in', 'out', 'base_left', 'base_right')
 EPS = sys.float_info.epsilon
+UNIT_ROUNDOFF = EPS / 2
+
+
+def gamma_n(n):
+    """Standard floating-point recurrence bound, n*u/(1-n*u)."""
+    nu = n * UNIT_ROUNDOFF
+    if not 0 <= nu < 1:
+        raise ValueError('Accumulation bound requires 0 <= n*u < 1')
+    return nu / (1 - nu)
 
 
 def sha256(path):
@@ -45,20 +54,29 @@ def audit_ledger(path):
     signed = {(p, f): Accumulator() for p in PHASES for f in FACES}
     absolute = {(p, f): Accumulator() for p in PHASES for f in FACES}
     residual = {(p, r): Accumulator() for p in PHASES for r in REGIONS}
+    residual_absolute = {(p, r): Accumulator() for p in PHASES for r in REGIONS}
+    local_defect_roundoff = {(p, r): Accumulator() for p in PHASES for r in REGIONS}
     maximum = {(p, r): 0.0 for p in PHASES for r in REGIONS}
     mismatches = []
     identity_errors = {}
+    identity_tolerances = {}
+    fixed_mismatches = []
     junction_difference = dict.fromkeys(PHASES, 0.0)
     first = previous = None
     count = 0
     accepted_time_hash = hashlib.sha256()
 
-    def identity(label, value, expected, scale):
+    def identity(label, value, expected, scale, accumulated_roundoff=0.0):
         error = abs(value - expected)
         identity_errors[label] = max(identity_errors.get(label, 0.0), error)
-        # This roundoff envelope verifies an identity; it is not the physical
-        # balance criterion. The latter remains 1e-6 on named mass scales.
-        tolerance = 256 * EPS * max(scale, abs(value), abs(expected), 1e-300)
+        # gamma_n multiplies the sum of magnitudes in the relevant recurrence.
+        # The separate local term covers ledger arithmetic/serialization, not
+        # the physical balance criterion (which remains 1e-6 on named scales).
+        fixed_tolerance = 256 * EPS * max(scale, abs(value), abs(expected), 1e-300)
+        tolerance = fixed_tolerance + accumulated_roundoff
+        identity_tolerances[label] = max(identity_tolerances.get(label, 0.0), tolerance)
+        if error > fixed_tolerance and len(fixed_mismatches) < 20:
+            fixed_mismatches.append(dict(row=count, identity=label, error=error, tolerance=fixed_tolerance))
         if error > tolerance and len(mismatches) < 20:
             mismatches.append(dict(row=count, identity=label, error=error, tolerance=tolerance))
 
@@ -92,8 +110,9 @@ def audit_ledger(path):
                         signed[phase, face].add(row['dt_s'] * flow)
                         absolute[phase, face].add(row['dt_s'] * abs(flow))
                     scale = absolute[phase, face].value
-                    identity(f'{phase}_{face}_signed_integral', row[f'M{phase}_{face}_integral_kg'], signed[phase, face].value, scale)
-                    identity(f'{phase}_{face}_absolute_integral', row[f'M{phase}_{face}_abs_integral_kg'], absolute[phase, face].value, scale)
+                    accumulation_bound = gamma_n(count) * scale
+                    identity(f'{phase}_{face}_signed_integral', row[f'M{phase}_{face}_integral_kg'], signed[phase, face].value, scale, accumulation_bound)
+                    identity(f'{phase}_{face}_absolute_integral', row[f'M{phase}_{face}_abs_integral_kg'], absolute[phase, face].value, scale, accumulation_bound)
                 inlet, outlet, left, right = (signed[phase, f].value for f in FACES)
                 junction_difference[phase] = max(junction_difference[phase], abs(left - right))
                 for region, incoming, outgoing in (('', 'in', 'out'), ('_pipe', 'in', 'base_left'), ('_riser', 'base_right', 'out')):
@@ -106,24 +125,34 @@ def audit_ledger(path):
                     processed = absolute[phase, incoming].value + absolute[phase, outgoing].value
                     scale = abs(mass) + abs(mass0) + processed
                     stored_error = row[f'balance_{phase}{region}_kg']
-                    identity(f'{phase}{region}_balance', stored_error, error, scale)
+                    identity(f'{phase}{region}_balance', stored_error, error, scale, gamma_n(count) * processed)
                     maximum[phase, region] = max(maximum[phase, region], abs(stored_error))
                     defect = row[f'mass_residual_{phase}{region}_kg']
                     if count:
                         residual[phase, region].add(defect)
+                        residual_absolute[phase, region].add(abs(defect))
                         transport_step = row['dt_s'] * (row[f'mdot_{phase}_{outgoing}_kg_s'] - row[f'mdot_{phase}_{incoming}_kg_s'])
                         step_error = mass - previous[f'M{phase}{region}_kg'] + transport_step
-                        identity(f'{phase}{region}_step_balance', row[f'step_balance_{phase}{region}_kg'], step_error, scale)
+                        local_scale = abs(mass) + abs(previous[f'M{phase}{region}_kg']) + row['dt_s'] * (
+                            abs(row[f'mdot_{phase}_{outgoing}_kg_s']) + abs(row[f'mdot_{phase}_{incoming}_kg_s']))
+                        identity(f'{phase}{region}_step_balance', row[f'step_balance_{phase}{region}_kg'], step_error, local_scale)
                         # The global residual also contains any noncanceling
                         # interface mass flux; retaining both sides exposes it.
                         if not region:
                             step_error += row['dt_s'] * (row[f'mdot_{phase}_base_left_kg_s'] - row[f'mdot_{phase}_base_right_kg_s'])
-                        identity(f'{phase}{region}_accepted_residual', defect, step_error, scale)
+                            local_scale += row['dt_s'] * (abs(row[f'mdot_{phase}_base_left_kg_s']) + abs(row[f'mdot_{phase}_base_right_kg_s']))
+                        identity(f'{phase}{region}_accepted_residual', defect, step_error, local_scale)
+                        local_defect_roundoff[phase, region].add(256 * EPS * local_scale)
                     else:
                         identity(f'{phase}{region}_initial_residual', defect, 0.0, scale)
                     cumulative = residual[phase, region].value
-                    identity(f'{phase}{region}_residual_accumulator', row[f'mass_residual_sum_{phase}{region}_kg'], cumulative, scale)
-                    identity(f'{phase}{region}_cumulative_defect', cumulative, error + (left - right if not region else 0.0), scale)
+                    residual_bound = gamma_n(count) * residual_absolute[phase, region].value
+                    identity(f'{phase}{region}_residual_accumulator', row[f'mass_residual_sum_{phase}{region}_kg'], cumulative, scale, residual_bound)
+                    transport_magnitude = processed
+                    if not region:
+                        transport_magnitude += absolute[phase, 'base_left'].value + absolute[phase, 'base_right'].value
+                    cumulative_bound = residual_bound + gamma_n(count) * transport_magnitude + local_defect_roundoff[phase, region].value
+                    identity(f'{phase}{region}_cumulative_defect', cumulative, error + (left - right if not region else 0.0), scale, cumulative_bound)
                 identity(f'{phase}_inventory_partition', row[f'M{phase}_kg'], row[f'M{phase}_pipe_kg'] + row[f'M{phase}_riser_kg'], abs(row[f'M{phase}_kg']))
             previous = row
             count += 1
@@ -149,6 +178,13 @@ def audit_ledger(path):
                 accepted_time_dt_norm_sha256=accepted_time_hash.hexdigest(),
                 arithmetic_contract_passes=not mismatches, mismatches=mismatches,
                 max_identity_error_kg_or_s=identity_errors,
+                max_identity_roundoff_allowance_kg_or_s=identity_tolerances,
+                fixed_256eps_contract_passes=not fixed_mismatches, fixed_256eps_mismatches=fixed_mismatches,
+                roundoff_policy=dict(unit_roundoff=UNIT_ROUNDOFF, recurrence='gamma_n=n*u/(1-n*u)',
+                    gamma_n_final=gamma_n(count - 1),
+                    magnitude='Sum of absolute contributions in each independent accumulator',
+                    local_term='256*epsilon*local ledger scale; accumulated for per-step residual identities',
+                    scope='Recurrence bound assumes finite normal arithmetic; local ledger allowance is operational, not a proof of every solver operator.'),
                 max_junction_integral_mismatch_kg=junction_difference, balances=balances)
 
 
@@ -222,7 +258,7 @@ def main():
         path = root / name
         if path.is_file():
             artifacts[name] = dict(path=str(path), sha256=sha256(path), size_bytes=path.stat().st_size)
-    result = dict(schema='PRIMS-F.accepted_conservation.v1', run_dir=str(root),
+    result = dict(schema='PRIMS-F.accepted_conservation.v2', run_dir=str(root),
                   analyzer_sha256=sha256(__file__), artifacts=artifacts, status=status, ledger=ledger, steps=steps,
                   limits=['The balance criteria are separate from arithmetic-contract verification.',
                           'Mass residuals are measured nonlinear-solve defects, never balance corrections.',
