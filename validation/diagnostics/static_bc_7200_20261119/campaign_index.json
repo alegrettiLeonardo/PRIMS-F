@@ -1,0 +1,51 @@
+{
+  "schema": "PRIMS-F.static_bc_extension_evidence.v1",
+  "source_freeze": "69813ee70551fa4a3f075919aeafc45de9693f11",
+  "binary_sha256": "7442291fd6cdc311627e79500dc5a4804813b42c7bf4daecf88b4b8b2322288a",
+  "external_root": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200",
+  "artifacts": {
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/plan.json": "db255b1e67f49534a64d65b359ed3f72e563ff0feb7196cdc44cb5012070887d",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/seal.json": "efa246d716035ba9f80695c6c9fcaa11dcdc4616b190d7ff086590941b1331ec",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/execution_index.json": "7ddb86a6dd3558538bb82d11c1cd07f9dcdd95dbc16b363234118ec070960571",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/analysis/aggregate.json": "3003d4f44af4bb4db223e01dc2af3214d4aae158975c3bc7d0a28d2f9adb0529",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/boundary_audit_index.json": "9b5ed19ccf48b0851670c09152cf5dc37b935daca98a24527c34a1e147093cd5",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/cycle_analysis_index.json": "3915a42c802497d961c42a55d978fab70456e878cee1ea63a4da0094f67f68e9",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/metrics_7200.json": "d6107e2f44919a92e9d3e0ef0d04a3671a6be0d4519012922bd11bdf3b6b74bc"
+  },
+  "cases": [
+    {
+      "name": "D_OSC_bc_Ps_plus_T7200",
+      "previous_run": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_Ps_plus",
+      "reference_parameter_changes": [
+        "out_dir",
+        "time_dim"
+      ],
+      "deck_sha256": "6fe883c90b70d7a8ab1c96ffeca0434c93d346d68018410fb27f514b6f311c37",
+      "manifest_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/runs/D_OSC_bc_Ps_plus_T7200/manifest.json",
+      "manifest_sha256": "23b4a7a1a3ee88f6484077b318507cfc231e657b663d183a09d052d298f98809"
+    },
+    {
+      "name": "D_OSC_bc_jg_plus_T7200",
+      "previous_run": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static/runs/D_OSC_bc_jg_plus",
+      "reference_parameter_changes": [
+        "out_dir",
+        "time_dim"
+      ],
+      "deck_sha256": "3c121798de429224a463855d11c9829696bf3ee8f5bdf19112c07d589c5c8d59",
+      "manifest_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/runs/D_OSC_bc_jg_plus_T7200/manifest.json",
+      "manifest_sha256": "676fba47b28791f8c8bb7e6850736eec6a06064831646f16eab6e447838f9844"
+    }
+  ],
+  "analysis_tools": {
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/analysis_tools/manifest.json": "3f393252045ba76c43a6dd16a6a0f630ebdc62f0370b2562496e98c149176f2f",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/phase_analysis_tools/manifest.json": "9e0a78903d2c6cb0523d35a89096601862144aa01072b2ae35b81ecdd8b2a5e9",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/boundary_audit_tools/manifest.json": "c6bb89b489d56908fd545b13e3daee3c56967cd747eacf3dd1df76926eb6f3ca",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/cycle_analysis_tools/manifest.json": "1348bdaa5a76826f83a4cb4aa5db6851d610589e3ff7863df24d49246f60fe38"
+  },
+  "limits": [
+    "Preserve the 3600s cohort and its unresolved accommodation flags.",
+    "Ps+ now meets the numerical cyclic-comparison criteria.",
+    "jg+ has no resolved cycles and fails five strict inventory-normalized balances; arithmetic and processed-mass criteria pass.",
+    "The separately authorized tolerance study will not replace these common-control results."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "PRIMS-F.static_bc_solver_counters.v1",
+  "source": "Exact run_status objects from the two completed manifests; no counter rescaling.",
+  "runs": [
+    {
+      "name": "D_OSC_bc_jg_plus_T7200",
+      "tol_res": 1e-08,
+      "tol_inc": 1e-08,
+      "manifest_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/runs/D_OSC_bc_jg_plus_T7200/manifest.json",
+      "manifest_sha256": "676fba47b28791f8c8bb7e6850736eec6a06064831646f16eab6e447838f9844",
+      "run_status": {
+        "status": 0.0,
+        "reached_time_s": 7200.000000000001,
+        "requested_time_s": 7200.000000000001,
+        "accepted_steps": 57622.0,
+        "rejected_steps": 0.0,
+        "last_rejection_status": 0.0,
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": 841.9896520000001,
+        "wall_seconds": 874.707519903,
+        "newton_iterations_total": 62576.0,
+        "jacobian_evaluations_total": 62576.0,
+        "residual_evaluations_total": 106103.0,
+        "linear_solves_total": 43527.0,
+        "backtrack_trials_total": 43527.0,
+        "prepare_calls_total": 57622.0
+      },
+      "executor_wall_seconds": 875.0952372409956
+    },
+    {
+      "name": "D_OSC_bc_jg_plus_T7200_tolres1e10",
+      "tol_res": 1e-10,
+      "tol_inc": 1e-08,
+      "manifest_path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_tolres1e10_7200/runs/D_OSC_bc_jg_plus_T7200_tolres1e10/manifest.json",
+      "manifest_sha256": "a67c56ddcb43aa8e230f974906e2659927389f8b59935454054fcafce880e8dd",
+      "run_status": {
+        "status": 0.0,
+        "reached_time_s": 7200.000000000001,
+        "requested_time_s": 7200.000000000001,
+        "accepted_steps": 57622.0,
+        "rejected_steps": 0.0,
+        "last_rejection_status": 0.0,
+        "termination_reason": "COMPLETED",
+        "cpu_seconds": 990.3407179999999,
+        "wall_seconds": 992.968695606,
+        "newton_iterations_total": 71806.0,
+        "jacobian_evaluations_total": 71806.0,
+        "residual_evaluations_total": 143106.0,
+        "linear_solves_total": 71300.0,
+        "backtrack_trials_total": 71300.0,
+        "prepare_calls_total": 57622.0
+      },
+      "executor_wall_seconds": 993.1510965729976
+    }
+  ]
+}

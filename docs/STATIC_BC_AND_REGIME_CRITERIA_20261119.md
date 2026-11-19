@@ -73,6 +73,19 @@ e a ausência de ciclos resolvidos jg+, além das quatro comparações periódic
 que satisfizeram os critérios numéricos. As extensões de 7200 s têm plano e
 selagem separados; o pacote de 3600 s não será substituído.
 
+As [extensões de 7200 s](../validation/diagnostics/static_bc_7200_20261119/README.md)
+terminaram: Ps+ acomodou e passou os balanços; jg+ continuou sem ciclos
+resolvidos e reprovou cinco balanços por inventário, embora a identidade
+aritmética passasse. Um [estudo isolado de tol_res](../validation/diagnostics/static_bc_tolerance_20261119/README.md)
+alterou apenas 1e-8 para 1e-10, mantendo tol_inc=1e-8 e os demais controles:
+os seis balanços passaram em 7200 s, com pior relativo ao inventário
+3,3827e-8, contra 1,0160e-4 antes. O FAIL original permanece na seleção dos
+seis eixos físicos. O estudo de tolerância não substitui esse caso nem
+produz período qualificado, prova de estabilidade física ou garantia de
+conservação em durações arbitrárias. A qualificação reportada se restringe
+aos critérios executados na malha fixa; não implica convergência de malha
+ou passo das sensibilidades.
+
 ### Compatibilidade do observável alpha_p e da pressão
 
 Baliño2010/p.652 chama alpha_p exp de fração de vazio experimental no

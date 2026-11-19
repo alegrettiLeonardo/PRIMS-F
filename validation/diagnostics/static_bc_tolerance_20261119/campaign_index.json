@@ -1,0 +1,33 @@
+{
+  "schema": "PRIMS-F.static_bc_tolerance_evidence.v1",
+  "external_root": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_tolres1e10_7200",
+  "source_freeze": "69813ee70551fa4a3f075919aeafc45de9693f11",
+  "binary_sha256": "7442291fd6cdc311627e79500dc5a4804813b42c7bf4daecf88b4b8b2322288a",
+  "artifacts": {
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_tolres1e10_7200/plan.json": "10e20c5c5e9d05a8a2ef7615433c310aec1ad0555553200b368267f5b5b294d7",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_tolres1e10_7200/seal.json": "fa211a587996e6bbc297aca6af45b4ed573c685662aab76bd7896c99368c6089",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_tolres1e10_7200/execution_index.json": "4d650a7e35d855ec0045a47a0ad09164f8d47ad2fb94523dedfe4146cfc90ee3",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_tolres1e10_7200/analysis/aggregate.json": "ef48e4c736fc174b80706cabcdec637eecac91badaa47c85301b8289df5a2fa5",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_tolres1e10_7200/boundary_audit_index.json": "990e6495d4b220a5cdb4f5726b4772882d83111ae4a62849d1b0b22b7b9eb6e1",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_tolres1e10_7200/cycle_analysis_index.json": "81cd076c5d7c5e002c028c9372b305aa0107108fd5decd3c139a31db9ee79049",
+    "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_tolres1e10_7200/tolerance_comparison.json": "b185376ac6b6afea0e1b232cf39803a2f6487a0bc75b6b3e8bd4d35d141842b2"
+  },
+  "run_manifest": {
+    "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_tolres1e10_7200/runs/D_OSC_bc_jg_plus_T7200_tolres1e10/manifest.json",
+    "sha256": "a67c56ddcb43aa8e230f974906e2659927389f8b59935454054fcafce880e8dd"
+  },
+  "previous_manifest": {
+    "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/runs/D_OSC_bc_jg_plus_T7200/manifest.json",
+    "sha256": "676fba47b28791f8c8bb7e6850736eec6a06064831646f16eab6e447838f9844"
+  },
+  "previous_mass_audit": {
+    "path": "/home/leonardoab/Documentos/PRIMS-F-qualification2-results-20261119/bc_static_ext7200/analysis/D_OSC_bc_jg_plus_T7200/accepted_conservation.json",
+    "sha256": "14034c0dd27ef1281213502e6e7168be71bacd0afade10d8f2369aa147723dac"
+  },
+  "preparer_sha256": "74e54933733733da88f76458b4e5ff3b0e133c9d793633e0ecf4839f183b3b91",
+  "independent_review": [
+    "Sealed operator and binary verified.",
+    "Exact deck and effective metadata differences are out_dir and tol_res; tol_inc1e-8 and duration7200 preserved.",
+    "All prior P2 input hashes were checked; five original inventory failures remain preserved."
+  ]
+}

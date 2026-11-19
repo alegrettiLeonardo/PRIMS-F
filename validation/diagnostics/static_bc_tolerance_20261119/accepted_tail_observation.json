@@ -1,0 +1,24 @@
+{
+  "schema": "PRIMS-F.accepted_tail_observation.v1",
+  "run": "D_OSC_bc_jg_plus_T7200_tolres1e10",
+  "method": "Differences of recorded cumulative linear-solve counts; last observed samples in final300s, no fitted frequency",
+  "input_sha256": {
+    "manifest.json": "a67c56ddcb43aa8e230f974906e2659927389f8b59935454054fcafce880e8dd",
+    "steps.csv": "872105999c84abf4e111b2ee24a7a916dbcbf1915498183e267ca79a2bda9df2",
+    "monitor.csv": "6b9144585e0ba40c79c19ee126c7652506b7f50bc5c3aaef33073b9d6d9b9f67"
+  },
+  "accepted_steps_without_linear_solve": 506,
+  "trailing_no_linear_solve_start_s": 7136.806852763579,
+  "trailing_no_linear_solve_end_s": 7200.000000000001,
+  "tail_residual_norm_range": [
+    1.4235126537340365e-13,
+    9.991732999835805e-11
+  ],
+  "pressure_observation_start_s": 6900.056852763301,
+  "pressure_observation_end_s": 7200.000000000001,
+  "pressure_samples": 2401,
+  "pressure_min_Pa": 264711.26719058695,
+  "pressure_max_Pa": 264711.2675580232,
+  "pressure_peak_to_peak_Pa": 0.0003674362669698894,
+  "interpretation": "Acceptance with no new linear solve and a pressure plateau is a numerical observation at the fixed Newton tolerance, not physical stability or a cycle qualification."
+}
