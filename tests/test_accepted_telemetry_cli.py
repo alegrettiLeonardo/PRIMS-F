@@ -44,7 +44,7 @@ def main():
             env=dict(os.environ, OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1'),
             capture_output=True, text=True, timeout=60)
         (out / (name + '.log')).write_text(process.stdout + process.stderr)
-        status = {k: float(v) for k, v in read_run_status(folder / 'run_status.txt').items()}
+        status = audit.read_status(folder / 'run_status.txt')
         ledger = audit.audit_ledger(folder / 'conservation.csv')
         steps = audit.audit_steps(folder / 'steps.csv', ledger)
         expected = 0 if name in ('sparse', 'frequent') else 7000 if name == 'limited' else None

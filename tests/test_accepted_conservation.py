@@ -50,6 +50,15 @@ def fixture():
 
 
 class AcceptedConservationTests(unittest.TestCase):
+    def test_status_retains_textual_termination_reason(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'run_status.txt'
+            path.write_text('status=6000\ntermination_reason=LINE_SEARCH_EXHAUSTED\naccepted_steps=3\n')
+            result = audit.read_status(path)
+            self.assertEqual(result['status'], 6000)
+            self.assertEqual(result['termination_reason'], 'LINE_SEARCH_EXHAUSTED')
+            self.assertEqual(result['accepted_steps'], 3)
+
     def analyze(self, rows):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'conservation.csv'

@@ -187,6 +187,19 @@ def audit_steps(path, ledger):
                 wall_to_last_accept_s=previous['wall_total_s'] if previous else None)
 
 
+def read_status(path):
+    result = {}
+    for line in Path(path).read_text().splitlines():
+        if '=' not in line:
+            continue
+        key, value = line.split('=', 1)
+        try:
+            result[key.strip()] = float(value)
+        except ValueError:
+            result[key.strip()] = value.strip()
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run-dir', type=Path, required=True)
@@ -197,8 +210,7 @@ def main():
     root = args.run_dir.resolve()
     ledger = audit_ledger(root / 'conservation.csv')
     steps = audit_steps(root / 'steps.csv', ledger)
-    status = dict(line.split('=', 1) for line in (root / 'run_status.txt').read_text().splitlines() if '=' in line)
-    status = {k: float(v) for k, v in status.items()}
+    status = read_status(root / 'run_status.txt')
     if status['accepted_steps'] != ledger['accepted_steps'] or status['reached_time_s'] != ledger['final_time_s']:
         raise ValueError('Final solver status disagrees with accepted ledgers')
     for key, value in steps['last_accepted_counters'].items():

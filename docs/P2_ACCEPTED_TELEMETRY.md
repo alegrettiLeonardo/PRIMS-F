@@ -50,12 +50,15 @@ eventual falha numa série longa exige examinar arredondamento. O critério fís
 de balanço 1e-6 é separado, em inventário inicial e massa absoluta processada;
 escala nula é reportada indisponível, nunca substituída por valor artificial.
 
-Testes específicos: 13 testes Python de sinais/defeitos/contratos e cinco
+Testes específicos: 14 testes Python de sinais/defeitos/contratos e cinco
 contratos CLI curtos (saída esparsa/frequente, término por limite de passos,
 rejeição real e estado final invariável com amostragem). A fixture Fortran FV
 inclui o telescópio por trecho em malha não uniforme, os dois fluxos de junção
 e identidade dos operadores com/sem saída opcional. Logs locais em
-`tmp/p2_cli_v3`, `tmp/p2_unit_tests` e `/tmp/primsf_p2_python.log`.
+`tmp/p2_cli_v3`, `tmp/p2_cli_freeze`, `tmp/p2_unit_tests` e
+`/tmp/primsf_p2_python_final.log`. O parser preserva também o campo textual
+`termination_reason` da telemetria P1; 5/5 smokes foram repetidos com o binário
+congelado `69813ee`, sem alterar esse solver.
 
 ```sh
 python3 -m unittest discover -s tests -p test_accepted_conservation.py -v
