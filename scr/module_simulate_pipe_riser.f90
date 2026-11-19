@@ -19,6 +19,7 @@ module module_simulate_pipe_riser
   implicit none
   private
   public :: pipeline_riser_simulator_t
+  integer,parameter,public :: NEWTON_GLOBALIZATION_FAILURE=6000
   type :: pipeline_riser_simulator_t
     type(sim_config_t) :: cfg
     type(roe_solver_t) :: roe_solver
@@ -456,7 +457,7 @@ contains
     if(present(status))status=code
   end subroutine
 
-  subroutine assemble(this,U,Uold,dt,R,A,B,C,norm,fin,fout,status,with_jac,base_mass_flux)
+  subroutine assemble(this,U,Uold,dt,R,A,B,C,norm,fin,fout,status,with_jac,base_mass_flux,failure_index,failure_stage)
     class(pipeline_riser_simulator_t),intent(in)::this
     real(wp),intent(in)::U(:,:),Uold(:,:),dt
     real(wp),intent(out)::R(:,:),A(:,:,:),B(:,:,:),C(:,:,:),norm,fin(3),fout(3)
@@ -465,17 +466,21 @@ contains
     ! Phase fluxes actually inserted in the residual: column 1 leaves the
     ! pipe, column 2 enters the riser. Keep both; never impose equality here.
     real(wp),intent(out),optional::base_mass_flux(2,2)
+    integer,intent(out),optional::failure_index
+    character(len=*),intent(out),optional::failure_stage
     integer::lo,hi,n,i,k,l,q,code,cp,cm
     real(wp)::v(6),f(3),s(3),fj(3,3),sj(3,3),fm(3),fp(3),jl(3,3),jr(3,3),kl(3,3),kr(3,3)
     real(wp)::up(3),um(3),plus(3),minus(3),h,jb(3,3),scale(3),ds
     lo=first_physical_cell(this%cfg);hi=last_physical_cell(this%cfg);n=hi-lo+1
     R=0;A=0;B=0;C=0;status=0;norm=huge(1.0_wp)
+    if(present(failure_index))failure_index=0
+    if(present(failure_stage))failure_stage='NONE'
     if(present(base_mass_flux))base_mass_flux=ieee_value(0.0_wp,ieee_quiet_nan)
     do i=lo,hi
       l=i-lo+1;ds=this%cfg%cell_width(i)
       call this%point_state(U(i,:),this%cfg%thetav(i),v,f,s,fj,sj,code,with_jac,cell_closure(this,this%cfg%thetav(i),i))
       if(code/=0)then
-        status=1000+code;return
+        call failure(1000+code,i,'CELL');return
       endif
       R(:,l)=U(i,:)-Uold(i,:)-dt*s
       if(with_jac)then
@@ -499,7 +504,7 @@ contains
         call this%face_pair(U(i,:),U(i+1,:),this%cfg%thetav(i),this%cfg%thetav(i+1),fm,fp,code,left_cell=i)
       endif
       if(code/=0)then
-        status=2000+code;return
+        call failure(2000+code,i,'FACE');return
       endif
       if(present(base_mass_flux))then
         if(i==lo+this%cfg%N_pipe-1)then
@@ -522,7 +527,7 @@ contains
       endif
       call boundary_flux(U(i,:),this%cfg%thetav(i),this%cfg,q==1,f,code)
       if(code/=0)then
-        status=3000+code;return
+        call failure(3000+code,i,'BOUNDARY');return
       endif
       if(q==1)then
         fin=f
@@ -540,7 +545,7 @@ contains
           call boundary_flux(up,this%cfg%thetav(i),this%cfg,q==1,plus,cp)
           call boundary_flux(um,this%cfg%thetav(i),this%cfg,q==1,minus,cm)
           if(cp/=0.or.cm/=0)then
-            status=3090;return
+            call failure(3090,i,'BOUNDARY_JAC');return
           endif
           jb(:,k)=(plus-minus)/(2*h)
         enddo
@@ -553,7 +558,15 @@ contains
       scale=[max(Uold(i,1),1e-3_wp),max(Uold(i,2),1e-7_wp),max(abs(Uold(i,3)),1.0_wp)]
       norm=max(norm,maxval(abs(R(:,l))/scale))
     enddo
-    if(.not.ieee_is_finite(norm))status=4000
+    if(.not.ieee_is_finite(norm))call failure(4000,0,'RESIDUAL')
+  contains
+    subroutine failure(code_at_site,location,stage)
+      integer,intent(in)::code_at_site,location
+      character(len=*),intent(in)::stage
+      status=code_at_site
+      if(present(failure_index))failure_index=location
+      if(present(failure_stage))failure_stage=stage
+    end subroutine failure
   end subroutine
 
   subroutine simulate(this,U,vns,thetav,T,max_iter,it_target,use_it_target,it_p,dt_fac_min,dt_fac_max, &
@@ -571,7 +584,12 @@ contains
     real(wp)::next_output,next_field,last_print,wall0,wall1,remaining,dt_next
     integer::lo,hi,n,step,it,code,ls,info,maxsteps,rej,unitmon,unitfield,unitstat,i,k,lastcode,finstatus
     logical::accepted,converged,requested_full_jac,diagnose_burr15
-    integer::unitburr15,unitsteps,unitmass,ib,initial_flux_status
+    integer::unitburr15,unitsteps,unitmass,unittrials,ib,initial_flux_status
+    integer::last_trial_status,last_trial_index,last_backtrack
+    real(wp)::last_lambda,proposal_norm
+    logical::linearized_fd
+    character(len=32)::termination_reason
+    character(len=16)::last_trial_stage
     integer::jacobian_evaluations,residual_evaluations,linear_solves,backtrack_trials,newton_iterations,prepare_calls
     integer(int64)::clock_start,clock_now,clock_rate
     real(wp)::base_mass_flux(2,2),trial_base_mass_flux(2,2),accepted_base(2,2),accepted_in(2),accepted_out(2)
@@ -598,6 +616,10 @@ contains
     if(dt<=0)dt=min(0.01_wp/this%cfg%omega_t,this%max_dt)
     tcur=0;step=0;rej=0;in_sum=0;out_sum=0;lastcode=0;finstatus=0
     next_output=0;next_field=0;last_print=-huge(1.0_wp)
+    termination_reason='COMPLETED'
+    last_trial_status=0;last_trial_index=0;last_trial_stage='NONE';last_backtrack=0
+    last_lambda=0.0_wp;proposal_norm=ieee_value(0.0_wp,ieee_quiet_nan)
+    linearized_fd=requested_full_jac
     ib=lo+this%cfg%N_pipe-1
     base_sum=0;base_abs=0;in_abs=0;out_abs=0;mass_residual=0;mass_residual_sum=0;step_balance=0
     accepted_in=ieee_value(0.0_wp,ieee_quiet_nan);accepted_out=accepted_in
@@ -647,6 +669,9 @@ contains
       'mass_residual_l_kg,mass_residual_g_kg,mass_residual_l_pipe_kg,mass_residual_g_pipe_kg,mass_residual_l_riser_kg,mass_residual_g_riser_kg,'// &
       'mass_residual_sum_l_kg,mass_residual_sum_g_kg,mass_residual_sum_l_pipe_kg,mass_residual_sum_g_pipe_kg,'// &
       'mass_residual_sum_l_riser_kg,mass_residual_sum_g_riser_kg'
+    open(newunit=unittrials,file=trim(this%cfg%out_dir)//'/rejected_proposals.csv',status='replace')
+    write(unittrials,'(a)') 'time_s,attempt_dt_s,iteration,backtrack,lambda,linearization_norm,proposal_norm,'// &
+      'assembly_status,extended_index,stage,full_jacobian'
     ! Initial fluxes are diagnostic only and do not contribute to an integral.
     ! An unavailable diagnostic must not alter the solver's acceptance path.
     call boundary_flux(U(lo,:),thetav(lo),this%cfg,.true.,fin,code)
@@ -660,6 +685,7 @@ contains
     if(code/=0)then
       initial_flux_status=3000+code
       finstatus=code
+      termination_reason='INITIAL_OUTLET'
     else
       call write_monitor(0.0_wp,0)
       call write_field()
@@ -668,10 +694,15 @@ contains
     do while(tcur<T.and.step<maxsteps.and.finstatus==0)
       remaining=T-tcur;dt=min(dt,remaining,this%max_dt)
       old=U;trial=U;accepted=.false.;converged=.false.
+      termination_reason='COMPLETED'
+      last_trial_status=0;last_trial_index=0;last_trial_stage='NONE';last_backtrack=0
+      last_lambda=0.0_wp;proposal_norm=ieee_value(0.0_wp,ieee_quiet_nan)
+      linearized_fd=this%cfg%jac_dissipation_fd
       prepare_calls=prepare_calls+1
       call this%prepare_dissipation(old,code)
       if(code/=0)then
         finstatus=8000+code
+        termination_reason='PREPARE_DISSIPATION'
         exit
       endif
       do it=1,this%cfg%newton_max
@@ -679,10 +710,11 @@ contains
         ! A frozen |A| is an inexact Newton matrix. Upgrade to the complete
         ! flux derivative when its convergence slows; the residual never changes.
         if(it>=7)this%cfg%jac_dissipation_fd=.true.
+        linearized_fd=this%cfg%jac_dissipation_fd
         jacobian_evaluations=jacobian_evaluations+1;residual_evaluations=residual_evaluations+1
         call this%assemble(trial,old,dt,r,a,b,c,norm,fin,fout,code,.true.,base_mass_flux)
         if(code/=0)then
-          lastcode=code;exit
+          lastcode=code;termination_reason='ASSEMBLY';exit
         endif
         if(norm<=this%cfg%tol_res)then
           call capture_mass_residual(r)
@@ -691,7 +723,7 @@ contains
         linear_solves=linear_solves+1
         call this%ti%solve_block_tridiagonal_3x3(a,b,c,-r,dx,info)
         if(info/=0)then
-          lastcode=5000+info;exit
+          lastcode=5000+info;termination_reason='LINEAR_SOLVE';exit
         endif
         lambda=1
         do i=lo,hi
@@ -706,7 +738,11 @@ contains
             work(i,:)=trial(i,:)+lambda*dx(:,i-lo+1)
           enddo
           residual_evaluations=residual_evaluations+1;backtrack_trials=backtrack_trials+1
-          call this%assemble(work,old,dt,rt,az,bz,cz,nt,fi2,fo2,code,.false.,trial_base_mass_flux)
+          call this%assemble(work,old,dt,rt,az,bz,cz,nt,fi2,fo2,code,.false.,trial_base_mass_flux, &
+            last_trial_index,last_trial_stage)
+          last_trial_status=code;last_backtrack=ls;last_lambda=lambda
+          proposal_norm=ieee_value(0.0_wp,ieee_quiet_nan)
+          if(code==0)proposal_norm=nt
           if(code==0)then
             if(nt<norm*(1-1e-4_wp*lambda).or.nt<=this%cfg%tol_res)then
               accepted=.true.;exit
@@ -714,6 +750,9 @@ contains
           else
             lastcode=code
           endif
+          write(unittrials,'(2(es25.16e3,","),2(i0,","),3(es25.16e3,","),2(i0,","),a,",",l1)') &
+            tcur*this%cfg%omega_t,dt*this%cfg%omega_t,it,ls,lambda,norm,proposal_norm,code, &
+            last_trial_index,trim(last_trial_stage),linearized_fd
           lambda=lambda*0.5_wp
         enddo
         if(.not.accepted)then
@@ -721,8 +760,13 @@ contains
             this%cfg%jac_dissipation_fd=.true.
             cycle
           endif
-          lastcode=6000;exit
+          lastcode=NEWTON_GLOBALIZATION_FAILURE
+          termination_reason='NEWTON_GLOBALIZATION_FAILURE'
+          exit
         endif
+        ! For an exhausted Newton budget, keep the point that generated
+        ! the saved residual and Jacobian for offline reconstruction.
+        if(it==this%cfg%newton_max.and.nt>this%cfg%tol_res)exit
         trial=work
         if(nt<=this%cfg%tol_res)then
           norm=nt;fin=fi2;fout=fo2;base_mass_flux=trial_base_mass_flux
@@ -731,6 +775,10 @@ contains
         endif
       enddo
       if(.not.converged)then
+        if(termination_reason=='COMPLETED')then
+          lastcode=6100
+          termination_reason='MAX_NEWTON'
+        endif
         call write_rejected_state()
         rej=rej+1;dt=dt*this%dt_shrink
         if(dt<this%min_dt)then
@@ -779,10 +827,13 @@ contains
       if(it>=max(8,this%cfg%newton_max-4))dt_next=dt*0.8_wp
       dt=min(dt_next,this%max_dt)
     enddo
-    if(tcur<T.and.finstatus==0)finstatus=7000
+    if(tcur<T.and.finstatus==0)then
+      finstatus=7000
+      termination_reason='MAX_TIME_STEPS'
+    endif
     call write_field()
     if(finstatus/=0)call write_monitor(0.0_wp,0)
-    close(unitmon);close(unitfield);close(unitsteps);close(unitmass)
+    close(unitmon);close(unitfield);close(unittrials);close(unitsteps);close(unitmass)
     if(diagnose_burr15)close(unitburr15)
     open(newunit=unitstat,file=trim(this%cfg%out_dir)//'/run_status.txt',status='replace')
     write(unitstat,'(a,i0)') 'status=',finstatus
@@ -791,6 +842,7 @@ contains
     write(unitstat,'(a,i0)') 'accepted_steps=',step
     write(unitstat,'(a,i0)') 'rejected_steps=',rej
     write(unitstat,'(a,i0)') 'last_rejection_status=',lastcode
+    write(unitstat,'(a,a)') 'termination_reason=',trim(termination_reason)
     call cpu_time(wall1)
     write(unitstat,'(a,es24.16)') 'cpu_seconds=',wall1-wall0
     call system_clock(clock_now)
@@ -847,6 +899,17 @@ contains
       do ii=lo,hi
         write(ju,'(i8,11es25.16)')ii,thetav(ii),this%cfg%cell_width(ii),old(ii,:),trial(ii,:),r(:,ii-lo+1)
       enddo
+      close(ju)
+      open(newunit=ju,file=trim(this%cfg%out_dir)//'/last_rejected_iteration.txt',status='replace')
+      write(ju,'(a,a)')'reason=',trim(termination_reason)
+      write(ju,'(a,i0)')'newton_iteration=',min(it,this%cfg%newton_max)
+      write(ju,'(a,i0)')'backtrack=',last_backtrack
+      write(ju,'(a,l1)')'jac_dissipation_fd=',linearized_fd
+      write(ju,'(a,es25.16e3)')'lambda=',last_lambda
+      write(ju,'(a,i0)')'proposal_status=',last_trial_status
+      write(ju,'(a,i0)')'proposal_index=',last_trial_index
+      write(ju,'(a,a)')'proposal_stage=',trim(last_trial_stage)
+      write(ju,'(a,es25.16e3)')'proposal_norm=',proposal_norm
       close(ju)
     end subroutine
     subroutine write_monitor(dts,nit)
