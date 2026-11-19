@@ -140,3 +140,28 @@ de status/sele??o, sem `abs`, clipping ou troca autom?tica de correla??o.
 
 Esta ? verifica??o independente da f?rmula e das conven??es. N?o ? valida??o
 experimental da transi??o nem demonstra??o da adequa??o da Eq.15 em transientes.
+
+## Confer?ncia complementar: disserta??o e Bali?o2010
+
+- `Dissertacao_Leonardo.pdf`, vers?o local de agosto/2025, 160 p?ginas PDF,
+  SHA256 `dcc6c069d89099950fe737112b331a678727cc3c6929deb4f105072f0f0e8e81`.
+  P.61/PDF63 explicita `Sl=gamma*pi*D` e `Si=gamma_i*pi*D` ap?s a Eq.3.14.
+  Ap?ndice E, pp.157?158/PDF159?160, Eqs.12.1?12.4 e 12.8, deduz a ?rea do
+  segmento circular e `dAl/dh=Si`. H? discrep?ncia interna: Eq.3.16/p.62 imprime
+  `sin(pi*gamma)`, enquanto Eq.12.3/p.157 deduz corretamente `sin(2*pi*gamma)`.
+  A refer?ncia independente de altura usa esta ?ltima geometria, verific?vel
+  diretamente pela ?rea circular, sem copiar a express?o inconsistente.
+  O resumo/PDF15 e o Ap?ndice E/p.157 assumem oleoduto estratificado; as se??es
+  3.3.1?3.3.2, pp.61?62, apresentam leis distintas de fechamento. Nessas passagens
+  conferidas n?o h? regra para retorno n?o estratificado ? estratificado.
+- Bali?o et al. (2010), *Modeling and simulation of severe slugging in air?water
+  pipeline?riser systems*, [DOI](https://doi.org/10.1016/j.ijmultiphaseflow.2010.04.003),
+  SHA256 local `ce04a2d1b79d3a10d442fbaeb3863e4639c8508bd34ba9e1a414ae03e5479e2b`.
+  P.645/PDF3 assume escoamento estratificado no oleoduto e despreza in?rcia no
+  riser (NPW). A Eq.7 ? o balan?o estratificado avaliado no estado estacion?rio;
+  distingue os per?metros l?quido, g?s e interface. Essa formula??o n?o fornece
+  um discriminante din?mico Burr15 nem uma lei reversa de troca de fechamento.
+
+Essas confer?ncias refor?am a conven??o geom?trica e delimitam o papel dos
+modelos consultados. N?o constituem uma afirma??o de inexist?ncia universal de
+modelos de retorno na literatura.
