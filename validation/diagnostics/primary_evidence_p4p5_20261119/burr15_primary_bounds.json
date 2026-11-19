@@ -1,0 +1,85 @@
+{
+  "schema": "PRIMS-F.burr15_primary_bounds.v1",
+  "source": {
+    "doi": "10.3390/fluids5030101",
+    "page": 10,
+    "figure": "9(a,b)",
+    "pdf_sha256": "960446bbdecef9acd5687978d8918390dde00ac58f045c2a00968144abbb7887",
+    "uncertainty_source": "pp.5-6, Table4; smooth observation p.7"
+  },
+  "analyst_assumptions": {
+    "height_accuracy_m": 0.0005,
+    "maximum_relative_jg_uncertainty": 0.07,
+    "maximum_relative_jl_uncertainty": 0.03,
+    "density_ratio_upper": 1.0,
+    "uncertainty_kind": "conservative envelope; not statistical CI"
+  },
+  "results": [
+    {
+      "id": "figure9a_third_marker_from_left",
+      "jl_nominal_m_s": 0.03,
+      "xv_reading_interval": [
+        0.96,
+        0.967
+      ],
+      "alpha_reading_interval": [
+        0.76,
+        0.8
+      ],
+      "diameter_m": 0.06,
+      "gravity_m_s2": 9.81,
+      "alpha_envelope": [
+        0.7493896704605403,
+        0.8106103295394598
+      ],
+      "jg_envelope_m_s": [
+        0.6495119999999993,
+        0.9688460909090901
+      ],
+      "ug_lower_m_s": 0.801262920457741,
+      "burr15_critical_upper_m_s": 0.45478743597268734,
+      "signed_margin_lower_m_s": 0.3464754844850536,
+      "squared_margin_lower_m2_s2": 0.4351906557818569,
+      "literal_detector_loss_for_entire_envelope": true,
+      "observed_pattern": "stratified, smooth interface",
+      "diameter_needed_to_remove_this_bound_m": 0.1862449153913007
+    },
+    {
+      "id": "figure9b_third_marker_from_left",
+      "jl_nominal_m_s": 0.04,
+      "xv_reading_interval": [
+        0.948,
+        0.954
+      ],
+      "alpha_reading_interval": [
+        0.71,
+        0.76
+      ],
+      "diameter_m": 0.06,
+      "gravity_m_s2": 9.81,
+      "alpha_envelope": [
+        0.6993896704605402,
+        0.7706103295394597
+      ],
+      "jg_envelope_m_s": [
+        0.6578390769230763,
+        0.9142638260869558
+      ],
+      "ug_lower_m_s": 0.8536598222297657,
+      "burr15_critical_upper_m_s": 0.4067845629211421,
+      "signed_margin_lower_m_s": 0.44687525930862354,
+      "squared_margin_lower_m2_s2": 0.5632614114584105,
+      "literal_detector_loss_for_entire_envelope": true,
+      "observed_pattern": "stratified, smooth interface",
+      "diameter_needed_to_remove_this_bound_m": 0.26423601238966227
+    }
+  ],
+  "limits": [
+    "Graph rectangles are manual readings, not tabulated raw points.",
+    "No reversal threshold, transition location or regime switching is inferred.",
+    "The geometric diameter is the reported nominal 60 mm.",
+    "This is a contradiction check of literal Burr15 with liquid wall perimeter.",
+    "It neither selects a replacement formula nor validates the full simulator."
+  ],
+  "analyzer_sha256": "825a8d943b5ff8a4204ecf7f0870ca585f3201514d37effffe40b21e84b3c9b5"
+}
