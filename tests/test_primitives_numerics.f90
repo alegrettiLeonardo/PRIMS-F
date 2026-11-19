@@ -379,10 +379,19 @@ contains
       call compute_primitive_variables(uu(1),uu(2),uu(3),theta,cgn,cln,1._wp,1._wp,d,pi*d*d/4, &
         rough,grav,mul,mug,sig,0._wp,u_scale,rho_scale,1e-12_wp,1e-13_wp,100_i4, &
         qq(1),qq(2),qq(3),qq(4),qq(5),qq(6),regime,status=istat,closure_id=3)
-      call check(istat==PRIMITIVE_NO_ROOT,'SS3 liquid reversal has explicit absence of cocurrent root')
+      call check(istat==PRIMITIVE_NO_PHYSICAL_ROOT,'positive lower bound excludes a cocurrent SS3 root')
       call check(.not.ieee_is_finite(qq(5)).and..not.ieee_is_finite(qq(6)), &
                  'SS3 unsupported reversal does not fabricate phase velocities')
     enddo
+    ! Full Newton proposal at extended cell 69, t=97.1318523387 s,
+    ! frozen 8a85e37 run. The independent 80-digit certificate bounds the
+    ! entire q=[0,1] residual below by +5.984975257e-7 m/s.
+    uu=[.361748887683525366_wp,.00124300510327740479_wp,.00161735202739144292_wp]
+    call compute_primitive_variables(uu(1),uu(2),uu(3),.901238667226846091_wp,cgn,cln,1._wp,1._wp, &
+      d,pi*d*d/4,rough,grav,mul,mug,sig,0._wp,u_scale,rho_scale,1e-12_wp,1e-13_wp,100_i4, &
+      qq(1),qq(2),qq(3),qq(4),qq(5),qq(6),regime,status=istat,closure_id=3)
+    call check(istat==PRIMITIVE_NO_PHYSICAL_ROOT,'cell 69 full proposal excluded over the momentum interval')
+    call check(abs(qq(1)-.638271663623163248_wp)<1e-12_wp,'cell 69 has positive inventories in both phases')
   end subroutine bhagwat_domain_boundary_regression
   subroutine derivative_check(uu,theta,model)
     real(wp),intent(in)::uu(3),theta

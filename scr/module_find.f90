@@ -3,7 +3,7 @@ module module_find
   !! failures. The regime index (0=stratified, 1=drift flux) is NOT a status.
   !! EOS: rho_g=P/Cg**2, rho_l=rho_l0+(P-P_l0)/Cl**2.
   use mod_kinds, only: wp, i4
-  use module_closure_law, only: lei_fechamento_or_ndim_simp, CdUd_bendiksen,is_chexal,chexal_branch_id
+  use module_closure_law, only: lei_fechamento_or_ndim_simp, CdUd_bendiksen,CdUd_bhagwat,is_chexal,chexal_branch_id
   use module_chexal_1992, only: chexal_recover_velocities
   use, intrinsic :: ieee_arithmetic, only: ieee_is_finite, ieee_value, ieee_quiet_nan
   implicit none
@@ -11,8 +11,11 @@ module module_find
   public :: compute_primitive_variables, pressure_fun_uj, alpha_fun_uj, set_stability_params
   public :: PRIMITIVE_OK, PRIMITIVE_DOMAIN, PRIMITIVE_EOS, PRIMITIVE_CLOSURE
   public :: PRIMITIVE_NO_ROOT, PRIMITIVE_SINGULAR, PRIMITIVE_UNSUPPORTED_SWITCH
+  public :: PRIMITIVE_ROOT_SEARCH_FAILURE, PRIMITIVE_NO_PHYSICAL_ROOT, PRIMITIVE_INADMISSIBLE_ROOT
   integer(i4), parameter :: PRIMITIVE_OK=0, PRIMITIVE_DOMAIN=1, PRIMITIVE_EOS=2
-  integer(i4), parameter :: PRIMITIVE_CLOSURE=3, PRIMITIVE_NO_ROOT=4, PRIMITIVE_SINGULAR=5
+  integer(i4), parameter :: PRIMITIVE_CLOSURE=3, PRIMITIVE_ROOT_SEARCH_FAILURE=4, PRIMITIVE_SINGULAR=5
+  integer(i4), parameter :: PRIMITIVE_NO_ROOT=PRIMITIVE_ROOT_SEARCH_FAILURE ! Legacy name for an unproved search failure.
+  integer(i4), parameter :: PRIMITIVE_NO_PHYSICAL_ROOT=7, PRIMITIVE_INADMISSIBLE_ROOT=8
   integer(i4), parameter :: PRIMITIVE_UNSUPPORTED_SWITCH=6
   logical, save :: requested_unqualified_switch=.false.
 contains
@@ -192,7 +195,11 @@ contains
     if (cid==3) then
       ! The verified Bhagwat transcription is co-current only. Bound the
       ! SOLVER variable, not U: momentum then gives the other speed >=0.
-      if (u3<=0.0_wp) return
+      if (u3<=0.0_wp) then
+        ! With both inventories positive, j>0 and u_l,u_g>=0 require u3>0.
+        if (present(status)) status=PRIMITIVE_NO_PHYSICAL_ROOT
+        return
+      end if
       if (solve_gas) then
         velocity_upper=u3/u2
       else
@@ -256,8 +263,13 @@ contains
       end if
       width=2.0_wp*width
     end do
-    if (present(status)) status=PRIMITIVE_NO_ROOT
-    if (.not. bracketed) return
+    if (present(status)) status=PRIMITIVE_ROOT_SEARCH_FAILURE
+    if (.not. bracketed) then
+      if (present(status).and.cid==3) then
+        if (bhagwat_positive_interval()) status=PRIMITIVE_NO_PHYSICAL_ROOT
+      end if
+      return
+    end if
     scale=max(abs(flo),abs(fhi),tiny(1.0_wp))
     ftol=max(128.0_wp*epsilon(1.0_wp),min(abs(tol),1.0e-11_wp))*scale
     do it=1,min(maxit,100_i4)
@@ -305,53 +317,82 @@ contains
       if (code/=0) return
     end do
   contains
-    subroutine residual(v,f,istat)
+    logical function bhagwat_positive_interval() result(excluded)
+      !! Sufficient lower bound for Phi/alpha on the entire co-current
+      !! momentum interval of the uphill Bhagwat (Azevedo 2015) branch.
+      !! q is the gas contribution to total momentum, divided by u3.
+      !! j(q) interpolates j_min and j_max. When the Colebrook root y>=1,
+      !! C01>=0 and C0 is bounded below by C0(q=1). For the low-q part
+      !! it suffices that C0>0 and u_g<Ud/w_u. No scan proves exclusion.
+      real(wp) :: j_min,j_max,ug_max,cd_end,drift,q_cut,re_min,re_cut,rough_term,margin
+      integer :: closure_status
+      excluded=.false.
+      if(theta<0.0_wp)return ! C4 may change within the interval.
+      ug_max=u3/u2
+      call CdUd_bhagwat(alpha,rhol,rhog,0.0_wp,ug_max,theta,D,AREA,EPS,G,MUL,MUG,sigma, &
+                       w_u,w_rho,tol,cd_end,drift,closure_status)
+      if(closure_status/=0)return
+      drift=drift/w_u
+      if(drift<=0.0_wp.or.ug_max<=0.0_wp)return
+      j_min=(1.0_wp-alpha)*(u3/u1)
+      j_max=alpha*ug_max
+      if(j_min<=0.0_wp.or.j_min>j_max)return
+      q_cut=min(0.5_wp,0.5_wp*(drift/ug_max))
+      re_min=rhol*w_rho*j_min*w_u*D/MUL
+      re_cut=rhol*w_rho*(j_min+q_cut*(j_max-j_min))*w_u*D/MUL
+      rough_term=EPS/(3.7_wp*D)
+      ! H(y)=y+4*log10(rough_term+1.256*y/Re) increases with y
+      ! and decreases with Re. These comparisons give strict lower
+      ! bounds y>1/3 and y>1 without evaluating log near its endpoint.
+      ! B>=2**(-.2) and C01>-.6 then imply C0>0 everywhere.
+      if((10.0_wp**(-1.0_wp/12.0_wp)-rough_term)*re_min<=1.256_wp/3.0_wp)return
+      if((10.0_wp**(-0.25_wp)-rough_term)*re_cut<=1.256_wp)return
+      margin=drift+min(0.0_wp,alpha*cd_end-1.0_wp)*ug_max
+      excluded=margin>128.0_wp*epsilon(1.0_wp)*max(1.0_wp,drift,ug_max)
+    end function bhagwat_positive_interval
+
+    subroutine velocity_pair(v,vl,vg)
       real(wp), intent(in) :: v
-      real(wp), intent(out) :: f
-      integer(i4), intent(out) :: istat
-      real(wp) :: vl,vg
+      real(wp), intent(out) :: vl,vg
       if (solve_gas) then
         vg=v; vl=(u3-u2*v)/u1
       else
         vl=v; vg=(u3-u1*v)/u2
       end if
-      if (cid==3) then
-        ! The upper endpoint means the other phase is stationary exactly;
-        ! avoid subtractive roundoff inventing a negative boundary speed.
-        if (v==velocity_upper) then
-          if (solve_gas) then
-            vl=0.0_wp
-          else
-            vg=0.0_wp
-          end if
-        end if
+      if (cid/=3) return
+      ! The exact upper endpoint has the other phase stationary. Avoid
+      ! sign loss from multiplying the rounded quotient back into u3.
+      if (v/=velocity_upper) return
+      if (solve_gas) then
+        vl=0.0_wp
+      else
+        vg=0.0_wp
       end if
+    end subroutine velocity_pair
+
+    subroutine residual(v,f,istat)
+      real(wp), intent(in) :: v
+      real(wp), intent(out) :: f
+      integer(i4), intent(out) :: istat
+      real(wp) :: vl,vg
+      call velocity_pair(v,vl,vg)
       call lei_fechamento_or_ndim_simp(alpha,rhol,rhog,vl,vg,theta,D,AREA,EPS,G,MUL,MUG,sigma, &
                                       w_u,w_rho,tol,f,closure_id=cid,status=istat)
       if (.not. ieee_is_finite(f)) istat=PRIMITIVE_CLOSURE
     end subroutine residual
     subroutine accept_velocity(v)
       real(wp), intent(in) :: v
-      if (solve_gas) then
-        ug=v; ul=(u3-u2*v)/u1
-      else
-        ul=v; ug=(u3-u1*v)/u2
-      end if
-      if (cid==3) then
-        if (v==velocity_upper) then
-          if (solve_gas) then
-            ul=0.0_wp
-          else
-            ug=0.0_wp
-          end if
-        end if
-      end if
-      if (.not. all(ieee_is_finite([ul,ug]))) then
+      call velocity_pair(v,ul,ug)
+      if (present(status)) status=PRIMITIVE_INADMISSIBLE_ROOT
+      if (.not.all(ieee_is_finite([ul,ug]))) then
         ul=nan; ug=nan
-        if (present(status)) status=PRIMITIVE_NO_ROOT
-      else
-        if (present(status)) status=PRIMITIVE_OK
+        return
       end if
+      if (cid==3.and.min(ul,ug)<0.0_wp) then
+        ul=nan; ug=nan
+        return
+      end if
+      if (present(status)) status=PRIMITIVE_OK
     end subroutine accept_velocity
   end subroutine compute_primitive_variables
 end module module_find
