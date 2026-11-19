@@ -1,0 +1,27 @@
+{
+  "observed_utc": "2026-11-18T18:51:33.156332+00:00",
+  "attempts": [
+    {
+      "name": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N201_201_dt0.125",
+      "reason": "execution_session_lost",
+      "observed_utc": "2026-11-18T18:51:33.156332+00:00",
+      "observation": "Executor session 70919 is no longer available (Unknown process id); no solver/runner process is visible; output files stopped changing. Exact termination mechanism is unknown.",
+      "last_monitor_time_s": 1351.556852759955,
+      "last_monitor_mtime_utc": "2026-11-18T18:43:01.124166+00:00",
+      "solver_run_status_written": false,
+      "solver_failure_not_inferred": true,
+      "duration_reached_qualification": "Last persisted monitor sample, not an invented solver-written completion status."
+    },
+    {
+      "name": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.03125",
+      "reason": "execution_session_lost",
+      "observed_utc": "2026-11-18T18:51:33.156332+00:00",
+      "observation": "Executor session 70919 is no longer available (Unknown process id); no solver/runner process is visible; output files stopped changing. Exact termination mechanism is unknown.",
+      "last_monitor_time_s": 1329.8109900001755,
+      "last_monitor_mtime_utc": "2026-11-18T18:43:01.344172+00:00",
+      "solver_run_status_written": false,
+      "solver_failure_not_inferred": true,
+      "duration_reached_qualification": "Last persisted monitor sample, not an invented solver-written completion status."
+    }
+  ]
+}

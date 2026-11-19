@@ -1,6 +1,6 @@
 {
   "schema": "PRIMS-F.reference-benchmark.v1",
-  "status": "D boundary metadata frozen; circular Bhagwat implementation verified against Azevedo/Balino/Burr2015 eq116-128; original2014 full-text audit and SS3 external period conflict unresolved; no experimental raw signals.",
+  "status": "D boundary metadata preserved; Bhagwat circular transcription from Azevedo/Balino/Burr2015 verified. New BBN2010 PDF visually confirms SS3 reported period76s, while D prints26s; discrepancy retained. No raw experimental signals or complete BG2014 audit.",
   "created_UTC": "2026-11-18",
   "sources": {
     "D": {
@@ -33,7 +33,7 @@
       "publisher_url": "https://www.sciencedirect.com/science/article/abs/pii/S0301932210000807",
       "readable_pdf_url": "https://electronicsandbooks.com/edt/manual/Magazine/I/International%20Journal%20of%20Multiphase%20Flow/2010%20Volume%2036/8/643-660.pdf",
       "second_text_url": "https://www.scribd.com/document/897648646/10-1016-j-ijmultiphaseflow-2010-04-003",
-      "retrieval_status": "Indexed full text read in two independent mirrors; direct PDF download and screenshot unavailable (503/timeout), so no visual verification/hash. No original Wordsworth raw time series obtained.",
+      "retrieval_status": "Complete PDF supplied by the user on2026-11-18. Eq78-79,p649/PDF7, Tables3-4,p653/PDF11 and Table5,p654/PDF12 visually verified. Earlier failed web retrieval is superseded. No original Wordsworth raw time series obtained.",
       "printed_to_pdf_page_offset": -642,
       "equations": {
         "standard_flow": "78–79,p649/PDF7",
@@ -41,7 +41,26 @@
         "geometry": "43–48,pp647–648/PDF5–6",
         "properties_geometry": "Section7,p654/PDF12",
         "case_tables": "Table3,p653/PDF11;Table4,p653/PDF11;Table5,p654/PDF12"
-      }
+      },
+      "pdf_local_file": "project_sources/05-Sci-Hub.-Modeling-and-simulation-of-severe-slugging-in-air-water-pipeline-riser-systems-_-International-Journal-of-Multiphase-Flow-2010.pdf",
+      "pdf_sha256": "c60944a348bf516f20ed7fd965cff7aa6b8417b07ef3b4b9433c64d28db8a3a5",
+      "visual_verified_pages": [
+        {
+          "printed": 649,
+          "pdf": 7,
+          "content": "standard flow equations78-79"
+        },
+        {
+          "printed": 653,
+          "pdf": 11,
+          "content": "Tables3-4; SS3 case11 period76s"
+        },
+        {
+          "printed": 654,
+          "pdf": 12,
+          "content": "Table5; Stable counterpart and Section7 properties"
+        }
+      ]
     },
     "BG2014": {
       "authors": [
@@ -78,6 +97,43 @@
       "retrieval_status": "Complete proceedings PDF downloaded; equation page visually verified.",
       "qualification": "Primary application paper transcription of Bhagwat/Ghajar2014, implemented for a circular pipe. Not a complete audit of the original2014 publication or new experimental validation of the D catenary.",
       "equation_page_visual_review": "Verified during audit; source page121/PDF135. Third-party image not redistributed."
+    },
+    "CHEXAL1992": {
+      "authors": [
+        "B. Chexal",
+        "G. Lellouche",
+        "J. Horowitz",
+        "J. Healzer"
+      ],
+      "title": "A void fraction correlation for generalized applications",
+      "journal": "Progress in Nuclear Energy",
+      "volume": 27,
+      "number": 4,
+      "year": 1992,
+      "pages": "255-295",
+      "pdf_local_file": "project_sources/06-chexal1992.pdf",
+      "pdf_sha256": "b0b6b68f5e13fec48e931d89d87f9d65cb9c3bb134235c2307ded24e9c00700e",
+      "countercurrent_scope": "Vertical only; gas upward positive and liquid downward negative,p262/PDF8. Horizontal countercurrent excluded,p264-265,269.",
+      "branch_selection": "Two void-fraction solutions in countercurrent region; desired branch requires pressure-drop or other prior information,p268/PDF14,Eq3-39 to3-41.",
+      "qualification": "Candidate source for a separate audit, not implemented. Do not apply its vertical countercurrent branch to every inclined catenary segment or mix1992/1997 variants.",
+      "further_reading": "docs/CHEXAL_1992_SCOPE.md"
+    },
+    "OZAKI2015": {
+      "authors": [
+        "T. Ozaki",
+        "T. Hibiki"
+      ],
+      "title": "Drift-flux model for rod bundle geometry",
+      "journal": "Progress in Nuclear Energy",
+      "volume": 83,
+      "year": 2015,
+      "pages": "229-247",
+      "doi": "10.1016/j.pnucene.2015.03.015",
+      "pdf_local_file": "project_sources/07-ozaki2015.pdf",
+      "pdf_sha256": "103b31e1ad5df5c3499f577d569bcefe6432620ddfb55acdd26282d4d7a96cf3",
+      "scope": "Rod-bundle correlations and FRIGG/NUPEC data; not an air-water catenary validation. Section2.2.2,p230/PDF2 mentions several Chexal packages; Table1,p231/PDF3 summarizes rod-bundle correlations.",
+      "paired_parameters_warning": "Section4.3,pp241-243/PDF13-15 warns against separating C0 and drift velocity because errors can compensate.",
+      "further_reading": "docs/CHEXAL_1992_SCOPE.md"
     }
   },
   "geometry": {
@@ -300,7 +356,9 @@
       "gas_mass_flow_kg_s": 0.0017985603239932828,
       "liquid_volumetric_flow_m3_s": 0.0012859518656131025,
       "liquid_mass_flow_kg_s": 1.2859518656131024,
-      "all_numeric_table_values_visual_verified": false
+      "all_numeric_table_values_visual_verified": true,
+      "visual_verification_source_sha256": "c60944a348bf516f20ed7fd965cff7aa6b8417b07ef3b4b9433c64d28db8a3a5",
+      "reported_deviation_qualification": "The paper calls the plus/minus quantities mean-value deviations; existing *_stddev field names do not establish a confidence level."
     },
     {
       "id": "B_OSC",
@@ -325,7 +383,7 @@
       "experimental_dp_peak_to_peak_bar": 0.69,
       "dp_qualifier": "Max; irregular signal; not mean cycle amplitude",
       "alpha_pipeline_experimental": 0.75,
-      "target_status": "Original indexed text differs from D singleton33.9s; values preserved separately.",
+      "target_status": "Visual PDF confirms19.3-33.8s with modulation; D singleton33.9s retained separately. Do not collapse a range into a single exact target.",
       "source": "BBN2010 Table3 case13,p653",
       "T_K": 293.15,
       "gas_mass_flux_kg_m2_s": 1.396675899947762,
@@ -333,7 +391,9 @@
       "gas_mass_flow_kg_s": 0.0030236666316408815,
       "liquid_volumetric_flow_m3_s": 0.0011842014654719986,
       "liquid_mass_flow_kg_s": 1.1842014654719986,
-      "all_numeric_table_values_visual_verified": false
+      "all_numeric_table_values_visual_verified": true,
+      "visual_verification_source_sha256": "c60944a348bf516f20ed7fd965cff7aa6b8417b07ef3b4b9433c64d28db8a3a5",
+      "reported_deviation_qualification": "The paper calls the plus/minus quantities mean-value deviations; existing *_stddev field names do not establish a confidence level."
     },
     {
       "id": "B_SS3",
@@ -349,15 +409,15 @@
       "jg_stddev_m_s": 0.06,
       "jl_m_s": 0.28,
       "jl_stddev_m_s": 0.03,
-      "experimental_period_s": null,
+      "experimental_period_s": 76.0,
       "experimental_period_text_extraction_s": 76.0,
       "experimental_period_conflicting_D_s": 26.0,
-      "experimental_period_visual_verified": false,
+      "experimental_period_visual_verified": true,
       "experimental_dp_peak_to_peak_bar": 0.86,
       "dp_qualifier": "reported amplitude at riser bottom",
       "alpha_pipeline_experimental": 0.76,
       "alpha_qualifier": "Max",
-      "target_status": "Hold quantitative period pass/fail until original PDF table visually verified; both mirrors read76 and model72.2/error−1 is arithmetically inconsistent. Do not replace D26 silently.",
+      "target_status": "Primary printed period76s visually verified in Table3 case11,p653/PDF11; D26s preserved separately as a confirmed documentary discrepancy. The original raw experimental signal has not been obtained.",
       "source": "BBN2010 Table3 case11,p653",
       "T_K": 292.95,
       "gas_mass_flux_kg_m2_s": 0.577934855150798,
@@ -365,7 +425,13 @@
       "gas_mass_flow_kg_s": 0.001251172399299675,
       "liquid_volumetric_flow_m3_s": 0.000606172596585301,
       "liquid_mass_flow_kg_s": 0.606172596585301,
-      "all_numeric_table_values_visual_verified": false
+      "all_numeric_table_values_visual_verified": true,
+      "visual_verification_source_sha256": "c60944a348bf516f20ed7fd965cff7aa6b8417b07ef3b4b9433c64d28db8a3a5",
+      "reported_deviation_qualification": "The paper calls the plus/minus quantities mean-value deviations; existing *_stddev field names do not establish a confidence level.",
+      "article_simulation_period_s_not_target": 72.2,
+      "article_reported_error_percent": -1.0,
+      "recomputed_error_percent_from_printed_periods": -5.0,
+      "article_internal_inconsistency": "Printed Tsim72.2s and Texp76s imply-5%, not the printed-1%; retain all printed quantities without silently repairing the source."
     },
     {
       "id": "B_SS1",
@@ -397,7 +463,9 @@
       "gas_mass_flow_kg_s": 0.0002867270081728422,
       "liquid_volumetric_flow_m3_s": 0.0011430683249894246,
       "liquid_mass_flow_kg_s": 1.1430683249894247,
-      "all_numeric_table_values_visual_verified": false
+      "all_numeric_table_values_visual_verified": true,
+      "visual_verification_source_sha256": "c60944a348bf516f20ed7fd965cff7aa6b8417b07ef3b4b9433c64d28db8a3a5",
+      "reported_deviation_qualification": "The paper calls the plus/minus quantities mean-value deviations; existing *_stddev field names do not establish a confidence level."
     },
     {
       "id": "B_SS2",
@@ -424,7 +492,9 @@
       "gas_mass_flow_kg_s": 0.0007819827495622969,
       "liquid_volumetric_flow_m3_s": 0.0006494706391985366,
       "liquid_mass_flow_kg_s": 0.6494706391985366,
-      "all_numeric_table_values_visual_verified": false
+      "all_numeric_table_values_visual_verified": true,
+      "visual_verification_source_sha256": "c60944a348bf516f20ed7fd965cff7aa6b8417b07ef3b4b9433c64d28db8a3a5",
+      "reported_deviation_qualification": "The paper calls the plus/minus quantities mean-value deviations; existing *_stddev field names do not establish a confidence level."
     }
   ],
   "validation": {
@@ -504,5 +574,17 @@
     "bhagwat_tests": "Four D steady profiles;20roots at five inclinations; complete closure residual; mass invariants; nondimensional scale invariance; root/FD continuity near Fr3.5; explicit monophase inventory; rejection of unqualified countercurrent flow.",
     "bhagwat_root_solver": "Full logit scan and safeguarded Brent on alpha-dependent residual; no coefficients frozen at alpha=.5. Finite sign-change scans do not certify absence of a tangential degenerate root.",
     "angular_boundary": "Second-order one-sided Htheta within riser theta>=0 at lower face; no smoothing of Bhagwat C4 jump. Regression dH/ds=S uses two right-sided spacings, exact face roundoff and two output meshes."
+  },
+  "documentary_update_2026_11_18": {
+    "nature": "Reference metadata and reported experimental targets only; no physical inputs, EOS, closures, namelists, solver source or run manifests changed.",
+    "SS3_primary_reading_resolved": true,
+    "SS3_primary_reported_period_s": 76.0,
+    "SS3_dissertation_reported_period_s_preserved": 26.0,
+    "SS3_documentary_conflict_remains": true,
+    "at_run_snapshots": [
+      "validation/evidence/benchmark_sources_at_run.json",
+      "validation/evidence/benchmark_sources_at_refined_run.json"
+    ],
+    "third_party_pdfs_or_images_redistributed": false
   }
 }

@@ -1,0 +1,53 @@
+snapshot time_s,dt_s,norm,status    7.7364993578739259E+01   1.4831542968749999E-07   3.5071781135576594E-08    6000
+prepare_dissipation status        0
+minimum physical alpha profile   1   1.9887251030994141E-01
+inlet boundary profile,status        1       0
+outlet boundary profile,status        1       0
+map right trace to pipe profile,status,alpha   1       0   5.6153706940075276E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile   1   2.5926959590271136E+05   5.4501063259090887E-01   1.8724634283107272E-01
+junction gas convective,diffusive,net kg_s profile   1   1.0050334327146601E-03   1.1039672623121571E-04   8.9463670648344431E-04
+riser trace root profile,status,nroots,alpha   1       0       1   1.8752094384816934E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile   1   1.2146431194128744E+00   3.9679068172752968E-01   6.5929771394052705E-01   1.0160701105741796E+00   5.5118922913981672E-01   1.9887251030994141E-01
+assembly residual profile,status,norm   1       0   4.3092133354394534E-08
+assembly Jacobian profile,status,norm   1       0   4.3092133354394534E-08
+minimum physical alpha profile   2   1.9887250862482708E-01
+inlet boundary profile,status        2       0
+outlet boundary profile,status        2       0
+map right trace to pipe profile,status,alpha   2       0   5.6153706941785908E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile   2   2.5926959601482921E+05   5.4501063256526894E-01   1.8724633654416722E-01
+junction gas convective,diffusive,net kg_s profile   2   1.0050334193367750E-03   1.1039674250440699E-04   8.9463667683236802E-04
+riser trace root profile,status,nroots,alpha   2       0       1   1.8752093969548131E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile   2   1.2146431193822214E+00   3.9679067602488838E-01   6.5929771250412994E-01   1.0160701059108688E+00   5.5118922913865098E-01   1.9887250862482708E-01
+assembly residual profile,status,norm   2       0   3.5071781135576594E-08
+assembly Jacobian profile,status,norm   2       0   3.5071781135576594E-08
+Newton band solve status,max increment        0   8.3599587749261640E-09
+Newton candidate lambda,point failures,junction status    1.0000000000000000E+00       0       0
+map right trace to pipe profile,status,alpha  10       0   5.6153706949264970E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile  10   2.5926959650510643E+05   5.4501063245312809E-01   1.8724630905675682E-01
+junction gas convective,diffusive,net kg_s profile  10   1.0050333608577844E-03   1.1039681366464775E-04   8.9463654719313681E-04
+riser trace root profile,status,nroots,alpha  10       0       1   1.8752092153924005E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile  10   1.2146431192481408E+00   3.9679065110324696E-01   6.5929770622298234E-01   1.0160700855189193E+00   5.5118922913355228E-01   1.9887250125607833E-01
+Newton candidate lambda,point failures,junction status    5.0000000000000000E-01       0       0
+map right trace to pipe profile,status,alpha  11       0   5.6153706945525450E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile  11   2.5926959625996801E+05   5.4501063250920201E-01   1.8724632279874903E-01
+junction gas convective,diffusive,net kg_s profile  11   1.0050333900893211E-03   1.1039677808475261E-04   8.9463661200456853E-04
+riser trace root profile,status,nroots,alpha  11       0       1   1.8752093061622524E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile  11   1.2146431193151972E+00   3.9679066355805881E-01   6.5929770936355581E-01   1.0160700957148932E+00   5.5118922913610158E-01   1.9887250494045258E-01
+Newton candidate lambda,point failures,junction status    2.5000000000000000E-01       0       0
+map right trace to pipe profile,status,alpha  12       0   5.6153706943655657E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile  12   2.5926959613739856E+05   5.4501063253723525E-01   1.8724632967143409E-01
+junction gas convective,diffusive,net kg_s profile  12   1.0050334047128574E-03   1.1039676029450435E-04   8.9463664441835318E-04
+riser trace root profile,status,nroots,alpha  12       0       1   1.8752093515583740E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile  12   1.2146431193487095E+00   3.9679066979147110E-01   6.5929771093384271E-01   1.0160701008128814E+00   5.5118922913737622E-01   1.9887250678263990E-01
+Newton candidate lambda,point failures,junction status    1.2500000000000000E-01       0       0
+map right trace to pipe profile,status,alpha  13       0   5.6153706942720805E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile  13   2.5926959607611396E+05   5.4501063255125570E-01   1.8724633310613564E-01
+junction gas convective,diffusive,net kg_s profile  13   1.0050334120168816E-03   1.1039675139947598E-04   8.9463666061740548E-04
+riser trace root profile,status,nroots,alpha  13       0       1   1.8752093742455550E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile  13   1.2146431193654819E+00   3.9679067290212872E-01   6.5929771171898610E-01   1.0160701033618749E+00   5.5118922913801327E-01   1.9887250770373346E-01
+Newton candidate lambda,point failures,junction status    6.2500000000000000E-02       0       0
+map right trace to pipe profile,status,alpha  14       0   5.6153706942254367E-01
+junction pstar_Pa,jl_m_s,jg_m_s profile  14   2.5926959604546934E+05   5.4501063255826698E-01   1.8724633482673081E-01
+junction gas convective,diffusive,net kg_s profile  14   1.0050334156843639E-03   1.1039674695193884E-04   8.9463666873242510E-04
+riser trace root profile,status,nroots,alpha  14       0       1   1.8752093856106472E-01
+neighbor velocities ulL,ugL,ulR,ugR,alphaL,alphaR profile  14   1.2146431193738352E+00   3.9679067446949662E-01   6.5929771211155808E-01   1.0160701046363718E+00   5.5118922913833202E-01   1.9887250816428029E-01

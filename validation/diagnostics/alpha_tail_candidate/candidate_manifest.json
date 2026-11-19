@@ -1,0 +1,33 @@
+{
+  "status": "CANDIDATE_NOT_APPLIED",
+  "baseline_steady_sha256": "73fbc6f2359b450d2d582439e65fd7942084a4d6c68a3c1426c4a6b668d40450",
+  "candidate_steady_sha256": "76311d3a412b6699ccb25a93c74062b2f993181bbecd9aff0928530a02c01624",
+  "patch_sha256": "bd1dda3ebf56997e99ceeb9df5e14a97361f6a40fa4599c42fcc9656bbbb8ee7",
+  "files": {
+    "README.md": "bf590bb8204d5f7eb4cdbefb3cf11b662c27705c2cc4c75118c7dfaf219ad7b3",
+    "REVIEW.md": "b37770455e3f49b410b72397d77e0f98f0cda29586b2226602d2a2fa4309f1e8",
+    "alpha_tail.patch": "bd1dda3ebf56997e99ceeb9df5e14a97361f6a40fa4599c42fcc9656bbbb8ee7",
+    "probe_alpha_tail_review.f90": "c512a4f06785d378d4fe148f8fce0c299be2d3bf09189d1345db5433afad5964",
+    "run_tests.py": "12b248a8bb3585fe5c7bb96b1c1c856a4f146ed60b218e597c0fe35b4dbd2bf7",
+    "tail_fixtures.dat": "a393c6dce6dee16b3c82121a443b2b65c31e74e88a3cb8666157989119e4ed69",
+    "tail_fixtures.json": "bb50f1a325b69b2f51d07eb237428b4ef5cbe5dcc5dcbdf2daacdfd958fa2de0",
+    "test_alpha_tail_guard.f90": "21922b3fb98a5f6f9b3e10ce8a41401f7d5b5f7f4a552f7dcbb18ce57b07775a",
+    "prior_evidence.json": "f88afc885178f1c3456ed0d03c9177566939b7ab90edf77ce77f411ae169af89"
+  },
+  "scope": "Isolated lower-alpha search repair; no countercurrent extension and no claim of transient validation.",
+  "historical_files_not_distributed": {},
+  "historical_manifest": {
+    "path": "candidate_manifest_historical.json",
+    "sha256": "9a0293dbde70de2435f52f6b0cd9862a641f83bc0e2ffc2fd4928340d17e35ac",
+    "source_commit": "05ad799"
+  },
+  "packaging_note": "Historical JSON absent from05ad799 recovered from user-supplied evidence ZIP, byte-identical to original expected SHA256. It is again a mandatory checksum input. Earlier NOT_DISTRIBUTED reports remain true records of the initial checkout.",
+  "historical_recovery": {
+    "date": "2026-11-18",
+    "archive": "PRIMSF_Evidencias_Implementacao.zip",
+    "archive_sha256": "af943e006857bf65f4848bd038b72dae9724fbe23e1bece425f93cb6d3859647",
+    "recovered_file": "prior_evidence.json",
+    "recovered_sha256": "f88afc885178f1c3456ed0d03c9177566939b7ab90edf77ce77f411ae169af89",
+    "matches_original_manifest": true
+  }
+}

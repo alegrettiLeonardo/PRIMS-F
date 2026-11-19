@@ -1,0 +1,33 @@
+{
+  "path": "/mnt/c/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-continuation-20261118/PRIMSF_Comparison_7321e67_Accommodation13_20261118.zip",
+  "windows_path": "C:/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-continuation-20261118/PRIMSF_Comparison_7321e67_Accommodation13_20261118.zip",
+  "sha256": "5c83dd36cd40f4a28ffd3ce002fe473638efa81329085c346172054474467c4d",
+  "bytes": 1977858,
+  "crc_test": "PASS",
+  "elf_pe_signature_scan": "PASS: none",
+  "pdf_scope": "Matplotlib mean-cycle figures only",
+  "member_crc32": {
+    "analyze_cycle_physics.py": "d1508887",
+    "comparison_h_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125/mean_cycle.csv": "a4adeeac",
+    "comparison_h_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125/mean_cycle.pdf": "a91920bc",
+    "comparison_h_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125/cycle_physics.json": "56eb27ff",
+    "comparison_h_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125/mean_cycle.png": "d1223506",
+    "extended/mean_cycle.csv": "93d0834f",
+    "extended/mean_cycle.pdf": "144b72bc",
+    "extended/cycle_physics.json": "71c41d25",
+    "extended/mean_cycle.png": "0418d69b",
+    "comparison_extended_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/mean_cycle.csv": "93d0834f",
+    "comparison_extended_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/mean_cycle.pdf": "e084fbd6",
+    "comparison_extended_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/cycle_physics.json": "897e5a51",
+    "comparison_extended_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/mean_cycle.png": "0418d69b",
+    "comparison_dt_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625/mean_cycle.csv": "2a3a1de2",
+    "comparison_dt_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625/mean_cycle.pdf": "b8e0b90c",
+    "comparison_dt_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625/cycle_physics.json": "ab72d903",
+    "comparison_dt_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625/mean_cycle.png": "93935deb",
+    "comparison_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/mean_cycle.csv": "8092ff37",
+    "comparison_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/mean_cycle.pdf": "380ec35e",
+    "comparison_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/cycle_physics.json": "9bd44a1a",
+    "comparison_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/mean_cycle.png": "e43a2c73",
+    "CONTENTS_SHA256.json": "501dc7e2"
+  }
+}

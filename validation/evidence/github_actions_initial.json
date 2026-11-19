@@ -1,0 +1,9 @@
+{
+  "commit_sha": "c31521ed5bff1b4df90a184b44fb88765f3b8dd1",
+  "workflow_run_id": 44366743101,
+  "name": "Fortran 2018 operator verification",
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/alegrettiLeonardo/PRIMS-F/actions/runs/44366743101",
+  "recorded_utc": "2026-11-18T18:11:31.916585+00:00"
+}

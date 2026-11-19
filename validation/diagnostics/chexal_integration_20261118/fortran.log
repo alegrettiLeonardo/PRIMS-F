@@ -1,0 +1,12 @@
+FC='gfortran' LIBS='-llapack -lblas' CALLBACK_FLAGS='' python3 scripts/run_unit_tests.py
+PASS: test_chexal_1992_core
+PASS: test_chexal_integration
+PASS: test_geometry
+PASS: test_closure_physics
+PASS: test_primitives_numerics
+PASS: test_steady
+PASS: test_boundaries_time
+PASS: test_fv_operators
+PASS: test_roe_geometry
+PASS: test_chexal_junction
+PASS: 10/10 tests; summary: /home/leonardoab/Documentos/PRIMS-F-chexal/tmp/unit_tests/summary.json

@@ -1,0 +1,46 @@
+[
+  {
+    "run": "comparison_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "one_percent_checks": {
+      "all_means": true,
+      "all_excursions": false
+    },
+    "maximum_mean_change_channel": "holdup_liquid_base",
+    "maximum_mean_relative_change": 0.0004192301238626199,
+    "maximum_excursion_change_channel": "mdot_l_base_kg_s",
+    "maximum_excursion_relative_change": 0.016939237991203695
+  },
+  {
+    "run": "comparison_dt_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+    "one_percent_checks": {
+      "all_means": true,
+      "all_excursions": true
+    },
+    "maximum_mean_change_channel": "Mg_riser_kg",
+    "maximum_mean_relative_change": 2.1604174262221893e-07,
+    "maximum_excursion_change_channel": "mdot_l_base_kg_s",
+    "maximum_excursion_relative_change": 1.185093861258978e-05
+  },
+  {
+    "run": "comparison_extended_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "one_percent_checks": {
+      "all_means": true,
+      "all_excursions": true
+    },
+    "maximum_mean_change_channel": "Mg_riser_kg",
+    "maximum_mean_relative_change": 1.2715371685569445e-06,
+    "maximum_excursion_change_channel": "mdot_l_base_kg_s",
+    "maximum_excursion_relative_change": 0.00011805599487110415
+  },
+  {
+    "run": "comparison_h_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+    "one_percent_checks": {
+      "all_means": true,
+      "all_excursions": true
+    },
+    "maximum_mean_change_channel": "holdup_liquid_base",
+    "maximum_mean_relative_change": 5.734901048074978e-06,
+    "maximum_excursion_change_channel": "mdot_g_out_kg_s",
+    "maximum_excursion_relative_change": 0.00018307837870607332
+  }
+]

@@ -1,7 +1,9 @@
 """Analysis safeguards; synthetic signals are software fixtures, not benchmarks."""
 import copy
+import json
 import math
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -9,6 +11,49 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from validation_evidence import pressure_cycles, time_statistics
 from compare_validation import compare, make_pairs
 from analyze_phase_sequence import analyze, gas_restarts, inlet_reference
+from osc_run_selection import cohort_metadata, select_runs
+
+
+class OscSelectionTests(unittest.TestCase):
+    def make_run(self, root, name, closure=3, source='frozen', eos='BAROTROPIC', cells=51):
+        path = root / name
+        path.mkdir()
+        (path / 'monitor.csv').write_text('time_s,p_junction_Pa\n0,1\n')
+        (path / 'manifest.json').write_text(json.dumps({'source_sha256': {'solver.f90': source}}))
+        parameters = fixture()['parameters'] | {'regime': 'D_OSC', 'closure_riser': closure,
+                                                'gas_eos': eos, 'nodes': cells, 'n_riser': cells}
+        (path / 'run_metadata.txt').write_text('\n'.join(f'{k}={v!r}' for k, v in parameters.items()))
+        return path
+
+    def test_explicit_selection_excludes_historical_defaults_and_deduplicates(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.make_run(root, 'final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_old')
+            requested = self.make_run(root, 'repeat_new')
+            self.assertEqual(select_runs(root, ['repeat_*']), [requested.resolve()])
+            self.assertEqual(select_runs(root, run_dirs=[requested, requested]), [requested.resolve()])
+
+    def test_missing_selected_metadata_is_an_error(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            run = self.make_run(root, 'repeat')
+            (run / 'manifest.json').unlink()
+            with self.assertRaisesRegex(ValueError, 'manifest.json'):
+                select_runs(root, run_dirs=[run])
+            with self.assertRaisesRegex(ValueError, 'No runs matched'):
+                select_runs(root, ['absent_*'])
+
+    def test_cohort_allows_mesh_refinement_but_rejects_source_or_physics_mixing(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            base = self.make_run(root, 'base')
+            refined = self.make_run(root, 'refined', cells=101)
+            self.assertEqual(len(cohort_metadata([base, refined])), 2)
+            for name, changes, reason in [('source', {'source': 'changed'}, 'source_sha256'),
+                                          ('closure', {'closure': 5}, 'closure_riser'),
+                                          ('eos', {'eos': 'ISOTHERMAL'}, 'gas_eos')]:
+                with self.assertRaisesRegex(ValueError, reason):
+                    cohort_metadata([base, self.make_run(root, name, **changes)])
 
 
 def fixture(name='flat', wave=False, cells=10, dt=.5, completed=True):

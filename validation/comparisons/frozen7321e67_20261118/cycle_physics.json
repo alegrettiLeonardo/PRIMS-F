@@ -1,0 +1,406 @@
+[
+  {
+    "run": "comparison_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "evidence_class": "numerical_cycle_conditioned_observations_not_regime_validation",
+    "monitor_sha256": "86c5dc423bfa67fadeed783e89b8edc03de116b8b08510d45b9754c8dfcd38f2",
+    "envelopes_sha256": "93f7b0db745757ff5b130b4c5379dd2d7ee5d9a717c34ab44985d69f41a842b8",
+    "cycles": 10,
+    "window_start_s": 2154.8200288991247,
+    "window_end_s": 2385.8502563557977,
+    "period_mean_s": 23.103022745667296,
+    "phase_reference": "pressure maximum = 0; phases increase to next pressure maximum",
+    "method": "256 equally spaced phase samples per complete pressure cycle; interpolate each named signal then average ten cycles",
+    "signals": {
+      "p_junction_Pa": {
+        "mean": 266175.58797169,
+        "minimum": 256308.38474640428,
+        "maximum": 275718.6802312305,
+        "peak_to_peak": 19410.29548482623,
+        "maximum_phase_after_pressure_peak": 0.99609375,
+        "minimum_phase_after_pressure_peak": 0.4375
+      },
+      "holdup_liquid_base": {
+        "mean": 0.6181132496739733,
+        "minimum": 0.49835998641028134,
+        "maximum": 0.7207413030593497,
+        "peak_to_peak": 0.22238131664906835,
+        "maximum_phase_after_pressure_peak": 0.7578125,
+        "minimum_phase_after_pressure_peak": 0.2734375
+      },
+      "holdup_liquid_out": {
+        "mean": 0.5546016061620338,
+        "minimum": 0.4640701430907166,
+        "maximum": 0.6704729274277847,
+        "peak_to_peak": 0.20640278433706816,
+        "maximum_phase_after_pressure_peak": 0.1015625,
+        "minimum_phase_after_pressure_peak": 0.57421875
+      },
+      "Ml_riser_kg": {
+        "mean": 16.289562546339265,
+        "minimum": 13.739484722094161,
+        "maximum": 18.702393326081825,
+        "peak_to_peak": 4.962908603987664,
+        "maximum_phase_after_pressure_peak": 0.94921875,
+        "minimum_phase_after_pressure_peak": 0.39453125
+      },
+      "Mg_pipe_kg": {
+        "mean": 0.15485149684767724,
+        "minimum": 0.1492595041145273,
+        "maximum": 0.1602296788550773,
+        "peak_to_peak": 0.01097017474055001,
+        "maximum_phase_after_pressure_peak": 0.015625,
+        "minimum_phase_after_pressure_peak": 0.4609375
+      },
+      "mdot_l_base_kg_s": {
+        "mean": 1.1824259827753218,
+        "minimum": 1.1803837728053512,
+        "maximum": 1.1856821930383896,
+        "peak_to_peak": 0.005298420233038392,
+        "maximum_phase_after_pressure_peak": 0.25390625,
+        "minimum_phase_after_pressure_peak": 0.72265625
+      },
+      "mdot_l_out_kg_s": {
+        "mean": 1.1821708453808193,
+        "minimum": 0.615515777452747,
+        "maximum": 1.9947297364979615,
+        "peak_to_peak": 1.3792139590452144,
+        "maximum_phase_after_pressure_peak": 0.19140625,
+        "minimum_phase_after_pressure_peak": 0.66015625
+      },
+      "mdot_g_base_kg_s": {
+        "mean": 0.0030274747139625922,
+        "minimum": 0.0017791406220494213,
+        "maximum": 0.004826007437061708,
+        "peak_to_peak": 0.003046866815012287,
+        "maximum_phase_after_pressure_peak": 0.2578125,
+        "minimum_phase_after_pressure_peak": 0.73828125
+      },
+      "mdot_g_out_kg_s": {
+        "mean": 0.00302795455575692,
+        "minimum": 0.0023329587724540144,
+        "maximum": 0.004031339721553309,
+        "peak_to_peak": 0.001698380949099295,
+        "maximum_phase_after_pressure_peak": 0.34765625,
+        "minimum_phase_after_pressure_peak": 0.9921875
+      }
+    },
+    "pressure_gas_pipe_inventory_correlation": 0.9920251034849826,
+    "pressure_liquid_riser_inventory_correlation": 0.9539302074398197,
+    "fractions_of_average_cycle": {
+      "rising_pressure_and_gas_pipeline_accumulation": 0.53515625,
+      "rising_pressure_and_liquid_riser_accumulation": 0.51171875,
+      "liquid_outflow_exceeds_base_inflow_and_liquid_riser_depletes": 0.44140625,
+      "falling_pressure_and_gas_pipeline_depletion": 0.421875
+    },
+    "gas_base_remains_positive_in_all_resampled_cycles": true,
+    "limits": [
+      "Phase averages describe observed numerical signals; they do not validate a flow regime.",
+      "Pressure/inventory synchrony supports accumulation/compression and depletion proxies; no local front penetration was measured.",
+      "No complete gas blockage is required or imposed for OSC/SS3; positive gas at the base is retained.",
+      "Integrated conservation uses original monitor integrals, not derivatives of phase averages."
+    ]
+  },
+  {
+    "run": "comparison_dt_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+    "evidence_class": "numerical_cycle_conditioned_observations_not_regime_validation",
+    "monitor_sha256": "0dcca8bda650c3a5d00d578d75a282ef434aaee8736765d918752f2f1d6d93ed",
+    "envelopes_sha256": "93f7b0db745757ff5b130b4c5379dd2d7ee5d9a717c34ab44985d69f41a842b8",
+    "cycles": 10,
+    "window_start_s": 2145.5565650170224,
+    "window_end_s": 2378.212957156808,
+    "period_mean_s": 23.265639213978556,
+    "phase_reference": "pressure maximum = 0; phases increase to next pressure maximum",
+    "method": "256 equally spaced phase samples per complete pressure cycle; interpolate each named signal then average ten cycles",
+    "signals": {
+      "p_junction_Pa": {
+        "mean": 266592.78728666727,
+        "minimum": 252505.13218301994,
+        "maximum": 280031.80154826946,
+        "peak_to_peak": 27526.669365249516,
+        "maximum_phase_after_pressure_peak": 0.0,
+        "minimum_phase_after_pressure_peak": 0.4140625
+      },
+      "holdup_liquid_base": {
+        "mean": 0.6301888595022944,
+        "minimum": 0.4582907033066391,
+        "maximum": 0.7684827317497958,
+        "peak_to_peak": 0.31019202844315663,
+        "maximum_phase_after_pressure_peak": 0.75390625,
+        "minimum_phase_after_pressure_peak": 0.265625
+      },
+      "holdup_liquid_out": {
+        "mean": 0.5480193860234678,
+        "minimum": 0.42630983452534277,
+        "maximum": 0.7206288789125355,
+        "peak_to_peak": 0.2943190443871927,
+        "maximum_phase_after_pressure_peak": 0.09765625,
+        "minimum_phase_after_pressure_peak": 0.55859375
+      },
+      "Ml_riser_kg": {
+        "mean": 16.408945183973273,
+        "minimum": 12.756944904049245,
+        "maximum": 19.787968717681704,
+        "peak_to_peak": 7.0310238136324585,
+        "maximum_phase_after_pressure_peak": 0.94921875,
+        "minimum_phase_after_pressure_peak": 0.37109375
+      },
+      "Mg_pipe_kg": {
+        "mean": 0.15512663799283039,
+        "minimum": 0.1471373897498269,
+        "maximum": 0.16270820810143827,
+        "peak_to_peak": 0.015570818351611365,
+        "maximum_phase_after_pressure_peak": 0.015625,
+        "minimum_phase_after_pressure_peak": 0.4375
+      },
+      "mdot_l_base_kg_s": {
+        "mean": 1.1824268396279491,
+        "minimum": 1.1793675447794292,
+        "maximum": 1.1885704407586333,
+        "peak_to_peak": 0.009202895979204095,
+        "maximum_phase_after_pressure_peak": 0.25,
+        "minimum_phase_after_pressure_peak": 0.6953125
+      },
+      "mdot_l_out_kg_s": {
+        "mean": 1.182426741954192,
+        "minimum": 0.4405431400698977,
+        "maximum": 2.426640639441087,
+        "peak_to_peak": 1.9860974993711893,
+        "maximum_phase_after_pressure_peak": 0.1875,
+        "minimum_phase_after_pressure_peak": 0.64453125
+      },
+      "mdot_g_base_kg_s": {
+        "mean": 0.003028068116375569,
+        "minimum": 0.0013838133919352776,
+        "maximum": 0.005780612958802037,
+        "peak_to_peak": 0.004396799566866759,
+        "maximum_phase_after_pressure_peak": 0.25,
+        "minimum_phase_after_pressure_peak": 0.734375
+      },
+      "mdot_g_out_kg_s": {
+        "mean": 0.0030280682919068486,
+        "minimum": 0.002042235654015331,
+        "maximum": 0.004664387365726117,
+        "peak_to_peak": 0.002622151711710786,
+        "maximum_phase_after_pressure_peak": 0.32421875,
+        "minimum_phase_after_pressure_peak": 0.015625
+      }
+    },
+    "pressure_gas_pipe_inventory_correlation": 0.9914733277419542,
+    "pressure_liquid_riser_inventory_correlation": 0.9529554789205096,
+    "fractions_of_average_cycle": {
+      "rising_pressure_and_gas_pipeline_accumulation": 0.5625,
+      "rising_pressure_and_liquid_riser_accumulation": 0.53515625,
+      "liquid_outflow_exceeds_base_inflow_and_liquid_riser_depletes": 0.41796875,
+      "falling_pressure_and_gas_pipeline_depletion": 0.39453125
+    },
+    "gas_base_remains_positive_in_all_resampled_cycles": true,
+    "limits": [
+      "Phase averages describe observed numerical signals; they do not validate a flow regime.",
+      "Pressure/inventory synchrony supports accumulation/compression and depletion proxies; no local front penetration was measured.",
+      "No complete gas blockage is required or imposed for OSC/SS3; positive gas at the base is retained.",
+      "Integrated conservation uses original monitor integrals, not derivatives of phase averages."
+    ]
+  },
+  {
+    "run": "comparison_extended_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "evidence_class": "numerical_cycle_conditioned_observations_not_regime_validation",
+    "monitor_sha256": "cdcc69dc8757450cd42baaad87d665141aaef2d6b4d27ff9eec017f883568c8d",
+    "envelopes_sha256": "41456d217e7be47cdaf5a10eff575465e2f8f85a8527845ea44d3348a1bc0c91",
+    "cycles": 10,
+    "window_start_s": 3356.386811896429,
+    "window_end_s": 3587.473217393323,
+    "period_mean_s": 23.10864054968938,
+    "phase_reference": "pressure maximum = 0; phases increase to next pressure maximum",
+    "method": "256 equally spaced phase samples per complete pressure cycle; interpolate each named signal then average ten cycles",
+    "signals": {
+      "p_junction_Pa": {
+        "mean": 266193.09027092496,
+        "minimum": 256112.13125761232,
+        "maximum": 275928.73372442194,
+        "peak_to_peak": 19816.60246680962,
+        "maximum_phase_after_pressure_peak": 0.0,
+        "minimum_phase_after_pressure_peak": 0.4375
+      },
+      "holdup_liquid_base": {
+        "mean": 0.6185961874390054,
+        "minimum": 0.49619343938797406,
+        "maximum": 0.7231216466464743,
+        "peak_to_peak": 0.22692820725850021,
+        "maximum_phase_after_pressure_peak": 0.7578125,
+        "minimum_phase_after_pressure_peak": 0.2734375
+      },
+      "holdup_liquid_out": {
+        "mean": 0.5543384611763127,
+        "minimum": 0.46212411654851665,
+        "maximum": 0.6730788727127262,
+        "peak_to_peak": 0.2109547561642095,
+        "maximum_phase_after_pressure_peak": 0.1015625,
+        "minimum_phase_after_pressure_peak": 0.57421875
+      },
+      "Ml_riser_kg": {
+        "mean": 16.294321567501648,
+        "minimum": 13.688587024508351,
+        "maximum": 18.755082994890408,
+        "peak_to_peak": 5.066495970382057,
+        "maximum_phase_after_pressure_peak": 0.94921875,
+        "minimum_phase_after_pressure_peak": 0.390625
+      },
+      "Mg_pipe_kg": {
+        "mean": 0.15486326216293494,
+        "minimum": 0.14914981247681083,
+        "maximum": 0.16036161400764243,
+        "peak_to_peak": 0.011211801530831594,
+        "maximum_phase_after_pressure_peak": 0.015625,
+        "minimum_phase_after_pressure_peak": 0.45703125
+      },
+      "mdot_l_base_kg_s": {
+        "mean": 1.1824268461964453,
+        "minimum": 1.1803363420781037,
+        "maximum": 1.1858034519335319,
+        "peak_to_peak": 0.005467109855428198,
+        "maximum_phase_after_pressure_peak": 0.25390625,
+        "minimum_phase_after_pressure_peak": 0.72265625
+      },
+      "mdot_l_out_kg_s": {
+        "mean": 1.1824261015502633,
+        "minimum": 0.6059663168158722,
+        "maximum": 2.01600443800659,
+        "peak_to_peak": 1.4100381211907176,
+        "maximum_phase_after_pressure_peak": 0.19140625,
+        "minimum_phase_after_pressure_peak": 0.66015625
+      },
+      "mdot_g_base_kg_s": {
+        "mean": 0.003028066571498895,
+        "minimum": 0.0017580008229907255,
+        "maximum": 0.004872530336336367,
+        "peak_to_peak": 0.003114529513345641,
+        "maximum_phase_after_pressure_peak": 0.2578125,
+        "minimum_phase_after_pressure_peak": 0.73828125
+      },
+      "mdot_g_out_kg_s": {
+        "mean": 0.0030280679951697337,
+        "minimum": 0.0023191525297503817,
+        "maximum": 0.00406013564156082,
+        "peak_to_peak": 0.0017409831118104387,
+        "maximum_phase_after_pressure_peak": 0.34765625,
+        "minimum_phase_after_pressure_peak": 0.9921875
+      }
+    },
+    "pressure_gas_pipe_inventory_correlation": 0.9919983941558003,
+    "pressure_liquid_riser_inventory_correlation": 0.9538657943151909,
+    "fractions_of_average_cycle": {
+      "rising_pressure_and_gas_pipeline_accumulation": 0.5390625,
+      "rising_pressure_and_liquid_riser_accumulation": 0.51171875,
+      "liquid_outflow_exceeds_base_inflow_and_liquid_riser_depletes": 0.44140625,
+      "falling_pressure_and_gas_pipeline_depletion": 0.41796875
+    },
+    "gas_base_remains_positive_in_all_resampled_cycles": true,
+    "limits": [
+      "Phase averages describe observed numerical signals; they do not validate a flow regime.",
+      "Pressure/inventory synchrony supports accumulation/compression and depletion proxies; no local front penetration was measured.",
+      "No complete gas blockage is required or imposed for OSC/SS3; positive gas at the base is retained.",
+      "Integrated conservation uses original monitor integrals, not derivatives of phase averages."
+    ]
+  },
+  {
+    "run": "comparison_h_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+    "evidence_class": "numerical_cycle_conditioned_observations_not_regime_validation",
+    "monitor_sha256": "8b1006211a21fa738ce9390c23050f459c576c471320b4de6064718c1f6db26a",
+    "envelopes_sha256": "93f7b0db745757ff5b130b4c5379dd2d7ee5d9a717c34ab44985d69f41a842b8",
+    "cycles": 10,
+    "window_start_s": 2144.054730744143,
+    "window_end_s": 2376.718699166814,
+    "period_mean_s": 23.266396842267113,
+    "phase_reference": "pressure maximum = 0; phases increase to next pressure maximum",
+    "method": "256 equally spaced phase samples per complete pressure cycle; interpolate each named signal then average ten cycles",
+    "signals": {
+      "p_junction_Pa": {
+        "mean": 266550.4503677053,
+        "minimum": 253532.04743563329,
+        "maximum": 279068.8827826533,
+        "peak_to_peak": 25536.835347020038,
+        "maximum_phase_after_pressure_peak": 0.0,
+        "minimum_phase_after_pressure_peak": 0.41796875
+      },
+      "holdup_liquid_base": {
+        "mean": 0.6250846337485093,
+        "minimum": 0.4668852298341138,
+        "maximum": 0.7549785806234527,
+        "peak_to_peak": 0.2880933507893389,
+        "maximum_phase_after_pressure_peak": 0.75,
+        "minimum_phase_after_pressure_peak": 0.265625
+      },
+      "holdup_liquid_out": {
+        "mean": 0.5498391721032088,
+        "minimum": 0.4352524290361453,
+        "maximum": 0.7091941163405597,
+        "peak_to_peak": 0.2739416873044144,
+        "maximum_phase_after_pressure_peak": 0.1015625,
+        "minimum_phase_after_pressure_peak": 0.5625
+      },
+      "Ml_riser_kg": {
+        "mean": 16.379571433257304,
+        "minimum": 13.000570849907097,
+        "maximum": 19.534071420145192,
+        "peak_to_peak": 6.533500570238095,
+        "maximum_phase_after_pressure_peak": 0.94921875,
+        "minimum_phase_after_pressure_peak": 0.375
+      },
+      "Mg_pipe_kg": {
+        "mean": 0.1550850166512538,
+        "minimum": 0.1477167743317954,
+        "maximum": 0.16213530195252446,
+        "peak_to_peak": 0.014418527620729066,
+        "maximum_phase_after_pressure_peak": 0.015625,
+        "minimum_phase_after_pressure_peak": 0.44140625
+      },
+      "mdot_l_base_kg_s": {
+        "mean": 1.182426839218596,
+        "minimum": 1.1796542654783555,
+        "maximum": 1.1877023725453406,
+        "peak_to_peak": 0.00804810706698511,
+        "maximum_phase_after_pressure_peak": 0.25,
+        "minimum_phase_after_pressure_peak": 0.71484375
+      },
+      "mdot_l_out_kg_s": {
+        "mean": 1.1824238773878621,
+        "minimum": 0.4812269401350838,
+        "maximum": 2.317051148840252,
+        "peak_to_peak": 1.835824208705168,
+        "maximum_phase_after_pressure_peak": 0.1875,
+        "minimum_phase_after_pressure_peak": 0.6484375
+      },
+      "mdot_g_base_kg_s": {
+        "mean": 0.0030280609559212995,
+        "minimum": 0.0014777422663900838,
+        "maximum": 0.005520551335443108,
+        "peak_to_peak": 0.004042809069053023,
+        "maximum_phase_after_pressure_peak": 0.25,
+        "minimum_phase_after_pressure_peak": 0.734375
+      },
+      "mdot_g_out_kg_s": {
+        "mean": 0.0030280665230852355,
+        "minimum": 0.0021081610805501216,
+        "maximum": 0.004486785511490834,
+        "peak_to_peak": 0.0023786244309407126,
+        "maximum_phase_after_pressure_peak": 0.328125,
+        "minimum_phase_after_pressure_peak": 0.01171875
+      }
+    },
+    "pressure_gas_pipe_inventory_correlation": 0.9912077265894158,
+    "pressure_liquid_riser_inventory_correlation": 0.9530368632954134,
+    "fractions_of_average_cycle": {
+      "rising_pressure_and_gas_pipeline_accumulation": 0.5546875,
+      "rising_pressure_and_liquid_riser_accumulation": 0.52734375,
+      "liquid_outflow_exceeds_base_inflow_and_liquid_riser_depletes": 0.42578125,
+      "falling_pressure_and_gas_pipeline_depletion": 0.40234375
+    },
+    "gas_base_remains_positive_in_all_resampled_cycles": true,
+    "limits": [
+      "Phase averages describe observed numerical signals; they do not validate a flow regime.",
+      "Pressure/inventory synchrony supports accumulation/compression and depletion proxies; no local front penetration was measured.",
+      "No complete gas blockage is required or imposed for OSC/SS3; positive gas at the base is retained.",
+      "Integrated conservation uses original monitor integrals, not derivatives of phase averages."
+    ]
+  }
+]

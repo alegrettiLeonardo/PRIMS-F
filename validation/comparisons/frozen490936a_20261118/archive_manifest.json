@@ -1,0 +1,14 @@
+{
+  "path": "/mnt/c/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-continuation-20261118/PRIMSF_Comparison_490936a_20261118.zip",
+  "sha256": "f90701bced6d634c971358dc4d9ceb09962907350cbbae69641a81eba31756c6",
+  "bytes": 46163553,
+  "git_head": "490936a676c2a86f1348f0c867bda65685c27823",
+  "files": 294,
+  "runs": 13,
+  "statuses": {
+    "COMPLETED": 6,
+    "FAILED": 7,
+    "TIMEOUT": 0
+  },
+  "windows_path": "C:/Users/leonardoab/Documents/rotordin_frontend/artifacts/primsf-continuation-20261118/PRIMSF_Comparison_490936a_20261118.zip"
+}

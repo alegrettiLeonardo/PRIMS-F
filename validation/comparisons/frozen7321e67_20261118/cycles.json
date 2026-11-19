@@ -1,0 +1,173 @@
+[
+  {
+    "run": "comparison_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "completed": true,
+    "monitor_sha256": "86c5dc423bfa67fadeed783e89b8edc03de116b8b08510d45b9754c8dfcd38f2",
+    "last_ten_cycles": {
+      "available": true,
+      "n_complete_cycles": 10,
+      "window_start_s": 2154.8200288991247,
+      "window_end_s": 2385.8502563557977,
+      "window_is_end_of_run": true,
+      "mean_period_s": 23.103022745667296,
+      "period_cv": 8.00799659336095e-05,
+      "first_semi_amplitude_Pa": 9567.26684529004,
+      "last_semi_amplitude_Pa": 9796.665117895915,
+      "mean_semi_amplitude_Pa": 9700.027289740705,
+      "amplitude_cv": 0.007830689504117158,
+      "relative_amplitude_change": 0.023977409255476978,
+      "relative_difference_last_five_vs_first_five_amplitudes": 0.01404317723531645,
+      "growth_rate_s_inv": 0.00010118890870019608,
+      "log_amplitude_r_squared": 0.9774544683729246,
+      "useful_above_declared_detection_thresholds": true,
+      "amplitude_change_within_one_percent": false,
+      "amplitude_change_within_five_percent": true,
+      "settled_or_physically_validated": false,
+      "pressure_statistics": {
+        "window_start_s": 2154.8200288991247,
+        "window_end_s": 2385.8502563557977,
+        "full_window_observed": true,
+        "mean_Pa": 266175.63523224916,
+        "rms_about_mean_Pa": 6835.501522629389,
+        "peak_to_peak_Pa": 19585.399584485887,
+        "minimum_Pa": 256224.31152075194,
+        "maximum_Pa": 275809.71110523783
+      }
+    }
+  },
+  {
+    "run": "comparison_dt_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+    "completed": true,
+    "monitor_sha256": "0dcca8bda650c3a5d00d578d75a282ef434aaee8736765d918752f2f1d6d93ed",
+    "last_ten_cycles": {
+      "available": true,
+      "n_complete_cycles": 10,
+      "window_start_s": 2145.5565650170224,
+      "window_end_s": 2378.212957156808,
+      "window_is_end_of_run": true,
+      "mean_period_s": 23.265639213978556,
+      "period_cv": 1.3425927961683971e-06,
+      "first_semi_amplitude_Pa": 13763.918327896943,
+      "last_semi_amplitude_Pa": 13763.990311432324,
+      "mean_semi_amplitude_Pa": 13763.965412138468,
+      "amplitude_cv": 1.7934335982639172e-06,
+      "relative_amplitude_change": 5.229872312995099e-06,
+      "relative_difference_last_five_vs_first_five_amplitudes": 3.035381755944755e-06,
+      "growth_rate_s_inv": 2.2286066956189305e-08,
+      "log_amplitude_r_squared": 0.9194295369964346,
+      "useful_above_declared_detection_thresholds": true,
+      "amplitude_change_within_one_percent": true,
+      "amplitude_change_within_five_percent": true,
+      "settled_or_physically_validated": false,
+      "pressure_statistics": {
+        "window_start_s": 2145.5565650170224,
+        "window_end_s": 2378.212957156808,
+        "full_window_observed": true,
+        "mean_Pa": 266592.787427076,
+        "rms_about_mean_Pa": 9671.353244776372,
+        "peak_to_peak_Pa": 27527.959905544005,
+        "minimum_Pa": 252504.1597083967,
+        "maximum_Pa": 280032.1196139407
+      }
+    }
+  },
+  {
+    "run": "comparison_h_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+    "completed": true,
+    "monitor_sha256": "8b1006211a21fa738ce9390c23050f459c576c471320b4de6064718c1f6db26a",
+    "last_ten_cycles": {
+      "available": true,
+      "n_complete_cycles": 10,
+      "window_start_s": 2144.054730744143,
+      "window_end_s": 2376.718699166814,
+      "window_is_end_of_run": false,
+      "mean_period_s": 23.266396842267113,
+      "period_cv": 3.392908562212758e-06,
+      "first_semi_amplitude_Pa": 12767.978715157762,
+      "last_semi_amplitude_Pa": 12770.696022641132,
+      "mean_semi_amplitude_Pa": 12769.699846288742,
+      "amplitude_cv": 6.985182688059537e-05,
+      "relative_amplitude_change": 0.00021282205617589867,
+      "relative_difference_last_five_vs_first_five_amplitudes": 0.00011985349318099914,
+      "growth_rate_s_inv": 8.757624901921803e-07,
+      "log_amplitude_r_squared": 0.9359398762029739,
+      "useful_above_declared_detection_thresholds": true,
+      "amplitude_change_within_one_percent": true,
+      "amplitude_change_within_five_percent": true,
+      "settled_or_physically_validated": false,
+      "pressure_statistics": {
+        "window_start_s": 2144.054730744143,
+        "window_end_s": 2376.718699166814,
+        "full_window_observed": true,
+        "mean_Pa": 266550.45087880676,
+        "rms_about_mean_Pa": 8982.307764276758,
+        "peak_to_peak_Pa": 25540.984909668012,
+        "minimum_Pa": 253529.83303411255,
+        "maximum_Pa": 279070.81794378057
+      }
+    }
+  },
+  {
+    "run": "comparison_extended_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "completed": true,
+    "monitor_sha256": "cdcc69dc8757450cd42baaad87d665141aaef2d6b4d27ff9eec017f883568c8d",
+    "last_ten_cycles": {
+      "available": true,
+      "n_complete_cycles": 10,
+      "window_start_s": 3356.386811896429,
+      "window_end_s": 3587.473217393323,
+      "window_is_end_of_run": true,
+      "mean_period_s": 23.10864054968938,
+      "period_cv": 3.4491998029311114e-06,
+      "first_semi_amplitude_Pa": 9909.194846128652,
+      "last_semi_amplitude_Pa": 9909.830415298042,
+      "mean_semi_amplitude_Pa": 9909.563378806588,
+      "amplitude_cv": 2.1501256508680514e-05,
+      "relative_amplitude_change": 6.413933515880821e-05,
+      "relative_difference_last_five_vs_first_five_amplitudes": 3.8552410908998525e-05,
+      "growth_rate_s_inv": 2.777496177330752e-07,
+      "log_amplitude_r_squared": 0.9802065716005801,
+      "useful_above_declared_detection_thresholds": true,
+      "amplitude_change_within_one_percent": true,
+      "amplitude_change_within_five_percent": true,
+      "settled_or_physically_validated": false,
+      "pressure_statistics": {
+        "window_start_s": 3356.386811896429,
+        "window_end_s": 3587.473217393323,
+        "full_window_observed": true,
+        "mean_Pa": 266193.09062406846,
+        "rms_about_mean_Pa": 6980.82150165305,
+        "peak_to_peak_Pa": 19819.325469138974,
+        "minimum_Pa": 256110.4704400745,
+        "maximum_Pa": 275929.7959092135
+      }
+    }
+  },
+  {
+    "run": "comparison_20261118_D_OSC_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "completed": false,
+    "monitor_sha256": "3dcbc5215c2d143f1ca9c5a5059946e3fce2ac37f6c495e55c841213c3925f70",
+    "last_ten_cycles": {
+      "available": false,
+      "reason": "fewer than eleven enclosed peaks"
+    }
+  },
+  {
+    "run": "comparison_dt_20261118_D_OSC_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+    "completed": false,
+    "monitor_sha256": "7eb1ce00477c6e5a8f371d000edafd0d378242ed089e47b21504805c583e579a",
+    "last_ten_cycles": {
+      "available": false,
+      "reason": "fewer than eleven enclosed peaks"
+    }
+  },
+  {
+    "run": "comparison_h_20261118_D_OSC_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+    "completed": false,
+    "monitor_sha256": "11181e9ac94e4684cd7063589adcdb43facec587af54cee51124a8ee81c757f3",
+    "last_ten_cycles": {
+      "available": false,
+      "reason": "fewer than eleven enclosed peaks"
+    }
+  }
+]

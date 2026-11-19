@@ -36,7 +36,7 @@ def main():
     p.add_argument('--dissipation',choices=['LAGGED','FULLY_IMPLICIT'],default='LAGGED')
     p.add_argument('--flux',choices=['ROE','RUSANOV'],default='ROE')
     p.add_argument('--perturbation',type=float,default=.01)
-    p.add_argument('--timeout',type=float,default=1800,help='Wall-clock safety limit per run, seconds')
+    p.add_argument('--timeout',type=float,default=7200,help='Wall-clock safety limit per run, seconds')
     p.add_argument('--label',default='final')
     p.add_argument('--exe',type=Path,default=ROOT/'bin/prims_f')
     p.add_argument('--overwrite',action='store_true')

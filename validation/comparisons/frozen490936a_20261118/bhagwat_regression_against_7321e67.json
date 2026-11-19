@@ -1,0 +1,51 @@
+[
+  {
+    "final_run": "comparison_final_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "old_run": "comparison_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "monitor_bit_identical": true,
+    "final_monitor_sha256": "86c5dc423bfa67fadeed783e89b8edc03de116b8b08510d45b9754c8dfcd38f2",
+    "old_monitor_sha256": "86c5dc423bfa67fadeed783e89b8edc03de116b8b08510d45b9754c8dfcd38f2"
+  },
+  {
+    "final_run": "comparison_final_20261118_D_SS1_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "old_run": "comparison_20261118_D_SS1_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "monitor_bit_identical": true,
+    "final_monitor_sha256": "c7ed139e5e4b3c4876b7daa3617baab76548fb5b4a814bcb15c109eb77ec753a",
+    "old_monitor_sha256": "c7ed139e5e4b3c4876b7daa3617baab76548fb5b4a814bcb15c109eb77ec753a"
+  },
+  {
+    "final_run": "comparison_final_20261118_D_SS3_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "old_run": "comparison_20261118_D_SS3_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "monitor_bit_identical": true,
+    "final_monitor_sha256": "a8524ded0be4e82a44c26aad379eb4f2f42603dd73a033e5d10dcd3e2f301ff3",
+    "old_monitor_sha256": "a8524ded0be4e82a44c26aad379eb4f2f42603dd73a033e5d10dcd3e2f301ff3"
+  },
+  {
+    "final_run": "comparison_final_20261118_D_Stable_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "old_run": "comparison_20261118_D_Stable_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "monitor_bit_identical": true,
+    "final_monitor_sha256": "d4f68a2983c5d9f0e18b0013637eece27e896fefb30ccfb05c31fbea0c27b71b",
+    "old_monitor_sha256": "d4f68a2983c5d9f0e18b0013637eece27e896fefb30ccfb05c31fbea0c27b71b"
+  },
+  {
+    "final_run": "comparison_final_20261118_dt_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+    "old_run": "comparison_dt_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+    "monitor_bit_identical": true,
+    "final_monitor_sha256": "0dcca8bda650c3a5d00d578d75a282ef434aaee8736765d918752f2f1d6d93ed",
+    "old_monitor_sha256": "0dcca8bda650c3a5d00d578d75a282ef434aaee8736765d918752f2f1d6d93ed"
+  },
+  {
+    "final_run": "comparison_final_20261118_h_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+    "old_run": "comparison_h_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+    "monitor_bit_identical": true,
+    "final_monitor_sha256": "8b1006211a21fa738ce9390c23050f459c576c471320b4de6064718c1f6db26a",
+    "old_monitor_sha256": "8b1006211a21fa738ce9390c23050f459c576c471320b4de6064718c1f6db26a"
+  },
+  {
+    "final_run": "comparison_final_extended_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "old_run": "comparison_extended_20261118_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+    "monitor_bit_identical": true,
+    "final_monitor_sha256": "cdcc69dc8757450cd42baaad87d665141aaef2d6b4d27ff9eec017f883568c8d",
+    "old_monitor_sha256": "cdcc69dc8757450cd42baaad87d665141aaef2d6b4d27ff9eec017f883568c8d"
+  }
+]

@@ -7,12 +7,17 @@ module module_closure_law
   !! BHAGWAT: the explicit transcription in Azevedo, Balino & Burr (IMAACA 2015),
   !! printed p.121, eqs.116--128. The 2014 original was not available in full.
   !! Legacy names containing 'swananda' select this identified transcription.
+  use module_chexal_1992, only: chexal_coefficients_si, chexal_residual_si
   use mod_kinds, only: wp
   use mod_void_helpers, only: ffan, Dffan, alpha2gamma
   use, intrinsic :: ieee_arithmetic, only: ieee_is_finite, ieee_value, ieee_quiet_nan
   implicit none
   private
   integer,parameter,public :: STRATIFIED=1, BENDIKSEN=2, BHAGWAT=3, MONTGOMERY=4
+  ! IDs 6/7 select the independently specified high/low void branch of 1992.
+  ! ID5 never silently chooses between countercurrent branches.
+  integer,parameter,public :: CHEXAL_1992=5, CHEXAL_1992_HIGH=6, CHEXAL_1992_LOW=7
+  public :: is_chexal, chexal_branch_id
   integer,parameter,public :: CLOSURE_OK=0, CLOSURE_INVALID=10, CLOSURE_UNSUPPORTED=11
   integer,parameter,public :: CLOSURE_DOMAIN=12, CLOSURE_DERIVATIVE=13
   real(wp),parameter :: PI=acos(-1.0_wp), FI_FANNING=0.0142_wp
@@ -21,6 +26,16 @@ module module_closure_law
   public :: RelEquilLocalPipe_comp, DRelEquiLocal_pipe_comp
   public :: lei_fechamento_or_ndim_simp, Dlei_fechamento_or_ndim_simp
 contains
+  pure logical function is_chexal(model)
+    integer,intent(in)::model
+    is_chexal=model>=CHEXAL_1992.and.model<=CHEXAL_1992_LOW
+  end function
+  pure integer function chexal_branch_id(model) result(branch)
+    integer,intent(in)::model
+    branch=0
+    if(model==CHEXAL_1992_HIGH)branch=1
+    if(model==CHEXAL_1992_LOW)branch=-1
+  end function
   pure real(wp) function invalid_real() result(x)
     x=ieee_value(0.0_wp,ieee_quiet_nan)
   end function
@@ -360,7 +375,11 @@ contains
         ti*gammai*(1.0_wp/(1.0_wp-alpha)+1.0_wp/alpha)- &
         (rhol-rhog)*G*area*sin(theta)/(PI*D)
     else
-      if(model==BHAGWAT)then
+      if(is_chexal(model))then
+        call chexal_residual_si(alpha,rhol,rhog,(1.0_wp-alpha)*ul,alpha*ug,theta,D,G,mul,mug,sigma, &
+          value,status,branch=chexal_branch_id(model))
+        return
+      else if(model==BHAGWAT)then
         call bhagwat_coefficients_si(alpha,rhol,rhog,ul,ug,theta,D,rough,G,mul,sigma,Cd,Ud,status)
       else
         call drift_coefficients_si(alpha,rhol,rhog,ul,ug,theta,D,G,model,Cd,Ud,status)
@@ -413,6 +432,15 @@ contains
     call lei_fechamento_or_ndim_simp(alpha,rhol,rhog,ul,ug,theta,DH,AREA,EPS,G,MUL,MUG,sigma,w_u,w_rho,tol,f0,model,ierr)
     if(ierr/=0)then
       if(present(status))status=ierr
+      return
+    endif
+    if(is_chexal(model))then
+      rsi=[alpha,rhol*w_rho,rhog*w_rho,ul*w_u,ug*w_u]
+      call chexal_derivatives_si(rsi,theta,DH,G,MUL,MUG,sigma,chexal_branch_id(model),der,ierr)
+      if(present(status))status=ierr
+      if(ierr/=0)return
+      dfda=der(1)/w_u;dfdrhol=der(2)*w_rho/w_u;dfdrhog=der(3)*w_rho/w_u
+      dfdul=der(4);dfdug=der(5)
       return
     endif
     if(model==BHAGWAT)then
@@ -481,7 +509,13 @@ contains
     if(.not.all(ieee_is_finite([w_u,w_rho])).or.w_u<=0.0_wp.or.w_rho<=0.0_wp)return
     model=BENDIKSEN
     if(present(closure_id))model=closure_id
-    if(model==BHAGWAT)then
+    if(is_chexal(model))then
+      if(.not.all(ieee_is_finite([AREA,MUG,tol])).or.AREA<=0.0_wp.or.MUG<=0.0_wp.or.tol<=0.0_wp)return
+      if(DH<=0.0_wp)return
+      if(abs(AREA-PI*DH**2/4.0_wp)>1e-6_wp*AREA)return
+      call chexal_coefficients_si(alpha,rhol*w_rho,rhog*w_rho,(1.0_wp-alpha)*ul*w_u,alpha*ug*w_u, &
+        theta,DH,G,MUL,MUG,sigma,Cd,Ud,ierr,branch=chexal_branch_id(model))
+    else if(model==BHAGWAT)then
       if(.not.all(ieee_is_finite([AREA,MUG,tol])).or.AREA<=0.0_wp.or.MUG<=0.0_wp.or.tol<=0.0_wp)return
       if(DH<=0.0_wp)return
       if(abs(AREA-PI*DH**2/4.0_wp)>1e-6_wp*AREA)return
@@ -566,5 +600,92 @@ contains
     integer,intent(out),optional::status
     call Dlei_fechamento_or_ndim_simp(alpha,rhol,rhog,ul,ug,theta,DH,AREA,EPS,G,MUL,MUG,sigma,w_u,w_rho,tol, &
       dfda,dfdrhog,dfdrhol,dfdug,dfdul,BHAGWAT,status)
+  end subroutine
+  subroutine chexal_derivatives_si(x,theta,D,G,mul,mug,sigma,branch,der,status)
+    !! Fourth-order differences of ONE selected residual. A velocity very
+    !! close to zero uses a one-sided stencil directed away from the sign
+    !! boundary. A local two-sided signature probe first excludes real kinks.
+    !! Exact zero is not assigned an invented bilateral derivative.
+    real(wp),intent(in)::x(5),theta,D,G,mul,mug,sigma
+    integer,intent(in)::branch
+    real(wp),intent(out)::der(5)
+    integer,intent(out)::status
+    real(wp)::xp(5),h,scale,values(6),f0,dc,df,offsets(6),probe,sgn
+    integer::sig0,sig,code,k,n,attempt,np,guard_attempt
+    logical::valid,one_sided
+    der=invalid_real();status=CLOSURE_DERIVATIVE
+    call eval(x,f0,code,sig0)
+    if(code/=0)then
+      status=code;return
+    endif
+    do k=1,5
+      scale=max(abs(x(k)),1.0_wp)
+      if(k==1)scale=min(x(1),1.0_wp-x(1))
+      h=epsilon(1.0_wp)**0.2_wp*scale
+      one_sided=k>=4.and.x(k)/=0.0_wp.and.abs(x(k))<4*h
+      sgn=1.0_wp;np=4
+      offsets(:4)=[1.0_wp,-1.0_wp,0.5_wp,-0.5_wp]
+      if(one_sided)then
+        ! A nearby switch need not be a kink AT the state. Reduce the
+        ! bilateral probe until both samples use its piece; never accept
+        ! an unresolved switch or an unrepresentable probe. The finite
+        ! limit keeps exact switches well above rounding-width plateaus.
+        probe=0.125_wp*abs(x(k))
+        do guard_attempt=1,16
+          valid=.true.
+          do n=-1,1,2
+            xp=x;xp(k)=x(k)+n*probe
+            if(xp(k)==x(k))return
+            call eval(xp,values(1),code,sig)
+            if(code/=0.or.sig/=sig0)valid=.false.
+          enddo
+          if(valid)exit
+          probe=0.5_wp*probe
+        enddo
+        if(guard_attempt>16)return
+        sgn=sign(1.0_wp,x(k));np=6
+        offsets=sgn*[0.5_wp,1.0_wp,1.5_wp,2.0_wp,3.0_wp,4.0_wp]
+      endif
+      do attempt=1,16
+        valid=.true.
+        do n=1,np
+          xp=x;xp(k)=x(k)+offsets(n)*h
+          if(xp(k)==x(k))then
+            valid=.false.;exit
+          endif
+          call eval(xp,values(n),code,sig)
+          if(code/=0.or.sig/=sig0)then
+            valid=.false.;exit
+          endif
+        enddo
+        if(valid)then
+          if(one_sided)then
+            dc=(-25*f0+48*values(2)-36*values(4)+16*values(5)-3*values(6))/(12*h*sgn)
+            df=(-25*f0+48*values(1)-36*values(2)+16*values(3)-3*values(4))/(6*h*sgn)
+          else
+            dc=(values(1)-values(2))/(2.0_wp*h)
+            df=(values(3)-values(4))/h
+          endif
+          if(abs(dc-df)<=2e-6_wp*max(abs(df),abs(f0)/scale,1e-9_wp))exit
+        endif
+        h=0.5_wp*h
+      enddo
+      if(attempt>16)return
+      if(one_sided)then
+        der(k)=(16.0_wp*df-dc)/15.0_wp
+      else
+        der(k)=(4.0_wp*df-dc)/3.0_wp
+      endif
+    enddo
+    if(.not.all(ieee_is_finite(der)))return
+    status=CLOSURE_OK
+  contains
+    subroutine eval(q,f,code,sig)
+      real(wp),intent(in)::q(5)
+      real(wp),intent(out)::f
+      integer,intent(out)::code,sig
+      call chexal_residual_si(q(1),q(2),q(3),(1.0_wp-q(1))*q(4),q(1)*q(5), &
+        theta,D,G,mul,mug,sigma,f,code,branch=branch,signature=sig)
+    end subroutine
   end subroutine
 end module module_closure_law

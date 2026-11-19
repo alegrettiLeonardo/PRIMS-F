@@ -1,5 +1,5 @@
 module module_matrix_roe
-  !! Fortran translation of matrixRoe.py (Roe matrix via Gauss-Legendre quadrature).
+  !! Approximate flux-Jacobian path integral via Gauss-Legendre quadrature.
   !!
   !! This module mirrors:
   !!   calculate_roe_matrix(U_i, U_ip1, ... , num_points, a=0, b=1, ul_prev, ug_prev)
@@ -55,23 +55,30 @@ contains
 
 
   function calculate_roe_matrix(U_i,U_ip1,Cl,Cg,theta,rho_l0,P_l0,D,AREA,EPS,G,MUL,MUG,sigma,njl_ref, &
-                                w_u,w_rho,w_P,tol,tola,num_points,a,b,ul_prev,ug_prev,status,fixed_regime,closure_id) result(RoeA)
+                                w_u,w_rho,w_P,tol,tola,num_points,a,b,ul_prev,ug_prev,status,fixed_regime,closure_id,theta_right) result(RoeA)
     !! Quadrature of dF/dU on the conservative segment. The closure branch
     !! is selected once and held fixed at every node. This is an approximate
     !! path integral, not an exact algebraic Roe average for a general closure.
+    !! With theta_right present, use the augmented segment (U(t),theta(t)).
+    !! Abar=int F_U dt is only the dissipative approximation. For varying theta,
+    !! F_R-F_L=Abar*(U_R-U_L)+int F_theta dt*(theta_R-theta_L), not Abar*dU.
+    !! Endpoint physical fluxes must retain their own geometry.
     real(wp), intent(in) :: U_i(3),U_ip1(3),Cl,Cg,theta,rho_l0,P_l0
     real(wp), intent(in) :: D,AREA,EPS,G,MUL,MUG,sigma,njl_ref,w_u,w_rho,w_P,tol,tola
     integer(i4), intent(in) :: num_points
-    real(wp), intent(in), optional :: a,b,ul_prev,ug_prev
+    real(wp), intent(in), optional :: a,b,ul_prev,ug_prev,theta_right
     integer(i4), intent(out), optional :: status
     integer(i4), intent(in), optional :: fixed_regime,closure_id
     real(wp) :: RoeA(3,3),aa,bb,xi(5),wi(5),t,Ux(3),partial(3,3),Jmat(3,3)
-    real(wp) :: alpha_i,rho_l_i,rho_g_i,P_i,u_l_i,u_g_i,ul_seed,ug_seed
+    real(wp) :: alpha_i,rho_l_i,rho_g_i,P_i,u_l_i,u_g_i,ul_seed,ug_seed,theta_end,theta_node
     integer(i4) :: idx,j,cid,code
     RoeA=ieee_value(0.0_wp,ieee_quiet_nan)
     if (present(status)) status=1
     if (num_points<1 .or. num_points>5) return
     if (.not. all(ieee_is_finite(U_i)) .or. .not. all(ieee_is_finite(U_ip1))) return
+    theta_end=theta
+    if (present(theta_right)) theta_end=theta_right
+    if (.not. all(ieee_is_finite([theta,theta_end]))) return
     aa=0.0_wp; bb=1.0_wp
     if (present(a)) aa=a
     if (present(b)) bb=b
@@ -98,7 +105,8 @@ contains
     do j=1,num_points
       t=(xi(j)-aa)/(bb-aa)
       Ux=U_i+t*(U_ip1-U_i)
-      call compute_primitive_variables(Ux(1),Ux(2),Ux(3),theta,Cg,Cl,rho_l0,P_l0,D,AREA,EPS,G, &
+      theta_node=theta+t*(theta_end-theta)
+      call compute_primitive_variables(Ux(1),Ux(2),Ux(3),theta_node,Cg,Cl,rho_l0,P_l0,D,AREA,EPS,G, &
             MUL,MUG,sigma,njl_ref,w_u,w_rho,tol,tola,100_i4,alpha_i,rho_l_i,rho_g_i,P_i,u_l_i,u_g_i,idx, &
             ul_prev=ul_seed,ug_prev=ug_seed,status=code,closure_id=cid)
       if (code/=0) then
@@ -106,7 +114,7 @@ contains
         return
       end if
       ul_seed=u_l_i; ug_seed=u_g_i
-      Jmat=DFduj(alpha_i,rho_l_i,rho_g_i,u_l_i,u_g_i,Cl,Cg,theta,D,AREA,EPS,G,MUL,MUG,sigma, &
+      Jmat=DFduj(alpha_i,rho_l_i,rho_g_i,u_l_i,u_g_i,Cl,Cg,theta_node,D,AREA,EPS,G,MUL,MUG,sigma, &
                  w_u,w_rho,w_P,tol,status=code,closure_id=cid)
       if (code/=0) then
         if (present(status)) status=100+code

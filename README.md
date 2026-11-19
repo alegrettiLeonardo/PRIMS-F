@@ -14,6 +14,11 @@ código diferente de zero é uma execução incompleta, mesmo que produza CSV.
 Consulte `docs/VALIDATION_RESULTS.md` para os resultados da campanha e
 `docs/TRANSIENT_DOMAIN_LIMITS.md` para os diagnósticos de SS1 e SS3.
 
+Para continuar a auditoria no WSL, comece por `docs/CODEX_HANDOFF_STATE.md`.
+O prompt pronto para o Codex está em `docs/CODEX_CONTINUATION_PROMPT_PT.md`,
+e o domínio documentado do futuro fechamento em `docs/CHEXAL_1992_SCOPE.md`.
+Chexal ainda não está implementado nesta entrega.
+
 ## Compilação e testes
 
 Dependências do executável: GNU Fortran com suporte a Fortran 2018,
@@ -193,3 +198,12 @@ frequência de gravação do CSV. A análise da sequência física exige examina
 acumulação, compressão, produção, penetração gasosa e blowdown conforme o regime.
 O detector de bloqueio forte não constitui condição necessária para OSC/SS3.
 Período ou conservação isolados não aprovam um ciclo físico.
+
+## Chexal 1992 (continuação de auditoria)
+
+`closure_riser=5` seleciona Chexal1992 ar–água; `6`/`7` declaram os ramos
+de maior/menor alfa da mesma correlação. ID3 preserva Bhagwat. Contracorrente
+é admitida apenas na vertical, gás ascendente e líquido descendente; a
+catenária D e o traço horizontal MATCHED não ganham essa extensão.
+Consulte [contratos de integração](docs/CHEXAL_1992_INTEGRATION.md) e os
+registros de fontes/testes. Verificação numérica não é validação experimental.

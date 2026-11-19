@@ -68,6 +68,7 @@ SRC := \
   $(DIR_SRC)/module_flow_regime.f90 \
   $(DIR_SRC)/module_config.f90 \
   $(DIR_SRC)/module_lapack_small.f90 \
+  $(DIR_SRC)/module_chexal_1992.f90 \
   $(DIR_SRC)/module_closure_law.f90 \
   $(DIR_SRC)/module_find.f90 \
   $(DIR_SRC)/module_catenary.f90 \
@@ -141,7 +142,8 @@ $(DIR_OBJ)/module_flow_regime.o:      $(DIR_OBJ)/mod_kinds.o
 $(DIR_OBJ)/module_catenary.o:         $(DIR_OBJ)/mod_kinds.o $(DIR_OBJ)/mod_rootfinding.o
 
 $(DIR_OBJ)/module_solver_utils.o:     $(DIR_OBJ)/mod_void_helpers.o
-$(DIR_OBJ)/module_closure_law.o:      $(DIR_OBJ)/mod_void_helpers.o
+$(DIR_OBJ)/module_chexal_1992.o:      $(DIR_OBJ)/mod_kinds.o
+$(DIR_OBJ)/module_closure_law.o:      $(DIR_OBJ)/mod_void_helpers.o $(DIR_OBJ)/module_chexal_1992.o
 $(DIR_OBJ)/module_find.o:             $(DIR_OBJ)/module_closure_law.o $(DIR_OBJ)/mod_rootfinding.o $(DIR_OBJ)/module_flow_regime.o
 
 $(DIR_OBJ)/module_steady_state.o:     $(DIR_OBJ)/module_find.o $(DIR_OBJ)/module_catenary.o $(DIR_OBJ)/module_solver_utils.o

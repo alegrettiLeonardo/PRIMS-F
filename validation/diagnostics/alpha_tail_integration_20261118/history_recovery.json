@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-18",
+  "archive": "PRIMSF_Evidencias_Implementacao.zip",
+  "archive_sha256": "af943e006857bf65f4848bd038b72dae9724fbe23e1bece425f93cb6d3859647",
+  "recovered_file": "prior_evidence.json",
+  "recovered_sha256": "f88afc885178f1c3456ed0d03c9177566939b7ab90edf77ce77f411ae169af89",
+  "matches_original_manifest": true,
+  "check_only_returncode": 0,
+  "check_only_source_tree": "/home/leonardoab/Documentos/PRIMS-F-roe-review-20261118",
+  "check_only_source_commit": "47433f8"
+}

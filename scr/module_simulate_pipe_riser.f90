@@ -301,7 +301,7 @@ contains
       logical,intent(out),optional::was_blocked
       real(wp),intent(out),optional::trace(6)
       real(wp)::mapped(3),vm(6),fs(3),ss(3),scratch(3,3),a0(3,3),pstar,rls,rgs,astl,astr
-      real(wp)::pip,kin,jsl,jsg,ax(3,3),raw_gas_flux,path_theta
+      real(wp)::pip,kin,jsl,jsg,ax(3,3),raw_gas_flux,path_theta,path_theta_right
       integer::ic,q,id_left,id_right
       logical::active
       active=.false.
@@ -333,16 +333,19 @@ contains
         if(thetaL<0.0_wp)id_left=this%cfg%closure_pipe
         if(thetaR<0.0_wp)id_right=this%cfg%closure_pipe
         if(match.or.id_left==id_right)then
-          path_theta=0.5_wp*(thetaL+thetaR)
-          if(match)path_theta=thetaL
-          ! Integrate the conservative path on one fixed closure branch.
+          path_theta=thetaL;path_theta_right=thetaR
+          if(match)path_theta_right=thetaL
+          ! Interpolate geometry along the conservative path on one closure.
+          ! MATCHED already maps both traces to the same pipe inclination.
+          ! This integral of F_U is a dissipative approximation: endpoint
+          ! physical fluxes retain their angles; no exact A*dU secant is claimed.
           ! An override skips this work entirely: lagged viscosity is built
           ! once at the old state, then shared by residual and Jacobian.
           a0=calculate_roe_matrix(x,mapped,this%cfg%nCl,this%cfg%nCg,path_theta, &
              this%cfg%nrho_l0,this%cfg%nP_l0,this%cfg%D_H,this%cfg%AREA,this%cfg%eps,this%cfg%G, &
              this%cfg%mu_l,this%cfg%mu_g,this%cfg%sigma,this%cfg%njl,this%cfg%omega_u, &
              this%cfg%omega_rho,this%cfg%omega_P,this%cfg%tol,this%cfg%tola,this%cfg%quad_points, &
-             ul_prev=vl(5),ug_prev=vl(6),status=ic,closure_id=id_left)
+             ul_prev=vl(5),ug_prev=vl(6),status=ic,closure_id=id_left,theta_right=path_theta_right)
           if(ic/=0)then
             istat=1200+ic;return
           endif

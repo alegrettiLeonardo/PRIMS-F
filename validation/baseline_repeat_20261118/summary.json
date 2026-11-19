@@ -1,0 +1,3540 @@
+{
+  "schema": "PRIMS-F.frozen-baseline-repeat.v1",
+  "summary_script_sha256": "519da8a78a56153d82eafc7133bb72cd5ed162ae0cf5e5bd241a9de59a422ece",
+  "frozen_commit": "05ad799af3b82aa540cb6c87b58debe914e52681",
+  "current_compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "current_python": "3.12.3",
+  "current_platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "current_analysis_packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.11.4",
+    "matplotlib": "3.6.3"
+  },
+  "historical_environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "compiler": "GNU Fortran (Debian 14.2.0-19) 14.2.0",
+    "packages": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "matplotlib": "3.10.8",
+      "mpmath": "1.3.0"
+    }
+  },
+  "cohort_same_physics_and_source_hashes": true,
+  "current_frozen_worktree_matches_every_recorded_source_hash": true,
+  "cross_compiler_comparison": true,
+  "restart_policy": "Both repeats started from zero; archived interrupted runs were not concatenated.",
+  "interpretation": "Numerical refinement/phase observables only. No automatic physical regime or experimental validation.",
+  "analysis_file_sha256": {
+    "osc_envelopes.json": "361238845f219cb1761f2c5b479d0d6b6bb9110dded134a59d0fcceef599865f",
+    "phase_sequence.json": "e3dd7dcb6813a80f5f51a27c8a10c691b798493f872823e38f370f9536d3b9e3",
+    "comparison.json": "b9edfa2b5811f986876bc84c20255c28f27079dfabfb27af204287f4d2867101"
+  },
+  "source_sha256": {
+    "scr/debug_closure_fd.f90": "fa2af5a40578008158e76044651214bf19422551f5bb60aca32add675ed967b5",
+    "scr/main.f90": "ea64165f6addf220a8e63002f43e1b7fb7a9292dfbaac7eda706cf860c1ef74b",
+    "scr/mod_fluid_dynamics.f90": "2f1b2137311d50cdd12410d01a2b1b58b694b8fbf18cf26a0da8a06506ffe9fe",
+    "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "scr/mod_roe_solver.f90": "4417a1c8db516a58f68023182ada5665b9f47277139b36b757e0cca00ed358c6",
+    "scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c",
+    "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "scr/module_boundary_conditions.f90": "a2a5d3bf8393661226c45e61f759fd874bd337801adf9c4e360bc0c3d48207b0",
+    "scr/module_catenary.f90": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+    "scr/module_closure_law.f90": "815af1f0355ea3075e729038644a193e52dc4a92d24f4504e9fa965eab9905a2",
+    "scr/module_config.f90": "2f719eda0f336d4ca5951228083c076d67166be307056224dea3dd75579f838b",
+    "scr/module_find.f90": "25f58d38f585a479c5919b9d4fd20810e0608527ac4ee5d047faec9426fbb007",
+    "scr/module_flow_regime.f90": "af17e75c6991c128935eddda4e90fbc8a5ed70d24b19bf0f978359080bac2afa",
+    "scr/module_jacobian.f90": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+    "scr/module_lapack_small.f90": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+    "scr/module_matrix_roe.f90": "314e0eb02a9445e07e536af2b85b4e721ac8bad58b076e6293f903a1f7d173bd",
+    "scr/module_mesh.f90": "bdb594b3f4ac288787484f613f73235453ad446053d4d34cb46ca0d60ac5f2fd",
+    "scr/module_roe_solver.f90": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+    "scr/module_simulate_pipe_riser.f90": "96c679103e433762e7560cc0b9664e59d0a7df14a21c4853f96afeb2764d83ef",
+    "scr/module_solver_utils.f90": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+    "scr/module_steady_state.f90": "73fbc6f2359b450d2d582439e65fd7942084a4d6c68a3c1426c4a6b668d40450",
+    "scr/module_time_step.f90": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133"
+  },
+  "cases": [
+    {
+      "name": "final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+      "source_directory": "/home/leonardoab/Documentos/PRIMS-F-baseline-20261118/validation/historical_validation_20261118/final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+      "new_repeat": false,
+      "completed": true,
+      "observed_end_s": 2400.0,
+      "nodes_each_section": 51,
+      "dt_max_s": 0.125,
+      "wall_seconds": 475.62515695299953,
+      "binary_sha256": "6260a2425124b070c5fd4310ffcafef8f1e0a777c900c0f332f09ccec643e7ca",
+      "sources_unchanged": true,
+      "binary_unchanged": true,
+      "namelist_sha256": "ef700a499723461a8471307e56ffebfa9371e1762d21750bd3322b9e03710578",
+      "data_quality_warnings": [],
+      "pressure_900_2400": {
+        "window_start_s": 900.0,
+        "window_end_s": 2400.0,
+        "full_window_observed": true,
+        "mean_Pa": 265963.2106141413,
+        "rms_about_mean_Pa": 5013.664263237727,
+        "peak_to_peak_Pa": 19597.40025847385,
+        "minimum_Pa": 256212.0616859783,
+        "maximum_Pa": 275809.46194445214
+      },
+      "last_ten_pressure_cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 2154.8192701280036,
+        "window_end_s": 2385.849380910329,
+        "window_is_end_of_run": true,
+        "mean_period_s": 23.10301107823252,
+        "period_cv": 8.004905447530199e-05,
+        "first_semi_amplitude_Pa": 9566.933804407454,
+        "last_semi_amplitude_Pa": 9796.406368690441,
+        "mean_semi_amplitude_Pa": 9699.735125169665,
+        "amplitude_cv": 0.00783334579055191,
+        "relative_amplitude_change": 0.023986009412678255,
+        "relative_difference_last_five_vs_first_five_amplitudes": 0.014048001555930334,
+        "growth_rate_s_inv": 0.00010122328578279543,
+        "log_amplitude_r_squared": 0.9774534539417421,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": false,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 2154.8192701280036,
+          "window_end_s": 2385.849380910329,
+          "full_window_observed": true,
+          "mean_Pa": 266175.6088819141,
+          "rms_about_mean_Pa": 6835.297935373193,
+          "peak_to_peak_Pa": 19584.9283945786,
+          "minimum_Pa": 256224.53354987354,
+          "maximum_Pa": 275809.46194445214
+        }
+      },
+      "last_ten_phase_observables": {
+        "p_junction_Pa": {
+          "available": true,
+          "unit": "Pa",
+          "first_five_mean": 266170.9281778947,
+          "last_five_mean": 266180.2887609807,
+          "mean_relative_change": 3.5166327039482065e-05,
+          "first_five_mean_excursion": 19303.8332034829,
+          "last_five_mean_excursion": 19522.446602039156,
+          "excursion_relative_change": 0.011198053349185291,
+          "cycle_means": [
+            266165.8993195352,
+            266168.6997632378,
+            266171.2301502617,
+            266173.3813069918,
+            266175.4303494469,
+            266177.28934585006,
+            266178.9628465449,
+            266180.4680240573,
+            266181.8188203914,
+            266182.9047680598
+          ],
+          "cycle_excursions": [
+            19186.07026634569,
+            19250.786149865366,
+            19308.756511877204,
+            19362.31329733113,
+            19411.239791995118,
+            19454.389460353443,
+            19491.888209194643,
+            19525.29974009603,
+            19555.72720597306,
+            19584.9283945786
+          ]
+        },
+        "holdup_liquid_base": {
+          "available": true,
+          "unit": "1",
+          "first_five_mean": 0.6179831172176408,
+          "last_five_mean": 0.6182423820966375,
+          "mean_relative_change": 0.0004193579840280504,
+          "first_five_mean_excursion": 0.2211605219807885,
+          "last_five_mean_excursion": 0.22362586208690916,
+          "excursion_relative_change": 0.01102439620853213,
+          "cycle_means": [
+            0.6178435569206976,
+            0.6179205170002701,
+            0.6179900174017956,
+            0.6180525142747555,
+            0.618108980490685,
+            0.6181598225036429,
+            0.6182055431684719,
+            0.6182466237625414,
+            0.6182835043501533,
+            0.6183164166983783
+          ],
+          "cycle_excursions": [
+            0.219815460849904,
+            0.22056883936208993,
+            0.2212375220910573,
+            0.22182933603071942,
+            0.2223514515701719,
+            0.22282965431852775,
+            0.22327817303688902,
+            0.22367383852684608,
+            0.22402162240676926,
+            0.22432602214551367
+          ]
+        },
+        "holdup_liquid_out": {
+          "available": true,
+          "unit": "1",
+          "first_five_mean": 0.5546731094428652,
+          "last_five_mean": 0.5545316723100238,
+          "mean_relative_change": -0.00025499186896493217,
+          "first_five_mean_excursion": 0.2051779819185709,
+          "last_five_mean_excursion": 0.20763697427015643,
+          "excursion_relative_change": 0.011842747950979757,
+          "cycle_means": [
+            0.5547492709741592,
+            0.554707581079198,
+            0.5546699282561546,
+            0.5546347277805038,
+            0.5546040391243103,
+            0.55457654672972,
+            0.554551834826626,
+            0.5545296407590955,
+            0.5545097050609935,
+            0.5544906341736838
+          ],
+          "cycle_excursions": [
+            0.2038534474434407,
+            0.20457975018048624,
+            0.205236328413547,
+            0.2058395392367658,
+            0.2063808443186148,
+            0.2068651340752442,
+            0.20729241891879902,
+            0.2076680233023135,
+            0.20802169932483505,
+            0.20833759572959032
+          ]
+        },
+        "mdot_l_base_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 1.182425752783742,
+          "last_five_mean": 1.1824262101956085,
+          "mean_relative_change": 3.868417855080573e-07,
+          "first_five_mean_excursion": 0.005253804915903349,
+          "last_five_mean_excursion": 0.005344371622416455,
+          "excursion_relative_change": 0.01694618430597766,
+          "cycle_means": [
+            1.1824255089367515,
+            1.1824256425520339,
+            1.1824257638086695,
+            1.1824258748665022,
+            1.182425973754753,
+            1.1824260634427162,
+            1.1824261443829642,
+            1.1824262173223026,
+            1.1824262829129943,
+            1.1824263429170645
+          ],
+          "cycle_excursions": [
+            0.005205083745591255,
+            0.005232182473978053,
+            0.005256534989469097,
+            0.005278105438518477,
+            0.0052971179319598605,
+            0.005315223841600547,
+            0.0053315227414225674,
+            0.005346095849268595,
+            0.005358914932620751,
+            0.005370100747169815
+          ]
+        },
+        "mdot_g_base_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 0.003027318685903393,
+          "last_five_mean": 0.0030276290033981507,
+          "mean_relative_change": 0.00010249521801036863,
+          "first_five_mean_excursion": 0.003028845354899616,
+          "last_five_mean_excursion": 0.0030654228653410366,
+          "excursion_relative_change": 0.011932288642777978,
+          "cycle_means": [
+            0.003027154469732124,
+            0.00302724377213797,
+            0.003027325107633205,
+            0.003027401437086821,
+            0.0030274686429268434,
+            0.003027529262191941,
+            0.0030275840113012232,
+            0.003027633397696354,
+            0.0030276779589552263,
+            0.0030277203868460086
+          ],
+          "cycle_excursions": [
+            0.003008797604715412,
+            0.0030199559126114607,
+            0.003029974578683369,
+            0.0030388402603850873,
+            0.003046658418102751,
+            0.0030535258027739876,
+            0.0030601344741902924,
+            0.003066113134693021,
+            0.0030713706641605793,
+            0.003075970250887303
+          ]
+        },
+        "mdot_l_out_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 1.1821049239097279,
+          "last_five_mean": 1.1822384312865535,
+          "mean_relative_change": 0.00011292762381300361,
+          "first_five_mean_excursion": 1.3710033202039797,
+          "last_five_mean_excursion": 1.3876202619779205,
+          "excursion_relative_change": 0.01197513630296442,
+          "cycle_means": [
+            1.1820343218897431,
+            1.1820735906967794,
+            1.1821093326422396,
+            1.182139065542568,
+            1.1821683087773092,
+            1.182195077060675,
+            1.1822192720913927,
+            1.1822411163345612,
+            1.182260793469953,
+            1.1822758974761856
+          ],
+          "cycle_excursions": [
+            1.3620555889210004,
+            1.3669151882103079,
+            1.3713887479124647,
+            1.3754893259668122,
+            1.3791677500093136,
+            1.3824111478186847,
+            1.3852597083799463,
+            1.387789264711548,
+            1.390227463419743,
+            1.3924137255596811
+          ]
+        },
+        "mdot_g_out_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 0.00302792107700864,
+          "last_five_mean": 0.0030279816651778584,
+          "mean_relative_change": 2.0009424071168983e-05,
+          "first_five_mean_excursion": 0.0016869651453747946,
+          "last_five_mean_excursion": 0.0017099612229023032,
+          "excursion_relative_change": 0.013448303516776608,
+          "cycle_means": [
+            0.003027888801994373,
+            0.003027904251838162,
+            0.0030279183574504756,
+            0.003027940821742861,
+            0.0030279531520173296,
+            0.0030279633153243494,
+            0.003027972432093022,
+            0.0030279805979115575,
+            0.0030279880403722174,
+            0.003028003940188146
+          ],
+          "cycle_excursions": [
+            0.0016743654647349455,
+            0.001681395348248663,
+            0.001687701820778949,
+            0.0016932506264522953,
+            0.0016981124666591197,
+            0.001702500860983256,
+            0.0017066825549665425,
+            0.0017104061067139218,
+            0.0017136855713862382,
+            0.0017165310204615572
+          ]
+        },
+        "Ml_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 71.99616588768542,
+          "last_five_mean": 71.99868740095516,
+          "mean_relative_change": 3.5021656099076295e-05,
+          "first_five_mean_excursion": 4.951636189131653,
+          "last_five_mean_excursion": 5.007971128448307,
+          "excursion_relative_change": 0.011249054331930332,
+          "cycle_means": [
+            71.99480925803148,
+            71.9955642844442,
+            71.99624605616921,
+            71.99682904753226,
+            71.99738079224996,
+            71.9978807254008,
+            71.99833056599947,
+            71.99873498584853,
+            71.99909781892447,
+            71.99939290860257
+          ],
+          "cycle_excursions": [
+            4.921084023488149,
+            4.937945874417451,
+            4.9529810200442626,
+            4.96690015985169,
+            4.979269867856715,
+            4.990173715830792,
+            4.999865845153309,
+            5.008679816790917,
+            5.0169100095479,
+            5.0242262549186165
+          ]
+        },
+        "Mg_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.17685174687871308,
+          "last_five_mean": 0.1768513577504986,
+          "mean_relative_change": -2.2003074402820686e-06,
+          "first_five_mean_excursion": 0.005652083487849402,
+          "last_five_mean_excursion": 0.005720852374760771,
+          "excursion_relative_change": 0.012020741387203687,
+          "cycle_means": [
+            0.1768519625592639,
+            0.1768518463465402,
+            0.17685174277837923,
+            0.17685163315667612,
+            0.17685154955270596,
+            0.1768514769111211,
+            0.17685141228854656,
+            0.1768513548220927,
+            0.17685130352684403,
+            0.17685124120388857
+          ],
+          "cycle_excursions": [
+            0.005614745707348046,
+            0.005635543939149279,
+            0.00565418167395898,
+            0.005670687834851973,
+            0.005685258283938732,
+            0.005698606933568606,
+            0.005711115038085662,
+            0.005722183890928684,
+            0.00573191711511975,
+            0.005740438896101152
+          ]
+        },
+        "Ml_riser_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 16.288291436371928,
+          "last_five_mean": 16.290841481304636,
+          "mean_relative_change": 0.0001565324256352281,
+          "first_five_mean_excursion": 4.935018639750295,
+          "last_five_mean_excursion": 4.991101690192929,
+          "excursion_relative_change": 0.011236607451383405,
+          "cycle_means": [
+            16.286919763760295,
+            16.2876829791008,
+            16.288372227464155,
+            16.288962143649343,
+            16.289520067885043,
+            16.29002559066721,
+            16.2904804921504,
+            16.290889488363003,
+            16.291256455652317,
+            16.291555379690248
+          ],
+          "cycle_excursions": [
+            4.9045698155110244,
+            4.9213969696836095,
+            4.936357634837011,
+            4.950245824204954,
+            4.962522954514878,
+            4.973341700225959,
+            4.983038478583033,
+            4.991790382257161,
+            5.000043289400153,
+            5.007294600498341
+          ]
+        },
+        "Mg_pipe_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.15484836234731106,
+          "last_five_mean": 0.1548546501030681,
+          "mean_relative_change": 4.0604242448315215e-05,
+          "first_five_mean_excursion": 0.010905625313747946,
+          "last_five_mean_excursion": 0.011036284978316425,
+          "excursion_relative_change": 0.011839098467028745,
+          "cycle_means": [
+            0.1548449863609207,
+            0.15484686247095608,
+            0.15484855830398386,
+            0.15485001482466978,
+            0.15485138977602492,
+            0.1548526360260668,
+            0.15485375805724477,
+            0.1548547673423806,
+            0.15485567340791465,
+            0.1548564156817337
+          ],
+          "cycle_excursions": [
+            0.010835101317957896,
+            0.010874474322535799,
+            0.010909389692759203,
+            0.010940261686013003,
+            0.010968899549473832,
+            0.010994830840110353,
+            0.011018120298958933,
+            0.011038626438342636,
+            0.011056613418411743,
+            0.011073233895758455
+          ]
+        },
+        "Ml_pipe_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 55.707874451313494,
+          "last_five_mean": 55.70784591965054,
+          "mean_relative_change": -5.121657079330003e-07,
+          "first_five_mean_excursion": 0.017443719628582245,
+          "last_five_mean_excursion": 0.017712243511756754,
+          "excursion_relative_change": 0.015160354079158427,
+          "cycle_means": [
+            55.707889494271186,
+            55.70788130534339,
+            55.707873828705054,
+            55.70786690388291,
+            55.70786072436491,
+            55.7078551347336,
+            55.707850073849066,
+            55.707845497485536,
+            55.70784136327216,
+            55.70783752891232
+          ],
+          "cycle_excursions": [
+            0.017299029505863928,
+            0.01737906735997541,
+            0.01745105588655349,
+            0.01751570870627006,
+            0.01757373668424833,
+            0.01762743251880039,
+            0.01767456203766926,
+            0.017716729072589033,
+            0.017754421396212194,
+            0.01778807253351289
+          ]
+        },
+        "Mg_riser_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.022003384531402003,
+          "last_five_mean": 0.021996707647430478,
+          "mean_relative_change": -0.00030344804282251094,
+          "first_five_mean_excursion": 0.009261101667248708,
+          "last_five_mean_excursion": 0.009366482876454543,
+          "excursion_relative_change": 0.011250883666348445,
+          "cycle_means": [
+            0.022006976198343173,
+            0.022004983875584094,
+            0.02200318447439536,
+            0.022001618332006343,
+            0.02200015977668105,
+            0.02199884088505429,
+            0.021997654231301803,
+            0.02199658747971208,
+            0.021995630118929375,
+            0.021994825522154846
+          ],
+          "cycle_excursions": [
+            0.00920433716511812,
+            0.009235577359826847,
+            0.00926378737659089,
+            0.00928946282292922,
+            0.009312343611778462,
+            0.009333148735404893,
+            0.009351470011822943,
+            0.009368072857848065,
+            0.00938322266672018,
+            0.009396500110476637
+          ]
+        }
+      },
+      "mass_balance_full_run": {
+        "liquid": {
+          "max_absolute_error_kg": 9.795257938094437e-10,
+          "normalization_kg": 2837.824436794129,
+          "max_relative_error": 3.451678620809987e-13,
+          "passes_1e_minus_6_relative": true
+        },
+        "gas": {
+          "max_absolute_error_kg": 1.8009171931510082e-10,
+          "normalization_kg": 7.267363767269862,
+          "max_relative_error": 2.4780886863842244e-11,
+          "passes_1e_minus_6_relative": true
+        }
+      },
+      "phase_window": {
+        "start_s": 900.0,
+        "end_s": 2400.0
+      },
+      "phase_classification": "pressure_oscillations_with_observed_positive_base_gas_flow",
+      "phase_event_counts": {
+        "accumulation_compression_proxies": 66,
+        "liquid_production_excursions": 49,
+        "base_gas_restart_proxies": 0,
+        "blowdown_proxies": 65
+      },
+      "gas_base_observations": {
+        "minimum_kg_s": 0.0017701054086120443,
+        "strictly_positive_at_observed_times": true,
+        "above_low_flow_threshold_through_observation": true,
+        "low_flux_detector_definition": "At or below5% of reference gas influx (subject to absolute floor), continuously observed for at least configured minimum duration; restart above25% uses hysteresis.",
+        "no_restart_does_not_exclude_osc_or_ss3": true
+      },
+      "phase_signal_statistics": {
+        "pressure": {
+          "mean": 265963.2106141413,
+          "std": 5013.664263237727,
+          "minimum": 256212.0616859783,
+          "maximum": 275809.46194445214,
+          "peak_to_peak": 19597.40025847385,
+          "initial": 264212.3066128454,
+          "final": 260985.66635910643,
+          "change": -3226.640253738966,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "p_junction_Pa"
+        },
+        "liquid_riser_inventory": {
+          "mean": 16.227891253403982,
+          "std": 1.2808969787873106,
+          "minimum": 13.71442975374458,
+          "maximum": 18.724890005555842,
+          "peak_to_peak": 5.010460251811262,
+          "initial": 15.789965855267514,
+          "final": 15.556197740934874,
+          "change": -0.23376811433264066,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "Ml_riser_kg"
+        },
+        "gas_pipeline_inventory": {
+          "mean": 0.15471651767972644,
+          "std": 0.002836857844444246,
+          "minimum": 0.1492057206653424,
+          "maximum": 0.1602938174970788,
+          "peak_to_peak": 0.011088096831736394,
+          "initial": 0.15371563862544796,
+          "final": 0.15139550357708287,
+          "change": -0.0023201350483650907,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "Mg_pipe_kg"
+        },
+        "liquid_production": {
+          "mean": 0.0011860507655168638,
+          "std": 0.0003541752824432688,
+          "minimum": 0.0006132308472769232,
+          "maximum": 0.0020110247442471883,
+          "peak_to_peak": 0.001397793896970265,
+          "initial": 0.0011560869072652137,
+          "final": 0.0006260878930096823,
+          "change": -0.0005299990142555314,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "derived_Ql_out_m3_s"
+        },
+        "gas_base_mass_flow": {
+          "mean": 0.0030296594875291465,
+          "std": 0.0007789740627504848,
+          "minimum": 0.0017701054086120443,
+          "maximum": 0.0048487906906945445,
+          "peak_to_peak": 0.0030786852820825,
+          "initial": 0.0030644242142384556,
+          "final": 0.001989552490759578,
+          "change": -0.0010748717234788777,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "mdot_g_base_kg_s"
+        }
+      },
+      "phase_thresholds": {
+        "pressure_change_Pa": 100.0,
+        "riser_liquid_change_kg": 0.02505230125905631,
+        "pipeline_gas_change_kg": 5.544048415868197e-05,
+        "production_high": 0.0014654841077768417,
+        "production_reference": 0.0011859253283827886,
+        "production_reference_definition": "imposed_liquid_mass_flow/rho_l0; reference-volume proxy",
+        "production_excursion_floor": 5.929626641913943e-05,
+        "production_unit": "m3/s",
+        "gas_reference_kg_s": 0.0030280682363617484,
+        "gas_reference_definition": "A*imposed_phase_mass_flux from metadata",
+        "gas_low_kg_s": 0.00015140341181808743,
+        "gas_high_kg_s": 0.0007570170590904371
+      },
+      "raw_files": {
+        "monitor.csv": {
+          "sha256": "d8f413a9c210221f9365c784fc3835b0cdcef6bb34733e1dc4a8a5807443b834",
+          "bytes": 17761453
+        },
+        "manifest.json": {
+          "sha256": "cd3df300bb10371f5f852f5758d87840dfdef00d15c1c2ea4a1badf75fecb823",
+          "bytes": 3504
+        },
+        "run_metadata.txt": {
+          "sha256": "0b5e5ed4f9a915c675bc08377c23e436179f73a9a8da9168d009ddb3eb2f9f91",
+          "bytes": 3213
+        },
+        "run_status.txt": {
+          "sha256": "8264b9272361e0fb9470acae14e98c5dc1905eeac24a60abbeddc7625d74d8fb",
+          "bytes": 190
+        }
+      }
+    },
+    {
+      "name": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+      "source_directory": "/home/leonardoab/Documentos/PRIMS-F-baseline-20261118/validation/historical_validation_20261118/refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+      "new_repeat": false,
+      "completed": true,
+      "observed_end_s": 2400.0,
+      "nodes_each_section": 101,
+      "dt_max_s": 0.125,
+      "wall_seconds": 1108.2879211319996,
+      "binary_sha256": "6260a2425124b070c5fd4310ffcafef8f1e0a777c900c0f332f09ccec643e7ca",
+      "sources_unchanged": true,
+      "binary_unchanged": true,
+      "namelist_sha256": "1092b350eaac1b924f5fb743263a71f6e578b732254c7eedf8d353abdecca20f",
+      "data_quality_warnings": [],
+      "pressure_900_2400": {
+        "window_start_s": 900.0,
+        "window_end_s": 2400.0,
+        "full_window_observed": true,
+        "mean_Pa": 266396.35452648613,
+        "rms_about_mean_Pa": 7993.146414698033,
+        "peak_to_peak_Pa": 25542.87691383448,
+        "minimum_Pa": 253529.8515680685,
+        "maximum_Pa": 279072.728481903
+      },
+      "last_ten_pressure_cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 2144.0546325173464,
+        "window_end_s": 2376.718588432538,
+        "window_is_end_of_run": false,
+        "mean_period_s": 23.266395591519178,
+        "period_cv": 3.404312421709155e-06,
+        "first_semi_amplitude_Pa": 12767.956299668716,
+        "last_semi_amplitude_Pa": 12770.673739502003,
+        "mean_semi_amplitude_Pa": 12769.677515903737,
+        "amplitude_cv": 6.985546795480193e-05,
+        "relative_amplitude_change": 0.0002128327955943643,
+        "relative_difference_last_five_vs_first_five_amplitudes": 0.00011985983803630695,
+        "growth_rate_s_inv": 8.75807894644065e-07,
+        "log_amplitude_r_squared": 0.9359392533261996,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": true,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 2144.0546325173464,
+          "window_end_s": 2376.718588432538,
+          "full_window_observed": true,
+          "mean_Pa": 266550.44802620413,
+          "rms_about_mean_Pa": 8982.292161750602,
+          "peak_to_peak_Pa": 25540.94234523183,
+          "minimum_Pa": 253529.8515680685,
+          "maximum_Pa": 279070.7939133003
+        }
+      },
+      "last_ten_phase_observables": {
+        "p_junction_Pa": {
+          "available": true,
+          "unit": "Pa",
+          "first_five_mean": 266550.38909828116,
+          "last_five_mean": 266550.50695382897,
+          "mean_relative_change": 4.4215090474886714e-07,
+          "first_five_mean_excursion": 25536.798790926026,
+          "last_five_mean_excursion": 25539.796125123314,
+          "excursion_relative_change": 0.00011735936272172577,
+          "cycle_means": [
+            266550.28763598704,
+            266550.36426622974,
+            266550.4319889998,
+            266550.48202423484,
+            266550.3795759543,
+            266550.4269097409,
+            266550.4702128473,
+            266550.51025691547,
+            266550.5466662364,
+            266550.58072340465
+          ],
+          "cycle_excursions": [
+            25536.619126564707,
+            25537.25149755596,
+            25537.20147587103,
+            25536.55111031569,
+            25536.370744322747,
+            25537.585916237324,
+            25539.291604486352,
+            25540.622424957954,
+            25540.89024780967,
+            25540.59043212526
+          ]
+        },
+        "holdup_liquid_base": {
+          "available": true,
+          "unit": "1",
+          "first_five_mean": 0.6250827877602336,
+          "last_five_mean": 0.6250863725847967,
+          "mean_relative_change": 5.73492675622055e-06,
+          "first_five_mean_excursion": 0.28811081473349254,
+          "last_five_mean_excursion": 0.2881445130130094,
+          "excursion_relative_change": 0.00011694923205204013,
+          "cycle_means": [
+            0.6250803828682219,
+            0.6250818206117068,
+            0.6250830163214639,
+            0.6250840057434164,
+            0.625084713256359,
+            0.6250854019312447,
+            0.6250859754272691,
+            0.6250864518171771,
+            0.6250868503427819,
+            0.625087183405511
+          ],
+          "cycle_excursions": [
+            0.2881065150616634,
+            0.2881132420117857,
+            0.2881123034805053,
+            0.28810400377863854,
+            0.28811800933486975,
+            0.2881263544696159,
+            0.2881417512201584,
+            0.2881508544630602,
+            0.2881536210134831,
+            0.2881499838987296
+          ]
+        },
+        "holdup_liquid_out": {
+          "available": true,
+          "unit": "1",
+          "first_five_mean": 0.5498402987832608,
+          "last_five_mean": 0.5498381310154697,
+          "mean_relative_change": -3.942540762922193e-06,
+          "first_five_mean_excursion": 0.2739511123173745,
+          "last_five_mean_excursion": 0.27397024616474663,
+          "excursion_relative_change": 6.983914362954458e-05,
+          "cycle_means": [
+            0.5498415160302991,
+            0.5498409556217669,
+            0.5498405318281354,
+            0.5498401208704906,
+            0.5498383695656117,
+            0.5498382130851882,
+            0.5498381234849667,
+            0.5498380892019961,
+            0.5498380937647767,
+            0.549838135540421
+          ],
+          "cycle_excursions": [
+            0.2739277627214497,
+            0.27394686028811177,
+            0.2739583737742005,
+            0.2739626391449246,
+            0.27395992565818594,
+            0.2739582166926747,
+            0.27395104798268866,
+            0.2739682623159987,
+            0.2739827334589059,
+            0.2739909703734653
+          ]
+        },
+        "mdot_l_base_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 1.182426835452165,
+          "last_five_mean": 1.182426843626648,
+          "mean_relative_change": 6.913309803891386e-09,
+          "first_five_mean_excursion": 0.008049334514589468,
+          "last_five_mean_excursion": 0.008049971013471957,
+          "excursion_relative_change": 7.906846887075384e-05,
+          "cycle_means": [
+            1.1824268300526548,
+            1.1824268330219476,
+            1.1824268354364968,
+            1.1824268375156965,
+            1.1824268412340293,
+            1.182426842425251,
+            1.1824268433131269,
+            1.1824268436056835,
+            1.1824268441180528,
+            1.1824268446711264
+          ],
+          "cycle_excursions": [
+            0.00804808490103337,
+            0.008049123100909439,
+            0.008049689576025587,
+            0.008049897330802525,
+            0.00804987766417642,
+            0.008049430168043825,
+            0.008048560494848145,
+            0.008049865771763365,
+            0.008050758470635966,
+            0.008051240162068485
+          ]
+        },
+        "mdot_g_base_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 0.00302805763108623,
+          "last_five_mean": 0.003028064286784631,
+          "mean_relative_change": 2.1980043258381453e-06,
+          "first_five_mean_excursion": 0.004043193283269825,
+          "last_five_mean_excursion": 0.004043383000815575,
+          "excursion_relative_change": 4.6920498432190566e-05,
+          "cycle_means": [
+            0.0030280535588726584,
+            0.003028055690416601,
+            0.0030280573747553997,
+            0.0030280588750349014,
+            0.00302806265635159,
+            0.0030280634420442273,
+            0.003028064013044172,
+            0.003028064393727978,
+            0.0030280646952120112,
+            0.003028064889894767
+          ],
+          "cycle_excursions": [
+            0.004042790777249162,
+            0.004043132100270265,
+            0.0040433310107379095,
+            0.004043392360598041,
+            0.004043320167493746,
+            0.004043169653814915,
+            0.00404295208749188,
+            0.004043347839729974,
+            0.0040436385720869945,
+            0.004043806850954114
+          ]
+        },
+        "mdot_l_out_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 1.1824227849009006,
+          "last_five_mean": 1.1824249975022691,
+          "mean_relative_change": 1.8712403520234647e-06,
+          "first_five_mean_excursion": 1.8358528215036212,
+          "last_five_mean_excursion": 1.836166725710317,
+          "excursion_relative_change": 0.00017095626573578957,
+          "cycle_means": [
+            1.182420797794112,
+            1.182422325637029,
+            1.1824236750750128,
+            1.1824246636862383,
+            1.182422462312111,
+            1.1824234004126453,
+            1.1824242572342356,
+            1.182425041765181,
+            1.1824257894188785,
+            1.1824264986804056
+          ],
+          "cycle_excursions": [
+            1.8358786828997764,
+            1.8358976594266667,
+            1.8358513515885693,
+            1.8357420679522773,
+            1.8358943456508159,
+            1.8360626285136372,
+            1.8361720124638778,
+            1.8362235855714708,
+            1.8362183262807084,
+            1.83615707572189
+          ]
+        },
+        "mdot_g_out_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 0.0030280650925756034,
+          "last_five_mean": 0.0030280678921414637,
+          "mean_relative_change": 9.245386695752833e-07,
+          "first_five_mean_excursion": 0.002378724613161656,
+          "last_five_mean_excursion": 0.0023791611048948878,
+          "excursion_relative_change": 0.0001834645549364908,
+          "cycle_means": [
+            0.003028064924444347,
+            0.003028063816527452,
+            0.003028062590962409,
+            0.0030280620225283878,
+            0.003028072108415421,
+            0.0030280707744625456,
+            0.003028069372478802,
+            0.003028067909028195,
+            0.003028066450096237,
+            0.003028064954641539
+          ],
+          "cycle_excursions": [
+            0.002378623476148096,
+            0.002378496859520684,
+            0.002378574876697243,
+            0.002378829860703169,
+            0.0023790979927390886,
+            0.0023792613753399815,
+            0.0023793171625731296,
+            0.0023792665279074704,
+            0.0023791105481565647,
+            0.0023788499104972923
+          ]
+        },
+        "Ml_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 72.08636589251648,
+          "last_five_mean": 72.08639677689371,
+          "mean_relative_change": 4.284355801570282e-07,
+          "first_five_mean_excursion": 6.558163616942449,
+          "last_five_mean_excursion": 6.558792045474727,
+          "excursion_relative_change": 9.581467561721914e-05,
+          "cycle_means": [
+            72.08633982832042,
+            72.08635922675094,
+            72.08637632036748,
+            72.08638904065855,
+            72.08636504648506,
+            72.08637689229047,
+            72.08638769024606,
+            72.08639763522537,
+            72.08640663945066,
+            72.08641502725598
+          ],
+          "cycle_excursions": [
+            6.557714012557,
+            6.558113653366533,
+            6.558335277672683,
+            6.55838547350119,
+            6.558269667614837,
+            6.558547446202482,
+            6.558712038419401,
+            6.558724501235602,
+            6.558908867055109,
+            6.559067374461037
+          ]
+        },
+        "Mg_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.17685670032789572,
+          "last_five_mean": 0.17685669782070648,
+          "mean_relative_change": -1.417638816823963e-08,
+          "first_five_mean_excursion": 0.007607681010094269,
+          "last_five_mean_excursion": 0.007608350529224905,
+          "excursion_relative_change": 8.799793438332442e-05,
+          "cycle_means": [
+            0.17685669892007128,
+            0.17685670194221595,
+            0.17685670497495756,
+            0.17685670665934874,
+            0.17685668914288502,
+            0.1768566919990821,
+            0.1768566949011971,
+            0.17685669782245345,
+            0.17685670072302512,
+            0.1768567036577746
+          ],
+          "cycle_excursions": [
+            0.007606659856381592,
+            0.00760739586304654,
+            0.007607890420062019,
+            0.007608152954553249,
+            0.0076083059564279465,
+            0.0076084147415833026,
+            0.007608312429845415,
+            0.007608003724808132,
+            0.007608302026456348,
+            0.007608719723431329
+          ]
+        },
+        "Ml_riser_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 16.379554954767425,
+          "last_five_mean": 16.379586557415884,
+          "mean_relative_change": 1.9293923169702968e-06,
+          "first_five_mean_excursion": 6.533596485112329,
+          "last_five_mean_excursion": 6.534198439082993,
+          "excursion_relative_change": 9.212361336677572e-05,
+          "cycle_means": [
+            16.379528446704764,
+            16.37954809461156,
+            16.379565390731862,
+            16.379578274070788,
+            16.379554567718145,
+            16.379566525105492,
+            16.37957741283195,
+            16.379587438727043,
+            16.379596493152658,
+            16.37960491726228
+          ],
+          "cycle_excursions": [
+            6.533078795164595,
+            6.533511599180551,
+            6.533767288473989,
+            6.53385240507037,
+            6.53377233767214,
+            6.53393182581101,
+            6.53413029129004,
+            6.534177337684522,
+            6.534279780087701,
+            6.534472960541692
+          ]
+        },
+        "Mg_pipe_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.15508497306903105,
+          "last_five_mean": 0.15508505709104345,
+          "mean_relative_change": 5.41780194554018e-07,
+          "first_five_mean_excursion": 0.014418974882909951,
+          "last_five_mean_excursion": 0.014420689300713923,
+          "excursion_relative_change": 0.00011888598167682468,
+          "cycle_means": [
+            0.1550849042788025,
+            0.15508495430132363,
+            0.15508499811120385,
+            0.15508503099257492,
+            0.15508497766125032,
+            0.15508500754242416,
+            0.1550850346017738,
+            0.1550850593536424,
+            0.15508508165305127,
+            0.15508510230432568
+          ],
+          "cycle_excursions": [
+            0.014417829669327309,
+            0.01441819332386679,
+            0.014418737279493249,
+            0.014419651905445752,
+            0.014420462236416659,
+            0.014420917478232376,
+            0.014421026245496904,
+            0.014420795669402048,
+            0.014420232063622668,
+            0.014420475046815623
+          ]
+        },
+        "Ml_pipe_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 55.70681093774906,
+          "last_five_mean": 55.70681021947782,
+          "mean_relative_change": -1.2893777725767483e-08,
+          "first_five_mean_excursion": 0.02573295393723072,
+          "last_five_mean_excursion": 0.025737081537999983,
+          "excursion_relative_change": 0.0001603756340115537,
+          "cycle_means": [
+            55.70681138161565,
+            55.70681113213938,
+            55.70681092963562,
+            55.70681076658776,
+            55.70681047876691,
+            55.706810367184985,
+            55.7068102774141,
+            55.70681019649833,
+            55.706810146298004,
+            55.706810109993704
+          ],
+          "cycle_excursions": [
+            0.025730615141107194,
+            0.02573231171216861,
+            0.025733280796806923,
+            0.02573356241265401,
+            0.025734999623416854,
+            0.025736184307191934,
+            0.025736790004835086,
+            0.02573683432296292,
+            0.025737624692020233,
+            0.025737974362989746
+          ]
+        },
+        "Mg_riser_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.021771727258864667,
+          "last_five_mean": 0.02177164072966301,
+          "mean_relative_change": -3.974383870843039e-06,
+          "first_five_mean_excursion": 0.012262591307500285,
+          "last_five_mean_excursion": 0.012263921348666895,
+          "excursion_relative_change": 0.0001084515408078403,
+          "cycle_means": [
+            0.02177179464126879,
+            0.021771747640892316,
+            0.021771706863753695,
+            0.021771675666773824,
+            0.021771711481634703,
+            0.021771684456657947,
+            0.02177166029942327,
+            0.02177163846881105,
+            0.021771619069973845,
+            0.02177160135344893
+          ],
+          "cycle_excursions": [
+            0.012262223694838661,
+            0.012262465768301943,
+            0.01226241945669036,
+            0.01226285901929855,
+            0.01226298859837191,
+            0.012263225530366014,
+            0.012263855495111543,
+            0.012264201131774139,
+            0.012264267161776126,
+            0.012264057424306647
+          ]
+        }
+      },
+      "mass_balance_full_run": {
+        "liquid": {
+          "max_absolute_error_kg": 9.295035852119327e-10,
+          "normalization_kg": 2837.824436794129,
+          "max_relative_error": 3.275409053359152e-13,
+          "passes_1e_minus_6_relative": true
+        },
+        "gas": {
+          "max_absolute_error_kg": 1.233813051726429e-10,
+          "normalization_kg": 7.267363767269862,
+          "max_relative_error": 1.6977450025044457e-11,
+          "passes_1e_minus_6_relative": true
+        }
+      },
+      "phase_window": {
+        "start_s": 900.0,
+        "end_s": 2400.0
+      },
+      "phase_classification": "pressure_oscillations_with_observed_positive_base_gas_flow",
+      "phase_event_counts": {
+        "accumulation_compression_proxies": 65,
+        "liquid_production_excursions": 61,
+        "base_gas_restart_proxies": 0,
+        "blowdown_proxies": 65
+      },
+      "gas_base_observations": {
+        "minimum_kg_s": 0.0014775706859469927,
+        "strictly_positive_at_observed_times": true,
+        "above_low_flow_threshold_through_observation": true,
+        "low_flux_detector_definition": "At or below5% of reference gas influx (subject to absolute floor), continuously observed for at least configured minimum duration; restart above25% uses hysteresis.",
+        "no_restart_does_not_exclude_osc_or_ss3": true
+      },
+      "phase_signal_statistics": {
+        "pressure": {
+          "mean": 266396.3545264862,
+          "std": 7993.146414698033,
+          "minimum": 253529.8515680685,
+          "maximum": 279072.728481903,
+          "peak_to_peak": 25542.87691383448,
+          "initial": 262816.93721469946,
+          "final": 279072.728481903,
+          "change": 16255.791267203516,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "p_junction_Pa"
+        },
+        "liquid_riser_inventory": {
+          "mean": 16.33834396895669,
+          "std": 2.04311146106427,
+          "minimum": 12.999985123009505,
+          "maximum": 19.53458891169791,
+          "peak_to_peak": 6.534603788688404,
+          "initial": 15.296844057864089,
+          "final": 19.36795737610776,
+          "change": 4.071113318243672,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "Ml_riser_kg"
+        },
+        "gas_pipeline_inventory": {
+          "mean": 0.1549807554380008,
+          "std": 0.00451115569015859,
+          "minimum": 0.14771534320126012,
+          "maximum": 0.16213661040498728,
+          "peak_to_peak": 0.014421267203727162,
+          "initial": 0.15306694817602212,
+          "final": 0.16210141516351728,
+          "change": 0.00903446698749516,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "Mg_pipe_kg"
+        },
+        "liquid_production": {
+          "mean": 0.0011831308933368575,
+          "std": 0.0005661814709377203,
+          "minimum": 0.000482550878579082,
+          "maximum": 0.0023241269595713158,
+          "peak_to_peak": 0.001841576080992234,
+          "initial": 0.001250691479156136,
+          "final": 0.001452199170710516,
+          "change": 0.00020150769155438003,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "derived_Ql_out_m3_s"
+        },
+        "gas_base_mass_flow": {
+          "mean": 0.0030220699901172174,
+          "std": 0.0012424808777521032,
+          "minimum": 0.0014775706859469927,
+          "maximum": 0.005521433382188349,
+          "peak_to_peak": 0.004043862696241356,
+          "initial": 0.0033962636343862476,
+          "final": 0.0028128311753155637,
+          "change": -0.0005834324590706839,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "mdot_g_base_kg_s"
+        }
+      },
+      "phase_thresholds": {
+        "pressure_change_Pa": 100.0,
+        "riser_liquid_change_kg": 0.032673018943442024,
+        "pipeline_gas_change_kg": 7.210633601863581e-05,
+        "production_high": 0.0015542405445812355,
+        "production_reference": 0.0011859253283827886,
+        "production_reference_definition": "imposed_liquid_mass_flow/rho_l0; reference-volume proxy",
+        "production_excursion_floor": 5.929626641913943e-05,
+        "production_unit": "m3/s",
+        "gas_reference_kg_s": 0.0030280682363617484,
+        "gas_reference_definition": "A*imposed_phase_mass_flux from metadata",
+        "gas_low_kg_s": 0.00015140341181808743,
+        "gas_high_kg_s": 0.0007570170590904371
+      },
+      "raw_files": {
+        "monitor.csv": {
+          "sha256": "8cc3a740819078b574e3cefb703ff484c9b025118dd7658640d993d8ba092e89",
+          "bytes": 17761453
+        },
+        "manifest.json": {
+          "sha256": "cc14b23e6d8f2ab7fd19ce28a69fc12b3081c1e404e23c208e7b8d9a2a97f487",
+          "bytes": 3517
+        },
+        "run_metadata.txt": {
+          "sha256": "105d954bba4838ef9b8b31cb15bb7f032e00b5584e92735356777368f66775d7",
+          "bytes": 3213
+        },
+        "run_status.txt": {
+          "sha256": "ef573221bcda54e7f51604a8586c63b227c90820a438f25dee16eddfa8a1c186",
+          "bytes": 190
+        }
+      }
+    },
+    {
+      "name": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+      "source_directory": "/home/leonardoab/Documentos/PRIMS-F-baseline-20261118/validation/historical_validation_20261118/refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+      "new_repeat": false,
+      "completed": true,
+      "observed_end_s": 2400.0,
+      "nodes_each_section": 51,
+      "dt_max_s": 0.0625,
+      "wall_seconds": 995.0831057080031,
+      "binary_sha256": "6260a2425124b070c5fd4310ffcafef8f1e0a777c900c0f332f09ccec643e7ca",
+      "sources_unchanged": true,
+      "binary_unchanged": true,
+      "namelist_sha256": "eae6554c8b65bf08720f14c64b2191da48e3a207400e04e16ce637dc8a29be3c",
+      "data_quality_warnings": [],
+      "pressure_900_2400": {
+        "window_start_s": 900.0,
+        "window_end_s": 2400.0,
+        "full_window_observed": true,
+        "mean_Pa": 266528.92781042063,
+        "rms_about_mean_Pa": 9373.761539241237,
+        "peak_to_peak_Pa": 27527.641735016194,
+        "minimum_Pa": 252504.29920267907,
+        "maximum_Pa": 280031.94093769527
+      },
+      "last_ten_pressure_cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 2145.555758267767,
+        "window_end_s": 2378.2120536697494,
+        "window_is_end_of_run": true,
+        "mean_period_s": 23.265629540198233,
+        "period_cv": 1.2825873465620896e-06,
+        "first_semi_amplitude_Pa": 13763.759230909534,
+        "last_semi_amplitude_Pa": 13763.831232937606,
+        "mean_semi_amplitude_Pa": 13763.806326143753,
+        "amplitude_cv": 1.7934446053966253e-06,
+        "relative_amplitude_change": 5.231276344108693e-06,
+        "relative_difference_last_five_vs_first_five_amplitudes": 3.0356371920614578e-06,
+        "growth_rate_s_inv": 2.2287657592550035e-08,
+        "log_amplitude_r_squared": 0.9195487593609989,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": true,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 2145.555758267767,
+          "window_end_s": 2378.2120536697494,
+          "full_window_observed": true,
+          "mean_Pa": 266592.76568304,
+          "rms_about_mean_Pa": 9671.242245577314,
+          "peak_to_peak_Pa": 27527.641735016194,
+          "minimum_Pa": 252504.29920267907,
+          "maximum_Pa": 280031.94093769527
+        }
+      },
+      "last_ten_phase_observables": {
+        "p_junction_Pa": {
+          "available": true,
+          "unit": "Pa",
+          "first_five_mean": 266592.7614342029,
+          "last_five_mean": 266592.7699318369,
+          "mean_relative_change": 3.1874960568714054e-08,
+          "first_five_mean_excursion": 27527.19656190932,
+          "last_five_mean_excursion": 27527.23612800551,
+          "excursion_relative_change": 1.4373435823211423e-06,
+          "cycle_means": [
+            266592.7442647916,
+            266592.7680754212,
+            266592.7913741126,
+            266592.7539153916,
+            266592.7495412976,
+            266592.772339013,
+            266592.7948210887,
+            266592.75653969555,
+            266592.75179474166,
+            266592.7741646457
+          ],
+          "cycle_excursions": [
+            27527.20187878044,
+            27527.06705660632,
+            27527.22358139034,
+            27527.202972607076,
+            27527.28732016243,
+            27527.145074922068,
+            27527.285618276044,
+            27527.24780362693,
+            27527.323427492433,
+            27527.178715710063
+          ]
+        },
+        "holdup_liquid_base": {
+          "available": true,
+          "unit": "1",
+          "first_five_mean": 0.6301883799600567,
+          "last_five_mean": 0.6301884881225159,
+          "mean_relative_change": 1.7163509211927376e-07,
+          "first_five_mean_excursion": 0.31020866484456733,
+          "last_five_mean_excursion": 0.3102092551402377,
+          "excursion_relative_change": 1.9028950961915368e-06,
+          "cycle_means": [
+            0.6301882942178552,
+            0.6301883554151346,
+            0.6301884102688675,
+            0.6301884104794075,
+            0.630188429419019,
+            0.6301884643982677,
+            0.6301884981200012,
+            0.6301884811719298,
+            0.6301884865047807,
+            0.6301885104176002
+          ],
+          "cycle_excursions": [
+            0.310210283078154,
+            0.3102099118222653,
+            0.3102039381464434,
+            0.31020796763011527,
+            0.3102112235458586,
+            0.31021066128764996,
+            0.31020455823436666,
+            0.31020845975489486,
+            0.31021162317690676,
+            0.31021097324737035
+          ]
+        },
+        "holdup_liquid_out": {
+          "available": true,
+          "unit": "1",
+          "first_five_mean": 0.5480196831010083,
+          "last_five_mean": 0.548019669880907,
+          "mean_relative_change": -2.412340606483319e-08,
+          "first_five_mean_excursion": 0.29433709542470365,
+          "last_five_mean_excursion": 0.2943383120712224,
+          "excursion_relative_change": 4.133496962023518e-06,
+          "cycle_means": [
+            0.5480195823922361,
+            0.5480197761002146,
+            0.5480199746673463,
+            0.5480195730705157,
+            0.5480195092747292,
+            0.5480197172718657,
+            0.5480199273540521,
+            0.5480195334011273,
+            0.5480194786760053,
+            0.5480196927014843
+          ],
+          "cycle_excursions": [
+            0.2943363598895341,
+            0.2943388151382216,
+            0.2943387588320129,
+            0.29433414972878236,
+            0.29433739353496746,
+            0.29433964109742083,
+            0.2943394215737617,
+            0.29433467313182493,
+            0.2943378356766292,
+            0.2943399888764755
+          ]
+        },
+        "mdot_l_base_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 1.1824268484235732,
+          "last_five_mean": 1.1824268485590803,
+          "mean_relative_change": 1.1460088310133479e-10,
+          "first_five_mean_excursion": 0.00920301420444134,
+          "last_five_mean_excursion": 0.009203128661808701,
+          "excursion_relative_change": 1.2436788788652492e-05,
+          "cycle_means": [
+            1.1824268484959133,
+            1.1824268481327873,
+            1.1824268479713915,
+            1.1824268487291705,
+            1.1824268487886036,
+            1.1824268483689957,
+            1.182426848161748,
+            1.182426848884891,
+            1.1824268489113252,
+            1.1824268484684413
+          ],
+          "cycle_excursions": [
+            0.009202787148077096,
+            0.009203177792574957,
+            0.009202830838098919,
+            0.009203435733285081,
+            0.009202839510170646,
+            0.009203219434721577,
+            0.009202863784582682,
+            0.009203461344018393,
+            0.00920286193561437,
+            0.009203236810106485
+          ]
+        },
+        "mdot_g_base_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 0.0030280679990364948,
+          "last_five_mean": 0.003028068123356839,
+          "mean_relative_change": 4.105599323366533e-08,
+          "first_five_mean_excursion": 0.004396903738400234,
+          "last_five_mean_excursion": 0.004396933924361205,
+          "excursion_relative_change": 6.86522961012095e-06,
+          "cycle_means": [
+            0.0030280680886869533,
+            0.003028067798055228,
+            0.0030280675403828333,
+            0.0030280682224422765,
+            0.003028068345615183,
+            0.003028068004997077,
+            0.0030280677070186803,
+            0.0030280683592300165,
+            0.0030280684536105875,
+            0.0030280680919278343
+          ],
+          "cycle_excursions": [
+            0.004396811345485973,
+            0.00439690640558058,
+            0.004397000634501795,
+            0.0043969736011123485,
+            0.004396826705320472,
+            0.004396919277985486,
+            0.004397010867199164,
+            0.0043969816490776175,
+            0.004396832937093706,
+            0.004396924890450052
+          ]
+        },
+        "mdot_l_out_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 1.182426643617488,
+          "last_five_mean": 1.1824268212627043,
+          "mean_relative_change": 1.502378101718029e-07,
+          "first_five_mean_excursion": 1.9861201152178154,
+          "last_five_mean_excursion": 1.9861220248283653,
+          "excursion_relative_change": 9.614769515863913e-07,
+          "cycle_means": [
+            1.1824262779801133,
+            1.1824267766400272,
+            1.1824272914223324,
+            1.1824264840166807,
+            1.1824263880282857,
+            1.182426865585937,
+            1.1824273633426872,
+            1.182426538661053,
+            1.1824264350312228,
+            1.1824269036926212
+          ],
+          "cycle_excursions": [
+            1.986105984506739,
+            1.9860898601037937,
+            1.986138948656127,
+            1.9861527376547712,
+            1.9861130451676456,
+            1.9860957524621607,
+            1.9861436360131515,
+            1.9861564635998379,
+            1.9861159436301108,
+            1.9860983284365659
+          ]
+        },
+        "mdot_g_out_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 0.003028068439235664,
+          "last_five_mean": 0.0030280681542711515,
+          "mean_relative_change": -9.410768554568726e-08,
+          "first_five_mean_excursion": 0.002622518070873329,
+          "last_five_mean_excursion": 0.0026225363098821277,
+          "excursion_relative_change": 6.954721172096892e-06,
+          "cycle_means": [
+            0.003028069453115086,
+            0.003028067860489412,
+            0.0030280662741312323,
+            0.0030280691088822257,
+            0.003028069499560364,
+            0.003028067897145357,
+            0.0030280663029141723,
+            0.0030280691433450177,
+            0.0030280695172396847,
+            0.003028067910711526
+          ],
+          "cycle_excursions": [
+            0.0026225223501660754,
+            0.0026225716639123662,
+            0.002622531870546838,
+            0.0026224301353842323,
+            0.0026225343343571324,
+            0.0026225812051293945,
+            0.0026225395164944467,
+            0.0026224360949718404,
+            0.002622539510542855,
+            0.0026225852222721024
+          ]
+        },
+        "Ml_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 72.11505438344987,
+          "last_five_mean": 72.11505647611688,
+          "mean_relative_change": 2.9018447817933325e-08,
+          "first_five_mean_excursion": 7.058688024990067,
+          "last_five_mean_excursion": 7.058724135345292,
+          "excursion_relative_change": 5.115705690252022e-06,
+          "cycle_means": [
+            72.11505023281134,
+            72.11505594756674,
+            72.11506155824081,
+            72.11505260448547,
+            72.11505157414499,
+            72.1150570312389,
+            72.11506243419693,
+            72.11505327366261,
+            72.11505214661145,
+            72.11505749487446
+          ],
+          "cycle_excursions": [
+            7.058670018619196,
+            7.0587724378714825,
+            7.058738160894876,
+            7.058567186451484,
+            7.058692321113298,
+            7.0587902711610155,
+            7.058752323023938,
+            7.058578323219081,
+            7.058701928856365,
+            7.058797830466062
+          ]
+        },
+        "Mg_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.17681664012319015,
+          "last_five_mean": 0.17681664073845907,
+          "mean_relative_change": 3.4797003074863344e-09,
+          "first_five_mean_excursion": 0.008194162457699295,
+          "last_five_mean_excursion": 0.00819421468214988,
+          "excursion_relative_change": 6.373331992265716e-06,
+          "cycle_means": [
+            0.17681663820177781,
+            0.17681664113055598,
+            0.17681664406909245,
+            0.17681663896961236,
+            0.1768166382449122,
+            0.17681664116678833,
+            0.17681664409971418,
+            0.1768166389736893,
+            0.17681663826657104,
+            0.17681664118553256
+          ],
+          "cycle_excursions": [
+            0.00819410231499662,
+            0.00819425873694446,
+            0.008194224883928791,
+            0.008194094193548274,
+            0.008194132159078327,
+            0.008194282580985396,
+            0.008194243800071915,
+            0.008194109278962275,
+            0.008194145043855183,
+            0.008194292706874634
+          ]
+        },
+        "Ml_riser_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 16.40893810846802,
+          "last_five_mean": 16.40894022487176,
+          "mean_relative_change": 1.2897869755632443e-07,
+          "first_five_mean_excursion": 7.031103713429338,
+          "last_five_mean_excursion": 7.03114724194635,
+          "excursion_relative_change": 6.1908128950120964e-06,
+          "cycle_means": [
+            16.40893395114017,
+            16.40893967467951,
+            16.408945248175137,
+            16.408936344900972,
+            16.408935323444325,
+            16.40894078330161,
+            16.408946144232395,
+            16.4089370304341,
+            16.408935908954373,
+            16.40894125743633
+          ],
+          "cycle_excursions": [
+            7.0310405729091805,
+            7.031180174096493,
+            7.031183741424995,
+            7.031051284624514,
+            7.031062794091508,
+            7.031197957832369,
+            7.031197879915904,
+            7.031062418949341,
+            7.031072411767406,
+            7.031205541266727
+          ]
+        },
+        "Mg_pipe_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.1551266212529948,
+          "last_five_mean": 0.15512662654370374,
+          "mean_relative_change": 3.410574344584989e-08,
+          "first_five_mean_excursion": 0.01557136495937816,
+          "last_five_mean_excursion": 0.01557136768078643,
+          "excursion_relative_change": 1.747700219016032e-07,
+          "cycle_means": [
+            0.15512661124570146,
+            0.15512662483635312,
+            0.15512663806839297,
+            0.1551266172364762,
+            0.1551266148780503,
+            0.15512662777006614,
+            0.15512664043890306,
+            0.1551266190607038,
+            0.15512661642593337,
+            0.1551266290229123
+          ],
+          "cycle_excursions": [
+            0.015571482765411232,
+            0.015571306417860808,
+            0.01557107455216214,
+            0.015571424438740766,
+            0.015571536622715848,
+            0.015571349355646108,
+            0.015571109577924402,
+            0.015571453105535094,
+            0.015571559298898668,
+            0.015571367065927877
+          ]
+        },
+        "Ml_pipe_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 55.70611627498185,
+          "last_five_mean": 55.70611625124511,
+          "mean_relative_change": -4.26106510092552e-10,
+          "first_five_mean_excursion": 0.028865640829481266,
+          "last_five_mean_excursion": 0.02886577170515494,
+          "excursion_relative_change": 4.533939885974118e-06,
+          "cycle_means": [
+            55.70611628167117,
+            55.70611627288724,
+            55.706116310065674,
+            55.7061162595845,
+            55.70611625070066,
+            55.706116247937295,
+            55.70611628996453,
+            55.706116243228514,
+            55.70611623765708,
+            55.70611623743814
+          ],
+          "cycle_excursions": [
+            0.028865572731596956,
+            0.028865707000676366,
+            0.028865409346153115,
+            0.028865795477919676,
+            0.028865719591060213,
+            0.028865824790713646,
+            0.02886550525010989,
+            0.02886587220159953,
+            0.028865781966423754,
+            0.028865874316927886
+          ]
+        },
+        "Mg_riser_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.021690018870195348,
+          "last_five_mean": 0.02169001419475534,
+          "mean_relative_change": -2.1555721252958512e-07,
+          "first_five_mean_excursion": 0.013195875579207691,
+          "last_five_mean_excursion": 0.013195914642346665,
+          "excursion_relative_change": 2.960244896412767e-06,
+          "cycle_means": [
+            0.021690026956076355,
+            0.021690016294202863,
+            0.02169000600069947,
+            0.021690021733136163,
+            0.021690023366861887,
+            0.021690013396722184,
+            0.02169000366081111,
+            0.021690019912985498,
+            0.021690021840637664,
+            0.02169001216262025
+          ],
+          "cycle_excursions": [
+            0.013195882577470633,
+            0.013195932020207425,
+            0.013195833460481221,
+            0.013195805862930125,
+            0.01319592397494905,
+            0.013195965062213757,
+            0.013195860420052921,
+            0.013195827189842455,
+            0.013195941640314467,
+            0.013195978899309724
+          ]
+        }
+      },
+      "mass_balance_full_run": {
+        "liquid": {
+          "max_absolute_error_kg": 1.5456862456630915e-09,
+          "normalization_kg": 2837.824436794284,
+          "max_relative_error": 5.446729634230504e-13,
+          "passes_1e_minus_6_relative": true
+        },
+        "gas": {
+          "max_absolute_error_kg": 8.073195445490455e-10,
+          "normalization_kg": 7.2673637672647065,
+          "max_relative_error": 1.1108836304377053e-10,
+          "passes_1e_minus_6_relative": true
+        }
+      },
+      "phase_window": {
+        "start_s": 900.0,
+        "end_s": 2400.0
+      },
+      "phase_classification": "pressure_oscillations_with_observed_positive_base_gas_flow",
+      "phase_event_counts": {
+        "accumulation_compression_proxies": 65,
+        "liquid_production_excursions": 64,
+        "base_gas_restart_proxies": 0,
+        "blowdown_proxies": 64
+      },
+      "gas_base_observations": {
+        "minimum_kg_s": 0.0013837509365991702,
+        "strictly_positive_at_observed_times": true,
+        "above_low_flow_threshold_through_observation": true,
+        "low_flux_detector_definition": "At or below5% of reference gas influx (subject to absolute floor), continuously observed for at least configured minimum duration; restart above25% uses hysteresis.",
+        "no_restart_does_not_exclude_osc_or_ss3": true
+      },
+      "phase_signal_statistics": {
+        "pressure": {
+          "mean": 266528.92781042063,
+          "std": 9373.761539241237,
+          "minimum": 252504.29920267907,
+          "maximum": 280031.94093769527,
+          "peak_to_peak": 27527.641735016194,
+          "initial": 256980.8256789741,
+          "final": 279091.74914089916,
+          "change": 22110.923461925064,
+          "sample_count": 21462,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "p_junction_Pa"
+        },
+        "liquid_riser_inventory": {
+          "mean": 16.395456717019375,
+          "std": 2.3904591605783114,
+          "minimum": 12.756868651523964,
+          "maximum": 19.7880818783426,
+          "peak_to_peak": 7.031213226818634,
+          "initial": 13.933497456052079,
+          "final": 19.779979926749455,
+          "change": 5.846482470697376,
+          "sample_count": 21462,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "Ml_riser_kg"
+        },
+        "gas_pipeline_inventory": {
+          "mean": 0.15508201445191735,
+          "std": 0.005298920927069367,
+          "minimum": 0.14713697397941491,
+          "maximum": 0.16270853327831358,
+          "peak_to_peak": 0.015571559298898668,
+          "initial": 0.14978365033512536,
+          "final": 0.1618756016110454,
+          "change": 0.012091951275920026,
+          "sample_count": 21462,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "Mg_pipe_kg"
+        },
+        "liquid_production": {
+          "mean": 0.0011819474539646977,
+          "std": 0.0006663908328400781,
+          "minimum": 0.00044181798445219094,
+          "maximum": 0.0024337607147367764,
+          "peak_to_peak": 0.0019919427302845854,
+          "initial": 0.0010821596167850012,
+          "final": 0.0011170389001202096,
+          "change": 3.487928333520841e-05,
+          "sample_count": 21462,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "derived_Ql_out_m3_s"
+        },
+        "gas_base_mass_flow": {
+          "mean": 0.0030200338039011792,
+          "std": 0.0014675150202291237,
+          "minimum": 0.0013837509365991702,
+          "maximum": 0.005780768399282075,
+          "peak_to_peak": 0.004397017462682905,
+          "initial": 0.0034674292964415447,
+          "final": 0.0021755132185677243,
+          "change": -0.0012919160778738204,
+          "sample_count": 21462,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "mdot_g_base_kg_s"
+        }
+      },
+      "phase_thresholds": {
+        "pressure_change_Pa": 100.0,
+        "riser_liquid_change_kg": 0.035156066134093174,
+        "pipeline_gas_change_kg": 7.785779649449335e-05,
+        "production_high": 0.0015843138744397057,
+        "production_reference": 0.0011859253283827886,
+        "production_reference_definition": "imposed_liquid_mass_flow/rho_l0; reference-volume proxy",
+        "production_excursion_floor": 5.929626641913943e-05,
+        "production_unit": "m3/s",
+        "gas_reference_kg_s": 0.0030280682363617484,
+        "gas_reference_definition": "A*imposed_phase_mass_flux from metadata",
+        "gas_low_kg_s": 0.00015140341181808743,
+        "gas_high_kg_s": 0.0007570170590904371
+      },
+      "raw_files": {
+        "monitor.csv": {
+          "sha256": "5323450af492aad3063ffd9c61b9d71aaa955ca011359d9a2a3fc4974c3b8cfc",
+          "bytes": 31722478
+        },
+        "manifest.json": {
+          "sha256": "749bbe1a0421b513a0e8d8cd761b486263d12bd468073f390bae25c029fe9ffa",
+          "bytes": 3513
+        },
+        "run_metadata.txt": {
+          "sha256": "2c68e59d45d14b9b4556513f514d7a0d852b2458141d7bd7455c1516e276ce64",
+          "bytes": 3213
+        },
+        "run_status.txt": {
+          "sha256": "8295ac36985f9ede5734a1d71d18fce5d48b695f792cbe820fbf6a37d5fa5d75",
+          "bytes": 190
+        }
+      }
+    },
+    {
+      "name": "repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N201_201_dt0.125",
+      "source_directory": "/home/leonardoab/Documentos/PRIMS-F-baseline-20261118/validation/results/repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N201_201_dt0.125",
+      "new_repeat": true,
+      "completed": true,
+      "observed_end_s": 2400.0,
+      "nodes_each_section": 201,
+      "dt_max_s": 0.125,
+      "wall_seconds": 2101.6957695720002,
+      "binary_sha256": "11c1faa0a27c58654ab3f49a168519f62939d367b63ba0e7780e1c9d7f1219d4",
+      "sources_unchanged": true,
+      "binary_unchanged": true,
+      "namelist_sha256": "48f80cb8ccc9d776230cee506e21286bad4dd45b8b79c987eb43279fa98cbebb",
+      "data_quality_warnings": [],
+      "pressure_900_2400": {
+        "window_start_s": 900.0,
+        "window_end_s": 2400.0,
+        "full_window_observed": true,
+        "mean_Pa": 266545.82524323877,
+        "rms_about_mean_Pa": 8970.245053824086,
+        "peak_to_peak_Pa": 28023.307517826266,
+        "minimum_Pa": 252447.75135529786,
+        "maximum_Pa": 280471.05887312413
+      },
+      "last_ten_pressure_cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 2149.3495968550396,
+        "window_end_s": 2382.8043010662554,
+        "window_is_end_of_run": true,
+        "mean_period_s": 23.345470421121583,
+        "period_cv": 5.22074529594268e-06,
+        "first_semi_amplitude_Pa": 14011.304952623745,
+        "last_semi_amplitude_Pa": 14011.673435085584,
+        "mean_semi_amplitude_Pa": 14011.547154527692,
+        "amplitude_cv": 8.676927741424028e-06,
+        "relative_amplitude_change": 2.6298939540980726e-05,
+        "relative_difference_last_five_vs_first_five_amplitudes": 1.4367352145328027e-05,
+        "growth_rate_s_inv": 1.0661861768310158e-07,
+        "log_amplitude_r_squared": 0.9051688862256504,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": true,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 2149.3495968550396,
+          "window_end_s": 2382.8043010662554,
+          "full_window_observed": true,
+          "mean_Pa": 266739.36946268217,
+          "rms_about_mean_Pa": 9850.472669815419,
+          "peak_to_peak_Pa": 28023.199680054968,
+          "minimum_Pa": 252447.75135529786,
+          "maximum_Pa": 280470.95103535283
+        }
+      },
+      "last_ten_phase_observables": {
+        "p_junction_Pa": {
+          "available": true,
+          "unit": "Pa",
+          "first_five_mean": 266739.3542856415,
+          "last_five_mean": 266739.38463904196,
+          "mean_relative_change": 1.1379422086422594e-07,
+          "first_five_mean_excursion": 28021.747030792612,
+          "last_five_mean_excursion": 28022.25951859149,
+          "excursion_relative_change": 1.828859655440242e-05,
+          "cycle_means": [
+            266739.2761631547,
+            266739.3649886807,
+            266739.45297510887,
+            266739.3923096497,
+            266739.28499161353,
+            266739.36836984486,
+            266739.4518764881,
+            266739.4673351661,
+            266739.27693992644,
+            266739.3586737844
+          ],
+          "cycle_excursions": [
+            28022.306523315172,
+            28022.072630102193,
+            28022.070244461094,
+            28019.888267507427,
+            28022.397488577175,
+            28022.68943719534,
+            28022.72073621524,
+            28020.595479744836,
+            28022.13079974652,
+            28023.161140055512
+          ]
+        },
+        "holdup_liquid_base": {
+          "available": true,
+          "unit": "1",
+          "first_five_mean": 0.6282823004444157,
+          "last_five_mean": 0.6282828282832859,
+          "mean_relative_change": 8.40129391424245e-07,
+          "first_five_mean_excursion": 0.31392207016355034,
+          "last_five_mean_excursion": 0.31392587450403,
+          "excursion_relative_change": 1.2118594829594987e-05,
+          "cycle_means": [
+            0.6282818900589324,
+            0.6282821623756116,
+            0.6282823879907179,
+            0.6282824971897012,
+            0.6282825646071151,
+            0.6282827018822643,
+            0.6282828191811712,
+            0.6282828800141296,
+            0.6282828294522668,
+            0.6282829108865974
+          ],
+          "cycle_excursions": [
+            0.31392979687505473,
+            0.31392476468655406,
+            0.31390431116653283,
+            0.313918347249873,
+            0.31393313083973706,
+            0.31393188167970365,
+            0.3139098950851277,
+            0.31391949385738893,
+            0.31393238971714554,
+            0.3139357121807842
+          ]
+        },
+        "holdup_liquid_out": {
+          "available": true,
+          "unit": "1",
+          "first_five_mean": 0.5475891276901667,
+          "last_five_mean": 0.547588939150945,
+          "mean_relative_change": -3.443078252387485e-07,
+          "first_five_mean_excursion": 0.3018326107406051,
+          "last_five_mean_excursion": 0.30183901635653365,
+          "excursion_relative_change": 2.1221961315321423e-05,
+          "cycle_means": [
+            0.5475887057543797,
+            0.54758937481977,
+            0.5475900753903812,
+            0.5475893326341162,
+            0.547588149852186,
+            0.5475888928028931,
+            0.5475896509749703,
+            0.5475897508463705,
+            0.5475878113088979,
+            0.5475885898215932
+          ],
+          "cycle_excursions": [
+            0.30183661808062445,
+            0.30184471569548954,
+            0.30183200631059903,
+            0.30181232658486357,
+            0.3018373870314487,
+            0.3018492185408834,
+            0.30184048479075987,
+            0.3018213518689614,
+            0.30183393607873665,
+            0.301850090503327
+          ]
+        },
+        "mdot_l_base_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 1.1824268471471837,
+          "last_five_mean": 1.1824268481927642,
+          "mean_relative_change": 8.842665511689284e-10,
+          "first_five_mean_excursion": 0.009411397916686414,
+          "last_five_mean_excursion": 0.009411642078283622,
+          "excursion_relative_change": 2.5942507712990197e-05,
+          "cycle_means": [
+            1.1824268476163216,
+            1.1824268464808216,
+            1.1824268454111004,
+            1.1824268469017323,
+            1.1824268493259422,
+            1.1824268481977955,
+            1.1824268467000145,
+            1.1824268467409973,
+            1.1824268501775348,
+            1.182426849147479
+          ],
+          "cycle_excursions": [
+            0.009411745007390726,
+            0.009410264227160958,
+            0.009410860320091308,
+            0.00941193297681897,
+            0.009412187051970111,
+            0.009411317202457248,
+            0.00941060703176766,
+            0.009412211878954357,
+            0.009412418842375425,
+            0.00941165543586342
+          ]
+        },
+        "mdot_g_base_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 0.003028066930741991,
+          "last_five_mean": 0.003028067817799499,
+          "mean_relative_change": 2.929450597271457e-07,
+          "first_five_mean_excursion": 0.004454967700240728,
+          "last_five_mean_excursion": 0.004454979757010428,
+          "excursion_relative_change": 2.706357908997119e-06,
+          "cycle_means": [
+            0.0030280672662177234,
+            0.0030280664240821434,
+            0.003028065298879169,
+            0.003028066727016642,
+            0.003028068937514277,
+            0.0030280678118608678,
+            0.0030280664954050285,
+            0.0030280663645612165,
+            0.0030280698506978485,
+            0.003028068566472533
+          ],
+          "cycle_excursions": [
+            0.004455060328475995,
+            0.004454512435219044,
+            0.0044548206821456455,
+            0.004455233495698598,
+            0.004455211559664359,
+            0.0044547485855685465,
+            0.004454715014648881,
+            0.004455218998454869,
+            0.004455291310747554,
+            0.004454924875632291
+          ]
+        },
+        "mdot_l_out_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 1.1824259187641246,
+          "last_five_mean": 1.1824265659849744,
+          "mean_relative_change": 5.473666343617999e-07,
+          "first_five_mean_excursion": 2.0275712285304155,
+          "last_five_mean_excursion": 2.027627451892681,
+          "excursion_relative_change": 2.772864522667849e-05,
+          "cycle_means": [
+            1.1824242728783434,
+            1.1824261966622238,
+            1.1824279865058112,
+            1.1824266916099615,
+            1.182424446164283,
+            1.1824262563668189,
+            1.18242796737951,
+            1.1824282737830198,
+            1.1824242881860803,
+            1.1824260442094436
+          ],
+          "cycle_excursions": [
+            2.027602738077496,
+            2.0277169113796147,
+            2.027624797587886,
+            2.027325713460761,
+            2.027585982146319,
+            2.027740345796444,
+            2.0276904171071606,
+            2.027435002563973,
+            2.027536310246192,
+            2.027735183749636
+          ]
+        },
+        "mdot_g_out_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 0.0030280689164060926,
+          "last_five_mean": 0.0030280684187371275,
+          "mean_relative_change": -1.6435192817759374e-07,
+          "first_five_mean_excursion": 0.0026824373820741924,
+          "last_five_mean_excursion": 0.0026824546683389817,
+          "excursion_relative_change": 6.44419642702859e-06,
+          "cycle_means": [
+            0.003028073395292616,
+            0.0030280676216411758,
+            0.0030280617898595435,
+            0.003028066747140895,
+            0.003028075028096233,
+            0.003028069189472656,
+            0.0030280633218445242,
+            0.0030280623952204577,
+            0.0030280765472983084,
+            0.0030280706398496905
+          ],
+          "cycle_excursions": [
+            0.0026821740461070117,
+            0.0026822842180114393,
+            0.002682654828287118,
+            0.0026827044864001187,
+            0.0026823693315652735,
+            0.0026822363698440622,
+            0.0026826289333308057,
+            0.002682760969617474,
+            0.0026825092278522132,
+            0.0026821378410503524
+          ]
+        },
+        "Ml_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 72.13036663126944,
+          "last_five_mean": 72.1303742091225,
+          "mean_relative_change": 1.0505772550709092e-07,
+          "first_five_mean_excursion": 7.200711732005752,
+          "last_five_mean_excursion": 7.200887056930751,
+          "excursion_relative_change": 2.434768433560574e-05,
+          "cycle_means": [
+            72.13034768914189,
+            72.130369074013,
+            72.13039030181176,
+            72.13037586999359,
+            72.13035022138698,
+            72.13037021052185,
+            72.13039029072809,
+            72.13039405174385,
+            72.13034846635131,
+            72.13036802626736
+          ],
+          "cycle_excursions": [
+            7.200525260276677,
+            7.2010199268927835,
+            7.2010198212397825,
+            7.200527998779378,
+            7.200465652840137,
+            7.201044884400517,
+            7.201141404529068,
+            7.200749460702369,
+            7.200509826686783,
+            7.200989708335015
+          ]
+        },
+        "Mg_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.17686358661173887,
+          "last_five_mean": 0.17686358830350377,
+          "mean_relative_change": 9.565365664394954e-09,
+          "first_five_mean_excursion": 0.00841807412637129,
+          "last_five_mean_excursion": 0.008418179408308607,
+          "excursion_relative_change": 1.2506497214062066e-05,
+          "cycle_means": [
+            0.17686357806987565,
+            0.17686358877837186,
+            0.17686359937237348,
+            0.17686359066896284,
+            0.1768635761691105,
+            0.1768635868512619,
+            0.1768635973636978,
+            0.1768635989566191,
+            0.17686357377485118,
+            0.1768635845710888
+          ],
+          "cycle_excursions": [
+            0.008418213081104603,
+            0.008418232360521305,
+            0.008417713517963527,
+            0.008417858315474147,
+            0.008418353356792863,
+            0.008418381393246938,
+            0.008418004649953598,
+            0.008417724638040247,
+            0.008418366459402388,
+            0.008418419900899865
+          ]
+        },
+        "Ml_riser_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 16.42417150798155,
+          "last_five_mean": 16.42417918694323,
+          "mean_relative_change": 4.6754005740283104e-07,
+          "first_five_mean_excursion": 7.1725792136276265,
+          "last_five_mean_excursion": 7.172734850915727,
+          "excursion_relative_change": 2.1698458305759467e-05,
+          "cycle_means": [
+            16.42415255604913,
+            16.424173889106076,
+            16.42419508169625,
+            16.424180756444276,
+            16.42415525661202,
+            16.42417517913797,
+            16.424195197107718,
+            16.42419894282626,
+            16.424153557137874,
+            16.42417305850634
+          ],
+          "cycle_excursions": [
+            7.172478536346363,
+            7.172898468569189,
+            7.172826060731268,
+            7.172264342480625,
+            7.172428660010686,
+            7.172940144187743,
+            7.172963929915625,
+            7.172501634591896,
+            7.172366349245301,
+            7.17290219663807
+          ]
+        },
+        "Mg_pipe_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.1552034152661441,
+          "last_five_mean": 0.1552034350943882,
+          "mean_relative_change": 1.2775647710454166e-07,
+          "first_five_mean_excursion": 0.015805695377829738,
+          "last_five_mean_excursion": 0.015805811014863846,
+          "excursion_relative_change": 7.316108866491884e-06,
+          "cycle_means": [
+            0.15520336954213038,
+            0.15520342042361188,
+            0.1552034706516273,
+            0.15520343750060542,
+            0.15520337821274555,
+            0.1552034253899035,
+            0.15520347251216465,
+            0.15520348134775758,
+            0.15520337508156345,
+            0.1552034211405518
+          ],
+          "cycle_excursions": [
+            0.015805463326150987,
+            0.015805347863844105,
+            0.015805454151928855,
+            0.015806247351465297,
+            0.015805964195759442,
+            0.015805577359044504,
+            0.015805300227333202,
+            0.015806309530046886,
+            0.015806247701322385,
+            0.015805620256572256
+          ]
+        },
+        "Ml_pipe_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 55.70619512328789,
+          "last_five_mean": 55.70619502217926,
+          "mean_relative_change": -1.8150338997975915e-09,
+          "first_five_mean_excursion": 0.029458360225413573,
+          "last_five_mean_excursion": 0.029458922453692082,
+          "excursion_relative_change": 1.908516102018201e-05,
+          "cycle_means": [
+            55.706195133092756,
+            55.70619518490693,
+            55.70619522011551,
+            55.706195113549306,
+            55.70619496477496,
+            55.70619503138387,
+            55.706195093620366,
+            55.70619510891759,
+            55.70619490921343,
+            55.70619496776102
+          ],
+          "cycle_excursions": [
+            0.029458984174205227,
+            0.029458765736976034,
+            0.029456760680389493,
+            0.02945771736078484,
+            0.02945957317471226,
+            0.029459621773305855,
+            0.02945790304439555,
+            0.02945742977565402,
+            0.029459627936383015,
+            0.02946002973872197
+          ]
+        },
+        "Mg_riser_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.021660171345594764,
+          "last_five_mean": 0.021660153209115574,
+          "mean_relative_change": -8.3731928527351e-07,
+          "first_five_mean_excursion": 0.013464993378256858,
+          "last_five_mean_excursion": 0.013465223717464428,
+          "excursion_relative_change": 1.7106229529007897e-05,
+          "cycle_means": [
+            0.021660208527745285,
+            0.02166016835475998,
+            0.02166012872074618,
+            0.021660153168357427,
+            0.021660197956364945,
+            0.021660161461358407,
+            0.021660124851533163,
+            0.021660117608861548,
+            0.021660198693287742,
+            0.021660163430537
+          ],
+          "cycle_excursions": [
+            0.013465256953071594,
+            0.013465593196773862,
+            0.013465004309686335,
+            0.013463842619803944,
+            0.013465269811948552,
+            0.013465778041657103,
+            0.01346536999353076,
+            0.013464048479034247,
+            0.013465108647558633,
+            0.013465813425541396
+          ]
+        }
+      },
+      "mass_balance_full_run": {
+        "liquid": {
+          "max_absolute_error_kg": 9.044924809131771e-10,
+          "normalization_kg": 2837.824436794129,
+          "max_relative_error": 3.187274269633735e-13,
+          "passes_1e_minus_6_relative": true
+        },
+        "gas": {
+          "max_absolute_error_kg": 9.227063557659676e-11,
+          "normalization_kg": 7.267363767269862,
+          "max_relative_error": 1.2696575887966065e-11,
+          "passes_1e_minus_6_relative": true
+        }
+      },
+      "phase_window": {
+        "start_s": 900.0,
+        "end_s": 2400.0
+      },
+      "phase_classification": "pressure_oscillations_with_observed_positive_base_gas_flow",
+      "phase_event_counts": {
+        "accumulation_compression_proxies": 65,
+        "liquid_production_excursions": 62,
+        "base_gas_restart_proxies": 0,
+        "blowdown_proxies": 65
+      },
+      "gas_base_observations": {
+        "minimum_kg_s": 0.0013651937310447406,
+        "strictly_positive_at_observed_times": true,
+        "above_low_flow_threshold_through_observation": true,
+        "low_flux_detector_definition": "At or below5% of reference gas influx (subject to absolute floor), continuously observed for at least configured minimum duration; restart above25% uses hysteresis.",
+        "no_restart_does_not_exclude_osc_or_ss3": true
+      },
+      "phase_signal_statistics": {
+        "pressure": {
+          "mean": 266545.82524323877,
+          "std": 8970.245053824088,
+          "minimum": 252447.75135529786,
+          "maximum": 280471.05887312413,
+          "peak_to_peak": 28023.307517826266,
+          "initial": 263061.29320205457,
+          "final": 268608.1748866385,
+          "change": 5546.881684583903,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "p_junction_Pa"
+        },
+        "liquid_riser_inventory": {
+          "mean": 16.371396015751998,
+          "std": 2.2909496572500636,
+          "minimum": 12.70726628406007,
+          "maximum": 19.88031031976221,
+          "peak_to_peak": 7.173044035702139,
+          "initial": 15.27059366304281,
+          "final": 17.770793273090693,
+          "change": 2.5001996100478827,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "Ml_riser_kg"
+        },
+        "gas_pipeline_inventory": {
+          "mean": 0.15507821283187748,
+          "std": 0.0050585328819043335,
+          "minimum": 0.14711996139220265,
+          "maximum": 0.1629266043063053,
+          "peak_to_peak": 0.015806642914102637,
+          "initial": 0.15328433403873398,
+          "final": 0.15549573706422762,
+          "change": 0.0022114030254936357,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "Mg_pipe_kg"
+        },
+        "liquid_production": {
+          "mean": 0.0011842320769739612,
+          "std": 0.0006372311261533906,
+          "minimum": 0.0004333294670002614,
+          "maximum": 0.002466976800203787,
+          "peak_to_peak": 0.0020336473332035255,
+          "initial": 0.0013256943791150112,
+          "final": 0.0004817176097481686,
+          "change": -0.0008439767693668426,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "derived_Ql_out_m3_s"
+        },
+        "gas_base_mass_flow": {
+          "mean": 0.0030266851639910164,
+          "std": 0.0013947794910336311,
+          "minimum": 0.0013651937310447406,
+          "maximum": 0.0058206318440843655,
+          "peak_to_peak": 0.004455438113039625,
+          "initial": 0.0035574935183639187,
+          "final": 0.0013651937310447406,
+          "change": -0.002192299787319178,
+          "sample_count": 12002,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "mdot_g_base_kg_s"
+        }
+      },
+      "phase_thresholds": {
+        "pressure_change_Pa": 100.0,
+        "riser_liquid_change_kg": 0.035865220178510696,
+        "pipeline_gas_change_kg": 7.903321457051319e-05,
+        "production_high": 0.0015926547950234939,
+        "production_reference": 0.0011859253283827886,
+        "production_reference_definition": "imposed_liquid_mass_flow/rho_l0; reference-volume proxy",
+        "production_excursion_floor": 5.929626641913943e-05,
+        "production_unit": "m3/s",
+        "gas_reference_kg_s": 0.0030280682363617484,
+        "gas_reference_definition": "A*imposed_phase_mass_flux from metadata",
+        "gas_low_kg_s": 0.00015140341181808743,
+        "gas_high_kg_s": 0.0007570170590904371
+      },
+      "raw_files": {
+        "monitor.csv": {
+          "sha256": "ffbc37e6abc506d2beda829cf95546c68ff6382872a7d1f6bff6c1b2a885b458",
+          "bytes": 17761453
+        },
+        "fields.csv": {
+          "sha256": "3f8e29703cc83c9402428026cadc3294ad4959c5476b223fb4600feff81a75cd",
+          "bytes": 16281082
+        },
+        "manifest.json": {
+          "sha256": "f79811c5f86ef8e883000d9a40c985351594fc6e4e34af4bf1a267b659430070",
+          "bytes": 3581
+        },
+        "run_metadata.txt": {
+          "sha256": "cd7c0246c85d488ae825cd649f449c0266ef8b20fd157828d01622dc18b24e43",
+          "bytes": 3213
+        },
+        "run_status.txt": {
+          "sha256": "d5c2f0568681af9fc9e1f3819810a797086e3c7550b80be3dae32a5dc22d84a6",
+          "bytes": 190
+        }
+      }
+    },
+    {
+      "name": "repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.03125",
+      "source_directory": "/home/leonardoab/Documentos/PRIMS-F-baseline-20261118/validation/results/repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.03125",
+      "new_repeat": true,
+      "completed": true,
+      "observed_end_s": 2400.0,
+      "nodes_each_section": 51,
+      "dt_max_s": 0.03125,
+      "wall_seconds": 1942.6171024980003,
+      "binary_sha256": "11c1faa0a27c58654ab3f49a168519f62939d367b63ba0e7780e1c9d7f1219d4",
+      "sources_unchanged": true,
+      "binary_unchanged": true,
+      "namelist_sha256": "9c26c39c4be0214fe659b6b9cddb8f58edd52e99424ca04e57ed874c6758ae91",
+      "data_quality_warnings": [],
+      "pressure_900_2400": {
+        "window_start_s": 900.0,
+        "window_end_s": 2400.0,
+        "full_window_observed": true,
+        "mean_Pa": 266728.7380054547,
+        "rms_about_mean_Pa": 10722.05273164426,
+        "peak_to_peak_Pa": 30694.742868417117,
+        "minimum_Pa": 251047.22081963514,
+        "maximum_Pa": 281741.96368805226
+      },
+      "last_ten_pressure_cycles": {
+        "available": true,
+        "n_complete_cycles": 10,
+        "window_start_s": 2152.698060407797,
+        "window_end_s": 2386.1399068312176,
+        "window_is_end_of_run": true,
+        "mean_period_s": 23.344184642342043,
+        "period_cv": 2.8533939433081044e-08,
+        "first_semi_amplitude_Pa": 15347.395558229517,
+        "last_semi_amplitude_Pa": 15347.390802928523,
+        "mean_semi_amplitude_Pa": 15347.394287269657,
+        "amplitude_cv": 1.325177186277703e-07,
+        "relative_amplitude_change": -3.098441671012253e-07,
+        "relative_difference_last_five_vs_first_five_amplitudes": -2.2067713123519184e-07,
+        "growth_rate_s_inv": -1.5700969821580331e-09,
+        "log_amplitude_r_squared": 0.8415019612677577,
+        "useful_above_declared_detection_thresholds": true,
+        "amplitude_change_within_one_percent": true,
+        "amplitude_change_within_five_percent": true,
+        "settled_or_physically_validated": false,
+        "pressure_statistics": {
+          "window_start_s": 2152.698060407797,
+          "window_end_s": 2386.1399068312176,
+          "full_window_observed": true,
+          "mean_Pa": 266794.355351683,
+          "rms_about_mean_Pa": 10772.217198449736,
+          "peak_to_peak_Pa": 30694.69877831769,
+          "minimum_Pa": 251047.22249936333,
+          "maximum_Pa": 281741.921277681
+        }
+      },
+      "last_ten_phase_observables": {
+        "p_junction_Pa": {
+          "available": true,
+          "unit": "Pa",
+          "first_five_mean": 266794.3557800512,
+          "last_five_mean": 266794.35492331476,
+          "mean_relative_change": -3.2112240139760846e-09,
+          "first_five_mean_excursion": 30694.668829247334,
+          "last_five_mean_excursion": 30694.652346826922,
+          "excursion_relative_change": -5.369799069305649e-07,
+          "cycle_means": [
+            266794.3557990479,
+            266794.3558943641,
+            266794.355717669,
+            266794.3557614822,
+            266794.3557276928,
+            266794.3557509795,
+            266794.3553727039,
+            266794.3554613651,
+            266794.35417108197,
+            266794.3538604434
+          ],
+          "cycle_excursions": [
+            30694.672576424637,
+            30694.672418812755,
+            30694.670452836493,
+            30694.666128286568,
+            30694.662569876207,
+            30694.65938414744,
+            30694.65418443625,
+            30694.647465167334,
+            30694.64723706129,
+            30694.65346332229
+          ]
+        },
+        "holdup_liquid_base": {
+          "available": true,
+          "unit": "1",
+          "first_five_mean": 0.6358889564069917,
+          "last_five_mean": 0.6358889405689289,
+          "mean_relative_change": -2.4906963238829318e-08,
+          "first_five_mean_excursion": 0.343438128273297,
+          "last_five_mean_excursion": 0.3434373667219313,
+          "excursion_relative_change": -2.2174339509709224e-06,
+          "cycle_means": [
+            0.6358889588683646,
+            0.6358889611390138,
+            0.635888957690369,
+            0.6358889532682943,
+            0.6358889510689171,
+            0.6358889512067155,
+            0.635888945192299,
+            0.6358889389335154,
+            0.6358889348906974,
+            0.6358889326214169
+          ],
+          "cycle_excursions": [
+            0.3434383770684717,
+            0.3434382667301189,
+            0.3434381514806738,
+            0.3434379992376977,
+            0.34343784684952305,
+            0.3434377020310362,
+            0.343437555873948,
+            0.3434373730185528,
+            0.3434371907534338,
+            0.3434370119326857
+          ]
+        },
+        "holdup_liquid_out": {
+          "available": true,
+          "unit": "1",
+          "first_five_mean": 0.5449180301379216,
+          "last_five_mean": 0.5449180339776023,
+          "mean_relative_change": 7.046345404439408e-09,
+          "first_five_mean_excursion": 0.32900152439374875,
+          "last_five_mean_excursion": 0.3290014123041151,
+          "excursion_relative_change": -3.4069639597249713e-07,
+          "cycle_means": [
+            0.5449180288791201,
+            0.5449180279696937,
+            0.5449180280986027,
+            0.5449180324154775,
+            0.5449180333267143,
+            0.5449180336827222,
+            0.5449180342814576,
+            0.5449180406583027,
+            0.5449180310879189,
+            0.5449180301776101
+          ],
+          "cycle_excursions": [
+            0.32900150608203227,
+            0.3290015333119619,
+            0.3290015544692616,
+            0.32900152300027397,
+            0.329001505105214,
+            0.32900150568939135,
+            0.3290014954609214,
+            0.32900140101655717,
+            0.32900135197268976,
+            0.32900130738101596
+          ]
+        },
+        "mdot_l_base_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 1.1824268487146885,
+          "last_five_mean": 1.1824268485809137,
+          "mean_relative_change": -1.1313576749833486e-10,
+          "first_five_mean_excursion": 0.011176797604694633,
+          "last_five_mean_excursion": 0.011176726075657584,
+          "excursion_relative_change": -6.3997792193438245e-06,
+          "cycle_means": [
+            1.1824268487667389,
+            1.1824268487676144,
+            1.1824268484364842,
+            1.1824268488053993,
+            1.182426848797206,
+            1.182426848781442,
+            1.1824268476628204,
+            1.1824268488174607,
+            1.182426848824632,
+            1.182426848818214
+          ],
+          "cycle_excursions": [
+            0.011176821929290703,
+            0.011176810865435094,
+            0.011176799362091261,
+            0.011176785024728408,
+            0.011176770841927697,
+            0.01117675700116183,
+            0.01117674299999516,
+            0.011176726705260265,
+            0.011176710086482355,
+            0.011176693585388309
+          ]
+        },
+        "mdot_g_base_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 0.0030280682330290037,
+          "last_five_mean": 0.0030280682602239232,
+          "mean_relative_change": 8.98094664860534e-09,
+          "first_five_mean_excursion": 0.004947410751925428,
+          "last_five_mean_excursion": 0.004947425162331339,
+          "excursion_relative_change": 2.9127082145273797e-06,
+          "cycle_means": [
+            0.003028068214647464,
+            0.0030280682137908905,
+            0.0030280682491182023,
+            0.0030280682535504923,
+            0.003028068234037969,
+            0.003028068228255745,
+            0.0030280682718641324,
+            0.003028068266023875,
+            0.00302806827064274,
+            0.0030280682643331245
+          ],
+          "cycle_excursions": [
+            0.004947403877161072,
+            0.004947407597398311,
+            0.004947411209028172,
+            0.004947414084641628,
+            0.004947416991397959,
+            0.004947419999148604,
+            0.0049474229717623415,
+            0.004947425314752335,
+            0.004947427600042265,
+            0.004947429925951153
+          ]
+        },
+        "mdot_l_out_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 1.1824268634985617,
+          "last_five_mean": 1.1824268627343149,
+          "mean_relative_change": -6.463375550646966e-10,
+          "first_five_mean_excursion": 2.2327874382131103,
+          "last_five_mean_excursion": 2.2327942112329087,
+          "excursion_relative_change": 3.0334276953383734e-06,
+          "cycle_means": [
+            1.182426855637238,
+            1.1824268557120474,
+            1.1824268666100155,
+            1.1824268737886112,
+            1.182426865744897,
+            1.1824268640217221,
+            1.1824268753729859,
+            1.1824268812693113,
+            1.18242685097821,
+            1.1824268420293453
+          ],
+          "cycle_excursions": [
+            2.232784231653003,
+            2.232785975506233,
+            2.232787669722553,
+            2.2327889720812037,
+            2.2327903421025592,
+            2.2327917465504594,
+            2.232793147982521,
+            2.232794296240039,
+            2.232795380362792,
+            2.2327964850287327
+          ]
+        },
+        "mdot_g_out_kg_s": {
+          "available": true,
+          "unit": "kg/s",
+          "first_five_mean": 0.0030280681953327054,
+          "last_five_mean": 0.0030280682308245375,
+          "mean_relative_change": 1.172094861278553e-08,
+          "first_five_mean_excursion": 0.003034804957816229,
+          "last_five_mean_excursion": 0.0030348134705932375,
+          "excursion_relative_change": 2.805041262327243e-06,
+          "cycle_means": [
+            0.003028068192069069,
+            0.003028068191020351,
+            0.0030280682074481464,
+            0.0030280681950475468,
+            0.0030280681910784127,
+            0.0030280681882674707,
+            0.003028068213292335,
+            0.0030280681918799937,
+            0.003028068273158481,
+            0.003028068287524408
+          ],
+          "cycle_excursions": [
+            0.0030348005648728853,
+            0.003034802939367043,
+            0.0030348052145056786,
+            0.0030348071912856996,
+            0.003034808879049838,
+            0.003034810608462,
+            0.0030348123129540876,
+            0.0030348135973744077,
+            0.0030348147408289896,
+            0.0030348160933467015
+          ]
+        },
+        "Ml_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 72.17126832566349,
+          "last_five_mean": 72.17126811416692,
+          "mean_relative_change": -2.930481540612704e-09,
+          "first_five_mean_excursion": 7.869761317663449,
+          "last_five_mean_excursion": 7.869747656972462,
+          "excursion_relative_change": -1.7358456547637363e-06,
+          "cycle_means": [
+            72.1712683329323,
+            72.17126835909876,
+            72.17126831186103,
+            72.17126832066275,
+            72.1712683037626,
+            72.17126831230703,
+            72.17126822040807,
+            72.17126824152297,
+            72.17126793455776,
+            72.17126786203877
+          ],
+          "cycle_excursions": [
+            7.869765512796462,
+            7.8697638415055735,
+            7.86976177093797,
+            7.8697590240190465,
+            7.869756439058193,
+            7.869753977625052,
+            7.869751218836626,
+            7.869747689414865,
+            7.869744335105295,
+            7.869741063880468
+          ]
+        },
+        "Mg_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.17680170996063768,
+          "last_five_mean": 0.1768017097574966,
+          "mean_relative_change": -1.1489769376673206e-09,
+          "first_five_mean_excursion": 0.00920979796013302,
+          "last_five_mean_excursion": 0.00920980091615357,
+          "excursion_relative_change": 3.20964652415129e-07,
+          "cycle_means": [
+            0.17680171001499284,
+            0.17680171000998998,
+            0.17680170991385713,
+            0.17680170993551939,
+            0.17680170992882907,
+            0.17680170992271735,
+            0.17680170978475487,
+            0.1768017098176886,
+            0.17680170965133735,
+            0.17680170961098482
+          ],
+          "cycle_excursions": [
+            0.00920979489618437,
+            0.00920979698564306,
+            0.009209798898985572,
+            0.009209799169168975,
+            0.009209799850683126,
+            0.009209800783541805,
+            0.009209801658870975,
+            0.009209801006619556,
+            0.009209800675173796,
+            0.009209800456561723
+          ]
+        },
+        "Ml_riser_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 16.466241100128297,
+          "last_five_mean": 16.466240861534626,
+          "mean_relative_change": -1.4489868670795152e-08,
+          "first_five_mean_excursion": 7.837167960022501,
+          "last_five_mean_excursion": 7.837160526057009,
+          "excursion_relative_change": -9.485525293203988e-07,
+          "cycle_means": [
+            16.46624111839278,
+            16.466241144819506,
+            16.46624107533268,
+            16.46624108251114,
+            16.466241079585384,
+            16.466241087739363,
+            16.466240963442207,
+            16.466240981291527,
+            16.466240674221893,
+            16.46624060097814
+          ],
+          "cycle_excursions": [
+            7.837169665470785,
+            7.837169247245319,
+            7.837168394414594,
+            7.837166907980551,
+            7.837165585001255,
+            7.837164382106035,
+            7.837162805972314,
+            7.837160542650423,
+            7.837158453290403,
+            7.837156446265871
+          ]
+        },
+        "Mg_pipe_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.15526015765598022,
+          "last_five_mean": 0.15526015692068929,
+          "mean_relative_change": -4.73586366488082e-09,
+          "first_five_mean_excursion": 0.01736212189886449,
+          "last_five_mean_excursion": 0.017362126925603034,
+          "excursion_relative_change": 2.895231997965139e-07,
+          "cycle_means": [
+            0.15526015775501031,
+            0.15526015781470734,
+            0.15526015757041806,
+            0.15526015757998762,
+            0.15526015755977782,
+            0.15526015756751518,
+            0.1552601571654109,
+            0.1552601571861002,
+            0.15526015643788263,
+            0.15526015624653758
+          ],
+          "cycle_excursions": [
+            0.017362116808300077,
+            0.017362120101356765,
+            0.017362123150511777,
+            0.017362124248952143,
+            0.017362125185201693,
+            0.01736212664014558,
+            0.017362128038138913,
+            0.01736212721428612,
+            0.017362126568927078,
+            0.017362126166517472
+          ]
+        },
+        "Ml_pipe_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 55.70502722553519,
+          "last_five_mean": 55.7050272526323,
+          "mean_relative_change": 4.8643919397225e-10,
+          "first_five_mean_excursion": 0.034110970783508776,
+          "last_five_mean_excursion": 0.03411096665381734,
+          "excursion_relative_change": -1.2106637076525102e-07,
+          "cycle_means": [
+            55.70502721453953,
+            55.70502721427926,
+            55.70502723652835,
+            55.70502723815161,
+            55.705027224177215,
+            55.70502722456768,
+            55.70502725696586,
+            55.70502726023144,
+            55.70502726033587,
+            55.70502726106063
+          ],
+          "cycle_excursions": [
+            0.03411097789671658,
+            0.03411097522891282,
+            0.03411097207600022,
+            0.03411096872963526,
+            0.034110959986279,
+            0.03411095368571182,
+            0.03411095765979866,
+            0.034110975072600525,
+            0.034110973650612664,
+            0.03411097320036305
+          ]
+        },
+        "Mg_riser_kg": {
+          "available": true,
+          "unit": "kg",
+          "first_five_mean": 0.021541552304657454,
+          "last_five_mean": 0.0215415528368073,
+          "mean_relative_change": 2.4703411543922933e-08,
+          "first_five_mean_excursion": 0.014710970763279117,
+          "last_five_mean_excursion": 0.014710947704851712,
+          "excursion_relative_change": -1.5674307138771142e-06,
+          "cycle_means": [
+            0.02154155225998254,
+            0.02154155219528263,
+            0.021541552343439088,
+            0.021541552355531766,
+            0.021541552369051246,
+            0.021541552355202158,
+            0.021541552619343984,
+            0.0215415526315884,
+            0.02154155321345472,
+            0.02154155336444723
+          ],
+          "cycle_excursions": [
+            0.014710977687840202,
+            0.01471097509957025,
+            0.014710971491891973,
+            0.01471096691682299,
+            0.01471096262027017,
+            0.014710958558211149,
+            0.014710953773275385,
+            0.01471094773794004,
+            0.014710942012429166,
+            0.014710936442402822
+          ]
+        }
+      },
+      "mass_balance_full_run": {
+        "liquid": {
+          "max_absolute_error_kg": 2.7255282475380227e-09,
+          "normalization_kg": 2837.824436795761,
+          "max_relative_error": 9.6042877501452e-13,
+          "passes_1e_minus_6_relative": true
+        },
+        "gas": {
+          "max_absolute_error_kg": 2.3705117868644265e-09,
+          "normalization_kg": 7.2673637672760885,
+          "max_relative_error": 3.2618592694348203e-10,
+          "passes_1e_minus_6_relative": true
+        }
+      },
+      "phase_window": {
+        "start_s": 900.0,
+        "end_s": 2400.0
+      },
+      "phase_classification": "pressure_oscillations_with_observed_positive_base_gas_flow",
+      "phase_event_counts": {
+        "accumulation_compression_proxies": 65,
+        "liquid_production_excursions": 64,
+        "base_gas_restart_proxies": 0,
+        "blowdown_proxies": 65
+      },
+      "gas_base_observations": {
+        "minimum_kg_s": 0.0012448227212454486,
+        "strictly_positive_at_observed_times": true,
+        "above_low_flow_threshold_through_observation": true,
+        "low_flux_detector_definition": "At or below5% of reference gas influx (subject to absolute floor), continuously observed for at least configured minimum duration; restart above25% uses hysteresis.",
+        "no_restart_does_not_exclude_osc_or_ss3": true
+      },
+      "phase_signal_statistics": {
+        "pressure": {
+          "mean": 266728.73800545477,
+          "std": 10722.052731644262,
+          "minimum": 251047.22081963514,
+          "maximum": 281741.96368805226,
+          "peak_to_peak": 30694.742868417117,
+          "initial": 254988.31191542387,
+          "final": 259018.25165851653,
+          "change": 4029.939743092662,
+          "sample_count": 48001,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "p_junction_Pa"
+        },
+        "liquid_riser_inventory": {
+          "mean": 16.450273543972596,
+          "std": 2.729730322068002,
+          "minimum": 12.379921226473488,
+          "maximum": 20.21709570638219,
+          "peak_to_peak": 7.8371744799087,
+          "initial": 12.886401402867932,
+          "final": 15.350539714730173,
+          "change": 2.464138311862241,
+          "sample_count": 48001,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "Ml_riser_kg"
+        },
+        "gas_pipeline_inventory": {
+          "mean": 0.15522129500002183,
+          "std": 0.006059672325578541,
+          "minimum": 0.1463272391801915,
+          "maximum": 0.16368936792479155,
+          "peak_to_peak": 0.017362128744600053,
+          "initial": 0.14953538730465532,
+          "final": 0.1500751655043488,
+          "change": 0.0005397781996934747,
+          "sample_count": 48001,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "Mg_pipe_kg"
+        },
+        "liquid_production": {
+          "mean": 0.0011842326495855782,
+          "std": 0.0007627991699613413,
+          "minimum": 0.00038172759657942204,
+          "maximum": 0.0026210267187939487,
+          "peak_to_peak": 0.002239299122214527,
+          "initial": 0.0015419957963304829,
+          "final": 0.00039399507862215724,
+          "change": -0.0011480007177083256,
+          "sample_count": 48001,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "derived_Ql_out_m3_s"
+        },
+        "gas_base_mass_flow": {
+          "mean": 0.0030277454152483774,
+          "std": 0.0016798980270500464,
+          "minimum": 0.0012448227212454486,
+          "maximum": 0.006192254847197153,
+          "peak_to_peak": 0.004947432125951705,
+          "initial": 0.005063196854986156,
+          "final": 0.001507363710845666,
+          "change": -0.0035558331441404903,
+          "sample_count": 48001,
+          "covered_duration_s": 1500.0,
+          "coverage_fraction": 1.0,
+          "method": "time-weighted piecewise-linear observations; missing segments excluded",
+          "column": "mdot_g_base_kg_s"
+        }
+      },
+      "phase_thresholds": {
+        "pressure_change_Pa": 100.0,
+        "riser_liquid_change_kg": 0.039185872399543506,
+        "pipeline_gas_change_kg": 8.681064372300027e-05,
+        "production_high": 0.001633785152825694,
+        "production_reference": 0.0011859253283827886,
+        "production_reference_definition": "imposed_liquid_mass_flow/rho_l0; reference-volume proxy",
+        "production_excursion_floor": 5.929626641913943e-05,
+        "production_unit": "m3/s",
+        "gas_reference_kg_s": 0.0030280682363617484,
+        "gas_reference_definition": "A*imposed_phase_mass_flux from metadata",
+        "gas_low_kg_s": 0.00015140341181808743,
+        "gas_high_kg_s": 0.0007570170590904371
+      },
+      "raw_files": {
+        "monitor.csv": {
+          "sha256": "d15e2cff60f121b282dc3a0acb526ec4f37f0bc08e5118c1611f1e6034b4ea2f",
+          "bytes": 67244328
+        },
+        "fields.csv": {
+          "sha256": "e96b514c874ab5da08ceb0c3853c3edcec842d59dc6448289000587902d3ac16",
+          "bytes": 4131082
+        },
+        "manifest.json": {
+          "sha256": "247477893ba9074833975869cdc9f1efe322505657cf3cc2f8877182dbef459d",
+          "bytes": 3581
+        },
+        "run_metadata.txt": {
+          "sha256": "34e706ddd3a035c8c75eb60acf2f2b78dde9e51694b9d419585302815fb3598a",
+          "bytes": 3213
+        },
+        "run_status.txt": {
+          "sha256": "5066e0504be7a3489af72e9d9563efc431314d71aabc733389b970bc001908b4",
+          "bytes": 190
+        }
+      }
+    }
+  ],
+  "comparisons_900_2400": [
+    {
+      "kind": "mesh_at_same_dt_ceiling",
+      "coarse_run": "final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+      "fine_run": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+      "case": "D_OSC",
+      "coarse_discretization": {
+        "n_pipe": 51.0,
+        "n_riser": 51.0,
+        "dt_max_s": 0.125
+      },
+      "fine_discretization": {
+        "n_pipe": 101.0,
+        "n_riser": 101.0,
+        "dt_max_s": 0.125
+      },
+      "automatic_convergence_claim": false,
+      "automatic_experimental_validation_claim": false,
+      "common_window_s": [
+        900.0,
+        2400.0
+      ],
+      "status": "descriptive_comparison_available",
+      "dynamic_comparison_status": "not_stable_across_refinement_controls",
+      "flags": [
+        "coarse:pressure_std_differs_over20percent_among_window_thirds",
+        "fine:pressure_std_differs_over20percent_among_window_thirds",
+        "pressure_peak_to_peak_differs_over10percent_under_refinement",
+        "pressure_std_differs_over10percent_under_refinement"
+      ],
+      "interpretation": "Differences on a common window; no convergence order or GCI inferred. Mass conservation is necessary evidence and is not a convergence criterion by itself. Missing cycles prevent a period comparison, not a claim of physical stability."
+    },
+    {
+      "kind": "dt_ceiling_at_same_mesh",
+      "coarse_run": "final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+      "fine_run": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+      "case": "D_OSC",
+      "coarse_discretization": {
+        "n_pipe": 51.0,
+        "n_riser": 51.0,
+        "dt_max_s": 0.125
+      },
+      "fine_discretization": {
+        "n_pipe": 51.0,
+        "n_riser": 51.0,
+        "dt_max_s": 0.0625
+      },
+      "automatic_convergence_claim": false,
+      "automatic_experimental_validation_claim": false,
+      "common_window_s": [
+        900.0,
+        2400.0
+      ],
+      "status": "descriptive_comparison_available",
+      "dynamic_comparison_status": "not_stable_across_refinement_controls",
+      "flags": [
+        "coarse:pressure_std_differs_over20percent_among_window_thirds",
+        "pressure_peak_to_peak_differs_over10percent_under_refinement",
+        "pressure_std_differs_over10percent_under_refinement"
+      ],
+      "interpretation": "Differences on a common window; no convergence order or GCI inferred. Mass conservation is necessary evidence and is not a convergence criterion by itself. Missing cycles prevent a period comparison, not a claim of physical stability."
+    },
+    {
+      "kind": "mesh_at_same_dt_ceiling",
+      "coarse_run": "final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+      "fine_run": "repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N201_201_dt0.125",
+      "case": "D_OSC",
+      "coarse_discretization": {
+        "n_pipe": 51.0,
+        "n_riser": 51.0,
+        "dt_max_s": 0.125
+      },
+      "fine_discretization": {
+        "n_pipe": 201.0,
+        "n_riser": 201.0,
+        "dt_max_s": 0.125
+      },
+      "automatic_convergence_claim": false,
+      "automatic_experimental_validation_claim": false,
+      "common_window_s": [
+        900.0,
+        2400.0
+      ],
+      "status": "descriptive_comparison_available",
+      "dynamic_comparison_status": "not_stable_across_refinement_controls",
+      "flags": [
+        "coarse:pressure_std_differs_over20percent_among_window_thirds",
+        "different_executable_binaries",
+        "fine:pressure_std_differs_over20percent_among_window_thirds",
+        "pressure_peak_to_peak_differs_over10percent_under_refinement",
+        "pressure_std_differs_over10percent_under_refinement"
+      ],
+      "interpretation": "Differences on a common window; no convergence order or GCI inferred. Mass conservation is necessary evidence and is not a convergence criterion by itself. Missing cycles prevent a period comparison, not a claim of physical stability."
+    },
+    {
+      "kind": "dt_ceiling_at_same_mesh",
+      "coarse_run": "final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+      "fine_run": "repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.03125",
+      "case": "D_OSC",
+      "coarse_discretization": {
+        "n_pipe": 51.0,
+        "n_riser": 51.0,
+        "dt_max_s": 0.125
+      },
+      "fine_discretization": {
+        "n_pipe": 51.0,
+        "n_riser": 51.0,
+        "dt_max_s": 0.03125
+      },
+      "automatic_convergence_claim": false,
+      "automatic_experimental_validation_claim": false,
+      "common_window_s": [
+        900.0,
+        2400.0
+      ],
+      "status": "descriptive_comparison_available",
+      "dynamic_comparison_status": "not_stable_across_refinement_controls",
+      "flags": [
+        "coarse:pressure_std_differs_over20percent_among_window_thirds",
+        "different_executable_binaries",
+        "pressure_peak_to_peak_differs_over10percent_under_refinement",
+        "pressure_std_differs_over10percent_under_refinement"
+      ],
+      "interpretation": "Differences on a common window; no convergence order or GCI inferred. Mass conservation is necessary evidence and is not a convergence criterion by itself. Missing cycles prevent a period comparison, not a claim of physical stability."
+    },
+    {
+      "kind": "mesh_at_same_dt_ceiling",
+      "coarse_run": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+      "fine_run": "repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N201_201_dt0.125",
+      "case": "D_OSC",
+      "coarse_discretization": {
+        "n_pipe": 101.0,
+        "n_riser": 101.0,
+        "dt_max_s": 0.125
+      },
+      "fine_discretization": {
+        "n_pipe": 201.0,
+        "n_riser": 201.0,
+        "dt_max_s": 0.125
+      },
+      "automatic_convergence_claim": false,
+      "automatic_experimental_validation_claim": false,
+      "common_window_s": [
+        900.0,
+        2400.0
+      ],
+      "status": "descriptive_comparison_available",
+      "dynamic_comparison_status": "not_stable_across_refinement_controls",
+      "flags": [
+        "coarse:pressure_std_differs_over20percent_among_window_thirds",
+        "different_executable_binaries",
+        "fine:pressure_std_differs_over20percent_among_window_thirds",
+        "pressure_std_differs_over10percent_under_refinement"
+      ],
+      "interpretation": "Differences on a common window; no convergence order or GCI inferred. Mass conservation is necessary evidence and is not a convergence criterion by itself. Missing cycles prevent a period comparison, not a claim of physical stability."
+    },
+    {
+      "kind": "dt_ceiling_at_same_mesh",
+      "coarse_run": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+      "fine_run": "repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.03125",
+      "case": "D_OSC",
+      "coarse_discretization": {
+        "n_pipe": 51.0,
+        "n_riser": 51.0,
+        "dt_max_s": 0.0625
+      },
+      "fine_discretization": {
+        "n_pipe": 51.0,
+        "n_riser": 51.0,
+        "dt_max_s": 0.03125
+      },
+      "automatic_convergence_claim": false,
+      "automatic_experimental_validation_claim": false,
+      "common_window_s": [
+        900.0,
+        2400.0
+      ],
+      "status": "descriptive_comparison_available",
+      "dynamic_comparison_status": "not_stable_across_refinement_controls",
+      "flags": [
+        "different_executable_binaries",
+        "pressure_peak_to_peak_differs_over10percent_under_refinement",
+        "pressure_std_differs_over10percent_under_refinement"
+      ],
+      "interpretation": "Differences on a common window; no convergence order or GCI inferred. Mass conservation is necessary evidence and is not a convergence criterion by itself. Missing cycles prevent a period comparison, not a claim of physical stability."
+    }
+  ],
+  "last_ten_refinement_comparisons": [
+    {
+      "kind": "mesh_at_same_dt_ceiling",
+      "coarse": "final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+      "fine": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+      "coarse_period_s": 23.10301107823252,
+      "fine_period_s": 23.266395591519178,
+      "period_change_relative_to_coarse": 0.00707200081986703,
+      "coarse_semi_amplitude_Pa": 9699.735125169665,
+      "fine_semi_amplitude_Pa": 12769.677515903737,
+      "amplitude_change_relative_to_coarse": 0.3164975487596495,
+      "independent_last_ten_windows": true,
+      "automatic_convergence_claim": false
+    },
+    {
+      "kind": "dt_ceiling_at_same_mesh",
+      "coarse": "final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+      "fine": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+      "coarse_period_s": 23.10301107823252,
+      "fine_period_s": 23.265629540198233,
+      "period_change_relative_to_coarse": 0.007038842747166152,
+      "coarse_semi_amplitude_Pa": 9699.735125169665,
+      "fine_semi_amplitude_Pa": 13763.806326143753,
+      "amplitude_change_relative_to_coarse": 0.4189878536402818,
+      "independent_last_ten_windows": true,
+      "automatic_convergence_claim": false
+    },
+    {
+      "kind": "mesh_at_same_dt_ceiling",
+      "coarse": "final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+      "fine": "repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N201_201_dt0.125",
+      "coarse_period_s": 23.10301107823252,
+      "fine_period_s": 23.345470421121583,
+      "period_change_relative_to_coarse": 0.010494707467699094,
+      "coarse_semi_amplitude_Pa": 9699.735125169665,
+      "fine_semi_amplitude_Pa": 14011.547154527692,
+      "amplitude_change_relative_to_coarse": 0.4445288426659595,
+      "independent_last_ten_windows": true,
+      "automatic_convergence_claim": false
+    },
+    {
+      "kind": "dt_ceiling_at_same_mesh",
+      "coarse": "final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125",
+      "fine": "repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.03125",
+      "coarse_period_s": 23.10301107823252,
+      "fine_period_s": 23.344184642342043,
+      "period_change_relative_to_coarse": 0.010439053303175516,
+      "coarse_semi_amplitude_Pa": 9699.735125169665,
+      "fine_semi_amplitude_Pa": 15347.394287269657,
+      "amplitude_change_relative_to_coarse": 0.5822488025930712,
+      "independent_last_ten_windows": true,
+      "automatic_convergence_claim": false
+    },
+    {
+      "kind": "mesh_at_same_dt_ceiling",
+      "coarse": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125",
+      "fine": "repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N201_201_dt0.125",
+      "coarse_period_s": 23.266395591519178,
+      "fine_period_s": 23.345470421121583,
+      "period_change_relative_to_coarse": 0.003398671242021978,
+      "coarse_semi_amplitude_Pa": 12769.677515903737,
+      "fine_semi_amplitude_Pa": 14011.547154527692,
+      "amplitude_change_relative_to_coarse": 0.0972514487603382,
+      "independent_last_ten_windows": true,
+      "automatic_convergence_claim": false
+    },
+    {
+      "kind": "dt_ceiling_at_same_mesh",
+      "coarse": "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+      "fine": "repeat_20261118_frozen05ad799_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.03125",
+      "coarse_period_s": 23.265629540198233,
+      "fine_period_s": 23.344184642342043,
+      "period_change_relative_to_coarse": 0.0033764442955683815,
+      "coarse_semi_amplitude_Pa": 13763.806326143753,
+      "fine_semi_amplitude_Pa": 15347.394287269657,
+      "amplitude_change_relative_to_coarse": 0.11505450771404324,
+      "independent_last_ten_windows": true,
+      "automatic_convergence_claim": false
+    }
+  ]
+}

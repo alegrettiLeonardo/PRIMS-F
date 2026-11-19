@@ -25,18 +25,22 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import find_peaks
 from scipy.stats import linregress
+from osc_run_selection import DEFAULT_PATTERNS, cohort_metadata, select_runs
 
 
 WINDOWS = ((40., 200.), (200., 400.), (40., 400.), (900., 1400.),
            (1400., 1900.), (1900., 2400.), (2100., 2400.))
 BLOCKS = ((900., 1400.), (1400., 1900.), (1900., 2400.))
-PATTERNS = ("final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_*",
-            "refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_*")
+PATTERNS = DEFAULT_PATTERNS
 THRESHOLD_AMPLITUDE_PA = 1.0  # Fit floor; not the physical-cycle detector.
 
 
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def finite_or_none(value: float) -> float | None:
+    return float(value) if np.isfinite(value) else None
 
 
 def metadata_number(text: str, key: str) -> float:
@@ -119,7 +123,7 @@ def fit_envelope(envelope: list[dict], lo: float, hi: float,
     result.update(available=True,
                   growth_rate_s_inv=float(regression.slope),
                   log_amplitude_intercept=float(regression.intercept),
-                  r_squared=float(regression.rvalue ** 2),
+                  r_squared=finite_or_none(regression.rvalue ** 2),
                   slope_standard_error_s_inv=float(regression.stderr),
                   first_peak_time_s=float(t[0]), last_peak_time_s=float(t[-1]),
                   first_amplitude_Pa=float(amplitude[0]), last_amplitude_Pa=float(amplitude[-1]),
@@ -137,7 +141,7 @@ def window_statistics(t: np.ndarray, y: np.ndarray, lo: float, hi: float) -> dic
     use = (t > lo) & (t < hi)
     tx = np.r_[lo, t[use], hi]
     yy = np.r_[np.interp(lo, t, y), y[use], np.interp(hi, t, y)]
-    mean = float(np.trapezoid(yy, tx) / (hi - lo))
+    mean = float(np.sum(.5 * (yy[:-1] + yy[1:]) * np.diff(tx)) / (hi - lo))
     z = yy - mean
     variance = float(np.sum(np.diff(tx) * (z[:-1] ** 2 + z[:-1] * z[1:] + z[1:] ** 2) / 3)
                      / (hi - lo))
@@ -174,7 +178,7 @@ def last_ten_cycles(t: np.ndarray, y: np.ndarray, envelope: list[dict]) -> dict:
             "relative_difference_last_five_vs_first_five_amplitudes":
                 float(np.mean(amplitudes[-5:]) / np.mean(amplitudes[:5]) - 1),
             "growth_rate_s_inv": float(regression.slope),
-            "log_amplitude_r_squared": float(regression.rvalue ** 2),
+            "log_amplitude_r_squared": finite_or_none(regression.rvalue ** 2),
             "useful_above_declared_detection_thresholds": useful,
             "amplitude_change_within_one_percent": bool(abs(relative_change) <= .01),
             "amplitude_change_within_five_percent": bool(abs(relative_change) <= .05),
@@ -211,6 +215,7 @@ def read_run(path: Path) -> tuple[dict, np.ndarray, np.ndarray, np.ndarray]:
               "nodes_pipe": int(metadata_number(meta, "NODES")),
               "nodes_riser": int(metadata_number(meta, "N_RISER")),
               "dt_max_s": metadata_number(meta, "DT_MAX_S"),
+              "requested_output_interval_s": metadata_number(meta, "OUTPUT_INTERVAL_S"),
               "sample_interval_median_s": float(np.median(np.diff(t))),
               "actual_step_range_40_400_s":
                   [float(np.min(data["dt_s"][(t >= 40) & (t <= 400)])),
@@ -222,6 +227,14 @@ def read_run(path: Path) -> tuple[dict, np.ndarray, np.ndarray, np.ndarray]:
               "pressure_blocks": [window_statistics(t, pressure, lo, hi) for lo, hi in BLOCKS],
               "pressure_900_2400": window_statistics(t, pressure, 900., 2400.),
               "last_ten_cycles": last_ten_cycles(t, pressure, envelope)}
+    # Refined runs save more frequently.  Repeat the initial-window fit on a
+    # common 0.125 s grid to expose the effect of sampling separately from h.
+    if result["dt_max_s"] <= .125 and t[-1] >= 450:
+        common_t = np.arange(0., 450.00001, .125)
+        common_pressure = np.interp(common_t, t, pressure)
+        common_fit = fit_envelope(pressure_envelope(common_t, common_pressure), 40., 400., 450.)
+        result["common_sample_step_s"] = .125
+        result["initial_fit_common_sampling"] = common_fit
     return result, t, pressure, data["dt_s"]
 
 
@@ -389,15 +402,20 @@ def report(cases: list[dict], model: dict, generated: str) -> str:
              "úteis, exige-se excursão pico–mínimo ≥ 100 Pa em todos eles e RMS da pressão em torno da média "
              "≥ 1 Pa. Onze picos consecutivos definem exatamente dez intervalos. O RMS é integrado no tempo "
              "sobre a interpolação linear das amostras. Dados ainda em execução são explicitamente identificados.", "",
+             "Os refinados 0,0625 e 0,03125 s também gravam o monitor com intervalo menor. O JSON registra "
+             "essa cadência e repete o ajuste inicial em uma grade comum de amostragem de 0,125 s, por "
+             "interpolação linear. Isso permite distinguir o efeito da gravação do efeito do passo do solver; "
+             "a tabela principal usa as amostras nativas.", "",
              "## Crescimento inicial observado", "",
              "| N | Δt máximo (s) | Fim observado (s) | Execução completa | Taxa (s⁻¹) | R² | Picos | Intervalo médio entre picos (s) |",
              "|---:|---:|---:|:---:|---:|---:|---:|---:|"]
     for case in sorted(cases, key=lambda c: (c["nodes_pipe"], -c["dt_max_s"])):
         fit = initial_fit(case)
         if fit:
+            r_squared = f"{fit['r_squared']:.9f}" if fit['r_squared'] is not None else "indefinido"
             lines.append(f"| {case['nodes_pipe']} | {case['dt_max_s']:g} | {case['observed_end_s']:.3f} | "
                          f"{'sim' if case['completed'] else 'não'} | {fit['growth_rate_s_inv']:+.9f} | "
-                         f"{fit['r_squared']:.9f} | {fit['n_peaks']} | {fit['mean_peak_interval_s']:.6f} |")
+                         f"{r_squared} | {fit['n_peaks']} | {fit['mean_peak_interval_s']:.6f} |")
     lines += ["", "O alto R² descreve a regularidade exponencial desta janela. O erro padrão da regressão não "
               "é uma incerteza de modelo: os ciclos vêm de uma única trajetória numérica, e não de réplicas independentes.", "",
               "## Acomodação nas execuções completas", "",
@@ -457,8 +475,9 @@ def report(cases: list[dict], model: dict, generated: str) -> str:
               "lista as regressões. Os PNG e PDF são figuras independentes para exportação.", "",
               "As execuções refinadas em curso podem mudar suas estatísticas tardias. Reexecute este script "
               "após a conclusão. Nenhum alvo experimental é usado para ajustar as taxas, o modelo descritivo "
-              "ou os limiares. Captar uma oscilação de pressão não comprova a sequência física de bloqueio, "
-              "expulsão e retorno de líquido requerida para caracterizar severe slugging.", ""]
+              "ou os limiares. Captar uma oscilação de pressão não comprova a sequência física de acumulação, "
+              "compressão, produção, penetração de gás e blowdown. Bloqueio completo do gás não é um "
+              "requisito universal de OSC/SS3; a análise dessas fases exige fluxos e inventários.", ""]
     return "\n".join(lines)
 
 
@@ -467,9 +486,16 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results-root", type=Path, default=repo / "validation/results")
     parser.add_argument("--output", type=Path, default=repo / "validation/analysis_final")
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument("--pattern", action="append", help="Repeatable glob; replaces historical defaults")
+    selection.add_argument("--run-dir", action="append", type=Path,
+                           help="Explicit run directory; repeat for independent mesh/time refinements")
     args = parser.parse_args()
-    paths = sorted({p for pattern in PATTERNS for p in args.results_root.glob(pattern)
-                    if (p / "monitor.csv").exists() and (p / "run_metadata.txt").exists()})
+    try:
+        paths = select_runs(args.results_root, args.pattern, args.run_dir)
+        cohort = cohort_metadata(paths)
+    except (ValueError, OSError) as exc:
+        parser.error(str(exc))
     args.output.mkdir(parents=True, exist_ok=True)
     cases, signals, errors = [], {}, []
     for path in paths:
@@ -485,6 +511,11 @@ def main() -> None:
     generated = datetime.now(timezone.utc).isoformat()
     model = backward_euler_model(cases)
     summary = {"generated_utc": generated, "script_sha256": sha256(Path(__file__).read_bytes()),
+               "selection": {"patterns": args.pattern if not args.run_dir else None,
+                             "used_historical_defaults": not (args.pattern or args.run_dir),
+                             "run_directories": [str(p) for p in paths]},
+               "cohort": {"parameters": cohort[0]["parameters"],
+                          "source_sha256": cohort[0]["manifest"]["source_sha256"]},
                "interpretation": "numerical signal diagnostics; no physical validation claim",
                "main_fit_window_s": [40, 400], "fit_amplitude_floor_Pa": THRESHOLD_AMPLITUDE_PA,
                "cycle_detection_thresholds": {"minimum_peak_to_trough_Pa": 100, "minimum_rms_Pa": 1},

@@ -1,0 +1,223 @@
+{
+  "case": "comparison_dt_20261118_D_OSC_C5_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625",
+  "physical_cells": 102,
+  "junction_extended_cells": [
+    53,
+    54
+  ],
+  "snapshot_sha256": "45c564a7096841a0d5e202a9a8e9a0cf74d73c017912d04e8a55860d3e2e5f51",
+  "evidence_class": "local_diagnosis_not_experimental_validation",
+  "profiles": {
+    "1": {
+      "minimum_cell_alpha": 0.1988725103099414,
+      "inlet_boundary_status": 0,
+      "outlet_boundary_status": 0,
+      "pressure_Pa": 259269.59590271136,
+      "jl_m_s": 0.5450106325909089,
+      "jg_m_s": 0.18724634283107272,
+      "central_gas_mass_flow_kg_s": 0.0010050334327146601,
+      "dissipative_gas_mass_flow_kg_s": 0.00011039672623121571,
+      "gas_mass_flow_kg_s": 0.0008946367064834443,
+      "trace_status": 0,
+      "trace_nroots": 1,
+      "alpha_riser_trace": 0.18752094384816934,
+      "ul_pipe_m_s": 1.2146431194128744,
+      "ug_pipe_m_s": 0.3967906817275297,
+      "ul_riser_m_s": 0.659297713940527,
+      "ug_riser_m_s": 1.0160701105741796,
+      "alpha_pipe_cell": 0.5511892291398167,
+      "alpha_riser_cell": 0.1988725103099414,
+      "assembly_status": 0,
+      "residual_norm": 4.3092133354394534e-08
+    },
+    "2": {
+      "minimum_cell_alpha": 0.19887250862482708,
+      "inlet_boundary_status": 0,
+      "outlet_boundary_status": 0,
+      "pressure_Pa": 259269.5960148292,
+      "jl_m_s": 0.5450106325652689,
+      "jg_m_s": 0.18724633654416722,
+      "central_gas_mass_flow_kg_s": 0.001005033419336775,
+      "dissipative_gas_mass_flow_kg_s": 0.00011039674250440699,
+      "gas_mass_flow_kg_s": 0.000894636676832368,
+      "trace_status": 0,
+      "trace_nroots": 1,
+      "alpha_riser_trace": 0.1875209396954813,
+      "ul_pipe_m_s": 1.2146431193822214,
+      "ug_pipe_m_s": 0.3967906760248884,
+      "ul_riser_m_s": 0.6592977125041299,
+      "ug_riser_m_s": 1.0160701059108688,
+      "alpha_pipe_cell": 0.551189229138651,
+      "alpha_riser_cell": 0.19887250862482708,
+      "assembly_status": 0,
+      "residual_norm": 3.5071781135576594e-08
+    },
+    "10": {
+      "pressure_Pa": 259269.59650510643,
+      "jl_m_s": 0.5450106324531281,
+      "jg_m_s": 0.18724630905675682,
+      "central_gas_mass_flow_kg_s": 0.0010050333608577844,
+      "dissipative_gas_mass_flow_kg_s": 0.00011039681366464775,
+      "gas_mass_flow_kg_s": 0.0008946365471931368,
+      "trace_status": 0,
+      "trace_nroots": 1,
+      "alpha_riser_trace": 0.18752092153924005,
+      "ul_pipe_m_s": 1.2146431192481408,
+      "ug_pipe_m_s": 0.39679065110324696,
+      "ul_riser_m_s": 0.6592977062229823,
+      "ug_riser_m_s": 1.0160700855189193,
+      "alpha_pipe_cell": 0.5511892291335523,
+      "alpha_riser_cell": 0.19887250125607833
+    },
+    "11": {
+      "pressure_Pa": 259269.596259968,
+      "jl_m_s": 0.545010632509202,
+      "jg_m_s": 0.18724632279874903,
+      "central_gas_mass_flow_kg_s": 0.001005033390089321,
+      "dissipative_gas_mass_flow_kg_s": 0.00011039677808475261,
+      "gas_mass_flow_kg_s": 0.0008946366120045685,
+      "trace_status": 0,
+      "trace_nroots": 1,
+      "alpha_riser_trace": 0.18752093061622524,
+      "ul_pipe_m_s": 1.2146431193151972,
+      "ug_pipe_m_s": 0.3967906635580588,
+      "ul_riser_m_s": 0.6592977093635558,
+      "ug_riser_m_s": 1.0160700957148932,
+      "alpha_pipe_cell": 0.5511892291361016,
+      "alpha_riser_cell": 0.19887250494045258
+    },
+    "12": {
+      "pressure_Pa": 259269.59613739856,
+      "jl_m_s": 0.5450106325372353,
+      "jg_m_s": 0.1872463296714341,
+      "central_gas_mass_flow_kg_s": 0.0010050334047128574,
+      "dissipative_gas_mass_flow_kg_s": 0.00011039676029450435,
+      "gas_mass_flow_kg_s": 0.0008946366444183532,
+      "trace_status": 0,
+      "trace_nroots": 1,
+      "alpha_riser_trace": 0.1875209351558374,
+      "ul_pipe_m_s": 1.2146431193487095,
+      "ug_pipe_m_s": 0.3967906697914711,
+      "ul_riser_m_s": 0.6592977109338427,
+      "ug_riser_m_s": 1.0160701008128814,
+      "alpha_pipe_cell": 0.5511892291373762,
+      "alpha_riser_cell": 0.1988725067826399
+    },
+    "13": {
+      "pressure_Pa": 259269.59607611396,
+      "jl_m_s": 0.5450106325512557,
+      "jg_m_s": 0.18724633310613564,
+      "central_gas_mass_flow_kg_s": 0.0010050334120168816,
+      "dissipative_gas_mass_flow_kg_s": 0.00011039675139947598,
+      "gas_mass_flow_kg_s": 0.0008946366606174055,
+      "trace_status": 0,
+      "trace_nroots": 1,
+      "alpha_riser_trace": 0.1875209374245555,
+      "ul_pipe_m_s": 1.2146431193654819,
+      "ug_pipe_m_s": 0.3967906729021287,
+      "ul_riser_m_s": 0.6592977117189861,
+      "ug_riser_m_s": 1.0160701033618749,
+      "alpha_pipe_cell": 0.5511892291380133,
+      "alpha_riser_cell": 0.19887250770373346
+    },
+    "14": {
+      "pressure_Pa": 259269.59604546934,
+      "jl_m_s": 0.545010632558267,
+      "jg_m_s": 0.1872463348267308,
+      "central_gas_mass_flow_kg_s": 0.001005033415684364,
+      "dissipative_gas_mass_flow_kg_s": 0.00011039674695193884,
+      "gas_mass_flow_kg_s": 0.0008946366687324251,
+      "trace_status": 0,
+      "trace_nroots": 1,
+      "alpha_riser_trace": 0.18752093856106472,
+      "ul_pipe_m_s": 1.2146431193738352,
+      "ug_pipe_m_s": 0.3967906744694966,
+      "ul_riser_m_s": 0.6592977121115581,
+      "ug_riser_m_s": 1.0160701046363718,
+      "alpha_pipe_cell": 0.551189229138332,
+      "alpha_riser_cell": 0.1988725081642803
+    }
+  },
+  "newton_candidates": [
+    {
+      "lambda": 1.0,
+      "cell_point_failures": 1,
+      "junction_status": 0
+    },
+    {
+      "lambda": 0.5,
+      "cell_point_failures": 1,
+      "junction_status": 0
+    },
+    {
+      "lambda": 0.25,
+      "cell_point_failures": 1,
+      "junction_status": 0
+    },
+    {
+      "lambda": 0.125,
+      "cell_point_failures": 1,
+      "junction_status": 0
+    },
+    {
+      "lambda": 0.0625,
+      "cell_point_failures": 1,
+      "junction_status": 0
+    }
+  ],
+  "point_failures": [],
+  "time_s": 77.36499357873926,
+  "dt_s": 1.483154296875e-07,
+  "saved_residual_norm": 3.5071781135576594e-08,
+  "saved_status": 6000,
+  "linear_solve_status": 0,
+  "max_newton_increment": 8.359958774926164e-09,
+  "interpretation": "The snapshot and candidates distinguish cell admissibility from the MATCHED Roe trace domain. A negative proposed numerical gas flux alone does not prove physical reverse-gas flow.",
+  "probe_returncode": 0,
+  "closure_riser": 5,
+  "cohort_source_hashes_verified": true,
+  "newton_cell_failures": [
+    {
+      "step_halving_index": 0,
+      "cell": 103,
+      "point_state_status": 53,
+      "theta_rad": 1.3278382388484324
+    },
+    {
+      "step_halving_index": 1,
+      "cell": 103,
+      "point_state_status": 53,
+      "theta_rad": 1.3278382388484324
+    },
+    {
+      "step_halving_index": 2,
+      "cell": 103,
+      "point_state_status": 53,
+      "theta_rad": 1.3278382388484324
+    },
+    {
+      "step_halving_index": 3,
+      "cell": 103,
+      "point_state_status": 53,
+      "theta_rad": 1.3278382388484324
+    },
+    {
+      "step_halving_index": 4,
+      "cell": 103,
+      "point_state_status": 53,
+      "theta_rad": 1.3278382388484324
+    }
+  ],
+  "profiles_minima": {
+    "1": {
+      "valid_cells": 102,
+      "min_ul_m_s": 2.4462787801900594e-08,
+      "min_ug_m_s": 0.3967906817275297
+    },
+    "2": {
+      "valid_cells": 102,
+      "min_ul_m_s": 2.2585949207166082e-08,
+      "min_ug_m_s": 0.3967906760248884
+    }
+  }
+}

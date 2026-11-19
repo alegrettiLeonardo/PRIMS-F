@@ -1,0 +1,85 @@
+{
+  "case": "pilot5_D_SS3_MATCHED",
+  "time_s": 78.60730652347247,
+  "cell": {
+    "cell": 49,
+    "s": 69.16211311862236,
+    "alpha": 0.36726016693180563,
+    "p": 207124.6022980541,
+    "theta": 1.319613718692701,
+    "jl": 1.2849134250800127,
+    "jg": 1.2278267383044532,
+    "Fr": 3.4999999940922755
+  },
+  "gas_eos": "BAROTROPIC Cg=343m/s",
+  "rho_l": 997.0971476888178,
+  "rho_g": 1.7605300707872917,
+  "sqrt_gD": 0.7179257621787924,
+  "j_critical": 2.5127401676257737,
+  "C0_low": 1.1952928743465274,
+  "C0_high": 1.2,
+  "Ud_low": 0.33974652607694394,
+  "Ud_high": 0.24338882762688255,
+  "A_low": 560.1608348598886,
+  "A_high": 558.4401568811338,
+  "m_low_critical_SI": 1283.345139444666,
+  "m_high_critical_SI": 1314.2448378079482,
+  "m_low_critical_nd": 2.6815462686689613,
+  "m_high_critical_nd": 2.746111106530825,
+  "gap_SI": 30.89969836328214,
+  "gap_nd": 0.06456483786186364,
+  "gap_relative_to_low_m": 0.02407746553405982,
+  "accepted_state": {
+    "momentum_SI": 1283.3451370688517,
+    "momentum_nd": 2.6815462637047034,
+    "low_j": 2.5127401633844664,
+    "low_Fr": 3.499999994092276,
+    "low_valid": true,
+    "high_j": 2.45740800650099,
+    "high_Fr": 3.4229277398308438,
+    "high_valid": false
+  },
+  "mid_gap": {
+    "momentum_SI": 1298.7949886263073,
+    "momentum_nd": 2.7138286875998934,
+    "low_j": 2.5403212625902327,
+    "low_Fr": 3.538417753502472,
+    "low_valid": false,
+    "high_j": 2.48507408919057,
+    "high_Fr": 3.461463872878386,
+    "high_valid": false
+  },
+  "at_low_edge": {
+    "momentum_SI": 1283.345139444666,
+    "momentum_nd": 2.6815462686689613,
+    "low_j": 2.5127401676257737,
+    "low_Fr": 3.5,
+    "low_valid": false,
+    "high_j": 2.457408010755366,
+    "high_Fr": 3.4229277457567715,
+    "high_valid": false
+  },
+  "at_high_edge": {
+    "momentum_SI": 1314.2448378079482,
+    "momentum_nd": 2.746111106530825,
+    "low_j": 2.5679023575546913,
+    "low_Fr": 3.5768355070049433,
+    "low_valid": false,
+    "high_j": 2.5127401676257737,
+    "high_Fr": 3.5,
+    "high_valid": true
+  },
+  "scope": "Algebraic analysis of the explicit implemented Bali\u00f1o-Bendiksen piecewise relation. This is not experimental validation.",
+  "provenance": {
+    "validation/diagnostics/ss3_late_snapshot.dat": "401c9421a13d967fc9c37a5964059bff2d60e16db9289363c3f4d834eb6bfe50",
+    "validation/diagnostics/ss3_late_metadata.txt": "f6c56d14cec5b229e0366ded69d71c701ae0f7846f8bdf41daa4a849e10591d0",
+    "validation/diagnostics/ss3_late_field_summary.json": "8c93e50a32a4709c8a2777b4012245a83906c1528106d0f8fcfdef2dc0de0400",
+    "validation/diagnostics/ss3_bendiksen_gap_probe.csv": "4ef9d797d6a0799d51e8b81f75ee6d27d67ddfaf0d62a2e71695c95d65b68be0"
+  },
+  "probe": {
+    "file": "validation/diagnostics/ss3_bendiksen_gap_probe.csv",
+    "expected_no_root_status": 4,
+    "valid_exterior_points_status": 0,
+    "result": "PASS"
+  }
+}

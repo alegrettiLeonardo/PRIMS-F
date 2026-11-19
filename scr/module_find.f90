@@ -3,7 +3,8 @@ module module_find
   !! failures. The regime index (0=stratified, 1=drift flux) is NOT a status.
   !! EOS: rho_g=P/Cg**2, rho_l=rho_l0+(P-P_l0)/Cl**2.
   use mod_kinds, only: wp, i4
-  use module_closure_law, only: lei_fechamento_or_ndim_simp, CdUd_bendiksen
+  use module_closure_law, only: lei_fechamento_or_ndim_simp, CdUd_bendiksen,is_chexal,chexal_branch_id
+  use module_chexal_1992, only: chexal_recover_velocities
   use, intrinsic :: ieee_arithmetic, only: ieee_is_finite, ieee_value, ieee_quiet_nan
   implicit none
   private
@@ -99,7 +100,11 @@ contains
       end select
     end if
     if (present(closure_id)) cid=closure_id
-    if (cid<1 .or. cid>4) return
+    if (cid<1 .or. cid>7) return
+    if(is_chexal(cid))then
+      if(.not.all(ieee_is_finite([D,AREA])).or.D<=0.0_wp.or.AREA<=0.0_wp)return
+      if(abs(AREA-acos(-1.0_wp)*D**2/4.0_wp)>1e-6_wp*AREA)return
+    endif
     index=1
     if (cid==1) index=0
     if (requested_unqualified_switch .and. theta<0.0_wp .and. &
@@ -135,6 +140,24 @@ contains
     if (present(ug_prev)) then
       if (ieee_is_finite(ug_prev)) ug_seed=ug_prev
     end if
+
+    if(is_chexal(cid))then
+      ! Continuation hints must originate from a supplied previous state.
+      ! The mixture-velocity starting guess is not branch-selection evidence.
+      if(present(ul_prev).and.present(ug_prev))then
+        call chexal_recover_velocities(alpha,rhol*w_rho,rhog*w_rho,u3*w_rho*w_u, &
+          theta,D,G,MUL,MUG,sigma,ul,ug,code,branch=chexal_branch_id(cid), &
+          ul_hint=ul_prev*w_u,ug_hint=ug_prev*w_u)
+      else
+        call chexal_recover_velocities(alpha,rhol*w_rho,rhog*w_rho,u3*w_rho*w_u, &
+          theta,D,G,MUL,MUG,sigma,ul,ug,code,branch=chexal_branch_id(cid))
+      endif
+      if(present(status))status=code
+      if(code==0)then
+        ul=ul/w_u;ug=ug/w_u
+      endif
+      return
+    endif
 
     ! Bendiksen is linear in velocities within each Froude branch. Recheck
     ! the branch AFTER solving, including negative liquid velocity. No scan.

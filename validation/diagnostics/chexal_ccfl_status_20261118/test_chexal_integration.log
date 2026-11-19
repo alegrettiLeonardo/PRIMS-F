@@ -1,0 +1,26 @@
+$ /home/leonardoab/Documentos/PRIMS-F-chexal/tmp/unit_tests/test_chexal_integration
+CC spectrum scale/branch/case   1  6  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   1  6  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   1  7  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   1  7  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   1  6  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   1  6  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   1  7  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   1  7  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   2  6  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   2  6  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   2  7  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   2  7  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   2  6  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   2  6  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   2  7  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   2  7  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   3  6  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   3  6  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   3  7  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   3  7  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   3  6  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   3  6  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   3  7  1 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+CC spectrum scale/branch/case   3  7  2 imag=   0.000000000E+00   0.000000000E+00   0.000000000E+00
+PASS Chexal integration: 584 assertions

@@ -1,0 +1,66 @@
+{
+  "source_archive": "C:\\Users\\leonardoab\\Downloads\\PRIMSF_Evidencias_Implementacao.zip",
+  "archive_sha256": "af943e006857bf65f4848bd038b72dae9724fbe23e1bece425f93cb6d3859647",
+  "members": [
+    {
+      "archive_member": "validation/results/final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/manifest.json",
+      "sha256": "cd3df300bb10371f5f852f5758d87840dfdef00d15c1c2ea4a1badf75fecb823",
+      "bytes": 3504
+    },
+    {
+      "archive_member": "validation/results/final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/monitor.csv",
+      "sha256": "d8f413a9c210221f9365c784fc3835b0cdcef6bb34733e1dc4a8a5807443b834",
+      "bytes": 17761453
+    },
+    {
+      "archive_member": "validation/results/final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/run_metadata.txt",
+      "sha256": "0b5e5ed4f9a915c675bc08377c23e436179f73a9a8da9168d009ddb3eb2f9f91",
+      "bytes": 3213
+    },
+    {
+      "archive_member": "validation/results/final_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.125/run_status.txt",
+      "sha256": "8264b9272361e0fb9470acae14e98c5dc1905eeac24a60abbeddc7625d74d8fb",
+      "bytes": 190
+    },
+    {
+      "archive_member": "validation/results/refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125/manifest.json",
+      "sha256": "cc14b23e6d8f2ab7fd19ce28a69fc12b3081c1e404e23c208e7b8d9a2a97f487",
+      "bytes": 3517
+    },
+    {
+      "archive_member": "validation/results/refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125/monitor.csv",
+      "sha256": "8cc3a740819078b574e3cefb703ff484c9b025118dd7658640d993d8ba092e89",
+      "bytes": 17761453
+    },
+    {
+      "archive_member": "validation/results/refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125/run_metadata.txt",
+      "sha256": "105d954bba4838ef9b8b31cb15bb7f032e00b5584e92735356777368f66775d7",
+      "bytes": 3213
+    },
+    {
+      "archive_member": "validation/results/refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N101_101_dt0.125/run_status.txt",
+      "sha256": "ef573221bcda54e7f51604a8586c63b227c90820a438f25dee16eddfa8a1c186",
+      "bytes": 190
+    },
+    {
+      "archive_member": "validation/results/refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625/manifest.json",
+      "sha256": "749bbe1a0421b513a0e8d8cd761b486263d12bd468073f390bae25c029fe9ffa",
+      "bytes": 3513
+    },
+    {
+      "archive_member": "validation/results/refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625/monitor.csv",
+      "sha256": "5323450af492aad3063ffd9c61b9d71aaa955ca011359d9a2a3fc4974c3b8cfc",
+      "bytes": 31722478
+    },
+    {
+      "archive_member": "validation/results/refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625/run_metadata.txt",
+      "sha256": "2c68e59d45d14b9b4556513f514d7a0d852b2458141d7bd7455c1516e276ce64",
+      "bytes": 3213
+    },
+    {
+      "archive_member": "validation/results/refined_D_OSC_C3_BAROTROPIC_MATCHED_LAGGED_ROE_N51_51_dt0.0625/run_status.txt",
+      "sha256": "8295ac36985f9ede5734a1d71d18fce5d48b695f792cbe820fbf6a37d5fa5d75",
+      "bytes": 190
+    }
+  ]
+}

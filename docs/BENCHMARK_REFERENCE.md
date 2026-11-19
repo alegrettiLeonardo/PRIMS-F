@@ -12,13 +12,13 @@ O PDF novo `04-j.ijmultiphaseflow.2012.06.004.pdf` é **Malekzadeh, Henkes e Mud
 
 ### Acesso e qualidade da evidência
 
-Baliño2010 foi lido integralmente por texto indexado em dois espelhos do mesmo artigo:
+Baliño2010 foi inicialmente lido em duas transcrições indexadas. Em 18/11/2026 o usuário forneceu o PDF completo, permitindo a conferência visual direta. Os links abaixo permanecem como registro de localização bibliográfica:
 
 - [PDF do artigo](https://electronicsandbooks.com/edt/manual/Magazine/I/International%20Journal%20of%20Multiphase%20Flow/2010%20Volume%2036/8/643-660.pdf).
 - [Segunda transcrição do artigo](https://www.scribd.com/document/897648646/10-1016-j-ijmultiphaseflow-2010-04-003).
 - [Registro da editora](https://www.sciencedirect.com/science/article/abs/pii/S0301932210000807).
 
-O download direto falhou com503/timeout e a ferramenta de captura de página também falhou. **Não existe cópia local nem hash do PDF2010 nesta etapa; não se declara confirmação visual de suas tabelas.** A divergência SS3 abaixo exige essa confirmação antes de aprovação quantitativa. O JSON registra o hash do PDF da dissertação efetivamente disponível.
+O PDF fornecido está identificado no JSON por `project_sources/05-Sci-Hub.-Modeling-and-simulation-of-severe-slugging-in-air-water-pipeline-riser-systems-_-International-Journal-of-Multiphase-Flow-2010.pdf`, SHA-256 `c60944a348bf516f20ed7fd965cff7aa6b8417b07ef3b4b9433c64d28db8a3a5`. Foram conferidos visualmente Eq.78–79,p.649/PDF7, Tabelas3–4,p.653/PDF11 e Tabela5,p.654/PDF12. A restrição anterior de acesso foi superada; o sinal bruto original de Wordsworth não foi obtido. O PDF e imagens de terceiros não são redistribuídos no repositório.
 
 ## 2. Geometria e unidades
 
@@ -163,10 +163,10 @@ Perfis executáveis com esta alternativa devem identificar **“parâmetros/EOS 
 |---|---|---|---|
 |Stable|sem Texp|tab5caso1,p654: experimentalSF; modeloStable; sem Texp e sem amplitude numérica|Estabilidade global não significa ausência de slugs hidrodinâmicos ou ruído|
 |OSC|Texp33.9s; Tsim3.3s|tab3caso13,p653: Texp19.3–33.8s, sinal modulado; ΔPexp máximo0.69bar|Não usar3.3s como experimento; manter33.9 declarado e contraponto primário|
-|SS3|Texp26.0s; Tsim6.9s|tab3caso11,p653: textos dos dois espelhos leem76s; ΔPexp0.86bar|Período externo quantitativo suspenso até inspeção visual; não corrigir26→76 silenciosamente|
+|SS3|Texp26.0s; Tsim6.9s|tab3caso11,p653/PDF11: Texp76s confirmado visualmente; ΔPexp0.86bar|Leitura primária resolvida:76s. Conflito documental com D26s preservado; não usar6.9s como experimento|
 |SS1|não aparece em tab6.7|tab3caso2,p653: Texp85.6s; ΔPexp0.51bar;T19.7°C,jl0.528|Difere de D20.1°C,jl0.530; comparação externa aproximada, identificada|
 
-A coluna de erro numérico de SS3 no texto do artigo2010 também é inconsistente com72.2s e76s; isso reforça a necessidade de conferir a página original. Este relatório **não aprova**26s nem76s como referência visualmente confirmada.
+A inspeção visual confirma que a fonte primária imprime Texp=76s, Tsim=72.2s e erro=−1%. Esses períodos implicam erro de−5%, portanto há uma inconsistência interna na coluna de erro. A dissertação imprime26.0s na Tabela6.7,p.138/PDF140, também conferida visualmente. A origem do erro de transcrição não foi demonstrada;76s é o período reportado pelo artigo primário, enquanto26s permanece preservado como declaração da dissertação.
 
 ΔP é a amplitude da pressão na base do riser, não a queda permanente Pb−Ps. “Max” significa máximo observado em sinal sem amplitude de ciclo clara; não é uma média experimental. As variações ± das condições constam no JSON e são dispersões do ensaio, não uma tolerância automaticamente aplicável ao erro do solver.
 
@@ -176,13 +176,13 @@ Não há neste material uma tabela experimental de picos de produção de gás/l
 
 Propõe-se total2400s, descarte inicial de900s e análise dos1500s restantes, duração compatível com os registros experimentais citados no artigo (§6,p652,10Hz). Esses tempos de descarte são escolha deste protocolo, não prescrição da fonte. Verificar que as estatísticas já não derivam antes de fixar a janela; se não estiverem estacionárias em sentido estatístico, a execução precisa continuar ou a conclusão permanece indeterminada.
 
-Para SS1 com85.6s, a janela contém aproximadamente17.5ciclos. Para OSC, analisar os dois picos/modulação e não exigir uma senoide única. Para SS3, a janela permite avaliar oscilação e conservação, mas a aprovação do período exige resolver a divergência documental. ParaStable, testar ausência de uma instabilidade global crescente; pequenas oscilações hidrodinâmicas não constituem, por si, falha.
+Para SS1 com85.6s, a janela contém aproximadamente17.5ciclos. Para OSC, analisar os dois picos/modulação e não exigir uma senoide única. Para SS3, o período primário reportado é76s, agora conferido visualmente, e a divergência com D26s deve permanecer explícita. ParaStable, testar ausência de uma instabilidade global crescente; pequenas oscilações hidrodinâmicas não constituem, por si, falha.
 
 Registrar em intervalos físicos regulares: Pb,Ps, α dos dois lados da junção, fluxo de cada fase na base e no topo, inventários de massa, balanços cumulativos e contagem de passos rejeitados. Extrair período de picos e espectro da mesma janela; conservar também variabilidade ciclo a ciclo. Confirmar classificação por bloqueio/penetração de gás e produção, além da pressão.
 
 Executar refinamento espacial e temporal separadamente. Oscilação dependente de CFL, passo de saída, tolerância de Newton ou malha, ou acompanhada de erros de massa/estado inadmissível, não demonstra captura física de severe slugging. Um ciclo visível sem convergência não basta. Não calibrar coeficientes ou vazões para reproduzir um período e depois chamar a mesma comparação de validação independente.
 
-A divergência de modelo em relação ao solver NPW, a ausência de auditoria integral do artigo original de 2014 e o acesso incompleto à página primária SS3 permanecem limitações identificadas. A transcrição de fechamento de 2015 agora está disponível e qualificada como fonte efetivamente implementada. Os perfis, os alvos disponíveis e as lacunas estão separados no JSON para permitir testes reproduzíveis.
+A divergência de modelo em relação ao solver NPW e a ausência de auditoria integral do artigo original de2014 permanecem limitações. A página primária de SS3 agora foi obtida e conferida:76s. O conflito com D26s e a inconsistência da coluna de erro do artigo são registrados. Os novos PDFs Chexal1992/Ozaki2015 são fontes para uma auditoria futura; seu recebimento não altera o fechamento implementado. Consulte `docs/CHEXAL_1992_SCOPE.md`.
 
 Os decks principais usam o seguinte protocolo numérico explícito: `tol=1e-12`, `tola=1e-13`, `dt_start_s=0.001`, `dt_max_s=0.5`, `dissipation_mode='LAGGED'` e `junction_model='MATCHED'`; `save_every=0`, `field_interval_s=15` e `output_interval_s=0.1` controlam as saídas. São configurações de solução e observação, não ajustes dos parâmetros físicos ou dos alvos experimentais. O passo de tempo continua adaptativo; `dt_max_s` é um teto. As massas impostas, Ps, temperaturas, diâmetro, viscosidades, \(C_g=343\), pares isotérmicos e hipótese adicional de \(\sigma=0.0728\) permanecem documentados e inalterados. Os decks Bendiksen arquivados preservam o conteúdo anterior, incluindo seu protocolo de saída; ao executá-los, deve-se escolher uma saída própria para distinguir as alternativas.
 
@@ -206,3 +206,7 @@ O ramo estratificado cocorrente descendente com Reynolds líquido mínimo acima 
 A hipótese de acoplamento P contínua/α com dois traços vem da referência. Ela não implica que as parcelas cinéticas de H sejam iguais nos dois lados; o tratamento discreto da junção deve incorporar a hipótese de acoplamento consistentemente. Os testes do módulo verificam cada trecho e seus traços, sem alegar continuidade automática do fluxo de momento total por impor somente continuidade de P.
 
 **Verificação executada do módulo estacionário:**398 verificações passaram com compilação Fortran2018, verificações de acesso e traps de ponto flutuante ativadas. Incluem solução hidrostática compressível analítica, pressão na face versus centro, duas fases com invariantes de massa, independência da pressão em relação à malha de saída, contribuição explícita da catenária em dH/ds, concordância de raízes rápidas e varredura em oito pressões para cada um dos quatro casos, duas raízes contracorrentes estratificadas e convergência de diferenças finitas em cada ramo selecionado. As 19 verificações mais recentes conferem a identidade dH/ds=S no traço direito da base, continuidade local, roundoff da face e convergência das pressões de face entre duas malhas. A extensão ID 3 acrescentou inicialização dos quatro perfis D, vinte raízes em inclinações distintas, invariância às escalas adimensionais, preservação das massas e continuidade da raiz e de sua derivada na vizinhança do antigo limiar de Froude da ID 2. Esses são testes da implementação; não substituem os ensaios transientes experimentais definidos acima.
+
+## Atualização documental e rastreabilidade
+
+A atualização com os novos PDFs altera somente metadados de referência e a leitura dos alvos reportados; não altera os parâmetros físicos D, EOS, namelists, código ou resultados da campanha. Os snapshots de referência utilizados nas execuções permanecem em `validation/evidence/benchmark_sources_at_run.json` e `validation/evidence/benchmark_sources_at_refined_run.json`. O último conserva o hash `8c81309e2d584304e6876528ee766007c0342a40ed841c048affe89f285f3d95` utilizado nos refinamentos.

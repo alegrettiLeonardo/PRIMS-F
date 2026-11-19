@@ -13,6 +13,8 @@ jobs:
         run: make -j2 FC=gfortran LIBS='-llapack -lblas'
       - name: Verify physical and numerical operators
         run: make test FC=gfortran LIBS='-llapack -lblas'
+      - name: Verify analysis safeguards
+        run: python3 -m unittest discover -s tests -p 'test_validation_evidence.py' -v
       - name: Preserve test evidence
         if: always()
         uses: actions/upload-artifact@v4

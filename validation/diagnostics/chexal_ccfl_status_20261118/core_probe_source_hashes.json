@@ -1,0 +1,10 @@
+{
+  "before_version": "b0d33cb25ab2480b3eb0f5d37c18edc340b0f122",
+  "sha256": {
+    "before_core": "63aa7e3ab00beab6b16602daf50b029a22e01e4401eed9e69d34e3620bb72ad1",
+    "after_core": "63a60d888a288eee582ab61d418cfe8838d1aa0e79b145e8a163d25c026d0443",
+    "after_testcore": "4f2af4cb6d15f87f7cc5c9bbe193b3359ea685858eaf7af3eddfe62c46547908",
+    "probe": "dafebafc1d63da208e041cecc12c145e3e743cb0e06159d72102d74abb95d66d"
+  },
+  "experimental_validation": false
+}
