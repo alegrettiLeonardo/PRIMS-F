@@ -1,0 +1,57 @@
+{
+  "schema": "PRIMS-F.stratified_primary_comparison.v1",
+  "source": {
+    "title": "Taitel, Lee and Dukler (1977), DOE/ID/01571--T1",
+    "url": "https://www.osti.gov/servlets/purl/5902200",
+    "equation": 1,
+    "printed_page": 6,
+    "pdf_page": 10,
+    "geometry": "Eq11, printed p9 / PDF13: dAl/dh=Si",
+    "pdf_sha256": "c953722d3abb7e22369b4c89b6fd15c6a28482d896a3bbdfc8f654f41f9854fa",
+    "relation_to_1976": "Author report summarizes 1976 steady theory; not a claim of reading 1976 full text"
+  },
+  "controls": [
+    {
+      "point_id": "figure9a_third_marker_from_left",
+      "burr15_margin_lower_m_s": 0.3464754844850536,
+      "burr15_loss_entire_envelope": true,
+      "td1977_factor_lower_m2_s2": 0.18624948561574928,
+      "ug_upper_m_s": 1.2928468713929324,
+      "td1977_no_loss_entire_envelope_if_rhol_over_rhog_strictly_greater_than": 9.97426925687657,
+      "measured_density_ratio": null,
+      "td1977_experimental_verdict": "CONDITIONAL_MISSING_DENSITY",
+      "observed_pattern": "stratified smooth",
+      "lower_gas_to_liquid_phase_velocity_ratio": 4.911033024522383
+    },
+    {
+      "point_id": "figure9b_third_marker_from_left",
+      "burr15_margin_lower_m_s": 0.44687525930862354,
+      "burr15_loss_entire_envelope": true,
+      "td1977_factor_lower_m2_s2": 0.14828691601396435,
+      "ug_upper_m_s": 1.3072309539329103,
+      "td1977_no_loss_entire_envelope_if_rhol_over_rhog_strictly_greater_than": 12.523961876443787,
+      "measured_density_ratio": null,
+      "td1977_experimental_verdict": "CONDITIONAL_MISSING_DENSITY",
+      "observed_pattern": "stratified smooth",
+      "lower_gas_to_liquid_phase_velocity_ratio": 4.75293071132741
+    }
+  ],
+  "nonstratified_record": {
+    "source": "Balino2010 Table3/case14, p653; Fig14/p655",
+    "observed_pattern": "SF",
+    "alpha_p_reported_mean": 0.74,
+    "jg_standard_m_s": 1.86,
+    "jl_m_s": 0.82,
+    "status": "NOT_APPLICABLE_GEOMETRY_NOT_ESTABLISHED",
+    "critical_velocity": null,
+    "reason": "System flow label and mean void fraction do not establish a local flat stratified candidate; standard gas flux is not local gas velocity"
+  },
+  "limits": [
+    "The comparison is conditional on density ratio; no experimental point density was invented.",
+    "The author report assumes gas appreciably faster than liquid in the stratified model; the envelope ratios are reported, not a validation of that approximation.",
+    "Loss of stratification is not equivalent to slug onset: the source distinguishes intermittent/annular and smooth/wavy transitions.",
+    "No return law, hysteresis coefficient, angled extension or automatic switching is implemented."
+  ],
+  "script_sha256": "3a19e3e7fc4620e7f77f6f0e188914c7458454577dd7681ddb87a88e7f5741d8",
+  "bounds_script_sha256": "825a8d943b5ff8a4204ecf7f0870ca585f3201514d37effffe40b21e84b3c9b5"
+}
