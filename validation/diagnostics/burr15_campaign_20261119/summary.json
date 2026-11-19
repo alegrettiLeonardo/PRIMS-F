@@ -1,0 +1,657 @@
+{
+  "schema": "PRIMS-F.burr15_qualification.v1",
+  "base": "ee5810e57488bde45b3ec02024b644d55be59724",
+  "git_head": "8a85e37319995b37795d2c798d6f865b863b1834",
+  "binary_sha256": "6b3164d2a18e08e173c1e65e5058bfc024d648a94b64fa10c7bc8ab8a24d37e5",
+  "source_sha256": {
+    "scr/debug_closure_fd.f90": "fa2af5a40578008158e76044651214bf19422551f5bb60aca32add675ed967b5",
+    "scr/main.f90": "4365b0f395845e01d0ee3bc4826b4a1f0c1f9000aed9e0b290aa501de4027a29",
+    "scr/mod_fluid_dynamics.f90": "2f1b2137311d50cdd12410d01a2b1b58b694b8fbf18cf26a0da8a06506ffe9fe",
+    "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+    "scr/mod_roe_solver.f90": "4417a1c8db516a58f68023182ada5665b9f47277139b36b757e0cca00ed358c6",
+    "scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c",
+    "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+    "scr/module_boundary_conditions.f90": "d9f24ac455573778ccbee722a1fcb930ab45b5865213746f176acc5ff416b994",
+    "scr/module_catenary.f90": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+    "scr/module_chexal_1992.f90": "63a60d888a288eee582ab61d418cfe8838d1aa0e79b145e8a163d25c026d0443",
+    "scr/module_closure_law.f90": "2c7e9b7d81651faa6580be044fcf04e8430fc54670afd8b10dd614d2e955d233",
+    "scr/module_config.f90": "fcac25be786649550dc06a687fddd7b4f215c9ba362a9d48a6505503a0470251",
+    "scr/module_find.f90": "e6a9a70050885b092e17b7db0d04a46450b5eb7c4659d0a1f91ed3312afdafce",
+    "scr/module_flow_regime.f90": "d7c369d3d1418d1f3bb97ebd10a849ad3ea24aec11522753377c9e2cea046ebd",
+    "scr/module_jacobian.f90": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+    "scr/module_lapack_small.f90": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+    "scr/module_matrix_roe.f90": "f75d32c43cfb344c58aaaf0217f186f042c57dd68c86cd111a8c23bf8f64be6e",
+    "scr/module_mesh.f90": "bdb594b3f4ac288787484f613f73235453ad446053d4d34cb46ca0d60ac5f2fd",
+    "scr/module_roe_solver.f90": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+    "scr/module_simulate_pipe_riser.f90": "452a2158e2bd49fa00db50f6816252a937c4c18db935d13e9d21ff020252d7e3",
+    "scr/module_solver_utils.f90": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+    "scr/module_steady_state.f90": "7e7258450e45beb14c4e1b1115d49bdff6662cac94fc27b33ecd21a37cfcdd6f",
+    "scr/module_time_step.f90": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133"
+  },
+  "release_build": {
+    "path": "builds/release_8a85e37_r1/build.json",
+    "sha256": "3e9cbf32ebc7062791d845b3f20846e8ce8b83771db16aceedb8b3a4abd9826d"
+  },
+  "release_compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "release_dependencies": {
+    "/usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3": {
+      "observed_path": "/lib/x86_64-linux-gnu/liblapack.so.3",
+      "sha256": "1e82245607c58d13405580c71b9b0134b5a952686ac861f979fc7a886ebd4229",
+      "packages": [
+        {
+          "name": "libopenblas0-pthread:amd64",
+          "version": "libopenblas0-pthread 0.3.26+ds-1ubuntu0.1",
+          "returncode": 0
+        }
+      ]
+    },
+    "/usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3": {
+      "observed_path": "/lib/x86_64-linux-gnu/libblas.so.3",
+      "sha256": "8ba4a98f44d763c2e648755ef452025919e28633339f23ff605044de3483a25d",
+      "packages": [
+        {
+          "name": "libopenblas0-pthread:amd64",
+          "version": "libopenblas0-pthread 0.3.26+ds-1ubuntu0.1",
+          "returncode": 0
+        }
+      ]
+    },
+    "/usr/lib/x86_64-linux-gnu/libgfortran.so.5.0.0": {
+      "observed_path": "/lib/x86_64-linux-gnu/libgfortran.so.5",
+      "sha256": "342618ccfebe840446e4ef2b7893f4161b2084845e570f42d68a70bfde58a58d",
+      "packages": [
+        {
+          "name": "libgfortran5:amd64",
+          "version": "libgfortran5 14.2.0-4ubuntu2~24.04.1",
+          "returncode": 0
+        }
+      ]
+    },
+    "/usr/lib/x86_64-linux-gnu/libm.so.6": {
+      "observed_path": "/lib/x86_64-linux-gnu/libm.so.6",
+      "sha256": "1b87a1a50b496cfead2b0ad134c2ff536705c82608db240c7e8aa48d6c0e4217",
+      "packages": [
+        {
+          "name": "libc6:amd64",
+          "version": "libc6 2.39-0ubuntu8.7",
+          "returncode": 0
+        }
+      ]
+    },
+    "/usr/lib/x86_64-linux-gnu/libmvec.so.1": {
+      "observed_path": "/lib/x86_64-linux-gnu/libmvec.so.1",
+      "sha256": "48cb1a87e6f8a713037a45fe4db113c5ed43ac0730963871640f7f1a0a713384",
+      "packages": [
+        {
+          "name": "libc6:amd64",
+          "version": "libc6 2.39-0ubuntu8.7",
+          "returncode": 0
+        }
+      ]
+    },
+    "/usr/lib/x86_64-linux-gnu/libc.so.6": {
+      "observed_path": "/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "d8db8739a1633c972cec6a4fe0566bdcec6fd088f98723492ab0361f66238f75",
+      "packages": [
+        {
+          "name": "libc6:amd64",
+          "version": "libc6 2.39-0ubuntu8.7",
+          "returncode": 0
+        }
+      ]
+    },
+    "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1": {
+      "observed_path": "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "sha256": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+      "packages": [
+        {
+          "name": "libgcc-s1:amd64",
+          "version": "libgcc-s1 14.2.0-4ubuntu2~24.04.1",
+          "returncode": 0
+        }
+      ]
+    },
+    "/usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so": {
+      "observed_path": "/lib/x86_64-linux-gnu/libopenblas.so.0",
+      "sha256": "bfc7492adbf84a8f567720a9e1fae2afc18f3d817da233e7f4d453683485308e",
+      "packages": [
+        {
+          "name": "libopenblas0-pthread:amd64",
+          "version": "libopenblas0-pthread 0.3.26+ds-1ubuntu0.1",
+          "returncode": 0
+        }
+      ]
+    },
+    "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2": {
+      "observed_path": "/lib64/ld-linux-x86-64.so.2",
+      "sha256": "1cd555ac46b7887edeaf3c42aac5408c8135e52f6b37870da2cf82d5fe14e829",
+      "packages": [
+        {
+          "name": "libc6:amd64",
+          "version": "libc6 2.39-0ubuntu8.7",
+          "returncode": 0
+        }
+      ]
+    }
+  },
+  "data_root": "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119",
+  "cohorts": {
+    "v1": {
+      "plan": {
+        "path": "v1/plan.json",
+        "sha256": "13c4a7da50f9c1048ab93412dafdacc8d156230f0b3d97f066f597f70514b37c"
+      },
+      "seal": {
+        "path": "v1/seal.json",
+        "sha256": "fc98d1a018dac9dd60af3266613ce556553434fc0b84df5f6cd86eea403a9a58"
+      },
+      "evidence": [
+        {
+          "path": "v1/analysis_spatial/campaign_metrics.json",
+          "sha256": "5316da3611eb6f5b202df91853199132091a575712273c20a3acca6136f6a399"
+        },
+        {
+          "path": "v1/comparison.json",
+          "sha256": "cf21ba615b4db4d4e321e70f2fb77731e1848d5dba1b875bd51b555ea5dd97fa"
+        }
+      ],
+      "runs": {
+        "D_Stable_fixed": {
+          "name": "D_Stable_fixed",
+          "status": "COMPLETED",
+          "pipe_regime_mode": "FIXED_STRATIFIED",
+          "returncode": 0,
+          "wall_seconds": 284.05982218901045,
+          "run_status": {
+            "status": 0.0,
+            "reached_time_s": 2400.0,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 19222.0,
+            "rejected_steps": 0.0,
+            "last_rejection_status": 0.0,
+            "cpu_seconds": 277.200716
+          },
+          "namelist_sha256": "486d2e6ac3f1afdb046457ff42ae730824086b3de87ac46af25afe40926e8c24",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v1/decks/D_Stable_fixed.nml"
+          ],
+          "run_manifest": {
+            "path": "v1/runs/D_Stable_fixed/manifest.json",
+            "sha256": "d5eb701cc4a104684ac41c47bfcac60922450c73d502231344b588adae5eac57"
+          },
+          "field_sha256": "00582bdd7af8113ee1551257452527496940c5e3892b2c1cecbb6fd4cbb65a87",
+          "monitor_sha256": "af5fe306f9ccbebbf90c2af7f9503d9de6b573772edba5b30a3805d1bebe5bb4"
+        },
+        "D_Stable_diagnostic": {
+          "name": "D_Stable_diagnostic",
+          "status": "COMPLETED",
+          "pipe_regime_mode": "AUTO_BURR15",
+          "returncode": 0,
+          "wall_seconds": 286.0953460979945,
+          "run_status": {
+            "status": 0.0,
+            "reached_time_s": 2400.0,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 19222.0,
+            "rejected_steps": 0.0,
+            "last_rejection_status": 0.0,
+            "cpu_seconds": 279.423649
+          },
+          "namelist_sha256": "7f9fe0cb3ec5b3a6487bb47859e8623a970a66933d590f86136bf39d1330d6a8",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v1/decks/D_Stable_diagnostic.nml"
+          ],
+          "run_manifest": {
+            "path": "v1/runs/D_Stable_diagnostic/manifest.json",
+            "sha256": "6b07f7f45411f8eeb93a30c28e6b2034409d1f33ac399e59f567d61f8098eb49"
+          },
+          "field_sha256": "00582bdd7af8113ee1551257452527496940c5e3892b2c1cecbb6fd4cbb65a87",
+          "monitor_sha256": "af5fe306f9ccbebbf90c2af7f9503d9de6b573772edba5b30a3805d1bebe5bb4"
+        },
+        "D_OSC_fixed": {
+          "name": "D_OSC_fixed",
+          "status": "COMPLETED",
+          "pipe_regime_mode": "FIXED_STRATIFIED",
+          "returncode": 0,
+          "wall_seconds": 552.1162661629933,
+          "run_status": {
+            "status": 0.0,
+            "reached_time_s": 2400.0,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 19222.0,
+            "rejected_steps": 0.0,
+            "last_rejection_status": 0.0,
+            "cpu_seconds": 540.07539
+          },
+          "namelist_sha256": "79e3ba6eab1d9ac512bd9addf3185659197add223d3fbdbf70ca5aa9e96156a4",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v1/decks/D_OSC_fixed.nml"
+          ],
+          "run_manifest": {
+            "path": "v1/runs/D_OSC_fixed/manifest.json",
+            "sha256": "0c2470068c33cc2b99fa607db5a869586c975df4291295d3fa1ec2f66296c54f"
+          },
+          "field_sha256": "e545bbb3ed0fa7d17f6a6da2d327d9585796b2ded16745fc527635213b8da919",
+          "monitor_sha256": "f6eb5c5092a3a9207b3c5b75a49d0f64823902848a3b2d75e4a64cbcb931a871"
+        },
+        "D_OSC_diagnostic": {
+          "name": "D_OSC_diagnostic",
+          "status": "COMPLETED",
+          "pipe_regime_mode": "AUTO_BURR15",
+          "returncode": 0,
+          "wall_seconds": 553.0848090950021,
+          "run_status": {
+            "status": 0.0,
+            "reached_time_s": 2400.0,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 19222.0,
+            "rejected_steps": 0.0,
+            "last_rejection_status": 0.0,
+            "cpu_seconds": 542.019274
+          },
+          "namelist_sha256": "afa2b01d64de99d574fe6f564dc044f222ab23dc7222b9a63ccdcffe0ec7dda4",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v1/decks/D_OSC_diagnostic.nml"
+          ],
+          "run_manifest": {
+            "path": "v1/runs/D_OSC_diagnostic/manifest.json",
+            "sha256": "7c9af5b43bca2902defd8d868119222ddf01f29e732c4f7a972d97506ba1625d"
+          },
+          "field_sha256": "e545bbb3ed0fa7d17f6a6da2d327d9585796b2ded16745fc527635213b8da919",
+          "monitor_sha256": "f6eb5c5092a3a9207b3c5b75a49d0f64823902848a3b2d75e4a64cbcb931a871"
+        },
+        "D_SS3_fixed": {
+          "name": "D_SS3_fixed",
+          "status": "FAILED",
+          "pipe_regime_mode": "FIXED_STRATIFIED",
+          "returncode": 3,
+          "wall_seconds": 37.50959037899156,
+          "run_status": {
+            "status": 6000.0,
+            "reached_time_s": 97.1318523387001,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 809.0,
+            "rejected_steps": 24.0,
+            "last_rejection_status": 6000.0,
+            "cpu_seconds": 34.289861
+          },
+          "namelist_sha256": "24b9fdc21afd56148fa9b25af5728b2c852e3b53107019fad2fcde08bb05fa5f",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v1/decks/D_SS3_fixed.nml"
+          ],
+          "run_manifest": {
+            "path": "v1/runs/D_SS3_fixed/manifest.json",
+            "sha256": "6b2d0ddab76446f8952d08d2f975f57f19e24ba5c07fdbc14493e700982b5105"
+          },
+          "field_sha256": "82c0e4df451cd67f623659a42c0d4609657a85ddc5a74784bd95d7867f1df03d",
+          "monitor_sha256": "1b8c03eeba215881fcf9c0936ee77f0c485e5661e214f1a0f15d632325c7f7c8"
+        },
+        "D_SS3_diagnostic": {
+          "name": "D_SS3_diagnostic",
+          "status": "FAILED",
+          "pipe_regime_mode": "AUTO_BURR15",
+          "returncode": 3,
+          "wall_seconds": 37.50286382500781,
+          "run_status": {
+            "status": 6000.0,
+            "reached_time_s": 97.1318523387001,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 809.0,
+            "rejected_steps": 24.0,
+            "last_rejection_status": 6000.0,
+            "cpu_seconds": 34.159740000000006
+          },
+          "namelist_sha256": "f96778e63ff5888508c004f79526d3609f3d344b06f4dd88051609df1f29b7f9",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v1/decks/D_SS3_diagnostic.nml"
+          ],
+          "run_manifest": {
+            "path": "v1/runs/D_SS3_diagnostic/manifest.json",
+            "sha256": "710ecc564dfd58048e4254cfc5824227d8d4764ede6f085eff39613fe031f368"
+          },
+          "field_sha256": "82c0e4df451cd67f623659a42c0d4609657a85ddc5a74784bd95d7867f1df03d",
+          "monitor_sha256": "1b8c03eeba215881fcf9c0936ee77f0c485e5661e214f1a0f15d632325c7f7c8"
+        },
+        "D_SS1_fixed": {
+          "name": "D_SS1_fixed",
+          "status": "FAILED",
+          "pipe_regime_mode": "FIXED_STRATIFIED",
+          "returncode": 3,
+          "wall_seconds": 50.65504056600912,
+          "run_status": {
+            "status": 6000.0,
+            "reached_time_s": 78.57178847673931,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 662.0,
+            "rejected_steps": 24.0,
+            "last_rejection_status": 6000.0,
+            "cpu_seconds": 49.205728
+          },
+          "namelist_sha256": "62faf257164a129d6d9d70370f0ce36976410d14a2f35e3cfd800752b0ebc489",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v1/decks/D_SS1_fixed.nml"
+          ],
+          "run_manifest": {
+            "path": "v1/runs/D_SS1_fixed/manifest.json",
+            "sha256": "726a13a9203fda02c9741ddd264a977ce73acf655814a342afe859a8de1cb152"
+          },
+          "field_sha256": "58e3dc59e7478b28a6daa94112e8e5f1d13a9501750a0288c932b6dc2328124e",
+          "monitor_sha256": "f3bedb875c93523c7204b5bd2b6158d2d228482947516bd94bc8ae8f10652409"
+        },
+        "D_SS1_diagnostic": {
+          "name": "D_SS1_diagnostic",
+          "status": "FAILED",
+          "pipe_regime_mode": "AUTO_BURR15",
+          "returncode": 3,
+          "wall_seconds": 50.605744714004686,
+          "run_status": {
+            "status": 6000.0,
+            "reached_time_s": 78.57178847673931,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 662.0,
+            "rejected_steps": 24.0,
+            "last_rejection_status": 6000.0,
+            "cpu_seconds": 49.470468
+          },
+          "namelist_sha256": "9c29f054d90dda03e73b205ec0cb14194f073695b416f4b5ddc254672e4689e2",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v1/decks/D_SS1_diagnostic.nml"
+          ],
+          "run_manifest": {
+            "path": "v1/runs/D_SS1_diagnostic/manifest.json",
+            "sha256": "59c2d59830430ffe06d51d0c635cb7a1d156bf0db1a56935a1694d65ff45ad49"
+          },
+          "field_sha256": "58e3dc59e7478b28a6daa94112e8e5f1d13a9501750a0288c932b6dc2328124e",
+          "monitor_sha256": "f3bedb875c93523c7204b5bd2b6158d2d228482947516bd94bc8ae8f10652409"
+        }
+      }
+    },
+    "v2_stable": {
+      "plan": {
+        "path": "v2_stable/plan.json",
+        "sha256": "0f83bedabb13dadb03b808c3b0d60496237178e9dbe57d4a0865132dae82a9ab"
+      },
+      "seal": {
+        "path": "v2_stable/seal.json",
+        "sha256": "e6fbdc67cf474fb70ba679237bb661028e641f8b49f2897cb3990f5c5e5245a0"
+      },
+      "evidence": [
+        {
+          "path": "v2_stable/analysis_spatial/campaign_metrics.json",
+          "sha256": "c4aba808615084fa72b61d37d14d2b4e3f621c79ecb36791b73f481a39478004"
+        }
+      ],
+      "runs": {
+        "D_Stable_space_N101_dt0p125": {
+          "name": "D_Stable_space_N101_dt0p125",
+          "status": "COMPLETED",
+          "pipe_regime_mode": "FIXED_STRATIFIED",
+          "returncode": 0,
+          "wall_seconds": 493.39995196698874,
+          "run_status": {
+            "status": 0.0,
+            "reached_time_s": 2400.0,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 19222.0,
+            "rejected_steps": 0.0,
+            "last_rejection_status": 0.0,
+            "cpu_seconds": 483.74339399999997
+          },
+          "namelist_sha256": "d3adb0a26e9ea956b9f32e943222f68dcaa59132425e19aedbb280268cd71bd3",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v2_stable/decks/D_Stable_space_N101_dt0p125.nml"
+          ],
+          "run_manifest": {
+            "path": "v2_stable/runs/D_Stable_space_N101_dt0p125/manifest.json",
+            "sha256": "3a84f01628c3f6c294bd57e2e3a704f43219903f78b67af294e2e7ca368ae4d9"
+          },
+          "field_sha256": "cb066ee90b0a0af8e13929cd82b67ba6524865b6460172a919c4249eea2244b0",
+          "monitor_sha256": "ed064b3cfee2bf8d509b05e53edd77dc1b881cdb63eeab026bf6ca58bd754afe"
+        },
+        "D_Stable_time_N51_dt0p0625": {
+          "name": "D_Stable_time_N51_dt0p0625",
+          "status": "COMPLETED",
+          "pipe_regime_mode": "FIXED_STRATIFIED",
+          "returncode": 0,
+          "wall_seconds": 513.6300433759898,
+          "run_status": {
+            "status": 0.0,
+            "reached_time_s": 2400.0,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 38418.0,
+            "rejected_steps": 0.0,
+            "last_rejection_status": 0.0,
+            "cpu_seconds": 503.695854
+          },
+          "namelist_sha256": "0f16dd28dafffe2be84a15133c414514fa2f1719690c1b8ac2fb434f03c092a5",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v2_stable/decks/D_Stable_time_N51_dt0p0625.nml"
+          ],
+          "run_manifest": {
+            "path": "v2_stable/runs/D_Stable_time_N51_dt0p0625/manifest.json",
+            "sha256": "7c5cb04e2276d4a57f6f0270c4eac06d7bf00cf707909968e61214b271a59c8a"
+          },
+          "field_sha256": "abd682e53e88d376f6ee2b027bde672518db45cc1fe7bf5d6b5f3ba7cb0212ab",
+          "monitor_sha256": "d65819e40a88e30b3bea28766f73aed7b4ba918f88592a2f11d0a32fb925254e"
+        }
+      }
+    },
+    "v2_osc": {
+      "plan": {
+        "path": "v2_osc/plan.json",
+        "sha256": "36ac4d9ce46c6e90827f3e9cd227373c6b0653cfa25ab8620024ec1a27f16c6d"
+      },
+      "seal": {
+        "path": "v2_osc/seal.json",
+        "sha256": "7ecbce4859f5e63819d12a95d64793ba8c62c3ef12968816c4c9255232d1c640"
+      },
+      "evidence": [
+        {
+          "path": "v2_osc/analysis_spatial/campaign_metrics.json",
+          "sha256": "f21e2fc5ace962760bc5dadf1e89c4332250bd2db1399fabf5db22da440f33d1"
+        },
+        {
+          "path": "v2_osc/analysis_spatial_complete_cycles/campaign_metrics.json",
+          "sha256": "08e718486a8e0ec66b504ea48aa8d76f3def2e41e388c3d3c883cf3eed1ebfaf"
+        }
+      ],
+      "runs": {
+        "D_OSC_space_N101_dt0p125": {
+          "name": "D_OSC_space_N101_dt0p125",
+          "status": "COMPLETED",
+          "pipe_regime_mode": "FIXED_STRATIFIED",
+          "returncode": 0,
+          "wall_seconds": 1081.5973760610068,
+          "run_status": {
+            "status": 0.0,
+            "reached_time_s": 2400.0,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 19222.0,
+            "rejected_steps": 0.0,
+            "last_rejection_status": 0.0,
+            "cpu_seconds": 1072.522749
+          },
+          "namelist_sha256": "3f152f9330c3884796aeb899528b26d84ac8f183a29d8cf341c0368d1e9107cd",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v2_osc/decks/D_OSC_space_N101_dt0p125.nml"
+          ],
+          "run_manifest": {
+            "path": "v2_osc/runs/D_OSC_space_N101_dt0p125/manifest.json",
+            "sha256": "ad3ccb9efbaa31575aebee37180d8e6958a47bbbccded5ad30f27e51d250fbf1"
+          },
+          "field_sha256": "700589cf3fd1e9b841a79f813e13a90f8ed6d2f512a2fa7f12e809b02693bca3",
+          "monitor_sha256": "4a3047f8058a302d983caa785adc8786ffdd58a24a639fad3a1a824290c49fd3"
+        },
+        "D_OSC_time_N51_dt0p0625": {
+          "name": "D_OSC_time_N51_dt0p0625",
+          "status": "COMPLETED",
+          "pipe_regime_mode": "FIXED_STRATIFIED",
+          "returncode": 0,
+          "wall_seconds": 987.7879346870031,
+          "run_status": {
+            "status": 0.0,
+            "reached_time_s": 2400.0,
+            "requested_time_s": 2400.0,
+            "accepted_steps": 38418.0,
+            "rejected_steps": 0.0,
+            "last_rejection_status": 0.0,
+            "cpu_seconds": 978.617678
+          },
+          "namelist_sha256": "f7c0068dc6ca9c90f975f88877d2a5971819675888a288061952f8dad9a992fe",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v2_osc/decks/D_OSC_time_N51_dt0p0625.nml"
+          ],
+          "run_manifest": {
+            "path": "v2_osc/runs/D_OSC_time_N51_dt0p0625/manifest.json",
+            "sha256": "e11af6205804ee6f8bde8425d0277ba804f5660fd1e052ba74713ab26ba7df96"
+          },
+          "field_sha256": "ac3bfe33aacaea29cc2ad4e03c8033f7fbca3fea6da22630b69fbd6bbd3f5fa8",
+          "monitor_sha256": "88c56c3fa4a3d3c85b1f53ebccff5a4feca2c3013a8f6a016673f77a83e55b33"
+        }
+      }
+    },
+    "v2_osc3600": {
+      "plan": {
+        "path": "v2_osc3600/plan.json",
+        "sha256": "85cdc634ab2a3cb77c28b4319bea89f396ecbe30456808bf3ce45f7e60c08d09"
+      },
+      "seal": {
+        "path": "v2_osc3600/seal.json",
+        "sha256": "44ce6f7a2b057ca60ba6f446575bec44f774ddb8da57213f340991e3ba9c2390"
+      },
+      "evidence": [
+        {
+          "path": "v2_osc3600/analysis_spatial/campaign_metrics.json",
+          "sha256": "3e5eb89a164057c6b72e54112d367bbf5cd585286ff238ebd1cee7d368f79878"
+        }
+      ],
+      "runs": {
+        "D_OSC_extended_N51_dt0p125": {
+          "name": "D_OSC_extended_N51_dt0p125",
+          "status": "COMPLETED",
+          "pipe_regime_mode": "FIXED_STRATIFIED",
+          "returncode": 0,
+          "wall_seconds": 815.2832023270021,
+          "run_status": {
+            "status": 0.0,
+            "reached_time_s": 3600.0,
+            "requested_time_s": 3600.0,
+            "accepted_steps": 28822.0,
+            "rejected_steps": 0.0,
+            "last_rejection_status": 0.0,
+            "cpu_seconds": 813.66304
+          },
+          "namelist_sha256": "1cbc290b968fb1ebdac40a3a2b720eb6ca9c1c38facb99902ba9c6a5a685bb8e",
+          "command": [
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/builds/release_8a85e37_r1/bin/prims_f",
+            "/home/leonardoab/Documentos/PRIMS-F-burr15-results-20261119/v2_osc3600/decks/D_OSC_extended_N51_dt0p125.nml"
+          ],
+          "run_manifest": {
+            "path": "v2_osc3600/runs/D_OSC_extended_N51_dt0p125/manifest.json",
+            "sha256": "f1645b636fa53617d8b7c1f389b8ca37e1ea08837b2ef0e11eea7695d384c048"
+          },
+          "field_sha256": "aa5f4d55e30e77eb5c942429f0419ce04cb82e21e8ded59afba964b5effa8b60",
+          "monitor_sha256": "9d857341bd104a5f9a8caee8ab9fca1c136d7a6106cbd3bb3c42a3b67a1d1fb2"
+        }
+      }
+    }
+  },
+  "unit_tests": {
+    "git_head": "8a85e37319995b37795d2c798d6f865b863b1834",
+    "assertions": 3573,
+    "passed_tests": 13,
+    "required_tests": 13,
+    "flags": [
+      "-std=f2018",
+      "-O0",
+      "-g3",
+      "-Wall",
+      "-Wextra",
+      "-Wno-unused-dummy-argument",
+      "-Wno-unused-parameter",
+      "-fimplicit-none",
+      "-ffree-line-length-none",
+      "-fopenmp",
+      "-fcheck=all",
+      "-fbacktrace",
+      "-ffpe-trap=invalid,zero,overflow",
+      "-finit-real=snan",
+      "-finit-integer=-999",
+      "-J/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/tmp/unit_tests",
+      "-I/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/tmp/unit_tests",
+      "-I/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/scr"
+    ],
+    "libraries": [
+      "-llapack",
+      "-lblas"
+    ],
+    "source_sha256": {
+      "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+      "scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c",
+      "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+      "scr/module_flow_regime.f90": "d7c369d3d1418d1f3bb97ebd10a849ad3ea24aec11522753377c9e2cea046ebd",
+      "scr/module_config.f90": "fcac25be786649550dc06a687fddd7b4f215c9ba362a9d48a6505503a0470251",
+      "scr/module_lapack_small.f90": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+      "scr/module_chexal_1992.f90": "63a60d888a288eee582ab61d418cfe8838d1aa0e79b145e8a163d25c026d0443",
+      "scr/module_closure_law.f90": "2c7e9b7d81651faa6580be044fcf04e8430fc54670afd8b10dd614d2e955d233",
+      "scr/module_find.f90": "e6a9a70050885b092e17b7db0d04a46450b5eb7c4659d0a1f91ed3312afdafce",
+      "scr/module_catenary.f90": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+      "scr/module_steady_state.f90": "7e7258450e45beb14c4e1b1115d49bdff6662cac94fc27b33ecd21a37cfcdd6f",
+      "scr/module_jacobian.f90": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+      "scr/module_matrix_roe.f90": "f75d32c43cfb344c58aaaf0217f186f042c57dd68c86cd111a8c23bf8f64be6e",
+      "scr/module_roe_solver.f90": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+      "scr/module_boundary_conditions.f90": "d9f24ac455573778ccbee722a1fcb930ab45b5865213746f176acc5ff416b994",
+      "scr/module_solver_utils.f90": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+      "scr/module_time_step.f90": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133",
+      "scr/module_simulate_pipe_riser.f90": "452a2158e2bd49fa00db50f6816252a937c4c18db935d13e9d21ff020252d7e3",
+      "tests/test_chexal_velocity_reference.f90": "94305a19fc06582be1af53a92c616654179af71cce720b0c318fdb531cd79a70",
+      "tests/test_chexal_derivative_tail.f90": "0cdb5ae9089dfff5f36403a04de34ed37beb42fbe2883e184b10d5c9f1e8d9e3",
+      "tests/test_chexal_1992_core.f90": "4f2af4cb6d15f87f7cc5c9bbe193b3359ea685858eaf7af3eddfe62c46547908",
+      "tests/test_chexal_integration.f90": "d172a5831e412660e1493aa57f31478ec8022463b26f6d90c7e7518a2342fcc7",
+      "tests/test_geometry.f90": "cea60253a701249a1730633fce23db60d81ce418c33cc4ec9a7b2e741693d213",
+      "tests/test_closure_physics.f90": "cfb986acaa8d6b68b78be813e8f808c2a601a08e311d5e8143b23ae13e4039eb",
+      "tests/test_primitives_numerics.f90": "584e2202469cb0b1445e91a2fe05c99c5c17bb635d156e1a1f6d140e9524518d",
+      "tests/test_steady.f90": "50bebcb6a429c0b43a07a063803a37e9d4980c9767627c92feafccdc6137f49f",
+      "tests/test_boundaries_time.f90": "d59abebcf35adfd75b216c1fda26de0a9a66a1571b15f805d6ede37e1cb05b3f",
+      "tests/test_fv_operators.f90": "e7a8cdd7312b57bcde4a5e4ec04ade4ea433946aca6c961776a14fd9080546b1",
+      "tests/test_roe_geometry.f90": "296e6b0c20b994a1e309deed2b65a78baf43edf0a648d9b5321cf58efcdbc8ef",
+      "tests/test_chexal_junction.f90": "7c48d4d6181d3ce5bc7157b0bdff9f3c249effdb42f8172cf7ebaa9fe88c9698",
+      "tests/test_burr15.f90": "2d5fc2a1183e6967e122f1dc50d81f579054c92c0e8e650500f8616456b77b53"
+    },
+    "unit_manifest_sha256": "664cf149ba8429b7ba10570fcf51ec055c12d0fbd9926245ec19fefc9518eacb",
+    "debug_binary_sha256": "506585a6346429cdad09a20e7e0689307cc85cd310d915a1857cc6b995dc6a73",
+    "programs": {
+      "test_chexal_velocity_reference": 21,
+      "test_chexal_derivative_tail": 87,
+      "test_chexal_1992_core": 147,
+      "test_chexal_integration": 584,
+      "test_geometry": 43,
+      "test_closure_physics": 1110,
+      "test_primitives_numerics": 283,
+      "test_steady": 398,
+      "test_boundaries_time": 32,
+      "test_fv_operators": 319,
+      "test_roe_geometry": 315,
+      "test_chexal_junction": 108,
+      "test_burr15": 126
+    },
+    "cli_release_passed": 18,
+    "cli_release_summary_sha256": "3d50e75bacdb68ec7dcf4286e874aedf71fd25c9d85a3a58f93d2cbc49a6cdea"
+  },
+  "independent_detector": {
+    "path": "v1/independent_burr15/v2/summary.json",
+    "sha256": "c56d915c6c0804156ea98e9c65328794390161251d7daa28707cea53e7a6744a"
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "schema": "PRIMS-F.default_pipe_policy_regression.v1",
+  "physical_time_s": 1,
+  "workers": 1,
+  "environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OMP_DYNAMIC": "FALSE"
+  },
+  "process_nice": 15,
+  "builds": {
+    "legacy": {
+      "command": [
+        "make",
+        "-j1",
+        "FC=gfortran",
+        "LIBS=-llapack -lblas"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.0042798270005732775,
+      "log": "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/validation/diagnostics/burr15_legacy_regression_20261119/legacy_build_v2.log",
+      "commit": "ee5810e57488bde45b3ec02024b644d55be59724",
+      "binary_sha256": "290280e37841d3f768299035afc668590474871f066c3200abec341f198b1bb7",
+      "sources_sha256": {
+        "scr/module_roe_solver.f90": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+        "scr/debug_closure_fd.f90": "fa2af5a40578008158e76044651214bf19422551f5bb60aca32add675ed967b5",
+        "scr/module_boundary_conditions.f90": "d9f24ac455573778ccbee722a1fcb930ab45b5865213746f176acc5ff416b994",
+        "scr/module_mesh.f90": "bdb594b3f4ac288787484f613f73235453ad446053d4d34cb46ca0d60ac5f2fd",
+        "scr/mod_roe_solver.f90": "4417a1c8db516a58f68023182ada5665b9f47277139b36b757e0cca00ed358c6",
+        "scr/module_simulate_pipe_riser.f90": "998e9d56e85b64c3075379d02c7c63de5b720e796be3553f8245024990318997",
+        "scr/main.f90": "086885be6d2eb6933ff36f87d581e3564748553d40b7aef353385553b3513fa8",
+        "scr/module_flow_regime.f90": "af17e75c6991c128935eddda4e90fbc8a5ed70d24b19bf0f978359080bac2afa",
+        "scr/module_lapack_small.f90": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+        "scr/module_steady_state.f90": "a6346574744a95d8da6ed1061730a889d39d1bb93eee27e79d412595e46ff529",
+        "scr/module_config.f90": "c4b52aaf5f090a8e366b7b61b2fc3dd0234601ab1e6eaaab092e9e6b1a9e68d4",
+        "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+        "scr/module_jacobian.f90": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+        "scr/module_catenary.f90": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+        "scr/module_chexal_1992.f90": "63a60d888a288eee582ab61d418cfe8838d1aa0e79b145e8a163d25c026d0443",
+        "scr/module_time_step.f90": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133",
+        "scr/module_solver_utils.f90": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+        "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+        "scr/mod_fluid_dynamics.f90": "2f1b2137311d50cdd12410d01a2b1b58b694b8fbf18cf26a0da8a06506ffe9fe",
+        "scr/module_matrix_roe.f90": "f75d32c43cfb344c58aaaf0217f186f042c57dd68c86cd111a8c23bf8f64be6e",
+        "scr/module_closure_law.f90": "2c7e9b7d81651faa6580be044fcf04e8430fc54670afd8b10dd614d2e955d233",
+        "scr/module_find.f90": "e6a9a70050885b092e17b7db0d04a46450b5eb7c4659d0a1f91ed3312afdafce",
+        "scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c"
+      },
+      "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+    },
+    "fixed_policy": {
+      "command": [
+        "make",
+        "-j1",
+        "FC=gfortran",
+        "LIBS=-llapack -lblas"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.005146315001184121,
+      "log": "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/validation/diagnostics/burr15_legacy_regression_20261119/fixed_policy_build_v2.log",
+      "commit": "8a85e37319995b37795d2c798d6f865b863b1834",
+      "binary_sha256": "6b3164d2a18e08e173c1e65e5058bfc024d648a94b64fa10c7bc8ab8a24d37e5",
+      "sources_sha256": {
+        "scr/module_roe_solver.f90": "df2aa7695e07e8db91eac4e00348d6a21cb2a4b157d509ec2adb17b6b4e29453",
+        "scr/debug_closure_fd.f90": "fa2af5a40578008158e76044651214bf19422551f5bb60aca32add675ed967b5",
+        "scr/module_boundary_conditions.f90": "d9f24ac455573778ccbee722a1fcb930ab45b5865213746f176acc5ff416b994",
+        "scr/module_mesh.f90": "bdb594b3f4ac288787484f613f73235453ad446053d4d34cb46ca0d60ac5f2fd",
+        "scr/mod_roe_solver.f90": "4417a1c8db516a58f68023182ada5665b9f47277139b36b757e0cca00ed358c6",
+        "scr/module_simulate_pipe_riser.f90": "452a2158e2bd49fa00db50f6816252a937c4c18db935d13e9d21ff020252d7e3",
+        "scr/main.f90": "4365b0f395845e01d0ee3bc4826b4a1f0c1f9000aed9e0b290aa501de4027a29",
+        "scr/module_flow_regime.f90": "d7c369d3d1418d1f3bb97ebd10a849ad3ea24aec11522753377c9e2cea046ebd",
+        "scr/module_lapack_small.f90": "722202a6288f6c49d099b54148936b4c2401c65f11dfd0c279534b73c442c363",
+        "scr/module_steady_state.f90": "7e7258450e45beb14c4e1b1115d49bdff6662cac94fc27b33ecd21a37cfcdd6f",
+        "scr/module_config.f90": "fcac25be786649550dc06a687fddd7b4f215c9ba362a9d48a6505503a0470251",
+        "scr/mod_kinds.f90": "ee97dc5a842e4a74ca53c5e20f1267f4ae270642cf59264b8a4968c538057900",
+        "scr/module_jacobian.f90": "c15ed27a1015b631027ab407622f50ff1bf488c3598795726565540c16d90469",
+        "scr/module_catenary.f90": "e9ef06437c339d9acde41cc0a47605e93e80fd59b69ba5a2724605eb646a3687",
+        "scr/module_chexal_1992.f90": "63a60d888a288eee582ab61d418cfe8838d1aa0e79b145e8a163d25c026d0443",
+        "scr/module_time_step.f90": "ebad91018f5ad877d024edc4f1a3b8f4f5ba9ea716c7bf990332b09bb6eee133",
+        "scr/module_solver_utils.f90": "c7974aa593588398b916287d87fdf9fb0019825d25f9feb88608f30a26fde4af",
+        "scr/mod_void_helpers.f90": "748e60ace76e37700450652495fee9eb15031708b6376f6794bf35b295808028",
+        "scr/mod_fluid_dynamics.f90": "2f1b2137311d50cdd12410d01a2b1b58b694b8fbf18cf26a0da8a06506ffe9fe",
+        "scr/module_matrix_roe.f90": "f75d32c43cfb344c58aaaf0217f186f042c57dd68c86cd111a8c23bf8f64be6e",
+        "scr/module_closure_law.f90": "2c7e9b7d81651faa6580be044fcf04e8430fc54670afd8b10dd614d2e955d233",
+        "scr/module_find.f90": "e6a9a70050885b092e17b7db0d04a46450b5eb7c4659d0a1f91ed3312afdafce",
+        "scr/mod_rootfinding.f90": "cf35a6aa8bed4347b4d9ba4b5d2260000fb8a4e90aefcbdb57055216eb73734c"
+      },
+      "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
+    }
+  },
+  "cases": {
+    "D_Stable": {
+      "legacy": {
+        "command": [
+          "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-ee5810e-20261119/bin/prims_f",
+          "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-ee5810e-20261119/tmp/D_Stable_default_policy_1s_v2.nml"
+        ],
+        "returncode": 0,
+        "wall_seconds": 1.0382676150038606,
+        "log": "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/validation/diagnostics/burr15_legacy_regression_20261119/legacy_D_Stable_v2.log",
+        "input_sha256": "a338a2b059dcfb7c0967339a2b88e4c40b2ba64fd821a10ee6231ca135c45111",
+        "canonical_input_sha256": "c1b9bfd1f5518b1f9ead28394953a3f007f438e730a2572f4bfddc80fdd42925",
+        "output": "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-ee5810e-20261119/tmp/reg2/D_Stable",
+        "run_status": {
+          "status": "0",
+          "reached_time_s": "1.0000000000000000E+00",
+          "requested_time_s": "1.0000000000000000E+00",
+          "accepted_steps": "30",
+          "rejected_steps": "0",
+          "last_rejection_status": "0",
+          "cpu_seconds": "8.6817800000000012E-01"
+        },
+        "artifacts_sha256": {
+          "monitor.csv": "ee94aeb60b731d5e7353756e1c577f5e765fb260669428578c3d5c095dff2c0e",
+          "fields.csv": "c58732bcfeb13c61625c6478a1a783cb3d8042d8e8b4db55e2ccfc5ce1a3bd69",
+          "results_D_Stable.dat": "4f5126da68964d5e753ef8777ef2d71da806c9d4b4a4ad59adb5c2ff2ad5a649",
+          "run_status.txt": "bdcb453e40fa381560ea81edb94fece8c5b9f631f1c86bb930804e95cf68e797"
+        }
+      },
+      "fixed_policy": {
+        "command": [
+          "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-8a85e37-20261119/bin/prims_f",
+          "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-8a85e37-20261119/tmp/D_Stable_default_policy_1s_v2.nml"
+        ],
+        "returncode": 0,
+        "wall_seconds": 1.0100060690019745,
+        "log": "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/validation/diagnostics/burr15_legacy_regression_20261119/fixed_policy_D_Stable_v2.log",
+        "input_sha256": "aaeb8652368519093422b3840c21bf2ec6374af33c130cfd63e0eef73c8515c3",
+        "canonical_input_sha256": "c1b9bfd1f5518b1f9ead28394953a3f007f438e730a2572f4bfddc80fdd42925",
+        "output": "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-8a85e37-20261119/tmp/reg2/D_Stable",
+        "run_status": {
+          "status": "0",
+          "reached_time_s": "1.0000000000000000E+00",
+          "requested_time_s": "1.0000000000000000E+00",
+          "accepted_steps": "30",
+          "rejected_steps": "0",
+          "last_rejection_status": "0",
+          "cpu_seconds": "8.5544399999999998E-01"
+        },
+        "artifacts_sha256": {
+          "monitor.csv": "ee94aeb60b731d5e7353756e1c577f5e765fb260669428578c3d5c095dff2c0e",
+          "fields.csv": "c58732bcfeb13c61625c6478a1a783cb3d8042d8e8b4db55e2ccfc5ce1a3bd69",
+          "results_D_Stable.dat": "c7f66b5eda8e6068bb424a27739a1b330422d9d12dd3d9cfbc2d34f71d316aa1",
+          "run_status.txt": "9d46aeaf0c7fc21e1523dab33f53f0fc74d1020cc51efd1c015ae952665c9088"
+        }
+      },
+      "canonical_inputs_equal": true,
+      "byte_equal": {
+        "monitor.csv": true,
+        "fields.csv": true
+      },
+      "legacy_output_max_absolute_difference": {
+        "pipe": {
+          "s_nd": 0.0,
+          "s_m": 0.0,
+          "alpha": 0.0,
+          "P_Pa": 0.0,
+          "ul_m_s": 0.0,
+          "ug_m_s": 0.0
+        },
+        "riser": {
+          "s_nd": 0.0,
+          "s_m": 0.0,
+          "alpha": 0.0,
+          "P_Pa": 0.0,
+          "ul_m_s": 0.00011183800000003075,
+          "ug_m_s": 0.14066522999999997
+        }
+      }
+    },
+    "D_OSC": {
+      "legacy": {
+        "command": [
+          "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-ee5810e-20261119/bin/prims_f",
+          "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-ee5810e-20261119/tmp/D_OSC_default_policy_1s_v2.nml"
+        ],
+        "returncode": 0,
+        "wall_seconds": 1.019946970991441,
+        "log": "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/validation/diagnostics/burr15_legacy_regression_20261119/legacy_D_OSC_v2.log",
+        "input_sha256": "9c2b816a643352dd6a3931df6d27c0628dc8b4cab84f24278e1cdf4c4fdd7229",
+        "canonical_input_sha256": "7c7a749966211719f248f9e7f39dc2ebb04c89828f51266e93c2b8207be2afa2",
+        "output": "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-ee5810e-20261119/tmp/reg2/D_OSC",
+        "run_status": {
+          "status": "0",
+          "reached_time_s": "1.0000000000000000E+00",
+          "requested_time_s": "1.0000000000000000E+00",
+          "accepted_steps": "30",
+          "rejected_steps": "0",
+          "last_rejection_status": "0",
+          "cpu_seconds": "8.4098099999999998E-01"
+        },
+        "artifacts_sha256": {
+          "monitor.csv": "3d3ba31a3d61fa90a28863b41b001b0c42add815a6dd666e5747df113bb3ee31",
+          "fields.csv": "a6b6ad5d2f84bb36fa7d654867179a782274e6c4f3dedc062a2e5eadab7ae487",
+          "results_D_OSC.dat": "2dd804cef9886b70157262b672de45c3bc3e744918688dc5c3111b633b874c07",
+          "run_status.txt": "4d082991e0c06ed132e274c0f6ebb55631bae26e376753e91a12e879adb9311a"
+        }
+      },
+      "fixed_policy": {
+        "command": [
+          "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-8a85e37-20261119/bin/prims_f",
+          "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-8a85e37-20261119/tmp/D_OSC_default_policy_1s_v2.nml"
+        ],
+        "returncode": 0,
+        "wall_seconds": 1.511777082007029,
+        "log": "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/validation/diagnostics/burr15_legacy_regression_20261119/fixed_policy_D_OSC_v2.log",
+        "input_sha256": "eebb785214180e1869b913bc62ce63e94066bfec0b28611f6a81870228e87ac7",
+        "canonical_input_sha256": "7c7a749966211719f248f9e7f39dc2ebb04c89828f51266e93c2b8207be2afa2",
+        "output": "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-8a85e37-20261119/tmp/reg2/D_OSC",
+        "run_status": {
+          "status": "0",
+          "reached_time_s": "1.0000000000000000E+00",
+          "requested_time_s": "1.0000000000000000E+00",
+          "accepted_steps": "30",
+          "rejected_steps": "0",
+          "last_rejection_status": "0",
+          "cpu_seconds": "8.0239699999999992E-01"
+        },
+        "artifacts_sha256": {
+          "monitor.csv": "3d3ba31a3d61fa90a28863b41b001b0c42add815a6dd666e5747df113bb3ee31",
+          "fields.csv": "a6b6ad5d2f84bb36fa7d654867179a782274e6c4f3dedc062a2e5eadab7ae487",
+          "results_D_OSC.dat": "31a4af8295f36772e71465d5e58d8557defd2e47285cd2d2c0202a8cd46278d8",
+          "run_status.txt": "bda6fa220536d3f90239c8749982bebd354d18b081adcc1eee763a7baaef8f55"
+        }
+      },
+      "canonical_inputs_equal": true,
+      "byte_equal": {
+        "monitor.csv": true,
+        "fields.csv": true
+      },
+      "legacy_output_max_absolute_difference": {
+        "pipe": {
+          "s_nd": 0.0,
+          "s_m": 0.0,
+          "alpha": 0.0,
+          "P_Pa": 0.0,
+          "ul_m_s": 0.0,
+          "ug_m_s": 0.0
+        },
+        "riser": {
+          "s_nd": 0.0,
+          "s_m": 0.0,
+          "alpha": 0.0,
+          "P_Pa": 0.0,
+          "ul_m_s": 0.0003971859999999383,
+          "ug_m_s": 0.2901241600000002
+        }
+      }
+    }
+  },
+  "initial_harness_attempt": {
+    "result": "solver completed D_Stable, status 0; comparator stopped before comparing",
+    "cause": "legacy final-output path exceeded its fixed character buffer; results_D_Stable.dat became results_D_Stable.d",
+    "preserved_output": "/home/leonardoab/Documentos/PRIMS-F-burr15-regression-ee5810e-20261119/tmp/default_policy_regression/D_Stable",
+    "resolution": "new shorter out_dir paths for both versions; no solver change"
+  },
+  "executed_harness_sha256": "19e99ac32dcd9b80da87e764f53196e7a96fd4b8ccc0e33c1da4da3f77163bba"
+}

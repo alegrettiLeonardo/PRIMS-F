@@ -1,0 +1,24 @@
+{
+  "base": "ee5810e",
+  "compiler": "GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "checks": {
+    "existing_steady": 398,
+    "cli_cases": 18,
+    "all_cli_passed": true
+  },
+  "test_script_sha256": "234f52f47955332b3661a64e6c1c017f39b5990abc3b600d7b005af523249e0d",
+  "binary_sha256": "f2c241a2f644664f7fd4f098770850cc3b6b292db66296a57f778edb2802c8a5",
+  "edited_source_sha256": {
+    "main.f90": "4365b0f395845e01d0ee3bc4826b4a1f0c1f9000aed9e0b290aa501de4027a29",
+    "module_config.f90": "fcac25be786649550dc06a687fddd7b4f215c9ba362a9d48a6505503a0470251",
+    "module_steady_state.f90": "7e7258450e45beb14c4e1b1115d49bdff6662cac94fc27b33ecd21a37cfcdd6f"
+  },
+  "source_snapshot": "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/tmp/pipe_config_check/sources",
+  "raw_cli_output": "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/tmp/pipe_regime_cli_refactored_v4",
+  "raw_prior_outputs": [
+    "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/tmp/pipe_regime_cli",
+    "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/tmp/pipe_regime_cli_output_check_v2",
+    "/home/leonardoab/Documentos/PRIMS-F-burr15-20261119/tmp/pipe_regime_cli_output_check_v3"
+  ],
+  "test_revision": "v4 readability refactor, same checks and unchanged solver binary"
+}
