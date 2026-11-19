@@ -2,7 +2,7 @@ from pathlib import Path
 import json, subprocess, time, os, math
 import numpy as np
 from audit_local import Audit,scalar
-OUT=Path('/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119')
+from audit_paths import OUT
 HERE=Path(__file__).parent
 def main():
  records=[]

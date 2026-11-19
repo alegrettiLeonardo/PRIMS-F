@@ -6,8 +6,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from audit_local import scalar
-ROOT=Path('/home/leonardoab/Documentos/PRIMS-F-boundary-audit-20261119')
-OUT=Path('/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119')
+from audit_paths import ROOT
+from audit_paths import OUT
 sys.path.insert(0,str(ROOT/'scripts'))
 from analyze_accepted_conservation import audit_ledger,audit_steps
 def csvrows(path):

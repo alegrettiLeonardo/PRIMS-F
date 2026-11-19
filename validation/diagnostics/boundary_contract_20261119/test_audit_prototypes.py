@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,unittest,sys
 import numpy as np
 from audit_local import Audit,fd
-BASE=Path('/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119')
+from audit_paths import OUT as BASE
 class Prototypes(unittest.TestCase):
  def audit(self,v,debug=False):return Audit(BASE/('variants_v2_debug' if debug else 'variants_v2')/v/'audit.so')
  def test_volume_contract_and_physical_flux(self):

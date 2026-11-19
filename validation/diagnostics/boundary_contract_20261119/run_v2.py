@@ -3,8 +3,8 @@ import subprocess,time,hashlib,json,os,sys
 from audit_local import Audit,scalar
 import numpy as np
 import csv
-ROOT=Path('/home/leonardoab/Documentos/PRIMS-F-boundary-audit-20261119')
-OUT=Path('/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119')
+from audit_paths import ROOT
+from audit_paths import OUT
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
  here=Path(__file__).parent
