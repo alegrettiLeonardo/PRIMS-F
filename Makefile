@@ -76,6 +76,7 @@ SRC := \
   $(DIR_SRC)/module_jacobian.f90 \
   $(DIR_SRC)/module_matrix_roe.f90 \
   $(DIR_SRC)/module_roe_solver.f90 \
+  $(DIR_SRC)/module_feed_contracts.f90 \
   $(DIR_SRC)/module_boundary_conditions.f90 \
   $(DIR_SRC)/module_solver_utils.f90 \
   $(DIR_SRC)/module_time_step.f90 \
@@ -155,7 +156,9 @@ $(DIR_OBJ)/module_matrix_roe.o:       $(DIR_OBJ)/module_find.o $(DIR_OBJ)/module
 $(DIR_OBJ)/module_roe_solver.o:       $(DIR_OBJ)/module_matrix_roe.o $(DIR_OBJ)/module_lapack_small.o
 
 # boundary_conditions usa module_roe_solver
-$(DIR_OBJ)/module_boundary_conditions.o: \
+$(DIR_OBJ)/module_feed_contracts.o: $(DIR_OBJ)/module_config.o
+
+$(DIR_OBJ)/module_boundary_conditions.o: $(DIR_OBJ)/module_feed_contracts.o \
                                       $(DIR_OBJ)/module_steady_state.o \
                                       $(DIR_OBJ)/module_roe_solver.o $(DIR_OBJ)/module_jacobian.o \
                                       $(DIR_OBJ)/module_find.o $(DIR_OBJ)/module_closure_law.o \

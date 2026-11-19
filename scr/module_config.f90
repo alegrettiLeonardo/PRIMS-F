@@ -73,6 +73,9 @@ module module_config
     real(wp) :: nPs     = 0.0_wp
     real(wp) :: nPb     = 0.0_wp
 
+    ! Explicit resolved inlet contracts; historical objects retain mass mode.
+    character(len=16)::liquid_inlet_basis='MASS',gas_inlet_basis='MASS'
+
     ! --- nondimensional inlet mass flows
     real(wp) :: mul = 0.0_wp
     real(wp) :: mug = 0.0_wp

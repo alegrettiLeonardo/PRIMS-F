@@ -2,6 +2,7 @@ module module_boundary_conditions
   !! Boundary conditions act on boundary faces and ghosts only. There is no
   !! inlet cache and no positivity repair of physical conservative states.
   use mod_kinds,only:wp,i4
+  use module_feed_contracts,only:inlet_mass_fluxes
   use module_config,only:sim_config_t
   use module_closure_law,only:is_chexal
   use module_find,only:compute_primitive_variables,pressure_fun_uj
@@ -33,6 +34,7 @@ contains
     real(wp),intent(out)::F(3)
     integer,intent(out)::status
     real(wp),intent(out),optional::Ubc(3)
+    real(wp)::gl_prescribed,gg_prescribed
     real(wp)::p,rhol,rhog,alpha,alpha_interior,ul,ug,jl,jg,pip,state(3),pcheck
     real(wp)::ul_interior,ug_interior,ai,rli,rgi,pi
     integer::model,phase,inlet_phase,interior_status
@@ -50,6 +52,8 @@ contains
     pip=cfg%omega_P/(cfg%omega_rho*cfg%omega_u**2)
     if(is_inlet)then
       model=cfg%closure_pipe
+      call inlet_mass_fluxes(p,cfg,gl_prescribed,gg_prescribed,status)
+      if(status/=0)return
       ! Inlet pressure follows the interior. Two independently prescribed
       ! phase mass fluxes supply the incoming boundary conditions.
       rhol=cfg%nrho_l0+(p-cfg%nP_l0)/cfg%nCl**2
@@ -60,9 +64,9 @@ contains
       if(alpha_interior<0.0_wp.or.alpha_interior>1.0_wp)return
       ! Zero imposed flow alone does not imply that a phase is absent.
       inlet_phase=PHASE_AUTO
-      if(Uinterior(2)==0.0_wp.and.cfg%mug==0.0_wp)inlet_phase=PHASE_LIQUID_ONLY
-      if(Uinterior(1)==0.0_wp.and.cfg%mul==0.0_wp)inlet_phase=PHASE_GAS_ONLY
-      jl=cfg%mul/rhol;jg=cfg%mug/rhog
+      if(Uinterior(2)==0.0_wp.and.gg_prescribed==0.0_wp)inlet_phase=PHASE_LIQUID_ONLY
+      if(Uinterior(1)==0.0_wp.and.gl_prescribed==0.0_wp)inlet_phase=PHASE_GAS_ONLY
+      jl=gl_prescribed/rhol;jg=gg_prescribed/rhog
       alpha=solve_alpha_from_superficials(jl,jg,rhol,rhog,theta,cfg%D_H,cfg%AREA,cfg%eps,cfg%G, &
         cfg%mu_l,cfg%mu_g,cfg%sigma,cfg%omega_u,cfg%omega_rho,cfg%tol,status=status,closure_id=model, &
         alpha_hint=alpha_interior,phase_hint=inlet_phase)
@@ -70,8 +74,8 @@ contains
       ul=0.0_wp;ug=0.0_wp
       if(alpha<1.0_wp)ul=jl/(1.0_wp-alpha)
       if(alpha>0.0_wp)ug=jg/alpha
-      state=[(1.0_wp-alpha)*rhol,alpha*rhog,cfg%mul+cfg%mug]
-      F=[cfg%mul,cfg%mug,cfg%mul*ul+cfg%mug*ug+pip*p]
+      state=[(1.0_wp-alpha)*rhol,alpha*rhog,gl_prescribed+gg_prescribed]
+      F=[gl_prescribed,gg_prescribed,gl_prescribed*ul+gg_prescribed*ug+pip*p]
     else
       model=cfg%closure_riser
       rhog=p/cfg%nCg**2

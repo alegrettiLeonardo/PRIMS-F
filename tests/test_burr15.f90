@@ -138,12 +138,16 @@ program test_burr15
     call state_from_flux(BENDIKSEN,y)
     call sim%face_pair(x,y,0.0_wp,0.0_wp,fm,fp,code,junction_trace=trace,left_cell=3)
     call check(code==0,'MATCHED on horizontal pipeline/riser base')
-    call check(all(ieee_is_finite(trace)),'MATCHED trace written')
-    call near(trace(1),p,2e-10_wp,'MATCHED pressure continuity')
+    if(model/=BENDIKSEN)then
+      call check(all(ieee_is_finite(trace)),'MATCHED trace for physically different closures')
+      call near(trace(1),p,2e-10_wp,'MATCHED pressure continuity')
+    else
+      call check(.not.any(ieee_is_finite(trace)),'identical operators have no artificial junction trace')
+    endif
     call check(maxval(abs(fm(:2)-fp(:2)))==0,'MATCHED phase flux continuity')
     call near(fm(1),gl,2e-10_wp,'positive liquid phase flux')
     call near(fm(2),gg,2e-10_wp,'positive gas phase flux')
-    call near(trace(6),gg,2e-10_wp,'positive unprojected gas trace')
+    if(model/=BENDIKSEN)call near(trace(6),gg,2e-10_wp,'positive unprojected gas trace')
     if(model==STRATIFIED)call check(abs(trace(4)-trace(5))>.01_wp,'matched void fractions may differ')
     h=1e-5_wp
     updated=((x(:2)-h*fm(:2)/.2_wp)-x(:2))*.2_wp + ((y(:2)+h*fp(:2)/.07_wp)-y(:2))*.07_wp
