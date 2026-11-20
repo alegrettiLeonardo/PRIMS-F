@@ -1,3 +1,36 @@
+## Atualização: auditoria avançada P0–P2, 20/11/2026
+
+Mesma branch/worktree; sem push/merge. Relatório:
+[QUALIFICATION_P0P2_ADVANCED_20261120.md](QUALIFICATION_P0P2_ADVANCED_20261120.md).
+Operador congelado `007359d` (`frozen_007359d/`, `prims_f` `d1184263…`); default byte a
+byte = `1d71f00`; 25/25 Fortran, 123 Python, 6/6 CLI.
+
+- **P0.1:** nos estados aceitos terminais, a junção é classe **C** (gás presente e
+  subindo, fluxo de face nulo por cancelamento Roe). Com E1/STEADY, o gás no fim do
+  oleoduto chega a 1,3–1,6% de |U_d|, perto da estagnação (A). Ferramentas:
+  `junction_state_compare.f90` (argumentos: fixture, c_g, fluxo e traço da execução;
+  β = 2° agora definido) e `junction_classification.py`.
+- **P0.2:** `junction_flux='PHASE_UPWIND'` (E1, opt‑in, experimental, **não promover**).
+  Vetor (G_l\*, G_g\*, p\*) por Riemann acústico de Wood mais separação de fluxo
+  material por fase. A dinâmica fica igual à do Roe até o bloqueio; todas as execuções
+  concluídas terminam em 3021 (traço do riser com j_g = 0). O próximo passo é o E2
+  (passagem misto→puro na face).
+- **P0.3:** `initial_u_file` (opt‑in), `make_perturbed_ic.py`, `p03_analysis.py`.
+  - Estacionário discreto por Euler implícito com Δt grande (`p03/SS_N*`); com ΔP = 0
+    fica bit a bit estacionário.
+  - Com ΔP = 250 Pa, a semente independe da malha e os níveis refinados falham no
+    mesmo vale (173,3–174,2 s).
+  - σ ainda não está na região assintótica.
+- **P1.1:** `ss3_closure_map.f90`. O ramo Bhagwat termina em u_l = 0⁺, na fronteira do
+  domínio. Bendiksen dá um ramo contracorrente contínuo e hiperbólico, mas por
+  extrapolação. Literatura primária só no nível bibliográfico.
+- **P1.2:** combinado N101/Δt 0,0625 concluído. Amplitude FAIL (19–22% estimado);
+  interação espaço–tempo −619 Pa.
+- **P2:** NOT_VERIFIED. O PDF de Baliño 2010 não está nesta máquina; valores só via
+  `benchmark_sources.json`.
+
+---
+
 ## Atualização: continuação 2 da auditoria físico-numérica, 20/11/2026
 
 Mesma branch/worktree; sem push/merge. Relatório:

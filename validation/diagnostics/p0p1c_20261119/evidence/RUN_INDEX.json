@@ -12385,6 +12385,115 @@
    "max_balance_over_M0": 1.9409414393426255e-11
   },
   {
+   "run": "p03/P_N401_dt0.125_dp250",
+   "status": {
+    "status": "6100",
+    "reached_time_s": "1.7377609844060882E+02",
+    "requested_time_s": "3.0000000000000000E+02",
+    "accepted_steps": "1427",
+    "rejected_steps": "22",
+    "last_rejection_status": "6100",
+    "termination_reason": "MAX_NEWTON",
+    "cpu_seconds": "2.1845305160000003E+03",
+    "wall_seconds": "2.1861116825019999E+03",
+    "newton_iterations_total": "4616",
+    "jacobian_evaluations_total": "4616",
+    "residual_evaluations_total": "13484",
+    "linear_solves_total": "4616",
+    "backtrack_trials_total": "8868",
+    "prepare_calls_total": "1449"
+   },
+   "termination": "MAX_NEWTON",
+   "steps": {
+    "accepted": 1427,
+    "dt_min_s": 1.64025e-07,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.12177722385466874,
+    "last_time_s": 173.77609844060882,
+    "rejected_total": 21
+   },
+   "input": "p03/P_N401_dt0.125_dp250.nml",
+   "input_sha256": "b7ef2a5864064402c2edef116eafe2d2e6ff844867c081699332f0f82052e456",
+   "hashes": {
+    "monitor.csv": "647bcacf75bc4f18352fdce29b75632ba16c3ba4b0eb83923534324d4ca86f94",
+    "conservation.csv": "ccce9762381a2a29f78dff67460d9c423d9c6c284fbc37c85e1ad2aa3a528c3a",
+    "steps.csv": "4e356e47a8406a98911766cfaff229e7907766f187b051416d90982bf65f1ee1",
+    "boundary_conditions.csv": "44225f01b5e3411882e34f9ead606575da6304b3e0d466f08be313ee0692bf60",
+    "fields.csv": "fcd9f323c9dbed916f783443d6c6987f9bc6fd57a2fa3c7eac74e01373ee093b",
+    "checkpoint.dat": "8a0fbc2fa0a14288d5d68e49c4b0c6b1f0bd8b2602d00049937f3730a1d4db41",
+    "last_rejected_state.dat": "54bcdd02f66f3f670a6e763dcd56ad8b670d9da10c85d3e8970ebbc922c6bebd",
+    "run_metadata.txt": "0918af7362ad295b7502fd5b16878ae24c0839634b4471d4c9f3477ef167e857"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 3.751665644813329e-12,
+     "initial_inventory_kg": 74.01421245403753,
+     "absolute_processed_mass_kg": 411.5592630342826,
+     "relative_inventory": 5.0688449156208953e-14,
+     "relative_processed": 9.11573613275913e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 4.287993299156854e-15
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 3.240074875066057e-12,
+     "initial_inventory_kg": 55.774444384135315,
+     "absolute_processed_mass_kg": 410.9653607904467,
+     "relative_inventory": 5.809246350803049e-14,
+     "relative_processed": 7.884058327529427e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.4405020749148745e-13
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 5.968558980384842e-13,
+     "initial_inventory_kg": 18.23976806990217,
+     "absolute_processed_mass_kg": 411.56957492019217,
+     "relative_inventory": 3.272277891643638e-14,
+     "relative_processed": 1.4501944128261206e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -2.397622141923306e-13
+    },
+    "g_system": {
+     "max_abs_balance_kg": 1.354472090042691e-14,
+     "initial_inventory_kg": 0.24664586538234057,
+     "absolute_processed_mass_kg": 1.0612895052932845,
+     "relative_inventory": 5.4915661689404055e-14,
+     "relative_processed": 1.2762512804349143e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 1.096125348796009e-15
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 2.235711615838909e-13,
+     "initial_inventory_kg": 0.22095719578233858,
+     "absolute_processed_mass_kg": 1.060740192653376,
+     "relative_inventory": 1.0118301908760975e-12,
+     "relative_processed": 2.1076901123605157e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 6.127714475922872e-14
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 2.2198909377380005e-13,
+     "initial_inventory_kg": 0.025688669600002025,
+     "absolute_processed_mass_kg": 1.0696179300928794,
+     "relative_inventory": 8.641517728648064e-12,
+     "relative_processed": 2.0754055025472862e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -6.01810194104327e-14
+    }
+   },
+   "max_balance_over_M0": 8.641517728648064e-12
+  },
+  {
    "run": "p03/P_N51_dt0.03125_dp1000",
    "status": {
     "status": "6000",
