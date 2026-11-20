@@ -42,6 +42,14 @@ def main():
    with(o/'boundary_conditions.csv').open()as f:rows=list(csv.DictReader(f))
    assert rows and all(x['status_in']==x['status_out']=='0' for x in rows),name
    records.append(dict(case=name,status=st['status'],accepted=st['accepted_steps'],rejected=st['rejected_steps']));print('PASS',name)
+  # Hydrostatic rest under gravity: the separator face must not read an
+  # arithmetic backflow (deviation form against the same equilibrium).
+  name=f'{phase}_HYDROSTATIC_G9.81_rest'
+  rc,st,o=run(a.binary,a.output,name,dict(initial_phase=ini,source_scheme="'HYDROSTATIC'",G=9.81))
+  assert rc==0 and st['status']=='0' and int(st['rejected_steps'])==0,(name,st)
+  with(o/'boundary_conditions.csv').open()as f:rows=list(csv.DictReader(f))
+  assert rows and all(x['status_in']==x['status_out']=='0' for x in rows),name
+  records.append(dict(case=name,status=st['status'],accepted=st['accepted_steps'],rejected=st['rejected_steps']));print('PASS',name)
  # Effective physical backflow without external data stays refused.
  name='liquid_POINT_gravity_backflow'
  rc,st,o=run(a.binary,a.output,name,dict(initial_phase="'LIQUID'",G=9.81,time_dim=.05))

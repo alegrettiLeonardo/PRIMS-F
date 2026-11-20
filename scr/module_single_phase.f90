@@ -47,19 +47,28 @@ contains
     type(sim_config_t),intent(in)::cfg
     integer,intent(in)::phase
     real(wp),intent(inout)::u(:,:)
+    integer::i,lo,hi
+    lo=first_physical_cell(cfg);hi=last_physical_cell(cfg)
+    do i=lo,hi
+      u(i,:)=0
+      u(i,phase)=equilibrium_density(cfg,phase,i)
+    enddo
+  end subroutine
+  real(wp) function equilibrium_density(cfg,phase,i)result(rho)
+    !! Cell mean of the discrete hydrostatic rest referred to the separator:
+    !! rho_eq,i = rho_b*<exp(-g(z-z_top)/c^2)>_i, mean normalized by the stored
+    !! weights. The SAME function defines the hydrostatic initial state and the
+    !! separator-face deviation, so the rest state is bitwise rho_eq.
+    type(sim_config_t),intent(in)::cfg
+    integer,intent(in)::phase,i
     real(wp)::c2,p0,rho0,mu,rhot,zref
-    integer::i,lo,hi,cell
+    integer::cell
     call coefficients(cfg,phase,c2,p0,rho0,mu)
     rhot=cfg%nPs/cfg%nCg**2
     if(phase==1)rhot=cfg%nrho_l0+(cfg%nPs-cfg%nP_l0)/cfg%nCl**2
-    zref=cfg%z_faces(ubound(cfg%z_faces,1));lo=first_physical_cell(cfg);hi=last_physical_cell(cfg)
-    do i=lo,hi
-      cell=i-cfg%num_dummy_cells
-      u(i,:)=0
-      ! Mean normalized by the stored weights: constants are integrated exactly.
-      u(i,phase)=rhot*sum(qw*exp(-cfg%G*(cfg%z_quadrature(:,cell)-zref)/(cfg%omega_u**2*c2)))/sum(qw)
-    enddo
-  end subroutine
+    zref=cfg%z_faces(ubound(cfg%z_faces,1));cell=i-cfg%num_dummy_cells
+    rho=rhot*sum(qw*exp(-cfg%G*(cfg%z_quadrature(:,cell)-zref)/(cfg%omega_u**2*c2)))/sum(qw)
+  end function
   integer function global_single_phase(u,cfg)result(phase)
     real(wp),intent(in)::u(:,:)
     type(sim_config_t),intent(in)::cfg
@@ -263,7 +272,21 @@ contains
     else
       rhob=cfg%nPs/cfg%nCg**2
       if(phase==1)rhob=cfg%nrho_l0+(cfg%nPs-cfg%nP_l0)/cfg%nCl**2
-      if(rhob>rho)then
+      if(trim(cfg%source_scheme)=='HYDROSTATIC'.and.allocated(cfg%z_quadrature).and.allocated(cfg%z_faces))then
+        ! Well-balanced deviation form (equilibrium-preserving reconstruction):
+        ! rho_face/rho_b = u_N/rho_eq,N exactly in exact arithmetic, because the
+        ! top face is the reference elevation. x is computed against the SAME
+        ! rho_eq used by the initial state: x=0 bitwise at discrete rest, and a
+        ! physical deviation keeps full relative accuracy (log1p). No tolerance
+        ! is applied to the sign of vb.
+        lower=equilibrium_density(cfg,phase,i)
+        val(1)=(u(i,phase)-lower)/lower
+        if(val(1)<0)then
+          vb=v+c*val(1)/sqrt(1+val(1))
+        else
+          vb=v+c*log1p_stable(val(1))
+        endif
+      else if(rhob>rho)then
         vb=v-c*(rhob-rho)/sqrt(rhob*rho)
       else
         vb=v+c*log(rho/rhob)
@@ -438,4 +461,16 @@ contains
       st=0
     end subroutine
   end subroutine
+  pure real(wp) function log1p_stable(x)result(y)
+    !! log(1+x) to full relative accuracy for small |x| (Goldberg 1991, Thm 4):
+    !! with w=fl(1+x), log(w)*x/(w-1); exact 0 at x=0.
+    real(wp),intent(in)::x
+    real(wp)::w
+    w=1+x
+    if(w==1)then
+      y=x
+    else
+      y=log(w)*x/(w-1)
+    endif
+  end function
 end module
