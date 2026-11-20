@@ -15,5 +15,6 @@ Execução: `/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/jt2/SS1_CE
 * admissible part of the Newton ray reduces the residual only to 0.999923: no admissible descent, not a line-search weakness
 * first refused point: CLOSURE_DOMAIN of the junction riser closure
 * junction gas flux 6.85e-15 -> -2.32e-14 kg/m2/s with face riser holdup 3.20e-15: required mixed->pure liquid transition of the face trace while both cells stay two-phase
+* both traces still carry gas upward (7.115e-02, 4.038e-02 kg/m2/s): the vanishing face flux comes from the Roe dissipation (diss_Gg=-5.576e-02) at the junction holdup jump; a PHYSICAL blockage is NOT established by these states
 
 _absence of roots along local Newton proposals is not a proof that no global solution exists; the model, not the physics, is certified here_

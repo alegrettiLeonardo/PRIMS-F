@@ -161,6 +161,11 @@ def main():
             why.append(f"junction gas flux {fe[0]['Gg']:.2e} -> {ff[0]['Gg']:.2e} kg/m2/s with face riser holdup "
                        f"{fe[0]['alpha_riser_face']:.2e}: required mixed->pure liquid transition of the face trace "
                        'while both cells stay two-phase')
+            if fe[0]['Gg_pipe_cell'] > 0 and fe[0]['Gg_riser_trace'] > 0:
+                why.append(f"both traces still carry gas upward ({fe[0]['Gg_pipe_cell']:.3e}, {fe[0]['Gg_riser_trace']:.3e} "
+                           f"kg/m2/s): the vanishing face flux comes from the Roe dissipation (diss_Gg={fe[0]['diss_Gg']:.3e}) "
+                           'at the junction holdup jump; a PHYSICAL blockage is NOT established by these states')
+                cert.setdefault('flags', []).append('NUMERICAL_FLUX_INDUCED_BOUNDARY')
     if d.get('primitive_status') == 7:
         cls.append('NO_ROOT_IN_DECLARED_BRANCH')
         why.append('primitive recovery status 7: analytic exclusion over the whole co-current interval')
@@ -172,7 +177,7 @@ def main():
         cls.append('ROOT_SEARCH_FAILURE')
     if d.get('primitive_status') in (1, 2, 8):
         cls.append('INADMISSIBLE_STATE')
-    cert['classification'] = dict(blockage_in=where, classes=cls, evidence=why,
+    cert['classification'] = dict(blockage_in=where, classes=cls, flags=cert.get('flags', []), evidence=why,
                                   not_implied='absence of roots along local Newton proposals is not a proof that no '
                                               'global solution exists; the model, not the physics, is certified here')
     out.write_text(json.dumps(cert, indent=1) + '\n')
