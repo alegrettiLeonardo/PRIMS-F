@@ -1,3 +1,36 @@
+## Atualização: continuação 2 da auditoria físico-numérica, 20/11/2026
+
+Mesma branch/worktree; sem push/merge. Relatório:
+[QUALIFICATION_P0P1_CONTINUATION2_20261120.md](QUALIFICATION_P0P1_CONTINUATION2_20261120.md).
+
+- P0.1 (`0960246`): face do separador do modo reduzido *well-balanced* com G≠0
+  (forma de desvio do equilíbrio discreto da célula; `log1p` estável). Repouso
+  exato preservado; refluxo real sem composição continua 934. `test_hydrostatic_outlet`
+  (1760 asserções).
+- P0.2 (`1dde473`, `9c31dea`): certificados SS1/OSC-ISO/SS3 em
+  `validation/diagnostics/p0p1c_20261119/evidence/certificates/`. Todos em proposta de
+  Newton a partir de aceitos admissíveis. SS1/OSC: Gg Roe de face cancelado pela
+  dissipação com os dois traços a u_g>0 (`NUMERICAL_FLUX_INDUCED_BOUNDARY`). SS3: raiz
+  só em u_l=0 no ramo cocorrente.
+- P1.1 BLOCKED por limitação documentada (traço exige j_g>0; 21 em j_g=0, 12 em
+  j_g<0; `test_junction_vanishing_gas`). Extensão E1 (fluxo de massa por fase
+  *upwind*, tipo AUSMV) e E2 (limite α*→0⁺ só como continuação) **propostas, não
+  implementadas**.
+- P1.2: SS3 sem fechamento qualificado; Chexal 1992 cobre contracorrente só na
+  vertical (PDF local, p. 8). `ss3_local_closures.f90` é o solver local assinado.
+- P1.3 ISO (`1d71f00`, `1518f5d`; N51–N401, dt 0,125–0,015625): período converge;
+  σ assintótico de ordem ≈ 1 (erro 1,2–1,5%); semente O(h^0,8); A*(f) ±2,3%; o
+  instante do evento salta por ciclos (FAIL, não declarado).
+- P1.3 BARO (`21ad166`): as 4 execuções concluídas acomodam (v2, 14 canais);
+  amplitude FAIL (h 22%; dt 28% → 10%, ordem 1,28, erro estimado 6,8%). O combinado
+  N101/dt 0,0625 estava em execução em
+  `~/Documentos/PRIMS-F-p0p1c-results-20261119/baro_combined/`; analisar com
+  `baro_refinement_v2.py` quando houver `run_status.txt`.
+- Regressões no `1d71f00`: 24/24 Fortran, 123 Python, 6/6 CLI; binários de campanha
+  byte a byte equivalentes ao HEAD.
+
+---
+
 ## Atualização: continuação P0/P1, 19–20/11/2026
 
 Branch local `implementation/p0p1-continuation-20261119`, worktree
