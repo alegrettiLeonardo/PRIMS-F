@@ -6,8 +6,10 @@ Pre-registered definitions (fixed before reading the refined runs):
     (a run still in progress contributes its current time and is marked RUNNING).
   * Oscillation    p_in about its mean on [20, 60] s; half-cycle amplitudes
     A_k = (max - min)/2 between successive up-crossings; period from up-crossings;
-    growth rate sigma = slope of ln A_k vs cycle mid-time over cycles inside W
-    that start after 60 s.
+    growth rate sigma = slope of ln A_k vs cycle mid-time over the complete
+    cycles inside W that start in (60, 150) s. (Amended after N401/dt0.015625
+    shortened W: the first rule, "start after 60 s", fitted 7 cycles in one run and
+    6 in the others; the amended rule fits the same four cycle indices everywhere.)
   * Events from continuous monitor quantities (never from the solver status):
       E_g(f)  first t > 20 s with mdot_g_base <= f * mean(mdot_g_in on [20,60]),
               f in {0.5, 0.25, 0.10, 0.01}, by linear interpolation;
@@ -36,6 +38,8 @@ RUNS = {  # name: (N_pipe_cells, dt_max_s, mass/volume flux convention)
     "B_ISO_MASS_N101": (101, 0.125, "MASS"),
     "B_ISO_MASS_N201": (201, 0.125, "MASS"),
     "B_ISO_MASS_N101_dt0.0625": (101, 0.0625, "MASS"),
+    "B_ISO_MASS_N401": (401, 0.125, "MASS"),
+    "B_ISO_MASS_dt0.015625": (51, 0.015625, "MASS"),
 }
 FG = [0.5, 0.25, 0.10, 0.01]
 HH = [0.80, 0.90, 0.98]
@@ -78,7 +82,7 @@ def cycles(t, p, tc):
         seg = p[ia:ib + 2]
         cyc.append({"t_start": float(a), "t_end": float(b), "period_s": float(b - a),
                     "amplitude_Pa": float(0.5 * (seg.max() - seg.min()))})
-    fit = [c for c in cyc if c["t_start"] > 60]
+    fit = [c for c in cyc if 60 < c["t_start"] < 150]  # same four cycle indices in every run
     sigma = None
     if len(fit) >= 3:
         tm = np.array([0.5 * (c["t_start"] + c["t_end"]) for c in fit])
@@ -153,7 +157,9 @@ def main():
     for name, a in data.items():
         ref[name] = np.interp(grid, a["time_s"], a["p_in_Pa"])
     pairs = [("time", "B_ISO_MASS", "B_ISO_MASS_dt0.0625"), ("time", "B_ISO_MASS_dt0.0625", "B_ISO_MASS_dt0.03125"),
+             ("time", "B_ISO_MASS_dt0.03125", "B_ISO_MASS_dt0.015625"),
              ("space", "B_ISO_MASS", "B_ISO_MASS_N101"), ("space", "B_ISO_MASS_N101", "B_ISO_MASS_N201"),
+             ("space", "B_ISO_MASS_N201", "B_ISO_MASS_N401"),
              ("combined", "B_ISO_MASS", "B_ISO_MASS_N101_dt0.0625"),
              ("convention", "B_ISO_MASS", "C_ISO_VOLUME")]
     dist = []
