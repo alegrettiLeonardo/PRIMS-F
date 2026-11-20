@@ -56,7 +56,8 @@ contains
     do i=lo,hi
       cell=i-cfg%num_dummy_cells
       u(i,:)=0
-      u(i,phase)=rhot*.5_wp*sum(qw*exp(-cfg%G*(cfg%z_quadrature(:,cell)-zref)/(cfg%omega_u**2*c2)))
+      ! Mean normalized by the stored weights: constants are integrated exactly.
+      u(i,phase)=rhot*sum(qw*exp(-cfg%G*(cfg%z_quadrature(:,cell)-zref)/(cfg%omega_u**2*c2)))/sum(qw)
     enddo
   end subroutine
   integer function global_single_phase(u,cfg)result(phase)
@@ -121,7 +122,9 @@ contains
     if(maxval(abs(ex))>log(huge(1._wp))-2)then
       status=PHASE_INVALID;return
     endif
-    average=.5_wp*sum(qw*exp(ex))
+    ! Normalize by the stored weights (0.5*sum(qw)=1+2.2e-16 in binary64):
+    ! G=0 then gives fl=fr=1 exactly, never a roundoff-signed outlet velocity.
+    average=sum(qw*exp(ex))/sum(qw)
     fl=exp(-cfg%G*(zl-zm)/(cfg%omega_u**2*c2))/average
     fr=exp(-cfg%G*(zr-zm)/(cfg%omega_u**2*c2))/average
     if(.not.all(ieee_is_finite([fl,fr])).or.min(fl,fr)<=0)status=PHASE_INVALID
