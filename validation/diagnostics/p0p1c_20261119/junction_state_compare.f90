@@ -9,7 +9,9 @@ program junction_state_compare
  !!        E1/CENTER and E1/STEADY: status, p*, Gl*, Gg*, alpha_pipe*,
  !!        alpha_riser*, and the convective (centred) part of the Roe vector.
  !! All in SI. Nothing in the run is modified; E1 is evaluated, not run.
- !! Arguments: fixture folder, gas sound speed (m/s) of the run EOS.
+ !! Arguments: fixture folder, gas sound speed (m/s) of the run EOS, and
+ !! optionally the junction_flux and junction_trace of the run that produced the state (its lagged
+ !! dissipation and probe status are then evaluated with that operator).
  use offline_api
  use module_find,only:pressure_fun_uj
  use module_closure_law,only:CdUd_bhagwat
@@ -18,14 +20,24 @@ program junction_state_compare
  integer(c_int)::st
  integer::which,k,i,code,cid
  character(512)::folder,arg
+ character(16)::runflux,runtrace
  character(16)::flux(4)=['ROE         ','ROE         ','PHASE_UPWIND','PHASE_UPWIND']
  character(16)::trc(4)=['CENTER      ','STEADY      ','CENTER      ','STEADY      ']
  call get_command_argument(1,folder);call get_command_argument(2,arg);read(arg,*)cgas
+ runflux='ROE'
+ runtrace='CENTER'
+ if(command_argument_count()>2)call get_command_argument(3,runflux)
+ if(command_argument_count()>3)call get_command_argument(4,runtrace)
  call probe_init(trim(folder),len_trim(folder),1_c_int,st)
+ ! probe_init evaluates the saved state with the default operator; its status
+ ! is reported but only the operator of the run decides admissibility below.
+ write(*,'(a,i6)')'PROBE_DEFAULT_STATUS|',st
+ st=0
  cfg%nCg=cgas*sqrt(cfg%omega_rho/cfg%omega_P);cfg%tol_res=1e-10_wp;cfg%tol_inc=1e-10_wp
+ cfg%junction_flux=runflux;cfg%junction_trace=runtrace
  ! Geometry needed only by the opt-in STEADY trace (not stored in the fixture):
  ! faces/centres from the stored cell widths, catenary constant of the rig.
- cfg%CA=3.01818193717446_wp
+ cfg%CA=3.01818193717446_wp;cfg%beta=2*acos(-1._wp)/180
  if(.not.allocated(cfg%face_positions))allocate(cfg%face_positions(0:hi-lo+1))
  if(.not.allocated(cfg%vns))allocate(cfg%vns(nc))
  cfg%face_positions(0)=0
@@ -59,7 +71,9 @@ program junction_state_compare
   do k=1,4
    cfg%junction_flux=flux(k);cfg%junction_trace=trc(k);call sim%init(cfg)
    if(k==1)then
+    cfg%junction_flux=runflux;cfg%junction_trace=runtrace;call sim%init(cfg)
     call sim%prepare_dissipation(old,code)
+    cfg%junction_flux=flux(k);cfg%junction_trace=trc(k);call sim%init(cfg)
     call sim%face_pair(uu(ib,:),uu(ib+1,:),cfg%thetav(ib),cfg%thetav(ib+1),fm,fp,code, &
       junction_trace=tr,dissipation_matrix=sim%lagged_dissipation(:,:,ib),left_cell=ib)
    else
@@ -69,6 +83,6 @@ program junction_state_compare
      tr(1)*cfg%omega_P,tr(2)*cfg%omega_rho*cfg%omega_u,tr(3)*cfg%omega_rho*cfg%omega_u,tr(4),tr(5), &
      tr(6)*cfg%omega_rho*cfg%omega_u
   enddo
-  cfg%junction_flux='ROE';cfg%junction_trace='CENTER';call sim%init(cfg);call sim%prepare_dissipation(old,code)
+  cfg%junction_flux=runflux;cfg%junction_trace=runtrace;call sim%init(cfg);call sim%prepare_dissipation(old,code)
  enddo
 end program
