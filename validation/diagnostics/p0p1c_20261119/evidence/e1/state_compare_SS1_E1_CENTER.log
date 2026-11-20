@@ -1,0 +1,29 @@
+At line 76 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 76 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+At line 60 of file /home/leonardo/Documentos/PRIMS-F-p0p1c-20261119/validation/diagnostics/p0p1c_20261119/junction_state_compare.f90
+Fortran runtime warning: An array temporary was created for argument 'u' of procedure 'point_state'
+At line 77 of file /home/leonardo/Documentos/PRIMS-F-p0p1c-20261119/validation/diagnostics/p0p1c_20261119/junction_state_compare.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 77 of file /home/leonardo/Documentos/PRIMS-F-p0p1c-20261119/validation/diagnostics/p0p1c_20261119/junction_state_compare.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+At line 80 of file /home/leonardo/Documentos/PRIMS-F-p0p1c-20261119/validation/diagnostics/p0p1c_20261119/junction_state_compare.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 80 of file /home/leonardo/Documentos/PRIMS-F-p0p1c-20261119/validation/diagnostics/p0p1c_20261119/junction_state_compare.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+PROBE_DEFAULT_STATUS|  1012
+GEOM|junction face s/Lr   4.5750707765938614E+00 expected Lp/Lr   4.5750707765938614E+00
+INIT|     0     0|junction left cell  53
+CELL|0|  53|  1|   0|  5.58601508E-01  2.42007916E+00  5.27298278E-03  2.94549613E-03  1.35185987E+00  2.84719893E+05  5.30183836E+02  7.12833379E-03 -3.49065850E-02 -2.08428124E-01
+CELL|0|  54|  3|   0|  1.52197332E-02  2.42140942E+00  8.98927781E-01  1.36814410E-02  3.68532054E-02  2.84876397E+05  5.12891182E+02  3.31283701E-02  4.07312956E-02  3.30084975E-01
+FACE|0|ROE|CENTER|  1012|             NaN             NaN             NaN             NaN             NaN             NaN
+FACE|0|ROE|STEADY|  1012|             NaN             NaN             NaN             NaN             NaN             NaN
+FACE|0|PHASE_UPWIND|CENTER|     0|  2.84847359E+05  5.27855900E+02  8.70447250E-09  5.60023024E-01  4.02974755E-09  8.70447250E-09
+FACE|0|PHASE_UPWIND|STEADY|     0|  2.84897378E+05  5.28381490E+02  1.61304887E-03  5.59700532E-01  7.45628518E-04  1.61304887E-03
+CELL|1|  53|  1|   0|  5.58601508E-01  2.42007916E+00  5.27297629E-03  2.94549251E-03  1.35185987E+00  2.84719893E+05  5.30183836E+02  7.12832503E-03 -3.49065850E-02 -2.08428124E-01
+CELL|1|  54|  3|   0|  1.52197293E-02  2.42140942E+00  8.98927777E-01  1.36814374E-02  3.68531959E-02  2.84876397E+05  5.12891181E+02  3.31283615E-02  4.07312956E-02  3.30084976E-01
+FACE|1|ROE|CENTER|  1012|             NaN             NaN             NaN             NaN             NaN             NaN
+FACE|1|ROE|STEADY|  1012|             NaN             NaN             NaN             NaN             NaN             NaN
+FACE|1|PHASE_UPWIND|CENTER|     0|  2.84847359E+05  5.27855900E+02  2.37432069E-14  5.60023024E-01  1.09919504E-14  2.37432069E-14
+FACE|1|PHASE_UPWIND|STEADY|     0|  2.84897378E+05  5.28381490E+02  1.61304018E-03  5.59700532E-01  7.45624500E-04  1.61304018E-03
