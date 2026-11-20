@@ -1,0 +1,56 @@
+ LEGACY_INIT_STATUS (uses 343 before explicit override)           0
+ ACTUAL_EOS_CG_M_S, PREPARE_STATUS   290.05870095551347                0
+ STATE old0/trial1,time_s,dt_s,status,index,stage,norm           0   223.64452291713980        1.9835929036799990E-007           0           0           0   7.5034745742804061E-007
+ MAX_RESIDUAL cell/component/value          81           1  -1.3050897507656464E-008
+ SI_CELL i,closure,theta,status,U,alpha,rhol,rhog,p,ul,ug,phase_flux          80           3   1.1372065965562996                0   705.27377780258132       0.81854859377611389        255.47245302051667       0.29268186284297482        997.10970319146509        2.7967178622724189        235299.20046032083       0.36118492622386439       0.90183481210289818        254.73425740325146       0.73819561726517313     
+ SI_CELL i,closure,theta,status,U,alpha,rhol,rhog,p,ul,ug,phase_flux          81           3   1.1511590174118609                0   685.53407555781155       0.86819197568411022        239.46265503596902       0.31247831070043430        997.10901667148994        2.7784071596457958        233758.64688999738       0.34817289244273514       0.89642970995664606        238.68438195501980       0.77827308094919434     
+ SI_CELL i,closure,theta,status,U,alpha,rhol,rhog,p,ul,ug,phase_flux          82           3   1.1642901663988612                0   665.70616629078484       0.91749105047652990        223.67874164891214       0.33236325894797086        997.10834553802090        2.7605068423647774        232252.62070086034       0.33477395517959652       0.89118621034527923        222.86108627661224       0.81765537229988805     
+ JUNCTION status,conv_g,diss_g,raw_g_kg_m2s,p_Pa,ulug_left_right           0   5.8485267864334813E-002  -5.8485257118065258E-002   1.0746269558811695E-008   270603.58950178087        1.2107098397546137        5.6677169865431087E-002  0.54115204898984270       0.91543516699075411     
+ LOCAL_JAC_ERROR same lagged operator   2.0551935153712009E-011
+ LINEAR_STATUS, STEP_MAX           0   1.3050897420194494E-008
+ PROPOSAL lambda,status,index,stage,residual   1.0000000000000000             3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual  0.50000000000000000                0           0           0   3.7517372876460437E-007
+ PROPOSAL lambda,status,index,stage,residual  0.25000000000000000                0           0           0   5.6276059306065891E-007
+ PROPOSAL lambda,status,index,stage,residual  0.12500000000000000                0           0           0   6.5655402525068573E-007
+ PROPOSAL lambda,status,index,stage,residual   6.2500000000000000E-002           0           0           0   7.0345074139106807E-007
+ PROPOSAL lambda,status,index,stage,residual   3.1250000000000000E-002           0           0           0   7.2689909922202607E-007
+ PROPOSAL lambda,status,index,stage,residual   1.5625000000000000E-002           0           0           0   7.3862327845174126E-007
+ PROPOSAL lambda,status,index,stage,residual   7.8125000000000000E-003           0           0           0   7.4448536795237779E-007
+ PROPOSAL lambda,status,index,stage,residual   3.9062500000000000E-003           0           0           0   7.4741641262444440E-007
+ PROPOSAL lambda,status,index,stage,residual   1.9531250000000000E-003           0           0           0   7.4888193503937946E-007
+ PROPOSAL lambda,status,index,stage,residual   9.7656250000000000E-004           0           0           0   7.4961469635661849E-007
+ PROPOSAL lambda,status,index,stage,residual   4.8828125000000000E-004           0           0           0   7.4998107681344797E-007
+ PROPOSAL lambda,status,index,stage,residual   2.4414062500000000E-004           0           0           0   7.5016426702762249E-007
+ PROPOSAL lambda,status,index,stage,residual   1.2207031250000000E-004           0           0           0   7.5025586231387422E-007
+ PROPOSAL lambda,status,index,stage,residual   6.1035156250000000E-005           0           0           0   7.5030165988749849E-007
+ PROPOSAL lambda,status,index,stage,residual   3.0517578125000000E-005           0           0           0   7.5032455874782069E-007
+ PROPOSAL lambda,status,index,stage,residual   1.5258789062500000E-005           0           0           0   7.5033600791429647E-007
+ PROPOSAL lambda,status,index,stage,residual   7.6293945312500000E-006           0           0           0   7.5034173275864656E-007
+ PROPOSAL lambda,status,index,stage,residual   3.8146972656250000E-006           0           0           0   7.5034459510099568E-007
+ STATE old0/trial1,time_s,dt_s,status,index,stage,norm           1   223.64452291713980        1.9835929036799990E-007           0           0           0   2.9022810733625042E-007
+ MAX_RESIDUAL cell/component/value          81           1  -5.0479775716780499E-009
+ SI_CELL i,closure,theta,status,U,alpha,rhol,rhog,p,ul,ug,phase_flux          80           3   1.1372065965562996                0   705.27378576594936       0.81854857234208100        255.47245813871766       0.29268185485660553        997.10970319158037        2.7967178653528584        235299.20071949071       0.36118492943149338       0.90183481091276441        254.73426254175661       0.73819559696103387     
+ SI_CELL i,closure,theta,status,U,alpha,rhol,rhog,p,ul,ug,phase_flux          81           3   1.1511590174118609                0   685.53408353712291       0.86819195434690277        239.46266014709576       0.31247830269806220        997.10901667159749        2.7784071625152444        233758.64713141575       0.34817289587521905       0.89642970879266215        238.68438708628437       0.77827306081132641     
+ SI_CELL i,closure,theta,status,U,alpha,rhol,rhog,p,ul,ug,phase_flux          82           3   1.1642901663988612                0   665.70617420164740       0.91749102945778105        223.67874668192664       0.33236325101423309        997.10834553812026        2.7605068450196697        232252.62092422714       0.33477395879148358       0.89118620918974956        222.86109132941851       0.81765535250808064     
+ JUNCTION status,conv_g,diss_g,raw_g_kg_m2s,p_Pa,ulug_left_right           0   5.8485260434303799E-002  -5.8485260433723228E-002   5.8056199622312932E-013   270603.58996269415        1.2107098397079765        5.6677165734173432E-002  0.54115204676504636       0.91543516383530321     
+ LOCAL_JAC_ERROR same lagged operator   1.4181211760444512E-011
+ LINEAR_STATUS, STEP_MAX           0   5.0479775378505699E-009
+ PROPOSAL lambda,status,index,stage,residual   1.0000000000000000             3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual  0.50000000000000000             3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual  0.25000000000000000             3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual  0.12500000000000000             3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   6.2500000000000000E-002        3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   3.1250000000000000E-002        3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   1.5625000000000000E-002        3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   7.8125000000000000E-003        3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   3.9062500000000000E-003        3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   1.9531250000000000E-003        3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   9.7656250000000000E-004        3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   4.8828125000000000E-004        3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   2.4414062500000000E-004        3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   1.2207031250000000E-004           0           0           0   2.9019267903220235E-007
+ PROPOSAL lambda,status,index,stage,residual   6.1035156250000000E-005        3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   3.0517578125000000E-005        3012          53           2                       NaN
+ PROPOSAL lambda,status,index,stage,residual   1.5258789062500000E-005           0           0           0   2.9022367880495554E-007
+ PROPOSAL lambda,status,index,stage,residual   7.6293945312500000E-006           0           0           0   2.9022589300858971E-007
+ PROPOSAL lambda,status,index,stage,residual   3.8146972656250000E-006        3012          53           2                       NaN
