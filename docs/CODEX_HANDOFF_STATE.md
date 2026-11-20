@@ -1,3 +1,28 @@
+## Atualização: continuação P0/P1, 19–20/11/2026
+
+Branch local `implementation/p0p1-continuation-20261119`, worktree
+`~/Documentos/PRIMS-F-p0p1c-20261119` (máquina `leonardo-ubuntu`), base `f3717dd`;
+main local intacta, sem push/merge. Relatório:
+[QUALIFICATION_P0P1_CONTINUATION_20261120.md](QUALIFICATION_P0P1_CONTINUATION_20261120.md).
+Dados brutos: `~/Documentos/PRIMS-F-p0p1c-results-20261119`. `AGENTS.md` não existe
+em nenhum ramo; os resultados `/home/leonardoab/...` não estão nesta máquina.
+
+- P0 corrigidos: Jacobiano reduzido no limite de refluxo (`aef3774`), busca
+  mássica no ramo subsônico (`5e4882e`), média hidrostática exata para constantes
+  (`1c778bf`). 22/22 Fortran, 123 Python, 6 CLI; default byte a byte = `f3717dd`.
+- Critérios v2 pré-registrados (`813da75`) e aplicados (`9552bab`): inventários,
+  fluxos por fase, holdups e formas de onda entram em `settled`.
+- OSC ISOTHERMAL reproduz bit a bit o bloqueio em 223,6445 s: selo líquido na base
+  do riser e Gg de junção → 0 → CLOSURE_DOMAIN. Instante não converge em h/dt
+  (198,7–249,4 s). BLOCKED.
+- SS1 (face 53) e SS3 (célula 69, raiz em u_l=0) mapeados: ausência de estado no
+  domínio constitutivo declarado, não falha de busca/globalização. BLOCKED.
+- `junction_trace='STEADY'` (`fab19c6`, opt-in): remove erro de 29% do Gg
+  estacionário na junção; não desbloqueia SS1 (78,84 s) nem OSC-ISO (223,65 s).
+- BLAS/LAPACK desta máquina = Intel MKL via alternativas.
+
+---
+
 ## Atualização: correções P0 e qualificação P1,19/11/2026
 
 Branch `audit/p0p1-20261119`, worktree `PRIMS-F-p0p1-20261119`, base remota

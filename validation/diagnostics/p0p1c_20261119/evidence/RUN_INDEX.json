@@ -1,0 +1,1638 @@
+{
+ "results_root": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119",
+ "binaries": {
+  "prims_f_aef3774": "e33a1b8d72889decf6429ffad21652684e77e963de5d06df9a163dbb350d4eb3",
+  "prims_f_jt4": "8136d9b8289aca222ef6af684343826080226ec9ae9a5f48593a492045d36458",
+  "prims_f_jt_wip": "1c6f320d142f3e645ce9e858d03a784423f1678e5f30b2fca9b8b50a89078e36",
+  "restart_baro_813da75": "ef5c87e6214063080c5fa4909f16810cb86072200f46f289c7d0117ccda4e2ae"
+ },
+ "runs": [
+  {
+   "run": "baro/N51_dt0.0625",
+   "status": {
+    "status": "0",
+    "reached_time_s": "9.0000000000000000E+02",
+    "requested_time_s": "9.0000000000000000E+02",
+    "accepted_steps": "14418",
+    "rejected_steps": "0",
+    "last_rejection_status": "0",
+    "termination_reason": "COMPLETED",
+    "cpu_seconds": "6.4824177369999998E+03",
+    "wall_seconds": "6.5525565166050001E+03",
+    "newton_iterations_total": "42516",
+    "jacobian_evaluations_total": "42516",
+    "residual_evaluations_total": "85032",
+    "linear_solves_total": "42516",
+    "backtrack_trials_total": "42516",
+    "prepare_calls_total": "14418"
+   },
+   "termination": "COMPLETED",
+   "steps": {
+    "accepted": 14418,
+    "dt_min_s": 0.001,
+    "dt_max_s": 0.0625,
+    "dt_mean_s": 0.06242197253434412,
+    "last_time_s": 900.0,
+    "rejected_total": 0
+   },
+   "input": null,
+   "input_sha256": null,
+   "hashes": {
+    "monitor.csv": "b394d73edf775727b188f768ce349c82cbe22dbdecc41d1afaa905d4228e2d5b",
+    "conservation.csv": "67431f7407ae2f9f36809ff26319285b073c50cc4e693d3c6ba11a187633709f",
+    "steps.csv": "b467d97d6721e583a549af42babf123c375136be14b87b04d3140e95ecafe4f0",
+    "boundary_conditions.csv": "9feb4c921b8309393485856f130f520aeb96dd7e70e3d4591b4b8869dbb1bbfb",
+    "fields.csv": "e41633e61cae37db3a16569ff2b3c10f11f10cf00308b548b933a9a827332003",
+    "checkpoint.dat": "3cb9bbf25ebec45f989a41f23878a74f87623f5b00e73e6fa9cf03a3989c2ba7"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 2.28283170145005e-10,
+     "initial_inventory_kg": 71.25836382794435,
+     "absolute_processed_mass_kg": 2131.0033531702584,
+     "relative_inventory": 3.2035982568474653e-12,
+     "relative_processed": 1.0712473530620771e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -4.58794166866479e-13
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 2.489741746103391e-10,
+     "initial_inventory_kg": 55.70265512773727,
+     "absolute_processed_mass_kg": 2128.3771423035823,
+     "relative_inventory": 4.469700304938638e-12,
+     "relative_processed": 1.1697841029286272e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 1.9472197381100193e-11
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 2.2168933355715126e-11,
+     "initial_inventory_kg": 15.555708700207084,
+     "absolute_processed_mass_kg": 2131.012167878124,
+     "relative_inventory": 1.42513168528413e-12,
+     "relative_processed": 1.0403006463256856e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -1.9930991547966672e-11
+    },
+    "g_system": {
+     "max_abs_balance_kg": 9.64117674584486e-13,
+     "initial_inventory_kg": 0.17434152937405795,
+     "absolute_processed_mass_kg": 5.44679440445519,
+     "relative_inventory": 5.530051721158911e-12,
+     "relative_processed": 1.770064377307667e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 4.734098854421129e-13
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 7.424283410273347e-12,
+     "initial_inventory_kg": 0.15139453820328883,
+     "absolute_processed_mass_kg": 5.452250116174172,
+     "relative_inventory": 4.9039308144024346e-11,
+     "relative_processed": 1.3616916414470995e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 6.9227496479774186e-12
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 6.461942092528261e-12,
+     "initial_inventory_kg": 0.022946991170769142,
+     "absolute_processed_mass_kg": 5.4485216951771624,
+     "relative_inventory": 2.8160302343950694e-10,
+     "relative_processed": 1.1859991487687646e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -6.449339762535306e-12
+    }
+   },
+   "max_balance_over_M0": 2.8160302343950694e-10
+  },
+  {
+   "run": "baro/N51_dt0.125",
+   "status": {
+    "status": "0",
+    "reached_time_s": "6.0000000000000000E+02",
+    "requested_time_s": "6.0000000000000000E+02",
+    "accepted_steps": "4822",
+    "rejected_steps": "0",
+    "last_rejection_status": "0",
+    "termination_reason": "COMPLETED",
+    "cpu_seconds": "2.2676680529999999E+03",
+    "wall_seconds": "2.3310688980049999E+03",
+    "newton_iterations_total": "14446",
+    "jacobian_evaluations_total": "14446",
+    "residual_evaluations_total": "28892",
+    "linear_solves_total": "14446",
+    "backtrack_trials_total": "14446",
+    "prepare_calls_total": "4822"
+   },
+   "termination": "COMPLETED",
+   "steps": {
+    "accepted": 4822,
+    "dt_min_s": 0.001,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.1244296972210617,
+    "last_time_s": 600.0,
+    "rejected_total": 0
+   },
+   "input": null,
+   "input_sha256": null,
+   "hashes": {
+    "monitor.csv": "048f4c17a1481d538561819e3d7d63b0408583497bd635e643a414577f4f4443",
+    "conservation.csv": "6b7e6760e1a217637965b060d8f198170dc3b250fda0a72595e0dee05cbcfc4a",
+    "steps.csv": "0849c31b0ec7c03c298c4708373a98ef8004a885b7d0f011f5f9bff91deeacc5",
+    "boundary_conditions.csv": "0bce4fcd32d7e46da894bead729e89b88d85c7903d84bbedb364f63f1c0c569d",
+    "fields.csv": "8f8df44ca9904acea2dcafd67c654be7ddf428c7962479daf54bac1595a13345",
+    "checkpoint.dat": "06b51a4d2cfc4c13ad9752a0f538144c96b5b313c06b0345f546e9edb2161894"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 2.6147972675971687e-11,
+     "initial_inventory_kg": 71.25836382794435,
+     "absolute_processed_mass_kg": 1419.3572583364246,
+     "relative_inventory": 3.6694601547555626e-13,
+     "relative_processed": 1.8422403889080573e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -1.6408394703181257e-14
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 2.7284841053187847e-11,
+     "initial_inventory_kg": 55.70265512773727,
+     "absolute_processed_mass_kg": 1418.9136542632273,
+     "relative_inventory": 4.898301704042343e-13,
+     "relative_processed": 1.9229387899121695e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 4.9594527215441566e-14
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 3.410605131648481e-12,
+     "initial_inventory_kg": 15.555708700207084,
+     "absolute_processed_mass_kg": 1419.3586942028764,
+     "relative_inventory": 2.1925102850525076e-13,
+     "relative_processed": 2.4029198155325387e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -6.600292191862283e-14
+    },
+    "g_system": {
+     "max_abs_balance_kg": 1.532107773982716e-13,
+     "initial_inventory_kg": 0.17434152937405795,
+     "absolute_processed_mass_kg": 3.633650032224309,
+     "relative_inventory": 8.78796795854364e-13,
+     "relative_processed": 4.21644286157313e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -3.613490157391659e-17
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 1.3566925360919413e-13,
+     "initial_inventory_kg": 0.15139453820328883,
+     "absolute_processed_mass_kg": 3.6344981516457784,
+     "relative_inventory": 8.961304365354371e-13,
+     "relative_processed": 3.732819441599116e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -2.03747271920943e-14
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 6.217248937900877e-14,
+     "initial_inventory_kg": 0.022946991170769142,
+     "absolute_processed_mass_kg": 3.634466300236234,
+     "relative_inventory": 2.7093961433256113e-12,
+     "relative_processed": 1.7106360120870475e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.0338592290520368e-14
+    }
+   },
+   "max_balance_over_M0": 2.7093961433256113e-12
+  },
+  {
+   "run": "bytewise/D_OSC_base",
+   "status": {
+    "status": "0",
+    "reached_time_s": "4.0000000000000000E+01",
+    "requested_time_s": "4.0000000000000000E+01",
+    "accepted_steps": "342",
+    "rejected_steps": "0",
+    "last_rejection_status": "0",
+    "termination_reason": "COMPLETED",
+    "cpu_seconds": "3.9229630999999998E+01",
+    "wall_seconds": "6.5081340084000004E+01",
+    "newton_iterations_total": "690",
+    "jacobian_evaluations_total": "690",
+    "residual_evaluations_total": "1380",
+    "linear_solves_total": "690",
+    "backtrack_trials_total": "690",
+    "prepare_calls_total": "342"
+   },
+   "termination": "COMPLETED",
+   "steps": {
+    "accepted": 342,
+    "dt_min_s": 0.001,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.11695906432748586,
+    "last_time_s": 40.0,
+    "rejected_total": 0
+   },
+   "input": "bytewise/D_OSC_base.nml",
+   "input_sha256": "296adde4f06ddd5fa0b488390907dcaad92538b1600ac05089273f3c49e9eb78",
+   "hashes": {
+    "monitor.csv": "b5bac0876492a151b29dc023641cca37e3a33dd3b27aab2ceb08d68424fd5622",
+    "conservation.csv": "fe0ec2452b2369a404f3dc63132dbe2a806a0f06b2afabcdbe5c22860b8dcaa2",
+    "steps.csv": "bf1e130b452954edb76d8a83e457d08ebbb6a86c2f88f8d7caa2455b544ec9df",
+    "boundary_conditions.csv": "87627bd75151f432aa8d3406d53c0b1952b1f18eb84b97d7fa63d949171c2fef",
+    "fields.csv": "f6162534e791bb94bf1328b5bc6ca8a4f112fb9efa7db0c9bbccfe78d0452f96",
+    "checkpoint.dat": "bf123c484e909b4c2d244e91276bf2bccd9962290a2bc0e525f2a8db20a41f97",
+    "run_metadata.txt": "acb5098bcae83004966202dd6d87d53b3e63aa9b21cbc7325d5a6e1e74afef17"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 1.9895196601282805e-13,
+     "initial_inventory_kg": 71.87519043151006,
+     "absolute_processed_mass_kg": 94.54865719716517,
+     "relative_inventory": 2.768020019403073e-15,
+     "relative_processed": 2.104228361466282e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.8797455030231993e-15
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 4.902744876744691e-13,
+     "initial_inventory_kg": 55.707636743071255,
+     "absolute_processed_mass_kg": 94.59406981738667,
+     "relative_inventory": 8.80084879449581e-15,
+     "relative_processed": 5.1829304799015556e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 3.654642065990994e-13
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 4.121147867408581e-13,
+     "initial_inventory_kg": 16.1675536884388,
+     "absolute_processed_mass_kg": 94.54857912142671,
+     "relative_inventory": 2.549023771206375e-14,
+     "relative_processed": 4.358762348100313e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -3.625844610960762e-13
+    },
+    "g_system": {
+     "max_abs_balance_kg": 6.522560269672795e-16,
+     "initial_inventory_kg": 0.17695406353276283,
+     "absolute_processed_mass_kg": 0.24227750309847915,
+     "relative_inventory": 3.686018924603645e-15,
+     "relative_processed": 2.692185690481362e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.6307303846965428e-17
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 5.23192600354605e-14,
+     "initial_inventory_kg": 0.1546312268866754,
+     "absolute_processed_mass_kg": 0.24218969664566128,
+     "relative_inventory": 3.383486058336957e-13,
+     "relative_processed": 2.1602595304459571e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -2.158976106187533e-14
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 5.229150445984487e-14,
+     "initial_inventory_kg": 0.022322836646087384,
+     "absolute_processed_mass_kg": 0.24222174083519954,
+     "relative_inventory": 2.34251163008041e-12,
+     "relative_processed": 2.1588278690236337e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.1616068365722288e-14
+    }
+   },
+   "max_balance_over_M0": 2.34251163008041e-12
+  },
+  {
+   "run": "bytewise/D_OSC_new",
+   "status": {
+    "status": "0",
+    "reached_time_s": "4.0000000000000000E+01",
+    "requested_time_s": "4.0000000000000000E+01",
+    "accepted_steps": "342",
+    "rejected_steps": "0",
+    "last_rejection_status": "0",
+    "termination_reason": "COMPLETED",
+    "cpu_seconds": "3.9294089000000000E+01",
+    "wall_seconds": "7.8865613850000003E+01",
+    "newton_iterations_total": "690",
+    "jacobian_evaluations_total": "690",
+    "residual_evaluations_total": "1380",
+    "linear_solves_total": "690",
+    "backtrack_trials_total": "690",
+    "prepare_calls_total": "342"
+   },
+   "termination": "COMPLETED",
+   "steps": {
+    "accepted": 342,
+    "dt_min_s": 0.001,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.11695906432748586,
+    "last_time_s": 40.0,
+    "rejected_total": 0
+   },
+   "input": "bytewise/D_OSC_new.nml",
+   "input_sha256": "4d3997bbcd2d64171eed9e1943c3462267435cff0fba6ef5814df7eea6177fbf",
+   "hashes": {
+    "monitor.csv": "b5bac0876492a151b29dc023641cca37e3a33dd3b27aab2ceb08d68424fd5622",
+    "conservation.csv": "fe0ec2452b2369a404f3dc63132dbe2a806a0f06b2afabcdbe5c22860b8dcaa2",
+    "steps.csv": "aa21b84c031fc100df898a05e5d94311e03320999bcf24f27eb7b716cb7b20c4",
+    "boundary_conditions.csv": "87627bd75151f432aa8d3406d53c0b1952b1f18eb84b97d7fa63d949171c2fef",
+    "fields.csv": "f6162534e791bb94bf1328b5bc6ca8a4f112fb9efa7db0c9bbccfe78d0452f96",
+    "checkpoint.dat": "bf123c484e909b4c2d244e91276bf2bccd9962290a2bc0e525f2a8db20a41f97",
+    "run_metadata.txt": "b61666da0b290a16d68aa15c91906abed0796fae34ac92a4be4a16acd8ff1c00"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 1.9895196601282805e-13,
+     "initial_inventory_kg": 71.87519043151006,
+     "absolute_processed_mass_kg": 94.54865719716517,
+     "relative_inventory": 2.768020019403073e-15,
+     "relative_processed": 2.104228361466282e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.8797455030231993e-15
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 4.902744876744691e-13,
+     "initial_inventory_kg": 55.707636743071255,
+     "absolute_processed_mass_kg": 94.59406981738667,
+     "relative_inventory": 8.80084879449581e-15,
+     "relative_processed": 5.1829304799015556e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 3.654642065990994e-13
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 4.121147867408581e-13,
+     "initial_inventory_kg": 16.1675536884388,
+     "absolute_processed_mass_kg": 94.54857912142671,
+     "relative_inventory": 2.549023771206375e-14,
+     "relative_processed": 4.358762348100313e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -3.625844610960762e-13
+    },
+    "g_system": {
+     "max_abs_balance_kg": 6.522560269672795e-16,
+     "initial_inventory_kg": 0.17695406353276283,
+     "absolute_processed_mass_kg": 0.24227750309847915,
+     "relative_inventory": 3.686018924603645e-15,
+     "relative_processed": 2.692185690481362e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.6307303846965428e-17
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 5.23192600354605e-14,
+     "initial_inventory_kg": 0.1546312268866754,
+     "absolute_processed_mass_kg": 0.24218969664566128,
+     "relative_inventory": 3.383486058336957e-13,
+     "relative_processed": 2.1602595304459571e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -2.158976106187533e-14
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 5.229150445984487e-14,
+     "initial_inventory_kg": 0.022322836646087384,
+     "absolute_processed_mass_kg": 0.24222174083519954,
+     "relative_inventory": 2.34251163008041e-12,
+     "relative_processed": 2.1588278690236337e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.1616068365722288e-14
+    }
+   },
+   "max_balance_over_M0": 2.34251163008041e-12
+  },
+  {
+   "run": "bytewise/D_Stable_base",
+   "status": {
+    "status": "0",
+    "reached_time_s": "4.0000000000000000E+01",
+    "requested_time_s": "4.0000000000000000E+01",
+    "accepted_steps": "342",
+    "rejected_steps": "0",
+    "last_rejection_status": "0",
+    "termination_reason": "COMPLETED",
+    "cpu_seconds": "4.0541896999999999E+01",
+    "wall_seconds": "7.5096933484999994E+01",
+    "newton_iterations_total": "689",
+    "jacobian_evaluations_total": "689",
+    "residual_evaluations_total": "1378",
+    "linear_solves_total": "689",
+    "backtrack_trials_total": "689",
+    "prepare_calls_total": "342"
+   },
+   "termination": "COMPLETED",
+   "steps": {
+    "accepted": 342,
+    "dt_min_s": 0.001,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.11695906432748573,
+    "last_time_s": 40.0,
+    "rejected_total": 0
+   },
+   "input": "bytewise/D_Stable_base.nml",
+   "input_sha256": "be3f35c6751e6b55efa521940336da60caa8deefa7689521094085ee66233bd8",
+   "hashes": {
+    "monitor.csv": "5ea2ed9b09b03a8e1dbcb026c74111dbcd28089d56515293e3cecd718e338904",
+    "conservation.csv": "bd628e8d48f41440060bfbfe0f49c01245658e82d6c102c9a4f37a5704a78618",
+    "steps.csv": "a8708fca0cd6f333132a46465871577bb29ef134429f0b00bb536f665925a5b6",
+    "boundary_conditions.csv": "18a45de3bcdaf63cb9962ff5fcb2589d74706f5071cefafd5204ff220eceba8f",
+    "fields.csv": "eef2c39ed56ea44b2fdacb9a779b9fa17872a3c283dc5ab4e2fb4d162401db98",
+    "checkpoint.dat": "28f989a5f8108e9d70a24df148963f5753a599c67ae9feb201fb3f74db585a13",
+    "run_metadata.txt": "16e6015562ecc56a220070fc651dacfbbf63368c982f0382e3352565f1ab3b3d"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 3.907985046680551e-13,
+     "initial_inventory_kg": 82.0261564726594,
+     "absolute_processed_mass_kg": 102.71717317746813,
+     "relative_inventory": 4.764315694815158e-15,
+     "relative_processed": 3.8046072782090544e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -1.5156969849473136e-16
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 7.887024366937112e-13,
+     "initial_inventory_kg": 59.48512663249196,
+     "absolute_processed_mass_kg": 102.7220681553298,
+     "relative_inventory": 1.3258817478298957e-14,
+     "relative_processed": 7.678023338676217e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 4.2735396455323187e-13
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 4.831690603168681e-13,
+     "initial_inventory_kg": 22.541029840167486,
+     "absolute_processed_mass_kg": 102.71725989126911,
+     "relative_inventory": 2.1435092528730625e-14,
+     "relative_processed": 4.703874118413249e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -4.2750553425172667e-13
+    },
+    "g_system": {
+     "max_abs_balance_kg": 8.118505867571457e-16,
+     "initial_inventory_kg": 0.2930524122350142,
+     "absolute_processed_mass_kg": 0.1441022646042392,
+     "relative_inventory": 2.7703255556418344e-15,
+     "relative_processed": 5.6338503005959195e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 3.636593001692766e-18
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 1.0134254546656507e-13,
+     "initial_inventory_kg": 0.2748660004833321,
+     "absolute_processed_mass_kg": 0.14408175287992797,
+     "relative_inventory": 3.68698002984587e-13,
+     "relative_processed": 7.033683547077605e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 8.883329458258162e-14
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 1.0141887329950805e-13,
+     "initial_inventory_kg": 0.01818641175168204,
+     "absolute_processed_mass_kg": 0.1440897358917801,
+     "relative_inventory": 5.5766291165231065e-12,
+     "relative_processed": 7.038591102400217e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -8.882965798957991e-14
+    }
+   },
+   "max_balance_over_M0": 5.5766291165231065e-12
+  },
+  {
+   "run": "bytewise/D_Stable_new",
+   "status": {
+    "status": "0",
+    "reached_time_s": "4.0000000000000000E+01",
+    "requested_time_s": "4.0000000000000000E+01",
+    "accepted_steps": "342",
+    "rejected_steps": "0",
+    "last_rejection_status": "0",
+    "termination_reason": "COMPLETED",
+    "cpu_seconds": "4.0422220000000003E+01",
+    "wall_seconds": "7.0394351895000000E+01",
+    "newton_iterations_total": "689",
+    "jacobian_evaluations_total": "689",
+    "residual_evaluations_total": "1378",
+    "linear_solves_total": "689",
+    "backtrack_trials_total": "689",
+    "prepare_calls_total": "342"
+   },
+   "termination": "COMPLETED",
+   "steps": {
+    "accepted": 342,
+    "dt_min_s": 0.001,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.11695906432748573,
+    "last_time_s": 40.0,
+    "rejected_total": 0
+   },
+   "input": "bytewise/D_Stable_new.nml",
+   "input_sha256": "f28bf44c22f95cc38c9ea3ea40bcad303d91e6f6ed205583b010e8a0f8ee2061",
+   "hashes": {
+    "monitor.csv": "5ea2ed9b09b03a8e1dbcb026c74111dbcd28089d56515293e3cecd718e338904",
+    "conservation.csv": "bd628e8d48f41440060bfbfe0f49c01245658e82d6c102c9a4f37a5704a78618",
+    "steps.csv": "1e4795ec3b6ce6a0132d6bc2e2e4326f8f239c3abefd4f01b8b521b96039ca19",
+    "boundary_conditions.csv": "18a45de3bcdaf63cb9962ff5fcb2589d74706f5071cefafd5204ff220eceba8f",
+    "fields.csv": "eef2c39ed56ea44b2fdacb9a779b9fa17872a3c283dc5ab4e2fb4d162401db98",
+    "checkpoint.dat": "28f989a5f8108e9d70a24df148963f5753a599c67ae9feb201fb3f74db585a13",
+    "run_metadata.txt": "b25a9edea4598a4c61cadbd6c4e0ce501e5b9fe75d172c67627f733b8e4c2f18"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 3.907985046680551e-13,
+     "initial_inventory_kg": 82.0261564726594,
+     "absolute_processed_mass_kg": 102.71717317746813,
+     "relative_inventory": 4.764315694815158e-15,
+     "relative_processed": 3.8046072782090544e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -1.5156969849473136e-16
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 7.887024366937112e-13,
+     "initial_inventory_kg": 59.48512663249196,
+     "absolute_processed_mass_kg": 102.7220681553298,
+     "relative_inventory": 1.3258817478298957e-14,
+     "relative_processed": 7.678023338676217e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 4.2735396455323187e-13
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 4.831690603168681e-13,
+     "initial_inventory_kg": 22.541029840167486,
+     "absolute_processed_mass_kg": 102.71725989126911,
+     "relative_inventory": 2.1435092528730625e-14,
+     "relative_processed": 4.703874118413249e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -4.2750553425172667e-13
+    },
+    "g_system": {
+     "max_abs_balance_kg": 8.118505867571457e-16,
+     "initial_inventory_kg": 0.2930524122350142,
+     "absolute_processed_mass_kg": 0.1441022646042392,
+     "relative_inventory": 2.7703255556418344e-15,
+     "relative_processed": 5.6338503005959195e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 3.636593001692766e-18
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 1.0134254546656507e-13,
+     "initial_inventory_kg": 0.2748660004833321,
+     "absolute_processed_mass_kg": 0.14408175287992797,
+     "relative_inventory": 3.68698002984587e-13,
+     "relative_processed": 7.033683547077605e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 8.883329458258162e-14
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 1.0141887329950805e-13,
+     "initial_inventory_kg": 0.01818641175168204,
+     "absolute_processed_mass_kg": 0.1440897358917801,
+     "relative_inventory": 5.5766291165231065e-12,
+     "relative_processed": 7.038591102400217e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -8.882965798957991e-14
+    }
+   },
+   "max_balance_over_M0": 5.5766291165231065e-12
+  },
+  {
+   "run": "iso/B_ISO_MASS",
+   "status": {
+    "status": "6100",
+    "reached_time_s": "2.2364452291713980E+02",
+    "requested_time_s": "3.0000000000000000E+02",
+    "accepted_steps": "1829",
+    "rejected_steps": "25",
+    "last_rejection_status": "6100",
+    "termination_reason": "MAX_NEWTON",
+    "cpu_seconds": "3.1135595300000000E+02",
+    "wall_seconds": "3.1197509853899999E+02",
+    "newton_iterations_total": "4872",
+    "jacobian_evaluations_total": "4872",
+    "residual_evaluations_total": "13668",
+    "linear_solves_total": "4872",
+    "backtrack_trials_total": "8796",
+    "prepare_calls_total": "1854"
+   },
+   "termination": "MAX_NEWTON",
+   "steps": {
+    "accepted": 1829,
+    "dt_min_s": 1.652994086399999e-07,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.12227693981254137,
+    "last_time_s": 223.6445229171398,
+    "rejected_total": 24
+   },
+   "input": "iso/B_ISO_MASS.nml",
+   "input_sha256": "a74530dd8ac69d786c20e4ddd4860df5ebc5b3065dc05c2fdf375001045bd353",
+   "hashes": {
+    "monitor.csv": "6626c0d32a17a571ce39e78c1c8a6d0820a3afdeeb2a3207403fdd3b0a5132f3",
+    "conservation.csv": "5a25dd4031d525ba50388be7957cb3b9a76dc7fabeecbc2feec0d66b34d71c53",
+    "steps.csv": "56c7a54a8a938d38f19832126d4fb52c83cf4f52d708a5d80b2f23d28a95d47d",
+    "boundary_conditions.csv": "54bb1f75df2298f67d45fb7afe3e89fbfd8f6eb2c6344ad1f1fb58109ab934c3",
+    "fields.csv": "4c8edeeecc1174f985d9ec12bc6ffe7cea785c2d563bd65628c3321f410c2967",
+    "checkpoint.dat": "7d37b346400145f6b0d43851cae8e6af8ecfe74b03fbb5b5166c937694fa96a9",
+    "last_rejected_state.dat": "64e653e16c6992e7c4640ca46cad68c14af9049e7108e02c6ecaa57500ac2482",
+    "run_metadata.txt": "826293ea3006c1f4268678c6410215f085eb212bf06a611cf4f238ddcfbd8466"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 6.934897101018578e-12,
+     "initial_inventory_kg": 74.01411854028603,
+     "absolute_processed_mass_kg": 527.8676499083758,
+     "relative_inventory": 9.369694914685635e-14,
+     "relative_processed": 1.3137567915408903e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 4.1887462088337906e-15
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 5.002220859751105e-12,
+     "initial_inventory_kg": 55.774445113292124,
+     "absolute_processed_mass_kg": 528.882004995264,
+     "relative_inventory": 8.968660915568625e-14,
+     "relative_processed": 9.458103721634279e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 5.314687340775275e-12
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 5.5138116294983774e-12,
+     "initial_inventory_kg": 18.239673426993903,
+     "absolute_processed_mass_kg": 527.8630779958623,
+     "relative_inventory": 3.022977166541909e-13,
+     "relative_processed": 1.0445533812352751e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -5.310498594566441e-12
+    },
+    "g_system": {
+     "max_abs_balance_kg": 1.5654144647214707e-14,
+     "initial_inventory_kg": 0.24644815571778697,
+     "absolute_processed_mass_kg": 1.3618404135652356,
+     "relative_inventory": 6.351901722137699e-14,
+     "relative_processed": 1.1494845131106719e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 7.369109672588089e-15
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 1.5940027076055685e-12,
+     "initial_inventory_kg": 0.2207594856622925,
+     "absolute_processed_mass_kg": 1.3571776084062097,
+     "relative_inventory": 7.220540049835046e-12,
+     "relative_processed": 1.1744982364375082e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 1.0293437852547173e-12
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 1.5955570198400437e-12,
+     "initial_inventory_kg": 0.0256886700554943,
+     "absolute_processed_mass_kg": 1.3645962698081187,
+     "relative_inventory": 6.211131274578325e-11,
+     "relative_processed": 1.169252074875158e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -1.0219746755821296e-12
+    }
+   },
+   "max_balance_over_M0": 6.211131274578325e-11
+  },
+  {
+   "run": "iso/B_ISO_MASS_N101",
+   "status": {
+    "status": "6100",
+    "reached_time_s": "2.4939956206493420E+02",
+    "requested_time_s": "3.0000000000000000E+02",
+    "accepted_steps": "2037",
+    "rejected_steps": "24",
+    "last_rejection_status": "6100",
+    "termination_reason": "MAX_NEWTON",
+    "cpu_seconds": "8.1132354199999997E+02",
+    "wall_seconds": "8.6337679433500000E+02",
+    "newton_iterations_total": "5747",
+    "jacobian_evaluations_total": "5747",
+    "residual_evaluations_total": "15650",
+    "linear_solves_total": "5747",
+    "backtrack_trials_total": "9903",
+    "prepare_calls_total": "2061"
+   },
+   "termination": "MAX_NEWTON",
+   "steps": {
+    "accepted": 2037,
+    "dt_min_s": 4.4286749999999987e-07,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.12243473837257231,
+    "last_time_s": 249.3995620649342,
+    "rejected_total": 21
+   },
+   "input": "iso/B_ISO_MASS_N101.nml",
+   "input_sha256": "629b59b5c76032586f8506782110ec1d3264630c541594c0d58e71dd5a1d8a57",
+   "hashes": {
+    "monitor.csv": "793ef9bfd224324d66258c3529b1b1d21aecefdfb3d57c728769283fd7efb513",
+    "conservation.csv": "556c496115ddf142b0671a894c5d0b85101b4b0d6150fa3721cf5787d397b48f",
+    "steps.csv": "d68037ceda509d7a66046a5afe76a8ff5917ae1fd09b1b0f28d5db13d3a295f3",
+    "boundary_conditions.csv": "5a4e4ec7cbced04aca1f93267c294535bb38d70d82899edb2d52a2ea3a44c48b",
+    "fields.csv": "480004535701d0ac2539e4b9c373004f4bf7c481b7613a26afe1799744bf32f9",
+    "checkpoint.dat": "88384cfbac4545b103969316861adac9532ee2e393e87072682c56c428471258",
+    "last_rejected_state.dat": "3b9686670afaa41c5ae9569f8e21842f2bc26aae2277c78a10c7c76d7a0303a3",
+    "run_metadata.txt": "f44e042d6f544aa26655562bd28e339af50b4f7f4c63a369132551531a94143c"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 6.423306331271306e-12,
+     "initial_inventory_kg": 74.01402354318307,
+     "absolute_processed_mass_kg": 591.079317633021,
+     "relative_inventory": 8.678499051633996e-14,
+     "relative_processed": 1.0867080169533688e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -1.9796414958504553e-14
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 4.746425474877469e-12,
+     "initial_inventory_kg": 55.7744451140444,
+     "absolute_processed_mass_kg": 589.8140761281611,
+     "relative_inventory": 8.510036209544083e-14,
+     "relative_processed": 8.047324855377163e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 1.8770488125719297e-12
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 2.1316282072803006e-12,
+     "initial_inventory_kg": 18.239578429138746,
+     "absolute_processed_mass_kg": 591.0999172999193,
+     "relative_inventory": 1.168682826503767e-13,
+     "relative_processed": 3.6062062350090464e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -1.8968452275304344e-12
+    },
+    "g_system": {
+     "max_abs_balance_kg": 2.220446049250313e-14,
+     "initial_inventory_kg": 0.24644833472980882,
+     "absolute_processed_mass_kg": 1.5195269670541098,
+     "relative_inventory": 9.009783132374082e-14,
+     "relative_processed": 1.4612745264765305e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 3.65200791112658e-15
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 1.0243472736704007e-12,
+     "initial_inventory_kg": 0.22075948620292535,
+     "absolute_processed_mass_kg": 1.5206899705160475,
+     "relative_inventory": 4.640105353066484e-12,
+     "relative_processed": 6.736069110278853e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 4.208183010908817e-13
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 1.0294542995836764e-12,
+     "initial_inventory_kg": 0.025688848526883492,
+     "absolute_processed_mass_kg": 1.5298191534674683,
+     "relative_inventory": 4.007397600972064e-11,
+     "relative_processed": 6.729254874671484e-13,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -4.17166293179755e-13
+    }
+   },
+   "max_balance_over_M0": 4.007397600972064e-11
+  },
+  {
+   "run": "iso/B_ISO_MASS_dt0.03125",
+   "status": {
+    "status": "6100",
+    "reached_time_s": "1.9866709919470173E+02",
+    "requested_time_s": "3.0000000000000000E+02",
+    "accepted_steps": "6388",
+    "rejected_steps": "23",
+    "last_rejection_status": "6100",
+    "termination_reason": "MAX_NEWTON",
+    "cpu_seconds": "8.1529551800000002E+02",
+    "wall_seconds": "8.6979209782600003E+02",
+    "newton_iterations_total": "13783",
+    "jacobian_evaluations_total": "13783",
+    "residual_evaluations_total": "30847",
+    "linear_solves_total": "13783",
+    "backtrack_trials_total": "17064",
+    "prepare_calls_total": "6411"
+   },
+   "termination": "MAX_NEWTON",
+   "steps": {
+    "accepted": 6388,
+    "dt_min_s": 2.754990143999999e-07,
+    "dt_max_s": 0.03125,
+    "dt_mean_s": 0.031100046836989165,
+    "last_time_s": 198.66709919470173,
+    "rejected_total": 21
+   },
+   "input": "iso/B_ISO_MASS_dt0.03125.nml",
+   "input_sha256": "7fa60329e111470666bb893199c157fe1504fef8ba5b5c1095ca26d81283823e",
+   "hashes": {
+    "monitor.csv": "bd05271e79347bec5e6da5811288c915db57859a3ba29a3e5d79bbad5c824285",
+    "conservation.csv": "676b602e2a87708c99339474504fdbf50ee9e674cb164cc7b208e9d00a45c848",
+    "steps.csv": "84ec4ad1295fd11dd9e36e3c645cd73973ee481937854958a7744fe94a5033df",
+    "boundary_conditions.csv": "43824c091465f445516d5d09aa796c83f237e3c4bec115207cf52ec9e138113b",
+    "fields.csv": "57b51c560da41877f002e52f1b0c082888af29b489849f917314cc66a1aa17c5",
+    "checkpoint.dat": "0f74231bb0a00b7ad0f2c1f19b97a7138b0c0bf94f293c70acde7cdb5b4da63a",
+    "last_rejected_state.dat": "cc1fc2bac1142a52363213a045f9cb998541b72991c90abe89971555c87e46c0",
+    "run_metadata.txt": "2ac449ee04c8f2c85b2832b255c66e49b4ad1d9b9d9728513a048925f8150fea"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 2.0122570276726037e-11,
+     "initial_inventory_kg": 74.01411854028603,
+     "absolute_processed_mass_kg": 467.58934593046695,
+     "relative_inventory": 2.7187475408186187e-13,
+     "relative_processed": 4.303470652583768e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.199150378510459e-14
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 1.4722445484949276e-11,
+     "initial_inventory_kg": 55.774445113292124,
+     "absolute_processed_mass_kg": 469.80544160072395,
+     "relative_inventory": 2.6396399740139474e-13,
+     "relative_processed": 3.133732430766845e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 3.3236260215012216e-11
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 3.26281224261038e-11,
+     "initial_inventory_kg": 18.239673426993903,
+     "absolute_processed_mass_kg": 467.5761634631838,
+     "relative_inventory": 1.7888545294794387e-12,
+     "relative_processed": 6.978140670054257e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -3.3214268711227115e-11
+    },
+    "g_system": {
+     "max_abs_balance_kg": 7.827072323607354e-14,
+     "initial_inventory_kg": 0.24644815571778697,
+     "absolute_processed_mass_kg": 1.2097619031470561,
+     "relative_inventory": 3.1759508610688494e-13,
+     "relative_processed": 6.469927928170103e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.6015954657803293e-15
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 7.779776822758322e-12,
+     "initial_inventory_kg": 0.2207594856622925,
+     "absolute_processed_mass_kg": 1.2019355834216259,
+     "relative_inventory": 3.524096280356197e-11,
+     "relative_processed": 6.472706965385899e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 7.194434207069591e-12
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 7.713163441280813e-12,
+     "initial_inventory_kg": 0.0256886700554943,
+     "absolute_processed_mass_kg": 1.208542421205562,
+     "relative_inventory": 3.0025545988244414e-10,
+     "relative_processed": 6.382203310320436e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -7.19183261160381e-12
+    }
+   },
+   "max_balance_over_M0": 3.0025545988244414e-10
+  },
+  {
+   "run": "iso/B_ISO_MASS_dt0.0625",
+   "status": {
+    "status": "6000",
+    "reached_time_s": "2.2251793196307389E+02",
+    "requested_time_s": "3.0000000000000000E+02",
+    "accepted_steps": "3594",
+    "rejected_steps": "24",
+    "last_rejection_status": "6000",
+    "termination_reason": "NEWTON_GLOBALIZATION_FAILURE",
+    "cpu_seconds": "5.0687979899999999E+02",
+    "wall_seconds": "5.1112054483300000E+02",
+    "newton_iterations_total": "8560",
+    "jacobian_evaluations_total": "8560",
+    "residual_evaluations_total": "19751",
+    "linear_solves_total": "8560",
+    "backtrack_trials_total": "11191",
+    "prepare_calls_total": "3618"
+   },
+   "termination": "NEWTON_GLOBALIZATION_FAILURE",
+   "steps": {
+    "accepted": 3594,
+    "dt_min_s": 1.3774950719999995e-07,
+    "dt_max_s": 0.0625,
+    "dt_mean_s": 0.06191372620007281,
+    "last_time_s": 222.5179319630739,
+    "rejected_total": 23
+   },
+   "input": "iso/B_ISO_MASS_dt0.0625.nml",
+   "input_sha256": "5452a8e37df8e295b8ae19a9b302e7488e643ac229b53bf0fdaafd80422e67c6",
+   "hashes": {
+    "monitor.csv": "0536a21bdfca88e9b5e96dcf3b6d11d8e298cd46e29885f559e1470e19784d41",
+    "conservation.csv": "cdcffc933b2095fddb0c1311c4450ee4e994f96613fda63e645abc0179223d22",
+    "steps.csv": "f1d56dabfba23f3115152df8b029e14601b1af38039782387d973cbbff2a9e47",
+    "boundary_conditions.csv": "8c5281f4def026749bf8b1ecb93869d33fd7df30e63f2f56805614ac1ed95c04",
+    "fields.csv": "a95997d1610036be5b15359f0af1907e1c703e21c723d976ac5e6a5397cd8cc4",
+    "checkpoint.dat": "ed7fc5da96e4143fd54b81c5b07627c79eb73e00ce7b14692ec842f8e2f6553f",
+    "last_rejected_state.dat": "be4a3f519b9ddf20802711bb6c40787830c383b0491d787ebb12ba3cc47af56e",
+    "run_metadata.txt": "8285f098b851bcb14a20d6520ea2d09ca341bee3fa2d496efd159857598e46b4"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 1.261923898709938e-11,
+     "initial_inventory_kg": 74.01411854028603,
+     "absolute_processed_mass_kg": 527.3012067220616,
+     "relative_inventory": 1.7049772713608287e-13,
+     "relative_processed": 2.393174683886307e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -3.474404579494363e-15
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 2.6489033189136535e-11,
+     "initial_inventory_kg": 55.774445113292124,
+     "absolute_processed_mass_kg": 526.2391611318947,
+     "relative_inventory": 4.74931362119884e-13,
+     "relative_processed": 5.033649174295757e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 1.344832467585986e-11
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 1.4210854715202004e-11,
+     "initial_inventory_kg": 18.239673426993903,
+     "absolute_processed_mass_kg": 527.3180137293032,
+     "relative_inventory": 7.79117826428327e-13,
+     "relative_processed": 2.694930638667143e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -1.3451799080439354e-11
+    },
+    "g_system": {
+     "max_abs_balance_kg": 2.90878432451791e-14,
+     "initial_inventory_kg": 0.24644815571778697,
+     "absolute_processed_mass_kg": 1.3565020707483546,
+     "relative_inventory": 1.180282447659629e-13,
+     "relative_processed": 2.1443272275383945e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 9.00601483556244e-15
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 3.798350522998817e-12,
+     "initial_inventory_kg": 0.2207594856622925,
+     "absolute_processed_mass_kg": 1.3571729022353904,
+     "relative_inventory": 1.7205831548318404e-11,
+     "relative_processed": 2.7987226364029072e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.037532832783236e-12
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 3.8172243144174445e-12,
+     "initial_inventory_kg": 0.0256886700554943,
+     "absolute_processed_mass_kg": 1.3660760093872417,
+     "relative_inventory": 1.48595637927975e-10,
+     "relative_processed": 2.7942986248105433e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -2.028526817947673e-12
+    }
+   },
+   "max_balance_over_M0": 1.48595637927975e-10
+  },
+  {
+   "run": "iso/C_ISO_VOLUME",
+   "status": {
+    "status": "6100",
+    "reached_time_s": "2.2364197117111507E+02",
+    "requested_time_s": "3.0000000000000000E+02",
+    "accepted_steps": "1824",
+    "rejected_steps": "24",
+    "last_rejection_status": "6100",
+    "termination_reason": "MAX_NEWTON",
+    "cpu_seconds": "3.0833378799999997E+02",
+    "wall_seconds": "3.0978992174500002E+02",
+    "newton_iterations_total": "4758",
+    "jacobian_evaluations_total": "4758",
+    "residual_evaluations_total": "12495",
+    "linear_solves_total": "4758",
+    "backtrack_trials_total": "7737",
+    "prepare_calls_total": "1848"
+   },
+   "termination": "MAX_NEWTON",
+   "steps": {
+    "accepted": 1824,
+    "dt_min_s": 5.314409999999998e-07,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.1226107298087244,
+    "last_time_s": 223.64197117111507,
+    "rejected_total": 21
+   },
+   "input": "iso/C_ISO_VOLUME.nml",
+   "input_sha256": "8d3d273d3e11d0d2211d8097519f47333add522dabd740c0ff07b3446461fd1d",
+   "hashes": {
+    "monitor.csv": "1be7f55deac7d661f6a8452532f493349d7260a865038c7e3e820be54852dff8",
+    "conservation.csv": "09867a5f93ad3e59020d6c2c5f24e5ae15fb646ce449e6004e4181df67714587",
+    "steps.csv": "f25a3fc821ee9b2d53241e670cc30db987fd18686b9ab4f6d4f29ed614bf3403",
+    "boundary_conditions.csv": "348aa88db399354403ae5e5b7579492c0d16147313a638831d8721a2559479be",
+    "fields.csv": "56aeb58df26c24bdc48c5be947f354291441c3477f99fdefb6b88ccbb922d026",
+    "checkpoint.dat": "75577a556ec2a9cee17d599c75aa8f37f8bc64293f42fc4d383c3c7756da1eb2",
+    "last_rejected_state.dat": "eebf7e3807834ef97403893d64e5055b15767fe2413fd67c1b1f82c3c8d2d021",
+    "run_metadata.txt": "b7f5518dc7527c72dd41944b4baca69dfaa0be5c686fc12628ec5152cdf0caeb"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 3.410605131648481e-13,
+     "initial_inventory_kg": 74.01753302968123,
+     "absolute_processed_mass_kg": 527.8935574678094,
+     "relative_inventory": 4.607834106387765e-15,
+     "relative_processed": 6.460781881878635e-16,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 6.220473606161127e-16
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 5.4569682106375694e-12,
+     "initial_inventory_kg": 55.77754951647629,
+     "absolute_processed_mass_kg": 528.9156580637202,
+     "relative_inventory": 9.783449179719916e-14,
+     "relative_processed": 1.0317274838515274e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 5.278938981129685e-12
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 5.5706550483591855e-12,
+     "initial_inventory_kg": 18.239983513204912,
+     "absolute_processed_mass_kg": 527.8889500930784,
+     "relative_inventory": 3.054089958100174e-13,
+     "relative_processed": 1.0552702509451954e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -5.27831693376907e-12
+    },
+    "g_system": {
+     "max_abs_balance_kg": 1.587618925213974e-14,
+     "initial_inventory_kg": 0.2464384364116767,
+     "absolute_processed_mass_kg": 1.3618198092989515,
+     "relative_inventory": 6.442253685467506e-14,
+     "relative_processed": 1.1658068963112389e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 7.616493603807147e-15
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 1.609601341101552e-12,
+     "initial_inventory_kg": 0.220750590542402,
+     "absolute_processed_mass_kg": 1.357136702895455,
+     "relative_inventory": 7.291492798033435e-12,
+     "relative_processed": 1.1860274191004213e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 9.781548478297745e-13
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 1.6113776979409522e-12,
+     "initial_inventory_kg": 0.025687845869274743,
+     "absolute_processed_mass_kg": 1.3645502137532501,
+     "relative_inventory": 6.272918741965525e-11,
+     "relative_processed": 1.1808856000313783e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -9.705383542259679e-13
+    }
+   },
+   "max_balance_over_M0": 6.272918741965525e-11
+  },
+  {
+   "run": "jt/OSC_ISO_MASS_STEADY",
+   "status": {
+    "status": "6000",
+    "reached_time_s": "2.2364970211845176E+02",
+    "requested_time_s": "6.0000000000000000E+02",
+    "accepted_steps": "1825",
+    "rejected_steps": "24",
+    "last_rejection_status": "6000",
+    "termination_reason": "NEWTON_GLOBALIZATION_FAILURE",
+    "cpu_seconds": "1.2453113070000002E+03",
+    "wall_seconds": "1.2569054999069999E+03",
+    "newton_iterations_total": "4727",
+    "jacobian_evaluations_total": "4727",
+    "residual_evaluations_total": "11925",
+    "linear_solves_total": "4727",
+    "backtrack_trials_total": "7198",
+    "prepare_calls_total": "1849"
+   },
+   "termination": "NEWTON_GLOBALIZATION_FAILURE",
+   "steps": {
+    "accepted": 1825,
+    "dt_min_s": 1.5943229999999994e-07,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.12254778198271239,
+    "last_time_s": 223.64970211845176,
+    "rejected_total": 23
+   },
+   "input": "jt/OSC_ISO_MASS_STEADY.nml",
+   "input_sha256": "485a10ba58ea30b08843ec61f1df6d2af9453ccb1ff4493b8674d0f7e9fe9302",
+   "hashes": {
+    "monitor.csv": "7972e64487077f8a308f31c94f49127652369f0423495166c84c761298a60d44",
+    "conservation.csv": "44bc055ca66630b3c518512320435243dea5e84fe408f5e4d4c78f2259d52b45",
+    "steps.csv": "6dbbd0f7bd090aa3471a9cf6e96bf164c7a5deeceee5b1046c596c9729c5f8a0",
+    "boundary_conditions.csv": "48b409606c38b3db81b290923fac88ce866864f30cc10beb6598c8fccbd758dd",
+    "fields.csv": "109e050e29b431c9cd3cd8428f287b99a03fdf0acb9fcaba43c03ac3da95fa5d",
+    "checkpoint.dat": "550e065442e8ad5563ec95b9f60499842a2159bf0b1a5804a6be8c6a1f494592",
+    "last_rejected_state.dat": "79be3f0ccdf22183bfd580bf0d97ae3aba489ef5ce7c4f90d32b13c3eec62c43",
+    "run_metadata.txt": "f50169d8c46cc41b3e48e66b801f9ceaf9ac2942beeeb1a393802404537fd537"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 6.480149750132114e-12,
+     "initial_inventory_kg": 74.01411854028603,
+     "absolute_processed_mass_kg": 527.9609977534103,
+     "relative_inventory": 8.755288690771823e-14,
+     "relative_processed": 1.2273917538807923e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 4.082614676480672e-15
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 4.860112312599085e-12,
+     "initial_inventory_kg": 55.774445113292124,
+     "absolute_processed_mass_kg": 528.8948777746996,
+     "relative_inventory": 8.713869412285425e-14,
+     "relative_processed": 9.18918393206563e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 5.144891154971614e-12
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 5.4001247917767614e-12,
+     "initial_inventory_kg": 18.239673426993903,
+     "absolute_processed_mass_kg": 527.9570505669608,
+     "relative_inventory": 2.9606477404276425e-13,
+     "relative_processed": 1.0228341085657807e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -5.1408085402951335e-12
+    },
+    "g_system": {
+     "max_abs_balance_kg": 1.4432899320127035e-14,
+     "initial_inventory_kg": 0.24644815571778697,
+     "absolute_processed_mass_kg": 1.3619290411171963,
+     "relative_inventory": 5.85636328991419e-14,
+     "relative_processed": 1.0597394492952191e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 8.66358700332827e-15
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 1.5793477636805164e-12,
+     "initial_inventory_kg": 0.2207594856622925,
+     "absolute_processed_mass_kg": 1.3574761925275118,
+     "relative_inventory": 7.154155840426846e-12,
+     "relative_processed": 1.163444171156989e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 9.631738477889499e-13
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 1.5816792320322293e-12,
+     "initial_inventory_kg": 0.0256886700554943,
+     "absolute_processed_mass_kg": 1.3649521155314168,
+     "relative_inventory": 6.157108283984283e-11,
+     "relative_processed": 1.1587800143570853e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -9.54510260785622e-13
+    }
+   },
+   "max_balance_over_M0": 6.157108283984283e-11
+  },
+  {
+   "run": "jt/SS1_CENTER",
+   "status": {
+    "status": "6100",
+    "reached_time_s": "7.7813621293409810E+01",
+    "requested_time_s": "1.1000000000000001E+02",
+    "accepted_steps": "197",
+    "rejected_steps": "28",
+    "last_rejection_status": "6100",
+    "termination_reason": "MAX_NEWTON",
+    "cpu_seconds": "1.5369982199999998E+02",
+    "wall_seconds": "2.0097089603200001E+02",
+    "newton_iterations_total": "903",
+    "jacobian_evaluations_total": "903",
+    "residual_evaluations_total": "5178",
+    "linear_solves_total": "903",
+    "backtrack_trials_total": "4275",
+    "prepare_calls_total": "225"
+   },
+   "termination": "MAX_NEWTON",
+   "steps": {
+    "accepted": 197,
+    "dt_min_s": 6.643012499999996e-08,
+    "dt_max_s": 0.5,
+    "dt_mean_s": 0.3949930014893913,
+    "last_time_s": 77.81362129340981,
+    "rejected_total": 26
+   },
+   "input": "jt/SS1_CENTER.nml",
+   "input_sha256": "12e3f57ebfb1217db7196b685d6e9d7ac26f3d555851d92fbd85652879f722b0",
+   "hashes": {
+    "monitor.csv": "480c9d5e96bb6758f724a75f238f4d507d1ac2b9772ef3d0f33c3648269e55e2",
+    "conservation.csv": "e6cd1d9d2a939aa234d9785cbb35dd1e158ac357a1fbe494db45023fa7aece4e",
+    "steps.csv": "2054b906187f6bfab13fcf564dd4b2424b98f38b807bb6ac94882f3233eab7e3",
+    "boundary_conditions.csv": "5cd65251878bbdf70cbebc59c235b1943f6bc11b8ecc84d5226c8eadc1879a2b",
+    "fields.csv": "f7a0f36b67e58675616c7528973c592849877bbc87b71b397b315a04c461898f",
+    "checkpoint.dat": "a1344632123913ba654c9f1973b4568c08997895baf4e320fac96e1379858e63",
+    "last_rejected_state.dat": "f9f61f5ca24cfb059edc0a3ddcf7d1c18950fb40eb5c431a4a2e1144ef12e5d7",
+    "run_metadata.txt": "5aeb8460b7578f9195478c9205e22615667635ba0aceab000903fd55aa0e3b99"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 2.2737367544323206e-13,
+     "initial_inventory_kg": 80.13637529525093,
+     "absolute_processed_mass_kg": 181.01456653349592,
+     "relative_inventory": 2.8373341644853104e-15,
+     "relative_processed": 1.2561070625283496e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -6.062751512540447e-15
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 8.618883384770015e-12,
+     "initial_inventory_kg": 54.623602610124024,
+     "absolute_processed_mass_kg": 178.31398322685902,
+     "relative_inventory": 1.5778679861684148e-13,
+     "relative_processed": 4.8335431853399214e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 4.981127315850764e-12
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 8.57625082062441e-12,
+     "initial_inventory_kg": 25.512772685126873,
+     "absolute_processed_mass_kg": 181.0297382253426,
+     "relative_inventory": 3.361551849526762e-13,
+     "relative_processed": 4.737481755593572e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -4.987190067363306e-12
+    },
+    "g_system": {
+     "max_abs_balance_kg": 5.741934705483231e-16,
+     "initial_inventory_kg": 0.1791201087920624,
+     "absolute_processed_mass_kg": 0.04624859444988068,
+     "relative_inventory": 3.2056337751273645e-15,
+     "relative_processed": 1.241537126432184e-14,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -3.2656250852653944e-16
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 3.844109058848133e-12,
+     "initial_inventory_kg": 0.17559012345996203,
+     "absolute_processed_mass_kg": 0.051704720999240006,
+     "relative_inventory": 2.1892512990485282e-11,
+     "relative_processed": 7.434735135510424e-11,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.2149390477812214e-12
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 3.844206203362788e-12,
+     "initial_inventory_kg": 0.0035299853321003197,
+     "absolute_processed_mass_kg": 0.0532658239845788,
+     "relative_inventory": 1.0890147809978316e-09,
+     "relative_processed": 7.217021939763364e-11,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -2.2152656102897488e-12
+    }
+   },
+   "max_balance_over_M0": 1.0890147809978316e-09
+  },
+  {
+   "run": "jt2/SS1_CENTER",
+   "status": {
+    "status": "6000",
+    "reached_time_s": "7.8576618280532784E+01",
+    "requested_time_s": "1.1000000000000001E+02",
+    "accepted_steps": "706",
+    "rejected_steps": "29",
+    "last_rejection_status": "6000",
+    "termination_reason": "NEWTON_GLOBALIZATION_FAILURE",
+    "cpu_seconds": "2.1271033399999999E+02",
+    "wall_seconds": "2.1431214781200001E+02",
+    "newton_iterations_total": "2415",
+    "jacobian_evaluations_total": "2415",
+    "residual_evaluations_total": "7468",
+    "linear_solves_total": "2415",
+    "backtrack_trials_total": "5053",
+    "prepare_calls_total": "735"
+   },
+   "termination": "NEWTON_GLOBALIZATION_FAILURE",
+   "steps": {
+    "accepted": 706,
+    "dt_min_s": 1.5377343749999993e-07,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.11129832617639106,
+    "last_time_s": 78.57661828053278,
+    "rejected_total": 28
+   },
+   "input": "jt2/SS1_CENTER.nml",
+   "input_sha256": "f2b3473ae7f627e337a40dd0a1b5b331da1b8c3b29e3de8d963635997a27c155",
+   "hashes": {
+    "monitor.csv": "3aa81430c89927cdffef74c46271834e049796bd3ddd7e7d82abde3c51b3278f",
+    "conservation.csv": "c0f38b7f39d735cba58f308cb2fe2fba464b395fba7290c372d30f0aec58fca2",
+    "steps.csv": "3b0e129f6d4b91bd1151b0fff130f9beec08bd6c8e690184ea817a5a777d6df8",
+    "boundary_conditions.csv": "a66ad26d628ffa02e94e45173d02e3b43d9f658a1a91dee0ff185f5bb75b8d72",
+    "fields.csv": "49e24ea62343daea354150207f36117cdaa6248d8b55be22126706b88c5ea576",
+    "checkpoint.dat": "882c6bb98188920afdaad581a16e0dcd4c116861201ef64c5bbe79c972394786",
+    "last_rejected_state.dat": "c753790f41e570b6a6dee77e586838272c9afc8c179bb3dae0e316bf648c4a88",
+    "run_metadata.txt": "302b7db6c708ca60f4efed16d25374629369a6d08327ecbc89c65535689f2580"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 7.105427357601002e-13,
+     "initial_inventory_kg": 80.13637529525093,
+     "absolute_processed_mass_kg": 184.3403439474334,
+     "relative_inventory": 8.866669264016595e-15,
+     "relative_processed": 3.854515623355455e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 4.133937501623254e-15
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 4.050093593832571e-13,
+     "initial_inventory_kg": 54.623602610124024,
+     "absolute_processed_mass_kg": 180.06952121218796,
+     "relative_inventory": 7.414548657180513e-15,
+     "relative_processed": 2.2491832968557044e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 3.1257011047635803e-13
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 3.836930773104541e-13,
+     "initial_inventory_kg": 25.512772685126873,
+     "absolute_processed_mass_kg": 184.362754885296,
+     "relative_inventory": 1.503925433922495e-14,
+     "relative_processed": 2.0811854191980068e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -3.0843617297473476e-13
+    },
+    "g_system": {
+     "max_abs_balance_kg": 2.5043545525110095e-16,
+     "initial_inventory_kg": 0.1791201087920624,
+     "absolute_processed_mass_kg": 0.04718730124181686,
+     "relative_inventory": 1.398142603529944e-15,
+     "relative_processed": 5.307263790478609e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 3.03794653093891e-18
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 1.5881740367262864e-13,
+     "initial_inventory_kg": 0.17559012345996203,
+     "absolute_processed_mass_kg": 0.05582723464821614,
+     "relative_inventory": 9.044779999191817e-13,
+     "relative_processed": 2.8448015502359006e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 1.1368969263097654e-13
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 1.5879311754396497e-13,
+     "initial_inventory_kg": 0.0035299853321003197,
+     "absolute_processed_mass_kg": 0.057888863798722455,
+     "relative_inventory": 4.4984072908168155e-11,
+     "relative_processed": 2.743068478526078e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -1.1368665468444557e-13
+    }
+   },
+   "max_balance_over_M0": 4.4984072908168155e-11
+  },
+  {
+   "run": "jt2/SS1_STEADY",
+   "status": {
+    "status": "6000",
+    "reached_time_s": "7.8837803174701364E+01",
+    "requested_time_s": "1.1000000000000001E+02",
+    "accepted_steps": "661",
+    "rejected_steps": "23",
+    "last_rejection_status": "6000",
+    "termination_reason": "NEWTON_GLOBALIZATION_FAILURE",
+    "cpu_seconds": "6.2870659300000000E+02",
+    "wall_seconds": "6.3136426727599996E+02",
+    "newton_iterations_total": "2018",
+    "jacobian_evaluations_total": "2018",
+    "residual_evaluations_total": "6404",
+    "linear_solves_total": "2018",
+    "backtrack_trials_total": "4386",
+    "prepare_calls_total": "684"
+   },
+   "termination": "NEWTON_GLOBALIZATION_FAILURE",
+   "steps": {
+    "accepted": 661,
+    "dt_min_s": 1.2814453124999993e-07,
+    "dt_max_s": 0.125,
+    "dt_mean_s": 0.11927050404644567,
+    "last_time_s": 78.83780317470136,
+    "rejected_total": 22
+   },
+   "input": "jt2/SS1_STEADY.nml",
+   "input_sha256": "291484e727dbdfb566b6f3bfc8e6bedcf4750617fd1687e643c7bc767012ac7b",
+   "hashes": {
+    "monitor.csv": "7c8a9f699bddc77229cef7461ed387e4b6e211a074bc8c0fc7848134315efdf4",
+    "conservation.csv": "e74ebb30a789364628f1c5e2bc27fdee04475bf0820c4a9ec5df06444f9b4327",
+    "steps.csv": "61abaf8992ba1d44351d26216710ff6acbdd1755fe1a319c03a221f6f2c64123",
+    "boundary_conditions.csv": "2a21bc8473e9e7c35fe5064adbbe69ff0f6ed604a5f25c130e234ece98bbc527",
+    "fields.csv": "327122d21b17ddf6c9104626d3a648240f2a9813ba998d5e11a9c7acb89bab30",
+    "checkpoint.dat": "12735b0a78f5a166b452049d55aa4253882574f8ac402698925095ef464fbff0",
+    "last_rejected_state.dat": "b9d10348944a47f23d306973f8816630a9fa6fd523fe1978b74c5d40fb343ab7",
+    "run_metadata.txt": "780f81770b97e6557823d565d9b71f3ecb8cee00b35a524a217e96d6af69efbc"
+   },
+   "ledger_arithmetic_passes": true,
+   "junction_integral_mismatch_kg": {
+    "l": 0.0,
+    "g": 0.0
+   },
+   "balances": {
+    "l_system": {
+     "max_abs_balance_kg": 7.176481631177012e-13,
+     "initial_inventory_kg": 80.13637529525093,
+     "absolute_processed_mass_kg": 184.80168042910714,
+     "relative_inventory": 8.955335956656761e-15,
+     "relative_processed": 3.88334219392016e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 2.5947647879654085e-15
+    },
+    "l_pipe": {
+     "max_abs_balance_kg": 6.110667527536862e-13,
+     "initial_inventory_kg": 54.623602610124024,
+     "absolute_processed_mass_kg": 180.66725863460763,
+     "relative_inventory": 1.1186862886272355e-14,
+     "relative_processed": 3.382277217088595e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 4.0537711937518213e-13
+    },
+    "l_riser": {
+     "max_abs_balance_kg": 6.323830348264892e-13,
+     "initial_inventory_kg": 25.512772685126873,
+     "absolute_processed_mass_kg": 184.82336086761586,
+     "relative_inventory": 2.4786919188722602e-14,
+     "relative_processed": 3.42155359505365e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -4.027823545872167e-13
+    },
+    "g_system": {
+     "max_abs_balance_kg": 2.463307335887066e-16,
+     "initial_inventory_kg": 0.1791201087920624,
+     "absolute_processed_mass_kg": 0.047293464125486205,
+     "relative_inventory": 1.3752265742238239e-15,
+     "relative_processed": 5.208557633568657e-15,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -3.090755889845814e-17
+    },
+    "g_pipe": {
+     "max_abs_balance_kg": 2.0896652463964216e-13,
+     "initial_inventory_kg": 0.17559012345996203,
+     "absolute_processed_mass_kg": 0.055659817918362844,
+     "relative_inventory": 1.1900813127868813e-12,
+     "relative_processed": 3.754351567339597e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": 1.9543550856325378e-13
+    },
+    "g_riser": {
+     "max_abs_balance_kg": 2.089630551926902e-13,
+     "initial_inventory_kg": 0.0035299853321003197,
+     "absolute_processed_mass_kg": 0.05767761439218781,
+     "relative_inventory": 5.919657889013336e-11,
+     "relative_processed": 3.6229489966733674e-12,
+     "passes_inventory_1e6": true,
+     "passes_processed_1e6": true,
+     "final_residual_sum_kg": -1.9546641612215223e-13
+    }
+   },
+   "max_balance_over_M0": 5.919657889013336e-11
+  }
+ ]
+}
