@@ -23,7 +23,7 @@ module module_simulate_pipe_riser
   use, intrinsic :: iso_fortran_env, only: output_unit,int64
   implicit none
   private
-  public :: pipeline_riser_simulator_t
+  public :: pipeline_riser_simulator_t,junction_phase_upwind
   integer,parameter,public :: NEWTON_GLOBALIZATION_FAILURE=6000
   interface
     function checkpoint_rename(old,new)bind(C,name='rename')result(status)
@@ -424,8 +424,18 @@ contains
       fp_=fm_
       if(match)then
         pip=this%cfg%omega_P/(this%cfg%omega_rho*this%cfg%omega_u**2)
-        kin=0.5_wp*(fl(3)-pip*vl(4)+fs(3)-pip*vm(4))
-        pstar=(fm_(3)-kin)/pip
+        if(trim(this%cfg%junction_flux)=='PHASE_UPWIND')then
+          ! EXPERIMENTAL E1 (opt-in): the whole junction vector (Gl*,Gg*,p*) is
+          ! replaced; momentum traces still follow from (p*,G*,alpha*) below.
+          call junction_phase_upwind(this%cfg,vl,x,vm,mapped,fm_(1),fm_(2),pstar,istat)
+          if(istat/=0)then
+            istat=1500+istat;return
+          endif
+          fp_=fm_
+        else
+          kin=0.5_wp*(fl(3)-pip*vl(4)+fs(3)-pip*vm(4))
+          pstar=(fm_(3)-kin)/pip
+        endif
         rls=this%cfg%nrho_l0+(pstar-this%cfg%nP_l0)/this%cfg%nCl**2
         rgs=pstar/this%cfg%nCg**2
         if(min(pstar,rls,rgs)<=0)then
@@ -473,6 +483,52 @@ contains
       istat=0
     end subroutine
   end subroutine
+
+  subroutine junction_phase_upwind(cfg,va,ua,vb,ub,gl,gg,pstar,istat)
+    !! E1 (EXPERIMENTAL, opt-in junction_flux='PHASE_UPWIND'): phase-upwind
+    !! junction vector between two traces on ONE closure (left pipe trace and
+    !! the right trace mapped to the pipe closure with the same p and phase
+    !! fluxes). v=[alpha,rho_l,rho_g,p,u_l,u_g], U=[U1,U2,U3], nondimensional.
+    !! Acoustic linearized Riemann problem of the mixture, Wood impedance
+    !! Z=rho_m c_m (arithmetic mean of both sides), momentum units P=pip*p:
+    !!   P* = (Pa+Pb)/2 - Z (jb-ja)/2,   j* = (ja+jb)/2 - (Pb-Pa)/(2Z).
+    !! Each phase velocity receives the common acoustic shift dj=j*-(ja+jb)/2
+    !! and the phase mass flux is split as a material wave (flux-vector
+    !! splitting, supersonic limit of AUSM-type mass fluxes):
+    !!   G_k = U_k,a max(u_k,a+dj,0) + U_k,b min(u_k,b+dj,0).
+    !! Co-directional phase velocities give the upstream trace flux plus the
+    !! acoustic correction U_k,up dj; diverging velocities give zero; the flux
+    !! is continuous through zero velocity. Nothing is clipped: no mass,
+    !! velocity or sign is altered. For ua=ub the vector is (U1 ul, U2 ug, p).
+    type(sim_config_t),intent(in)::cfg
+    real(wp),intent(in)::va(6),ua(3),vb(6),ub(3)
+    real(wp),intent(out)::gl,gg,pstar
+    integer,intent(out)::istat
+    real(wp)::pip,za,zb,z,pa,pb,ja,jb,jst,dj
+    istat=1
+    gl=ieee_value(0.0_wp,ieee_quiet_nan);gg=gl;pstar=gl
+    pip=cfg%omega_P/(cfg%omega_rho*cfg%omega_u**2)
+    za=impedance(va,ua);zb=impedance(vb,ub)
+    if(.not.(za>0.and.zb>0))return
+    z=0.5_wp*(za+zb)
+    pa=pip*va(4);pb=pip*vb(4)
+    ja=(1-va(1))*va(5)+va(1)*va(6);jb=(1-vb(1))*vb(5)+vb(1)*vb(6)
+    pstar=(0.5_wp*(pa+pb)-0.5_wp*z*(jb-ja))/pip
+    jst=0.5_wp*(ja+jb)-(pb-pa)/(2*z)
+    dj=jst-0.5_wp*(ja+jb)
+    gl=ua(1)*max(va(5)+dj,0.0_wp)+ub(1)*min(vb(5)+dj,0.0_wp)
+    gg=ua(2)*max(va(6)+dj,0.0_wp)+ub(2)*min(vb(6)+dj,0.0_wp)
+    istat=2
+    if(.not.all(ieee_is_finite([gl,gg,pstar])))return
+    istat=0
+  contains
+    real(wp) function impedance(v,u) result(zz)
+      real(wp),intent(in)::v(6),u(3)
+      real(wp)::compl
+      compl=v(1)/(v(3)*pip*cfg%nCg**2)+(1-v(1))/(v(2)*pip*cfg%nCl**2)
+      zz=sqrt((u(1)+u(2))/compl)
+    end function
+  end subroutine junction_phase_upwind
 
   subroutine admissibility_margin(this,U,kind,index,margin,status)
     !! A margin is diagnostic; status zero here never accepts a physical state.

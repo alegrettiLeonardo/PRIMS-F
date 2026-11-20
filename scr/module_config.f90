@@ -49,6 +49,10 @@ module module_config
     ! 'STEADY' (opt-in): both traces reconstructed to the junction face by the
     ! steady ODE of their own section/closure before the same MATCHED flux.
     character(len=16) :: junction_trace = 'CENTER'
+    !! EXPERIMENTAL (opt-in): 'PHASE_UPWIND' replaces the Roe junction-face
+    !! vector (Gl*, Gg*, p*) by phase-upwind mass fluxes with an acoustic
+    !! pressure/velocity coupling. Default 'ROE' is the qualified operator.
+    character(len=16) :: junction_flux = 'ROE'
     character(len=20) :: dissipation_mode = 'LAGGED'
     character(len=16) :: newton_globalization = 'LINE_SEARCH'
     real(wp) :: output_interval_s = 1.0_wp

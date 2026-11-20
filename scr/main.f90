@@ -49,7 +49,7 @@ program main
   real(wp)           :: mesh_ratio
   real(wp)           :: T_scenario, time_phys
   real(wp)           :: gamma_g
-  character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model, junction_trace
+  character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model, junction_trace, junction_flux
   character(len=16)::boundary_method
   integer::outlet_reservoir_phase,initial_phase_hint
   character(len=16)::single_phase_mode,source_scheme,initial_phase
@@ -78,22 +78,23 @@ program main
 
 
   character(len=256) :: out_dir
+  character(len=512) :: initial_u_file
   logical           :: use_muscl
   namelist /PARAMS/ nodes, num_dummy_cells, X, Z, Lp, beta_deg, D, eps, mesh_ratio, &
                     rho_l0, P_l0, Cl, Rg, mu_l, mu_g, mul, mug, sigma, G, &
                     CFL, tol, tola, tol_res, tol_inc, dt_min, dt_max, dt_start, cfl_target, &
                     it_target, use_it_target, it_p, dt_fac_min, dt_fac_max, dt_growth, dt_shrink, newton_fast, newton_slow, quad_points, Ps, jl, jg, Tgas, time_dim, T_scenario, time_phys, &
-                    gamma_g, max_iter, max_workers, save_every, newton_max, regime, use_muscl, out_dir, jac_dissipation_fd, jac_dissipation_fd_eps, debug_dfduj_check, debug_dfduj_cell, debug_dfduj_eps, &
+                    gamma_g, max_iter, max_workers, save_every, newton_max, regime, use_muscl, out_dir, initial_u_file, jac_dissipation_fd, jac_dissipation_fd_eps, debug_dfduj_check, debug_dfduj_cell, debug_dfduj_eps, &
                     pb_dp_on, pb_dp_off, &
                     stab_si_on, stab_si_off, stab_use_hysteresis, &
                     gas_eos, gas_flow_basis, liquid_flow_basis, single_phase_mode, source_scheme, initial_phase, outlet_reservoir_phase, boundary_method, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
-                    checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, junction_trace, dissipation_mode, newton_globalization
+                    checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, junction_trace, junction_flux, dissipation_mode, newton_globalization
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
   type(pipeline_riser_simulator_t) :: sim
   type(fluid_dynamics_t)        :: fd
 
-  integer(i4) :: i, nd, Nss, N, ios
+  integer(i4) :: i, nd, Nss, N, ios, ios_open
   real(wp)    :: CA, Lr, AREA
   real(wp)    :: Cg
   real(wp)    :: Pb, rhog, rhol
@@ -201,6 +202,7 @@ program main
     save_every = 10
   regime = 'OSC'
   out_dir = 'output'
+  initial_u_file = ''
 
   use_muscl = .false.
   n_riser = 0
@@ -226,6 +228,7 @@ program main
   flux_scheme = 'ROE'
   junction_model = 'MATCHED'
   junction_trace = 'CENTER'
+  junction_flux = 'ROE'
   dissipation_mode = 'LAGGED'
   newton_globalization = 'LINE_SEARCH'
   ! ------------------------------ Read -----------------------------------
@@ -303,6 +306,7 @@ program main
   if (trim(junction_model)/='MATCHED'.and.trim(junction_model)/='BLOCKING'.and. &
       trim(junction_model)/='CONSERVATIVE') error stop 'Unknown junction_model'
   if (trim(junction_trace)/='CENTER'.and.trim(junction_trace)/='STEADY') error stop 'Unknown junction_trace'
+  if (trim(junction_flux)/='ROE'.and.trim(junction_flux)/='PHASE_UPWIND') error stop 'Unknown junction_flux'
   if (trim(dissipation_mode)/='LAGGED'.and.trim(dissipation_mode)/='FULLY_IMPLICIT') error stop 'Unknown dissipation_mode'
   if (mu_l<=0.0_wp .or. mu_g<=0.0_wp .or. eps<0.0_wp .or. eps/D>=1.0_wp) error stop 'Invalid viscosities/roughness'
   if(trim(newton_globalization)/='LINE_SEARCH'.and.trim(newton_globalization)/='ACTIVE_SET') &
@@ -402,6 +406,23 @@ program main
     U(i,3)=U(i,3)*(1.0_wp+perturbation_amplitude*exp(-((vns_ext(i)-Lp/Lr)/0.15_wp)**2))
   end do
   call apply_ghost_cells(U,nd)
+  ! Opt-in (diagnostic campaigns): replace the physical-cell initial state by
+  ! an externally projected conservative state (one nondimensional U1 U2 U3
+  ! line per physical cell). Geometry, EOS, feed and steady boundary data are
+  ! still built above; the legacy perturbation is NOT added to this state.
+  if(len_trim(initial_u_file)>0)then
+    open(newunit=ios,file=trim(initial_u_file),status='old',action='read',iostat=ios_open)
+    if(ios_open/=0)error stop 'initial_u_file cannot be opened'
+    do i=nd+1,N-nd
+      read(ios,*,iostat=ios_open)U(i,:)
+      if(ios_open/=0)error stop 'initial_u_file has fewer valid lines than physical cells'
+    end do
+    close(ios)
+    if(any(.not.ieee_is_finite(U(nd+1:N-nd,:))))error stop 'initial_u_file contains non-finite values'
+    if(any(U(nd+1:N-nd,1:2)<=0.0_wp))error stop 'initial_u_file contains a non-positive phase mass'
+    call apply_ghost_cells(U,nd)
+    write(output_unit,'(2a)')'[INIT] conservative initial state read from ',trim(initial_u_file)
+  end if
 
   ! ---------------------------- Config -----------------------------------
   cfg%regime         = trim(adjustl(regime))
@@ -414,6 +435,7 @@ program main
   cfg%flux_scheme    = flux_scheme
   cfg%junction_model = junction_model
   cfg%junction_trace = junction_trace
+  cfg%junction_flux = junction_flux
   cfg%dissipation_mode = dissipation_mode
   cfg%newton_globalization = newton_globalization
   cfg%gas_eos        = gas_eos
