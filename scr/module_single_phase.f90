@@ -217,30 +217,44 @@ contains
         endif
       else
         target=cfg%mul;if(phase==2)target=cfg%mug
-        ! The pressure-vacuum boundary is thermodynamic, not a mass floor.
+        ! Admissible branch of the boundary state: subsonic |vb|<c and p>0.
+        ! On it m(r)=r*vb(r) is strictly increasing (dm/dr=vb+c on the
+        ! rarefaction curve, >=vb+c on the compression curve), so a root exists
+        ! iff m(left)<target<m(right). The sonic ends are closed form:
+        !   rarefaction vb=-c: r=rho*exp(-1-v/c), r/rho in (exp(-2),1);
+        !   compression vb=+c: sqrt(r/rho)-sqrt(rho/r)=(c-v)/c.
+        ! The thermodynamic vacuum p=0 is an open bound, never a mass floor.
         lower=0
         if(phase==1)lower=cfg%nrho_l0-cfg%nP_l0/cfg%nCl**2
-        left=max(nearest(0._wp,1._wp),nearest(lower,1._wp));right=max(2*rho,2*left)
+        if(rho<=lower)then
+          status=PHASE_INVALID;return
+        endif
+        val(1)=(c-v)/c
+        right=rho*(.5_wp*(val(1)+sqrt(val(1)**2+4)))**2
+        left=max(rho*exp(-1-v/c),lower)
         gleft=mass_residual(left);gright=mass_residual(right)
-        do j=1,60
-          if(gleft<=0.and.gright>=0)exit
-          if(gleft>0)then
-            status=PHASE_DATA_REQUIRED;return
-          endif
-          right=2*right;gright=mass_residual(right)
-        enddo
-        if(j>60)then
+        if(.not.ieee_is_finite(gleft).or..not.ieee_is_finite(gright))then
+          status=PHASE_INVALID;return
+        endif
+        if(gleft>=0.or.gright<=0)then
+          ! Proven absence of a subsonic, positive-pressure boundary state.
           status=PHASE_DATA_REQUIRED;return
         endif
-        do j=1,80
+        gm=gleft;mid=left
+        do j=1,200
           mid=left+.5_wp*(right-left);gm=mass_residual(mid)
           if(mid==left.or.mid==right.or.gm==0)exit
           if(gm<0)then
-            left=mid
+            left=mid;gleft=gm
           else
-            right=mid
+            right=mid;gright=gm
           endif
         enddo
+        if(gm/=0)then
+          ! Bracket exhausted at adjacent floating-point numbers.
+          mid=left
+          if(abs(gright)<abs(gleft))mid=right
+        endif
         rhob=mid;vb=target/rhob
       endif
     else
