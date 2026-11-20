@@ -15,6 +15,7 @@ module module_simulate_pipe_riser
   use module_time_step, only: time_integrator_t
   use module_solver_utils, only: fluid_dynamics_t
   use module_boundary_conditions, only: boundary_flux,apply_ghost_cells
+  use module_boundary_trace, only: steady_junction_trace
   use module_steady_state, only: solve_alpha_from_superficials
   use mod_void_helpers, only: ffan,Dffan
   use, intrinsic :: ieee_arithmetic, only: ieee_is_finite,ieee_value,ieee_quiet_nan
@@ -341,8 +342,9 @@ contains
       if(.not.ieee_is_finite(momentum))return
       istat=0
     end subroutine momentum_trace
-    subroutine basic(x,y,fm_,fp_,istat,amat,bmat,dmat,sp,was_blocked,trace)
-      real(wp),intent(in)::x(3),y(3)
+    subroutine basic(x0,y0,fm_,fp_,istat,amat,bmat,dmat,sp,was_blocked,trace)
+      real(wp),intent(in)::x0(3),y0(3)
+      real(wp)::x(3),y(3),thl,thr
       real(wp),intent(out)::fm_(3),fp_(3),amat(3,3),bmat(3,3),dmat(3,3),sp
       integer,intent(out)::istat
       logical,intent(out),optional::was_blocked
@@ -354,9 +356,24 @@ contains
       active=.false.
       if(present(was_blocked))was_blocked=.false.
       if(present(trace))trace=ieee_value(0.0_wp,ieee_quiet_nan)
-      call this%point_state(x,thetaL,vl,fl,sl,amat,scratch,istat,closure_id=id_left)
+      x=x0;y=y0;thl=thetaL;thr=thetaR
+      if(match.and.trim(this%cfg%junction_trace)=='STEADY')then
+        ! Opt-in well-balanced junction: replace each centre state by its
+        ! steady trace at the shared face (own section/closure, same ODE).
+        ! The equilibrium pressure difference between the two centres is
+        ! then not read as an acoustic jump by the Roe dissipation.
+        call steady_junction_trace(x0,thetaL,this%cfg,.true.,x,thl,istat)
+        if(istat/=0)then
+          istat=1400+istat;return
+        endif
+        call steady_junction_trace(y0,thetaR,this%cfg,.false.,y,thr,istat)
+        if(istat/=0)then
+          istat=1400+istat;return
+        endif
+      endif
+      call this%point_state(x,thl,vl,fl,sl,amat,scratch,istat,closure_id=id_left)
       if(istat/=0)return
-      call this%point_state(y,thetaR,vr,fr,sr,bmat,scratch,istat,closure_id=id_right)
+      call this%point_state(y,thr,vr,fr,sr,bmat,scratch,istat,closure_id=id_right)
       if(istat/=0)return
       if(match)then
         ! Map the right trace to the pipe closure with the SAME p and phase fluxes.

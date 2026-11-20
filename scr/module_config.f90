@@ -45,6 +45,10 @@ module module_config
     character(len=16) :: flux_scheme = 'ROE'
     character(len=16) :: gas_eos = 'ISOTHERMAL'
     character(len=16) :: junction_model = 'MATCHED'
+    ! 'CENTER' (legacy): Roe at the junction between cell-centre traces.
+    ! 'STEADY' (opt-in): both traces reconstructed to the junction face by the
+    ! steady ODE of their own section/closure before the same MATCHED flux.
+    character(len=16) :: junction_trace = 'CENTER'
     character(len=20) :: dissipation_mode = 'LAGGED'
     character(len=16) :: newton_globalization = 'LINE_SEARCH'
     real(wp) :: output_interval_s = 1.0_wp

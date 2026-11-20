@@ -174,7 +174,7 @@ $(DIR_OBJ)/module_single_phase.o: $(DIR_OBJ)/module_config.o $(DIR_OBJ)/mod_void
 
 $(DIR_OBJ)/module_simulate_pipe_riser.o: $(DIR_OBJ)/module_single_phase.o \
                                       $(DIR_OBJ)/module_active_set.o \
-                                      $(DIR_OBJ)/module_roe_solver.o $(DIR_OBJ)/module_boundary_conditions.o \
+                                      $(DIR_OBJ)/module_roe_solver.o $(DIR_OBJ)/module_boundary_conditions.o $(DIR_OBJ)/module_boundary_trace.o \
                                       $(DIR_OBJ)/module_time_step.o $(DIR_OBJ)/module_catenary.o $(DIR_OBJ)/module_solver_utils.o \
                                       $(DIR_OBJ)/module_flow_regime.o $(DIR_OBJ)/module_config.o
 
