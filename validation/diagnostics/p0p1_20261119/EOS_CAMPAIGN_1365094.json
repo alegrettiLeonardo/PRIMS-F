@@ -1,0 +1,76 @@
+{
+  "operator_sha": "1365094",
+  "canonical_input_sha256": "953b6f99f0076e99940d724cd7fcc9914b4ac061452628dd4049729e05c7b06c",
+  "binary_sha256": "06e22edb828897fb297a699f03ff700eadb3dc3565865d6260203628a781ee3d",
+  "protocol": "EOS only then liquid contract; tol_res=tol_inc1e-10; dt_max_s0.125, dt_start_s0.001, dt_min_s1e-7; 2400s; settling10 cycles<=0.5%; 1e-6 mass/M0",
+  "jobs": [
+    {
+      "name": "A_BARO_MASS",
+      "returncode": 0,
+      "wall_s": 569.865359346004,
+      "input_sha256": "3cf14cebeb8e94cdc69881539357b640fdb91f9b21ba6d5801196eb32c4f3b46",
+      "files": {
+        "run_status.txt": "36bf9ddb6fe4cb2cc41473db4f58844b717f3636195b2351cfe09baf9cd6253d",
+        "stdout.log": "25b61df77bb217b6544efe6657e1b8160a57becb9388de98b82baf228302230a",
+        "steps.csv": "d5bf6d643d012fa074ab4072ae34b62ee18951d6966585320e7a5b790ab95d6c",
+        "conservation.csv": "300fcd6f857df00177c2a1bbfea4a23fe7c6976705499bfc185939be15ffb057",
+        "run_metadata.txt": "a169356a2a75b7874e89292dc136ec5d427424488bc3a1a5b739907a605164ea",
+        "fields.csv": "fb3a425657d1f192c677af445a30ba9e19fca13543d92e7af4fb5d778e2facf2",
+        "results_D_OSC.dat": "70cada0dd8f51f26f3a2b5187e0de324bf1eae5023d6ff0389004381ec920804",
+        "inlet_contract.txt": "0ba3a1b0af82b2895bb7cb6b89f39795d7b770f348869f7fda4a773d8d2d057e",
+        "monitor.csv": "2f8d367a0061a346a8fba236930586d94e2f62a15c957c06ad3d8366bc953559",
+        "input.nml": "3cf14cebeb8e94cdc69881539357b640fdb91f9b21ba6d5801196eb32c4f3b46",
+        "rejected_proposals.csv": "e25dac85d6bc9cc6571672790b89fb445c0f78e8451c1b94919a38625f4bffa2"
+      },
+      "status": "status=0\nreached_time_s=  2.4000000000000000E+03\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=19222\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  5.6968939000000000E+02\nwall_seconds=  5.6969785293500001E+02\nnewton_iterations_total=48321\njacobian_evaluations_total=48321\nresidual_evaluations_total=96642\nlinear_solves_total=48321\nbacktrack_trials_total=48321\nprepare_calls_total=19222\n",
+      "actual_dt_min_s": 0.001,
+      "actual_dt_max_s": 0.125
+    },
+    {
+      "name": "B_ISO_MASS",
+      "returncode": 3,
+      "wall_s": 85.03714102499362,
+      "input_sha256": "bc0a293d00c9e386328a4b138ca338c3555e3d3bdea4aed2417de1b5650d74b3",
+      "files": {
+        "run_status.txt": "1eb6f9100beff641ae485c3287430a9b51ae03e70435271beff2a4fb88f0de0f",
+        "last_rejected_iteration.txt": "dafb406681e5af3b5e196cb32864f25cf257d3988f5f02f7f333026e53df9040",
+        "stdout.log": "27a5d9781343b5ffe15f73d7fe6c966b5644becec77cd3702f6d4790b6ed60c8",
+        "steps.csv": "291161e70bab2d6fa9ee17fe4f93cd6fe02d5784cb59666d9e3a8dca06cca1cf",
+        "conservation.csv": "401fac0722eaf320ff5ac02faf4921af7fec430f9c0d30e4bcb0f4c30baa3fcd",
+        "last_rejected_state.dat": "a2b6aab57f729cb33b74a7083096d932de19fb6d5f9701f1a1e97ba2ba740fb0",
+        "run_metadata.txt": "97ff5985d9607688c681620c964b6d75ea674880209ee2180612755712e8eb8d",
+        "fields.csv": "fd25afe9c9ca95f4bc9d5aa99858aef057cf6011e634831356d41f8fd2c9780a",
+        "inlet_contract.txt": "7a4abecd4f04f1e8448b001c70ecb4d068db6e5c35260192df35725a3689f2dc",
+        "monitor.csv": "23d66f56984d0fa3c1d43dc753013b015b019cd9f0e97ae5af0d3256f343993a",
+        "input.nml": "bc0a293d00c9e386328a4b138ca338c3555e3d3bdea4aed2417de1b5650d74b3",
+        "rejected_proposals.csv": "2e251c36acaa3302aebc5195caffa6e6f777d74d36ba58a9b91af157f9bf2217"
+      },
+      "status": "status=6100\nreached_time_s=  2.2364452291713980E+02\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=1829\nrejected_steps=25\nlast_rejection_status=6100\ntermination_reason=MAX_NEWTON\ncpu_seconds=  8.4888201000000009E+01\nwall_seconds=  8.4887178405000000E+01\nnewton_iterations_total=4849\njacobian_evaluations_total=4849\nresidual_evaluations_total=13284\nlinear_solves_total=4849\nbacktrack_trials_total=8435\nprepare_calls_total=1854\n",
+      "actual_dt_min_s": 1.652994086399999e-07,
+      "actual_dt_max_s": 0.125
+    },
+    {
+      "name": "C_ISO_VOLUME",
+      "returncode": 3,
+      "wall_s": 82.11722865499905,
+      "input_sha256": "7602917262054b0b3d9f15ba61c80091140ac6050fbb3d9ef789a4cf98e85589",
+      "files": {
+        "run_status.txt": "9219e33c55fbf6279606a3a4708d0cf55959e6a772f8df1ef3db63657c8a1357",
+        "last_rejected_iteration.txt": "575ef388359adfc93ccb9623f18854a17dd0fe947e0e58e509734ffe90ffc98d",
+        "stdout.log": "29737a5aaa02b841c49c70b8d2823be28c81171155b6216a20ff64639137acfd",
+        "steps.csv": "78e06dfccabac37263dc2cda561f251d3cab6698915800f907ed6ad644d4a5a2",
+        "conservation.csv": "d3d40293316f2585afc2c882941e4427686db55ede2e2cc73a23a88f4df684e1",
+        "last_rejected_state.dat": "0f8dd6f36ad932f626fc26df937f379575e9b1d0a002d5e8a5ff988bdbe204d4",
+        "run_metadata.txt": "8101d9026ef70fd6f441351d018627f813b113fea9ab21ead77d399641042c19",
+        "fields.csv": "d8b7c63730f9db350edbc15a11f51de6c87f8a50a70d144756c188d2802440a9",
+        "inlet_contract.txt": "e0d80c7384d842e2546521f5b50aa477c777fcafc6dacec98f9b920a846454f7",
+        "monitor.csv": "1900df33bbbf3d5debe081dbc960c22347c3f2fd36e3eed0eba5aa036cb752fd",
+        "input.nml": "7602917262054b0b3d9f15ba61c80091140ac6050fbb3d9ef789a4cf98e85589",
+        "rejected_proposals.csv": "cc8eb733fd60017cece916676eff105701716252d7a889eb54d71e0d39bd2492"
+      },
+      "status": "status=6100\nreached_time_s=  2.2364197117111507E+02\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=1824\nrejected_steps=24\nlast_rejection_status=6100\ntermination_reason=MAX_NEWTON\ncpu_seconds=  8.1653283000000002E+01\nwall_seconds=  8.1651759593999998E+01\nnewton_iterations_total=4786\njacobian_evaluations_total=4786\nresidual_evaluations_total=12999\nlinear_solves_total=4786\nbacktrack_trials_total=8213\nprepare_calls_total=1848\n",
+      "actual_dt_min_s": 5.314409999999998e-07,
+      "actual_dt_max_s": 0.125
+    }
+  ]
+}

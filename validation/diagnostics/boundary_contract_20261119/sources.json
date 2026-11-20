@@ -1,0 +1,34 @@
+[
+  {
+    "name": "sistema",
+    "path": "C:\\Users\\leonardoab\\Downloads\\sistema_oleoduto_riser.pdf",
+    "sha256": "9f115779783f87a58719e730f1c3a35c331d221361bff1c78ffed9306f7feb1d",
+    "location": "p5 Eqs24-29"
+  },
+  {
+    "name": "dissertacao",
+    "path": "C:\\Users\\leonardoab\\Documents\\Leonardo\\multiPhaseFlow\\Dissertacao_Leonardo.pdf",
+    "sha256": "dcc6c069d89099950fe737112b331a678727cc3c6929deb4f105072f0f0e8e81",
+    "location": "PDF98, impressa96, Eqs4.28-4.30"
+  },
+  {
+    "name": "balino",
+    "path": "C:\\Users\\leonardoab\\Documents\\Leonardo\\Sci-Hub. Modeling and simulation of severe slugging in air–water pipeline–riser systems _ International Journal of Multiphase Flow, 2010.pdf",
+    "sha256": "c60944a348bf516f20ed7fd965cff7aa6b8417b07ef3b4b9433c64d28db8a3a5",
+    "location": "p649 Eqs78-79; p653 Tabela3"
+  },
+  {
+    "name": "baudin",
+    "path": "artifacts\\primsf-boundary-audit-20261119\\private\\baudin.pdf",
+    "sha256": "ff0822e471a29b610f5ac855168e964be1e395d6be848ff300d57c5a458bd25d",
+    "location": "preprint p9; section2.7, Eqs2.34-2.37"
+  },
+  {
+    "name": "munkejord",
+    "url": "https://www.pvv.org/~stm/dring/cbccomm.pdf",
+    "doi": "10.1002/cnm.849",
+    "location": "preprint pp5-7 section5 Eqs11-23",
+    "access": "web PDF parsed and screenshot request; local download HTTP502",
+    "sha256": null
+  }
+]

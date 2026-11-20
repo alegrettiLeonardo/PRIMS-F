@@ -1,0 +1,111 @@
+{
+  "operator": "71a0693bb2dd8ca8cedfb38b1b491b64c6e6cc82",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "wall_s": 0.716166884987615,
+      "log_sha256": "ccfb7369dfd409e38d08b14743773165abbbffaa862c57d1ce182679e04c8969"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_pipe_regime_cli.py",
+        "--binary",
+        "bin/prims_f_check_all",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/final_checks_71a0693/pipe"
+      ],
+      "returncode": 0,
+      "wall_s": 0.7682088739966275,
+      "log_sha256": "69baaf76661894e90368e47ad07d92056f51baffd74028a5a76e138f79f0c103"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_feed_contract_cli.py",
+        "--binary",
+        "bin/prims_f",
+        "--baseline",
+        "/home/leonardoab/Documentos/PRIMS-F-boundary-audit-20261119/bin/prims_f",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/final_checks_71a0693/feed"
+      ],
+      "returncode": 0,
+      "wall_s": 2.337373399990611,
+      "log_sha256": "48fa424b04269be8ed6aabb74ec290b80ab7f479e4f71242d0c2d3b35e251af4"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_boundary_telemetry_cli.py",
+        "--binary",
+        "bin/prims_f_check_all",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/final_checks_71a0693/boundary"
+      ],
+      "returncode": 0,
+      "wall_s": 3.0187814609962516,
+      "log_sha256": "d4d2eea3bface165bf81e9ed5dd44474899eb99632f6f1b0f44e898a637fcb99"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_accepted_telemetry_cli.py",
+        "--binary",
+        "bin/prims_f",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/final_checks_71a0693/accepted"
+      ],
+      "returncode": 0,
+      "wall_s": 0.414340337010799,
+      "log_sha256": "16541b9f19249d187589c3213212e830242c55377a39997b3910cca46d001db5"
+    },
+    {
+      "command": [
+        "python3",
+        "tests/test_initial_inventory_cli.py",
+        "--binary",
+        "bin/prims_f",
+        "--output",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/final_checks_71a0693/initial"
+      ],
+      "returncode": 0,
+      "wall_s": 0.26666804899286944,
+      "log_sha256": "131fc3eecb411af183b149b533e7705b84fd61254ac6bb13c7f011860f5a9b76"
+    }
+  ],
+  "fortran_status": "PASS",
+  "fortran_tests": 20,
+  "fortran_summary_sha256": "35879a816b373ff66e6315a3a6f808c82217f6f9d02c3bfc2d964fe15b0d6fc1",
+  "fortran_flags": [
+    "-std=f2018",
+    "-O0",
+    "-g3",
+    "-Wall",
+    "-Wextra",
+    "-Wno-unused-dummy-argument",
+    "-Wno-unused-parameter",
+    "-fimplicit-none",
+    "-ffree-line-length-none",
+    "-fopenmp",
+    "-fcheck=all",
+    "-fbacktrace",
+    "-ffpe-trap=invalid,zero,overflow",
+    "-finit-real=snan",
+    "-finit-integer=-999",
+    "-J/home/leonardoab/Documentos/PRIMS-F-p0p1-20261119/tmp/unit_tests",
+    "-I/home/leonardoab/Documentos/PRIMS-F-p0p1-20261119/tmp/unit_tests",
+    "-I/home/leonardoab/Documentos/PRIMS-F-p0p1-20261119/scr"
+  ]
+}

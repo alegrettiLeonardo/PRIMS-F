@@ -1,0 +1,226 @@
+{
+  "experiment": "Bali\u00f1o, Burr e Nemoto 2010, Fig. 18, caso 13, curva publicada de Pb",
+  "table3_reported_period_s": [
+    19.3,
+    33.8
+  ],
+  "table3_DeltaP_reported_max_Pa": 69000,
+  "experiment_time_s": [
+    1200.0,
+    1500.0
+  ],
+  "digitized_pressure_sample_range_Pa": [
+    245530.72625698324,
+    310055.8659217877
+  ],
+  "digitized_pressure_envelope_range_Pa": [
+    238547.48603351956,
+    314525.13966480445
+  ],
+  "digitized_300s_excursion_interval_Pa": [
+    53631.28491620108,
+    75977.65363128489
+  ],
+  "spectral_bins": {
+    "Experimento digitalizado": [
+      {
+        "f_Hz": 0.026617647058825588,
+        "relative_power": 1.0
+      },
+      {
+        "f_Hz": 0.053235294117651176,
+        "relative_power": 0.9310129888655069
+      },
+      {
+        "f_Hz": 0.0033272058823531985,
+        "relative_power": 0.09201008514594308
+      }
+    ],
+    "PRIMS-F na jun\u00e7\u00e3o": [
+      {
+        "f_Hz": 0.04331540609445757,
+        "relative_power": 1.0
+      },
+      {
+        "f_Hz": 0.08663081218891514,
+        "relative_power": 0.009812735938054921
+      },
+      {
+        "f_Hz": 0.0033319543149582746,
+        "relative_power": 5.084218522353895e-07
+      }
+    ]
+  },
+  "model_time_s": [
+    2100.056852759152,
+    2400.0
+  ],
+  "model_junction_pressure": {
+    "mean": 266174.2109656584,
+    "std": 6817.583363751985,
+    "minimum": 256211.8299275602,
+    "maximum": 275808.0786742373,
+    "peak_to_peak": 19596.248746677098,
+    "initial": 261699.76330725756,
+    "final": 260983.9040898772,
+    "change": -715.8592173803481,
+    "sample_count": 1659,
+    "covered_duration_s": 300.0,
+    "coverage_fraction": 1.0,
+    "method": "time-weighted piecewise-linear observations; missing segments excluded"
+  },
+  "model_first_riser_cell_pressure": {
+    "mean": 266156.5358862409,
+    "std": 6821.803345058968,
+    "minimum": 256189.0683200403,
+    "maximum": 275796.89873186586,
+    "peak_to_peak": 19607.830411825562,
+    "initial": 261681.21565458126,
+    "final": 260965.29138631758,
+    "change": -715.9242682636832,
+    "sample_count": 1659,
+    "covered_duration_s": 300.0,
+    "coverage_fraction": 1.0,
+    "method": "time-weighted piecewise-linear observations; missing segments excluded"
+  },
+  "model_last_ten_first_riser_cell_cycles": {
+    "available": true,
+    "n_complete_cycles": 10,
+    "window_start_s": 2154.8193502077606,
+    "window_end_s": 2385.8494944349422,
+    "window_is_end_of_run": true,
+    "mean_period_s": 23.10301442271816,
+    "period_cv": 7.998813787445169e-05,
+    "first_semi_amplitude_Pa": 9572.87113190796,
+    "last_semi_amplitude_Pa": 9802.458355145121,
+    "mean_semi_amplitude_Pa": 9705.74653277349,
+    "amplitude_cv": 0.007832403141595,
+    "relative_amplitude_change": 0.023983110194799373,
+    "relative_difference_last_five_vs_first_five_amplitudes": 0.014045783053713512,
+    "growth_rate_s_inv": 0.00010120798172987234,
+    "log_amplitude_r_squared": 0.9773891833553168,
+    "useful_above_declared_detection_thresholds": true,
+    "amplitude_change_within_one_percent": false,
+    "amplitude_change_within_five_percent": true,
+    "settled_or_physically_validated": false,
+    "pressure_statistics": {
+      "window_start_s": 2154.8193502077606,
+      "window_end_s": 2385.8494944349422,
+      "full_window_observed": true,
+      "mean_Pa": 266157.9544424153,
+      "rms_about_mean_Pa": 6838.4672355688435,
+      "peak_to_peak_Pa": 19589.95257718538,
+      "minimum_Pa": 256204.51765188997,
+      "maximum_Pa": 275794.47022907535
+    },
+    "peak_records": [
+      {
+        "peak_time_s": 2154.8193502077606,
+        "peak_pressure_Pa": 275556.76728838723,
+        "left_trough_time_s": 2141.8489267940886,
+        "right_trough_time_s": 2164.9423856565686,
+        "trough_baseline_Pa": 256411.0250245713,
+        "semi_amplitude_Pa": 9572.87113190796,
+        "peak_to_interpolated_trough_Pa": 19145.74226381592
+      },
+      {
+        "peak_time_s": 2177.9194683598894,
+        "peak_pressure_Pa": 275593.99582821934,
+        "left_trough_time_s": 2164.9423856565686,
+        "right_trough_time_s": 2188.038285929028,
+        "trough_baseline_Pa": 256377.67112616205,
+        "semi_amplitude_Pa": 9608.162351028644,
+        "peak_to_interpolated_trough_Pa": 19216.32470205729
+      },
+      {
+        "peak_time_s": 2201.0199124153837,
+        "peak_pressure_Pa": 275627.6751800104,
+        "left_trough_time_s": 2188.038285929028,
+        "right_trough_time_s": 2211.1342398308825,
+        "trough_baseline_Pa": 256347.56757501332,
+        "semi_amplitude_Pa": 9640.053802498529,
+        "peak_to_interpolated_trough_Pa": 19280.107604997058
+      },
+      {
+        "peak_time_s": 2224.1221408191445,
+        "peak_pressure_Pa": 275657.94284769223,
+        "left_trough_time_s": 2211.1342398308825,
+        "right_trough_time_s": 2234.232302524862,
+        "trough_baseline_Pa": 256320.47226079635,
+        "semi_amplitude_Pa": 9668.735293447942,
+        "peak_to_interpolated_trough_Pa": 19337.470586895884
+      },
+      {
+        "peak_time_s": 2247.223798263565,
+        "peak_pressure_Pa": 275685.1396479169,
+        "left_trough_time_s": 2234.232302524862,
+        "right_trough_time_s": 2257.332211153758,
+        "trough_baseline_Pa": 256296.1116626915,
+        "semi_amplitude_Pa": 9694.513992612701,
+        "peak_to_interpolated_trough_Pa": 19389.027985225403
+      },
+      {
+        "peak_time_s": 2270.327018918079,
+        "peak_pressure_Pa": 275709.69533920137,
+        "left_trough_time_s": 2257.332211153758,
+        "right_trough_time_s": 2280.4316351154553,
+        "trough_baseline_Pa": 256274.19138030836,
+        "semi_amplitude_Pa": 9717.751979446504,
+        "peak_to_interpolated_trough_Pa": 19435.50395889301
+      },
+      {
+        "peak_time_s": 2293.4304216676783,
+        "peak_pressure_Pa": 275731.6406200124,
+        "left_trough_time_s": 2280.4316351154553,
+        "right_trough_time_s": 2303.533246667428,
+        "trough_baseline_Pa": 256254.57832137516,
+        "semi_amplitude_Pa": 9738.531149318631,
+        "peak_to_interpolated_trough_Pa": 19477.062298637262
+      },
+      {
+        "peak_time_s": 2316.5346856487104,
+        "peak_pressure_Pa": 275751.39228780736,
+        "left_trough_time_s": 2303.533246667428,
+        "right_trough_time_s": 2326.6342880526645,
+        "trough_baseline_Pa": 256237.00518935945,
+        "semi_amplitude_Pa": 9757.193549223957,
+        "peak_to_interpolated_trough_Pa": 19514.387098447914
+      },
+      {
+        "peak_time_s": 2339.639449136881,
+        "peak_pressure_Pa": 275769.10913518624,
+        "left_trough_time_s": 2326.6342880526645,
+        "right_trough_time_s": 2349.737530263471,
+        "trough_baseline_Pa": 256221.1507777188,
+        "semi_amplitude_Pa": 9773.979178733716,
+        "peak_to_interpolated_trough_Pa": 19547.958357467433
+      },
+      {
+        "peak_time_s": 2362.74402426288,
+        "peak_pressure_Pa": 275784.94088833913,
+        "left_trough_time_s": 2349.737530263471,
+        "right_trough_time_s": 2372.840443985438,
+        "trough_baseline_Pa": 256207.01873404975,
+        "semi_amplitude_Pa": 9788.96107714469,
+        "peak_to_interpolated_trough_Pa": 19577.92215428938
+      },
+      {
+        "peak_time_s": 2385.8494944349422,
+        "peak_pressure_Pa": 275799.24394243944,
+        "left_trough_time_s": 2372.840443985438,
+        "right_trough_time_s": 2395.944106078637,
+        "trough_baseline_Pa": 256194.3272321492,
+        "semi_amplitude_Pa": 9802.458355145121,
+        "peak_to_interpolated_trough_Pa": 19604.916710290243
+      }
+    ]
+  },
+  "provenance": {
+    "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/D_OSC/manifest.json": "dbbd6f3cbf3fbb27597168e7849ea93bf758170596f07a313883826acc5c2e20",
+    "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/D_OSC/monitor.csv": "2f8d367a0061a346a8fba236930586d94e2f62a15c957c06ad3d8366bc953559",
+    "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/p0_campaign_18aa7f7/D_OSC/fields.csv": "ff4ed6992b88a004eab6551928feb1ebe55c745e527d247877e084403ac2ed39",
+    "/home/leonardoab/Documentos/PRIMS-F-numerics-results-20261119/primary_evidence/balino2010_case13/balino2010_case13_fig18_digitized.csv": "c514f55c7855437274d9fe49b352469b493c9bb5ef954319b83a6389f20afe91",
+    "/home/leonardoab/Documentos/PRIMS-F-p0p1-20261119/scripts/plot_osc_experimental.py": "74c616430fb6ccbcb3d2f6e24d749dec86ac25abddba9399ea83152b5c57c0f7"
+  },
+  "qualification": "A raster-derived comparison with independent time origins and a fixed model separator. No raw synchronized sensor records, experimental error estimate or regime validation."
+}

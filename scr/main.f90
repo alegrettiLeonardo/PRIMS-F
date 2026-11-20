@@ -2,10 +2,12 @@ program main
   !! Driver similar to Python main.py, using module_steady_state for U0.
 
   use mod_kinds,               only: wp, i4
+  use module_feed_contracts,only:feed_contract_t,FLOW_UNSET,gas_eos_coefficient,resolve_feed
   use module_config,           only: sim_config_t
   use module_solver_utils,     only: fluid_dynamics_t
+  use module_single_phase,only:configure_pipe_riser_elevation,global_single_phase,initialize_single_phase_hydrostatic
   use module_catenary,         only: solve_A
-  use module_steady_state,     only: EstadoEstacionario_ndim_simp
+  use module_steady_state,     only: EstadoEstacionario_ndim_simp,PHASE_AUTO,PHASE_LIQUID_ONLY,PHASE_GAS_ONLY
   use module_boundary_conditions, only: apply_ghost_cells
   use module_find,             only: compute_primitive_variables, set_stability_params
   use module_simulate_pipe_riser, only: pipeline_riser_simulator_t
@@ -48,9 +50,18 @@ program main
   real(wp)           :: T_scenario, time_phys
   real(wp)           :: gamma_g
   character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model
+  character(len=16)::boundary_method
+  integer::outlet_reservoir_phase,initial_phase_hint
+  character(len=16)::single_phase_mode,source_scheme,initial_phase
+  character(len=16)::liquid_flow_basis
+  type(feed_contract_t)::feed
+  integer::feed_status,initialization_iteration
+  real(wp)::target_gl,target_gg,inlet_contract_error,initial_pin
+  real(wp),allocatable::initial_face_pressures(:)
   character(len=20) :: dissipation_mode
   character(len=16) :: newton_globalization
   character(len=32) :: pipe_regime_mode
+  real(wp)::checkpoint_interval_s
   real(wp) :: Cg_fixed, P_standard, T_standard, dt_min_s, dt_max_s, dt_start_s
   real(wp) :: perturbation_amplitude, output_interval_s, field_interval_s
   integer(i4) :: n_riser, closure_riser, closure_pipe, sim_status, steady_status, output_closure, output_status
@@ -75,8 +86,8 @@ program main
                     gamma_g, max_iter, max_workers, save_every, newton_max, regime, use_muscl, out_dir, jac_dissipation_fd, jac_dissipation_fd_eps, debug_dfduj_check, debug_dfduj_cell, debug_dfduj_eps, &
                     pb_dp_on, pb_dp_off, &
                     stab_si_on, stab_si_off, stab_use_hysteresis, &
-                    gas_eos, gas_flow_basis, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
-                    dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode, newton_globalization
+                    gas_eos, gas_flow_basis, liquid_flow_basis, single_phase_mode, source_scheme, initial_phase, outlet_reservoir_phase, boundary_method, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
+                    checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode, newton_globalization
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
   type(pipeline_riser_simulator_t) :: sim
@@ -128,8 +139,8 @@ program main
   mu_l = 0.89e-3_wp
   mu_g = 1.85e-5_wp
   ! Optional inlet mass fluxes (kg/m^2/s). If <=0, they will be computed from jl/jg.
-  mul  = -1.0_wp
-  mug  = -1.0_wp
+  mul  = FLOW_UNSET
+  mug  = FLOW_UNSET
   eps  = 4.6e-5_wp
   D    = (2.54e-2_wp)*2.0_wp
   sigma = 7.28e-2_wp
@@ -199,6 +210,10 @@ program main
   pipe_regime_mode = 'FIXED_STRATIFIED'
   gas_eos = 'ISOTHERMAL'
   gas_flow_basis = 'STANDARD'
+  liquid_flow_basis = 'LEGACY'
+  single_phase_mode='STRICT';source_scheme='POINT';boundary_method='LEGACY'
+  outlet_reservoir_phase=0;initial_phase='AUTO';initial_phase_hint=PHASE_AUTO
+  checkpoint_interval_s=60
   Cg_fixed = 343.0_wp
   P_standard = 101300.0_wp
   T_standard = 293.15_wp
@@ -299,35 +314,17 @@ program main
   Lr = CA * sinh(X / CA)
 
   ! The derivative of an ISOTHERMAL ideal-gas EOS is R*T, not gamma*R*T.
-  select case(trim(gas_eos))
-  case('ISOTHERMAL')
-    Cg = sqrt(Rg*Tgas)
-  case('BAROTROPIC')
-    Cg = Cg_fixed
-  case default
-    error stop 'gas_eos must be ISOTHERMAL or BAROTROPIC'
-  end select
-
-  ! bottom pressure and densities for initial fluxes
-  Pb   = Ps + rho_l0 * G * Z
-  rhog = Pb / (Cg*Cg)
-  rhol = rho_l0 + (Pb - P_l0) / (Cl*Cl)
-  ! Default inlet mass fluxes per area (kg/m^2/s): mul=rho_l*jl, mug=rho_g*jg
-  ml_flux  = rho_l0 * jl
-  select case(trim(gas_flow_basis))
-  case('STANDARD')
-    mg_flux = (P_standard/(Rg*T_standard))*jg
-  case('SEPARATOR')
-    mg_flux = (Ps/(Cg*Cg))*jg
-  case default
-    error stop 'gas_flow_basis must be STANDARD or SEPARATOR; alternatively supply mug explicitly'
-  end select
-
-  ! If the user provided mul/mug in the namelist, use them as overrides.
-  ! (Useful when inlet mass flux is specified directly, instead of jl/jg.)
-  if (mul >= 0.0_wp) ml_flux = mul
-  if (mug >= 0.0_wp) mg_flux = mug
-
+  call gas_eos_coefficient(gas_eos,Rg,Tgas,Cg_fixed,Cg,feed_status)
+  if(feed_status/=0)error stop 'Invalid gas EOS: ISOTHERMAL uses dp/drho=R*T; BAROTROPIC uses Cg_fixed^2'
+  Pb=Ps+rho_l0*G*Z
+  rhog=Pb/Cg**2;rhol=rho_l0+(Pb-P_l0)/Cl**2
+  call resolve_feed(liquid_flow_basis,gas_flow_basis,jl,jg,mul,mug,rho_l0,Ps,Cg,Rg,T_standard,P_standard,feed,feed_status)
+  if(feed_status/=0)then
+    write(error_unit,'(a,i0)')'Invalid/missing/conflicting inlet contract, status=',feed_status
+    error stop 3
+  endif
+  ml_flux=feed%liquid_mass;mg_flux=feed%gas_mass
+  write(output_unit,'(4a)')'[INLET] resolved liquid=',trim(feed%liquid_mode),' gas=',trim(feed%gas_mode)
   ! ----------------------- Adimensionalization ---------------------------
   call fd%adimensionalizar(Cg, Cl, P_l0, rho_l0, Ps, Pb, jl, jg, ml_flux, mg_flux, &
                            nCg, nCl, nP_l0, nrho_l0, nPs, nPb, njl, njg, nmul, nmug, &
@@ -336,16 +333,43 @@ program main
   ! target nondimensional final time
   omega_t = Lr / max(omega_u, 1.0e-16_wp)
   ntime   = time_dim / omega_t
+  select case(trim(initial_phase))
+  case('AUTO');initial_phase_hint=PHASE_AUTO
+  case('LIQUID');initial_phase_hint=PHASE_LIQUID_ONLY
+  case('GAS');initial_phase_hint=PHASE_GAS_ONLY
+  case default;error stop 'Unknown initial_phase'
+  end select
+  if(initial_phase_hint/=PHASE_AUTO.and.single_phase_mode/='REDUCED') &
+    error stop 'Explicit pure inventory evolution requires single_phase_mode=REDUCED'
+
   ! ------------------------ Steady-state (IC) ----------------------------
+  ! For a local volumetric contract the steady mass flux is unknown until
+  ! the inlet FACE pressure is known. Iterate the actual steady ODE, with
+  ! fixed EOS/geometry; each iterate conserves one mass flux per phase.
+  do initialization_iteration=1,50
   call EstadoEstacionario_ndim_simp(nodes, nmul, nmug, nPs, Lp, Lr, CA, beta_rad, D, AREA, eps, G, &
                                     nCl, nCg, nrho_l0, nP_l0, mu_l, mu_g, sigma, omega_P, omega_u, omega_rho, tol, &
                                     vns, vnp, nrhogv, nrholv, alphav, nugv, nulv, thetav, njlv, njgv, &
                                     mesh_ratio=mesh_ratio, n_riser=n_riser, face_positions=physical_faces, &
-                                    closure_id_riser=closure_riser, status=steady_status, closure_id_pipe=closure_pipe)
+                                    closure_id_riser=closure_riser, status=steady_status, closure_id_pipe=closure_pipe, phase_hint=initial_phase_hint, &
+                                    face_pressures=initial_face_pressures)
   if (steady_status/=0) then
     write(error_unit,'(a,i0)') 'Steady initialization failed, status=',steady_status
     error stop 2
   end if
+
+    initial_pin=initial_face_pressures(1)
+    target_gl=nmul;target_gg=nmug
+    if(feed%liquid_mode=='LOCAL_VOLUME')target_gl=(nrho_l0+(initial_pin-nP_l0)/nCl**2)*njl
+    if(feed%gas_mode=='LOCAL_VOLUME')target_gg=initial_pin/nCg**2*njg
+    inlet_contract_error=0
+    if(target_gl/=nmul)inlet_contract_error=abs(target_gl-nmul)/max(abs(target_gl),abs(nmul))
+    if(target_gg/=nmug)inlet_contract_error=max(inlet_contract_error,abs(target_gg-nmug)/max(abs(target_gg),abs(nmug)))
+    if(inlet_contract_error<=1e-11_wp)exit
+    nmul=target_gl;nmug=target_gg
+  enddo
+  if(initialization_iteration>50)error stop 'Local-volume steady inlet fixed point did not converge; no global root exclusion claimed'
+  ml_flux=nmul*omega_rho*omega_u;mg_flux=nmug*omega_rho*omega_u
 
   call print_steady_state_summary(nodes, vns, vnp, alphav, nrholv, nrhogv, njlv, njgv, omega_u, omega_rho, omega_P, Lr, Lp)
 
@@ -390,10 +414,16 @@ program main
   cfg%dissipation_mode = dissipation_mode
   cfg%newton_globalization = newton_globalization
   cfg%gas_eos        = gas_eos
+  cfg%liquid_inlet_basis=feed%liquid_mode;cfg%gas_inlet_basis=feed%gas_mode
   cfg%output_interval_s = output_interval_s
   cfg%field_interval_s = field_interval_s
   cfg%perturbation_amplitude = perturbation_amplitude
 
+  cfg%checkpoint_interval_s=checkpoint_interval_s
+  cfg%boundary_method=boundary_method
+  cfg%single_phase_mode=single_phase_mode;cfg%source_scheme=source_scheme;cfg%CA=CA
+  cfg%outlet_reservoir_phase=outlet_reservoir_phase
+  if(outlet_reservoir_phase<0.or.outlet_reservoir_phase>2)error stop 'Unknown outlet_reservoir_phase'
   cfg%Lp   = Lp
   cfg%Lr   = Lr
   cfg%beta = beta_rad
@@ -487,11 +517,35 @@ program main
   end do
   cfg%cell_width(:nd)=cfg%cell_width(nd+1)
   cfg%cell_width(N-nd+1:)=cfg%cell_width(N-nd)
+  if(trim(boundary_method)/='LEGACY'.and.trim(boundary_method)/='STEADY_TRACE')error stop 'Unknown boundary_method'
+  if(trim(single_phase_mode)/='STRICT'.and.trim(single_phase_mode)/='REDUCED')error stop 'Unknown single_phase_mode'
+  if(trim(source_scheme)/='POINT'.and.trim(source_scheme)/='HYDROSTATIC')error stop 'Unknown source_scheme'
+  call configure_pipe_riser_elevation(cfg)
+  if(source_scheme=='HYDROSTATIC')then
+    if(global_single_phase(U,cfg)==0)error stop 'HYDROSTATIC currently requires a declared global single phase; no mixed-flow extension'
+    if(cfg%mul==0.and.cfg%mug==0)then
+      call initialize_single_phase_hydrostatic(cfg,global_single_phase(U,cfg),U)
+      call apply_ghost_cells(U,nd);cfg%U0=U
+    endif
+  endif
   open(newunit=ios,file=trim(out_dir)//'/run_metadata.txt',status='replace')
   write(ios,nml=PARAMS)
   write(ios,'(a,8(es24.16,1x))') 'Lr,CA,Cg,Gl,Gg,omega_P,omega_rho,omega_u: ', &
        Lr,CA,Cg,ml_flux,mg_flux,omega_P,omega_rho,omega_u
   write(ios,'(a)') 'FV1 + backward Euler; mass fluxes kg/m2/s; pressure Pa; time s. Regime is a label only.'
+  close(ios)
+  open(newunit=ios,file=trim(out_dir)//'/inlet_contract.txt',status='replace')
+  write(ios,'(a,a)')'liquid_resolved=',trim(feed%liquid_mode)
+  write(ios,'(a,a)')'gas_resolved=',trim(feed%gas_mode)
+  write(ios,'(a,es25.16)')'gas_dp_drho_m2_s2=',Cg**2
+  write(ios,'(a,es25.16)')'rho_standard_ideal_kg_m3=',P_standard/(Rg*T_standard)
+  write(ios,'(a,es25.16)')'rho_at_Pstandard_EOS_kg_m3=',P_standard/Cg**2
+  write(ios,'(a,es25.16)')'initial_inlet_face_pressure_Pa=',initial_pin*omega_P
+  write(ios,'(a,es25.16)')'initial_liquid_mass_flux_kg_m2_s=',ml_flux
+  write(ios,'(a,es25.16)')'initial_gas_mass_flux_kg_m2_s=',mg_flux
+  write(ios,'(a,es25.16)')'steady_inlet_contract_relative_error=',inlet_contract_error
+  write(ios,'(a,a)')'initial_inventory=',trim(initial_phase)
+  write(ios,'(a,i0)')'initialization_iterations=',initialization_iteration
   close(ios)
 
   ! ---------------------------- Simulate ---------------------------------

@@ -1,3 +1,76 @@
+## Atualização: correções P0 e qualificação P1,19/11/2026
+
+Branch `audit/p0p1-20261119`, worktree `PRIMS-F-p0p1-20261119`, base remota
+`00df4c2`; main local4572f95 e auditoria6019277 preservadas. Operador final
+**1603419806f5cc2db62fd2e326877ee232bd8df0**. Commits posteriores são
+ferramentas/evidência/documentação, sem mudança de scr/Makefile.
+
+Leia [QUALIFICATION_P0P1.md](QUALIFICATION_P0P1.md) e
+[índice de ferramentas](../validation/diagnostics/p0p1_20261119/README.md).
+Implementados: partição homogênea, EOS/feed explícitos, IC local-volume,
+traço com fontes e modelo puro optativos, inventário inicial declarado,
+composição externa no refluxo, guarda de transição932, telemetria aceita.
+Defaults preservados;20 programas Fortran debug/release e110 Python PASS,
+mais CLI e comparações byte a byte. Último OSC/MASS1603419 reproduz18aa7f7
+até2400 s; manter SHA de cada evidência, não reatribuí-las.
+
+Controle2400 s e seis balanços tol_res1e-10 PASS; tol_res1e-8 FAIL, sem
+relaxar1e-6/M0. EOS isotérmica passa no controle, mas OSC falha~223,64 s.
+SS1 BLOCKED~78,5768 s FACE53; SS3~97,1319 s CELL69. Traço com fontes antecipa
+a falha SS1~51,1994 s: não promovê-lo como cura nem atribuir causa única ao BC.
+
+Campanha comum nova congelada18aa7f7: N51/101/201/401 por trecho, três dt e
+caso cruzado. Sete histórias concluídas com dez ciclos acomodados; N401 até900 s
+da nova IC, não2400 s recalculados por malha. Últimas diferenças de amplitude
+4,0189% em h e10,3455% em dt: **FAIL** ao alvo1%; período0,1702%/0,3372%.
+42 balanços/M0≤9,442e-9. TIMEOUTs e caudas brutas preservados; composição
+de análise auditada sem status fictício. Campos/frentes geométricos não provam
+severe slugging; validação física SS1/SS3/OSC NOT_VERIFIED.
+
+Resultados completos: `/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119`.
+Análise final: `refinement_composite_final_v2`, `refinement_analysis_final_v2`,
+`refinement_spatial_final_v2`; índice de77 execuções e hashes em delivery_run_index.
+Não misturar05ad799/490936a. Chexal contrafluxo inclinado, comutação BURR15,
+transição misto–puro e promoção MUSCL/SDIRK2 continuam bloqueados/não qualificados.
+
+Usuário autorizou publicar MR ao final: abrir **draft para main**, sem merge.
+A restrição anterior de não publicar referia-se à etapa histórica abaixo.
+
+---
+
+## Atualização: auditoria P0 dos contornos, 19/11/2026
+
+Branch local `audit/boundary-contract-20261119`, base `2c3e3af`; worktree
+`/home/leonardoab/Documentos/PRIMS-F-boundary-audit-20261119`.
+Escopo vigente: inspeção/instrumentação/testes/protótipos; **não alterar solver,
+física ou defaults sem aprovação**. Nenhum push/merge nesta etapa; main intacta.
+
+Leia primeiro [BOUNDARY_CONTRACT_AUDIT_20261119.md](BOUNDARY_CONTRACT_AUDIT_20261119.md)
+e seus detalhes. Produção e Makefile não mudaram; binário SHA256
+02ce51462ec3c954cec9364b17444b7279be72ec150f87e307f1b5fc8dd0a4c3.
+Protocolo:08cd4a5; instrumentos:4ffe7b4; controles/manifestos:957eaa4.
+
+Demonstrados: massa líquida fixa difere do contrato Ql com EOS compressível;
+controle hidrostático não preservado pela pressão central usada na face;
+MATCHED horizontal desnecessário quebra invariância da partição no momento.
+Protótipos volume/partition corrigem apenas seus controles; permanecem externos.
+Jacobiano completo de contorno passou; contornos externos são admissíveis nas
+propostas dos replays que falham em FACE53(SS1) ou CELL69(SS3). Não inferir causa
+histórica/global dos contornos a partir dessa localização.
+
+Dados: `/home/leonardoab/Documentos/PRIMS-F-boundary-results-20261119`.
+Onze execuções com manifestos; janelas OSC120s v1/v2, checkpoints atômicos,
+983 estados exatos de extremidade por variante; seis balanços<=1,28e-8.
+Semi-excursão muda−0,01059% no protótipo Q; só quatro intervalos entre picos.
+Não atribuir essa evidência a dez ciclos, convergência ou validação física.
+SS1/SS3 continuam BLOCKED; OSC não ganhou qualificação experimental.
+Reversão de reservatório, NSCBC/Riemann não linear com fontes e evolução
+exatamente monofásica continuam abertos. Não extrapolar Chexal à catenária.
+
+Relatórios/campanhas anteriores abaixo são preservados com seus próprios SHAs.
+
+---
+
 # Estado para continuação no Codex
 
 

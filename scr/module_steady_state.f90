@@ -18,7 +18,7 @@ module module_steady_state
   integer,parameter,public :: STEADY_INTEGRATION=24,STEADY_PHASE_REQUIRED=25
   integer,parameter,public :: PHASE_AUTO=0,PHASE_LIQUID_ONLY=1,PHASE_GAS_ONLY=2
   public :: malha_progressiva,fun_dpds,steady_state_ndim_simp,EstadoEstacionario_ndim_simp
-  public :: solve_alpha_from_superficials
+  public :: solve_alpha_from_superficials,state_at ! same physical state for boundary stationary continuation
 contains
   pure real(wp) function nan_value() result(v)
     v=ieee_value(0.0_wp,ieee_quiet_nan)
@@ -420,10 +420,11 @@ contains
   end function
 
   subroutine state_at(p,theta,gl,gg,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
-      w_u,w_rho,tol,id,rl,rg,alpha,ul,ug,jl,jg,kin,status)
+      w_u,w_rho,tol,id,rl,rg,alpha,ul,ug,jl,jg,kin,status,phase_hint)
     real(wp),intent(in)::p,theta,gl,gg,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
     real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_u,w_rho,tol
     integer,intent(in)::id
+    integer,intent(in),optional::phase_hint
     real(wp),intent(out)::rl,rg,alpha,ul,ug,jl,jg,kin
     integer,intent(out)::status
     rl=nan_value();rg=rl;alpha=rl;ul=rl;ug=rl;jl=rl;jg=rl;kin=rl
@@ -433,6 +434,19 @@ contains
     rg=p/(Cg*Cg);rl=rho_l0+(p-P_l0)/(Cl*Cl)
     if(rl<=0.0_wp.or.rg<=0.0_wp)return
     jl=gl/rl;jg=gg/rg
+    if(present(phase_hint))then
+      if(phase_hint/=PHASE_AUTO)then
+        alpha=solve_alpha_from_superficials(jl,jg,rl,rg,theta,DH,AREA,EPS,G,mu_l_dyn,mu_g_dyn, &
+          sigma,w_u,w_rho,tol,status,id,phase_hint=phase_hint)
+        if(status/=0)return
+        ul=0;ug=0
+        if(alpha==0)ul=jl
+        if(alpha==1)ug=jg
+        kin=gl*ul+gg*ug
+        if(.not.ieee_is_finite(kin))status=STEADY_INVALID
+        return
+      endif
+    endif
     if(gl==0.0_wp.and.gg==0.0_wp)then
       ! Defined initialization scenario: stationary liquid-filled hydrostatics.
       ! This is a declared inventory choice, not inferred for a flowing phase.
@@ -455,13 +469,13 @@ contains
   end subroutine
 
   real(wp) function fun_dpds(s,p,mul,mug,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
-      mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,status,closure_id_riser,section_id,closure_id_pipe) result(dpds)
+      mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,status,closure_id_riser,section_id,closure_id_pipe,phase_hint) result(dpds)
     !! Optional section_id forces the pipe/riser trace at the shared junction;
     !! 1=pipe and2=riser. It never changes the closure's model definition.
     real(wp),intent(in)::s,p,mul,mug,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
     real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol
     integer,intent(out),optional::status
-    integer,intent(in),optional::closure_id_riser,section_id,closure_id_pipe
+    integer,intent(in),optional::closure_id_riser,section_id,closure_id_pipe,phase_hint
     real(wp)::theta,theta_s,sr,pip,pig,pif,rl,rg,alpha,ul,ug,jl,jg,kin
     real(wp)::rl1,rg1,a1,ul1,ug1,jl1,jg1,kp,km,hp,ht,delta,h_theta,source
     real(wp)::rm,j,mu,re,f,fric,scale,geometry_tol,theta_other
@@ -495,7 +509,7 @@ contains
     endif
     pip=w_p/(w_rho*w_u*w_u);pig=G*Lr/(w_u*w_u);pif=Lr/DH
     call state_at(p,theta,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
-      w_u,w_rho,tol,cid,rl,rg,alpha,ul,ug,jl,jg,kin,ierr)
+      w_u,w_rho,tol,cid,rl,rg,alpha,ul,ug,jl,jg,kin,ierr,phase_hint=phase_hint)
     if(ierr/=0)then
       if(present(status))status=ierr
       return
@@ -503,13 +517,13 @@ contains
     ! Separate pressure term analytically to avoid cancellation of PIP*P.
     delta=min(0.25_wp*p,epsilon(1.0_wp)**(1.0_wp/3.0_wp)*max(abs(p),1.0_wp))
     call state_at(p+delta,theta,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
-      w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,kp,ierr)
+      w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,kp,ierr,phase_hint=phase_hint)
     if(ierr/=0)then
       if(present(status))status=ierr
       return
     endif
     call state_at(p-delta,theta,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
-      w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,km,ierr)
+      w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,km,ierr,phase_hint=phase_hint)
     if(ierr/=0)then
       if(present(status))status=ierr
       return
@@ -535,7 +549,7 @@ contains
         theta_other=theta+h_theta
       endif
       call state_at(p,theta_other,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
-        w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,kp,ierr)
+        w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,kp,ierr,phase_hint=phase_hint)
       if(ierr/=0)then
         if(present(status))status=ierr
         return
@@ -548,7 +562,7 @@ contains
         theta_other=theta-h_theta
       endif
       call state_at(p,theta_other,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
-        w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,km,ierr)
+        w_u,w_rho,tol,cid,rl1,rg1,a1,ul1,ug1,jl1,jg1,km,ierr,phase_hint=phase_hint)
       if(ierr/=0)then
         if(present(status))status=ierr
         return
@@ -591,14 +605,14 @@ contains
   subroutine steady_state_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G, &
       Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol, &
       vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
-      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe)
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe,phase_hint)
     integer(i4),intent(in)::N
     real(wp),intent(in)::mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
     real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol
     real(wp),allocatable,intent(out)::vns(:),vnp(:),nrhogv(:),nrholv(:),alphav(:),nugv(:),nulv(:)
     real(wp),allocatable,intent(out)::thetav(:),njlv(:),njgv(:)
     real(wp),intent(in),optional::mesh_ratio
-    integer,intent(in),optional::n_riser,closure_id_riser,closure_id_pipe
+    integer,intent(in),optional::n_riser,closure_id_riser,closure_id_pipe,phase_hint
     real(wp),allocatable,intent(out),optional::face_positions(:),face_pressures(:)
     integer,intent(out),optional::status
     real(wp),allocatable::faces(:),pf(:)
@@ -644,7 +658,7 @@ contains
       endif
       thetav(i)=theta
       call state_at(p,theta,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
-        w_u,w_rho,tol,cid,nrholv(i),nrhogv(i),alphav(i),nulv(i),nugv(i),njlv(i),njgv(i),kin,ierr)
+        w_u,w_rho,tol,cid,nrholv(i),nrhogv(i),alphav(i),nulv(i),nugv(i),njlv(i),njgv(i),kin,ierr,phase_hint=phase_hint)
       if(ierr/=0)exit
       call advance(faces(i),sec,s,p,ierr)
       if(ierr/=0)exit
@@ -722,24 +736,24 @@ contains
       real(wp),intent(out)::value
       integer,intent(out)::code
       value=fun_dpds(ss,pp,mul,mug,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
-        mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,code,iriser,section,ipipe)
+        mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,code,iriser,section,ipipe,phase_hint)
     end subroutine
   end subroutine
 
   subroutine EstadoEstacionario_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
       mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
-      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe)
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe,phase_hint)
     integer(i4),intent(in)::N
     real(wp),intent(in)::mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
     real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol
     real(wp),allocatable,intent(out)::vns(:),vnp(:),nrhogv(:),nrholv(:),alphav(:),nugv(:),nulv(:)
     real(wp),allocatable,intent(out)::thetav(:),njlv(:),njgv(:)
     real(wp),intent(in),optional::mesh_ratio
-    integer,intent(in),optional::n_riser,closure_id_riser,closure_id_pipe
+    integer,intent(in),optional::n_riser,closure_id_riser,closure_id_pipe,phase_hint
     real(wp),allocatable,intent(out),optional::face_positions(:),face_pressures(:)
     integer,intent(out),optional::status
     call steady_state_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
       mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
-      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe)
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe,phase_hint)
   end subroutine
 end module module_steady_state

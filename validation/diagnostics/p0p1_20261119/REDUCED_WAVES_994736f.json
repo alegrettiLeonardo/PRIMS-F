@@ -1,0 +1,83 @@
+{
+  "operator": "994736f",
+  "binary_sha256": "bbbb979f7d24c66a8ddcd02b35ae545af199ca945a1d7314b80096a75cc4b412",
+  "results": [
+    {
+      "phase": 1,
+      "n": 40,
+      "returncode": 0,
+      "probe_m": 7.375,
+      "arrival_s": 0.0032376502002670242,
+      "analytic_arrival_s": 0.0032543391188251,
+      "arrival_error_s": -1.6688918558075902e-05,
+      "pressure_peak_Pa": 38.09979808004573,
+      "reflected_min_Pa": -27.323722025874304,
+      "passed": true,
+      "status": "status=0\nreached_time_s=  7.3431241655540725E-03\nrequested_time_s=  7.3431241655540725E-03\naccepted_steps=220\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  2.9268200000000000E-01\nwall_seconds=  3.3392308799999998E-01\nnewton_iterations_total=220\njacobian_evaluations_total=220\nresidual_evaluations_total=440\nlinear_solves_total=220\nbacktrack_trials_total=220\nprepare_calls_total=220\n",
+      "command": [
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/reduced_waves_994736f/wave",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/reduced_waves_994736f/phase1_N40",
+        "40",
+        "1"
+      ]
+    },
+    {
+      "phase": 1,
+      "n": 80,
+      "returncode": 0,
+      "probe_m": 7.4375,
+      "arrival_s": 0.0032877169559412623,
+      "analytic_arrival_s": 0.0032960614152202938,
+      "arrival_error_s": -8.344459279031446e-06,
+      "pressure_peak_Pa": 50.23654515526141,
+      "reflected_min_Pa": -37.67218464502366,
+      "passed": true,
+      "status": "status=0\nreached_time_s=  7.3431241655540725E-03\nrequested_time_s=  7.3431241655540725E-03\naccepted_steps=440\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  2.0336900000000000E+00\nwall_seconds=  2.2828597679999998E+00\nnewton_iterations_total=440\njacobian_evaluations_total=440\nresidual_evaluations_total=880\nlinear_solves_total=440\nbacktrack_trials_total=440\nprepare_calls_total=440\n",
+      "command": [
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/reduced_waves_994736f/wave",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/reduced_waves_994736f/phase1_N80",
+        "80",
+        "1"
+      ]
+    },
+    {
+      "phase": 2,
+      "n": 40,
+      "returncode": 0,
+      "probe_m": 7.375,
+      "arrival_s": 0.016720753364829616,
+      "analytic_arrival_s": 0.016806942815163758,
+      "arrival_error_s": -8.618945033414191e-05,
+      "pressure_peak_Pa": 38.08243991108611,
+      "reflected_min_Pa": -27.27379781950731,
+      "passed": true,
+      "status": "status=0\nreached_time_s=  3.7923358147036172E-02\nrequested_time_s=  3.7923358147036172E-02\naccepted_steps=220\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  3.0466799999999999E-01\nwall_seconds=  5.8115533200000002E-01\nnewton_iterations_total=220\njacobian_evaluations_total=220\nresidual_evaluations_total=440\nlinear_solves_total=220\nbacktrack_trials_total=220\nprepare_calls_total=220\n",
+      "command": [
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/reduced_waves_994736f/wave",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/reduced_waves_994736f/phase2_N40",
+        "40",
+        "2"
+      ]
+    },
+    {
+      "phase": 2,
+      "n": 80,
+      "returncode": 0,
+      "probe_m": 7.4375,
+      "arrival_s": 0.016979321715832163,
+      "analytic_arrival_s": 0.01702241644099919,
+      "arrival_error_s": -4.3094725167027587e-05,
+      "pressure_peak_Pa": 50.210868638852844,
+      "reflected_min_Pa": -37.60440197272692,
+      "passed": true,
+      "status": "status=0\nreached_time_s=  3.7923358147036172E-02\nrequested_time_s=  3.7923358147036172E-02\naccepted_steps=441\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  2.0171430000000004E+00\nwall_seconds=  2.1871025529999999E+00\nnewton_iterations_total=441\njacobian_evaluations_total=441\nresidual_evaluations_total=881\nlinear_solves_total=440\nbacktrack_trials_total=440\nprepare_calls_total=441\n",
+      "command": [
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/reduced_waves_994736f/wave",
+        "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/reduced_waves_994736f/phase2_N80",
+        "80",
+        "2"
+      ]
+    }
+  ],
+  "scope": "small acoustic wave and fixed-pressure reflection with explicitly declared pure reservoir; no claim of a nonreflecting outlet or nonlinear mixed/pure transitions"
+}

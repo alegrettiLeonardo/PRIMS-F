@@ -1,0 +1,269 @@
+{
+  "cases": [
+    {
+      "mode": "MASS",
+      "operator": "1603419",
+      "status": "status=0\nreached_time_s=  2.4000000000000000E+03\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=19222\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  5.6020278699999994E+02\nwall_seconds=  5.6135740024300003E+02\nnewton_iterations_total=48321\njacobian_evaluations_total=48321\nresidual_evaluations_total=96642\nlinear_solves_total=48321\nbacktrack_trials_total=48321\nprepare_calls_total=19222\n",
+      "period_s": 23.10301442271816,
+      "semi_amplitude_Pa": 9696.075350536328,
+      "mean_Pa": 266157.954038374,
+      "window_s": [
+        2154.8193502077606,
+        2385.8494944349422
+      ],
+      "settling_variation": {
+        "period": 0.00023165894439569032,
+        "amplitude": 0.02228633105917205,
+        "mean": 6.367943869135313e-05
+      },
+      "settled": false,
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 8.376446203328669e-10,
+          "initial_inventory_kg": 71.87519043151006,
+          "absolute_processed_mass_kg": 5676.26570019347,
+          "relative_inventory": 1.1654155144549624e-11,
+          "relative_processed": 1.4756966367947093e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.1750031751272285e-13
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 8.817551133688539e-10,
+          "initial_inventory_kg": 55.707636743071255,
+          "absolute_processed_mass_kg": 5675.653855205297,
+          "relative_inventory": 1.5828262782634087e-11,
+          "relative_processed": 1.5535745058874093e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 5.815889519097757e-11
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 5.911715561524034e-11,
+          "initial_inventory_kg": 16.1675536884388,
+          "absolute_processed_mass_kg": 5676.270681808863,
+          "relative_inventory": 3.656530651109835e-12,
+          "relative_processed": 1.0414787970682437e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -5.83763955084903e-11
+        },
+        "g_system": {
+          "max_abs_balance_kg": 1.617372902273928e-12,
+          "initial_inventory_kg": 0.17695406353276283,
+          "absolute_processed_mass_kg": 14.537340068701502,
+          "relative_inventory": 9.140072118063983e-12,
+          "relative_processed": 1.1125645369995079e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.0789350186220157e-13
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 1.4007905946300525e-11,
+          "initial_inventory_kg": 0.1546312268866754,
+          "absolute_processed_mass_kg": 14.5379642232353,
+          "relative_inventory": 9.058911468487862e-11,
+          "relative_processed": 9.635397178865244e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 9.324065641894867e-12
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 1.3434586776384094e-11,
+          "initial_inventory_kg": 0.022322836646087384,
+          "absolute_processed_mass_kg": 14.540576757394213,
+          "relative_inventory": 6.018315229995122e-10,
+          "relative_processed": 9.239376814645472e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -9.116172140032666e-12
+        }
+      },
+      "actual_dt_s": {
+        "min": 0.001,
+        "max": 0.125,
+        "mean": 0.12485693476230479,
+        "accepted": 19222,
+        "sum_duration_s": 2400.0000000010227
+      },
+      "max_Ql_nominal_relative_error": 7.73202227759604e-05,
+      "integrated_Ql_nominal_error_m3": -0.0002079334742672384,
+      "manifest": {
+        "operator": "1603419806f5cc2db62fd2e326877ee232bd8df0",
+        "mode": "MASS",
+        "command": [
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/frozen_1603419/prims_f",
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/osc_feed_ab_1603419/MASS/input.nml"
+        ],
+        "returncode": 0,
+        "timeout": false,
+        "wall_s": 561.5182828109973,
+        "status": "status=0\nreached_time_s=  2.4000000000000000E+03\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=19222\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  5.6020278699999994E+02\nwall_seconds=  5.6135740024300003E+02\nnewton_iterations_total=48321\njacobian_evaluations_total=48321\nresidual_evaluations_total=96642\nlinear_solves_total=48321\nbacktrack_trials_total=48321\nprepare_calls_total=19222\n",
+        "files": {
+          "run_status.txt": "93029b1db9ca02b885726202184f9d9b562863cd688acd8a724afd3d0aee0123",
+          "stdout.log": "4ccb3b2e3f58b25463fa6edfa1cf1dfb8a1058b7ba31e4da54ec9dac128f8afe",
+          "checkpoint.dat": "eee730878114caf3e3cae41d7f05c7faf70796c270ede441ea2d3a4c344ba1fe",
+          "steps.csv": "577a630111d2644e1c0575d5926e03cb9bee3c3be43a1474e890153785684095",
+          "conservation.csv": "300fcd6f857df00177c2a1bbfea4a23fe7c6976705499bfc185939be15ffb057",
+          "run_metadata.txt": "ecfc20397176fc9c12687e28aff0a59905118d59f68eb88b898ad7993f50907d",
+          "boundary_conditions.csv": "13001a2e29e5346f48420671089eebb18edc137807ef7a42eaf5245ca03d054f",
+          "fields.csv": "ff4ed6992b88a004eab6551928feb1ebe55c745e527d247877e084403ac2ed39",
+          "results_D_OSC.dat": "70cada0dd8f51f26f3a2b5187e0de324bf1eae5023d6ff0389004381ec920804",
+          "inlet_contract.txt": "09a076531ac046e53f8b4cce40c28f122e19dff7ef64d673e0e40b5374326c7e",
+          "monitor.csv": "2f8d367a0061a346a8fba236930586d94e2f62a15c957c06ad3d8366bc953559",
+          "input.nml": "bf21c5861f57b2a364372e212394e3aa387851f1160d27f3a7a43c63a1258e6a",
+          "rejected_proposals.csv": "e25dac85d6bc9cc6571672790b89fb445c0f78e8451c1b94919a38625f4bffa2"
+        }
+      },
+      "previous_analysis_actual_dt_s": {
+        "min": 0.0012,
+        "max": 0.125,
+        "mean": 0.12486337859638015,
+        "accepted": 19221
+      }
+    },
+    {
+      "mode": "LOCAL_VOLUME",
+      "operator": "1603419",
+      "status": "status=0\nreached_time_s=  2.4000000000000000E+03\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=19222\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  5.6080608700000005E+02\nwall_seconds=  5.6281452673499996E+02\nnewton_iterations_total=48310\njacobian_evaluations_total=48310\nresidual_evaluations_total=96620\nlinear_solves_total=48310\nbacktrack_trials_total=48310\nprepare_calls_total=19222\n",
+      "period_s": 23.10188619715759,
+      "semi_amplitude_Pa": 9687.854313764572,
+      "mean_Pa": 266158.58645724633,
+      "window_s": [
+        2154.7293060464613,
+        2385.748168018037
+      ],
+      "settling_variation": {
+        "period": 0.0002490401382423118,
+        "amplitude": 0.022513593897056764,
+        "mean": 6.476134542437077e-05
+      },
+      "settled": false,
+      "balances": {
+        "l_system": {
+          "max_abs_balance_kg": 3.8198777474462986e-11,
+          "initial_inventory_kg": 71.87852883622574,
+          "absolute_processed_mass_kg": 5676.6232807950855,
+          "relative_inventory": 5.31435160025303e-13,
+          "relative_processed": 6.729137303103324e-15,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -2.4570243401435384e-13
+        },
+        "l_pipe": {
+          "max_abs_balance_kg": 5.95719029661268e-11,
+          "initial_inventory_kg": 55.7106478929452,
+          "absolute_processed_mass_kg": 5676.068351464793,
+          "relative_inventory": 1.0693091037210961e-12,
+          "relative_processed": 1.0495275827810177e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 5.873990815015539e-11
+        },
+        "l_riser": {
+          "max_abs_balance_kg": 8.321876521222293e-11,
+          "initial_inventory_kg": 16.167880943280554,
+          "absolute_processed_mass_kg": 5676.62808580286,
+          "relative_inventory": 5.147165884271868e-12,
+          "relative_processed": 1.465989385853047e-14,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -5.898561058416975e-11
+        },
+        "g_system": {
+          "max_abs_balance_kg": 1.638689184346731e-12,
+          "initial_inventory_kg": 0.176947556836734,
+          "absolute_processed_mass_kg": 14.537339385100314,
+          "relative_inventory": 9.2608748809045e-12,
+          "relative_processed": 1.1272277140521773e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 2.0925019502327898e-13
+        },
+        "g_pipe": {
+          "max_abs_balance_kg": 1.4100720591159188e-11,
+          "initial_inventory_kg": 0.15462531931462037,
+          "absolute_processed_mass_kg": 14.537855371478482,
+          "relative_inventory": 9.119283086147144e-11,
+          "relative_processed": 9.699312746516312e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": 9.543447249252201e-12
+        },
+        "g_riser": {
+          "max_abs_balance_kg": 1.354294454358751e-11,
+          "initial_inventory_kg": 0.022322237522113594,
+          "absolute_processed_mass_kg": 14.54046722203621,
+          "relative_inventory": 6.067019280737941e-10,
+          "relative_processed": 9.313967932930694e-13,
+          "passes_inventory_1e6": true,
+          "passes_processed_1e6": true,
+          "final_residual_sum_kg": -9.334197054228922e-12
+        }
+      },
+      "actual_dt_s": {
+        "min": 0.001,
+        "max": 0.125,
+        "mean": 0.12485693476230479,
+        "accepted": 19222,
+        "sum_duration_s": 2400.0000000010227
+      },
+      "max_Ql_nominal_relative_error": 0.0,
+      "integrated_Ql_nominal_error_m3": 0.0,
+      "manifest": {
+        "operator": "1603419806f5cc2db62fd2e326877ee232bd8df0",
+        "mode": "LOCAL_VOLUME",
+        "command": [
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/frozen_1603419/prims_f",
+          "/home/leonardoab/Documentos/PRIMS-F-p0p1-results-20261119/osc_feed_ab_1603419/LOCAL_VOLUME/input.nml"
+        ],
+        "returncode": 0,
+        "timeout": false,
+        "wall_s": 563.3200547609886,
+        "status": "status=0\nreached_time_s=  2.4000000000000000E+03\nrequested_time_s=  2.4000000000000000E+03\naccepted_steps=19222\nrejected_steps=0\nlast_rejection_status=0\ntermination_reason=COMPLETED\ncpu_seconds=  5.6080608700000005E+02\nwall_seconds=  5.6281452673499996E+02\nnewton_iterations_total=48310\njacobian_evaluations_total=48310\nresidual_evaluations_total=96620\nlinear_solves_total=48310\nbacktrack_trials_total=48310\nprepare_calls_total=19222\n",
+        "files": {
+          "run_status.txt": "6926d61aebf1a4400b6f1c0962b6329b48767f7abefd39047ddd1e66a4df1adb",
+          "stdout.log": "67f24f1978d2134a27246ee9032713c080493aa5440c662a5c70e5b1688d6e38",
+          "checkpoint.dat": "f3664a49129d0d867cef40809ba779406532d2f95a7fcb808b09a7df2183c1d9",
+          "steps.csv": "8ba8e55fdf9e01f4b719c09dfc9ad97d1c9c46f3bf9424133f908e5cac723b6d",
+          "conservation.csv": "780a0868282c131582c83e2a3fd97f7c8d93acba64674fa48270e972e7841665",
+          "run_metadata.txt": "12b595793434bd212aa7af595c841fe8ef0cf4699cc9bf13f221885b580cc723",
+          "boundary_conditions.csv": "b74d1cca1e1479a602741ae8d3973b45def87ac6b9aa7ef3f4a762d4203b3e8d",
+          "fields.csv": "2afddb03c741e9500f90e1e633ec3c7976b123dc770889a7839ee24b129e4532",
+          "results_D_OSC.dat": "4a88eadd54fd01b523347c5cd7478496ddc7abf75ad1c205041f22f6958964df",
+          "inlet_contract.txt": "4a54a30f07755dfb305d3a5725f6bcc6b26ce583b1795167611b3c9bd2c1bb09",
+          "monitor.csv": "ed4a64aebe443c0aaecf11f959b6c8c2475fd269dd280ee3acb3ebba28ab51db",
+          "input.nml": "110087158ca2c651eeba7cf0dc91d3cc0e9c1d768bc77050e84cc571fe9d4550",
+          "rejected_proposals.csv": "e25dac85d6bc9cc6571672790b89fb445c0f78e8451c1b94919a38625f4bffa2"
+        }
+      },
+      "previous_analysis_actual_dt_s": {
+        "min": 0.0012,
+        "max": 0.125,
+        "mean": 0.12486337859638015,
+        "accepted": 19221
+      }
+    }
+  ],
+  "comparison": {
+    "period_s": {
+      "MASS": 23.10301442271816,
+      "LOCAL_VOLUME": 23.10188619715759,
+      "relative_change": -4.8834560716944894e-05
+    },
+    "semi_amplitude_Pa": {
+      "MASS": 9696.075350536328,
+      "LOCAL_VOLUME": 9687.854313764572,
+      "relative_change": -0.0008478726159343895
+    },
+    "mean_Pa": {
+      "MASS": 266157.954038374,
+      "LOCAL_VOLUME": 266158.58645724633,
+      "relative_change": 2.376103598360643e-06
+    }
+  },
+  "mass_monitor_byte_equal_to_18aa7f7": true,
+  "scope": "same2400s horizon and last-ten marker definitions; still evolving amplitudes, not steady-cycle or experimental qualification",
+  "metadata_correction": "steps.csv begins at accepted step 1: include that increment; original raw analysis remains preserved outside Git. Pressure, balances and trajectories are unchanged.",
+  "step_metadata_sha256": "9e8498c5c7026871fc83ddc61413515e5c33a22e54c7ad32b6aa5029302ad3ef"
+}

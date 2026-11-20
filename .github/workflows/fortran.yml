@@ -26,6 +26,9 @@ jobs:
         run: |
           /usr/bin/python3 tests/test_pipe_regime_cli.py --binary bin/prims_f_check_all --output tmp/ci_pipe_cli
           /usr/bin/python3 tests/test_accepted_telemetry_cli.py --binary bin/prims_f --output tmp/ci_telemetry
+          /usr/bin/python3 tests/test_feed_contract_cli.py --binary bin/prims_f_check_all --output tmp/ci_feed_contracts
+          /usr/bin/python3 tests/test_boundary_telemetry_cli.py --binary bin/prims_f_check_all --output tmp/ci_boundary_telemetry
+          /usr/bin/python3 tests/test_initial_inventory_cli.py --binary bin/prims_f_check_all --output tmp/ci_initial_inventory
       - name: Preserve test evidence
         if: always()
         uses: actions/upload-artifact@v4

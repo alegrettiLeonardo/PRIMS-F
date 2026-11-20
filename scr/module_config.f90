@@ -51,6 +51,14 @@ module module_config
     real(wp) :: field_interval_s = 30.0_wp
     real(wp) :: perturbation_amplitude = 0.01_wp
 
+    ! Reduced absent-inventory operator is opt-in; historical mixed path is unchanged.
+    real(wp)::checkpoint_interval_s=60._wp
+    character(16)::boundary_method='LEGACY'
+    character(16)::single_phase_mode='STRICT',source_scheme='POINT'
+    integer::outlet_reservoir_phase=0 ! 0 unspecified; 1 liquid; 2 gas (pure reduced model only)
+    real(wp)::CA=0
+    real(wp),allocatable::z_faces(:),z_quadrature(:,:) ! SI geometry, not a pressure correction
+
     ! --- geometry/physics
     real(wp) :: Lr = 0.0_wp
     real(wp) :: Lp = 0.0_wp
@@ -72,6 +80,9 @@ module module_config
     real(wp) :: nP_l0   = 0.0_wp
     real(wp) :: nPs     = 0.0_wp
     real(wp) :: nPb     = 0.0_wp
+
+    ! Explicit resolved inlet contracts; historical objects retain mass mode.
+    character(len=16)::liquid_inlet_basis='MASS',gas_inlet_basis='MASS'
 
     ! --- nondimensional inlet mass flows
     real(wp) :: mul = 0.0_wp

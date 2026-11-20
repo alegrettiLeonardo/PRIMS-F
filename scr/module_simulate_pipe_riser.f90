@@ -7,6 +7,7 @@ module module_simulate_pipe_riser
   use module_config, only: sim_config_t,first_physical_cell,last_physical_cell
   use module_find, only: compute_primitive_variables,pressure_fun_uj
   use module_closure_law, only: CdUd_bhagwat
+  use module_single_phase,only:global_single_phase,single_phase_assemble,single_phase_face,single_phase_boundary,PHASE_TRANSITION_REQUIRED,PHASE_INVALID
   use module_active_set, only: active_set_direction
   use module_flow_regime, only: burr15_result_t,burr15_stability,BURR15_NOT_EVALUATED
   use module_jacobian, only: DFduj
@@ -17,11 +18,19 @@ module module_simulate_pipe_riser
   use module_steady_state, only: solve_alpha_from_superficials
   use mod_void_helpers, only: ffan,Dffan
   use, intrinsic :: ieee_arithmetic, only: ieee_is_finite,ieee_value,ieee_quiet_nan
+  use, intrinsic :: iso_c_binding,only:c_int,c_char,c_null_char
   use, intrinsic :: iso_fortran_env, only: output_unit,int64
   implicit none
   private
   public :: pipeline_riser_simulator_t
   integer,parameter,public :: NEWTON_GLOBALIZATION_FAILURE=6000
+  interface
+    function checkpoint_rename(old,new)bind(C,name='rename')result(status)
+      import c_int,c_char
+      character(c_char),intent(in)::old(*),new(*)
+      integer(c_int)::status
+    end function
+  end interface
   type :: pipeline_riser_simulator_t
     type(sim_config_t) :: cfg
     type(roe_solver_t) :: roe_solver
@@ -51,6 +60,10 @@ contains
     real(wp)::fm(3),fp(3),dmat(3,3)
     integer::i,lo,hi
     status=0
+    if(global_single_phase(U,this%cfg)>0)then
+      if(allocated(this%lagged_dissipation))deallocate(this%lagged_dissipation)
+      return
+    endif
     if(trim(this%cfg%dissipation_mode)/='LAGGED')then
       if(allocated(this%lagged_dissipation))deallocate(this%lagged_dissipation)
       return
@@ -223,6 +236,12 @@ contains
       id_right=cell_closure(this,thetaR,left_cell+1)
       if(thetaL==0.0_wp.and.thetaR>=0.0_wp)match=left_cell==this%cfg%num_dummy_cells+this%cfg%N_pipe
     endif
+    ! Both traces share this cfg: area, EOS, material properties and wall law
+    ! are global scalars, not section-specific fields. With identical closure
+    ! and inclination the physical face operator is identical. Cell widths
+    ! belong to residual integration and must not create a point junction.
+    ! Exact equality is intentional: a geometric bend is never rounded away.
+    match=match.and.(id_left/=id_right.or.thetaL/=thetaR)
     match=match.and.(trim(this%cfg%junction_model)=='MATCHED'.or.blocking_mode)
     if(present(blocking_active))blocking_active=.false.
     if(present(junction_trace))junction_trace=ieee_value(0.0_wp,ieee_quiet_nan)
@@ -609,7 +628,7 @@ contains
     if(present(status))status=code
   end subroutine
 
-  subroutine assemble(this,U,Uold,dt,R,A,B,C,norm,fin,fout,status,with_jac,base_mass_flux,failure_index,failure_stage)
+  subroutine assemble(this,U,Uold,dt,R,A,B,C,norm,fin,fout,status,with_jac,base_mass_flux,failure_index,failure_stage,boundary_one_sided_count)
     class(pipeline_riser_simulator_t),intent(in)::this
     real(wp),intent(in)::U(:,:),Uold(:,:),dt
     real(wp),intent(out)::R(:,:),A(:,:,:),B(:,:,:),C(:,:,:),norm,fin(3),fout(3)
@@ -620,14 +639,40 @@ contains
     real(wp),intent(out),optional::base_mass_flux(2,2)
     integer,intent(out),optional::failure_index
     character(len=*),intent(out),optional::failure_stage
-    integer::lo,hi,n,i,k,l,q,code,cp,cm
+    integer,intent(out),optional::boundary_one_sided_count
+    integer::lo,hi,n,i,k,l,q,code,cp,cm,pure_phase,fd_attempt,c2bc
+    real(wp)::pure_base(2,2)
     real(wp)::v(6),f(3),s(3),fj(3,3),sj(3,3),fm(3),fp(3),jl(3,3),jr(3,3),kl(3,3),kr(3,3)
     real(wp)::up(3),um(3),plus(3),minus(3),h,jb(3,3),scale(3),ds
     lo=first_physical_cell(this%cfg);hi=last_physical_cell(this%cfg);n=hi-lo+1
     R=0;A=0;B=0;C=0;status=0;norm=huge(1.0_wp)
     if(present(failure_index))failure_index=0
     if(present(failure_stage))failure_stage='NONE'
+    if(present(boundary_one_sided_count))boundary_one_sided_count=0
     if(present(base_mass_flux))base_mass_flux=ieee_value(0.0_wp,ieee_quiet_nan)
+    fin=ieee_value(0._wp,ieee_quiet_nan);fout=fin
+    pure_phase=global_single_phase(U,this%cfg)
+    if(trim(this%cfg%single_phase_mode)=='REDUCED')then
+      if(.not.all(ieee_is_finite(U(lo:hi,:))) .or. .not.all(ieee_is_finite(Uold(lo:hi,:))))then
+        call failure(PHASE_INVALID,lo,'CELL');return
+      endif
+      if(any(U(lo:hi,:2)<0))then
+        call failure(PHASE_INVALID,lo,'CELL');return
+      endif
+      block
+        integer::accepted_phase
+        accepted_phase=global_single_phase(Uold,this%cfg)
+        if(pure_phase/=accepted_phase.and.(pure_phase>0.or.accepted_phase>0))then
+          call failure(PHASE_TRANSITION_REQUIRED,0,'PHASE_TRANSITION');return
+        endif
+      end block
+    endif
+    if(pure_phase>0)then
+      call single_phase_assemble(U,Uold,dt,this%cfg,pure_phase,R,A,B,C,norm,fin,fout,status,with_jac,pure_base)
+      if(present(base_mass_flux))base_mass_flux=pure_base
+      if(status/=0)call failure(status,lo,'PHASE_REDUCED')
+      return
+    endif
     do i=lo,hi
       l=i-lo+1;ds=this%cfg%cell_width(i)
       call this%point_state(U(i,:),this%cfg%thetav(i),v,f,s,fj,sj,code,with_jac,cell_closure(this,this%cfg%thetav(i),i))
@@ -693,13 +738,38 @@ contains
         do k=1,3
           h=this%cfg%jac_dissipation_fd_eps*max(abs(U(i,k)),merge(1e-5_wp,1e-2_wp,k==2))
           if(k<=2)h=min(h,0.2_wp*U(i,k))
-          up=U(i,:);um=up;up(k)=up(k)+h;um(k)=um(k)-h
-          call boundary_flux(up,this%cfg%thetav(i),this%cfg,q==1,plus,cp)
-          call boundary_flux(um,this%cfg%thetav(i),this%cfg,q==1,minus,cm)
-          if(cp/=0.or.cm/=0)then
+          ! Differentiate the physical boundary operator on its admissible
+          ! side. A reversed material mode requires new reservoir data; never
+          ! evaluate an invented extension to get a centered derivative.
+          do fd_attempt=1,10
+            if(h<=32*epsilon(1._wp)*max(abs(U(i,k)),1e-8_wp))exit
+            up=U(i,:);um=up;up(k)=up(k)+h;um(k)=um(k)-h
+            call boundary_flux(up,this%cfg%thetav(i),this%cfg,q==1,plus,cp)
+            call boundary_flux(um,this%cfg%thetav(i),this%cfg,q==1,minus,cm)
+            if(cp==0.and.cm==0)then
+              jb(:,k)=(plus-minus)/(2*h);exit
+            else if(cp==0)then
+              up(k)=U(i,k)+2*h
+              call boundary_flux(up,this%cfg%thetav(i),this%cfg,q==1,fp,c2bc)
+              if(c2bc==0)then
+                jb(:,k)=(-3*f+4*plus-fp)/(2*h)
+                if(present(boundary_one_sided_count))boundary_one_sided_count=boundary_one_sided_count+1
+                exit
+              endif
+            else if(cm==0)then
+              um(k)=U(i,k)-2*h
+              call boundary_flux(um,this%cfg%thetav(i),this%cfg,q==1,fp,c2bc)
+              if(c2bc==0)then
+                jb(:,k)=(3*f-4*minus+fp)/(2*h)
+                if(present(boundary_one_sided_count))boundary_one_sided_count=boundary_one_sided_count+1
+                exit
+              endif
+            endif
+            h=h/2
+          enddo
+          if(fd_attempt>10.or.h<=32*epsilon(1._wp)*max(abs(U(i,k)),1e-8_wp))then
             call failure(3090,i,'BOUNDARY_JAC');return
           endif
-          jb(:,k)=(plus-minus)/(2*h)
         enddo
         B(:,:,l)=B(:,:,l)+dt*jb/ds
       endif
@@ -736,7 +806,8 @@ contains
     real(wp)::next_output,next_field,last_print,wall0,wall1,remaining,dt_next
     integer::lo,hi,n,step,it,code,ls,info,maxsteps,rej,unitmon,unitfield,unitstat,i,k,lastcode,finstatus
     logical::accepted,converged,requested_full_jac,diagnose_burr15
-    integer::unitburr15,unitsteps,unitmass,unittrials,ib,initial_flux_status
+    integer::unitburr15,unitsteps,unitmass,unittrials,unitbc,ib,initial_flux_status
+    real(wp)::next_checkpoint_s
     integer::last_trial_status,last_trial_index,last_backtrack
     real(wp)::last_lambda,proposal_norm
     logical::linearized_fd
@@ -771,6 +842,7 @@ contains
     if(dt<=0)dt=min(0.01_wp/this%cfg%omega_t,this%max_dt)
     tcur=0;step=0;rej=0;in_sum=0;out_sum=0;lastcode=0;finstatus=0
     next_output=0;next_field=0;last_print=-huge(1.0_wp)
+    next_checkpoint_s=this%cfg%checkpoint_interval_s
     termination_reason='COMPLETED'
     last_trial_status=0;last_trial_index=0;last_trial_stage='NONE';last_backtrack=0
     last_lambda=0.0_wp;proposal_norm=ieee_value(0.0_wp,ieee_quiet_nan)
@@ -799,6 +871,12 @@ contains
        'Ml_in_abs_integral_kg,Mg_in_abs_integral_kg,Ml_out_abs_integral_kg,Mg_out_abs_integral_kg,'// &
        'Ml_base_integral_kg,Mg_base_integral_kg,Ml_base_abs_integral_kg,Mg_base_abs_integral_kg,'// &
        'Ml_base_right_integral_kg,Mg_base_right_integral_kg,Ml_base_right_abs_integral_kg,Mg_base_right_abs_integral_kg'
+    open(newunit=unitbc,file=trim(this%cfg%out_dir)//'/boundary_conditions.csv',status='replace')
+    write(unitbc,'(a)')'step,time_s,dt_s,reduced_phase,status_in,status_out,nin_in,nin_out,nzero_in,nzero_out,'// &
+      'nwaves_in,nwaves_out,spectrum_status_in,spectrum_status_out,mdot_l_eff_kg_s,mdot_g_eff_kg_s,'// &
+      'mdot_l_target_kg_s,mdot_g_target_kg_s,p_in_face_Pa,p_out_EOS_Pa,p_out_flux_Pa,Pt_Pa,'// &
+      'rm_l_kg_s,rm_g_kg_s,rp_Pa,relative_l,relative_g,rhol_in_kg_m3,rhog_in_kg_m3,jl_eff_m_s,jg_eff_m_s,'// &
+      'recompute_max_nd,Ql_eff_m3_s,Qg_eff_m3_s,UBL1,UBL2,UBL3,UBR1,UBR2,UBR3,UiL1,UiL2,UiL3,UiR1,UiR2,UiR3'
     open(newunit=unitfield,file=trim(this%cfg%out_dir)//'/fields.csv',status='replace')
     write(unitfield,'(a)') 'time_s,s_m,theta_rad,alpha,holdup_liquid,p_Pa,ul_m_s,ug_m_s,rhol_kg_m3,rhog_kg_m3'
     diagnose_burr15=trim(this%cfg%pipe_regime_mode)=='AUTO_BURR15'
@@ -834,13 +912,21 @@ contains
     endif
     ! Initial fluxes are diagnostic only and do not contribute to an integral.
     ! An unavailable diagnostic must not alter the solver's acceptance path.
-    call boundary_flux(U(lo,:),thetav(lo),this%cfg,.true.,fin,code)
+    if(global_single_phase(U,this%cfg)>0)then
+      call single_phase_boundary(U,this%cfg,global_single_phase(U,this%cfg),.true.,fin,code)
+    else
+      call boundary_flux(U(lo,:),thetav(lo),this%cfg,.true.,fin,code)
+    endif
     if(code==0)then
       accepted_in=fin(:2)
     else
       initial_flux_status=3000+code
     endif
-    call boundary_flux(U(hi,:),thetav(hi),this%cfg,.false.,fout,code)
+    if(global_single_phase(U,this%cfg)>0)then
+      call single_phase_boundary(U,this%cfg,global_single_phase(U,this%cfg),.false.,fout,code)
+    else
+      call boundary_flux(U(hi,:),thetav(hi),this%cfg,.false.,fout,code)
+    endif
     if(code==0)accepted_out=fout(:2)
     if(code/=0)then
       initial_flux_status=3000+code
@@ -851,6 +937,8 @@ contains
       call write_field()
     endif
     call write_mass_record(0.0_wp,0.0_wp,initial_flux_status)
+    call write_boundary_record(0._wp)
+    call write_checkpoint()
     do while(tcur<T.and.step<maxsteps.and.finstatus==0)
       remaining=T-tcur;dt=min(dt,remaining,this%max_dt)
       old=U;trial=U;accepted=.false.;converged=.false.
@@ -1040,6 +1128,7 @@ contains
       if(tcur*this%cfg%omega_t>=next_output.or.tcur>=T)call write_monitor(dt*this%cfg%omega_t,it)
       if(tcur*this%cfg%omega_t>=next_field.or.tcur>=T)call write_field()
       call write_mass_record(dt*this%cfg%omega_t,norm,0)
+      call write_boundary_record(dt*this%cfg%omega_t)
       call cpu_time(cpu_now);call system_clock(clock_now)
       elapsed_wall=ieee_value(0.0_wp,ieee_quiet_nan)
       if(clock_rate>0)elapsed_wall=real(clock_now-clock_start,wp)/real(clock_rate,wp)
@@ -1057,6 +1146,10 @@ contains
       if(it<=5)dt_next=dt*this%dt_growth
       if(it>=max(8,this%cfg%newton_max-4))dt_next=dt*0.8_wp
       dt=min(dt_next,this%max_dt)
+      if(this%cfg%checkpoint_interval_s>0.and.tcur*this%cfg%omega_t>=next_checkpoint_s)then
+        call write_checkpoint()
+        next_checkpoint_s=tcur*this%cfg%omega_t+this%cfg%checkpoint_interval_s
+      endif
     enddo
     if(tcur<T.and.finstatus==0)then
       finstatus=7000
@@ -1064,6 +1157,8 @@ contains
     endif
     call write_field()
     if(finstatus/=0)call write_monitor(0.0_wp,0)
+    call write_checkpoint()
+    close(unitbc)
     close(unitmon);close(unitfield);close(unittrials);close(unitsteps);close(unitmass)
     if(trim(this%cfg%newton_globalization)=='ACTIVE_SET')close(unitactive)
     if(diagnose_burr15)close(unitburr15)
@@ -1088,6 +1183,109 @@ contains
     close(unitstat)
     if(present(status))status=finstatus
   contains
+    subroutine write_boundary_record(dts)
+      use module_feed_contracts,only:inlet_mass_fluxes
+      use module_lapack_small,only:dgeev_3x3
+      real(wp),intent(in)::dts
+      real(wp)::lb(3),rb(3),fl(3),fr(3),vel(2,2),data(20),pp(2),rl(2),rg(2),al(2)
+      real(wp)::aa(3,3),er(3),ei(3),ev(3,3),massscale,pip,gl,gg,angle(2),cs,kin
+      integer::st(2),spectral(2),nin(2),nzero(2),nwaves(2),ph,q,cc,model
+      ph=global_single_phase(U,this%cfg)
+      data=ieee_value(0._wp,ieee_quiet_nan);vel=ieee_value(0._wp,ieee_quiet_nan)
+      spectral=-1;nin=-1;nzero=-1;nwaves=3
+      if(ph>0)then
+        call single_phase_boundary(U,this%cfg,ph,.true.,fl,st(1),lb)
+        call single_phase_boundary(U,this%cfg,ph,.false.,fr,st(2),rb)
+        nwaves=2
+      else
+        call boundary_flux(U(lo,:),thetav(lo),this%cfg,.true.,fl,st(1),lb,velocities=vel(:,1))
+        call boundary_flux(U(hi,:),thetav(hi),this%cfg,.false.,fr,st(2),rb,velocities=vel(:,2))
+      endif
+      massscale=this%cfg%AREA*this%cfg%omega_rho*this%cfg%omega_u
+      pip=this%cfg%omega_P/(this%cfg%omega_rho*this%cfg%omega_u**2)
+      data(1:2)=accepted_in*massscale;data(8)=this%cfg%nPs*this%cfg%omega_P
+      angle=[thetav(lo),thetav(hi)]
+      if(trim(this%cfg%boundary_method)=='STEADY_TRACE')angle=[-this%cfg%beta,atan(this%cfg%Lr/this%cfg%CA)]
+      do q=1,2
+        if(st(q)/=0)cycle
+        if(q==1)then
+          pp(q)=pressure_fun_uj(lb(1),lb(2),this%cfg%nCg,this%cfg%nCl,this%cfg%nrho_l0,this%cfg%nP_l0)
+        else
+          pp(q)=pressure_fun_uj(rb(1),rb(2),this%cfg%nCg,this%cfg%nCl,this%cfg%nrho_l0,this%cfg%nP_l0)
+        endif
+        rl(q)=this%cfg%nrho_l0+(pp(q)-this%cfg%nP_l0)/this%cfg%nCl**2;rg(q)=pp(q)/this%cfg%nCg**2
+        if(ph>0)then
+          if(q==1)cs=lb(3)/lb(ph)
+          if(q==2)cs=rb(3)/rb(ph)
+          kin=cs
+          cs=sqrt(pip)*this%cfg%nCl;if(ph==2)cs=sqrt(pip)*this%cfg%nCg
+          nin(q)=count([kin-cs,kin+cs]<0);if(q==1)nin(q)=count([kin-cs,kin+cs]>0)
+          nzero(q)=count([kin-cs,kin+cs]==0);spectral(q)=0
+        else
+          model=this%cfg%closure_pipe;if(q==2)model=this%cfg%closure_riser
+          if(q==1)then
+            al(q)=lb(2)/rg(q)
+          else
+            al(q)=rb(2)/rg(q)
+          endif
+          aa=DFduj(al(q),rl(q),rg(q),vel(1,q),vel(2,q),this%cfg%nCl,this%cfg%nCg,angle(q), &
+            this%cfg%D_H,this%cfg%AREA,this%cfg%eps,this%cfg%G,this%cfg%mu_l,this%cfg%mu_g,this%cfg%sigma, &
+            this%cfg%omega_u,this%cfg%omega_rho,this%cfg%omega_P,this%cfg%tol,status=cc,closure_id=model)
+          spectral(q)=cc
+          if(cc/=0)cycle
+          call dgeev_3x3(aa,er,ei,ev,cc);spectral(q)=cc
+          if(cc/=0)cycle
+          if(any(ei/=0))then
+            spectral(q)=-2;cycle
+          endif
+          nin(q)=count(er<0);if(q==1)nin(q)=count(er>0)
+          nzero(q)=count(er==0)
+        endif
+      enddo
+      if(st(1)==0)then
+        call inlet_mass_fluxes(pp(1),this%cfg,gl,gg,cc)
+        if(cc==0)then
+          data(3:4)=[gl,gg]*massscale
+          data(9:10)=data(1:2)-data(3:4)
+          if(gl/=0)data(12)=data(9)/(abs(gl)*massscale)
+          if(gg/=0)data(13)=data(10)/(abs(gg)*massscale)
+        endif
+        data(5)=pp(1)*this%cfg%omega_P
+        data(14:15)=[rl(1),rg(1)]*this%cfg%omega_rho
+        data(16:17)=accepted_in/[rl(1),rg(1)]*this%cfg%omega_u
+        data(19:20)=data(16:17)*this%cfg%AREA
+      endif
+      if(st(2)==0)then
+        data(6)=pp(2)*this%cfg%omega_P
+        kin=0
+        if(ph>0)then
+          kin=rb(3)**2/rb(ph)
+        else
+          kin=rb(1)*vel(1,2)**2+rb(2)*vel(2,2)**2
+        endif
+        data(7)=(fout(3)-kin)/pip*this%cfg%omega_P
+        data(11)=data(7)-data(8)
+      endif
+      if(all(st==0))data(18)=max(maxval(abs(fl(:2)-accepted_in)),maxval(abs(fr(:2)-accepted_out)))
+      write(unitbc,'(i0,2(",",es25.16),11(",",i0),",",*(es25.16,:,","))') &
+        step,tcur*this%cfg%omega_t,dts,ph,st,nin,nzero,nwaves,spectral,data,lb,rb,U(lo,:),U(hi,:)
+      flush(unitbc)
+    end subroutine
+    subroutine write_checkpoint()
+      integer::ck,ii,rename_status
+      open(newunit=ck,file=trim(this%cfg%out_dir)//'/checkpoint.next',status='replace')
+      write(ck,'(a)')'# PRIMS-F accepted U; autonomous model; dt is the next attempted step, not a reinitialization'
+      write(ck,'(5(i0,1x),6(es25.16e3,1x))')size(U,1),this%cfg%num_dummy_cells,this%cfg%N_pipe,step,rej, &
+        tcur,dt,this%cfg%omega_t,this%cfg%omega_u,this%cfg%omega_rho,this%cfg%omega_P
+      do ii=1,size(U,1)
+        write(ck,'(i0,6(1x,es25.16e3))')ii,vns(ii),thetav(ii),this%cfg%cell_width(ii),U(ii,:)
+      enddo
+      close(ck)
+      rename_status=checkpoint_rename(trim(this%cfg%out_dir)//'/checkpoint.next'//c_null_char, &
+        trim(this%cfg%out_dir)//'/checkpoint.dat'//c_null_char)
+      if(rename_status/=0)error stop 'Checkpoint atomic rename failed (I/O, not physical failure)'
+    end subroutine
+
     subroutine mass_inventory(state,mass)
       real(wp),intent(in)::state(:,:)
       real(wp),intent(out)::mass(2,3)
@@ -1152,7 +1350,15 @@ contains
       logical::blocked
       integer::ii,k,cc,indices(4),ib
       ib=lo+this%cfg%N_pipe-1;indices=[lo,ib,ib+1,hi]
-      if(allocated(this%lagged_dissipation))then
+      blocked=.false.;trace=ieee_value(0._wp,ieee_quiet_nan)
+      if(global_single_phase(U,this%cfg)>0)then
+        if(step==0)then
+          call single_phase_face(U,U,this%cfg,global_single_phase(U,this%cfg),ib,baseflux,cc)
+        else
+          call single_phase_face(U,old,this%cfg,global_single_phase(U,this%cfg),ib,baseflux,cc)
+        endif
+        baseplus=baseflux
+      else if(allocated(this%lagged_dissipation))then
         call this%face_pair(U(ib,:),U(ib+1,:),thetav(ib),thetav(ib+1),baseflux,baseplus,cc, &
           blocking_active=blocked,junction_trace=trace,dissipation_matrix=this%lagged_dissipation(:,:,ib),left_cell=ib)
       else
@@ -1200,6 +1406,8 @@ contains
       do ii=lo,hi
         cid=cell_closure(this,thetav(ii),ii)
         call this%point_state(U(ii,:),thetav(ii),v,f,s,aj,sj,cc,.false.,cid)
+        if(global_single_phase(U,this%cfg)==1)v(6)=ieee_value(0._wp,ieee_quiet_nan)
+        if(global_single_phase(U,this%cfg)==2)v(5)=ieee_value(0._wp,ieee_quiet_nan)
         write(unitfield,'(*(es24.16,:,","))') tcur*this%cfg%omega_t,vns(ii)*this%cfg%Lr,thetav(ii), &
           v(1),1-v(1),v(4)*this%cfg%omega_P,v(5:6)*this%cfg%omega_u,v(2:3)*this%cfg%omega_rho
         if(diagnose_burr15.and.ii<lo+this%cfg%N_pipe)then
