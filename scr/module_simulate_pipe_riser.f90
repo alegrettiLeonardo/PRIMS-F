@@ -640,7 +640,7 @@ contains
     integer,intent(out),optional::failure_index
     character(len=*),intent(out),optional::failure_stage
     integer,intent(out),optional::boundary_one_sided_count
-    integer::lo,hi,n,i,k,l,q,code,cp,cm,pure_phase,fd_attempt,c2bc
+    integer::lo,hi,n,i,k,l,q,code,cp,cm,pure_phase,fd_attempt,c2bc,pure_one_sided
     real(wp)::pure_base(2,2)
     real(wp)::v(6),f(3),s(3),fj(3,3),sj(3,3),fm(3),fp(3),jl(3,3),jr(3,3),kl(3,3),kr(3,3)
     real(wp)::up(3),um(3),plus(3),minus(3),h,jb(3,3),scale(3),ds
@@ -668,7 +668,9 @@ contains
       end block
     endif
     if(pure_phase>0)then
-      call single_phase_assemble(U,Uold,dt,this%cfg,pure_phase,R,A,B,C,norm,fin,fout,status,with_jac,pure_base)
+      call single_phase_assemble(U,Uold,dt,this%cfg,pure_phase,R,A,B,C,norm,fin,fout,status,with_jac,pure_base, &
+        one_sided_count=pure_one_sided)
+      if(present(boundary_one_sided_count).and.status==0)boundary_one_sided_count=pure_one_sided
       if(present(base_mass_flux))base_mass_flux=pure_base
       if(status/=0)call failure(status,lo,'PHASE_REDUCED')
       return

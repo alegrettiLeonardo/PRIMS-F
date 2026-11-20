@@ -302,17 +302,22 @@ contains
     end function
   end subroutine
 
-  subroutine single_phase_assemble(u,old,dt,cfg,phase,r,a,b,c,norm,fin,fout,status,jac,base)
+  subroutine single_phase_assemble(u,old,dt,cfg,phase,r,a,b,c,norm,fin,fout,status,jac,base,one_sided_count)
     real(wp),intent(in)::u(:,:),old(:,:),dt
     type(sim_config_t),intent(in)::cfg
     integer,intent(in)::phase
     real(wp),intent(out)::r(:,:),a(:,:,:),b(:,:,:),c(:,:,:),norm,fin(3),fout(3),base(2,2)
     integer,intent(out)::status
     logical,intent(in)::jac
+    !! Columns differentiated with a one-sided stencil because the base state
+    !! lies on the edge of the admissible residual domain.
+    integer,intent(out),optional::one_sided_count
     real(wp)::xp(size(u,1),3),xm(size(u,1),3),rp(size(r,1),size(r,2)),rm(size(r,1),size(r,2))
-    real(wp)::fi(3),fo(3),bb(2,2),h,sc(3),d(3),err
-    integer::lo,hi,i,j,k,l,t,cp,cm,idx(2)
+    real(wp)::fi(3),fo(3),bb(2,2),h,h0,sc(3),d(3),side
+    integer::lo,hi,i,j,k,l,t,cp,cm,idx(2),m,refusal,stencil,n_one
     lo=first_physical_cell(cfg);hi=last_physical_cell(cfg);idx=[phase,3]
+    n_one=0
+    if(present(one_sided_count))one_sided_count=0
     a=0;b=0;c=0;norm=huge(1._wp)
     r=ieee_value(0._wp,ieee_quiet_nan);fin=r(:,1);fout=fin;base=fin(1)
     status=PHASE_INVALID
@@ -331,21 +336,59 @@ contains
       ! An exact inactive constraint, not a fabricated physical wave/Jacobian.
       b(3-phase,3-phase,i-lo+1)=1
       do t=1,2
-        k=idx(t);h=1e-5_wp*max(abs(u(i,k)),1e-2_wp)
-        if(k==phase)h=min(h,.2_wp*u(i,k))
-        xp=u;xm=u;xp(i,k)=u(i,k)+h;xm(i,k)=u(i,k)-h
-        call residual(xp,rp,fi,fo,bb,cp);call residual(xm,rm,fi,fo,bb,cm)
-        if(cp/=0.or.cm/=0)then
-          status=PHASE_INVALID;return
+        k=idx(t);h0=1e-5_wp*max(abs(u(i,k)),1e-2_wp)
+        if(k==phase)h0=min(h0,.2_wp*u(i,k))
+        ! The base residual is admissible. A perturbation may leave the
+        ! admissible set (e.g. outlet backflow without reservoir data, 934):
+        ! 1) central stencil with a controlled shrinking increment, for a base
+        !    state strictly inside the domain;
+        ! 2) second-order one-sided stencil from the admissible side only,
+        !    the derivative of the admissible function at its domain edge.
+        ! Refusal codes are never replaced by a fabricated derivative.
+        stencil=0;refusal=0
+        do m=0,2
+          h=h0/8._wp**m
+          xp=u;xm=u;xp(i,k)=u(i,k)+h;xm(i,k)=u(i,k)-h
+          call residual(xp,rp,fi,fo,bb,cp);call residual(xm,rm,fi,fo,bb,cm)
+          if(cp==0.and.cm==0)then
+            stencil=2;exit
+          endif
+          if(refusal==0)refusal=merge(cp,cm,cp/=0)
+        enddo
+        if(stencil==0)then
+          sides:do l=1,2
+            side=merge(1._wp,-1._wp,l==1)
+            do m=0,2
+              h=h0/8._wp**m
+              xp=u;xm=u;xp(i,k)=u(i,k)+side*h;xm(i,k)=u(i,k)+2*side*h
+              call residual(xp,rp,fi,fo,bb,cp)
+              if(cp/=0)cycle
+              call residual(xm,rm,fi,fo,bb,cm)
+              if(cm==0)then
+                stencil=1;exit sides
+              endif
+            enddo
+          enddo sides
         endif
+        if(stencil==0)then
+          status=refusal;if(status==0)status=PHASE_INVALID
+          return
+        endif
+        if(stencil==1)n_one=n_one+1
         do j=max(lo,i-1),min(hi,i+1)
-          l=j-lo+1;d=(rp(:,l)-rm(:,l))/(2*h)
+          l=j-lo+1
+          if(stencil==2)then
+            d=(rp(:,l)-rm(:,l))/(2*h)
+          else
+            d=side*(-3*r(:,l)+4*rp(:,l)-rm(:,l))/(2*h)
+          endif
           if(j==i)b(:,k,l)=d
           if(j==i-1)c(:,k,l)=d
           if(j==i+1)a(:,k,l)=d
         enddo
       enddo
     enddo
+    if(present(one_sided_count))one_sided_count=n_one
   contains
     subroutine residual(x,rr,fi,fo,fb,st)
       real(wp),intent(in)::x(:,:)
