@@ -49,13 +49,14 @@ def main():
     a = ap.parse_args()
     run = Path(a.run); run.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, OMP_NUM_THREADS='1', MKL_NUM_THREADS='1')
-    t0 = time.time(); hist = []
+    # Monotonic clock: a machine suspension must not count as stagnation or wall time.
+    t0 = time.monotonic(); t0_wall = time.time(); hist = []
     with open(str(run) + '.stdout', 'w') as out:
         p = subprocess.Popen([a.binary, a.deck], stdout=out, stderr=subprocess.STDOUT, env=env, cwd=run.parent)
         verdict = None
         while p.poll() is None:
             time.sleep(30)
-            now = time.time(); ts = last_time(run); hist.append((now, ts))
+            now = time.monotonic(); ts = last_time(run); hist.append((now, ts))
             old = [h for h in hist if now - h[0] >= a.window_s]
             if now - t0 > a.max_wall_s:
                 verdict = 'TIMEOUT'
@@ -70,11 +71,12 @@ def main():
                 break
     st = status(run)
     res = dict(deck=a.deck, binary=a.binary, limits=dict(max_wall_s=a.max_wall_s, window_s=a.window_s, min_advance_s=a.min_advance_s),
-               wall_s=time.time() - t0, last_monitor_time_s=last_time(run), returncode=p.returncode,
+               wall_s=time.monotonic() - t0, wall_clock_incl_suspension_s=time.time() - t0_wall,
+               last_monitor_time_s=last_time(run), returncode=p.returncode,
                verdict=verdict or ('COMPLETED' if st.get('termination_reason') == 'COMPLETED' else 'FAIL:' + st.get('termination_reason', 'NO_STATUS')),
                solver_status=st)
     if verdict == 'COST_STAGNATION':
-        w = [h for h in hist if time.time() - h[0] <= a.window_s + 60]
+        w = [h for h in hist if time.monotonic() - h[0] <= a.window_s + 60]
         res['stagnation'] = dict(advance_over_window_s=(w[-1][1] - w[0][1]) if len(w) > 1 else None)
         (run / 'OPERATOR_TERMINATED.txt').write_text(
             'COST_STAGNATION (pre-declared guard): simulated time advanced %.4g s in the last %.0f s of wall time; '
