@@ -1,4 +1,4 @@
-! D_SS3_ISO: dissertation inputs; Bhagwat per Azevedo, Balino & Burr2015, eqs116-128, p121/PDF135.
+! D_SS3_ISO: dissertation inputs; riser closure CHEXAL_1992 (ID5, dev default 21/11/2026); legacy Bhagwat (Azevedo, Balino & Burr 2015) is riser closure ID 3.
 ! Circular-pipe transcription verified; no claim of full audit of the original2014 paper.
 ! Sources and experimental target conflicts: docs/benchmark_sources.json
 ! jl values for Stable/OSC use D Table6.7; SS1 uses D Table6.2 without changing T20.1C.
@@ -17,7 +17,7 @@
   Ps=201000.00000000, Tgas=292.95000000,
   jl=0.28, jg=0.48,
   mul=279.174, mug=0.577934855150798,
-  closure_riser=3,
+  closure_riser=5,
   dissipation_mode='LAGGED', junction_model='MATCHED',
   time_dim=2400.0, perturbation_amplitude=0.01,
   output_interval_s=0.1, dt_start_s=0.001, dt_max_s=0.5,

@@ -206,7 +206,10 @@ program main
 
   use_muscl = .false.
   n_riser = 0
-  closure_riser = 2
+  ! Development default (21/11/2026): CHEXAL_1992 air-water, AUTO branch, in
+  ! every riser cell, face, junction trace, steady profile and boundary.
+  ! Bhagwat (3) and Bendiksen (2) remain explicit legacy/comparison choices.
+  closure_riser = 5
   ! Sentinel distinguishes an explicitly supplied drift closure from a default.
   closure_pipe = -1
   pipe_regime_mode = 'FIXED_STRATIFIED'
@@ -313,6 +316,15 @@ program main
   if (mu_l<=0.0_wp .or. mu_g<=0.0_wp .or. eps<0.0_wp .or. eps/D>=1.0_wp) error stop 'Invalid viscosities/roughness'
   if(trim(newton_globalization)/='LINE_SEARCH'.and.trim(newton_globalization)/='ACTIVE_SET') &
     error stop 'Unknown newton_globalization'
+  ! Options whose physics/numerics were derived or qualified ONLY with the
+  ! Bhagwat riser closure are refused with any other riser closure, instead
+  ! of running silently inactive or unqualified (no automatic fallback).
+  if(trim(newton_globalization)=='ACTIVE_SET'.and.closure_riser/=3) &
+    error stop 'ACTIVE_SET admissibility margin is qualified only for closure_riser=3 (Bhagwat)'
+  if(closure_riser>=5.and.trim(junction_flux)/='ROE') &
+    error stop 'Experimental junction_flux (E1) is not qualified with CHEXAL_1992; use ROE'
+  if(closure_riser>=5.and.trim(junction_riser_limit)/='NONE') &
+    error stop 'Experimental junction_riser_limit (E2) is not qualified with CHEXAL_1992; use NONE'
   beta_rad = beta_deg * (acos(-1.0_wp)/180.0_wp)
 
   ! ---------------------- Geometry & properties --------------------------

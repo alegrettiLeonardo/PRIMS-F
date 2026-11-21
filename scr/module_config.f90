@@ -41,7 +41,8 @@ module module_config
     ! 1 stratified; 2 Bendiksen; 3 Bhagwat; 4 Montgomery;
     ! 5 Chexal1992 auto, 6 Chexal1992 high-alpha, 7 Chexal1992 low-alpha.
     ! Explicit branches never extend countercurrent validity to inclined flow.
-    integer(i4) :: closure_riser = 2
+    ! Development default: CHEXAL_1992 AUTO (main.f90 sets the same default).
+    integer(i4) :: closure_riser = 5
     character(len=16) :: flux_scheme = 'ROE'
     character(len=16) :: gas_eos = 'ISOTHERMAL'
     character(len=16) :: junction_model = 'MATCHED'
