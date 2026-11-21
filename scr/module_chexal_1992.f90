@@ -11,11 +11,18 @@ module module_chexal_1992
   integer,parameter,public :: CHEXAL_BRANCH_REQUIRED=62,CHEXAL_NO_ROOT=63,CHEXAL_CCFL_EXCEEDED=64
   integer,parameter,public :: CHEXAL_SINGULAR=65,CHEXAL_NUMERIC=66,CHEXAL_SOURCE_UNRESOLVED=67
   integer,parameter,public :: CHEXAL_BRANCH_AUTO=0,CHEXAL_BRANCH_HIGH=1,CHEXAL_BRANCH_LOW=-1
+  ! Fluid parameter L (p.262-265). AIR_WATER (default, the only one PRIMS-F
+  ! selects): Eqs.3-7/3-8/3-19. STEAM_WATER (verification against the EPRI
+  ! sample problems only): Eq.3-5/3-6, all orientations, needs 0<p<p_crit
+  ! in any consistent absolute unit. Refrigerant L is not implemented.
+  integer,parameter,public :: CHEXAL_FLUID_AIR_WATER=0,CHEXAL_FLUID_STEAM_WATER=1
   real(wp),parameter :: PI=acos(-1.0_wp),ANGLE_TOL=32*epsilon(1.0_wp)
   public :: chexal_coefficients_si,chexal_residual_si,chexal_ccfl
   public :: chexal_solve_alpha,chexal_recover_velocities
   type :: parameters
     real(wp) :: rl,rg,d,g,ml,mg,sigma,theta
+    integer :: fluid=CHEXAL_FLUID_AIR_WATER
+    real(wp) :: c1=0.0_wp
   end type
 contains
   pure real(wp) function nan() result(x)
@@ -29,6 +36,29 @@ contains
     ok=p%rl>p%rg.and.p%rg>0.and.p%d>0.and.p%g>=0.and.p%ml>0.and.p%mg>0.and.p%sigma>=0 &
       .and.abs(p%theta)<=PI/2+ANGLE_TOL
   end function
+
+  subroutine set_fluid(p,fluid,pressure,pcrit,status)
+    !! Eq.3-6: C1 = 4 p_crit^2/[p (p_crit - p)], absolute pressures, same unit.
+    type(parameters),intent(inout)::p
+    integer,intent(in),optional::fluid
+    real(wp),intent(in),optional::pressure,pcrit
+    integer,intent(out)::status
+    status=CHEXAL_OK
+    if(.not.present(fluid))return
+    status=CHEXAL_INVALID
+    select case(fluid)
+    case(CHEXAL_FLUID_AIR_WATER)
+      p%fluid=fluid
+    case(CHEXAL_FLUID_STEAM_WATER)
+      if(.not.(present(pressure).and.present(pcrit)))return
+      if(.not.all(ieee_is_finite([pressure,pcrit])))return
+      if(pressure<=0.or.pressure>=pcrit)return
+      p%fluid=fluid;p%c1=4*pcrit**2/(pressure*(pcrit-pressure))
+    case default
+      return
+    end select
+    status=CHEXAL_OK
+  end subroutine
 
   subroutine source_coordinates(p,jl,jg,fl,fg,theta_deg,direction,status)
     type(parameters),intent(in)::p
@@ -101,7 +131,9 @@ contains
     endif
     ratio=p%rg/p%rl;k0=b1+(1-b1)*ratio**0.25_wp
     r=(1+1.57_wp*ratio)/(1-b1)
-    if(horizontal)then
+    if(p%fluid==CHEXAL_FLUID_STEAM_WATER)then
+      l=(1-exp(-p%c1*a))/(1-exp(-p%c1))            ! Eq.3-5, C1 of Eq.3-6
+    else if(horizontal)then
       l=1.125_wp*a**0.6_wp                         ! Eq.3-19
     else if(fg>=0)then
       l=1.15_wp*a**0.45_wp                         ! Eq.3-7
@@ -250,13 +282,15 @@ contains
   end subroutine
 
   recursive subroutine chexal_coefficients_si(alpha,rhol,rhog,jl,jg,theta,D,G,mul,mug,sigma,c0,vgj,status, &
-      branch,signature,jl_ccfl)
+      branch,signature,jl_ccfl,fluid,pressure,pcrit)
     real(wp),intent(in)::alpha,rhol,rhog,jl,jg,theta,D,G,mul,mug,sigma
     real(wp),intent(out)::c0,vgj
     integer,intent(out)::status
     integer,intent(in),optional::branch
     integer,intent(out),optional::signature
     real(wp),intent(in),optional::jl_ccfl
+    integer,intent(in),optional::fluid
+    real(wp),intent(in),optional::pressure,pcrit
     type(parameters)::p
     integer::b,sig
     real(wp)::fl,fg,theta_deg,direction,fs,af
@@ -264,6 +298,9 @@ contains
     if(present(branch))b=branch
     c0=nan();vgj=nan();sig=0;status=CHEXAL_INVALID
     if(present(signature))signature=0
+    call set_fluid(p,fluid,pressure,pcrit,status)
+    if(status/=CHEXAL_OK)return
+    status=CHEXAL_INVALID
     if(.not.ieee_is_finite(alpha))return
     if(alpha<0.or.alpha>1)return
     call source_coordinates(p,jl,jg,fl,fg,theta_deg,direction,status)
@@ -292,16 +329,18 @@ contains
   end subroutine
 
   subroutine chexal_residual_si(alpha,rhol,rhog,jl,jg,theta,D,G,mul,mug,sigma,residual,status, &
-      branch,signature,jl_ccfl)
+      branch,signature,jl_ccfl,fluid,pressure,pcrit)
     real(wp),intent(in)::alpha,rhol,rhog,jl,jg,theta,D,G,mul,mug,sigma
     real(wp),intent(out)::residual
     integer,intent(out)::status
     integer,intent(in),optional::branch
     integer,intent(out),optional::signature
     real(wp),intent(in),optional::jl_ccfl
+    integer,intent(in),optional::fluid
+    real(wp),intent(in),optional::pressure,pcrit
     real(wp)::c0,v
     call chexal_coefficients_si(alpha,rhol,rhog,jl,jg,theta,D,G,mul,mug,sigma,c0,v,status, &
-      branch,signature,jl_ccfl)
+      branch,signature,jl_ccfl,fluid,pressure,pcrit)
     residual=nan()
     if(status==CHEXAL_OK)residual=alpha*(c0*(jl+jg)+v)-jg
   end subroutine
@@ -552,7 +591,8 @@ contains
     if(n==0)status=CHEXAL_NO_ROOT
   end subroutine
 
-  subroutine chexal_solve_alpha(jl,jg,rhol,rhog,theta,D,G,mul,mug,sigma,alpha,status,branch,nroots,alpha_hint,roots)
+  subroutine chexal_solve_alpha(jl,jg,rhol,rhog,theta,D,G,mul,mug,sigma,alpha,status,branch,nroots,alpha_hint,roots, &
+      fluid,pressure,pcrit)
     real(wp),intent(in)::jl,jg,rhol,rhog,theta,D,G,mul,mug,sigma
     real(wp),intent(out)::alpha
     integer,intent(out)::status
@@ -560,6 +600,8 @@ contains
     integer,intent(out),optional::nroots
     real(wp),intent(in),optional::alpha_hint
     real(wp),intent(out),optional::roots(:)
+    integer,intent(in),optional::fluid
+    real(wp),intent(in),optional::pressure,pcrit
     type(parameters)::p,pv
     real(wp)::fl,fg,angle,direction,rr(8),rlow(8),fs,af
     integer::b,n,nl,k,idx
@@ -567,6 +609,9 @@ contains
     if(present(nroots))nroots=0
     if(present(roots))roots=nan()
     p=parameters(rhol,rhog,D,G,mul,mug,sigma,theta);b=CHEXAL_BRANCH_AUTO
+    call set_fluid(p,fluid,pressure,pcrit,status)
+    if(status/=CHEXAL_OK)return
+    status=CHEXAL_INVALID
     if(present(branch))b=branch
     if(b/=CHEXAL_BRANCH_AUTO.and.b/=CHEXAL_BRANCH_HIGH.and.b/=CHEXAL_BRANCH_LOW)return
     if(present(alpha_hint))then
