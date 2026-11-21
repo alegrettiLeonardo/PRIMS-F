@@ -16,7 +16,7 @@ module module_simulate_pipe_riser
   use module_solver_utils, only: fluid_dynamics_t
   use module_boundary_conditions, only: boundary_flux,apply_ghost_cells
   use module_boundary_trace, only: steady_junction_trace
-  use module_steady_state, only: solve_alpha_from_superficials
+  use module_steady_state, only: solve_alpha_from_superficials,STEADY_NO_ROOT
   use mod_void_helpers, only: ffan,Dffan
   use, intrinsic :: ieee_arithmetic, only: ieee_is_finite,ieee_value,ieee_quiet_nan
   use, intrinsic :: iso_c_binding,only:c_int,c_char,c_null_char
@@ -350,8 +350,8 @@ contains
       logical,intent(out),optional::was_blocked
       real(wp),intent(out),optional::trace(6)
       real(wp)::mapped(3),vm(6),fs(3),ss(3),scratch(3,3),a0(3,3),pstar,rls,rgs,astl,astr
-      real(wp)::pip,kin,jsl,jsg,ax(3,3),raw_gas_flux,path_theta,path_theta_right
-      integer::ic,q
+      real(wp)::pip,kin,jsl,jsg,ax(3,3),raw_gas_flux,path_theta,path_theta_right,probe,aprobe
+      integer::ic,q,ic2
       logical::active
       active=.false.
       if(present(was_blocked))was_blocked=.false.
@@ -446,6 +446,25 @@ contains
         astr=solve_alpha_from_superficials(jsl,jsg,rls,rgs,0.0_wp,this%cfg%D_H,this%cfg%AREA, &
           this%cfg%eps,this%cfg%G,this%cfg%mu_l,this%cfg%mu_g,this%cfg%sigma,this%cfg%omega_u, &
           this%cfg%omega_rho,this%cfg%tol,status=ic,closure_id=this%cfg%closure_riser)
+        if(ic==STEADY_NO_ROOT.and.trim(this%cfg%junction_riser_limit)=='ALPHA0'.and. &
+           fm_(2)==0.0_wp.and.fm_(1)>=0.0_wp)then
+          ! EXPERIMENTAL E2 (opt-in): exact riser-trace limit at zero gas flux.
+          ! For the drift closures j_g=alpha*u_g with u_g -> C0(0) j_l+Vgj(0)>0
+          ! as alpha->0, so Gg*=0 with Gl*>=0 admits only alpha*_riser=0 (the
+          ! Bhagwat inversion excludes the endpoint; Bendiksen already returns
+          ! it). The regular branch is CHECKED, not assumed: a strictly
+          ! positive probe flux must give one root that vanishes with it.
+          ! No flux, state, sign or pressure is altered; Gg*<0 stays refused.
+          probe=1e-12_wp*max(jsl,1e-12_wp)
+          aprobe=solve_alpha_from_superficials(jsl,probe,rls,rgs,0.0_wp,this%cfg%D_H,this%cfg%AREA, &
+            this%cfg%eps,this%cfg%G,this%cfg%mu_l,this%cfg%mu_g,this%cfg%sigma,this%cfg%omega_u, &
+            this%cfg%omega_rho,this%cfg%tol,status=ic2,closure_id=this%cfg%closure_riser)
+          if(ic2==0)then
+            if(aprobe>0.0_wp.and.aprobe<=1e-6_wp)then
+              astr=0.0_wp;ic=0
+            endif
+          endif
+        endif
         if(ic/=0)then
           ! EXPERIMENTAL unilateral gas-barrier model, opt-in only. The
           ! projection keeps the Roe pressure and liquid mass flux, and sets

@@ -49,7 +49,7 @@ program main
   real(wp)           :: mesh_ratio
   real(wp)           :: T_scenario, time_phys
   real(wp)           :: gamma_g
-  character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model, junction_trace, junction_flux
+  character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model, junction_trace, junction_flux, junction_riser_limit
   character(len=16)::boundary_method
   integer::outlet_reservoir_phase,initial_phase_hint
   character(len=16)::single_phase_mode,source_scheme,initial_phase
@@ -88,7 +88,7 @@ program main
                     pb_dp_on, pb_dp_off, &
                     stab_si_on, stab_si_off, stab_use_hysteresis, &
                     gas_eos, gas_flow_basis, liquid_flow_basis, single_phase_mode, source_scheme, initial_phase, outlet_reservoir_phase, boundary_method, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
-                    checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, junction_trace, junction_flux, dissipation_mode, newton_globalization
+                    checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, junction_trace, junction_flux, junction_riser_limit, dissipation_mode, newton_globalization
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
   type(pipeline_riser_simulator_t) :: sim
@@ -229,6 +229,7 @@ program main
   junction_model = 'MATCHED'
   junction_trace = 'CENTER'
   junction_flux = 'ROE'
+  junction_riser_limit = 'NONE'
   dissipation_mode = 'LAGGED'
   newton_globalization = 'LINE_SEARCH'
   ! ------------------------------ Read -----------------------------------
@@ -307,6 +308,7 @@ program main
       trim(junction_model)/='CONSERVATIVE') error stop 'Unknown junction_model'
   if (trim(junction_trace)/='CENTER'.and.trim(junction_trace)/='STEADY') error stop 'Unknown junction_trace'
   if (trim(junction_flux)/='ROE'.and.trim(junction_flux)/='PHASE_UPWIND') error stop 'Unknown junction_flux'
+  if (trim(junction_riser_limit)/='NONE'.and.trim(junction_riser_limit)/='ALPHA0') error stop 'Unknown junction_riser_limit'
   if (trim(dissipation_mode)/='LAGGED'.and.trim(dissipation_mode)/='FULLY_IMPLICIT') error stop 'Unknown dissipation_mode'
   if (mu_l<=0.0_wp .or. mu_g<=0.0_wp .or. eps<0.0_wp .or. eps/D>=1.0_wp) error stop 'Invalid viscosities/roughness'
   if(trim(newton_globalization)/='LINE_SEARCH'.and.trim(newton_globalization)/='ACTIVE_SET') &
@@ -436,6 +438,7 @@ program main
   cfg%junction_model = junction_model
   cfg%junction_trace = junction_trace
   cfg%junction_flux = junction_flux
+  cfg%junction_riser_limit = junction_riser_limit
   cfg%dissipation_mode = dissipation_mode
   cfg%newton_globalization = newton_globalization
   cfg%gas_eos        = gas_eos

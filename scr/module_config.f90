@@ -53,6 +53,12 @@ module module_config
     !! vector (Gl*, Gg*, p*) by phase-upwind mass fluxes with an acoustic
     !! pressure/velocity coupling. Default 'ROE' is the qualified operator.
     character(len=16) :: junction_flux = 'ROE'
+    ! EXPERIMENTAL E2 (opt-in, default 'NONE'): riser-trace limit at zero gas
+    ! flux. 'ALPHA0' accepts alpha*_riser=0 only when the transmitted gas flux
+    ! is exactly zero, the liquid flux is non-negative and the riser drift
+    ! closure has a regular branch alpha*(j_g)->0+ (checked at run time). It
+    ! never changes a flux, a state or a sign; negative gas flux stays refused.
+    character(len=16) :: junction_riser_limit = 'NONE'
     character(len=20) :: dissipation_mode = 'LAGGED'
     character(len=16) :: newton_globalization = 'LINE_SEARCH'
     real(wp) :: output_interval_s = 1.0_wp
