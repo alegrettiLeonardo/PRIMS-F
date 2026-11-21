@@ -1,3 +1,33 @@
+## Atualização: Chexal–Lellouche em todo o riser, 21/11/2026
+
+Worktree `PRIMS-F-chexal-riser-20261121`, branch `implementation/chexal-riser-20261121`
+(base `d2c8101`); sem push/merge; `main` intocada. Relatório:
+[CHEXAL_LELLOUCHE_RISER_QUALIFICATION.md](CHEXAL_LELLOUCHE_RISER_QUALIFICATION.md).
+Resultados: `~/Documentos/PRIMS-F-chexal-riser-results-20261121` (`p1/`, `p1_refine/`,
+`regress_bhagwat/`; `p1_INVALID_deck_override_bug/` não é evidência).
+
+- **Default:** `closure_riser=5` (CHEXAL_1992 AUTO) em `main.f90`, `sim_config_t` e
+  decks primários. Bhagwat é o ID 3 explícito, com decks arquivados em
+  `input/benchmarks/bhagwat/`, e reproduz byte a byte o binário `364b808`.
+  ACTIVE_SET, E1 e E2 são recusados com Chexal.
+- **Verificação:**
+  - Fortran 26/26 (5947 asserções), Python 123 OK, seis CLI PASS e o CLI novo
+    `test_chexal_default_cli.py`;
+  - núcleo contra transcrição independente em 945 estados (≤ 6,9e-14);
+  - NP-3989 Tabela A-1: casos de baixa pressão PASS, 1000 psia não reproduzidos;
+  - Jacobiano global contra diferenças finitas em 6 estados aceitos (≤ 4,3e-8);
+  - todos os estados aceitos do riser satisfazem o Chexal (≤ 8,3e-14).
+- **Física:**
+  - Stable completo (BARO/ISO).
+  - OSC e SS3 → `BLOCKED_CONSTITUTIVE_DOMAIN`: contracorrente inclinada exigida no topo
+    (65–76°), j_l → 0; persiste sob refino.
+  - SS1 → `BLOCKED_JUNCTION_TRACE_DOMAIN`: gás precisa inverter no traço horizontal.
+  - SS3 com N101/N201 a Δt 0,5 também falha por quina da derivada Chexal no caminho de
+    Roe (9323).
+  - Sem ciclos com Chexal: validação experimental NOT_VERIFIED; promoção BLOCKED.
+- **Próximo passo científico:** dados e forma constitutiva de contracorrente inclinada
+  ar–água (§9 do relatório). Não estender Chexal 1992 sem essa fonte.
+
 ## Atualização: auditoria avançada P0–P2, 20/11/2026
 
 Mesma branch/worktree; sem push/merge. Relatório:
