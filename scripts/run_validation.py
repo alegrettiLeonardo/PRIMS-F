@@ -26,7 +26,7 @@ def assign(text,key,value):
         new,n=pattern.subn(lambda m:m[1]+value,ln)
         if n:lines[i]=new;hits+=n
     if hits:return ''.join(lines)
-    return re.sub(r'(?m)^\s*/\s*$',f'  {key}={value}\n/',text)
+    return re.sub(r'(?m)^[ \t]*/[ \t]*$',f'  {key}={value}\n/',text)
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)

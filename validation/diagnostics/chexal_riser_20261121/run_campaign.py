@@ -43,7 +43,7 @@ def assign(text, key, value):
         raise RuntimeError(f'{key} assigned {hits} times')
     if hits == 1:
         return ''.join(lines)
-    return re.sub(r'(?m)^\s*/\s*$', f'  {key}={value}\n/', text)
+    return re.sub(r'(?m)^[ \t]*/[ \t]*$', f'  {key}={value}\n/', text)
 
 
 def main():

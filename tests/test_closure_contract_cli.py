@@ -81,6 +81,16 @@ def main():
     d, deck, rc, log = run('incompatible_E1_C5', dict(junction_flux='PHASE_UPWIND'))
     assert rc != 0 and 'not qualified with CHEXAL_1992' in log and not (d / 'closure_contract.txt').exists()
     records.append(dict(case='incompatible_E1', refused=True))
+    # 6b. junction transmission T1 is recorded and verified; unknown value refused
+    d, deck, rc, log = run('t1_C5', dict(junction_transmission='T1'))
+    assert rc == 0, log[-1500:]
+    assert 'junction_transmission=T1' in (d / 'closure_contract.txt').read_text()
+    vr, st = verify(d, deck); assert vr == 0 and st['status'] == 'PASS', st
+    assert any(c['check'] == 'deck_transmission == contract' and c['ok'] for c in st['checks'])
+    records.append(dict(case='transmission_T1', verify=st['status']))
+    d, deck, rc, log = run('t3_C5', dict(junction_transmission='T3'))
+    assert rc != 0 and 'Unknown junction_transmission' in log and not (d / 'closure_contract.txt').exists()
+    records.append(dict(case='unknown_transmission', refused=True))
     # 7. contract tampered after the run
     src = out / 'default_C5'; tam = out / 'tampered_C5'
     shutil.copytree(src, tam)
@@ -90,7 +100,7 @@ def main():
     assert vr == 1 and 'resolved_riser == contract_effective' in st['failed'] and 'metadata_riser == contract_effective' in st['failed'], st
     records.append(dict(case='tampered_contract', verify=st['status'], failed=st['failed']))
     (out / 'manifest.json').write_text(json.dumps(records, indent=1) + '\n')
-    print('PASS', len(records), 'closure-contract cases (3 negative detections, 2 refusals)')
+    print('PASS', len(records), 'closure-contract cases (3 negative detections, 3 refusals)')
 
 
 if __name__ == '__main__':

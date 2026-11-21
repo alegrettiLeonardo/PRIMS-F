@@ -110,6 +110,10 @@ def main():
         check('deck_requested_pipe == contract_requested', req_p == c['closure_pipe_requested'], [req_p, c['closure_pipe_requested']])
         expected_r = int(dr[0]) if dr else DEFAULT_RISER
         check('resolved_riser == contract_effective', expected_r == eff_r, [expected_r, eff_r])
+    if deck_text is not None and 'junction_transmission' in c:
+        m_t = re.findall(r"\bjunction_transmission\s*=\s*'([^']*)'", body(deck_text), re.I)
+        req_t = m_t[0].strip().upper() if m_t else 'T2'
+        check('deck_transmission == contract', req_t == c['junction_transmission'], [req_t, c['junction_transmission']])
     check('all_riser_cells_dispatched_effective', c['riser_cells'] == c['riser_cells_dispatched_effective'],
           [c['riser_cells'], c['riser_cells_dispatched_effective']])
     check('all_pipe_cells_dispatched_effective', c['pipe_cells'] == c['pipe_cells_dispatched_effective'],
@@ -130,6 +134,10 @@ def main():
             check('checkpoint_riser == contract_effective', int(mk.group(1)) == eff_r, mk.group(1))
             mp = re.search(r'closure_pipe=(\d+)', head)
             check('checkpoint_pipe == contract_effective', mp is not None and int(mp.group(1)) == eff_p, mp.group(1) if mp else None)
+            mt = re.search(r'junction_transmission=(\S+)', head)
+            if 'junction_transmission' in c:
+                check('checkpoint_transmission == contract', mt is not None and mt.group(1) == c['junction_transmission'],
+                      mt.group(1) if mt else None)
         else:
             check('checkpoint_header_has_contract', False, 'legacy checkpoint header without closure ids')
     data = None
