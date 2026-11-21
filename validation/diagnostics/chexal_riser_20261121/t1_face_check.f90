@@ -8,7 +8,7 @@ program t1_face_check
   !!   BAL |tr|k| sum_i w_i R_i,k - [sum_i w_i (U-Uold)_i,k - dt sum_i w_i S_i,k + dt (Fout-Fin)_k]
   !!        which equals dt * sum_faces (fm - fp)_k (the singular source of the scheme):
   !!        0 for T1 in every component; dt*(F3_L*-F3_R*) for the T2 momentum.
-  !! Usage: t1_face_check FIXTURE C_GAS
+  !! Usage: t1_face_check FIXTURE C_GAS [TRIAL]
   use offline_api
   use,intrinsic::ieee_arithmetic,only:ieee_is_finite
   implicit none
@@ -23,7 +23,12 @@ program t1_face_check
   if(st/=0)then
     write(*,'(a,i0)')'probe_init status ',st;stop 1
   endif
-  call probe_state(0_c_int,x,sc,meta);call unpack(x,uu)
+  call get_command_argument(3,arg)
+  if(trim(arg)=='TRIAL')then
+    call probe_state(1_c_int,x,sc,meta);call unpack(x,uu)   ! last refused Newton trial
+  else
+    call probe_state(0_c_int,x,sc,meta);call unpack(x,uu)   ! accepted state
+  endif
   uo=uu;uo(:,1)=uu(:,1)*(1-1e-3_wp);uo(:,2)=uu(:,2)*(1+1e-3_wp)
   dtn=0.05_wp/cfg%omega_t
   fscale=[cfg%omega_rho*cfg%omega_u,cfg%omega_rho*cfg%omega_u,cfg%omega_rho*cfg%omega_u**2]

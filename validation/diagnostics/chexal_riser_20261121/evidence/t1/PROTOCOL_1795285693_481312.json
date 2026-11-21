@@ -1,0 +1,212 @@
+{
+ "created": "2026-11-21T15:28:13-0300",
+ "binary": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/bin/prims_f_t1",
+ "binary_sha256": "26b18c8e58da34c42b1ecea9b600693db9b08a6b9d60d7b134389551d974b760",
+ "source_sha256": "1b6650bc7352b53035d9f6607a8fbb344ece3cd4b820e93f580bb115312cd3f9",
+ "git_head": "d9b18e1d9b1c8d8792b69ad5caccf129554d3c57",
+ "git_dirty": false,
+ "limits": {
+  "max_wall_s": 14400.0,
+  "window_s": 1800.0,
+  "min_advance_s": 1.0
+ },
+ "env": {
+  "OMP_NUM_THREADS": "1",
+  "OPENBLAS_NUM_THREADS": "1",
+  "MKL_NUM_THREADS": "1"
+ },
+ "jobs": [
+  {
+   "name": "D_Stable_C5_BAROTROPIC_N51_dt0.5",
+   "case": "D_Stable",
+   "eos": "BAROTROPIC",
+   "closure_riser": 5,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_Stable.nml",
+   "source_sha256": "79c62fece8e55ad6d3d6d3963d4486ffe2b15d571bfa6944d1243e19f84938ab",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_Stable_C5_BAROTROPIC_N51_dt0.5.nml",
+   "deck_sha256": "81cd23cf6d5b46da0e701dbc3ce909ef20896f281ff1ddf5acb37ec09d56dc49",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_Stable_C5_BAROTROPIC_N51_dt0.5"
+  },
+  {
+   "name": "D_Stable_C3_BAROTROPIC_N51_dt0.5",
+   "case": "D_Stable",
+   "eos": "BAROTROPIC",
+   "closure_riser": 3,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_Stable.nml",
+   "source_sha256": "79c62fece8e55ad6d3d6d3963d4486ffe2b15d571bfa6944d1243e19f84938ab",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_Stable_C3_BAROTROPIC_N51_dt0.5.nml",
+   "deck_sha256": "9750e525ae8eafb88defc6c1e714a434f6c2d731c99f2aaedf935a5efab2f61f",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_Stable_C3_BAROTROPIC_N51_dt0.5"
+  },
+  {
+   "name": "D_OSC_C5_BAROTROPIC_N51_dt0.5",
+   "case": "D_OSC",
+   "eos": "BAROTROPIC",
+   "closure_riser": 5,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_OSC.nml",
+   "source_sha256": "0f7a03e3e9581e9b66c3a836e2730a8c29d3739ea6620f13c7460eeb4744f5e3",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_OSC_C5_BAROTROPIC_N51_dt0.5.nml",
+   "deck_sha256": "4100803b0ba77d179593332f1a922c14961e9aaeb0b68fb987276fe6c46c860e",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_OSC_C5_BAROTROPIC_N51_dt0.5"
+  },
+  {
+   "name": "D_OSC_C3_BAROTROPIC_N51_dt0.5",
+   "case": "D_OSC",
+   "eos": "BAROTROPIC",
+   "closure_riser": 3,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_OSC.nml",
+   "source_sha256": "0f7a03e3e9581e9b66c3a836e2730a8c29d3739ea6620f13c7460eeb4744f5e3",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_OSC_C3_BAROTROPIC_N51_dt0.5.nml",
+   "deck_sha256": "b65eab88b0742db26044714218ae24f91b13eda2e252ba6b021c625da24cdcc4",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_OSC_C3_BAROTROPIC_N51_dt0.5"
+  },
+  {
+   "name": "D_SS1_C5_BAROTROPIC_N51_dt0.5",
+   "case": "D_SS1",
+   "eos": "BAROTROPIC",
+   "closure_riser": 5,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_SS1.nml",
+   "source_sha256": "e1f0c39019eb74b414b4c079cd995d259ddcacae4f08da37341b06c40861824c",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_SS1_C5_BAROTROPIC_N51_dt0.5.nml",
+   "deck_sha256": "dd0b1f50a5e8079157634f1c3a438c3182dfb36d98e5225efb09e647156e650f",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_SS1_C5_BAROTROPIC_N51_dt0.5"
+  },
+  {
+   "name": "D_SS1_C3_BAROTROPIC_N51_dt0.5",
+   "case": "D_SS1",
+   "eos": "BAROTROPIC",
+   "closure_riser": 3,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_SS1.nml",
+   "source_sha256": "e1f0c39019eb74b414b4c079cd995d259ddcacae4f08da37341b06c40861824c",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_SS1_C3_BAROTROPIC_N51_dt0.5.nml",
+   "deck_sha256": "4b82d0f696b3dc48a522a2d043000c458124a1f4fc6407a0dc2ff9868e4f0921",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_SS1_C3_BAROTROPIC_N51_dt0.5"
+  },
+  {
+   "name": "D_SS3_C5_BAROTROPIC_N51_dt0.5",
+   "case": "D_SS3",
+   "eos": "BAROTROPIC",
+   "closure_riser": 5,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_SS3.nml",
+   "source_sha256": "541e96182dc4bc958bc0662513a6a0d8b74c291734ef20f2383a32e79fff1583",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_SS3_C5_BAROTROPIC_N51_dt0.5.nml",
+   "deck_sha256": "5d7b161479b5f0e0c678112ea67788e5bc1d8acf9b96ac76ac542bf7fed5aaa3",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_SS3_C5_BAROTROPIC_N51_dt0.5"
+  },
+  {
+   "name": "D_SS3_C3_BAROTROPIC_N51_dt0.5",
+   "case": "D_SS3",
+   "eos": "BAROTROPIC",
+   "closure_riser": 3,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_SS3.nml",
+   "source_sha256": "541e96182dc4bc958bc0662513a6a0d8b74c291734ef20f2383a32e79fff1583",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_SS3_C3_BAROTROPIC_N51_dt0.5.nml",
+   "deck_sha256": "2eb578c9aabafff0ce12a2be0a6cf46ec05c82e6e2fa435657ba80cd098543fc",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_SS3_C3_BAROTROPIC_N51_dt0.5"
+  },
+  {
+   "name": "D_Stable_C5_ISOTHERMAL_N51_dt0.5",
+   "case": "D_Stable",
+   "eos": "ISOTHERMAL",
+   "closure_riser": 5,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_Stable_ISO.nml",
+   "source_sha256": "eedde69cd910f63877d7de3de1557d1dd4996c2637aabbc0cb51779ba49d07d2",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_Stable_C5_ISOTHERMAL_N51_dt0.5.nml",
+   "deck_sha256": "6193885b4167213f68bb4ea27662fd8f619a90c28f78068bd8be502338f794cf",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_Stable_C5_ISOTHERMAL_N51_dt0.5"
+  },
+  {
+   "name": "D_Stable_C3_ISOTHERMAL_N51_dt0.5",
+   "case": "D_Stable",
+   "eos": "ISOTHERMAL",
+   "closure_riser": 3,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_Stable_ISO.nml",
+   "source_sha256": "eedde69cd910f63877d7de3de1557d1dd4996c2637aabbc0cb51779ba49d07d2",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_Stable_C3_ISOTHERMAL_N51_dt0.5.nml",
+   "deck_sha256": "ef773e307ba282010d3a6fd13d79e65d4ca723a828d2a8ef15e8b2a2675cbf96",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_Stable_C3_ISOTHERMAL_N51_dt0.5"
+  },
+  {
+   "name": "D_OSC_C5_ISOTHERMAL_N51_dt0.5",
+   "case": "D_OSC",
+   "eos": "ISOTHERMAL",
+   "closure_riser": 5,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_OSC_ISO.nml",
+   "source_sha256": "80ed29afa31eca262d20391a18147aea212de8d298700ab34ba43e667686def5",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_OSC_C5_ISOTHERMAL_N51_dt0.5.nml",
+   "deck_sha256": "14eeff3f512ad29b87a6d368940e8078e49f6c4f315b4180e12d26f74f8fd857",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_OSC_C5_ISOTHERMAL_N51_dt0.5"
+  },
+  {
+   "name": "D_OSC_C3_ISOTHERMAL_N51_dt0.5",
+   "case": "D_OSC",
+   "eos": "ISOTHERMAL",
+   "closure_riser": 3,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_OSC_ISO.nml",
+   "source_sha256": "80ed29afa31eca262d20391a18147aea212de8d298700ab34ba43e667686def5",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_OSC_C3_ISOTHERMAL_N51_dt0.5.nml",
+   "deck_sha256": "e8cbd398f6f937dc0d9ba881e4c005e9c8fcba038aaeb4cb02bc5c5e0b361281",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_OSC_C3_ISOTHERMAL_N51_dt0.5"
+  },
+  {
+   "name": "D_SS1_C5_ISOTHERMAL_N51_dt0.5",
+   "case": "D_SS1",
+   "eos": "ISOTHERMAL",
+   "closure_riser": 5,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_SS1_ISO.nml",
+   "source_sha256": "e89b1cf48a0d20e79698efd37df5f92bfaf606fa22cacfbe49a1bad32ec97e9c",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_SS1_C5_ISOTHERMAL_N51_dt0.5.nml",
+   "deck_sha256": "85dba0519a6530cfc1d456e1183cfb29e088d4ec52152dc5031b5158163f3078",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_SS1_C5_ISOTHERMAL_N51_dt0.5"
+  },
+  {
+   "name": "D_SS1_C3_ISOTHERMAL_N51_dt0.5",
+   "case": "D_SS1",
+   "eos": "ISOTHERMAL",
+   "closure_riser": 3,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_SS1_ISO.nml",
+   "source_sha256": "e89b1cf48a0d20e79698efd37df5f92bfaf606fa22cacfbe49a1bad32ec97e9c",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_SS1_C3_ISOTHERMAL_N51_dt0.5.nml",
+   "deck_sha256": "9dc89d1dd371006da5d4bc035936217bdc204339f44eeae990cd24cd0edf7ff9",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_SS1_C3_ISOTHERMAL_N51_dt0.5"
+  },
+  {
+   "name": "D_SS3_C5_ISOTHERMAL_N51_dt0.5",
+   "case": "D_SS3",
+   "eos": "ISOTHERMAL",
+   "closure_riser": 5,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_SS3_ISO.nml",
+   "source_sha256": "d8bf7ac86adb0dd0cbca35d641dd67b6178fc50352cf62a9c4452bb63677f34a",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_SS3_C5_ISOTHERMAL_N51_dt0.5.nml",
+   "deck_sha256": "2e1729b06cf09b00972eefa7f67b550e5bccfe7c3691c28f8beadbfea01a6944",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_SS3_C5_ISOTHERMAL_N51_dt0.5"
+  },
+  {
+   "name": "D_SS3_C3_ISOTHERMAL_N51_dt0.5",
+   "case": "D_SS3",
+   "eos": "ISOTHERMAL",
+   "closure_riser": 3,
+   "grid": "51:0.5",
+   "source_deck": "input/benchmarks/D_SS3_ISO.nml",
+   "source_sha256": "d8bf7ac86adb0dd0cbca35d641dd67b6178fc50352cf62a9c4452bb63677f34a",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/decks/D_SS3_C3_ISOTHERMAL_N51_dt0.5.nml",
+   "deck_sha256": "ad31baa20ae016fc00ab2fb685f969b45a5b6ab4c3a9d5fb62133cb8221ba94b",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/t1_regress_t2/runs/D_SS3_C3_ISOTHERMAL_N51_dt0.5"
+  }
+ ]
+}
