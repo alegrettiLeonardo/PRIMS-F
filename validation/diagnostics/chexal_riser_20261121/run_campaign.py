@@ -58,6 +58,8 @@ def main():
     a.add_argument('--closures', nargs='+', type=int, default=[5, 3])
     a.add_argument('--cases', nargs='+', default=CASES)
     a.add_argument('--grid', nargs='+', default=['51:0.5'], help='N:dt_max pairs (cells per section : seconds)')
+    a.add_argument('--transmission', default=None, choices=['T1', 'T2'], help='junction_transmission override (name gets _T1/_T2)')
+    a.add_argument('--time', type=float, default=None, help='time_dim override, s (short discriminating runs)')
     args = a.parse_args()
     root = args.root.resolve()
     (root / 'decks').mkdir(parents=True, exist_ok=True)
@@ -68,10 +70,15 @@ def main():
             src = ROOT / 'input/benchmarks' / (case + ('_ISO' if eos == 'ISOTHERMAL' else '') + '.nml')
             for cid, g in ((c, g) for c in args.closures for g in args.grid):
                 n, dt = g.split(':')
-                name = f'{case}_C{cid}_{eos}_N{n}_dt{dt}'
+                name = f'{case}_C{cid}_{eos}_N{n}_dt{dt}' + (f'_{args.transmission}' if args.transmission else '') + \
+                    (f'_t{args.time:g}' if args.time else '')
                 run = root / 'runs' / name
                 text = src.read_text()
                 over = [('closure_riser', str(cid)), ('tol_res', '1e-10'), ('out_dir', repr(str(run))), ('regime', repr(name))]
+                if args.transmission:
+                    over += [('junction_transmission', repr(args.transmission))]
+                if args.time:
+                    over += [('time_dim', repr(args.time))]
                 if g != '51:0.5':   # benchmark grid otherwise; refinement changes only N and dt_max
                     over += [('nodes', n), ('n_riser', n), ('dt_max_s', dt), ('output_interval_s', str(min(0.1, float(dt))))]
                 for k, v in over:

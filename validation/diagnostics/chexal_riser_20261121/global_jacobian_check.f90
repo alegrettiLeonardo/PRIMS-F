@@ -47,6 +47,10 @@ program global_jacobian_check
   cfg%closure_pipe = 1; cfg%closure_riser = closure; cfg%gas_eos = trim(eos)
   cfg%junction_model = 'MATCHED'; cfg%flux_scheme = 'ROE'; cfg%dissipation_mode = 'LAGGED'
   cfg%jac_dissipation_fd = .false.
+  ! junction transmission from PRIMS_JUNCTION_TRANSMISSION (default T2)
+  call get_environment_variable('PRIMS_JUNCTION_TRANSMISSION', arg, status=st)
+  if (st == 0) cfg%junction_transmission = trim(arg)
+  write(*,'(2a)') 'junction_transmission=', trim(cfg%junction_transmission)
   cfg%nCells = nc; cfg%num_dummy_cells = nd; cfg%N_pipe = np/2; cfg%quad_points = 3
   allocate(cfg%cell_width(nc), cfg%thetav(nc), u(nc,3))
   open(newunit=iu, file=trim(fstate), status='old')
