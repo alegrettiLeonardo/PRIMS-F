@@ -95,6 +95,32 @@ program junction_riemann_ref
   stop
  endif
  dbg=trim(mode)=='JUNCTION_DEBUG'
+ if(trim(mode)=='MULTISTART')then
+  ! 21/11/2026: a Newton failure is not a proof of non-existence. Starts on a
+  ! grid of (p_L*, ln alpha_R*, p_M); every converged solution is printed.
+  block
+   real(wp)::s0(3),vl0(6),vr0(6),fp_(5),fa_(5),fm_(3)
+   integer::a1,a2,a3,tc,ist
+   call probe_state(0_c_int,x,sc,meta);call unpack(x,uu)
+   xl=uu(ib,:);yr=uu(ib+1,:);thl=cfg%thetav(ib);thr=cfg%thetav(ib+1)
+   call prim(xl,thl,cfg%closure_pipe,vl0,code);call prim(yr,thr,cfg%closure_riser,vr0,code)
+   fp_=[-2e-3_wp,-1e-3_wp,0.0_wp,1e-3_wp,2e-3_wp]
+   fa_=[0.0_wp,-2.0_wp,-5.0_wp,-10.0_wp,-20.0_wp]
+   fm_=[-1e-3_wp,0.0_wp,1e-3_wp]
+   do tc=1,2
+    do a1=1,5
+     do a2=1,5
+      do a3=1,3
+       s0=[vl0(4)*(1+fp_(a1)),log(vr0(1))+fa_(a2),vr0(4)*(1+fm_(a3))]
+       call solve(xl,yr,thl,thr,cfg%closure_pipe,cfg%closure_riser,tc,ref1,ist,s0)
+       write(*,'(a,i1,a,3i2,a,i4,a,12es14.6)')'MS|T',tc,'|',a1,a2,a3,'|',ist,'|',out_si(ref1)
+      enddo
+     enddo
+    enddo
+   enddo
+  end block
+  stop
+ endif
  do which=0,1
   call probe_state(int(which,c_int),x,sc,meta);call unpack(x,uu)
   do k=1,2
@@ -271,11 +297,12 @@ contains
   endif
   ust(:,1)=uls;ust(:,2)=urs;ust(:,3)=um
  end subroutine
- subroutine solve(ul0,ur0,tl,tr_,cl_,cr_,tcond,out,istat)
+ subroutine solve(ul0,ur0,tl,tr_,cl_,cr_,tcond,out,istat,s0)
   real(wp),intent(in)::ul0(3),ur0(3),tl,tr_
   integer,intent(in)::cl_,cr_,tcond
   real(wp),intent(out)::out(12)
   integer,intent(out)::istat
+  real(wp),intent(in),optional::s0(3)
   real(wp)::s(3),res(3),res2(3),jac(3,3),ust(3,3),ust2(3,3),ds(3),scl(3),vl_(6),vr_(6),fl_(3),fr_(3),h,lam(3),rr(3,3),lam2(3)
   real(wp)::jinv(3,3),det,lam3(3)
   integer::n,j,code
@@ -284,6 +311,7 @@ contains
   call prim(ur0,tr_,cr_,vr_,code);if(code/=0)return
   call flux_of(ul0,tl,cl_,fl_,code);if(code/=0)return
   s=[vl_(4),log(vr_(1)),vr_(4)]
+  if(present(s0))s=s0
   scl=[max(abs(fl_(1)),1e-8_wp),max(abs(fl_(2)),abs(fl_(1))*1e-6_wp,1e-14_wp),pip*vl_(4)]
   istat=2
   do n=1,40

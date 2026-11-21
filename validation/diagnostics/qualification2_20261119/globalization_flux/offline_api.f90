@@ -45,6 +45,10 @@ contains
     cfg%njl=jl0/cfg%omega_u;cfg%njg=jg0/cfg%omega_u
     cfg%tol=1e-12_wp;cfg%tola=1e-13_wp;cfg%tol_res=1e-8_wp;cfg%tol_inc=1e-8_wp
     cfg%closure_pipe=1;cfg%closure_riser=3;cfg%gas_eos='BAROTROPIC'
+    ! Riser closure of the fixture (default 3 = historical Bhagwat fixtures;
+    ! PRIMS_PROBE_CLOSURE_RISER=5 for CHEXAL_1992 fixtures, 21/11/2026).
+    call get_environment_variable('PRIMS_PROBE_CLOSURE_RISER',header,status=code)
+    if(code==0)read(header,*)cfg%closure_riser
     cfg%junction_model='MATCHED';cfg%flux_scheme='ROE';cfg%dissipation_mode='LAGGED'
     cfg%jac_dissipation_fd=.true.
     cfg%nCells=nc;cfg%num_dummy_cells=2;cfg%N_pipe=51;cfg%quad_points=3
@@ -149,7 +153,7 @@ contains
     real(wp) :: source(3),a(3,3),ds(3,3),alpha,pip,kin
     call sim%point_state(u(ib,:),cfg%thetav(ib),vl,fl,source,a,ds,status,closure_id=1)
     if(status/=0)return
-    call sim%point_state(u(ib+1,:),cfg%thetav(ib+1),vr,fr,source,a,ds,status,closure_id=3)
+    call sim%point_state(u(ib+1,:),cfg%thetav(ib+1),vr,fr,source,a,ds,status,closure_id=cfg%closure_riser)
     if(status/=0)return
     alpha=solve_alpha_from_superficials(fr(1)/vr(2),fr(2)/vr(3),vr(2),vr(3),cfg%thetav(ib), &
       cfg%D_H,cfg%AREA,cfg%eps,cfg%G,cfg%mu_l,cfg%mu_g,cfg%sigma,cfg%omega_u,cfg%omega_rho, &
