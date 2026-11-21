@@ -1,3 +1,33 @@
+## Atualização: qualificação Chexal, rodada 2 (P0/P1/P2), 21/11/2026
+
+Mesma branch e worktree, sem push nem merge. Relatório: Parte II de
+[CHEXAL_LELLOUCHE_RISER_QUALIFICATION.md](CHEXAL_LELLOUCHE_RISER_QUALIFICATION.md).
+
+- **P0.1 NP-3989:**
+  - linhas 1, 4 e 8 PASS;
+  - linha 5 PASS só com as equações de 1986 (revisão descendente demonstrada);
+  - linha 3 é referência inconsistente;
+  - linhas 2, 6 e 7 (1000 psia) FAIL, com causa não identificada: não é versão nem Re, e propriedades só a explicam com um par incoerente.
+
+  O núcleo ganhou `fluid=CHEXAL_FLUID_STEAM_WATER` (só para verificação; o caminho ar–água é bit a bit).
+- **P0.2:** `test_chexal_angles`, 468 verificações, PASS.
+- **P0.3:**
+  - `closure_contract.txt` (fechamento solicitado, efetivo e despachado por célula), que para o solver se divergirem;
+  - checkpoint com os IDs de fechamento;
+  - `scripts/verify_closure_contract.py` e `tests/test_closure_contract_cli.py` (CI);
+  - `run_campaign.py` verifica cada execução.
+- **P0.4:** `boundary_jacobian_probe`:
+  - erro ≤ 9e-10 em j_l → 0⁺ no topo;
+  - até 2,2e-6 com α → 0;
+  - nas quinas, o Jacobiano é a derivada do pedaço do estado; na quina exata, status 53 (`CLOSURE_DERIVATIVE`).
+- **P1.1:** NOT_VERIFIED. Não há pontos experimentais. O mapa de domínio dá 0 % validado (D = 52,5 mm, fora dos 25–38 mm de Beggs) e interpolação por Fr.
+- **P1.2:** BLOCKED. Nos 11 estados de bloqueio, os candidatos diferem 1,4–3,5× em u_g. Barnea e Ohnuki não estão disponíveis localmente.
+- **P1.3:** a junção passa em conservação, Jacobiano e partição (agora também com Chexal). A transmissão T1/T2 está pendente de decisão.
+- **P2:**
+  - 16 execuções com o binário `prims_f_contract` (`9e54e79f…`): contrato 16/16 PASS e saídas idênticas byte a byte às da Parte I;
+  - Stable a Δt 0,125 também decai (Chexal mais devagar).
+- **Pendências científicas:** dados de C0/Vgj/CCFL inclinados ar–água com D ≈ 50 mm; decisão T1/T2; dados primários de fração de vazio; PDF de Baliño et al. 2010.
+
 ## Atualização: Chexal–Lellouche em todo o riser, 21/11/2026
 
 Worktree `PRIMS-F-chexal-riser-20261121`, branch `implementation/chexal-riser-20261121`

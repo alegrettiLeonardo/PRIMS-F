@@ -8,6 +8,16 @@ Sem push, merge ou alteração da `main`.
 
 ## Resumo
 
+> **Rodada 2 (Parte II, ao final):**
+> - NP-3989 auditado nas versões 1986 e 1992: a revisão descendente está demonstrada; as linhas a 1000 psia continuam FAIL, com causa não identificada.
+> - Ângulos e velocidades certificados.
+> - Contrato do fechamento solicitado = executado (incidente de rotulagem coberto por teste negativo).
+> - Jacobianos nas fronteiras constitutivas verificados.
+> - Validação ar–água NOT_VERIFIED (sem pontos primários).
+> - Contracorrente inclinada BLOCKED.
+> - Campanha reexecutada com contrato e idêntica byte a byte.
+> - Stable estável também com Δt 0,125.
+
 O Chexal–Lellouche (1992, ar–água, ID 5, ramo AUTO) é agora o fechamento padrão
 de todo o riser na branch de desenvolvimento. O Bhagwat (ID 3) continua selecionável
 e reproduz byte a byte o binário congelado anterior. Três verificações independentes
@@ -449,4 +459,387 @@ python3 $D/fields_closure_check.py OUT.json RESULTS/p1/runs/*/
 python3 $D/np3989_sample_check.py OUT.json OUT.md
 python3 $D/core_crosscheck.py tmp/cx/core_crosscheck OUT.json
 $D/run_global_jacobian.sh tmp/cx/global_jacobian_check RESULTS/p1/runs EVIDENCE
+```
+
+---
+
+# Parte II — Qualificação P0/P1/P2 (21/11/2026, segunda rodada)
+
+Base: HEAD `db97d3b` confirmada, worktree limpa e `main` em `f3717dd`. Os resultados da
+Parte I foram tratados como evidência histórica. Esta rodada reexecutou a campanha
+com o binário novo (contrato de fechamento, §II.3) e comparou as execuções com as
+anteriores (§II.8). A Parte II prevalece sobre a Parte I onde as duas tratam do mesmo item.
+
+## II.1 Auditoria EPRI a 1000 psia e diferenças 1986/1992 (P0.1)
+
+**Equações das duas versões.** Fontes: NP-3989 pp. 3-1 a 3-4 (PDF 25–28) e Chexal et al.
+(1992) pp. 261–268.
+
+| Termo | 1986 | 1992 | Efeito na Tabela A-1 |
+|---|---|---|---|
+| C0, L(α,p), K0, r, B1, Re | idênticos | idênticos | nenhum |
+| C2 | 1 ou 1/(1−e^{−C5/(1−C5)}), C5 = √(150 ρg/ρf) | idem + ramo 0,4757 [ln(ρf/ρg)]^0,7 se ρf/ρg ≤ 18 | nenhum (ρf/ρg ≥ 20,6 em todas as linhas) |
+| C3 ascendente, C4, D2 | idênticos | idênticos | nenhum |
+| C3 descendente | C3 = C10 | C3 = 2(C10/2)^B2 | casos 5–8 |
+| expoente de (1−α) com Reg<0 | K1 = min(0,65; 0,5 e^{|Reg|/4000}) | C9 = min(0,7; (1−α)^0,65) | casos 5–8 |
+| C0 com Reg<0 | só 3-4a | máx(3-4a; Vgj⁰(1−α)^0,2/(|jf|+|jg|)) (3-4b) | casos 5–8 |
+
+**Unidades e propriedades.** A tabela usa P em psia (absoluta), D em ft, j e Vgj em ft/s;
+o modelo é numericamente idêntico em SI (p. 3-4). As propriedades vapor–água não são
+impressas e foram declaradas: tabelas clássicas de vapor saturado (14,7 psia:
+vf 0,01672, vg 26,80 ft³/lb; 1000 psia: vf 0,02159, vg 0,4456 ft³/lb), σ pela IAPWS 1994
+em Tsat, viscosidades a partir dos Reynolds **impressos** e P_crit = 3208,2 psia. Nenhuma
+propriedade ar–água foi usada.
+
+**Teste por linha** (`tests/test_chexal_np3989.f90`): o núcleo Fortran ganhou o L de
+vapor–água (Eq. 3-5/3-6) como opção explícita de verificação. O caminho ar–água continua
+bit a bit, conforme o cruzamento de 945 estados repetido. Em todas as linhas, Fortran =
+transcrição independente de 1992 com erro ≤ 1e-11.
+
+| Caso | Versão aplicável | Referência C0/Vgj/α | Fortran (1992) | Erro máx. | Causa | Status |
+|---|---|---|---|---:|---|---|
+| 1 | ambas (ascendente) | 1,2037/0,5979/0,5361 | 1,2038/0,5984/0,5361 | 8,6e-4 | reproduzido na banda de propriedades | PASS |
+| 4 | ambas | 1,1922/0,9054/0,5323 | 1,1922/0,9063/0,5322 | 9,8e-4 | idem | PASS |
+| 8 | ambas | 1,3036/4,6590/0,6714 | 1,3037/4,6584/0,6713 | 1,5e-4 | idem | PASS |
+| 5 | 1986 | 1,0400/5,1172/0,9538 | 1,5869/11,391/0,8056 | — | revisão descendente de 1992; as equações de **1986** reproduzem (1,0399/5,1162/0,9539) | PASS (diferença de versão demonstrada) |
+| 3 | ambas | 1,1119/0,2234/0,5914 | 1,1109/0,2263/0,5921 | 1,3e-2 | a linha impressa viola α(C0 j+Vgj)=jg em −4,2e-4, limite de arredondamento 1,3e-4: referência defeituosa | FAIL (referência inconsistente) |
+| 2 | ambas | 1,1116/0,1410/0,5947 | 1,1107/0,1373/0,5953 | 2,6e-2 | não explicada | FAIL |
+| 6 | ambas | 1,0498/4,8444/0,9171 | 1,0921/4,6374/0,8515 (1986: 1,0514/4,8318/0,9142) | 7,2e-2 | não explicada | FAIL |
+| 7 | ambas | 1,2948/1,8775/0,5700 | 1,2934/1,8193/0,5688 (1986: 1,2927/1,8363/0,5697) | 3,1e-2 | não explicada | FAIL |
+
+Hipóteses testadas para a falha a 1000 psia ([np3989_audit.py](../validation/diagnostics/chexal_riser_20261121/np3989_audit.py),
+[np3989_property_fit.py](../validation/diagnostics/chexal_riser_20261121/np3989_property_fit.py)):
+
+- **Revisão de versão:** rejeitada. A forma ascendente é idêntica, e os casos 6–7 também
+  falham com as equações de 1986.
+- **Reynolds efetivo diferente em B1/C3:** rejeitada (erro mínimo ainda 5,7e-3).
+- **Um único conjunto de propriedades:** o ajuste é degenerado; só ρg/ρf e σ(ρf−ρg)/ρf²
+  são identificáveis. Os casos 2, 6 e 7 são reproduzidos a ≤ 1,1e-3 com ρg/ρf = 0,0468
+  (tabela: 0,0485) e σ(ρf−ρg)/ρf² +10 %. Esse par não corresponde a um estado saturado
+  coerente (a razão indica ~970 psia, a σ ~273 °C), e o caso 3, fora do ajuste, piora.
+
+A causa continua **não identificada** e os casos 2, 6 e 7 ficam FAIL, como exige o gate.
+
+Relevância: a 1000 psia, C5 ≥ 1 e C2 = 1. Nos estados ar–água do PRIMS-F, ρg/ρl ≈
+0,002–0,006 e C5 ≈ 0,5–0,95 < 1, o mesmo ramo das linhas de 14,7 psia, que são reproduzidas.
+Nenhum coeficiente foi ajustado.
+
+**Gate P0.1:** parcialmente atendido. Os valores aplicáveis a baixa pressão e a diferença
+de versão descendente estão demonstrados; as linhas a 1000 psia continuam **FAIL**.
+
+## II.2 Certificado de ângulos e velocidades (P0.2)
+
+Convenções:
+- **PRIMS-F:** θ em rad a partir da horizontal, positivo quando o eixo sobe (riser 0 a 76,47°,
+  oleoduto −β), fluxos assinados ao longo do eixo.
+- **Chexal:** θ_C = 90 − |θ| graus a partir da vertical e fluxos no sentido físico ascendente,
+  f = sign(θ)·j.
+- A correlação usa o ângulo só por Fr (3-3); o seno da gravidade fica no termo-fonte, coberto
+  por `test_fv_operators`.
+
+`tests/test_chexal_angles.f90`: **468 verificações, PASS**, em 0, ±15, ±45, ±65, ±76 e ±90°
+e 12 pares de fluxo (cocorrente ↑/↓, contracorrente nos dois sentidos, nulos, ±1e-12).
+
+- O status de domínio coincide com o previsto pelas pp. 262–265: 81 estados admitidos, 46
+  recusas de domínio, 5 contracorrentes verticais com `BRANCH_REQUIRED`. Não há tolerância de
+  sinal: 1e-12 m/s conta como sinal.
+- A reversão de eixo (θ, j) → (−θ, −j) dá C0 idêntico e Vgj com sinal oposto, **bit a bit**.
+- As velocidades recuperadas de (α, ρl j_l + ρg j_g) têm o sinal estrito, com erro ≤ 1e-12 na
+  escala do momento.
+- C0 e Vgj são contínuos em θ = 0. Há uma quina em Fr (inclinação 1/90 contra 1/10), sem salto.
+- Com líquido nulo descendente, a raiz é o limite de gás puro α = 1 (C0(1) = 1, Vgj(1) = 0, pp. 259–260).
+- Na **vertical**, o par (α, M) também admite uma solução contracorrente. Sem dica, AUTO recusa
+  com 62; com a dica do estado anterior, recupera o ramo cocorrente exato. Isso nunca ocorre na
+  catenária (≤ 76,47°).
+- Com |j_g| < 1e-4 na vertical, aparece `NUMERIC` (66): é a limitação documentada da busca de
+  CCFL (`CHEXAL_REMAINING_LIMITS.md`).
+- No topo da catenária (76,47°), a contracorrente é recusada **mesmo com ramo explícito**.
+
+**Gate P0.2: PASS.**
+
+## II.3 Contrato do fechamento efetivo (P0.3)
+
+Causa do incidente de 21/11 (manhã): o gerador de decks editou um `closure_riser=` dentro de
+um comentário, e nenhum artefato da execução registrava o fechamento executado de forma
+comparável ao rótulo.
+
+Implementação:
+
+- **`main.f90`:** `closure_riser` passa a ter sentinela, o que distingue DEFAULT de valor explícito.
+- **`effective_closures`** (procedimento do simulador): devolve o fechamento **despachado** a
+  cada célula pelo mesmo `cell_closure` usado nos operadores (estado pontual, faces, fontes,
+  Jacobianos e recuperação).
+- **`closure_contract.txt`**, gravado antes do transiente, com:
+  - `closure_{pipe,riser}_{requested,effective}`, nome do modelo e células despachadas por seção;
+  - fechamento do traço do riser na junção e do contorno de saída;
+  - `gas_eos`, `junction_model/flux/trace/riser_limit`, globalização, dissipação, `tol_res` e arquivo de entrada.
+- Se alguma célula despachada divergir do fechamento resolvido, o solver para (`error stop`).
+- O cabeçalho do checkpoint traz os IDs de fechamento, a EOS e as opções da junção. Os leitores
+  de checkpoint só usam as linhas seguintes, então continuam compatíveis.
+- **`scripts/verify_closure_contract.py`** cruza:
+  - deck (só linhas não comentadas) e rótulo `_C<k>`;
+  - contrato, `run_metadata` e checkpoint;
+  - **dados**: os estados aceitos do riser devem satisfazer o Chexal (transcrição
+    independente) se o efetivo for 5–7, e não satisfazê-lo (≤ 1 %) caso contrário.
+  
+  Grava `CLOSURE_CONTRACT_STATUS.json`. `run_campaign.py` executa o verificador após cada
+  execução e registra `source_sha256` (hash de `scr/*.f90`) e o SHA-256 do binário.
+- **`tests/test_closure_contract_cli.py`** (CI), 7 casos:
+  - deck sem chave → DEFAULT/5, PASS;
+  - Bhagwat explícito → PASS;
+  - **comentário com `closure_riser=3`, corpo 5, rótulo C3** (o incidente) → FAIL detectado
+    (`label_riser == contract_effective`);
+  - o mesmo deck rotulado C5 → PASS;
+  - `closure_riser=9` → recusado antes de qualquer saída;
+  - E1 + Chexal → recusado;
+  - contrato adulterado depois da execução → FAIL em 5 verificações (deck, rótulo,
+    metadados, checkpoint e dados).
+
+**Gate P0.3: PASS.** Um rótulo incorreto é detectado automaticamente, inclusive pelos dados.
+
+## II.4 Jacobianos nas fronteiras constitutivas (P0.4)
+
+[boundary_jacobian_probe.f90](../validation/diagnostics/chexal_riser_20261121/boundary_jacobian_probe.f90)
+([log](../validation/diagnostics/chexal_riser_20261121/evidence/BOUNDARY_JACOBIAN.log)):
+- coluna a coluna, A = ∂F/∂U do operador do riser contra diferenças independentes de F(U);
+- estados **consistentes** com o Chexal (j_g resolve a relação de deriva);
+- h = c·max(|U_m|, 1e-14), c de 1e-2 a 1e-7;
+- diferenças centradas, para frente e para trás **só quando admissíveis**; nenhum estêncil
+  atravessa domínio inválido;
+- autovalores por `dgeev_3x3`.
+
+| Família | Melhor erro por coluna (pior coluna) | Leitura |
+|---|---|---|
+| α = 1e-2, 1e-4, 1e-6 (45°) | 3e-8 / 4,5e-7 / **2,2e-6** (∂F/∂U₂) | patamar estável em duas décadas de h: degradação real e pequena da derivada Richardson perto de α = 0, abaixo de 3e-4 |
+| α = 0,99, 0,9999 | ≤ 8,5e-8 | PASS |
+| j_l = 1e-2 … 1e-9 a 76,08° (estado de bloqueio do OSC) e 1e-8 a 68,7° (SS3) | ≤ 8,9e-10 no lado admissível | o estêncil para trás entra em contracorrente inclinada e é recusado; o Jacobiano é a derivada do lado admissível |
+| j_g → 0⁺ a θ = 0 (α = 1e-3, 1e-6) | 1,7e-7 / 4,4e-6 | idem α → 0 |
+| Re_l = 83 178 (B1 = 0,8 e C3 = 0,5 coincidem) ± 1e-7 | ≤ 1,5e-10 | PASS |
+| L = 1 (Eq. 3-7) a α_L(1 ∓ 1e-8) | 7e-10 (para frente, abaixo) / 3,8e-9 (para trás, acima); central 1,1e-2 | **quina detectada**: A é a derivada do pedaço do estado; a central cruza o salto de inclinação |
+| L = 1 exato e a 1e-12 | status 53 = 30 + 10 + 13 (`CLOSURE_DERIVATIVE`) | ponto não diferenciável **recusado**, não suavizado |
+| θ = 1e-9 rad e 76,47° | ≤ 1,2e-9 | PASS |
+
+Todos os 24 espectros calculados são reais (hiperbólicos). A razão |λ|max/|λ|min chega a
+5,6e3 com α → 0 (rigidez acústico–cinemática). O Jacobiano global montado (Parte I, §5)
+completa a verificação: 306 colunas, ≤ 4,3e-8.
+
+Descontinuidade descoberta no estudo local (§II.6): o termo |Re_l|^0,03 da Eq. 3-36 dá a C3
+inclinação infinita em Re_l = 0. A **contracorrente vertical** tem, portanto, uma fronteira
+não diferenciável em j_l = 0⁻ (C3: 2 → ~0,9 já com |Re_l| ≈ 60). Na catenária ela não é
+atingida, porque é recusada antes.
+
+**Gate P0.4: PASS.** O erro fica dentro de tolerância justificada, e os pontos não
+diferenciáveis são recusados explicitamente.
+
+## II.5 Validação ar–água (P1.1)
+
+Não há, no disco, pontos experimentais primários de fração de vazio ar–água: só o resumo dos
+autores. A busca de uma tabulação aberta não encontrou dados anexados (Ghajar & Bhagwat,
+OSU, D = 12,7 mm). Portanto **nenhum erro, viés ou RMSE foi calculado**; não se reportam
+números que não são nossos.
+
+Cobertura de domínio pela base declarada na Tabela 5-1 (p. 280) e na Tabela 5-2 (p. 282)
+([validation_domain_map.py](../validation/diagnostics/chexal_riser_20261121/validation_domain_map.py)):
+
+- **Inclinado: Beggs (1972).** D 25,4–38,1 mm; 2,56–6,81 bar; G 60–5500 kg/(m²·s);
+  x 0,0008–0,833; 621 pontos. Os autores reportam erro médio 0,003 e desvio padrão 0,038 em α.
+- **Horizontal:** 12,7–127 mm. **Vertical ascendente:** 11–305 mm. **CCFL vertical:**
+  Bharathan, 25 e 51 mm.
+
+| Execução Chexal | Estados | Validado | Interpolado | Extrapolado | Não suportado |
+|---|---:|---:|---:|---:|---:|
+| Stable BARO/ISO | 8211 cada | 0 | 1,000 | 0 | 0 |
+| OSC BARO/ISO | 561/459 | 0 | 1,000 | 0 | 0 |
+| SS3 BARO/ISO | 204/255 | 0 | 1,000 | 0 | 0 |
+| SS1 BARO/ISO | 255/255 | 0 | 0,992 | 0,008 (x < 4e-5) | 0 |
+
+- Nenhum estado é validado diretamente: D = 52,5 mm fica fora dos dados inclinados.
+- "Interpolado" quer dizer D dentro das famílias horizontal e vertical que delimitam o ângulo
+  (interpolação Fr, Eq. 3-2) e p, G, x cobertos por pelo menos uma família. É uma noção fraca,
+  porque combina conjuntos distintos.
+
+**Gate P1.1: NOT_VERIFIED** (dados primários indisponíveis). Concordância algébrica não foi
+tratada como validação.
+
+## II.6 Contracorrente inclinada (P1.2)
+
+Fontes locais conferidas:
+- **Chexal 1992:** contracorrente só vertical (p. 262); a região fora da CCFL não pôde ser
+  verificada com dados (p. 270); CCFL ar–água só em tubos verticais (Tabela 5-2).
+- **Ozaki & Hibiki 2015:** feixes de varetas; não remove a restrição de orientação.
+
+Barnea, Ben Yoseph e Taitel, e Ohnuki, Adachi e Murao **não estão disponíveis localmente**. A
+limitação fica registrada; nenhuma equação dessas fontes foi transcrita de memória.
+
+Solver constitutivo local nos estados **reais** de bloqueio (11 células de fronteira; α
+0,46–0,63; θ 66–76°), com velocidades assinadas
+([inclined_cc_local.py](../validation/diagnostics/chexal_riser_20261121/inclined_cc_local.py),
+[tabela](../validation/diagnostics/chexal_riser_20261121/evidence/INCLINED_CC_LOCAL.md)):
+
+| j_l (m/s) | Chexal no ângulo real | Chexal vertical HIGH (sensibilidade, inadmissível em θ) | Bendiksen (correlação cocorrente estendida) | Bhagwat |
+|---|---|---|---|---|
+| 0 (borda admissível) | 1,10–1,82 | 1,07–1,79 | 0,79–1,34 | 0,45–0,51 (só a borda) |
+| −1e-3 a −3e-2 | recusado (p. 262) | 0,48–0,92 | 0,72–1,31 | indefinido |
+
+Valores em u_g (m/s). Os candidatos diferem por fator de 2,4–3,5 na borda e 1,4–1,8 em
+contracorrente. O Chexal vertical cai de forma quase descontínua ao cruzar j_l = 0 (§II.4).
+Não há base experimental, nos dados disponíveis, para escolher um candidato.
+
+**Gate P1.2: BLOCKED.** Nada foi integrado ao solver global. O caminho para uma extensão
+fundamentada está na Parte I, §9: dados C0/Vgj ou CCFL inclinados ar–água com D ≈ 50 mm e
+θ ≈ 65–76°, e a forma do ramo.
+
+## II.7 Junção estratificado–Chexal (P1.3)
+
+- **Continuidade mássica:** fluxo comum `|Fm − Fp| = 0` exato em todos os estados testados.
+  Descasamento da integral na junção = 0 kg em todas as execuções (ledger).
+- **Pressão e momento:** os traços MATCHED usam p* e os fluxos de fase comuns. A força pontual
+  (convenção T2) é preservada e não é apagada (`test_fv_operators`).
+- **Estados e ramos de face:** o traço do riser em θ = 0 satisfaz o Chexal horizontal (2e-16).
+  Fluxo de gás nulo é aceito; fluxo negativo é recusado com 3061 (domínio, pp. 264–265), sem
+  clipping (`test_chexal_junction`).
+- **Distinção dos tipos de falha:** SS1 C5 é domínio constitutivo do traço (3061: proposta com
+  G_g* < 0 a partir de G_g* = 5,8e-13). Isso difere de falha de Newton sem causa constitutiva
+  (MAX_NEWTON/6000 com status de proposta 0) e de raiz inexistente (Bhagwat 1017/1012).
+- **Jacobiano completo:** colunas da junção ≤ 4,3e-8 em 6 estados aceitos.
+- **Invariância à partição homogênea:** `test_partition_invariance` foi estendido a Chexal nos
+  dois lados: resíduo idêntico a 1e-12 com a junção nas posições 0, 2 e 4 e fluxo de fase comum
+  (28 asserções).
+- **Condição de transmissão:** a escolha T1 (conservativa, Borda–Carnot) × T2 (pressão
+  contínua, atual) foi estudada só com Bhagwat. Com T2 não havia solução de ondas fracas com
+  gás no traço. Esse resultado **não foi transferido** para o Chexal.
+
+**Gate P1.3:**
+- **PASS** para conservação, admissibilidade, Jacobiano e partição.
+- **NOT_VERIFIED/BLOCKED** para a fundamentação física da transmissão: a decisão T1/T2 é
+  pendente e muda a física. E1/E2 continuam recusados com Chexal.
+
+## II.8 Replays Stable/OSC/SS1/SS3 (P2.1)
+
+Configuração congelada: binário `prims_f_contract`, SHA-256 `9e54e79f…` (fonte = HEAD
+`7ba4d79` em `scr/`, patch em `bin/source_diff_contract_vs_db97d3b.patch`), GNU Fortran 13.3.0,
+LAPACK/BLAS do sistema e uma thread. São os mesmos 16 decks primários, com `tol_res = 1e-10`, e
+estados estacionários recalculados pelo solver com o fechamento de cada execução.
+
+- **Contrato:** 16/16 `CLOSURE_CONTRACT_STATUS = PASS` (8 efetivo 5, 8 efetivo 3).
+  Deck, rótulo, contrato, metadados, checkpoint e dados concordam
+  ([P2_CONTRACT_STATUS.txt](../validation/diagnostics/chexal_riser_20261121/evidence/P2_CONTRACT_STATUS.txt)).
+- **Reprodução:** as 16 execuções são **idênticas byte a byte** à campanha da Parte I
+  ([P2_VS_P1_BYTEWISE.json](../validation/diagnostics/chexal_riser_20261121/evidence/P2_VS_P1_BYTEWISE.json)).
+  Isso inclui monitor, campos, conservação, contornos, propostas rejeitadas, estado rejeitado,
+  `steps` sem as colunas de tempo de relógio e `run_status`.
+
+  Duas consequências: a opção de fluido e o contrato não alteram a física; e as conclusões da
+  Parte I (§7), cujos rótulos agora estão verificados, valem integralmente. Tempos alcançados,
+  passos, rejeições, resíduos, motivos de parada, inventários e custos estão em
+  [P2_CAMPAIGN.md](../validation/diagnostics/chexal_riser_20261121/evidence/P2_CAMPAIGN.md).
+
+| Caso | Chexal (efetivo 5) | Bhagwat (efetivo 3) |
+|---|---|---|
+| Stable BARO/ISO | COMPLETED; acomodação: p_in em 13/3 s, M_g riser em 111/152 s; desvio após 600 s ≤ 8e-9 | COMPLETED; 80/98 s |
+| OSC BARO/ISO | BLOCKED_CONSTITUTIVE_DOMAIN 145,70/111,13 s (contracorrente inclinada no topo) | 2400 s decaindo ao estacionário / MAX_NEWTON 382,98 s |
+| SS1 BARO/ISO | BLOCKED_JUNCTION_TRACE_DOMAIN 52,94/60,56 s | FAIL 3012 77,81 s / MAX_NEWTON 50,24 s |
+| SS3 BARO/ISO | BLOCKED_CONSTITUTIVE_DOMAIN 41,55/50,73 s | FAIL 1017 97,97 s / 3012 72,63 s |
+
+- **SS1 e SS3:** nenhuma sequência física completa (acumulação → bloqueio → penetração →
+  produção → blowdown) foi alcançada com Chexal. Nada é declarado além do bloqueio.
+- **OSC:** período, amplitude e taxa de crescimento não estão definidos, porque não há ciclo
+  completo. A taxa de crescimento e o instante do bloqueio dependem fortemente da discretização
+  (Parte I, §7: 93–181 s).
+
+**Stable com Δt menor (campanha curta discriminante).** Com Δt = 0,5 s o próprio OSC Bhagwat
+decai, então a estabilidade nesse passo não distingue física de dissipação numérica:
+
+| Execução (BARO, Δt 0,125, 2400 s) | Resultado | Semiamplitude de p_in em janelas de 200 s (Pa) | Taxa de decaimento (200–600 s) | M_g riser estável (< 1e-4) | Máx. \|balanço\|/M₀ | CPU (s) |
+|---|---|---|---:|---:|---:|---:|
+| Chexal N51 | COMPLETED, contrato PASS | 127 → 2,3 → 0,094 → 3,2e-3 → 1,3e-4 → 0 | −0,016 s⁻¹ | 195 s | 8,7e-7 | 1534 |
+| Chexal N101 | COMPLETED, contrato PASS | 72 → 2,1 → 0,15 → 9,4e-3 → 6,8e-4 → 0 | −0,013 s⁻¹ | 194 s | 6,9e-8 | 2509 |
+| Bhagwat N51 | COMPLETED, contrato PASS | 102 → 0,073 → 1,8e-4 → 0 | −0,030 s⁻¹ | 105 s | 2,4e-7 | 891 |
+
+Com Δt 0,125 o Stable continua decaindo ao estacionário com os dois fechamentos, sem
+passos rejeitados. A estabilidade não é artefato do Δt 0,5. O Chexal é **menos amortecido**:
+a taxa é metade da do Bhagwat e a acomodação ~2× mais lenta. A taxa varia 20 % entre N51 e
+N101, logo ainda não está convergida na malha. A pressão de entrada final difere 42 Pa entre
+as malhas (490 433 contra 490 391 Pa).
+([P2_STABLE_DT.md](../validation/diagnostics/chexal_riser_20261121/evidence/P2_STABLE_DT.md))
+
+## II.9 Balanços e convergência
+
+- **Seis balanços** (duas fases × sistema, oleoduto e riser), com os fluxos aceitos
+  (`audit_ledger`), em todas as execuções:
+  - P2: máx. |balanço|/M₀ de 2,7e-12 a 3,0e-7 (critério 1e-6);
+  - aritmética do ledger PASS 16/16;
+  - integral na junção sem descasamento (0 kg).
+- **Inventário inicial nulo:** não ocorre nestes casos; todas as fases começam presentes.
+- **Convergência:** OSC e SS3 com Chexal não têm ciclos, então não há grandeza periódica para
+  convergir. O que converge em tempo é o **instante de bloqueio do SS3** (N51: 41,55 → 41,95 →
+  42,18 s, ordem aparente ≈ 0,8). O do OSC não converge.
+- **`tol_res = 1e-10`** em todos os decks de referência.
+
+## II.10 Validação com Baliño et al. (2010) (P2.2)
+
+O PDF de Baliño, Burr e Nemoto (2010) não está nesta máquina; só o registro da conferência
+anterior: Tabela 3, p. 653 — SS3 76 s; OSC 19,3–33,8 s; SS1 85,6 s; dissertação 26 s para
+SS3, divergência preservada). Além disso, nenhuma trajetória Chexal tem ciclos completos e
+admissíveis.
+
+**P2.2: NOT_VERIFIED.** Não se compararam previsões numéricas publicadas com medidas.
+
+## II.11 Matriz de qualificação (rodada 2)
+
+| Item | Status | Evidência |
+|---|---|---|
+| P0.1 NP-3989: linhas 1, 4, 8 | PASS | §II.1, `test_chexal_np3989` |
+| P0.1 NP-3989: linha 5 (diferença 1986/1992 demonstrada) | PASS | §II.1 |
+| P0.1 NP-3989: linha 3 (referência inconsistente) | FAIL | identidade impressa −4,2e-4 |
+| P0.1 NP-3989: linhas 2, 6, 7 (1000 psia) | FAIL (causa não identificada) | §II.1 |
+| P0.2 ângulos e velocidades | PASS | `test_chexal_angles` (468) |
+| P0.3 contrato do fechamento efetivo | PASS | `closure_contract.txt`, verificador, `test_closure_contract_cli` |
+| P0.4 Jacobianos nas fronteiras | PASS | §II.4 |
+| P1.1 validação experimental ar–água | NOT_VERIFIED (dados indisponíveis) | §II.5 |
+| P1.2 contracorrente inclinada | BLOCKED | §II.6 |
+| P1.3 junção: conservação, admissibilidade, Jacobiano, partição | PASS | §II.7 |
+| P1.3 junção: condição de transmissão | BLOCKED (decisão T1/T2) | §II.7 |
+| P2.1 replays com contrato (16 + 3) | PASS como execução e reprodução: contrato 19/19 e reprodução byte a byte. Física: Stable estável (Δt 0,5 e 0,125); OSC/SS3 BLOCKED_CONSTITUTIVE_DOMAIN; SS1 BLOCKED_JUNCTION_TRACE_DOMAIN | §II.8 |
+| P2.2 Baliño et al. 2010 | NOT_VERIFIED | §II.10 |
+| SS1, SS3, OSC validados | não (sem convergência nem confronto) | — |
+
+**Commits locais da rodada 2** (branch `implementation/chexal-riser-20261121`, sem push nem merge):
+
+| SHA | Conteúdo |
+|---|---|
+| `749a90b` | feat(core): fluido STEAM_WATER explícito para verificação; teste por linha do NP-3989 |
+| `1525409` | test: certificado de ângulos e velocidades |
+| `f468e67` | feat: contrato do fechamento (solver, checkpoint, verificador, CLI, CI, lançador) |
+| `49fbd32` | diag: auditoria NP-3989 1986/1992, ajuste de propriedades, sonda de Jacobiano, mapa de domínio |
+| `0a0159a` | test: invariância à partição também com Chexal |
+| `7ba4d79` | evidence: auditoria, Jacobianos de fronteira, mapa de domínio, estudo local de contracorrente |
+| (seguintes) | evidence P2 e docs |
+
+Binários:
+- `prims_f_contract`: `9e54e79f0abac7107b1a2f53108e22a498026399bcead789b5ad010eab26c778`;
+- da Parte I: `d342750…`.
+
+Compilador GNU Fortran 13.3.0; LAPACK/BLAS do sistema (`-llapack -lblas`); uma thread.
+
+Testes:
+- Fortran 28/28 (5961 asserções);
+- Python 123 OK;
+- CLI 7/7: `pipe_regime`, `accepted_telemetry`, `feed_contract`, `boundary_telemetry`, `initial_inventory`, `chexal_default` e `closure_contract`.
+
+Custos medidos (CPU de uma thread):
+- P2: 87–547 s por execução;
+- Stable Δt 0,125: 891–2509 s;
+- auditoria NP-3989: 3 min.
+
+```sh
+D=validation/diagnostics/chexal_riser_20261121
+python3 -I $D/np3989_audit.py OUT.json OUT.md; python3 $D/np3989_property_fit.py OUT.json
+./tmp/cx/boundary_jacobian_probe $D/evidence/global_jacobian/gj_D_OSC_C5_BAROTROPIC_N51_dt0.5_t60.params
+python3 $D/validation_domain_map.py OUT.json OUT.md RESULTS/p1/runs/*C5*/
+python3 $D/inclined_cc_local.py $D/evidence/DOMAIN_PROBE.json OUT.json OUT.md
+python3 $D/run_campaign.py BIN RESULTS/p2 --workers 6          # verifies every run (contract)
+python3 $D/run_campaign.py BIN RESULTS/p2_stable_dt --workers 3 --eos BAROTROPIC --closures 5 3 --cases D_Stable --grid 51:0.125
+python3 scripts/verify_closure_contract.py RUN_DIR --deck DECK
+python3 tests/test_closure_contract_cli.py --binary bin/prims_f_check_all --output tmp/ci_closure_contract
 ```
