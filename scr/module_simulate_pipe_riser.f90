@@ -389,9 +389,10 @@ contains
       do it=1,40
         ! Converge to round-off: the face flux must not carry inner-iteration
         ! noise into the global residual (tol_res=1e-10). Accept 1e-14, or a
-        ! stagnated iterate (reduction < 2x) once below 1e-11.
+        ! stagnated iterate (reduction < 2x) once below 1e-13 (a 1e-11 floor left
+        ! ~3e-10 in the global residual: SS3 T1 MAX_NEWTON at 10.56 s).
         rnow=maxval(abs(res)/scl)
-        if(rnow<1e-14_wp.or.(rnow<1e-11_wp.and.rnow>0.5_wp*rprev))then
+        if(rnow<1e-14_wp.or.(rnow<1e-13_wp.and.rnow>0.5_wp*rprev))then
           call t1_eig(ust(:,1),thl_,id_left,lm1,rr,vls,gpx,gax,code)
           if(code==0)call t1_eig(ust(:,2),thr_,id_right,lm2,rr,vrs,gpy,gay,code)
           if(code==0)call t1_eig(ust(:,3),thr_,id_right,lm3,rr,vy,gpy,gay,code)
