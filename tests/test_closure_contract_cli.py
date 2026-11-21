@@ -91,6 +91,16 @@ def main():
     d, deck, rc, log = run('t3_C5', dict(junction_transmission='T3'))
     assert rc != 0 and 'Unknown junction_transmission' in log and not (d / 'closure_contract.txt').exists()
     records.append(dict(case='unknown_transmission', refused=True))
+    # 6c. seal extension (experimental): recorded and verified with T1; refused with T2
+    d, deck, rc, log = run('t1seal_C5', dict(junction_transmission='T1', junction_seal='LIQUID_BRIDGE'))
+    assert rc == 0, log[-1500:]
+    assert 'junction_seal=LIQUID_BRIDGE' in (d / 'closure_contract.txt').read_text()
+    vr, st = verify(d, deck); assert vr == 0 and st['status'] == 'PASS', st
+    assert any(c['check'] == 'deck_seal == contract' and c['ok'] for c in st['checks'])
+    records.append(dict(case='seal_T1', verify=st['status']))
+    d, deck, rc, log = run('t2seal_C5', dict(junction_seal='LIQUID_BRIDGE'))
+    assert rc != 0 and 'requires junction_transmission=T1' in log and not (d / 'closure_contract.txt').exists()
+    records.append(dict(case='seal_with_T2', refused=True))
     # 7. contract tampered after the run
     src = out / 'default_C5'; tam = out / 'tampered_C5'
     shutil.copytree(src, tam)
@@ -100,7 +110,7 @@ def main():
     assert vr == 1 and 'resolved_riser == contract_effective' in st['failed'] and 'metadata_riser == contract_effective' in st['failed'], st
     records.append(dict(case='tampered_contract', verify=st['status'], failed=st['failed']))
     (out / 'manifest.json').write_text(json.dumps(records, indent=1) + '\n')
-    print('PASS', len(records), 'closure-contract cases (3 negative detections, 3 refusals)')
+    print('PASS', len(records), 'closure-contract cases (3 negative detections, 4 refusals)')
 
 
 if __name__ == '__main__':

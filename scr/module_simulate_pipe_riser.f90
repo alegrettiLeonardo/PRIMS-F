@@ -210,7 +210,8 @@ contains
     status=0
   end subroutine
 
-  subroutine face_pair(this,UL,UR,thetaL,thetaR,FM,FP,status,JL,JR,KL,KR,speed,fd_one_sided,blocking_active,junction_trace,dissipation_matrix,used_dissipation,left_cell)
+  subroutine face_pair(this,UL,UR,thetaL,thetaR,FM,FP,status,JL,JR,KL,KR,speed,fd_one_sided,blocking_active,junction_trace,dissipation_matrix,used_dissipation,left_cell, &
+      junction_seal_info)
     use module_lapack_small,only:dgeev_3x3
     use module_matrix_roe,only:calculate_roe_matrix
     class(pipeline_riser_simulator_t),intent(in)::this
@@ -221,6 +222,7 @@ contains
     integer,intent(in),optional::left_cell
     logical,intent(out),optional::blocking_active
     real(wp),intent(out),optional::junction_trace(6)
+    real(wp),intent(out),optional::junction_seal_info(3)
     real(wp),intent(in),optional::dissipation_matrix(3,3)
     real(wp),intent(out),optional::used_dissipation(3,3)
     real(wp),intent(out),optional::JL(3,3),JR(3,3),KL(3,3),KR(3,3),speed
@@ -228,7 +230,7 @@ contains
     real(wp)::up(3),um(3),fm1(3),fp1(3),fm2(3),fp2(3),h,lj(3,3),rj(3,3),lk(3,3),rk(3,3)
     integer::code,k,cp,cm,n_one_sided,id_left,id_right
     logical::jac,match,blocking_mode,base_blocked,t1
-    real(wp)::base_trace(6),override_speed,eig_real(3),eig_imag(3),eig_vec(3,3)
+    real(wp)::base_seal(3),base_trace(6),override_speed,eig_real(3),eig_imag(3),eig_vec(3,3)
     if(present(used_dissipation))used_dissipation=ieee_value(0.0_wp,ieee_quiet_nan)
     if(present(dissipation_matrix))then
       ! The caller may freeze numerical viscosity at the beginning of a time
@@ -261,7 +263,10 @@ contains
     match=match.and.(trim(this%cfg%junction_model)=='MATCHED'.or.blocking_mode)
     if(present(blocking_active))blocking_active=.false.
     if(present(junction_trace))junction_trace=ieee_value(0.0_wp,ieee_quiet_nan)
-    call basic(UL,UR,FM,FP,status,al,ar,ab,amax,base_blocked,base_trace)
+    base_seal=ieee_value(0.0_wp,ieee_quiet_nan)
+    if(present(junction_seal_info))junction_seal_info=base_seal
+    call basic(UL,UR,FM,FP,status,al,ar,ab,amax,base_blocked,base_trace,base_seal)
+    if(present(junction_seal_info))junction_seal_info=base_seal
     if(status/=0)return
     if(present(speed))speed=amax
     if(present(used_dissipation))used_dissipation=ab
@@ -456,6 +461,474 @@ contains
       enddo
       istat=1614
     end subroutine t1_face
+    subroutine t1s_face(x,y,thl_,thr_,flux,istat,spd,trace,info)
+      !! T1 junction with the SEAL LIMIT (EXPERIMENTAL, junction_seal='LIQUID_BRIDGE').
+      !! Waves: pipe 1-wave and riser 3-wave linearized along r(U_cell) in p (weak);
+      !! riser kinematic 2-wave in z = sqrt(alpha) on (U1,U3), U2 rebuilt exactly from
+      !! the EOS (rho_l = U1/(1-alpha) -> p, U2 = alpha p/Cg^2), so every stage has
+      !! U2 > 0 and the endpoint alpha=0 needs no closure call (dU/dz = 2z dU/dalpha,
+      !! dU/dalpha finite as alpha->0+: lambda2 -> Vgj(0), see the P0.2 derivation).
+      !! Stage G0: H4 with alpha_R*=0; g0 = Fg(U_L*), the pipe gas flux at the face.
+      !!  g0 >  0: H4 (gas passes): root of g(z)=Fg(U_L*)-Fg(U_R*) bracketed in
+      !!           (0, z_hi] (g(0)=g0>0), Illinois iterations with inner (p_L*,p_M) solves.
+      !!  g0 <= 0: H7 liquid bridge: U_L1 = 1-curve(U_L;p_L1); pipe accumulation front
+      !!           U_L1 -> U* (pure liquid) with speed s = u_g(U_L1) (gas Rankine-Hugoniot,
+      !!           U2*=0); U* = alpha=0 endpoint of the riser 2-curve from U_M(p_M);
+      !!           s[U1]=[F1], s[U3]=[F3]. Admissible only if s <= 0 (front in the pipe)
+      !!           and lambda2(U_L1) > s (gas enters the front). Flux F(U*) = (U3*,0,F3*).
+      !! At g0 = 0 both configurations give the same flux (s = 0, U_L1 = U_L*).
+      !! info = [configuration 4|7, s, g0]. Status 1620 complex spectrum, 1621 wave
+      !! configuration violated, 1622 singular inner matrix, 1623 no admissible damped
+      !! step, 1624 no convergence, 1625 evaluation failure, 1626 H7 with s>0
+      !! (inconsistent), 1627 H4 root not bracketed. No fallback to T1/T2.
+      real(wp),intent(in)::x(3),y(3),thl_,thr_
+      real(wp),intent(out)::flux(3),spd
+      integer,intent(out)::istat
+      real(wp),intent(out),optional::trace(6),info(3)
+      real(wp)::lamx(3),rx(3,3),lamy(3),ry(3,3),gpx(3),gax(3),gpy(3),gay(3),vx(6),vy(6)
+      real(wp)::q(2),qs(2),o(12),ust(3,3),g0,zlo,zhi,glo,ghi,zm,gm,sfront,l1(3),l2(3),l3(3),rr(3,3),v1(6),v2(6),v3(6)
+      real(wp)::fstar(3),vstar(6),sclg,qg0(2)
+      integer::code,k,side
+      flux=ieee_value(0.0_wp,ieee_quiet_nan);spd=flux(1);istat=1625
+      if(present(info))info=flux
+      call t1_eig(x,thl_,id_left,lamx,rx,vx,gpx,gax,code)
+      if(code/=0)then
+        istat=merge(1620,1625,code==-7);return
+      endif
+      call t1_eig(y,thr_,id_right,lamy,ry,vy,gpy,gay,code)
+      if(code/=0)then
+        istat=merge(1620,1625,code==-7);return
+      endif
+      spd=max(maxval(abs(lamx)),maxval(abs(lamy)))
+      ! Search for a sign change of g(z) = Fg(U_L*) - Fg(U_R*(z)), z = sqrt(alpha_R*):
+      ! first at the riser cell value z_c; upwards if g(z_c) >= 0 (gas passes, the
+      ! closed limit is never needed); downwards by factors of 4 (at most 6 times)
+      ! if g(z_c) < 0; only then the closed limit z = 0 (stage G0) decides by the
+      ! SIGN of g0. Every evaluation is a converged inner solve; failures are reported.
+      ! g(z) = Fg(U_L*) - Fg(U_R*(z)), z = sqrt(alpha_R*). Decision by signs only:
+      !  g(z_c) >= 0 at the riser cell value: the root lies above (gas passes);
+      !  g(z_c) <  0: the closed limit z=0 (stage G0) decides by the sign of g0
+      !   (g0<=0: H7; g0>0: root in (0,z_c)). If the kinematic curve to alpha=0
+      !   leaves the closure domain, z is reduced by factors of 4 instead.
+      ! Roots are computed by Newton on (p_L*,z,p_M) from a bracket-informed start,
+      ! with the bracketed Illinois search as fallback. Every evaluation is a
+      ! converged inner solve; failures are reported, never replaced.
+      q=[vx(4),vy(4)];qg0=q
+      zhi=min(sqrt(max(vy(1),1e-30_wp)),0.5_wp)
+      call t1s_solve2r(zhi,q,qg0,x,y,thl_,thr_,qs,o,ust,istat)
+      if(istat/=0)return
+      ghi=o(2)-o(5);q=qs
+      if(ghi>=0.0_wp)then
+        call t1s_newton3(x,y,thl_,thr_,q(1),q(2),zhi,zm,qs,o,ust,istat)
+        if(istat==0.and.zm>0.0_wp)then
+          if(present(info))info(1)=4.0_wp
+          goto 600
+        endif
+        ! root above z_c: grow zhi; where the inner problem has no admissible
+        ! solution zhi moves back towards zlo (whose inner problem is solved)
+        zlo=zhi;glo=ghi;zhi=min(2*zhi,zlo+0.5_wp*(1-zlo))
+        do k=1,200
+          call t1s_solve2r(zhi,q,qg0,x,y,thl_,thr_,qs,o,ust,istat)
+          if(istat/=0)then
+            zhi=zlo+0.5_wp*(zhi-zlo)
+            if(zhi-zlo<=1e-14_wp*zhi)exit
+            cycle
+          endif
+          ghi=o(2)-o(5)
+          if(ghi<=0.0_wp)exit
+          zlo=zhi;glo=ghi;q=qs;zhi=min(2*zhi,zlo+0.5_wp*(1-zlo))
+        enddo
+        if(istat/=0.or.ghi>0.0_wp)then
+          istat=1627;return
+        endif
+        qs=q
+      else
+        ! closed limit first (stage G0), with the deterministic restarts
+        call t1s_solve2r(0.0_wp,q,q,x,y,thl_,thr_,qs,o,ust,istat)
+        if(istat==0)then
+          g0=o(2);qg0=qs
+          if(present(info))info=[4.0_wp,0.0_wp,g0]
+          if(abs(g0)<=this%cfg%junction_seal_face_tol*max(abs(o(1)),abs(g0)))then
+            ! |g0| at the round-off floor: z=0 solves the H4 equations within the face
+            ! tolerance and is the s=0 limit of H7 (same equations): the common limit
+            ! (gas-free riser trace, Gg*=0) is returned, continuous with both.
+            call t1_eig(ust(:,1),thl_,id_left,l1,rr,v1,gpx,gax,code)
+            if(code==0)call t1_eig(ust(:,3),thr_,id_right,l3,rr,v3,gpy,gay,code)
+            if(code/=0)then
+              istat=merge(1620,1625,code==-7);return
+            endif
+            if(.not.(l1(1)<0.0_wp.and.l3(2)>0.0_wp.and.l3(3)>0.0_wp))then
+              istat=1621;return
+            endif
+            call t1_flux(ust(:,2),thr_,id_right,flux,v2,code)
+            if(code/=0)then
+              istat=1625;return
+            endif
+            istat=0
+            if(present(trace))trace=[v1(4),flux(1),flux(2),v1(1),0.0_wp,v2(4)]
+            return
+          else if(g0<0.0_wp)then
+            q=qg0
+            goto 700
+          endif
+          ! g0>0>g(z_c): root in (0,z_c); Newton from the estimate of g linear in z^2
+          zlo=0.0_wp;glo=g0
+          zm=zhi*sqrt(g0/(g0-ghi))
+          call t1s_newton3(x,y,thl_,thr_,qg0(1),qg0(2),zm,zm,qs,o,ust,istat)
+          if(istat==0.and.zm>0.0_wp)then
+            if(present(info))info(1)=4.0_wp
+            goto 600
+          endif
+          q=qg0
+        else
+          ! the kinematic curve to alpha=0 left the closure domain: reduce z by 4
+          zlo=zhi;glo=ghi
+          do k=1,6
+            zlo=0.25_wp*zhi
+            call t1s_solve2r(zlo,q,qg0,x,y,thl_,thr_,qs,o,ust,istat)
+            if(istat/=0)return
+            glo=o(2)-o(5)
+            if(glo>=0.0_wp)exit
+            zhi=zlo;ghi=glo;q=qs
+          enddo
+          if(glo<0.0_wp)then
+            istat=1627;return
+          endif
+        endif
+        qs=q
+      endif
+        if(present(info))info(1)=4.0_wp
+        ! Illinois (modified regula falsi): the bracket always contains the root
+        sclg=max(abs(o(2)),abs(o(1)))
+        side=0;zm=zhi;gm=ghi
+        do k=1,100
+          if(abs(gm)<=1e-15_wp*sclg.or.zhi-zlo<=1e-14_wp*zhi)exit
+          zm=(zlo*ghi-zhi*glo)/(ghi-glo)
+          if(.not.(zm>zlo.and.zm<zhi))zm=0.5_wp*(zlo+zhi)
+          call t1s_solve2r(zm,q,qg0,x,y,thl_,thr_,qs,o,ust,istat)
+          if(istat/=0)return
+          gm=o(2)-o(5)
+          if(gm>0.0_wp)then
+            zlo=zm;glo=gm;q=qs
+            if(side==-1)ghi=0.5_wp*ghi
+            side=-1
+          else
+            zhi=zm;ghi=gm
+            if(side==1)glo=0.5_wp*glo
+            side=1
+          endif
+        enddo
+        ! The gas flux of the closures carries round-off relative to the MIXTURE
+        ! flux (velocities are recovered from the mixture momentum), so the
+        ! mismatch is measured against max(|Fg|,|F1|), not |Fg| alone.
+        sclg=max(abs(o(2)),abs(o(1)))
+        if(abs(gm)>this%cfg%junction_seal_face_tol*sclg)then
+          istat=1624;return
+        endif
+600     continue
+        call t1_eig(ust(:,1),thl_,id_left,l1,rr,v1,gpx,gax,code)
+        if(code==0)call t1_eig(ust(:,2),thr_,id_right,l2,rr,v2,gpy,gay,code)
+        if(code==0)call t1_eig(ust(:,3),thr_,id_right,l3,rr,v3,gpy,gay,code)
+        if(code/=0)then
+          istat=merge(1620,1625,code==-7);return
+        endif
+        ! characteristic count of H4: exactly one outgoing family on the pipe side
+        ! (lambda1<0<lambda2 at U_L*), two on the riser side (lambda2, lambda3 > 0)
+        if(.not.(l1(1)<0.0_wp.and.l1(2)>0.0_wp.and.l2(2)>0.0_wp.and.l3(3)>0.0_wp))then
+          istat=1621;return
+        endif
+        ! Transmitted flux evaluated on the RISER trace: there Gg is a smooth function
+        ! of the root variable alpha_R*; on the pipe trace it is amplified by
+        ! du_g/dU3 ~ 1/U2 of the stratified closure (round-off of the inner solve).
+        ! Both traces agree within the face tolerance.
+        call t1_flux(ust(:,2),thr_,id_right,flux,v2,code)
+        if(code/=0)then
+          istat=1625;return
+        endif
+        istat=0
+        if(present(trace))trace=[v1(4),flux(1),flux(2),v1(1),v2(1),v2(4)]
+        return
+      ! H7 liquid bridge
+700   continue
+      call t1s_solve2(7,0.0_wp,x,y,thl_,thr_,q,o,ust,istat)
+      if(istat/=0)return
+      sfront=o(6)
+      if(present(info))info=[7.0_wp,sfront,g0]
+      if(sfront>0.0_wp)then
+        istat=1626;return
+      endif
+      call t1_eig(ust(:,1),thl_,id_left,l1,rr,v1,gpx,gax,code)
+      if(code==0)call t1_eig(ust(:,3),thr_,id_right,l3,rr,v3,gpy,gay,code)
+      if(code/=0)then
+        istat=merge(1620,1625,code==-7);return
+      endif
+      if(.not.(l1(1)<0.0_wp.and.l1(2)>sfront.and.l3(2)>0.0_wp.and.l3(3)>0.0_wp))then
+        istat=1621;return
+      endif
+      call t1_flux(ust(:,2),thr_,id_right,fstar,vstar,code)   ! U2*=0: (U3*, 0, F3*)
+      if(code/=0)then
+        istat=1625;return
+      endif
+      flux=fstar;istat=0
+      if(present(trace))trace=[v1(4),flux(1),flux(2),0.0_wp,0.0_wp,vstar(4)]
+    end subroutine t1s_face
+    subroutine t1s_newton3(x,y,thl_,thr_,px,py,z0,z,q,o,ust,istat)
+      !! H4 by Newton on s=(p_L*, z, p_M): residual F_L(U_L*)-F_R(U_R*(z)) scaled by
+      !! [|F1|, max(|Fg|,|F1|), p-scale]; difference Jacobian; damping keeps z in (0,1).
+      !! Convergence as t1s_solve2 (1e-14, or stagnation below junction_seal_face_tol).
+      real(wp),intent(in)::x(3),y(3),thl_,thr_,px,py,z0
+      real(wp),intent(out)::z,q(2),o(12),ust(3,3)
+      integer,intent(out)::istat
+      real(wp)::s(3),sn(3),r(3),rn(3),jm(3,3),jinv(3,3),det,ds(3),h,lam,sc(3),on(12),un(3,3),rnow,rprev
+      integer::it,j,k,code
+      istat=1624;s=[px,min(max(z0,1e-8_wp),0.999_wp),py]
+      call t1s_res3(s,x,y,thl_,thr_,r,o,ust,code)
+      if(code/=0)then
+        istat=1625;return
+      endif
+      sc=[max(abs(o(1)),1e-8_wp),max(abs(o(2)),abs(o(1))),this%cfg%omega_P/(this%cfg%omega_rho*this%cfg%omega_u**2)*px]
+      rprev=huge(1.0_wp)
+      do it=1,30
+        rnow=maxval(abs(r)/sc)
+        if(rnow<1e-14_wp.or.(rnow<this%cfg%junction_seal_face_tol.and.rnow>0.5_wp*rprev))then
+          z=s(2);q=s([1,3]);istat=0;return
+        endif
+        do j=1,3
+          sn=s;h=1e-7_wp*max(abs(s(j)),merge(1e-3_wp,1.0_wp,j==2));sn(j)=s(j)+h
+          call t1s_res3(sn,x,y,thl_,thr_,rn,on,un,code)
+          if(code/=0)then
+            sn(j)=s(j)-h
+            call t1s_res3(sn,x,y,thl_,thr_,rn,on,un,code)
+            if(code/=0)return
+            jm(:,j)=(r-rn)/h
+          else
+            jm(:,j)=(rn-r)/h
+          endif
+        enddo
+        det=jm(1,1)*(jm(2,2)*jm(3,3)-jm(2,3)*jm(3,2))-jm(1,2)*(jm(2,1)*jm(3,3)-jm(2,3)*jm(3,1)) &
+           +jm(1,3)*(jm(2,1)*jm(3,2)-jm(2,2)*jm(3,1))
+        if(.not.ieee_is_finite(det).or.det==0.0_wp)return
+        jinv(1,1)=jm(2,2)*jm(3,3)-jm(2,3)*jm(3,2);jinv(1,2)=jm(1,3)*jm(3,2)-jm(1,2)*jm(3,3)
+        jinv(1,3)=jm(1,2)*jm(2,3)-jm(1,3)*jm(2,2);jinv(2,1)=jm(2,3)*jm(3,1)-jm(2,1)*jm(3,3)
+        jinv(2,2)=jm(1,1)*jm(3,3)-jm(1,3)*jm(3,1);jinv(2,3)=jm(1,3)*jm(2,1)-jm(1,1)*jm(2,3)
+        jinv(3,1)=jm(2,1)*jm(3,2)-jm(2,2)*jm(3,1);jinv(3,2)=jm(1,2)*jm(3,1)-jm(1,1)*jm(3,2)
+        jinv(3,3)=jm(1,1)*jm(2,2)-jm(1,2)*jm(2,1)
+        ds=-matmul(jinv/det,r)
+        lam=1.0_wp
+        do k=1,30
+          sn=s+lam*ds
+          if(sn(2)>0.0_wp.and.sn(2)<1.0_wp)then
+            call t1s_res3(sn,x,y,thl_,thr_,rn,on,un,code)
+            if(code==0)then
+              if(maxval(abs(rn)/sc)<maxval(abs(r)/sc))exit
+            endif
+          endif
+          lam=0.5_wp*lam
+        enddo
+        if(k>30)then
+          if(rnow<this%cfg%junction_seal_face_tol)then
+            z=s(2);q=s([1,3]);istat=0
+          endif
+          return
+        endif
+        rprev=rnow
+        s=sn;r=rn;o=on;ust=un
+      enddo
+    end subroutine t1s_newton3
+    subroutine t1s_res3(ss,x,y,thl_,thr_,rr3,oo,uu,c)
+      !! H4 residual on (p_L*, z, p_M): [F1_L-F1_R, Fg_L-Fg_R, F3_L-F3_R]
+      real(wp),intent(in)::ss(3),x(3),y(3),thl_,thr_
+      real(wp),intent(out)::rr3(3),oo(12),uu(3,3)
+      integer,intent(out)::c
+      real(wp)::qq(2),r2(2)
+      qq=ss([1,3])
+      call t1s_res(4,ss(2),x,y,thl_,thr_,qq,r2,oo,uu,c)
+      rr3=[r2(1),oo(2)-oo(5),r2(2)]
+    end subroutine t1s_res3
+    subroutine t1s_solve2r(z,qwarm,qg0,x,y,thl_,thr_,q,o,ust,istat)
+      !! H4 inner solve at fixed z with deterministic restarts: warm start (last
+      !! solved bracket end), then the cell pressures, then the G0 solution. A
+      !! Newton stall at a local minimum of |res| is not taken as non-existence.
+      real(wp),intent(in)::z,qwarm(2),qg0(2),x(3),y(3),thl_,thr_
+      real(wp),intent(out)::q(2),o(12),ust(3,3)
+      integer,intent(out)::istat
+      real(wp)::v(6),f(3)
+      integer::c
+      q=qwarm
+      call t1s_solve2(4,z,x,y,thl_,thr_,q,o,ust,istat)
+      if(istat==0)return
+      call t1_flux(x,thl_,id_left,f,v,c);q(1)=v(4)
+      call t1_flux(y,thr_,id_right,f,v,c);q(2)=v(4)
+      call t1s_solve2(4,z,x,y,thl_,thr_,q,o,ust,istat)
+      if(istat==0)return
+      q=qg0
+      call t1s_solve2(4,z,x,y,thl_,thr_,q,o,ust,istat)
+    end subroutine t1s_solve2r
+    subroutine t1s_solve2(cfgn,z,x,y,thl_,thr_,q,o,ust,istat)
+      !! Inner Newton on q=(p_L*|p_L1, p_M) for the liquid-flux and momentum conditions
+      !! (cfgn=4: F1,F3 continuous at fixed z; cfgn=7: Rankine-Hugoniot of the pipe
+      !! accumulation front against U* = alpha=0 endpoint). o = [Fg_L1|L*, Fg(U_L), F1_L,
+      !! ..] see t1s_res. Convergence: max|res|/scale < 1e-14, or stagnation (< 2x
+      !! reduction) below junction_seal_face_tol.
+      integer,intent(in)::cfgn
+      real(wp),intent(in)::z,x(3),y(3),thl_,thr_
+      real(wp),intent(inout)::q(2)
+      real(wp),intent(out)::o(12),ust(3,3)
+      integer,intent(out)::istat
+      real(wp)::rr(2),rn(2),jm(2,2),det,ds(2),qn(2),h,lam,sc2(2),on(12),un(3,3),rnow,rprev
+      integer::it,j,k,code
+      istat=1625
+      call t1s_res(cfgn,z,x,y,thl_,thr_,q,rr,o,ust,code)
+      if(code/=0)return
+      sc2=[max(abs(o(1)),1e-8_wp),this%cfg%omega_P/(this%cfg%omega_rho*this%cfg%omega_u**2)*q(1)]
+      rprev=huge(1.0_wp)
+      do it=1,40
+        rnow=maxval(abs(rr)/sc2)
+        if(rnow<1e-14_wp.or.(rnow<this%cfg%junction_seal_face_tol.and.rnow>0.5_wp*rprev))then
+          istat=0;return
+        endif
+        do j=1,2
+          qn=q;h=1e-7_wp*max(abs(q(j)),1.0_wp);qn(j)=q(j)+h
+          call t1s_res(cfgn,z,x,y,thl_,thr_,qn,rn,on,un,code)
+          if(code/=0)then
+            qn(j)=q(j)-h
+            call t1s_res(cfgn,z,x,y,thl_,thr_,qn,rn,on,un,code)
+            if(code/=0)return
+            jm(:,j)=(rr-rn)/h
+          else
+            jm(:,j)=(rn-rr)/h
+          endif
+        enddo
+        det=jm(1,1)*jm(2,2)-jm(1,2)*jm(2,1)
+        if(.not.ieee_is_finite(det).or.det==0.0_wp)then
+          istat=1622;return
+        endif
+        ds=-[jm(2,2)*rr(1)-jm(1,2)*rr(2),-jm(2,1)*rr(1)+jm(1,1)*rr(2)]/det
+        lam=1.0_wp
+        do k=1,30
+          qn=q+lam*ds
+          call t1s_res(cfgn,z,x,y,thl_,thr_,qn,rn,on,un,code)
+          if(code==0)then
+            if(maxval(abs(rn)/sc2)<maxval(abs(rr)/sc2))exit
+          endif
+          lam=0.5_wp*lam
+        enddo
+        if(k>30)then
+          ! no decrease is possible: accepted only at the round-off floor of the
+          ! closures (below junction_seal_face_tol), otherwise a failure
+          if(rnow<this%cfg%junction_seal_face_tol)then
+            istat=0;return
+          endif
+          istat=1623;return
+        endif
+        rprev=rnow
+        q=qn;rr=rn;o=on;ust=un
+      enddo
+      istat=1624
+    end subroutine t1s_solve2
+    subroutine t1s_res(cfgn,z,x,y,thl_,thr_,q,res,o,ust,code)
+      !! o(1)=F1 left, o(2)=Fg left, o(3)=F3 left, o(4)=F1 right, o(5)=Fg right, o(6)=s;
+      !! ust = [U_L* | U_L1, U_R* | U*, U_M]
+      integer,intent(in)::cfgn
+      real(wp),intent(in)::z,x(3),y(3),thl_,thr_,q(2)
+      real(wp),intent(out)::res(2),o(12),ust(3,3)
+      integer,intent(out)::code
+      real(wp)::ul1(3),um(3),urs(3),f1(3),f2(3),v(6),s_
+      res=huge(1.0_wp);o=0;ust=0
+      call t1s_curvep(x,thl_,id_left,1,q(1),ul1,code);if(code/=0)return
+      call t1s_curvep(y,thr_,id_right,3,q(2),um,code);if(code/=0)return
+      call t1s_curvez(um,thr_,id_right,z,urs,code);if(code/=0)return
+      call t1_flux(ul1,thl_,id_left,f1,v,code);if(code/=0)return
+      call t1_flux(urs,thr_,id_right,f2,v,code);if(code/=0)return
+      if(cfgn==4)then
+        s_=0
+        res=[f1(1)-f2(1),f1(3)-f2(3)]
+      else
+        s_=f1(2)/ul1(2)
+        res=[s_*(urs(1)-ul1(1))-(f2(1)-f1(1)),s_*(urs(3)-ul1(3))-(f2(3)-f1(3))]
+      endif
+      o(1:3)=[f1(1),f1(2),f1(3)];o(4:5)=[f2(1),f2(2)];o(6)=s_
+      ust(:,1)=ul1;ust(:,2)=urs;ust(:,3)=um
+    end subroutine t1s_res
+    subroutine t1s_curvep(u0,th,cid,fam,p1,u1,code)
+      !! Acoustic family fam LINEARIZED along r_fam(u0), parametrized by p (as T1).
+      !! The acoustic waves are weak (dp/p <= ~3e-3): second-order error, and the map
+      !! p1 -> u1 is smooth. An integral curve with a fixed number of RK stages is NOT
+      !! used: the stratified closure is only C0 at the Fanning laminar/turbulent
+      !! switch (gas Re = 2000), so stage fields jump there and the discrete curve
+      !! becomes discontinuous in p1 (observed: inner Newton stall, P1.2 scan).
+      real(wp),intent(in)::u0(3),th,p1
+      integer,intent(in)::cid,fam
+      real(wp),intent(out)::u1(3)
+      integer,intent(out)::code
+      real(wp)::v(6),f(3),k1(3)
+      u1=u0
+      call t1_flux(u0,th,cid,f,v,code);if(code/=0)return
+      if(p1==v(4))return
+      call t1s_fieldp(u0,th,cid,fam,k1,code);if(code/=0)return
+      u1=u0+(p1-v(4))*k1
+    end subroutine t1s_curvep
+    subroutine t1s_fieldp(u,th,cid,fam,du,code)
+      real(wp),intent(in)::u(3),th
+      integer,intent(in)::cid,fam
+      real(wp),intent(out)::du(3)
+      integer,intent(out)::code
+      real(wp)::lam(3),r(3,3),v(6),gp(3),ga(3),dq
+      call t1_eig(u,th,cid,lam,r,v,gp,ga,code)
+      if(code/=0)return
+      dq=dot_product(gp,r(:,fam))
+      if(.not.(abs(dq)>0.0_wp))then
+        code=-8;return
+      endif
+      du=r(:,fam)/dq
+    end subroutine t1s_fieldp
+    function t1s_onz(w,z) result(u)
+      !! state on the kinematic curve from (U1,U3) and alpha=z**2 (exact EOS identity)
+      real(wp),intent(in)::w(2),z
+      real(wp)::u(3),pp,a
+      a=z*z
+      pp=this%cfg%nP_l0+this%cfg%nCl**2*(w(1)/(1-a)-this%cfg%nrho_l0)
+      u=[w(1),a*pp/this%cfg%nCg**2,w(2)]
+    end function t1s_onz
+    subroutine t1s_fieldz(w,z,th,cid,dw,code)
+      !! d(U1,U3)/dz = 2z r2/(grad(alpha).r2); exactly 0 at z=0 (no closure call)
+      real(wp),intent(in)::w(2),z,th
+      integer,intent(in)::cid
+      real(wp),intent(out)::dw(2)
+      integer,intent(out)::code
+      real(wp)::lam(3),r(3,3),v(6),gp(3),ga(3),dq
+      dw=0;code=0
+      if(z==0.0_wp)return
+      call t1_eig(t1s_onz(w,z),th,cid,lam,r,v,gp,ga,code)
+      if(code/=0)return
+      dq=dot_product(ga,r(:,2))
+      if(.not.(abs(dq)>0.0_wp))then
+        code=-8;return
+      endif
+      dw=2*z*r([1,3],2)/dq
+    end subroutine t1s_fieldz
+    subroutine t1s_curvez(u0,th,cid,z1,u1,code)
+      !! RK4 (32 steps) of the kinematic integral curve from u0 to alpha=z1**2
+      real(wp),intent(in)::u0(3),th,z1
+      integer,intent(in)::cid
+      real(wp),intent(out)::u1(3)
+      integer,intent(out)::code
+      integer,parameter::nz=32
+      real(wp)::v(6),f(3),k1(2),k2(2),k3(2),k4(2),h,z,w(2)
+      integer::i
+      u1=u0
+      call t1_flux(u0,th,cid,f,v,code);if(code/=0)return
+      z=sqrt(v(1));h=(z1-z)/nz;w=u0([1,3])
+      if(h==0.0_wp)return
+      do i=1,nz
+        call t1s_fieldz(w,z,th,cid,k1,code);if(code/=0)return
+        call t1s_fieldz(w+h/2*k1,z+h/2,th,cid,k2,code);if(code/=0)return
+        call t1s_fieldz(w+h/2*k2,z+h/2,th,cid,k3,code);if(code/=0)return
+        call t1s_fieldz(w+h*k3,z+h,th,cid,k4,code);if(code/=0)return
+        w=w+h*(k1+2*k2+2*k3+k4)/6;z=z+h
+      enddo
+      u1=t1s_onz(w,z1)
+    end subroutine t1s_curvez
     subroutine t1_res(x,y,thl_,thr_,rx1,dqx,ry3,dqy,px,py,s,res,ust,code)
       !! residual F_L(U_L*) - F_R(U_R*) of the T1 solver; ust = [U_L*, U_R*, U_M]
       real(wp),intent(in)::x(3),y(3),thl_,thr_,rx1(3),dqx,ry3(3),dqy,px,py,s(3)
@@ -569,13 +1042,13 @@ contains
       if(.not.ieee_is_finite(momentum))return
       istat=0
     end subroutine momentum_trace
-    subroutine basic(x0,y0,fm_,fp_,istat,amat,bmat,dmat,sp,was_blocked,trace)
+    subroutine basic(x0,y0,fm_,fp_,istat,amat,bmat,dmat,sp,was_blocked,trace,sinfo)
       real(wp),intent(in)::x0(3),y0(3)
       real(wp)::x(3),y(3),thl,thr
       real(wp),intent(out)::fm_(3),fp_(3),amat(3,3),bmat(3,3),dmat(3,3),sp
       integer,intent(out)::istat
       logical,intent(out),optional::was_blocked
-      real(wp),intent(out),optional::trace(6)
+      real(wp),intent(out),optional::trace(6),sinfo(3)
       real(wp)::mapped(3),vm(6),fs(3),ss(3),scratch(3,3),a0(3,3),pstar,rls,rgs,astl,astr
       real(wp)::pip,kin,jsl,jsg,ax(3,3),raw_gas_flux,path_theta,path_theta_right,probe,aprobe
       integer::ic,q,ic2
@@ -612,7 +1085,11 @@ contains
         ! Wave configuration of the independent reference (H4): one negative
         ! eigenvalue on the pipe side, two positive on the riser side, real
         ! spectra; anything else is refused explicitly (no fallback to T2).
-        call t1_face(x,y,thl,thr,fm_,istat,sp,trace)
+        if(trim(this%cfg%junction_seal)=='LIQUID_BRIDGE')then
+          call t1s_face(x,y,thl,thr,fm_,istat,sp,trace,sinfo)
+        else
+          call t1_face(x,y,thl,thr,fm_,istat,sp,trace)
+        endif
         if(istat/=0)return
         fp_=fm_
         dmat=0
@@ -1215,7 +1692,8 @@ contains
       ! T1 only (T2 outputs stay byte-identical): both junction pressure traces.
       open(newunit=unitt1,file=trim(this%cfg%out_dir)//'/junction_transmission.csv',status='replace')
       write(unitt1,'(a)')'time_s,p_L_star_Pa,p_R_star_Pa,dp_RL_Pa,Gl_star_kg_m2_s,Gg_star_kg_m2_s,F3_star_Pa,'// &
-        'alpha_pipe_star,alpha_riser_star,face_status'
+        'alpha_pipe_star,alpha_riser_star,face_status'//trim(merge( &
+        ',configuration,front_speed_m_s,g0_kg_m2_s',repeat(' ',41),trim(this%cfg%junction_seal)/='OFF'))
     endif
     open(newunit=unitbc,file=trim(this%cfg%out_dir)//'/boundary_conditions.csv',status='replace')
     write(unitbc,'(a)')'step,time_s,dt_s,reduced_phase,status_in,status_out,nin_in,nin_out,nzero_in,nzero_out,'// &
@@ -1621,12 +2099,15 @@ contains
     end subroutine
     subroutine write_checkpoint()
       integer::ck,ii,rename_status
+      character(len=40)::seal_tag
+      seal_tag=''
+      if(trim(this%cfg%junction_seal)/='OFF')seal_tag=' junction_seal='//trim(this%cfg%junction_seal)
       open(newunit=ck,file=trim(this%cfg%out_dir)//'/checkpoint.next',status='replace')
-      write(ck,'(a,i0,a,i0,12a)')'# PRIMS-F accepted U; autonomous model; dt is the next attempted step, not a reinitialization;'// &
+      write(ck,'(a,i0,a,i0,13a)')'# PRIMS-F accepted U; autonomous model; dt is the next attempted step, not a reinitialization;'// &
         ' closure_pipe=',this%cfg%closure_pipe,' closure_riser=',this%cfg%closure_riser,' gas_eos=',trim(this%cfg%gas_eos), &
         ' junction_model=',trim(this%cfg%junction_model),' junction_flux=',trim(this%cfg%junction_flux), &
         ' junction_trace=',trim(this%cfg%junction_trace),' junction_riser_limit=',trim(this%cfg%junction_riser_limit), &
-        ' junction_transmission=',trim(this%cfg%junction_transmission)
+        ' junction_transmission=',trim(this%cfg%junction_transmission),trim(seal_tag)
       write(ck,'(5(i0,1x),6(es25.16e3,1x))')size(U,1),this%cfg%num_dummy_cells,this%cfg%N_pipe,step,rej, &
         tcur,dt,this%cfg%omega_t,this%cfg%omega_u,this%cfg%omega_rho,this%cfg%omega_P
       do ii=1,size(U,1)
@@ -1698,11 +2179,12 @@ contains
       real(wp),intent(in)::dts
       integer,intent(in)::nit
       real(wp)::pr(6,4),v(6),f(3),s(3),aj(3,3),sj(3,3),mpi(2),mr(2),err(2),conv,rlout,rgout
-      real(wp)::baseflux(3),baseplus(3),trace(6),massflow_scale
+      real(wp)::baseflux(3),baseplus(3),trace(6),massflow_scale,sealinfo(3)
       logical::blocked,t1mode
       integer::ii,k,cc,indices(4),ib,t1status
       ib=lo+this%cfg%N_pipe-1;indices=[lo,ib,ib+1,hi]
       blocked=.false.;trace=ieee_value(0._wp,ieee_quiet_nan)
+      sealinfo=ieee_value(0._wp,ieee_quiet_nan)
       t1mode=trim(this%cfg%junction_transmission)=='T1'
       if(global_single_phase(U,this%cfg)>0)then
         if(step==0)then
@@ -1713,10 +2195,11 @@ contains
         baseplus=baseflux
       else if(allocated(this%lagged_dissipation))then
         call this%face_pair(U(ib,:),U(ib+1,:),thetav(ib),thetav(ib+1),baseflux,baseplus,cc, &
-          blocking_active=blocked,junction_trace=trace,dissipation_matrix=this%lagged_dissipation(:,:,ib),left_cell=ib)
+          blocking_active=blocked,junction_trace=trace,dissipation_matrix=this%lagged_dissipation(:,:,ib),left_cell=ib, &
+          junction_seal_info=sealinfo)
       else
         call this%face_pair(U(ib,:),U(ib+1,:),thetav(ib),thetav(ib+1),baseflux,baseplus,cc, &
-          blocking_active=blocked,junction_trace=trace,left_cell=ib)
+          blocking_active=blocked,junction_trace=trace,left_cell=ib,junction_seal_info=sealinfo)
       endif
       t1status=cc
       if(step==0)then
@@ -1752,9 +2235,16 @@ contains
         trace(1)*this%cfg%omega_P,trace(4:5),merge(trace(3),trace(6),t1mode)*massflow_scale, &
         merge(1.0_wp,0.0_wp,blocked),1-pr(1,3),1-pr(1,4), &
         accepted_in*massflow_scale,in_abs,out_abs,base_sum(:,1),base_abs(:,1),base_sum(:,2),base_abs(:,2)
-      if(t1mode)write(unitt1,'(*(es24.16,:,","))')tcur*this%cfg%omega_t,trace(1)*this%cfg%omega_P,trace(6)*this%cfg%omega_P, &
+      if(t1mode.and.trim(this%cfg%junction_seal)=='OFF')write(unitt1,'(*(es24.16,:,","))')tcur*this%cfg%omega_t, &
+        trace(1)*this%cfg%omega_P,trace(6)*this%cfg%omega_P, &
         (trace(6)-trace(1))*this%cfg%omega_P,trace(2:3)*this%cfg%omega_rho*this%cfg%omega_u, &
         baseplus(3)*this%cfg%omega_rho*this%cfg%omega_u**2,trace(4:5),real(t1status,wp)
+      if(t1mode.and.trim(this%cfg%junction_seal)/='OFF')then
+        write(unitt1,'(*(es24.16,:,","))')tcur*this%cfg%omega_t,trace(1)*this%cfg%omega_P,trace(6)*this%cfg%omega_P, &
+          (trace(6)-trace(1))*this%cfg%omega_P,trace(2:3)*this%cfg%omega_rho*this%cfg%omega_u, &
+          baseplus(3)*this%cfg%omega_rho*this%cfg%omega_u**2,trace(4:5),real(t1status,wp), &
+          sealinfo(1),sealinfo(2)*this%cfg%omega_u,sealinfo(3)*this%cfg%omega_rho*this%cfg%omega_u
+      endif
       next_output=tcur*this%cfg%omega_t+this%cfg%output_interval_s
     end subroutine
     subroutine write_field()

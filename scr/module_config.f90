@@ -65,6 +65,19 @@ module module_config
     ! 21/11/2026): Gl, Gg and F3 continuous (Burr eqs.72-75, no singular
     ! source); the two pressure traces may differ.
     character(len=16) :: junction_transmission = 'T2'
+    ! Seal limit of the T1 junction (EXPERIMENTAL, 21/11/2026). 'OFF' (default):
+    ! T1 unchanged. 'LIQUID_BRIDGE': configuration chosen by the sign of g0, the
+    ! pipe-side gas flux at the face when the riser trace is gas-free (alpha_R*=0,
+    ! closed endpoint of the Chexal kinematic curve, z=sqrt(alpha) parametrization):
+    ! g0>0 -> H4 (gas passes, alpha_R*>0); g0<=0 -> H7 liquid bridge (Gg*=0, pure
+    ! liquid face state, pipe accumulation front s=u_g(U_L1)<=0 by Rankine-Hugoniot).
+    ! The face flux is continuous at g0=0. Requires junction_transmission='T1'.
+    character(len=16) :: junction_seal = 'OFF'
+    ! Inner face Newton of the seal solver: accept max|res|/scale < 1e-14, or a
+    ! stagnated iterate (reduction < 2x) below junction_seal_face_tol. Default
+    ! 1e-11 = 10x the relative tolerance of the closures' velocity recovery (tol),
+    ! the round-off floor of every flux evaluation.
+    real(wp) :: junction_seal_face_tol = 1e-11_wp
     character(len=20) :: dissipation_mode = 'LAGGED'
     character(len=16) :: newton_globalization = 'LINE_SEARCH'
     real(wp) :: output_interval_s = 1.0_wp

@@ -51,6 +51,8 @@ contains
     if(code==0)read(header,*)cfg%closure_riser
     call get_environment_variable('PRIMS_JUNCTION_TRANSMISSION',header,status=code)
     if(code==0)cfg%junction_transmission=trim(header)
+    call get_environment_variable('PRIMS_JUNCTION_SEAL',header,status=code)
+    if(code==0)cfg%junction_seal=trim(header)
     cfg%junction_model='MATCHED';cfg%flux_scheme='ROE';cfg%dissipation_mode='LAGGED'
     cfg%jac_dissipation_fd=.true.
     cfg%nCells=nc;cfg%num_dummy_cells=2;cfg%N_pipe=51;cfg%quad_points=3

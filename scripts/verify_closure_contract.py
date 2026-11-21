@@ -114,6 +114,10 @@ def main():
         m_t = re.findall(r"\bjunction_transmission\s*=\s*'([^']*)'", body(deck_text), re.I)
         req_t = m_t[0].strip().upper() if m_t else 'T2'
         check('deck_transmission == contract', req_t == c['junction_transmission'], [req_t, c['junction_transmission']])
+        # seal extension: written to the contract only when active (OFF keeps T1/T2 contracts unchanged)
+        m_s = re.findall(r"\bjunction_seal\s*=\s*'([^']*)'", body(deck_text), re.I)
+        req_s = m_s[0].strip().upper() if m_s else 'OFF'
+        check('deck_seal == contract', req_s == c.get('junction_seal', 'OFF'), [req_s, c.get('junction_seal', 'OFF')])
     check('all_riser_cells_dispatched_effective', c['riser_cells'] == c['riser_cells_dispatched_effective'],
           [c['riser_cells'], c['riser_cells_dispatched_effective']])
     check('all_pipe_cells_dispatched_effective', c['pipe_cells'] == c['pipe_cells_dispatched_effective'],
@@ -138,6 +142,9 @@ def main():
             if 'junction_transmission' in c:
                 check('checkpoint_transmission == contract', mt is not None and mt.group(1) == c['junction_transmission'],
                       mt.group(1) if mt else None)
+            ms = re.search(r'junction_seal=(\S+)', head)
+            check('checkpoint_seal == contract', (ms.group(1) if ms else 'OFF') == c.get('junction_seal', 'OFF'),
+                  ms.group(1) if ms else 'OFF')
         else:
             check('checkpoint_header_has_contract', False, 'legacy checkpoint header without closure ids')
     data = None
