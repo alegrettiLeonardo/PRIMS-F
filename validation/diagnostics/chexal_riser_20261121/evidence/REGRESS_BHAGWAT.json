@@ -1,0 +1,76 @@
+{
+ "frozen_binary": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/frozen_364b808/prims_f_364b808",
+ "frozen_sha256": "ee6f57029f12c5d390de3baa2773fa561c3b2a049ced5710cabca0ed79686a33",
+ "new_binary_sha256": "d342750229f4c250d87888e0ed0cc37ad29a16293d41faad9004e0509b400ad2",
+ "runs": {
+  "D_SS1_C3_BAROTROPIC_N51_dt0.5": {
+   "monitor.csv": {
+    "lines_frozen": 167,
+    "identical_prefix": true,
+    "first_diff_line": null
+   },
+   "fields.csv": {
+    "lines_frozen": 715,
+    "identical_prefix": true,
+    "first_diff_line": null
+   },
+   "conservation.csv": {
+    "lines_frozen": 197,
+    "identical_prefix": true,
+    "first_diff_line": null
+   },
+   "boundary_conditions.csv": {
+    "lines_frozen": 197,
+    "identical_prefix": true,
+    "first_diff_line": null
+   },
+   "note": "same deck; terminal failure reproduced"
+  },
+  "D_SS3_C3_ISOTHERMAL_N51_dt0.5": {
+   "monitor.csv": {
+    "lines_frozen": 156,
+    "identical_prefix": true,
+    "first_diff_line": null
+   },
+   "fields.csv": {
+    "lines_frozen": 613,
+    "identical_prefix": true,
+    "first_diff_line": null
+   },
+   "conservation.csv": {
+    "lines_frozen": 191,
+    "identical_prefix": true,
+    "first_diff_line": null
+   },
+   "boundary_conditions.csv": {
+    "lines_frozen": 191,
+    "identical_prefix": true,
+    "first_diff_line": null
+   },
+   "note": "same deck; terminal failure reproduced"
+  },
+  "D_Stable_C3_BAROTROPIC_N51_dt0.5": {
+   "monitor.csv": {
+    "lines_frozen": 610,
+    "identical_prefix": false,
+    "first_diff_line": 610
+   },
+   "fields.csv": {
+    "lines_frozen": 2245,
+    "identical_prefix": false,
+    "first_diff_line": 2042
+   },
+   "conservation.csv": {
+    "lines_frozen": 632,
+    "identical_prefix": false,
+    "first_diff_line": 632
+   },
+   "boundary_conditions.csv": {
+    "lines_frozen": 632,
+    "identical_prefix": false,
+    "first_diff_line": 632
+   },
+   "note": "frozen deck time_dim=300 s (new run 2400 s): only the final truncated step differs"
+  }
+ }
+}
