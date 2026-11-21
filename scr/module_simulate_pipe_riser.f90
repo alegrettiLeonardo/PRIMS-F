@@ -47,6 +47,7 @@ module module_simulate_pipe_riser
     procedure :: init,ensure_prev_arrays,update_prev_arrays,process_cell,simulate
     procedure :: point_state,face_pair,assemble
     procedure :: prepare_dissipation
+    procedure :: effective_closures
     procedure :: admissibility_margin,constrained_direction
   end type
 contains
@@ -112,6 +113,19 @@ contains
       this%idx_prev(i)=merge(0,1,cell_closure(this,thetav(i),i)==1)
     enddo
   end subroutine
+
+  subroutine effective_closures(this,ids)
+    !! Closure ID actually dispatched to every cell by the operators (the same
+    !! cell_closure used by point_state, faces, sources and Jacobians). Written
+    !! to closure_contract.txt so that requested and executed closures can be
+    !! audited; it does not change any computation.
+    class(pipeline_riser_simulator_t),intent(in)::this
+    integer,intent(out)::ids(:)
+    integer::i
+    do i=1,size(ids)
+      ids(i)=cell_closure(this,this%cfg%thetav(i),i)
+    enddo
+  end subroutine effective_closures
 
   integer function cell_closure(this,theta,i) result(cid)
     class(pipeline_riser_simulator_t), intent(in) :: this
@@ -1368,7 +1382,10 @@ contains
     subroutine write_checkpoint()
       integer::ck,ii,rename_status
       open(newunit=ck,file=trim(this%cfg%out_dir)//'/checkpoint.next',status='replace')
-      write(ck,'(a)')'# PRIMS-F accepted U; autonomous model; dt is the next attempted step, not a reinitialization'
+      write(ck,'(a,i0,a,i0,10a)')'# PRIMS-F accepted U; autonomous model; dt is the next attempted step, not a reinitialization;'// &
+        ' closure_pipe=',this%cfg%closure_pipe,' closure_riser=',this%cfg%closure_riser,' gas_eos=',trim(this%cfg%gas_eos), &
+        ' junction_model=',trim(this%cfg%junction_model),' junction_flux=',trim(this%cfg%junction_flux), &
+        ' junction_trace=',trim(this%cfg%junction_trace),' junction_riser_limit=',trim(this%cfg%junction_riser_limit)
       write(ck,'(5(i0,1x),6(es25.16e3,1x))')size(U,1),this%cfg%num_dummy_cells,this%cfg%N_pipe,step,rej, &
         tcur,dt,this%cfg%omega_t,this%cfg%omega_u,this%cfg%omega_rho,this%cfg%omega_P
       do ii=1,size(U,1)

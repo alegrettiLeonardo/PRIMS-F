@@ -65,6 +65,8 @@ program main
   real(wp) :: Cg_fixed, P_standard, T_standard, dt_min_s, dt_max_s, dt_start_s
   real(wp) :: perturbation_amplitude, output_interval_s, field_interval_s
   integer(i4) :: n_riser, closure_riser, closure_pipe, sim_status, steady_status, output_closure, output_status
+  integer(i4) :: closure_riser_requested, closure_pipe_requested, contract_unit
+  integer, allocatable :: effective_ids(:)
   integer(i4)        :: quad_points, max_iter, max_workers, save_every, newton_max
   character(len=32)  :: regime
 
@@ -209,7 +211,8 @@ program main
   ! Development default (21/11/2026): CHEXAL_1992 air-water, AUTO branch, in
   ! every riser cell, face, junction trace, steady profile and boundary.
   ! Bhagwat (3) and Bendiksen (2) remain explicit legacy/comparison choices.
-  closure_riser = 5
+  ! The sentinel -1 records whether the deck REQUESTED a closure (contract).
+  closure_riser = -1
   ! Sentinel distinguishes an explicitly supplied drift closure from a default.
   closure_pipe = -1
   pipe_regime_mode = 'FIXED_STRATIFIED'
@@ -279,6 +282,8 @@ program main
 
   end if
 
+  closure_riser_requested=closure_riser;closure_pipe_requested=closure_pipe
+  if(closure_riser==-1)closure_riser=5
   select case(trim(pipe_regime_mode))
   case('FIXED_STRATIFIED','AUTO_BURR15')
     if(closure_pipe/=-1.and.closure_pipe/=1) &
@@ -590,6 +595,41 @@ program main
 
   ! ---------------------------- Simulate ---------------------------------
   call sim%init(cfg)
+  ! Closure contract: requested (deck) vs effective (dispatched per cell).
+  ! Written BEFORE the transient so failed runs carry it; any cell whose
+  ! dispatched closure differs from the resolved section closure stops here.
+  allocate(effective_ids(cfg%nCells))
+  call sim%effective_closures(effective_ids)
+  open(newunit=contract_unit,file=trim(out_dir)//'/closure_contract.txt',status='replace')
+  write(contract_unit,'(a)')'contract_version=1'
+  call contract_int('closure_pipe_requested',closure_pipe_requested)
+  write(contract_unit,'(a,i0)')'closure_pipe_effective=',cfg%closure_pipe
+  call contract_int('closure_riser_requested',closure_riser_requested)
+  write(contract_unit,'(a,i0)')'closure_riser_effective=',cfg%closure_riser
+  write(contract_unit,'(2a)')'closure_riser_name=',trim(closure_name(cfg%closure_riser))
+  write(contract_unit,'(2a)')'closure_pipe_name=',trim(closure_name(cfg%closure_pipe))
+  write(contract_unit,'(a,i0)')'pipe_cells=',cfg%N_pipe
+  write(contract_unit,'(a,i0)')'pipe_cells_dispatched_effective=',count(effective_ids(nd+1:nd+cfg%N_pipe)==cfg%closure_pipe)
+  write(contract_unit,'(a,i0)')'riser_cells=',cfg%nCells-2*nd-cfg%N_pipe
+  write(contract_unit,'(a,i0)')'riser_cells_dispatched_effective=', &
+    count(effective_ids(nd+cfg%N_pipe+1:cfg%nCells-nd)==cfg%closure_riser)
+  write(contract_unit,'(a,i0)')'junction_riser_trace_closure=',cfg%closure_riser
+  write(contract_unit,'(a,i0)')'outlet_boundary_closure=',cfg%closure_riser
+  write(contract_unit,'(2a)')'pipe_regime_mode=',trim(pipe_regime_mode)
+  write(contract_unit,'(2a)')'gas_eos=',trim(gas_eos)
+  write(contract_unit,'(2a)')'junction_model=',trim(junction_model)
+  write(contract_unit,'(2a)')'junction_flux=',trim(junction_flux)
+  write(contract_unit,'(2a)')'junction_trace=',trim(junction_trace)
+  write(contract_unit,'(2a)')'junction_riser_limit=',trim(junction_riser_limit)
+  write(contract_unit,'(2a)')'newton_globalization=',trim(newton_globalization)
+  write(contract_unit,'(2a)')'dissipation_mode=',trim(dissipation_mode)
+  write(contract_unit,'(2a)')'flux_scheme=',trim(flux_scheme)
+  write(contract_unit,'(a,es12.4)')'tol_res=',tol_res
+  write(contract_unit,'(2a)')'input_file=',trim(infile)
+  close(contract_unit)
+  if(any(effective_ids(nd+1:nd+cfg%N_pipe)/=cfg%closure_pipe).or. &
+     any(effective_ids(nd+cfg%N_pipe+1:cfg%nCells-nd)/=cfg%closure_riser)) &
+    error stop 'Closure contract violated: dispatched cell closure differs from the resolved section closure'
   call sim%simulate(U, vns_ext, thetav_ext, cfg%T, max_iter=max_iter, &
                    it_target=it_target, use_it_target=use_it_target, it_p=it_p, &
                    dt_fac_min=dt_fac_min, dt_fac_max=dt_fac_max, &
@@ -639,6 +679,31 @@ program main
   write(*,'(a,1x,a)') 'Done. Wrote', trim(outname)
 
 contains
+
+  subroutine contract_int(key,value)
+    character(*),intent(in)::key
+    integer(i4),intent(in)::value
+    if(value==-1)then
+      write(contract_unit,'(2a)')key,'=DEFAULT'
+    else
+      write(contract_unit,'(a,a,i0)')key,'=',value
+    endif
+  end subroutine contract_int
+
+  pure function closure_name(id) result(name)
+    integer(i4),intent(in)::id
+    character(len=32)::name
+    select case(id)
+    case(1);name='STRATIFIED'
+    case(2);name='BENDIKSEN'
+    case(3);name='BHAGWAT_AZEVEDO2015'
+    case(4);name='MONTGOMERY'
+    case(5);name='CHEXAL_1992_AUTO'
+    case(6);name='CHEXAL_1992_HIGH'
+    case(7);name='CHEXAL_1992_LOW'
+    case default;name='UNKNOWN'
+    end select
+  end function closure_name
   function shell_quote(s) result(quoted)
     character(len=*),intent(in)::s
     character(len=:),allocatable::quoted

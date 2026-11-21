@@ -10,7 +10,10 @@ LAGGED, MATCHED are the benchmark values. The steady initial state is computed
 by the solver at start-up with the selected riser closure (no reuse of a
 Bhagwat initial state for Chexal).
 Each run goes through junction_constitutive/run_guarded.py with pre-declared
-cost limits (COMPLETED / FAIL / TIMEOUT / COST_STAGNATION).
+cost limits (COMPLETED / FAIL / TIMEOUT / COST_STAGNATION), then through
+scripts/verify_closure_contract.py (CLOSURE_CONTRACT_STATUS.json: requested ==
+executed closure from deck, label, solver contract, metadata, checkpoint and data).
+PROTOCOL records the binary SHA-256 and a SHA-256 over scr/*.f90 (source_sha256).
 Usage: run_campaign.py BINARY RESULTS_ROOT [--workers 6] [--max-wall-s 14400] [--grid N:dt ...]
 """
 import argparse, concurrent.futures as cf, hashlib, json, os, re, subprocess, sys, time
@@ -81,7 +84,11 @@ def main():
                     raise RuntimeError(f'{deck}: closure_riser={got}, expected {cid}')
                 jobs.append(dict(name=name, case=case, eos=eos, closure_riser=cid, grid=g, source_deck=str(src.relative_to(ROOT)),
                                  source_sha256=sha(src), deck=str(deck), deck_sha256=sha(deck), run=str(run)))
+    src = hashlib.sha256()
+    for f in sorted((ROOT / 'scr').glob('*.f90')):
+        src.update(f.name.encode()); src.update(f.read_bytes())
     protocol = dict(created=time.strftime('%Y-%m-%dT%H:%M:%S%z'), binary=str(args.binary.resolve()), binary_sha256=sha(args.binary),
+                    source_sha256=src.hexdigest(),
                     git_head=subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip(),
                     git_dirty=bool(subprocess.check_output(['git', '-C', str(ROOT), 'status', '--porcelain', 'scr'], text=True).strip()),
                     limits=dict(max_wall_s=args.max_wall_s, window_s=args.window_s, min_advance_s=args.min_advance_s),
@@ -91,17 +98,20 @@ def main():
 
     def go(j):
         if (Path(j['run']) / 'GUARD_STATUS.json').exists():
-            return j['name'], 'skipped'
+            return j['name'], 'skipped', ''
         Path(j['run']).mkdir(parents=True, exist_ok=True)
         cmd = [sys.executable, str(GUARD), str(args.binary.resolve()), j['deck'], j['run'], '--max-wall-s', str(args.max_wall_s),
                '--window-s', str(args.window_s), '--min-advance-s', str(args.min_advance_s)]
         with open(Path(j['run']) / 'guard.log', 'w') as f:
             p = subprocess.run(cmd, env=env, stdout=f, stderr=subprocess.STDOUT)
-        return j['name'], p.returncode
+        # requested == executed: deck, label, solver contract, metadata, checkpoint, data
+        v = subprocess.run([sys.executable, str(ROOT / 'scripts/verify_closure_contract.py'), j['run'], '--deck', j['deck'],
+                            '--expect-riser', str(j['closure_riser'])], capture_output=True, text=True)
+        return j['name'], p.returncode, v.stdout.strip()
 
     with cf.ThreadPoolExecutor(max_workers=args.workers) as ex:
-        for name, rc in ex.map(go, jobs):
-            print(name, rc, flush=True)
+        for res in ex.map(go, jobs):
+            print(*res, flush=True)
 
 
 if __name__ == '__main__':
