@@ -362,7 +362,7 @@ contains
       real(wp),intent(out),optional::trace(6)
       real(wp)::lamx(3),rx(3,3),lamy(3),ry(3,3),gpx(3),gax(3),gpy(3),gay(3),vx(6),vy(6)
       real(wp)::s(3),sn(3),res(3),rn(3),jm(3,3),jinv(3,3),det,ds(3),scl(3),h,lam,ust(3,3),fl_(3)
-      real(wp)::vls(6),vrs(6),lm1(3),lm2(3),lm3(3),rr(3,3),pipl,dqx,dqy
+      real(wp)::vls(6),vrs(6),lm1(3),lm2(3),lm3(3),rr(3,3),pipl,dqx,dqy,rprev,rnow
       integer::it,k,code,j
       flux=ieee_value(0.0_wp,ieee_quiet_nan);spd=flux(1);istat=1615
       pipl=this%cfg%omega_P/(this%cfg%omega_rho*this%cfg%omega_u**2)
@@ -385,8 +385,13 @@ contains
       scl=[max(abs(fl_(1)),1e-8_wp),max(abs(fl_(2)),abs(fl_(1))*1e-6_wp,1e-14_wp),pipl*vx(4)]
       call t1_res(x,y,thl_,thr_,rx(:,1),dqx,ry(:,3),dqy,vx(4),vy(4),s,res,ust,code)
       if(code/=0)return
+      rprev=huge(1.0_wp)
       do it=1,40
-        if(maxval(abs(res)/scl)<1e-12_wp)then
+        ! Converge to round-off: the face flux must not carry inner-iteration
+        ! noise into the global residual (tol_res=1e-10). Accept 1e-14, or a
+        ! stagnated iterate (reduction < 2x) once below 1e-11.
+        rnow=maxval(abs(res)/scl)
+        if(rnow<1e-14_wp.or.(rnow<1e-11_wp.and.rnow>0.5_wp*rprev))then
           call t1_eig(ust(:,1),thl_,id_left,lm1,rr,vls,gpx,gax,code)
           if(code==0)call t1_eig(ust(:,2),thr_,id_right,lm2,rr,vrs,gpy,gay,code)
           if(code==0)call t1_eig(ust(:,3),thr_,id_right,lm3,rr,vy,gpy,gay,code)
@@ -445,6 +450,7 @@ contains
         if(code/=0)then
           istat=1613;return
         endif
+        rprev=rnow
         s=sn;res=rn
       enddo
       istat=1614
@@ -1480,6 +1486,7 @@ contains
         write(output_unit,'(a,f12.4,a,i0,a,es11.3,a,i0,a,i0)') 't(s)=',tcur*this%cfg%omega_t, &
            ' step=',step,' dt(s)=',dt*this%cfg%omega_t,' Newton=',it,' rejects=',rej
         flush(output_unit);flush(unitmon);flush(unitsteps);flush(unitmass);last_print=wall1
+        if(trim(this%cfg%junction_transmission)=='T1')flush(unitt1)
       endif
       dt_next=dt
       if(it<=5)dt_next=dt*this%dt_growth
