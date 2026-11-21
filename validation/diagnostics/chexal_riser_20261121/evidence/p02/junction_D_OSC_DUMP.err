@@ -1,0 +1,16 @@
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+At line 118 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 118 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+At line 123 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 123 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+At line 103 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'u' of procedure 'steady_junction_trace'
+At line 104 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'u' of procedure 'steady_junction_trace'

@@ -1,3 +1,29 @@
+## Atualização: domínio físico Chexal e transmissão na junção, 21/11/2026 (rodada 3)
+
+Relatório: [CHEXAL_PHYSICAL_DOMAIN_AND_JUNCTION_QUALIFICATION.md](CHEXAL_PHYSICAL_DOMAIN_AND_JUNCTION_QUALIFICATION.md).
+
+- **P0.1:**
+  - contrato executável ar–água no núcleo (`CHEXAL_UNQUALIFIED` = 68 para ρg/ρl > 8,1e-3
+    ou D ∉ [0,010; 0,305] m);
+  - EPRI 1000 psia decomposto: as linhas 2, 6 e 7 implicam as mesmas propriedades
+    (ρg/ρf = 0,0468, grupo de Vgj +2,5 %), com equações verificadas;
+  - FAIL mantido para uso generalizado; subconjunto qualificado = ramo C5 < 1 (todo o PRIMS-F).
+- **P0.2: recomendação T1.**
+  - Fundamentos: Burr (72)–(75) e discretização nodal; balanço integral; dobra sem força
+    tangencial; Riemann local com Chexal (8 estados, multistart).
+  - No bloqueio do SS1, a T1 tem solução única com G_g* = 2,94e-3; a T2 não tem solução
+    (só G_g* ≤ 0).
+  - O operador atual ≈ T2. Ainda **não implementado**: próximo passo, T1 opt-in com
+    Jacobiano, partição e replay curto do SS1.
+- **P1.1:** registro rastreável de 9 fontes em `validation/experimental_airwater/`; nenhum
+  ponto primário de α acessível: NOT_VERIFIED.
+- **P1.2:**
+  - mecanismo B (líquido descendo a 65–76°): BLOCKED (Ousaka et al. 2006 é limite de
+    inundação, 16/26 mm, 30–60°);
+  - mecanismo A: não exigido sob T1.
+- **Regressão:** 29/29 Fortran, Python OK, 7/7 CLI; 16 réplicas idênticas byte a byte à P2,
+  contrato 16/16.
+
 ## Atualização: qualificação Chexal, rodada 2 (P0/P1/P2), 21/11/2026
 
 Mesma branch e worktree, sem push nem merge. Relatório: Parte II de
