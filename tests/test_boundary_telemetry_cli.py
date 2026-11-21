@@ -11,7 +11,12 @@ def rows(p):
 
 def check_case(binary,out,name,extra):
     folder=out/name;deck=out/(name+'.nml')
-    params=dict(nodes=4,n_riser=4,time_dim=.02,dt_start_s=.001,dt_max_s=.004,
+    # Boundary-ledger contract, independent of the riser closure: the legacy
+    # Bhagwat riser is pinned (the primary decks now select CHEXAL_1992, whose
+    # root enumeration is too slow for this check under -O0 -fcheck=all);
+    # Chexal boundaries are covered by test_chexal_junction/_integration and
+    # tests/test_chexal_default_cli.py.
+    params=dict(closure_riser=3,nodes=4,n_riser=4,time_dim=.02,dt_start_s=.001,dt_max_s=.004,
         tol_res=1e-10,tol_inc=1e-10,newton_max=25,output_interval_s=1,field_interval_s=1,
         out_dir="'"+str(folder)+"'",**extra)
     base=(ROOT/'input/benchmarks/D_Stable.nml').read_text()
