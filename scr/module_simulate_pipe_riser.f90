@@ -302,8 +302,14 @@ contains
       real(wp),intent(out)::dm(3),dp(3)
       integer,intent(out)::istat
       real(wp)::xp(3),xm(3),yp(3),ym(3),fmp(3),fpp(3),fmm(3),fpm(3),fm2(3),fp2(3)
-      real(wp)::qa(3,3),qb(3,3),qd(3,3),wave,step,base(3),step_min
+      real(wp)::qa(3,3),qb(3,3),qd(3,3),wave,step,base(3),step_min,sp_(3),sm_(3),s2_(3)
       integer::ip,im,i2,it
+      logical::seal
+      ! Seal extension: the face flux is piecewise smooth (H4|H7, continuous at the
+      ! switch). A sample in the other configuration is treated like an inadmissible
+      ! one, so the difference is one-sided ON THE BASE CONFIGURATION: a consistent
+      ! element of the B-subdifferential (semismooth Newton), not a mix of both sides.
+      seal=match.and.t1.and.trim(this%cfg%junction_seal)/='OFF'.and.ieee_is_finite(base_seal(1))
       base=UL
       if(side==2)base=UR
       step=this%cfg%jac_dissipation_fd_eps*max(abs(base(component)),merge(1e-5_wp,1e-2_wp,component==2))
@@ -318,15 +324,22 @@ contains
         else
           yp(component)=UR(component)+step;ym(component)=UR(component)-step
         endif
-        call basic(xp,yp,fmp,fpp,ip,qa,qb,qd,wave)
-        call basic(xm,ym,fmm,fpm,im,qa,qb,qd,wave)
+        call basic(xp,yp,fmp,fpp,ip,qa,qb,qd,wave,sinfo=sp_)
+        call basic(xm,ym,fmm,fpm,im,qa,qb,qd,wave,sinfo=sm_)
+        if(seal)then
+          if(ip==0.and.nint(sp_(1))/=nint(base_seal(1)))ip=-1
+          if(im==0.and.nint(sm_(1))/=nint(base_seal(1)))im=-1
+        endif
         if(ip==0.and.im==0)then
           dm=(fmp-fmm)/(2*step);dp=(fpp-fpm)/(2*step)
           istat=0;return
         else if(ip==0)then
           if(side==1)xp(component)=UL(component)+2*step
           if(side==2)yp(component)=UR(component)+2*step
-          call basic(xp,yp,fm2,fp2,i2,qa,qb,qd,wave)
+          call basic(xp,yp,fm2,fp2,i2,qa,qb,qd,wave,sinfo=s2_)
+          if(seal.and.i2==0)then
+            if(nint(s2_(1))/=nint(base_seal(1)))i2=-1
+          endif
           if(i2==0)then
             dm=(-3*FM+4*fmp-fm2)/(2*step);dp=(-3*FP+4*fpp-fp2)/(2*step)
             n_one_sided=n_one_sided+1;istat=0;return
@@ -334,7 +347,10 @@ contains
         else if(im==0)then
           if(side==1)xm(component)=UL(component)-2*step
           if(side==2)ym(component)=UR(component)-2*step
-          call basic(xm,ym,fm2,fp2,i2,qa,qb,qd,wave)
+          call basic(xm,ym,fm2,fp2,i2,qa,qb,qd,wave,sinfo=s2_)
+          if(seal.and.i2==0)then
+            if(nint(s2_(1))/=nint(base_seal(1)))i2=-1
+          endif
           if(i2==0)then
             dm=(3*FM-4*fmm+fm2)/(2*step);dp=(3*FP-4*fpm+fp2)/(2*step)
             n_one_sided=n_one_sided+1;istat=0;return

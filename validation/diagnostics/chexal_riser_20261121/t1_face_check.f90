@@ -8,12 +8,14 @@ program t1_face_check
   !!   BAL |tr|k| sum_i w_i R_i,k - [sum_i w_i (U-Uold)_i,k - dt sum_i w_i S_i,k + dt (Fout-Fin)_k]
   !!        which equals dt * sum_faces (fm - fp)_k (the singular source of the scheme):
   !!        0 for T1 in every component; dt*(F3_L*-F3_R*) for the T2 momentum.
+  !! SEAL|config s g0 when PRIMS_JUNCTION_SEAL is set (junction_seal_info of the face).
   !! Usage: t1_face_check FIXTURE C_GAS [TRIAL]
   use offline_api
   use,intrinsic::ieee_arithmetic,only:ieee_is_finite
   implicit none
   character(512)::folder,arg
   real(wp)::x(nx),sc(nx),meta(6),uu(nc,3),uo(nc,3),fm(3),fp(3),tr6(6),r(3,np),a(3,3,np),b(3,3,np),c(3,3,np)
+  real(wp)::sinfo(3)
   real(wp)::norm,fin(3),fout(3),lhs(3),acc(3),src(3),v(6),f(3),s(3),aj(3,3),sj(3,3),dtn,wscale(3),fscale(3)
   integer(c_int)::st
   integer::k,i,code,cid
@@ -39,7 +41,9 @@ program t1_face_check
       write(*,'(3a,i0)')'FACE|',trs(k),'|prepare_dissipation ',code;cycle
     endif
     call sim%face_pair(uu(ib,:),uu(ib+1,:),cfg%thetav(ib),cfg%thetav(ib+1),fm,fp,code,junction_trace=tr6, &
-      dissipation_matrix=sim%lagged_dissipation(:,:,ib),left_cell=ib)
+      dissipation_matrix=sim%lagged_dissipation(:,:,ib),left_cell=ib,junction_seal_info=sinfo)
+    if(trs(k)=='T1'.and.trim(cfg%junction_seal)/='OFF')write(*,'(a,f3.0,a,es14.6,a,es14.6)')'SEAL|config ',sinfo(1), &
+      '|s m/s ',sinfo(2)*cfg%omega_u,'|g0 kg/m2/s ',sinfo(3)*cfg%omega_rho*cfg%omega_u
     if(trs(k)=='T2')then
       write(*,'(3a,i6,a,8es15.7)')'FACE|',trs(k),'|',code,'|',fm(1:2)*fscale(1:2),fm(3)*fscale(3),fp(3)*fscale(3), &
         tr6(1)*cfg%omega_P,tr6(1)*cfg%omega_P,tr6(4:5)
