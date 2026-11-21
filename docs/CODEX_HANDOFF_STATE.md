@@ -1,3 +1,34 @@
+## Atualização: transmissão T1 implementada e qualificada, 21/11/2026 (rodada 4)
+
+Relatório: [PRIMSF_T1_JUNCTION_QUALIFICATION.md](PRIMSF_T1_JUNCTION_QUALIFICATION.md). Branch
+`implementation/chexal-riser-20261121`, sem push nem merge; `main` intacta (`f3717dd`).
+
+- **Opção:** `junction_transmission` = `'T2'` (default, operador original) ou `'T1'`
+  (experimental; exige MATCHED, ROE, traços CENTER, sem limitador no riser).
+  - Solver de face com camada estacionária: ondas acústicas linearizadas e onda cinemática por
+    curva integral em ln α.
+  - Estacionário inicial próprio da T1.
+  - Contrato, checkpoint e `junction_transmission.csv` registram a opção.
+- **P0-A..E: PASS.**
+  - Face global = referência local (G_g* ≤ 1,7e-4; 1,1e-3 no bloqueio do SS1).
+  - Salto de fluxo zero; identidade de momento ~1e-16.
+  - Jacobiano global ≤ 1,6e-8; partição homogênea com segunda ordem para o Roe.
+  - T2 idêntica byte a byte (16/16).
+- **P0-F replay 52,94 s:** a T2 bloqueia em t = 0 (3061); a T1 atravessa com G_g* > 0 e para em
+  3,15 s no limite de selo (1613/1614/1615).
+- **P1-A: PASS.** **P1-B, SS1 desde t = 0: BLOCKED** em 53,48 s. G_g* → 0⁺ e α_R* → 4e-4 (formação
+  do selo sem inversão de gás); o estado selado G_g* = 0 / α_R* = 0 e a quina do Chexal em j_g = 0
+  não estão representados.
+- **P1-C e P2: NOT_VERIFIED.**
+- **Outros casos com T1:** Stable 300 s COMPLETED; OSC BLOCKED_CONSTITUTIVE_DOMAIN em 163,75 s (T2:
+  145,70 s); SS3 BLOCKED_CONSTITUTIVE_DOMAIN em 41,65 s (T2: 41,55 s), depois da correção do critério da face (`20e00ba`; com 1e-11 havia MAX_NEWTON em 10,56 s).
+- **Suítes:** Fortran 30/30, Python 123 OK, CLI 8/8; T2 idêntica byte a byte.
+- **Guarda:** relógio monotônico. Três veredictos COST_STAGNATION da suspensão foram invalidados
+  e refeitos.
+- **Próximo passo:** representação fechada e fundamentada do estado selado sob T1 (ramo
+  α_R* = 0 da onda cinemática, com o Chexal no limite j_g → 0⁺) antes de qualquer campanha
+  de convergência.
+
 ## Atualização: domínio físico Chexal e transmissão na junção, 21/11/2026 (rodada 3)
 
 Relatório: [CHEXAL_PHYSICAL_DOMAIN_AND_JUNCTION_QUALIFICATION.md](CHEXAL_PHYSICAL_DOMAIN_AND_JUNCTION_QUALIFICATION.md).
