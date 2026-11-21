@@ -1,0 +1,82 @@
+[
+ {
+  "run": "D_SS3_C5_BAROTROPIC_N51_dt0.5_T1_t300",
+  "closure_riser": 5,
+  "termination": "NEWTON_GLOBALIZATION_FAILURE",
+  "guard": "FAIL:NEWTON_GLOBALIZATION_FAILURE",
+  "classification": "BLOCKED_CONSTITUTIVE_DOMAIN",
+  "decoded": "CELL primitive recovery code 61 (DOMAIN)",
+  "proposal_index": "86",
+  "reached_time_s": 41.64960919731031,
+  "accepted_steps": 126,
+  "rejected_steps": 29,
+  "newton_iterations": 666,
+  "cpu_s": 1359.77618,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": 0.7621054154446566,
+  "p_in_range_Pa": [
+   247015.2406313821,
+   268374.7345625377
+  ],
+  "alpha_riser_base_range": [
+   0.23099000182197446,
+   0.4551834899616964
+  ],
+  "Ml_kg": [
+   53.63425913645365,
+   49.10906285282922
+  ],
+  "Mg_kg": [
+   0.22099408698545248,
+   0.2145306229344965
+  ],
+  "Mg_riser_kg": [
+   0.015851603177366363,
+   0.023848814158513563
+  ],
+  "boundary_cell": {
+   "index": 86,
+   "theta_deg": 69.31842603707842,
+   "alpha": 0.4914396232595765,
+   "jl_m_s": 3.31694999823129e-09
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 4.755570937042819e-14,
+    "rel_inventory": 8.866666592604418e-16,
+    "rel_processed": 8.655426413425683e-16
+   },
+   "l_pipe": {
+    "max_abs_kg": 1.3322676295501878e-13,
+    "rel_inventory": 3.885875418387933e-15,
+    "rel_processed": 2.6419650040912992e-15
+   },
+   "l_riser": {
+    "max_abs_kg": 1.2789769243681803e-13,
+    "rel_inventory": 6.609911121406421e-15,
+    "rel_processed": 2.3274291887025547e-15
+   },
+   "g_system": {
+    "max_abs_kg": 7.320533068622126e-16,
+    "rel_inventory": 3.3125470316787357e-15,
+    "rel_processed": 6.604781823314946e-15
+   },
+   "g_pipe": {
+    "max_abs_kg": 1.559863349598345e-14,
+    "rel_inventory": 7.603804539373818e-14,
+    "rel_processed": 1.312639784126962e-13
+   },
+   "g_riser": {
+    "max_abs_kg": 1.517536096784511e-14,
+    "rel_inventory": 9.573391913767546e-13,
+    "rel_processed": 1.211145968662129e-13
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 9.573391913767546e-13
+ }
+]
