@@ -1,0 +1,494 @@
+[
+ {
+  "run": "D_OSC_C5_BAROTROPIC_N101_dt0.25",
+  "alpha": 0.5903119156989073,
+  "theta_deg": 76.27743563354461,
+  "p_Pa": 206722.00807250917,
+  "eos": "BAROTROPIC",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.6109424482283985,
+    "CHEXAL_VERTICAL_HIGH": 1.5795745664779148,
+    "BENDIKSEN_1984": 1.1424907524560686,
+    "BHAGWAT_EDGE": 0.49089483283371044,
+    "spread_max_over_min": 3.2816447444133146
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.8087287700981262,
+    "BENDIKSEN_1984": 1.1384258013945407,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.407673182266548
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.7473052016980539,
+    "BENDIKSEN_1984": 1.101841241840791,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4744193394307272
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.7021905921631112,
+    "BENDIKSEN_1984": 1.020542220610236,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4533692590019422
+   }
+  ]
+ },
+ {
+  "run": "D_OSC_C5_BAROTROPIC_N101_dt0.5",
+  "alpha": 0.5885161079578957,
+  "theta_deg": 76.27743563354461,
+  "p_Pa": 206725.36376381153,
+  "eos": "BAROTROPIC",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.6015698326213077,
+    "CHEXAL_VERTICAL_HIGH": 1.570257321658163,
+    "BENDIKSEN_1984": 1.1342111577902634,
+    "BHAGWAT_EDGE": 0.48986634320442946,
+    "spread_max_over_min": 3.2694016538158976
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.8038043963283189,
+    "BENDIKSEN_1984": 1.1301756653016415,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4060331972108475
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.7428406317583556,
+    "BENDIKSEN_1984": 1.0938562329040469,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4725315042538976
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.6982091635193435,
+    "BENDIKSEN_1984": 1.013146383131614,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.451064288564791
+   }
+  ]
+ },
+ {
+  "run": "D_OSC_C5_BAROTROPIC_N201_dt0.5",
+  "alpha": 0.5973878493298203,
+  "theta_deg": 76.37577034874555,
+  "p_Pa": 206356.60106762292,
+  "eos": "BAROTROPIC",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.6506815630053577,
+    "CHEXAL_VERTICAL_HIGH": 1.6193181255915305,
+    "BENDIKSEN_1984": 1.1745691438434862,
+    "BHAGWAT_EDGE": 0.49442434531674945,
+    "spread_max_over_min": 3.3385928072531708
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.8297267937986189,
+    "BENDIKSEN_1984": 1.170383062941684,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4105643829862207
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.7663954065530069,
+    "BENDIKSEN_1984": 1.132708334825463,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4779685853285716
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.7193388565135648,
+    "BENDIKSEN_1984": 1.0489867167894162,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4582650544884548
+   }
+  ]
+ },
+ {
+  "run": "D_OSC_C5_BAROTROPIC_N51_dt0.125",
+  "alpha": 0.6213026254777556,
+  "theta_deg": 76.07952696209932,
+  "p_Pa": 207307.02143939573,
+  "eos": "BAROTROPIC",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.7910443074734044,
+    "CHEXAL_VERTICAL_HIGH": 1.758943704607962,
+    "BENDIKSEN_1984": 1.3110204319050491,
+    "BHAGWAT_EDGE": 0.5110191566674739,
+    "spread_max_over_min": 3.504847683506428
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.9040597041824556,
+    "BENDIKSEN_1984": 1.3063714594294922,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.445005737326661
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.8336106686657575,
+    "BENDIKSEN_1984": 1.2645307071494796,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.5169320099674763
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.7788048226807379,
+    "BENDIKSEN_1984": 1.1715512576383407,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.5042937890468158
+   }
+  ]
+ },
+ {
+  "run": "D_OSC_C5_BAROTROPIC_N51_dt0.25",
+  "alpha": 0.6262720079965509,
+  "theta_deg": 76.07952696209932,
+  "p_Pa": 207290.2168523584,
+  "eos": "BAROTROPIC",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.8248050997461032,
+    "CHEXAL_VERTICAL_HIGH": 1.7927883500552,
+    "BENDIKSEN_1984": 1.3420245851465797,
+    "BHAGWAT_EDGE": 0.5142788911637006,
+    "spread_max_over_min": 3.5482792140602317
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.9221344562415761,
+    "BENDIKSEN_1984": 1.3372656697200664,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4501851228621008
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.8499902328929739,
+    "BENDIKSEN_1984": 1.294435430881446,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.5228827118116242
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.7933722681434799,
+    "BENDIKSEN_1984": 1.199257122351178,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.5115944563546235
+   }
+  ]
+ },
+ {
+  "run": "D_SS3_C5_BAROTROPIC_N101_dt0.25",
+  "alpha": 0.4554411265057405,
+  "theta_deg": 71.23130281590538,
+  "p_Pa": 219429.46756938013,
+  "eos": "BAROTROPIC",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.101498444777907,
+    "CHEXAL_VERTICAL_HIGH": 1.0711693557009774,
+    "BENDIKSEN_1984": 0.7933610255158696,
+    "BHAGWAT_EDGE": 0.4540832101978855,
+    "spread_max_over_min": 2.42576342846476
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.5436087234517046,
+    "BENDIKSEN_1984": 0.7907532481210192,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4546367893069168
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.5056890641184099,
+    "BENDIKSEN_1984": 0.7672832515673651,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.5173024413826388
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.4833965566062958,
+    "BENDIKSEN_1984": 0.7151277036703558,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4793810462592814
+   }
+  ]
+ },
+ {
+  "run": "D_SS3_C5_BAROTROPIC_N51_dt0.125",
+  "alpha": 0.5430028523516649,
+  "theta_deg": 65.95655324612648,
+  "p_Pa": 224877.21111030364,
+  "eos": "BAROTROPIC",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.3476553209625126,
+    "CHEXAL_VERTICAL_HIGH": 1.2988539971600228,
+    "BENDIKSEN_1984": 1.0899145279803801,
+    "BHAGWAT_EDGE": 0.5170618096076282,
+    "spread_max_over_min": 2.6063718029865317
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.6622614281677053,
+    "BENDIKSEN_1984": 1.0865752664673787,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.6407044412561256
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.6123579237629753,
+    "BENDIKSEN_1984": 1.056521912850366,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.7253339458040766
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.5766045108615296,
+    "BENDIKSEN_1984": 0.9897366825903379,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.7164913973904394
+   }
+  ]
+ },
+ {
+  "run": "D_SS3_C5_BAROTROPIC_N51_dt0.25",
+  "alpha": 0.526772936315635,
+  "theta_deg": 67.41801460054181,
+  "p_Pa": 223762.1399673459,
+  "eos": "BAROTROPIC",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.2921560460029056,
+    "CHEXAL_VERTICAL_HIGH": 1.2478542442370577,
+    "BENDIKSEN_1984": 1.0185852072878352,
+    "BHAGWAT_EDGE": 0.5025312691124352,
+    "spread_max_over_min": 2.571294813723923
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.6355432897064833,
+    "BENDIKSEN_1984": 1.0154068105210101,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.5976988931626694
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.5883408379105302,
+    "BENDIKSEN_1984": 0.9868012396195837,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.6772611656946512
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.5556403952761354,
+    "BENDIKSEN_1984": 0.9232333042830803,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.661566207446568
+   }
+  ]
+ },
+ {
+  "run": "D_OSC_C5_BAROTROPIC_N51_dt0.5",
+  "alpha": 0.5773249525509775,
+  "theta_deg": 76.07952696209932,
+  "p_Pa": 207476.36215118272,
+  "eos": "BAROTROPIC",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.5427135321462013,
+    "CHEXAL_VERTICAL_HIGH": 1.5114377952100395,
+    "BENDIKSEN_1984": 1.0884796822186076,
+    "BHAGWAT_EDGE": 0.4847711319655675,
+    "spread_max_over_min": 3.182354373889941
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.7728264037917768,
+    "BENDIKSEN_1984": 1.0846198552016602,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4034456507698332
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.7146500327743894,
+    "BENDIKSEN_1984": 1.0498814120491327,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4690846762761902
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.6728116470206226,
+    "BENDIKSEN_1984": 0.9726848717101828,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.4457015957102906
+   }
+  ]
+ },
+ {
+  "run": "D_OSC_C5_ISOTHERMAL_N51_dt0.5",
+  "alpha": 0.5992306965783047,
+  "theta_deg": 75.51758390773233,
+  "p_Pa": 209229.83211253223,
+  "eos": "ISOTHERMAL",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.3327508478578651,
+    "CHEXAL_VERTICAL_HIGH": 1.3068804040039208,
+    "BENDIKSEN_1984": 1.1989660643546047,
+    "BHAGWAT_EDGE": 0.5004571339965885,
+    "spread_max_over_min": 2.663066938849852
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.6702493624934546,
+    "BENDIKSEN_1984": 1.194754222006709,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.782551821551903
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.6123034828056056,
+    "BENDIKSEN_1984": 1.1568476408756496,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.889337025448418
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.5591108656934337,
+    "BENDIKSEN_1984": 1.0726107939177394,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.9184223733291976
+   }
+  ]
+ },
+ {
+  "run": "D_SS3_C5_BAROTROPIC_N51_dt0.5",
+  "alpha": 0.4950522306390652,
+  "theta_deg": 68.71982253925219,
+  "p_Pa": 223150.47939912273,
+  "eos": "BAROTROPIC",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.1948289295702594,
+    "CHEXAL_VERTICAL_HIGH": 1.1563367385582102,
+    "BENDIKSEN_1984": 0.9120223320470229,
+    "BHAGWAT_EDGE": 0.4819421248281959,
+    "spread_max_over_min": 2.479195878542876
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.5878575287895506,
+    "BENDIKSEN_1984": 0.9091275115972234,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.5465099400346125
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.5453105264249031,
+    "BENDIKSEN_1984": 0.8830741275490285,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.6193968110950085
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.517661808310433,
+    "BENDIKSEN_1984": 0.8251777185530398,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 1.594047900203978
+   }
+  ]
+ },
+ {
+  "run": "D_SS3_C5_ISOTHERMAL_N51_dt0.5",
+  "alpha": 0.5513866985459149,
+  "theta_deg": 65.1571384171125,
+  "p_Pa": 225632.56829379866,
+  "eos": "ISOTHERMAL",
+  "rows": [
+   {
+    "jl": 0.0,
+    "CHEXAL_AT_THETA": 1.1230802098749253,
+    "CHEXAL_VERTICAL_HIGH": 1.0825926665589867,
+    "BENDIKSEN_1984": 1.1297983912651082,
+    "BHAGWAT_EDGE": 0.5246636942589099,
+    "spread_max_over_min": 2.1533763506563077
+   },
+   {
+    "jl": -0.001,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.5525572748129662,
+    "BENDIKSEN_1984": 1.1263701959024035,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 2.0384677702119944
+   },
+   {
+    "jl": -0.01,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.5055415685996469,
+    "BENDIKSEN_1984": 1.0955164376380608,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 2.1670155446814148
+   },
+   {
+    "jl": -0.03,
+    "CHEXAL_AT_THETA": null,
+    "CHEXAL_VERTICAL_HIGH": 0.4636756159740366,
+    "BENDIKSEN_1984": 1.0269525303839662,
+    "BHAGWAT_EDGE": null,
+    "spread_max_over_min": 2.2148081438931437
+   }
+  ]
+ }
+]
