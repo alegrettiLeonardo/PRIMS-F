@@ -60,6 +60,11 @@ module module_config
     ! closure has a regular branch alpha*(j_g)->0+ (checked at run time). It
     ! never changes a flux, a state or a sign; negative gas flux stays refused.
     character(len=16) :: junction_riser_limit = 'NONE'
+    ! Junction transmission condition (MATCHED). 'T2' (default, legacy): Gl, Gg
+    ! and p continuous, momentum point force F3_R-F3_L. 'T1' (EXPERIMENTAL,
+    ! 21/11/2026): Gl, Gg and F3 continuous (Burr eqs.72-75, no singular
+    ! source); the two pressure traces may differ.
+    character(len=16) :: junction_transmission = 'T2'
     character(len=20) :: dissipation_mode = 'LAGGED'
     character(len=16) :: newton_globalization = 'LINE_SEARCH'
     real(wp) :: output_interval_s = 1.0_wp

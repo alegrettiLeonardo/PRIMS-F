@@ -50,6 +50,7 @@ program main
   real(wp)           :: T_scenario, time_phys
   real(wp)           :: gamma_g
   character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model, junction_trace, junction_flux, junction_riser_limit
+  character(len=16) :: junction_transmission
   character(len=16)::boundary_method
   integer::outlet_reservoir_phase,initial_phase_hint
   character(len=16)::single_phase_mode,source_scheme,initial_phase
@@ -90,7 +91,7 @@ program main
                     pb_dp_on, pb_dp_off, &
                     stab_si_on, stab_si_off, stab_use_hysteresis, &
                     gas_eos, gas_flow_basis, liquid_flow_basis, single_phase_mode, source_scheme, initial_phase, outlet_reservoir_phase, boundary_method, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
-                    checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, junction_trace, junction_flux, junction_riser_limit, dissipation_mode, newton_globalization
+                    checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, junction_trace, junction_flux, junction_riser_limit, dissipation_mode, newton_globalization, junction_transmission
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
   type(pipeline_riser_simulator_t) :: sim
@@ -236,6 +237,7 @@ program main
   junction_trace = 'CENTER'
   junction_flux = 'ROE'
   junction_riser_limit = 'NONE'
+  junction_transmission = 'T2'
   dissipation_mode = 'LAGGED'
   newton_globalization = 'LINE_SEARCH'
   ! ------------------------------ Read -----------------------------------
@@ -330,6 +332,11 @@ program main
     error stop 'Experimental junction_flux (E1) is not qualified with CHEXAL_1992; use ROE'
   if(closure_riser>=5.and.trim(junction_riser_limit)/='NONE') &
     error stop 'Experimental junction_riser_limit (E2) is not qualified with CHEXAL_1992; use NONE'
+  if(trim(junction_transmission)/='T2'.and.trim(junction_transmission)/='T1') &
+    error stop 'Unknown junction_transmission: use T2 (default) or T1 (experimental)'
+  if(trim(junction_transmission)=='T1'.and.(trim(junction_model)/='MATCHED'.or.trim(junction_flux)/='ROE'.or. &
+     trim(junction_riser_limit)/='NONE'.or.trim(junction_trace)/='CENTER')) &
+    error stop 'junction_transmission=T1 is qualified only with MATCHED, ROE, CENTER traces and no riser limit'
   beta_rad = beta_deg * (acos(-1.0_wp)/180.0_wp)
 
   ! ---------------------- Geometry & properties --------------------------
@@ -377,7 +384,8 @@ program main
                                     vns, vnp, nrhogv, nrholv, alphav, nugv, nulv, thetav, njlv, njgv, &
                                     mesh_ratio=mesh_ratio, n_riser=n_riser, face_positions=physical_faces, &
                                     closure_id_riser=closure_riser, status=steady_status, closure_id_pipe=closure_pipe, phase_hint=initial_phase_hint, &
-                                    face_pressures=initial_face_pressures)
+                                    face_pressures=initial_face_pressures, &
+                                    t1_junction=trim(junction_transmission)=='T1')
   if (steady_status/=0) then
     write(error_unit,'(a,i0)') 'Steady initialization failed, status=',steady_status
     error stop 2
@@ -456,6 +464,7 @@ program main
   cfg%junction_trace = junction_trace
   cfg%junction_flux = junction_flux
   cfg%junction_riser_limit = junction_riser_limit
+  cfg%junction_transmission = junction_transmission
   cfg%dissipation_mode = dissipation_mode
   cfg%newton_globalization = newton_globalization
   cfg%gas_eos        = gas_eos
@@ -621,6 +630,7 @@ program main
   write(contract_unit,'(2a)')'junction_flux=',trim(junction_flux)
   write(contract_unit,'(2a)')'junction_trace=',trim(junction_trace)
   write(contract_unit,'(2a)')'junction_riser_limit=',trim(junction_riser_limit)
+  write(contract_unit,'(2a)')'junction_transmission=',trim(junction_transmission)
   write(contract_unit,'(2a)')'newton_globalization=',trim(newton_globalization)
   write(contract_unit,'(2a)')'dissipation_mode=',trim(dissipation_mode)
   write(contract_unit,'(2a)')'flux_scheme=',trim(flux_scheme)

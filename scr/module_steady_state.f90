@@ -605,7 +605,7 @@ contains
   subroutine steady_state_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G, &
       Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol, &
       vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
-      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe,phase_hint)
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe,phase_hint,t1_junction)
     integer(i4),intent(in)::N
     real(wp),intent(in)::mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
     real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol
@@ -615,6 +615,9 @@ contains
     integer,intent(in),optional::n_riser,closure_id_riser,closure_id_pipe,phase_hint
     real(wp),allocatable,intent(out),optional::face_positions(:),face_pressures(:)
     integer,intent(out),optional::status
+    ! T1 (junction_transmission='T1'): at the pipe-riser face the steady state
+    ! carries F3 = kin + pip p continuous instead of p (default: p continuous).
+    logical,intent(in),optional::t1_junction
     real(wp),allocatable::faces(:),pf(:)
     real(wp)::ratio,s,p,theta,kin,rtol
     integer::nb,na,nt,i,sec,cid,iriser,ipipe,ierr
@@ -663,10 +666,52 @@ contains
       call advance(faces(i),sec,s,p,ierr)
       if(ierr/=0)exit
       pf(i)=p
+      if(present(t1_junction))then
+        if(t1_junction.and.i==nb+1.and.nb>0)then
+          call t1_jump(p,ierr)
+          if(ierr/=0)exit
+        endif
+      endif
     enddo
     if(present(face_pressures))face_pressures=pf
     if(present(status))status=ierr
   contains
+    subroutine t1_jump(pp,code)
+      !! pp: riser-side face pressure on entry, pipe-side face pressure on exit,
+      !! from kin_L(p_L) + pip p_L = kin_R(p_R) + pip p_R (secant; no clipping).
+      real(wp),intent(inout)::pp
+      integer,intent(out)::code
+      real(wp)::pip,f3,pa,pb,ga,gb,k_,rl_,rg_,a_,ul_,ug_,jl_,jg_,step
+      integer::it
+      pip=w_p/(w_rho*w_u*w_u)
+      call state_at(pp,0.0_wp,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
+        w_u,w_rho,tol,iriser,rl_,rg_,a_,ul_,ug_,jl_,jg_,k_,code,phase_hint=phase_hint)
+      if(code/=0)return
+      f3=k_+pip*pp
+      pa=pp
+      call t1_gpipe(pa,f3,ga,code);if(code/=0)return
+      pb=pa-ga/pip
+      do it=1,60
+        call t1_gpipe(pb,f3,gb,code);if(code/=0)return
+        if(abs(gb)<=64*epsilon(1.0_wp)*abs(f3))then
+          pp=pb;return
+        endif
+        if(gb==ga)exit
+        step=-gb*(pb-pa)/(gb-ga);pa=pb;ga=gb;pb=pb+step
+      enddo
+      code=STEADY_INTEGRATION
+    end subroutine t1_jump
+    subroutine t1_gpipe(pp,f3,gval,code)
+      !! kin + pip p of the PIPE closure at the junction face, minus f3
+      real(wp),intent(in)::pp,f3
+      real(wp),intent(out)::gval
+      integer,intent(out)::code
+      real(wp)::k_,rl_,rg_,a_,ul_,ug_,jl_,jg_
+      call state_at(pp,-beta,mul,mug,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0,mu_l_dyn,mu_g_dyn,sigma, &
+        w_u,w_rho,tol,ipipe,rl_,rg_,a_,ul_,ug_,jl_,jg_,k_,code,phase_hint=phase_hint)
+      if(code/=0)return
+      gval=k_+w_p/(w_rho*w_u*w_u)*pp-f3
+    end subroutine t1_gpipe
     subroutine advance(target,section,ss,pp,code)
       real(wp),intent(in)::target
       integer,intent(in)::section
@@ -742,7 +787,7 @@ contains
 
   subroutine EstadoEstacionario_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
       mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
-      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe,phase_hint)
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe,phase_hint,t1_junction)
     integer(i4),intent(in)::N
     real(wp),intent(in)::mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0
     real(wp),intent(in)::mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol
@@ -752,8 +797,10 @@ contains
     integer,intent(in),optional::n_riser,closure_id_riser,closure_id_pipe,phase_hint
     real(wp),allocatable,intent(out),optional::face_positions(:),face_pressures(:)
     integer,intent(out),optional::status
+    logical,intent(in),optional::t1_junction
     call steady_state_ndim_simp(N,mul,mug,Ps,Lp,Lr,CA,beta,DH,AREA,EPS,G,Cl,Cg,rho_l0,P_l0, &
       mu_l_dyn,mu_g_dyn,sigma,w_p,w_u,w_rho,tol,vns,vnp,nrhogv,nrholv,alphav,nugv,nulv,thetav,njlv,njgv, &
-      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe,phase_hint)
+      mesh_ratio,n_riser,face_positions,closure_id_riser,status,face_pressures,closure_id_pipe,phase_hint, &
+      t1_junction=t1_junction)
   end subroutine
 end module module_steady_state
