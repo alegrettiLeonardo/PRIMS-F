@@ -10,6 +10,14 @@ module module_chexal_1992
   integer,parameter,public :: CHEXAL_OK=0,CHEXAL_INVALID=60,CHEXAL_DOMAIN=61
   integer,parameter,public :: CHEXAL_BRANCH_REQUIRED=62,CHEXAL_NO_ROOT=63,CHEXAL_CCFL_EXCEEDED=64
   integer,parameter,public :: CHEXAL_SINGULAR=65,CHEXAL_NUMERIC=66,CHEXAL_SOURCE_UNRESOLVED=67
+  ! Executable qualification contract of the AIR_WATER path (21/11/2026):
+  ! states outside the air-water data base of the source (Table I-I p.257 and
+  ! Table 5-1 p.280: p 1-6.8 bar, hydraulic diameter 0.01-0.305 m) are refused.
+  ! The density ratio is the operative variable of the correlation (K0, r, C2,
+  ! C5); 6.8 bar air at 293 K gives rho_g/rho_l = 8.1e-3.
+  integer,parameter,public :: CHEXAL_UNQUALIFIED=68
+  real(wp),parameter,public :: CHEXAL_AW_MAX_DENSITY_RATIO=8.1e-3_wp
+  real(wp),parameter,public :: CHEXAL_AW_MIN_DIAMETER=0.010_wp,CHEXAL_AW_MAX_DIAMETER=0.305_wp
   integer,parameter,public :: CHEXAL_BRANCH_AUTO=0,CHEXAL_BRANCH_HIGH=1,CHEXAL_BRANCH_LOW=-1
   ! Fluid parameter L (p.262-265). AIR_WATER (default, the only one PRIMS-F
   ! selects): Eqs.3-7/3-8/3-19. STEAM_WATER (verification against the EPRI
@@ -67,6 +75,11 @@ contains
     integer,intent(out)::status
     status=CHEXAL_INVALID
     if(.not.valid(p).or..not.all(ieee_is_finite([jl,jg])))return
+    if(p%fluid==CHEXAL_FLUID_AIR_WATER)then
+      if(p%rg/p%rl>CHEXAL_AW_MAX_DENSITY_RATIO.or.p%d<CHEXAL_AW_MIN_DIAMETER.or.p%d>CHEXAL_AW_MAX_DIAMETER)then
+        status=CHEXAL_UNQUALIFIED;return
+      endif
+    endif
     direction=1.0_wp
     if(p%theta<0)direction=-1.0_wp
     fl=direction*jl;fg=direction*jg
@@ -683,6 +696,9 @@ contains
     if(present(branch))b=branch
     if(b/=CHEXAL_BRANCH_AUTO.and.b/=CHEXAL_BRANCH_HIGH.and.b/=CHEXAL_BRANCH_LOW)return
     if(.not.valid(p).or..not.all(ieee_is_finite([alpha,momentum])))return
+    if(p%rg/p%rl>CHEXAL_AW_MAX_DENSITY_RATIO.or.p%d<CHEXAL_AW_MIN_DIAMETER.or.p%d>CHEXAL_AW_MAX_DIAMETER)then
+      status=CHEXAL_UNQUALIFIED;return   ! recovery is AIR_WATER only: same contract as source_coordinates
+    endif
     if(alpha<0.or.alpha>1)return
     ! Zero velocity for an absent phase is storage convention, not a root.
     if(alpha==0)then

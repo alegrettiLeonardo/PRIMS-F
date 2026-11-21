@@ -29,7 +29,7 @@ SOURCES = [
     'module_time_step', 'module_active_set', 'module_single_phase', 'module_simulate_pipe_riser',
 ]
 TESTS = ['test_chexal_velocity_reference', 'test_chexal_derivative_tail', 'test_chexal_1992_core', 'test_chexal_integration', 'test_geometry', 'test_closure_physics', 'test_primitives_numerics', 'test_steady',
-         'test_boundaries_time', 'test_fv_operators', 'test_roe_geometry', 'test_chexal_junction', 'test_burr15', 'test_active_set', "test_active_replay", "test_feed_contracts", "test_partition_invariance", "test_single_phase", "test_source_boundary", "test_initial_inventory", "test_reduced_domain_edges", "test_junction_trace", "test_hydrostatic_outlet", "test_junction_vanishing_gas", "test_junction_phase_upwind", "test_junction_riser_limit", "test_chexal_np3989", "test_chexal_angles"]
+         'test_boundaries_time', 'test_fv_operators', 'test_roe_geometry', 'test_chexal_junction', 'test_burr15', 'test_active_set', "test_active_replay", "test_feed_contracts", "test_partition_invariance", "test_single_phase", "test_source_boundary", "test_initial_inventory", "test_reduced_domain_edges", "test_junction_trace", "test_hydrostatic_outlet", "test_junction_vanishing_gas", "test_junction_phase_upwind", "test_junction_riser_limit", "test_chexal_np3989", "test_chexal_angles", "test_chexal_domain_contract"]
 
 def run_command(command: list[str], cwd: Path, log: Path, timeout: float) -> dict:
     start = time.perf_counter()
