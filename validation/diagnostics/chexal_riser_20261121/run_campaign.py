@@ -93,7 +93,9 @@ def main():
                     git_dirty=bool(subprocess.check_output(['git', '-C', str(ROOT), 'status', '--porcelain', 'scr'], text=True).strip()),
                     limits=dict(max_wall_s=args.max_wall_s, window_s=args.window_s, min_advance_s=args.min_advance_s),
                     env=dict(OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1', MKL_NUM_THREADS='1'), jobs=jobs)
-    (root / f'PROTOCOL_{int(time.time())}.json').write_text(json.dumps(protocol, indent=1) + '\n')
+    # exclusive create, pid in the name: concurrent launchers never overwrite a protocol
+    with open(root / f'PROTOCOL_{int(time.time())}_{os.getpid()}.json', 'x') as fh:
+        fh.write(json.dumps(protocol, indent=1) + '\n')
     env = dict(os.environ, **protocol['env'])
 
     def go(j):
