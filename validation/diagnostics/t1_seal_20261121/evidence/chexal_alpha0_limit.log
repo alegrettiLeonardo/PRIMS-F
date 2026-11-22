@@ -1,0 +1,15 @@
+ALPHA| 1.0E-01|  0|C0,Vgj   6.817691E-01  3.222071E-01|u_g   7.309224E-01|jg,rho_g jg   7.3092E-02  1.8448E-01
+ALPHA| 1.0E-02|  0|C0,Vgj   1.784519E-01  3.420267E-01|u_g   4.367431E-01|jg,rho_g jg   4.3674E-03  1.1023E-02|dlnC0/dlna,dlnjg/dlna   0.5821  1.2236|recovered u_g   4.3674E-01   0
+ALPHA| 1.0E-03|  0|C0,Vgj   4.361237E-02  3.439708E-01|u_g   3.669444E-01|jg,rho_g jg   3.6694E-04  9.2617E-04|dlnC0/dlna,dlnjg/dlna   0.6119  1.0756|recovered u_g   3.6694E-01   0
+ALPHA| 1.0E-04|  0|C0,Vgj   1.068428E-02  3.441649E-01|u_g   3.497895E-01|jg,rho_g jg   3.4979E-05  8.8287E-05|dlnC0/dlna,dlnjg/dlna   0.6109  1.0208|recovered u_g   3.4979E-01   0
+ALPHA| 1.0E-05|  0|C0,Vgj   2.647037E-03  3.441843E-01|u_g   3.455777E-01|jg,rho_g jg   3.4558E-06  8.7224E-06|dlnC0/dlna,dlnjg/dlna   0.6060  1.0053|recovered u_g   3.4558E-01   0
+ALPHA| 1.0E-06|  0|C0,Vgj   6.656780E-04  3.441862E-01|u_g   3.445366E-01|jg,rho_g jg   3.4454E-07  8.6961E-07|dlnC0/dlna,dlnjg/dlna   0.5995  1.0013|recovered u_g   3.4454E-01   0
+ALPHA| 1.0E-07|  0|C0,Vgj   1.705873E-04  3.441864E-01|u_g   3.442762E-01|jg,rho_g jg   3.4428E-08  8.6895E-08|dlnC0/dlna,dlnjg/dlna   0.5913  1.0003|recovered u_g   3.4428E-01   0
+ALPHA| 1.0E-08|  0|C0,Vgj   4.474248E-05  3.441864E-01|u_g   3.442100E-01|jg,rho_g jg   3.4421E-09  8.6879E-09|dlnC0/dlna,dlnjg/dlna   0.5812  1.0001|recovered u_g   3.4421E-01   0
+ALPHA| 1.0E-09|  0|C0,Vgj   1.206599E-05  3.441864E-01|u_g   3.441928E-01|jg,rho_g jg   3.4419E-10  8.6874E-10|dlnC0/dlna,dlnjg/dlna   0.5692  1.0000|recovered u_g   3.4419E-01   0
+ALPHA| 1.0E-10|  0|C0,Vgj   3.359161E-06  3.441864E-01|u_g   3.441882E-01|jg,rho_g jg   3.4419E-11  8.6873E-11|dlnC0/dlna,dlnjg/dlna   0.5553  1.0000|recovered u_g   3.4419E-01   0
+ALPHA| 1.0E-11|  0|C0,Vgj   9.680726E-07  3.441864E-01|u_g   3.441869E-01|jg,rho_g jg   3.4419E-12  8.6873E-12|dlnC0/dlna,dlnjg/dlna   0.5403  1.0000|recovered u_g   3.4419E-01   0
+ALPHA| 1.0E-12|  0|C0,Vgj   2.890139E-07  3.441864E-01|u_g   3.441866E-01|jg,rho_g jg   3.4419E-13  8.6873E-13|dlnC0/dlna,dlnjg/dlna   0.5250  1.0000|recovered u_g   3.4419E-01   0
+ALPHA|0 exactly|  0|C0,Vgj (limit coefficients at jg=0)   0.000000E+00  3.441864E-01
+RECOVER|alpha=0|  0|u_l, u_g (storage convention)   5.264000E-01  0.000000E+00
+JG_NEGATIVE|status (61 = CHEXAL_DOMAIN)  61

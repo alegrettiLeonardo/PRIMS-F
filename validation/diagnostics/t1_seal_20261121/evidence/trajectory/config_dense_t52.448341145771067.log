@@ -1,0 +1,7 @@
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+STATE|t=  0.0000000E+00|which=0|nz=32
+G0|  53|g0=Fg(U_L*) kg/m2/s   7.205150E-01|p_L* p_M   2.95591446E+05  2.95949605E+05|Gl F3_L F3_R   5.2972484E+02  2.9623113E+05  2.9623113E+05|alpha_L*   5.5982E-01

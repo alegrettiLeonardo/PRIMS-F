@@ -1,0 +1,7 @@
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+STATE|t=  5.3475300E+01|which=0|nz=32
+G0|   0|g0=Fg(U_L*) kg/m2/s  -7.082344E-03|p_L* p_M   2.96676502E+05  2.97032071E+05|Gl F3_L F3_R   5.2808019E+02  2.9731183E+05  2.9731183E+05|alpha_L*   5.5981E-01
+H7|   0|s m/s  -8.561085E-05|Gl 0 F3   5.2809859E+02  0.0000000E+00  2.9730574E+05|p_L1 p*   2.96670368E+05  2.97026106E+05|lam(U_L1) lam(U*) lam(U_M)  -2.403E+02  1.611E+00  2.414E+02        NaN        NaN        NaN -2.054E+02  4.635E-01  2.063E+02|alpha_L1   5.5981E-01|u_g(U_L1) m/s  -8.5611E-05
