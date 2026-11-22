@@ -157,11 +157,121 @@ program test_junction_seal
   call sim%face_pair(ul,ur,thp,thr,fm,fp,st,left_cell=3)
   write(*,'(a,i0)')'  pure-liquid riser cell: status ',st
   call chk(st/=0,'pure-liquid riser cell refused explicitly (not supported)')
+  ! ---- round 20261122: well-conditioned fixed-step curve, H4_ONLY, implicit Jacobian ----
+  ! (9) operator B (H4_ONLY) and C (LIQUID_BRIDGE) are the same solver on the H4 branch
+  ul=state(.55_wp,2.93_wp,.53_wp);ur=state(.25_wp,2.92_wp,.53_wp)
+  cfg%junction_seal_curve_steps=16
+  cfg%junction_seal='H4_ONLY';call sim%init(cfg)
+  call sim%face_pair(ul,ur,-.0349_wp,.04_wp,fa,fp,st,left_cell=3,junction_seal_info=ia)
+  cfg%junction_seal='LIQUID_BRIDGE';call sim%init(cfg)
+  call sim%face_pair(ul,ur,-.0349_wp,.04_wp,fb,fq,st,left_cell=3,junction_seal_info=ib)
+  call chk(st==0.and.all(fa==fb).and.nint(ia(1))==4.and.nint(ib(1))==4,'H4 branch: B (H4_ONLY) == C bit for bit')
+  ! (10) curve convergence of the well-conditioned curve: 16 vs 64 steps
+  cfg%junction_seal_curve_steps=64;call sim%init(cfg)
+  call sim%face_pair(ul,ur,-.0349_wp,.04_wp,fu,fq,st,left_cell=3)
+  err=maxval(abs(fb-fu)/max(1e-3_wp,abs(fu)))
+  write(*,'(a,es11.3)')'  well-conditioned curve, 16 vs 64 steps: max rel ',err
+  call chk(st==0.and.err<1e-9_wp,'fixed-step curve: 16 steps converged to 1e-9 (relative)')
+  ! (11) H4_ONLY at the SS1 seal state: no gas-transmitting root, explicit refusal
+  ul=[438.9335_wp,1.411318_wp,528.3750_wp]/rho;ur=[990.2674_wp,1.739060e-2_wp,524.9158_wp]/rho
+  cfg%junction_seal_curve_steps=16;cfg%junction_seal='H4_ONLY';call sim%init(cfg)
+  call sim%face_pair(ul,ur,thp,thr,fa,fp,st,left_cell=3)
+  call chk(st==1628,'H4_ONLY at the seal state: status 1628 (H7 required, not available)')
+  ! (12) smoothness at round-off: relative perturbations 1e-15..1e-13 of U3_R move the
+  ! flux linearly (no quantized jumps of the inner solve), H7 and H4
+  cfg%junction_seal='LIQUID_BRIDGE';call sim%init(cfg)
+  do i=1,2
+    if(i==2)then
+      ul=state(.55_wp,2.93_wp,.53_wp);ur=state(.25_wp,2.92_wp,.53_wp)
+    endif
+    call face2(ul,ur,i,f0)
+    err=0
+    do m=1,3
+      u=ur;u(3)=ur(3)*(1+10.0_wp**(-16+m));call face2(ul,u,i,fu)
+      err=max(err,abs(fu(3)-f0(3))/abs(f0(3)))
+    enddo
+    write(*,'(a,a,a,es11.3)')'  momentum flux under 1e-15..1e-13 perturbations (',merge('H7','H4',i==1),'): max rel ',err
+    call chk(err<1e-13_wp,'fixed-step curve: face momentum flux smooth at round-off ('//merge('H7','H4',i==1)//')')
+  enddo
+  ! (13) implicit Jacobian against Richardson differences of the complete face solve
+  cfg%junction_seal_jacobian='IMPLICIT';call sim%init(cfg)
+  do i=1,2
+    if(i==1)then
+      ul=[438.9335_wp,1.411318_wp,528.3750_wp]/rho;ur=[990.2674_wp,1.739060e-2_wp*1.01_wp,524.9158_wp]/rho
+    else
+      ul=state(.55_wp,2.93_wp,.53_wp);ur=state(.25_wp,2.92_wp,.53_wp)
+    endif
+    call jface(ul,ur,i,fm,jl,jr,st)
+    call chk(st==0,'implicit seal Jacobian available ('//merge('H7','H4',i==1)//')')
+    err=0
+    do k=1,3
+      err=max(err,rich(1,k,i),rich(2,k,i))
+    enddo
+    write(*,'(a,a,a,es11.3)')'  implicit Jacobian vs Richardson differences (',merge('H7','H4',i==1),'): max rel ',err
+    call chk(err<2e-4_wp,'implicit Jacobian consistent with the face flux ('//merge('H7','H4',i==1)//')')
+  enddo
   if(fails>0)then
     write(*,'(a,i0,a,i0)')'FAILED ',fails,' of ',n;error stop 1
   endif
   write(*,'(a,i0,a)')'PASS junction seal: ',n,' assertions'
 contains
+  subroutine face2(a_,b_,which,f)
+    !! which=1: SS1 seal geometry (thp,thr); 2: co-current test geometry
+    real(wp),intent(in)::a_(3),b_(3)
+    integer,intent(in)::which
+    real(wp),intent(out)::f(3)
+    real(wp)::g(3)
+    integer::is
+    if(which==1)then
+      call sim%face_pair(a_,b_,thp,thr,f,g,is,left_cell=3)
+    else
+      call sim%face_pair(a_,b_,-.0349_wp,.04_wp,f,g,is,left_cell=3)
+    endif
+  end subroutine
+  subroutine jface(a_,b_,which,f,jl_,jr_,is)
+    real(wp),intent(in)::a_(3),b_(3)
+    integer,intent(in)::which
+    real(wp),intent(out)::f(3),jl_(3,3),jr_(3,3)
+    integer,intent(out)::is
+    real(wp)::g(3)
+    if(which==1)then
+      call sim%face_pair(a_,b_,thp,thr,f,g,is,JL=jl_,JR=jr_,left_cell=3)
+    else
+      call sim%face_pair(a_,b_,-.0349_wp,.04_wp,f,g,is,JL=jl_,JR=jr_,left_cell=3)
+    endif
+  end subroutine
+  real(wp) function rich(side,k,which) result(e)
+    !! scaled column error of the implicit Jacobian against Richardson-extrapolated
+    !! central differences (steps 1e-5 and 5e-6 relative: larger steps cross the H4/H7
+    !! switch at the H7 state) of the complete face solve; rows scaled by |F_i| itself
+    !! (the gas row by |Gg*| = 5.5e-4 kg/(m2 s) in the H4 state: a strict metric)
+    integer,intent(in)::side,k,which
+    real(wp)::w(3),d(3,2),fp_(3),fm_(3),h,col(3),jl_(3,3),jr_(3,3),f(3)
+    integer::m_,is
+    call jface(ul,ur,which,f,jl_,jr_,is)
+    do m_=1,2
+      w=merge(ul,ur,side==1);h=1e-5_wp/m_*abs(w(k))
+      w(k)=w(k)+h
+      if(side==1)then
+        call face2(w,ur,which,fp_)
+      else
+        call face2(ul,w,which,fp_)
+      endif
+      w(k)=w(k)-2*h
+      if(side==1)then
+        call face2(w,ur,which,fm_)
+      else
+        call face2(ul,w,which,fm_)
+      endif
+      d(:,m_)=(fp_-fm_)/(2*h)
+    enddo
+    col=(4*d(:,2)-d(:,1))/3
+    if(side==1)then
+      e=maxval(abs(jl_(:,k)-col)*abs(ul(k))/max(abs(f),1e-6_wp*abs(f(1))))
+    else
+      e=maxval(abs(jr_(:,k)-col)*abs(ur(k))/max(abs(f),1e-6_wp*abs(f(1))))
+    endif
+  end function
   subroutine face(a_,b_,which,f)
     real(wp),intent(in)::a_(3),b_(3)
     integer,intent(in)::which

@@ -14,17 +14,31 @@ import argparse, json, os, signal, subprocess, time
 from pathlib import Path
 
 
+def _tail_time(path, column):
+    with open(path, 'rb') as f:
+        f.seek(0, 2)
+        n = f.tell()
+        f.seek(max(0, n - 4096))
+        lines = f.read().decode(errors='replace').strip().splitlines()
+    return float(lines[-1].split(',')[column])
+
+
 def last_time(run):
+    """Simulated time of the last ACCEPTED step: steps.csv (one row per accepted
+    step, column time_s); monitor.csv (written at output_interval_s) is the fallback.
+    Round 20261122: before, only monitor.csv was read, which lags by up to one
+    output interval."""
+    s = Path(run) / 'steps.csv'
+    try:
+        if s.exists():
+            return _tail_time(s, 1)
+    except (ValueError, IndexError):
+        pass
     m = Path(run) / 'monitor.csv'
     if not m.exists():
         return 0.0
     try:
-        with open(m, 'rb') as f:
-            f.seek(0, 2)
-            n = f.tell()
-            f.seek(max(0, n - 4096))
-            lines = f.read().decode(errors='replace').strip().splitlines()
-        return float(lines[-1].split(',')[0])
+        return _tail_time(m, 0)
     except (ValueError, IndexError):
         return 0.0
 
@@ -53,7 +67,7 @@ def main():
     t0 = time.monotonic(); t0_wall = time.time(); hist = []
     with open(str(run) + '.stdout', 'w') as out:
         p = subprocess.Popen([a.binary, a.deck], stdout=out, stderr=subprocess.STDOUT, env=env, cwd=run.parent)
-        verdict = None
+        verdict = None; trigger = None
         while p.poll() is None:
             time.sleep(30)
             now = time.monotonic(); ts = last_time(run); hist.append((now, ts))
@@ -62,6 +76,11 @@ def main():
                 verdict = 'TIMEOUT'
             elif old and ts - old[-1][1] < a.min_advance_s:
                 verdict = 'COST_STAGNATION'
+                # the exact comparison that fired (audit, round 20261122)
+                trigger = dict(window_start_monotonic_s=old[-1][0] - t0, window_end_monotonic_s=now - t0,
+                               window_length_s=now - old[-1][0], sim_time_start_s=old[-1][1], sim_time_end_s=ts,
+                               advance_s=ts - old[-1][1], min_advance_s=a.min_advance_s,
+                               comparison='advance_s < min_advance_s')
             if verdict:
                 p.send_signal(signal.SIGTERM)
                 try:
@@ -75,13 +94,15 @@ def main():
                last_monitor_time_s=last_time(run), returncode=p.returncode,
                verdict=verdict or ('COMPLETED' if st.get('termination_reason') == 'COMPLETED' else 'FAIL:' + st.get('termination_reason', 'NO_STATUS')),
                solver_status=st)
+    res['history_monotonic_s_sim_time_s'] = [[round(h[0] - t0, 3), h[1]] for h in hist]
     if verdict == 'COST_STAGNATION':
-        w = [h for h in hist if time.monotonic() - h[0] <= a.window_s + 60]
-        res['stagnation'] = dict(advance_over_window_s=(w[-1][1] - w[0][1]) if len(w) > 1 else None)
+        res['stagnation'] = trigger
         (run / 'OPERATOR_TERMINATED.txt').write_text(
-            'COST_STAGNATION (pre-declared guard): simulated time advanced %.4g s in the last %.0f s of wall time; '
-            'neither TIMEOUT nor solver FAIL. Last accepted state and checkpoint preserved.\n'
-            % (res['stagnation']['advance_over_window_s'] or 0.0, a.window_s))
+            'COST_STAGNATION (pre-declared guard): simulated time advanced %.6g s between monotonic %.1f s and %.1f s '
+            '(window %.1f s >= %.0f s); %.6g < min_advance_s=%.4g. Neither TIMEOUT nor solver FAIL. '
+            'Last accepted state and checkpoint preserved.\n'
+            % (trigger['advance_s'], trigger['window_start_monotonic_s'], trigger['window_end_monotonic_s'],
+               trigger['window_length_s'], a.window_s, trigger['advance_s'], a.min_advance_s))
     (run / 'GUARD_STATUS.json').write_text(json.dumps(res, indent=1))
     print(json.dumps({k: res[k] for k in ('verdict', 'wall_s', 'last_monitor_time_s')}))
 

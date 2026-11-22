@@ -52,6 +52,9 @@ program main
   character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model, junction_trace, junction_flux, junction_riser_limit
   character(len=16) :: junction_transmission, junction_seal
   real(wp) :: junction_seal_face_tol
+  integer :: junction_seal_curve_steps, junction_t1_curve_steps
+  character(len=16) :: junction_seal_jacobian
+  logical :: momentum_ledger
   character(len=16)::boundary_method
   integer::outlet_reservoir_phase,initial_phase_hint
   character(len=16)::single_phase_mode,source_scheme,initial_phase
@@ -93,7 +96,7 @@ program main
                     stab_si_on, stab_si_off, stab_use_hysteresis, &
                     gas_eos, gas_flow_basis, liquid_flow_basis, single_phase_mode, source_scheme, initial_phase, outlet_reservoir_phase, boundary_method, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
                     checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, junction_trace, junction_flux, junction_riser_limit, dissipation_mode, newton_globalization, junction_transmission, &
-                    junction_seal, junction_seal_face_tol
+                    junction_seal, junction_seal_face_tol, junction_seal_curve_steps, junction_seal_jacobian, junction_t1_curve_steps, momentum_ledger
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
   type(pipeline_riser_simulator_t) :: sim
@@ -242,6 +245,10 @@ program main
   junction_transmission = 'T2'
   junction_seal = 'OFF'
   junction_seal_face_tol = 1e-11_wp
+  junction_seal_curve_steps = 0
+  junction_seal_jacobian = 'FD'
+  junction_t1_curve_steps = 8
+  momentum_ledger = .false.
   dissipation_mode = 'LAGGED'
   newton_globalization = 'LINE_SEARCH'
   ! ------------------------------ Read -----------------------------------
@@ -341,12 +348,20 @@ program main
   if(trim(junction_transmission)=='T1'.and.(trim(junction_model)/='MATCHED'.or.trim(junction_flux)/='ROE'.or. &
      trim(junction_riser_limit)/='NONE'.or.trim(junction_trace)/='CENTER')) &
     error stop 'junction_transmission=T1 is qualified only with MATCHED, ROE, CENTER traces and no riser limit'
-  if(trim(junction_seal)/='OFF'.and.trim(junction_seal)/='LIQUID_BRIDGE') &
-    error stop 'Unknown junction_seal: use OFF (default) or LIQUID_BRIDGE (experimental)'
-  if(trim(junction_seal)=='LIQUID_BRIDGE'.and.trim(junction_transmission)/='T1') &
-    error stop 'junction_seal=LIQUID_BRIDGE requires junction_transmission=T1'
-  if(trim(junction_seal)=='LIQUID_BRIDGE'.and.(closure_pipe/=1.or.closure_riser/=5)) &
-    error stop 'junction_seal=LIQUID_BRIDGE is qualified only with the stratified pipe (1) and CHEXAL_1992 riser (5)'
+  if(trim(junction_seal)/='OFF'.and.trim(junction_seal)/='LIQUID_BRIDGE'.and.trim(junction_seal)/='H4_ONLY') &
+    error stop 'Unknown junction_seal: use OFF (default), LIQUID_BRIDGE or H4_ONLY (experimental)'
+  if(trim(junction_seal)/='OFF'.and.trim(junction_transmission)/='T1') &
+    error stop 'junction_seal=LIQUID_BRIDGE|H4_ONLY requires junction_transmission=T1'
+  if(trim(junction_seal)/='OFF'.and.(closure_pipe/=1.or.closure_riser/=5)) &
+    error stop 'junction_seal=LIQUID_BRIDGE|H4_ONLY is qualified only with the stratified pipe (1) and CHEXAL_1992 riser (5)'
+  if(.not.(junction_seal_curve_steps==0.or.(junction_seal_curve_steps>=8.and.junction_seal_curve_steps<=256))) &
+    error stop 'junction_seal_curve_steps must be 0 (legacy adaptive rule) or lie in [8, 256]'
+  if(trim(junction_seal_jacobian)/='FD'.and.trim(junction_seal_jacobian)/='IMPLICIT') &
+    error stop 'Unknown junction_seal_jacobian: use FD (default) or IMPLICIT (experimental)'
+  if(trim(junction_seal_jacobian)=='IMPLICIT'.and.trim(junction_seal)=='OFF') &
+    error stop 'junction_seal_jacobian=IMPLICIT requires junction_seal=LIQUID_BRIDGE or H4_ONLY'
+  if(.not.(junction_t1_curve_steps>=4.and.junction_t1_curve_steps<=256)) &
+    error stop 'junction_t1_curve_steps must lie in [4, 256]'
   if(.not.(junction_seal_face_tol>=1e-14_wp.and.junction_seal_face_tol<=1e-9_wp)) &
     error stop 'junction_seal_face_tol must lie in [1e-14, 1e-9]'
   beta_rad = beta_deg * (acos(-1.0_wp)/180.0_wp)
@@ -479,6 +494,10 @@ program main
   cfg%junction_transmission = junction_transmission
   cfg%junction_seal = junction_seal
   cfg%junction_seal_face_tol = junction_seal_face_tol
+  cfg%junction_seal_curve_steps = junction_seal_curve_steps
+  cfg%junction_seal_jacobian = junction_seal_jacobian
+  cfg%junction_t1_curve_steps = junction_t1_curve_steps
+  cfg%momentum_ledger = momentum_ledger
   cfg%dissipation_mode = dissipation_mode
   cfg%newton_globalization = newton_globalization
   cfg%gas_eos        = gas_eos
@@ -649,7 +668,12 @@ program main
   if(trim(junction_seal)/='OFF')then
     write(contract_unit,'(2a)')'junction_seal=',trim(junction_seal)
     write(contract_unit,'(a,es10.3)')'junction_seal_face_tol=',junction_seal_face_tol
+    ! Round 20261122 options: written only when not at their defaults (seal5 contracts unchanged).
+    if(junction_seal_curve_steps/=0)write(contract_unit,'(a,i0)')'junction_seal_curve_steps=',junction_seal_curve_steps
+    if(trim(junction_seal_jacobian)/='FD')write(contract_unit,'(2a)')'junction_seal_jacobian=',trim(junction_seal_jacobian)
   endif
+  if(junction_t1_curve_steps/=8)write(contract_unit,'(a,i0)')'junction_t1_curve_steps=',junction_t1_curve_steps
+  if(momentum_ledger)write(contract_unit,'(a)')'momentum_ledger=T'
   write(contract_unit,'(2a)')'newton_globalization=',trim(newton_globalization)
   write(contract_unit,'(2a)')'dissipation_mode=',trim(dissipation_mode)
   write(contract_unit,'(2a)')'flux_scheme=',trim(flux_scheme)

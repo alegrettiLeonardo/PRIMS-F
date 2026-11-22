@@ -78,6 +78,24 @@ module module_config
     ! 1e-11 = 10x the relative tolerance of the closures' velocity recovery (tol),
     ! the round-off floor of every flux evaluation.
     real(wp) :: junction_seal_face_tol = 1e-11_wp
+    ! Round 20261122 (all opt-in; defaults reproduce prims_f_seal5_46e8830):
+    ! junction_seal_curve_steps: RK4 steps of the seal kinematic curve in z. 0 = legacy
+    ! adaptive rule (16..32, piecewise constant in the data); N>0 = N fixed steps, a
+    ! smooth map of (U_R, p_M, z), required for a consistent implicit Jacobian.
+    integer :: junction_seal_curve_steps = 0
+    ! junction_seal_jacobian: 'FD' (legacy: differences of the complete face solve) or
+    ! 'IMPLICIT' (implicit differentiation of the converged H4/H7 equations).
+    character(len=16) :: junction_seal_jacobian = 'FD'
+    ! junction_t1_curve_steps: RK4 steps of the ORIGINAL T1 kinematic curve in ln(alpha)
+    ! (operator A). Default 8 = original operator; other values only for convergence studies.
+    integer :: junction_t1_curve_steps = 8
+    ! Relative step of the central differences of the two ELEMENTARY explicit face maps
+    ! in the implicit Jacobian (not a namelist option; offline step studies only).
+    ! Default 1e-5: error <= 7.5e-6 (scaled) against Richardson differences of the
+    ! complete face solve on all verified states, including the H4/H7 vicinity.
+    real(wp) :: junction_seal_ijac_eps = 1e-5_wp
+    ! Opt-in integral momentum balance output (momentum_ledger.csv), round 20261122.
+    logical :: momentum_ledger = .false.
     character(len=20) :: dissipation_mode = 'LAGGED'
     character(len=16) :: newton_globalization = 'LINE_SEARCH'
     real(wp) :: output_interval_s = 1.0_wp
