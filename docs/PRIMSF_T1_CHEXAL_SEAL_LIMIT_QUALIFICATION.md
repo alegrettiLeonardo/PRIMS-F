@@ -526,7 +526,7 @@ haver uma trajetória completa (§9). **NOT_VERIFIED.** Nenhuma qualificação B
 | `e5cf228` | fix: diferenças unilaterais da face na configuração base (Newton semissuave); diagnósticos de tolerância e do limite Chexal |
 | `1d56984` | evidence: mapas locais do P0.1, sonda de configuração na trajetória, face OFF × selo, estudo de tolerância, limite α → 0 |
 | `46e8830` | perf: secante salvaguardada em z, nz proporcional (16–32), raiz no valor da célula; caso CLI encurtado |
-| ⟨THIS⟩ | docs/evidence: este relatório, balanços finais, comparação de regressão, handoff |
+| `9630bce` | docs/evidence: este relatório, balanços finais, comparação de regressão, handoff |
 
 ### 12.2 Binários congelados
 
