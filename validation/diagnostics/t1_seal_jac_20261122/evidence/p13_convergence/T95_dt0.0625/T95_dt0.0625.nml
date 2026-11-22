@@ -1,0 +1,29 @@
+! D_SS1: dissertation inputs; riser closure CHEXAL_1992 (ID5, dev default 21/11/2026); legacy Bhagwat (Azevedo, Balino & Burr 2015) is riser closure ID 3.
+! Circular-pipe transcription verified; no claim of full audit of the original2014 paper.
+! Sources and experimental target conflicts: docs/benchmark_sources.json
+! jl values for Stable/OSC use D Table6.7; SS1 uses D Table6.2 without changing T20.1C.
+! gas mass flux comes from jg STANDARD at101300Pa and293.15K, Rg287.
+! sigma0.0728 is inherited from the repository, not specified in D Table6.1.
+! _ISO changes only gas EOS relative to paired D profile, not liquid model/properties.
+&PARAMS
+  nodes=51, n_riser=51, num_dummy_cells=2, mesh_ratio=1.0,
+  X=6.435, Z=9.886, Lp=57.4, beta_deg=2.0,
+  D=0.05254, eps=4.6e-5, G=9.81,
+  rho_l0=997.05, P_l0=101325.0, Cl=1498.0,
+  mu_l=0.89e-3, mu_g=1.85e-5, sigma=0.0728,
+  Rg=287.0, gamma_g=1.4,
+  gas_eos='BAROTROPIC', Cg_fixed=343.0,
+  gas_flow_basis='STANDARD', P_standard=101300.0, T_standard=293.15,
+  Ps=208000.00000000, Tgas=293.25000000,
+  jl=0.53, jg=0.11,
+  mul=528.4365, mug=0.1324434043053912,
+  closure_riser=5,
+  dissipation_mode='LAGGED', junction_model='MATCHED',
+  time_dim=95.0, perturbation_amplitude=0.01,
+  output_interval_s=0.1, dt_start_s=0.001, dt_max_s=0.0625,
+  CFL=0.5, tol=1.0e-12, tola=1.0e-13, tol_res=1e-10, tol_inc=1.0e-8,
+  quad_points=3, use_muscl=.false., max_iter=10000000, newton_max=25,
+  max_workers=1, save_every=0, field_interval_s=15.0,
+  regime='T95_dt0.0625', out_dir='/home/leonardo/Documentos/PRIMS-F-t1seal-jac-results-20261122/camp/runs/T95_dt0.0625'
+  junction_transmission='T1', junction_seal='LIQUID_BRIDGE', junction_seal_curve_steps=16, junction_seal_jacobian='IMPLICIT', momentum_ledger=.true.
+/

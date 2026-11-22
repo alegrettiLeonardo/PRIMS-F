@@ -1,0 +1,12 @@
+{
+ "run": "/home/leonardo/Documentos/PRIMS-F-t1seal-jac-results-20261122/camp/runs/T95_dt0.125",
+ "t_end_s": 69.18015181023456,
+ "events": [
+  [
+   "SEAL",
+   53.18185275983767
+  ]
+ ],
+ "n_complete_cycles": 0,
+ "cycles": []
+}

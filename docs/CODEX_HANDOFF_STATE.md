@@ -1,3 +1,53 @@
+## Atualização: qualificação numérica T1 + LIQUID_BRIDGE, Jacobiano implícito, 22/11/2026 (rodada 6)
+
+Relatório: [PRIMSF_T1_SEAL_JACOBIAN_PERFORMANCE_QUALIFICATION.md](PRIMSF_T1_SEAL_JACOBIAN_PERFORMANCE_QUALIFICATION.md).
+Branch `implementation/t1-seal-jacobian-20261122`, a partir de `56998bb`. Sem push nem merge; `main`
+intacta (`f3717dd`). Evidência bruta em `~/Documentos/PRIMS-F-t1seal-jac-results-20261122/`.
+
+- **Opções novas, desligadas por default.** Com os defaults o binário é byte-idêntico a seal5,
+  T2, Bhagwat e T1.
+  - `junction_seal='H4_ONLY'`: operador B, recusa 1628 no selo.
+  - `junction_seal_curve_steps=N`: curva cinemática em (p, U₃) com N passos fixos, bem
+    condicionada; elimina o quantum nCl²·ε de F₃ na face.
+  - `junction_seal_jacobian='IMPLICIT'`: dF*/dW pelo teorema da função implícita (H4 e H7
+    separados; status 73/74/75).
+  - `junction_t1_curve_steps`: passos da T1 original (8).
+  - `momentum_ledger`: balanço de momento por passo.
+- **P0.1 PASS.** B ≡ C em H4; RK4 de ordem ≈ 4. Os 273 Pa T1 × seal4 são histórico de Δt
+  (Euler implícito), não operador: com o mesmo Δt, ≤ 0,05 Pa.
+- **P0.2 PASS.** Implícito ≤ 7,6e-6 contra Richardson da face completa em 9 estados (3 em H7).
+  Troca contínua e Lipschitz numérico; J₊ ≠ J₋; semissuavidade NOT_VERIFIED.
+- **P0.3/P0.4.**
+  - SS1 0→3 s em núcleo isolado: 17,3 contra 862 CPU-s por s simulado (seal5), 0 rejeições,
+    mesma solução.
+  - **Piso em H7 não resolvido:** células quase líquidas, p(U₁) com quantum nCl²·ε, δR₃ ≈
+    (Δt/Δs)π_P δp ≈ 1e-10. Força Δt ≈ 0,085 s.
+  - Correção exige trocar incógnitas (δρ ou p) ou o critério de aceitação: fora do mandato.
+- **P0.5 PASS.** RH da frente móvel ≤ 8,6e-12 (37 estados); balanço de momento ≤ 5e-15 do bruto.
+- **P1.1.** SS1 desde t = 0 com C16 + IMPLICIT: SEAL 53,45 → PEN 67,30 → BLOW 84,93 → SEAL
+  91,93 s, em 2073 CPU-s. A réplica concorda a ≤ 0,23 s.
+- **P1.2 BLOCKED.** Em 92,2 s a queda de líquido no trecho **inclinado** da catenária é
+  contracorrente, e o CHEXAL_1992 recusa por domínio (61 → 1071). Há um único intervalo
+  SEAL→SEAL (38,5 s).
+- **P1.3.**
+  - p_in em H4 (0–50 s) converge com ordem ≈ 1 em Δt e em malha; o erro ainda é O(100 Pa)
+    com Δt = 0,0625 s.
+  - **O primeiro selo não converge em malha:** 53,2 s (51 nós), 94,4 s (101 nós), nenhum
+    até 92 s (201 nós, provisório).
+  - Período e amplitude: NOT_VERIFIED.
+- **P2: NOT_VERIFIED.**
+- **`ececf68`:** estênceis adicionais do Jacobiano implícito, tentados só depois de todos os
+  originais falharem. Corrige o status 73 com α ≈ 2e-14 (Δt 0,125/0,0625 s, ~69 s). Os
+  caminhos que já funcionavam são byte-idênticos.
+- **Próximo passo:**
+  1. Decidir a extensão física para contracorrente inclinada no riser (fechamento),
+     necessária para o segundo ciclo.
+  2. Reformular as incógnitas de célula líquida (δρ_l ou p) para remover o piso de H7.
+  3. Resolver a dependência de malha do início da intermitência (MUSCL de 2ª ordem já
+     existe como opção, mas não foi qualificado com a T1 + selo), ou partir de um estado
+     de ciclo estabelecido.
+  4. Só então o refinamento de período e amplitude e a comparação com Baliño 2010.
+
 ## Atualização: limite de selo líquido T1 + Chexal, 22/11/2026 (rodada 5)
 
 Relatório: [PRIMSF_T1_CHEXAL_SEAL_LIMIT_QUALIFICATION.md](PRIMSF_T1_CHEXAL_SEAL_LIMIT_QUALIFICATION.md).
