@@ -1,3 +1,33 @@
+## Atualização: limite de selo líquido T1 + Chexal, 22/11/2026 (rodada 5)
+
+Relatório: [PRIMSF_T1_CHEXAL_SEAL_LIMIT_QUALIFICATION.md](PRIMSF_T1_CHEXAL_SEAL_LIMIT_QUALIFICATION.md).
+Branch `implementation/chexal-riser-20261121` (`538df1e` → `46e8830` + docs), sem push nem merge;
+`main` intacta (`f3717dd`).
+
+- **P0.1 PASS — causa da falha em 53,48 s:** ausência local da fase gasosa na face.
+  - Não existe raiz H4 para α_R* > 0; g₀ troca de sinal entre 53,450 e 53,475 s.
+  - A raiz da T1 em 53,4753 s era artefato da curva de 8 passos.
+  - Não é degeneração do Chexal nem perda de hiperbolicidade; o Newton falha em consequência.
+- **P0.2 PASS:** limite Chexal α → 0 regular (C₀ → 0, V_gj → 0,34419 m/s, F_g C¹, λ hiperbólico).
+- **Opção nova:** `junction_seal = 'OFF'` (default) | `'LIQUID_BRIDGE'` (experimental; só T1 + fechamentos 1/5).
+  `junction_seal_face_tol` 1e-11 ∈ [1e-14, 1e-9].
+  - **H7 (ponte líquida):** G_g* = 0 exato, frente de acumulação no oleoduto com s = u_g ≤ 0.
+  - **Seleção** pelo sinal de g; diferenças unilaterais na configuração base (Newton semissuave).
+  - **Preservação:** OFF byte-idêntico a T2, Bhagwat e T1.
+  - **Testes:** `test_junction_seal` com 26 asserções; Fortran 31/31, Python 123 (`PYTHONPATH=scripts`), CLI 8/8.
+- **Réplica a partir de 53,4753 s:**
+  - A T1 sem extensão não aceita nenhum passo.
+  - Com a extensão, 33,9 s: H7 por 14 s → reaparecimento do gás → produção → **início do blowdown**.
+  - Parada por COST_STAGNATION; seal4 × seal5 coincidem a ≤ 3 Pa.
+- **SS1 desde 0 com extensão: BLOCKED por custo** (TIMEOUT 6 h em 43,4 s). São ≈ 5× mais passos que a
+  T1, provavelmente pelo Jacobiano da face por diferenças (~1e-4). Os seis balanços ≤ 5,8e-11·M₀.
+- **P2.2 e Baliño 2010: NOT_VERIFIED** (sem ciclo completo).
+- **Próximo passo:**
+  1. Jacobiano analítico ou diferenciação implícita da face H4/H7, com derivadas laterais
+     explícitas na troca, para recuperar o Δt da T1.
+  2. Só depois, SS1 completo e refinamento.
+  3. Não usar 1e-13 na face (abaixo do piso de ruído).
+
 ## Atualização: transmissão T1 implementada e qualificada, 21/11/2026 (rodada 4)
 
 Relatório: [PRIMSF_T1_JUNCTION_QUALIFICATION.md](PRIMSF_T1_JUNCTION_QUALIFICATION.md). Branch

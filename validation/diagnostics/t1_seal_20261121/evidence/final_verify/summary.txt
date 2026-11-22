@@ -1,0 +1,21 @@
+HEAD 46e8830796834161d8766a51400452921ed22019
+release rc=0
+check_all rc=0
+e9af384c98aebc337e1a3f1599b4356f9dae5f0c4e7659c2f45a4333542a8601  bin/prims_f
+2c1971972318beb8c023413299b83b9011880f2d17805a943e2aaaa71dc7f3d2  bin/prims_f_check_all
+fortran units rc=0
+PASS: test_junction_t1
+PASS: test_junction_seal
+PASS: 31/31 tests; summary: /home/leonardo/Documentos/PRIMS-F-chexal-riser-20261121/tmp/unit_tests/summary.json
+python rc=1
+Ran 110 tests in 1.013s
+
+FAILED (errors=3)
+test_accepted_telemetry_cli rc=0
+test_boundary_telemetry_cli rc=0
+test_chexal_default_cli rc=0
+test_closure_contract_cli rc=0
+test_feed_contract_cli rc=0
+test_initial_inventory_cli rc=0
+test_pipe_regime_cli rc=0
+test_reduced_equilibrium_cli rc=0

@@ -1,0 +1,562 @@
+[
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_REPLAY53.4753_T1SEAL",
+  "closure_riser": 5,
+  "termination": "NO_STATUS",
+  "guard": "COST_STAGNATION",
+  "classification": "FAIL:NO_STATUS/0",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 33.911417997171256,
+  "accepted_steps": -1,
+  "rejected_steps": -1,
+  "newton_iterations": -1,
+  "cpu_s": null,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": NaN,
+  "p_in_range_Pa": [
+   272466.9123415291,
+   297937.44620999426
+  ],
+  "alpha_riser_base_range": [
+   5.6579692020433083e-11,
+   0.3890181424043767
+  ],
+  "Ml_kg": [
+   79.63956039048537,
+   72.63864422176053
+  ],
+  "Mg_kg": [
+   0.17815033506373185,
+   0.18231246175812266
+  ],
+  "Mg_riser_kg": [
+   0.004433121951671803,
+   0.019486145623115923
+  ],
+  "boundary_cell": {
+   "index": 54,
+   "theta_deg": 2.333731331866095,
+   "alpha": 0.3890181424043769,
+   "jl_m_s": 0.5319231082436178
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 1.2079226507921703e-13,
+    "rel_inventory": 1.5167369644803839e-15,
+    "rel_processed": 1.4260499309641949e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 1.2740919430598296e-12,
+    "rel_inventory": 2.3325874323319294e-14,
+    "rel_processed": 1.6391882921312938e-14
+   },
+   "l_riser": {
+    "max_abs_kg": 1.2876366639602566e-12,
+    "rel_inventory": 5.146808210183725e-14,
+    "rel_processed": 1.519731237668991e-14
+   },
+   "g_system": {
+    "max_abs_kg": 2.1378433962340737e-16,
+    "rel_inventory": 1.2000221023829555e-15,
+    "rel_processed": 1.396113361713572e-14
+   },
+   "g_pipe": {
+    "max_abs_kg": 2.5613192122797557e-13,
+    "rel_inventory": 1.4744187788849234e-12,
+    "rel_processed": 8.434868986878324e-12
+   },
+   "g_riser": {
+    "max_abs_kg": 2.561154413549538e-13,
+    "rel_inventory": 5.7773154933932836e-11,
+    "rel_processed": 9.774011530376148e-12
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 5.7773154933932836e-11
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_REPLAY53.4753_T1SEAL",
+  "closure_riser": 5,
+  "termination": "NO_STATUS",
+  "guard": "TIMEOUT",
+  "classification": "FAIL:NO_STATUS/0",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 31.76836718364022,
+  "accepted_steps": -1,
+  "rejected_steps": -1,
+  "newton_iterations": -1,
+  "cpu_s": null,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": NaN,
+  "p_in_range_Pa": [
+   281819.8399326293,
+   297936.9805514371
+  ],
+  "alpha_riser_base_range": [
+   5.6427875244102595e-11,
+   0.32838475122909916
+  ],
+  "Ml_kg": [
+   79.63956039048537,
+   75.31341798544808
+  ],
+  "Mg_kg": [
+   0.17815033506373185,
+   0.18285518053029626
+  ],
+  "Mg_riser_kg": [
+   0.004433121951671803,
+   0.014357806300823376
+  ],
+  "boundary_cell": {
+   "index": 54,
+   "theta_deg": 2.333731331866095,
+   "alpha": 0.32838475122909927,
+   "jl_m_s": 0.5377894405406818
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 1.0480505352461478e-13,
+    "rel_inventory": 1.315992366240333e-15,
+    "rel_processed": 1.3542458640409765e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 4.483524662646232e-12,
+    "rel_inventory": 8.208366231029334e-14,
+    "rel_processed": 6.143307254453377e-14
+   },
+   "l_riser": {
+    "max_abs_kg": 4.511946372076636e-12,
+    "rel_inventory": 1.8034685778743453e-13,
+    "rel_processed": 5.829123172326237e-14
+   },
+   "g_system": {
+    "max_abs_kg": 2.970510664702941e-16,
+    "rel_inventory": 1.6674179499242961e-15,
+    "rel_processed": 2.1897782453110936e-14
+   },
+   "g_pipe": {
+    "max_abs_kg": 2.6109323036926924e-14,
+    "rel_inventory": 1.5029784653570595e-13,
+    "rel_processed": 1.1027132667098133e-12
+   },
+   "g_riser": {
+    "max_abs_kg": 2.617177308206209e-14,
+    "rel_inventory": 5.903688950445472e-12,
+    "rel_processed": 1.380778812883428e-12
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 5.903688950445472e-12
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_REPLAY53.4753_T1SEAL_tol1e-12",
+  "closure_riser": 5,
+  "termination": "NO_STATUS",
+  "guard": "COST_STAGNATION",
+  "classification": "FAIL:NO_STATUS/0",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 14.008102872871003,
+  "accepted_steps": -1,
+  "rejected_steps": -1,
+  "newton_iterations": -1,
+  "cpu_s": null,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": NaN,
+  "p_in_range_Pa": [
+   290113.21426599065,
+   297093.65659137396
+  ],
+  "alpha_riser_base_range": [
+   4.5410954889186404e-11,
+   0.006889535129169004
+  ],
+  "Ml_kg": [
+   79.63956039048537,
+   81.39210102279034
+  ],
+  "Mg_kg": [
+   0.17815033506373185,
+   0.1785098389355005
+  ],
+  "Mg_riser_kg": [
+   0.004433121951671803,
+   0.0007702775047222417
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.04926692130390897,
+   "jl_m_s": 0.5044345017969889
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 9.248157795127554e-14,
+    "rel_inventory": 1.1612517384302938e-15,
+    "rel_processed": 3.044466988209424e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 1.737276988933445e-12,
+    "rel_inventory": 3.180579308219766e-14,
+    "rel_processed": 5.413637998319806e-14
+   },
+   "l_riser": {
+    "max_abs_kg": 1.7532642004880472e-12,
+    "rel_inventory": 7.007966481740074e-14,
+    "rel_processed": 5.779120119225933e-14
+   },
+   "g_system": {
+    "max_abs_kg": 2.6930226711824323e-16,
+    "rel_inventory": 1.5116573708486296e-15,
+    "rel_processed": 3.501505231147954e-14
+   },
+   "g_pipe": {
+    "max_abs_kg": 1.205632815803881e-16,
+    "rel_inventory": 6.940203530816267e-16,
+    "rel_processed": 2.9943167463209443e-14
+   },
+   "g_riser": {
+    "max_abs_kg": 1.951563910473908e-17,
+    "rel_inventory": 4.402233757043253e-15,
+    "rel_processed": 5.3253354462896376e-15
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 7.007966481740074e-14
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_T1SEAL_t300",
+  "closure_riser": 5,
+  "termination": "NO_STATUS",
+  "guard": "TIMEOUT",
+  "classification": "FAIL:NO_STATUS/0",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 43.36070812695905,
+  "accepted_steps": -1,
+  "rejected_steps": -1,
+  "newton_iterations": -1,
+  "cpu_s": null,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": 0.5715889424463703,
+  "p_in_range_Pa": [
+   287999.18830424896,
+   290767.2940801712
+  ],
+  "alpha_riser_base_range": [
+   0.07015886948281647,
+   0.10382380716181266
+  ],
+  "Ml_kg": [
+   79.36395764917184,
+   78.69228301680528
+  ],
+  "Mg_kg": [
+   0.17896544750974827,
+   0.17909542901526115
+  ],
+  "Mg_riser_kg": [
+   0.005212966523964242,
+   0.006669826926672325
+  ],
+  "boundary_cell": {
+   "index": 77,
+   "theta_deg": 62.43202319587546,
+   "alpha": 0.11322432482124402,
+   "jl_m_s": 0.5100932529171966
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 1.1368683772161603e-13,
+    "rel_inventory": 1.4324744013418327e-15,
+    "rel_processed": 1.1365666069739568e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 2.9380942123680143e-12,
+    "rel_inventory": 5.379024783950102e-14,
+    "rel_processed": 2.9570680735900215e-14
+   },
+   "l_riser": {
+    "max_abs_kg": 2.9203306439740118e-12,
+    "rel_inventory": 1.1802825572045694e-13,
+    "rel_processed": 2.919453924706276e-14
+   },
+   "g_system": {
+    "max_abs_kg": 1.942890293094024e-16,
+    "rel_inventory": 1.0856231301230332e-15,
+    "rel_processed": 7.843220701412645e-15
+   },
+   "g_pipe": {
+    "max_abs_kg": 5.6081875254854197e-14,
+    "rel_inventory": 3.2276877392871684e-13,
+    "rel_processed": 2.1382079136010958e-12
+   },
+   "g_riser": {
+    "max_abs_kg": 5.6126110703491605e-14,
+    "rel_inventory": 1.0766635551077749e-11,
+    "rel_processed": 2.1505520462104517e-12
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 1.0766635551077749e-11
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_T1SEAL_t300",
+  "closure_riser": 5,
+  "termination": "NO_STATUS",
+  "guard": "TIMEOUT",
+  "classification": "FAIL:NO_STATUS/0",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 27.613873323439176,
+  "accepted_steps": -1,
+  "rejected_steps": -1,
+  "newton_iterations": -1,
+  "cpu_s": null,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": 0.5715622588729042,
+  "p_in_range_Pa": [
+   290130.8255319483,
+   290767.05532310595
+  ],
+  "alpha_riser_base_range": [
+   0.07019175274161496,
+   0.0895906926371546
+  ],
+  "Ml_kg": [
+   79.36395764917184,
+   79.4272125703649
+  ],
+  "Mg_kg": [
+   0.17896544750974827,
+   0.17911953941191558
+  ],
+  "Mg_riser_kg": [
+   0.005212966523964242,
+   0.005104634745581423
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.09227259518087981,
+   "jl_m_s": 0.5170393955443879
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 1.092459456231154e-13,
+    "rel_inventory": 1.3765183700394172e-15,
+    "rel_processed": 1.7283017292892584e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 4.732214620162267e-12,
+    "rel_inventory": 8.663677161090129e-14,
+    "rel_processed": 7.479040512450016e-14
+   },
+   "l_riser": {
+    "max_abs_kg": 4.725109192804666e-12,
+    "rel_inventory": 1.9097029210244248e-13,
+    "rel_processed": 7.475283867788474e-14
+   },
+   "g_system": {
+    "max_abs_kg": 2.1347940776239582e-16,
+    "rel_inventory": 1.1928526468818373e-15,
+    "rel_processed": 1.3593737819010219e-14
+   },
+   "g_pipe": {
+    "max_abs_kg": 3.1345585849162916e-14,
+    "rel_inventory": 1.8040367349763212e-13,
+    "rel_processed": 2.0098587787510546e-12
+   },
+   "g_riser": {
+    "max_abs_kg": 3.143405674643773e-14,
+    "rel_inventory": 6.029974794952923e-12,
+    "rel_processed": 2.03564419719924e-12
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 6.029974794952923e-12
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_T1SEAL_t300_tol1e-12",
+  "closure_riser": 5,
+  "termination": "NO_STATUS",
+  "guard": "COST_STAGNATION",
+  "classification": "FAIL:NO_STATUS/0",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 1.962550799570851,
+  "accepted_steps": -1,
+  "rejected_steps": -1,
+  "newton_iterations": -1,
+  "cpu_s": null,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": 0.6058143813270077,
+  "p_in_range_Pa": [
+   290131.19469165144,
+   290233.87438962015
+  ],
+  "alpha_riser_base_range": [
+   0.07557849023180195,
+   0.08952002375737275
+  ],
+  "Ml_kg": [
+   79.36395764917184,
+   79.34374916163571
+  ],
+  "Mg_kg": [
+   0.17896544750974827,
+   0.1789644655819521
+  ],
+  "Mg_riser_kg": [
+   0.005212966523964242,
+   0.005261927244749082
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.09879839884420093,
+   "jl_m_s": 0.5033002237889883
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 9.378522264347211e-14,
+    "rel_inventory": 1.1817105071555202e-15,
+    "rel_processed": 2.0219445006913252e-14
+   },
+   "l_pipe": {
+    "max_abs_kg": 3.717026686445024e-13,
+    "rel_inventory": 6.80508425659951e-15,
+    "rel_processed": 8.04753351207139e-14
+   },
+   "l_riser": {
+    "max_abs_kg": 3.6548541970660153e-13,
+    "rel_inventory": 1.477148030078103e-14,
+    "rel_processed": 7.879399351486169e-14
+   },
+   "g_system": {
+    "max_abs_kg": 1.7255077575106803e-16,
+    "rel_inventory": 9.641569261109416e-16,
+    "rel_processed": 1.4892917713621744e-13
+   },
+   "g_pipe": {
+    "max_abs_kg": 1.4520936536532858e-14,
+    "rel_inventory": 8.35725421251448e-14,
+    "rel_processed": 1.2038760032988633e-11
+   },
+   "g_riser": {
+    "max_abs_kg": 1.452185810837947e-14,
+    "rel_inventory": 2.785718657816396e-12,
+    "rel_processed": 1.2029457301867072e-11
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 2.785718657816396e-12
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_T1_t300",
+  "closure_riser": 5,
+  "termination": "NO_STATUS",
+  "guard": "COST_STAGNATION",
+  "classification": "FAIL:NO_STATUS/0",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 53.41964810244056,
+  "accepted_steps": -1,
+  "rejected_steps": -1,
+  "newton_iterations": -1,
+  "cpu_s": null,
+  "E_g_001_s": 53.41964810244056,
+  "mdot_g_base_min_rel": 0.0030103509503938536,
+  "p_in_range_Pa": [
+   288164.29740243184,
+   290742.56598046963
+  ],
+  "alpha_riser_base_range": [
+   0.007533123475767993,
+   0.0997850848455333
+  ],
+  "Ml_kg": [
+   79.36395764917184,
+   79.63034628614294
+  ],
+  "Mg_kg": [
+   0.17896544750974827,
+   0.17815487813667602
+  ],
+  "Mg_riser_kg": [
+   0.005212966523964242,
+   0.004454039356625009
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.12106117079283295,
+   "jl_m_s": 0.43106893345264075
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 1.5631940186722204e-13,
+    "rel_inventory": 1.9696523018450198e-15,
+    "rel_processed": 1.278676987498868e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 2.984279490192421e-13,
+    "rel_inventory": 5.46358019167846e-15,
+    "rel_processed": 2.4356322467009617e-15
+   },
+   "l_riser": {
+    "max_abs_kg": 1.7763568394002505e-13,
+    "rel_inventory": 7.179334289565507e-15,
+    "rel_processed": 1.4530429961287595e-15
+   },
+   "g_system": {
+    "max_abs_kg": 1.7867651802561113e-16,
+    "rel_inventory": 9.983855571667181e-16,
+    "rel_processed": 5.667965019214099e-15
+   },
+   "g_pipe": {
+    "max_abs_kg": 4.633446404334052e-15,
+    "rel_inventory": 2.666693665636434e-14,
+    "rel_processed": 1.5070420967754968e-13
+   },
+   "g_riser": {
+    "max_abs_kg": 4.583139423530724e-15,
+    "rel_inventory": 8.791806742786139e-13,
+    "rel_processed": 1.4521879963723293e-13
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 8.791806742786139e-13
+ }
+]
