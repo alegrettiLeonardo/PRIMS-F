@@ -62,8 +62,10 @@ binário novo reproduz byte a byte T2, Bhagwat, T1 e a seal legada (§8).
    - O erro temporal domina: centenas de Pa a Δt = 0,125 s, com ordem observada 0,6–0,9
      (pré-assintótica).
    - O erro da curva é desprezível. O erro de malha em p_in tem ordem ≈ 1 (0,1–1,2 kPa).
-   - **O instante do primeiro selo não converge em malha:** 53,2 s (51 nós), 94,4 s
-     (101 nós), e nenhum selo até 92 s (201 nós, provisório).
+   - **O primeiro selo depende fortemente da malha:** 53,2 s (51 nós), 94,4 s (101 nós),
+     96,6 s (201 nós). A malha de 51 nós está fora da faixa assintótica.
+   - O intervalo SEAL→SEAL vale 38,48 / 39,78 / 40,65 s em Δt = 0,5 / 0,25 / 0,125 s:
+     ordem ≈ 0,6, não convergido a 1 %.
 8. **Baliño 2010 (P2, NOT_VERIFIED).** Não existe ciclo-limite; o intervalo de partida não é
    comparável a T_exp = 85,6 s.
 
@@ -628,9 +630,8 @@ O monitor é amostrado a 0,1 s.
 
 ## 11. Convergência (P1.3)
 
-**Estado em 22/11/2026, 20:03 (-03):** três execuções com o binário corrigido `ececf68`
-continuam rodando sob o guarda (máx. 6 h). Os números marcados *provisório* vêm de prefixos
-dessas execuções.
+Todas as execuções terminaram. As três reexecuções com o binário corrigido `ececf68`
+terminaram depois da primeira publicação da branch; os valores abaixo são os finais.
 
 ### 11.1 Tempo
 
@@ -656,13 +657,20 @@ dessas execuções.
   | Evento | Δt 0,5 | Δt 0,25 | Δt 0,125 | Δt 0,0625 |
   |---|---|---|---|---|
   | SEAL | 53,45 s | 53,42 s | 53,18 s | 53,33 s |
-  | PEN | 67,30 s | 69,3 s | não alcançado (69,9 s, provisório) | não alcançado (61,9 s, provisório) |
-  | BLOW | 84,93 s | 86,7 s | — | — |
-  | novo SEAL | 91,93 s | 93,2 s | — | — |
+  | PEN | 67,30 s | 69,3 s | 70,18 s | — (falha 3625 em 70,45 s) |
+  | BLOW | 84,93 s | 86,7 s | 87,46 s | — |
+  | novo SEAL | 91,93 s | 93,2 s | 93,83 s | — |
+  | término | 1071 em 92,20 s | 1071 em 93,30 s | 1071 em 93,95 s | 3625 (face 53, 1625) em 70,45 s |
 
   - SEAL varia de modo não monotônico, com amostragem de 0,1 s.
-  - Intervalo SEAL→SEAL: 38,48 s (Δt 0,5) contra 39,78 s (Δt 0,25), **diferença de 3,4 %**.
-    Δp: 37,7 contra 40,8 kPa (8 %).
+  - Intervalo SEAL→SEAL: 38,48 / 39,78 / 40,65 s (Δt 0,5 / 0,25 / 0,125).
+    - Diferenças 1,30 e 0,87 s: ordem observada ≈ 0,58.
+    - Extrapolação de Richardson ≈ 42,4 s; a solução com Δt 0,125 ainda está ≈ 4 % abaixo.
+  - Δp: 37,7 / 40,8 / 42,3 kPa.
+  - PEN: 67,30 / 69,3 / 70,18 s.
+  - **Com Δt = 0,0625 s a execução para em 70,45 s, perto da penetração:** falha de
+    avaliação da face (3625 = FACE, 1625), um modo de falha novo, não investigado nesta
+    rodada.
 - A execução com Δt 0,25 s também termina por CHEXAL_DOMAIN (1071, célula 92) em 93,3 s.
 
 ### 11.2 Malha
@@ -685,7 +693,8 @@ idêntico nas três (Δt = Δt_max).
 - **O primeiro selo não converge em malha:**
   - 51 nós: SEAL em 53,2 s;
   - 101 nós: SEAL só em **94,4 s**, e falha por CHEXAL_DOMAIN (1071, célula 187) em 94,9 s;
-  - 201 nós: **nenhum selo até 92,06 s** (`N201_dt0.125_T130`, provisório, em execução até 130 s).
+  - 201 nós: SEAL em **96,56 s**; falha em 97,97 s com 3621 (configuração de ondas
+    violada, 1621) na face da junção (`N201_dt0.125_T130`).
 - O mínimo da vazão de gás na base até 60 s é 0 (51 nós), 1,8e-5 (101) e 1,4e-4 kg/s (201).
 - O inventário de líquido diverge 1,1 kg entre as malhas em 60 s. Na malha grossa, a difusão
   numérica antecipa o acúmulo na base até o limiar de selagem.
@@ -693,10 +702,13 @@ idêntico nas três (Δt = Δt_max).
 ### 11.3 Conclusão de P1.3
 
 - Δt: ordem observada → 1 em p_in; erro ainda O(100 Pa) com Δt = 0,0625 s.
-- Malha: ordem ≈ 1 em p_in; **o instante de selagem desde t = 0 não está convergido**
-  (diferença de 41 s entre 51 e 101 nós).
+- Malha: ordem ≈ 1 em p_in. **O instante de selagem desde t = 0 não está convergido:**
+  - 41 s entre 51 e 101 nós e 2,2 s entre 101 e 201 nós (razão ≈ 19, fora do regime
+    assintótico de 1ª ordem);
+  - a malha de 51 nós das campanhas principais é grossa demais para esse observável.
 - O período e a amplitude a 1 % **não podem ser verificados**: há um só intervalo de
-  partida, que difere 3,4 % entre Δt 0,5 e 0,25, e a sequência de eventos muda com a malha.
+  partida, com ordem temporal ≈ 0,6 e ≈ 4 % de erro estimado a Δt 0,125, e a sequência de
+  eventos muda com a malha.
 - **Status:**
   - **NOT_VERIFIED** para período e amplitude;
   - **FAIL (não convergido)** para o instante do primeiro selo em malha;
@@ -740,7 +752,7 @@ uma cópia livre. Por isso a verificação nesta rodada é por esse registro.
 | P1.1 SS1 desde t = 0, três operadores | **PASS parcial**: A falha em 53,4753 s; B recusa em 53,472 s; C chega a 92,2 s com selo, PEN, BLOW e novo SEAL | §9 |
 | P1.2 Ciclos completos, T̄, Δp, dispersão, deriva | **BLOCKED**: contracorrente inclinada fora do domínio do CHEXAL_1992 (1071) em 92,2 s | §5.4, §10 |
 | P1.3 Convergência Δt / malha (p_in, H4 0–50 s) | **PASS**: p_t → 0,8–1,0, p_s ≈ 1; erro O(100 Pa) | §11.1–11.2 |
-| P1.3 Instante do primeiro selo em malha | **FAIL (não convergido)**: 53,2 / 94,4 / > 92 s (provisório) | §11.2 |
+| P1.3 Instante do primeiro selo em malha | **FAIL (não convergido)**: 53,2 / 94,4 / 96,6 s | §11.2 |
 | P1.3 Período e amplitude a 1 % | **NOT_VERIFIED** (um só intervalo) | §11 |
 | P2 Baliño 2010 | **NOT_VERIFIED** | §12 |
 

@@ -32,8 +32,11 @@ intacta (`f3717dd`). Evidência bruta em `~/Documentos/PRIMS-F-t1seal-jac-result
 - **P1.3.**
   - p_in em H4 (0–50 s) converge com ordem ≈ 1 em Δt e em malha; o erro ainda é O(100 Pa)
     com Δt = 0,0625 s.
-  - **O primeiro selo não converge em malha:** 53,2 s (51 nós), 94,4 s (101 nós), nenhum
-    até 92 s (201 nós, provisório).
+  - **O primeiro selo não converge em malha:** 53,2 s (51 nós), 94,4 s (101 nós), 96,6 s
+    (201 nós).
+  - Intervalo SEAL→SEAL: 38,48 / 39,78 / 40,65 s (Δt 0,5 / 0,25 / 0,125), ordem ≈ 0,6.
+  - Δt 0,0625 s falha em 70,45 s (3625, face), e 201 nós falham em 97,97 s (3621):
+    modos de falha novos, não investigados.
   - Período e amplitude: NOT_VERIFIED.
 - **P2: NOT_VERIFIED.**
 - **`ececf68`:** estênceis adicionais do Jacobiano implícito, tentados só depois de todos os

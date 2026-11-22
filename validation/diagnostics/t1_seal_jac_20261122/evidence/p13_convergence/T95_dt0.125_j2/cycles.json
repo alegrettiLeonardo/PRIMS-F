@@ -1,6 +1,6 @@
 {
  "run": "/home/leonardo/Documentos/PRIMS-F-t1seal-jac-results-20261122/camp/runs/T95_dt0.125_j2",
- "t_end_s": 71.05801440104601,
+ "t_end_s": 93.95274759409371,
  "events": [
   [
    "SEAL",
@@ -9,8 +9,31 @@
   [
    "PEN",
    70.18052048473218
+  ],
+  [
+   "BLOW",
+   87.4562253949131
+  ],
+  [
+   "SEAL",
+   93.83122539491322
   ]
  ],
- "n_complete_cycles": 0,
- "cycles": []
+ "n_complete_cycles": 1,
+ "cycles": [
+  {
+   "t_seal_s": 53.18185275983767,
+   "period_s": 40.64937263507555,
+   "p_mean_Pa": 289694.6143116194,
+   "p_max_Pa": 298251.8002640378,
+   "p_min_Pa": 255912.40201184308,
+   "t_pmax_s": 73.83122539491289,
+   "dp_Pa": 42339.39825219472,
+   "semi_amplitude_Pa": 21169.69912609736,
+   "bridge_duration_s": 16.998667724894517,
+   "seal_to_blowdown_s": 34.27437263507544,
+   "Ml_at_seal_kg": 79.4143437942259,
+   "Mg_at_seal_kg": 0.17810675323074251
+  }
+ ]
 }

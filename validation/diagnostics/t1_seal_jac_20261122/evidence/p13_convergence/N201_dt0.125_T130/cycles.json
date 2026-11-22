@@ -1,7 +1,12 @@
 {
  "run": "/home/leonardo/Documentos/PRIMS-F-t1seal-jac-results-20261122/camp/runs/N201_dt0.125_T130",
- "t_end_s": 95.18185275983832,
- "events": [],
+ "t_end_s": 97.97293758894313,
+ "events": [
+  [
+   "SEAL",
+   96.55685275983834
+  ]
+ ],
  "n_complete_cycles": 0,
  "cycles": []
 }
