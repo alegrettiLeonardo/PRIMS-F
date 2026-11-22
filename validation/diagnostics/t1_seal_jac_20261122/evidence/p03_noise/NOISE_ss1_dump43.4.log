@@ -1,0 +1,65 @@
+STATE|t_s    42.941759|UL   4.402064E-01  1.404679E-03  1.001005E+00|UR   8.989838E-01  2.539477E-04  9.973269E-01
+NOISE|steps   0|base status 0|config  4.|F   5.2854222620661528E+02  1.8427874146076592E-01  2.9502158780863235E+05
+NOISE|steps   0|dU3R/U3R  1.00E-15|status 0|(F-F0)/Fs  -4.58830E-12 -5.67792E-11  1.66788E-12|slope (dF/F)/(dU/U)  -4.58830E+03 -5.67792E+04  1.66788E+03
+NOISE|steps   0|dU3R/U3R  3.16E-15|status 0|(F-F0)/Fs  -4.44977E-12  5.18352E-13 -1.01450E-14|slope (dF/F)/(dU/U)  -1.40714E+03  1.63917E+02 -3.20814E+00
+NOISE|steps   0|dU3R/U3R  1.00E-14|status 0|(F-F0)/Fs  -2.59163E-12 -8.28118E-11 -1.69616E-12|slope (dF/F)/(dU/U)  -2.59163E+02 -8.28118E+03 -1.69616E+02
+NOISE|steps   0|dU3R/U3R  3.16E-14|status 0|(F-F0)/Fs  -4.64469E-12 -1.76891E-11  1.67112E-12|slope (dF/F)/(dU/U)  -1.46878E+02 -5.59377E+02  5.28455E+01
+NOISE|steps   0|dU3R/U3R  1.00E-13|status 0|(F-F0)/Fs  -4.77944E-12 -3.46254E-11  1.67026E-12|slope (dF/F)/(dU/U)  -4.77944E+01 -3.46254E+02  1.67026E+01
+NOISE|steps   0|dU3R/U3R  3.16E-13|status 0|(F-F0)/Fs  -4.44866E-12 -5.69730E-12 -9.71332E-15|slope (dF/F)/(dU/U)  -1.40679E+01 -1.80165E+01 -3.07162E-02
+NOISE|steps   0|dU3R/U3R  1.00E-12|status 0|(F-F0)/Fs  -4.78499E-12 -1.43280E-11  1.67134E-12|slope (dF/F)/(dU/U)  -4.78499E+00 -1.43280E+01  1.67134E+00
+NOISE|steps   0|dU3R/U3R  3.16E-12|status 0|(F-F0)/Fs  -2.18759E-12 -7.42558E-11 -1.20877E-14|slope (dF/F)/(dU/U)  -6.91777E-01 -2.34818E+01 -3.82246E-03
+NOISE|steps   0|dU3R/U3R  1.00E-11|status 0|(F-F0)/Fs  -4.46576E-12  7.38148E-11 -2.15851E-15|slope (dF/F)/(dU/U)  -4.46576E-01  7.38148E+00 -2.15851E-04
+NOISE|steps   0|dU3R/U3R  3.16E-11|status 0|(F-F0)/Fs  -2.63581E-12  1.70178E-10  8.84991E-15|slope (dF/F)/(dU/U)  -8.33516E-02  5.38149E+00  2.79859E-04
+NOISE|steps   0|dU3R/U3R  1.00E-10|status 0|(F-F0)/Fs  -6.80231E-12  6.76937E-10  4.72715E-14|slope (dF/F)/(dU/U)  -6.80231E-02  6.76937E+00  4.72715E-04
+NOISE|steps   0|dU3R/U3R  3.16E-10|status 0|(F-F0)/Fs   8.30281E-14  2.02520E-09 -1.49779E-12|slope (dF/F)/(dU/U)   2.62558E-04  6.40423E+00 -4.73644E-03
+NOISE|steps   0|dU3R/U3R  1.00E-09|status 0|(F-F0)/Fs   2.42180E-12  6.54302E-09 -2.76139E-12|slope (dF/F)/(dU/U)   2.42180E-03  6.54302E+00 -2.76139E-03
+NOISE|steps   0|dU3R/U3R  3.16E-09|status 0|(F-F0)/Fs   1.81878E-11  2.10288E-08 -1.31786E-11|slope (dF/F)/(dU/U)   5.75149E-03  6.64989E+00 -4.16744E-03
+NOISE|steps   0|dU3R/U3R  1.00E-08|status 0|(F-F0)/Fs   5.37176E-11  6.65894E-08 -3.75320E-11|slope (dF/F)/(dU/U)   5.37176E-03  6.65894E+00 -3.75320E-03
+NOISE|steps  64|base status 0|config  4.|F   5.2854222620539269E+02  1.8427874147758261E-01  2.9502158780863299E+05
+NOISE|steps  64|dU3R/U3R  1.00E-15|status 0|(F-F0)/Fs  -3.71229E-12 -7.34121E-11  1.66918E-12|slope (dF/F)/(dU/U)  -3.71229E+03 -7.34121E+04  1.66918E+03
+NOISE|steps  64|dU3R/U3R  3.16E-15|status 0|(F-F0)/Fs  -4.43357E-12 -1.13020E-10 -1.94266E-14|slope (dF/F)/(dU/U)  -1.40202E+03 -3.57400E+04 -6.14324E+00
+NOISE|steps  64|dU3R/U3R  1.00E-14|status 0|(F-F0)/Fs   1.16994E-13 -1.49953E-10 -1.33828E-14|slope (dF/F)/(dU/U)   1.16994E+01 -1.49953E+04 -1.33828E+00
+NOISE|steps  64|dU3R/U3R  3.16E-14|status 0|(F-F0)/Fs   1.40082E-13 -1.53165E-10 -1.27352E-14|slope (dF/F)/(dU/U)   4.42979E+00 -4.84351E+03 -4.02724E-01
+NOISE|steps  64|dU3R/U3R  1.00E-13|status 0|(F-F0)/Fs  -2.47242E-12 -8.27807E-11  1.67047E-12|slope (dF/F)/(dU/U)  -2.47242E+01 -8.27807E+02  1.67047E+01
+NOISE|steps  64|dU3R/U3R  3.16E-13|status 0|(F-F0)/Fs  -1.00322E-12 -1.37359E-10  1.66875E-12|slope (dF/F)/(dU/U)  -3.17246E+00 -4.34368E+02  5.27704E+00
+NOISE|steps  64|dU3R/U3R  1.00E-12|status 0|(F-F0)/Fs   1.23432E-13 -1.13881E-10 -1.05767E-14|slope (dF/F)/(dU/U)   1.23432E-01 -1.13881E+02 -1.05767E-02
+NOISE|steps  64|dU3R/U3R  3.16E-12|status 0|(F-F0)/Fs  -1.12421E-12 -1.01454E-10 -1.14401E-14|slope (dF/F)/(dU/U)  -3.55506E-01 -3.20825E+01 -3.61769E-03
+NOISE|steps  64|dU3R/U3R  1.00E-11|status 0|(F-F0)/Fs  -2.17338E-12 -4.88320E-11 -7.98651E-15|slope (dF/F)/(dU/U)  -2.17338E-01 -4.88320E+00 -7.98651E-04
+NOISE|steps  64|dU3R/U3R  3.16E-11|status 0|(F-F0)/Fs  -2.31013E-12  7.98436E-11  1.68623E-12|slope (dF/F)/(dU/U)  -7.30529E-02  2.52487E+00  5.33233E-02
+NOISE|steps  64|dU3R/U3R  1.00E-10|status 0|(F-F0)/Fs   1.13442E-12  4.72951E-10 -1.63615E-12|slope (dF/F)/(dU/U)   1.13442E-02  4.72951E+00 -1.63615E-02
+NOISE|steps  64|dU3R/U3R  3.16E-10|status 0|(F-F0)/Fs   2.41936E-12  1.97074E-09 -1.49564E-12|slope (dF/F)/(dU/U)   7.65068E-03  6.23203E+00 -4.72961E-03
+NOISE|steps  64|dU3R/U3R  1.00E-09|status 0|(F-F0)/Fs   6.15895E-12  6.48926E-09 -2.75729E-12|slope (dF/F)/(dU/U)   6.15895E-03  6.48926E+00 -2.75729E-03
+NOISE|steps  64|dU3R/U3R  3.16E-09|status 0|(F-F0)/Fs   1.56286E-11  2.09995E-08 -1.15023E-11|slope (dF/F)/(dU/U)   4.94219E-03  6.64062E+00 -3.63734E-03
+NOISE|steps  64|dU3R/U3R  1.00E-08|status 0|(F-F0)/Fs   5.60335E-11  6.64751E-08 -3.75368E-11|slope (dF/F)/(dU/U)   5.60335E-03  6.64751E+00 -3.75368E-03
+NOISE|steps  64|base status 1624|config  4.|F                      NaN                     NaN                     NaN
+NOISE|steps  64|dU3R/U3R  1.00E-15|status 1624|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  3.16E-15|status 1624|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  1.00E-14|status 1623|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  3.16E-14|status 1624|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  1.00E-13|status 1623|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  3.16E-13|status 1623|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  1.00E-12|status 1623|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  3.16E-12|status 1624|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  1.00E-11|status 1624|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  3.16E-11|status 1623|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  1.00E-10|status 1624|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  3.16E-10|status 1624|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  1.00E-09|status 1623|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  3.16E-09|status 1624|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  64|dU3R/U3R  1.00E-08|status 1623|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|base status 1614|config NaN|F                      NaN                     NaN                     NaN
+NOISE|steps  -8|dU3R/U3R  1.00E-15|status 1614|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  3.16E-15|status 1614|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  1.00E-14|status 0|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  3.16E-14|status 1614|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  1.00E-13|status 0|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  3.16E-13|status 0|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  1.00E-12|status 1614|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  3.16E-12|status 1614|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  1.00E-11|status 0|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  3.16E-11|status 0|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  1.00E-10|status 1614|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  3.16E-10|status 0|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  1.00E-09|status 0|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  3.16E-09|status 0|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN
+NOISE|steps  -8|dU3R/U3R  1.00E-08|status 0|(F-F0)/Fs           NaN          NaN          NaN|slope (dF/F)/(dU/U)           NaN          NaN          NaN

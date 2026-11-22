@@ -1,0 +1,12 @@
+STATE|t_s     0.000000|UL   4.402320E-01  1.415433E-03  9.998857E-01|UR   9.928951E-01  1.820601E-05  9.933744E-01|fixed curve steps 16
+RH|U3L factor  1.000|status 0|config  4.
+RH|U3L factor  0.990|status 0|s (m/s)  -8.7135E-03|s[U]-[F] SI   1.5859E-12  0.0000E+00  1.4105E-09|rel   3.0033E-15  0.0000E+00  4.7609E-15|Fg_L1-s*U2_L1   0.0000E+00|Fg_L1 abs  -1.2258E-02|Gg* face   0.0000E+00|pt_state(U*) status 0|F*(curve p)-F*(point_state) rel   0.0000E+00  0.0000E+00 -4.1032E-13
+RH|U_L1 SI   4.389121E+02  1.406763E+00  5.280280E+02|U* SI   9.971368E+02  0.000000E+00  5.231762E+02|p_L1,p* Pa   2.956343E+05  2.959952E+05|face F* vs fs rel   0.0000E+00
+RH|U3L factor  0.970|status 0|s (m/s)  -2.1745E-02|s[U]-[F] SI  -7.8249E-12  0.0000E+00  1.8964E-09|rel  -1.4823E-14  0.0000E+00  6.4333E-15|Fg_L1-s*U2_L1   0.0000E+00|Fg_L1 abs  -3.0439E-02|Gg* face   0.0000E+00|pt_state(U*) status 0|F*(curve p)-F*(point_state) rel   0.0000E+00  0.0000E+00 -7.4400E-13
+RH|U_L1 SI   4.388473E+02  1.399847E+00  5.278702E+02|U* SI   9.971361E+02  0.000000E+00  5.157609E+02|p_L1,p* Pa   2.941470E+05  2.945155E+05|face F* vs fs rel   0.0000E+00
+RH|U3L factor  0.950|status 0|s (m/s)  -3.2633E-02|s[U]-[F] SI   4.8511E-12  0.0000E+00  6.1196E-10|rel   9.1922E-15  0.0000E+00  2.0847E-15|Fg_L1-s*U2_L1   0.0000E+00|Fg_L1 abs  -4.5495E-02|Gg* face   0.0000E+00|pt_state(U*) status 0|F*(curve p)-F*(point_state) rel   0.0000E+00  0.0000E+00 -9.1809E-13
+RH|U_L1 SI   4.387685E+02  1.394141E+00  5.276985E+02|U* SI   9.971355E+02  0.000000E+00  5.095226E+02|p_L1,p* Pa   2.929068E+05  2.932818E+05|face F* vs fs rel   0.0000E+00
+RH|U3L factor  0.900|status 0|s (m/s)  -5.5821E-02|s[U]-[F] SI  -1.0153E-11  0.0000E+00 -7.0334E-10|rel  -1.9255E-14  0.0000E+00 -2.4177E-15|Fg_L1-s*U2_L1   0.0000E+00|Fg_L1 abs  -7.7155E-02|Gg* face   0.0000E+00|pt_state(U*) status 0|F*(curve p)-F*(point_state) rel   0.0000E+00  0.0000E+00 -6.1708E-13
+RH|U_L1 SI   4.385342E+02  1.382201E+00  5.272252E+02|U* SI   9.971344E+02  0.000000E+00  4.961209E+02|p_L1,p* Pa   2.902766E+05  2.906655E+05|face F* vs fs rel   0.0000E+00
+RH|U3L factor  0.800|status 0|s (m/s)  -9.3672E-02|s[U]-[F] SI   2.1979E-11  0.0000E+00 -3.2235E-09|rel   4.1763E-14  0.0000E+00 -1.1246E-14|Fg_L1-s*U2_L1   0.0000E+00|Fg_L1 abs  -1.2770E-01|Gg* face   0.0000E+00|pt_state(U*) status 0|F*(curve p)-F*(point_state) rel   0.0000E+00  0.0000E+00 -4.1443E-13
+RH|U_L1 SI   4.379582E+02  1.363300E+00  5.261401E+02|U* SI   9.971325E+02  0.000000E+00  4.738890E+02|p_L1,p* Pa   2.860128E+05  2.864249E+05|face F* vs fs rel   0.0000E+00

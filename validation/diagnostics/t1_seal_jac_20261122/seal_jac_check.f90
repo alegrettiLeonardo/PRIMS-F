@@ -12,11 +12,19 @@ program seal_jac_check
   !!          elementary-map differences (junction_seal_ijac_eps).
   !!  SWITCH  pipe momentum U3_L as parameter: switch g0=0 by bisection; flux and
   !!          implicit Jacobian at offsets +-1e-4..1e-9 (lateral limits J+, J-).
+  !!  RH      moving front of H7 (P0.5): with the converged (U_L1, U*, s) recorded by the
+  !!          solver, independent fluxes (point_state for U_L1 with the pipe closure;
+  !!          pure-liquid flux of U* from its curve pressure) and the jump residuals
+  !!          s[U_k]-[F_k], k=1,2,3, in SI, relative to max(|F_k|,|s U_k|); gas flux
+  !!          through the front Fg_L1 - s U2_L1 (zero) versus the ABSOLUTE pipe-side gas
+  !!          flux Fg_L1 (not zero) and the fixed-face Gg* (zero). Pipe momentum U3_L
+  !!          scaled by 1, 0.99, 0.97, 0.95, 0.9, 0.8 to sample H7 states.
   !!  NOISE   flux under relative perturbations 1e-15..1e-8 of U3_R (legacy rule and fixed
   !!          steps): discontinuities of the discrete operator and round-off level.
   !! Output scaling (SI): G in kg/(m2 s), F3 in Pa; Jacobians scaled as J_ik*U_k/Fs_i with
   !! Fs = (|F1|, max(|Fg|, G_g,ref), |F3|), G_g,ref = rho_g(Ps) jg0.
   use offline_api
+  use module_simulate_pipe_riser,only:junction_seal_front
   use,intrinsic::ieee_arithmetic,only:ieee_is_finite,ieee_value,ieee_quiet_nan
   implicit none
   character(512)::folder,mode
@@ -40,8 +48,9 @@ program seal_jac_check
   case('JAC');call jacs()
   case('SWITCH');call switch()
   case('NOISE');call noise()
+  case('RH');call rh()
   case default
-    stop 'mode: OPS | JAC | SWITCH | NOISE'
+    stop 'mode: OPS | JAC | SWITCH | NOISE | RH'
   end select
 contains
   subroutine setop(trans,seal,t1steps,ssteps,jmode,ftol,eps)
@@ -273,6 +282,35 @@ contains
           '|(F-F0)/Fs ',(f-f0)/[abs(f0(1)),max(abs(f0(2)),ggref),abs(f0(3))],'|slope (dF/F)/(dU/U) ', &
           (f-f0)/[abs(f0(1)),max(abs(f0(2)),ggref),abs(f0(3))]/d,'|pL*,pR*,aR* ',tr(1),tr(6),tr(5)
       enddo
+    enddo
+  end subroutine
+  subroutine rh()
+    real(wp)::u(3),f(3),tr(6),info(3),s_,ul1(3),us(3),fl1(3),fs(3),fs2(3),v(6),sv(3),a(3,3),ds(3,3),fac(6),rk(3),nk(3)
+    real(wp)::pip,usi(3)
+    integer::k,stt,sp,sp2,cidl
+    fac=[1.0_wp,0.99_wp,0.97_wp,0.95_wp,0.9_wp,0.8_wp]
+    pip=cfg%omega_P/(cfg%omega_rho*cfg%omega_u**2)
+    usi=[cfg%omega_rho,cfg%omega_rho,cfg%omega_rho*cfg%omega_u]   ! U scale (SI)
+    cidl=cfg%closure_pipe
+    call setop('T1','LIQUID_BRIDGE',8,nsteps,'IMPLICIT',1e-11_wp,1e-5_wp)
+    do k=1,6
+      u=ul;u(3)=ul(3)*fac(k)
+      call face(u,ur,f,stt,tr,info)
+      if(stt/=0.or.nint(info(1))/=7)then
+        write(*,'(a,f6.3,a,i0,a,f3.0)')'RH|U3L factor ',fac(k),'|status ',stt,'|config ',info(1);cycle
+      endif
+      s_=junction_seal_front(1);ul1=junction_seal_front(2:4);us=junction_seal_front(5:7)
+      call sim%point_state(ul1,thl,v,fl1,sv,a,ds,sp,need_jac=.false.,closure_id=cidl)
+      fs=[us(3),0.0_wp,us(3)**2/us(1)+pip*junction_seal_front(9)]
+      call sim%point_state(us,thr,v,fs2,sv,a,ds,sp2,need_jac=.false.)
+      rk=s_*(us-ul1)-(fs-fl1)
+      nk=max(abs(fs),abs(fl1),abs(s_*us),abs(s_*ul1),1e-300_wp)
+      write(*,'(a,f6.3,a,i0,a,es12.4,a,3es12.4,a,3es12.4,a,es12.4,a,es12.4,a,es12.4,a,i0,a,3es12.4)') &
+        'RH|U3L factor ',fac(k),'|status ',stt,'|s (m/s) ',s_*cfg%omega_u,'|s[U]-[F] SI ',rk*fsi,'|rel ',rk/nk, &
+        '|Fg_L1-s*U2_L1 ',(fl1(2)-s_*ul1(2))*fsi(2),'|Fg_L1 abs ',fl1(2)*fsi(2),'|Gg* face ',f(2)*fsi(2), &
+        '|pt_state(U*) status ',sp2,'|F*(curve p)-F*(point_state) rel ',(fs-fs2)/max(abs(fs),1e-300_wp)
+      write(*,'(a,3es14.6,a,3es14.6,a,2es14.6,a,es12.4)')'RH|U_L1 SI ',ul1*usi,'|U* SI ',us*usi, &
+        '|p_L1,p* Pa ',junction_seal_front(8:9)*cfg%omega_P,'|face F* vs fs rel ',maxval(abs(f-fs)/max(abs(fs),1e-300_wp))
     enddo
   end subroutine
 end program seal_jac_check

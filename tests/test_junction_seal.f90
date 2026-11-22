@@ -16,9 +16,13 @@ program test_junction_seal
   !!  (6) face Jacobian against independent central differences in H4 and H7;
   !!  (7) a different pressure level (states scaled to +20 % pressure) behaves alike;
   !!  (8) a pure-liquid riser CELL (U2=0) is refused explicitly (not supported).
+  !!  (9)-(13) round 20261122 (fixed-step curve, H4_ONLY, implicit Jacobian);
+  !!  (14) moving front of H7: Rankine-Hugoniot s[U]=[F] for k=1,2,3 with an
+  !!      independent pipe flux (point_state) of U_L1 and the pure-liquid flux of U*;
+  !!      gas flux through the front zero, absolute pipe-side gas flux NOT zero.
   use mod_kinds,only:wp
   use module_config,only:sim_config_t
-  use module_simulate_pipe_riser,only:pipeline_riser_simulator_t
+  use module_simulate_pipe_riser,only:pipeline_riser_simulator_t,junction_seal_front
   use,intrinsic::ieee_arithmetic,only:ieee_is_finite
   implicit none
   type(sim_config_t)::cfg
@@ -210,6 +214,22 @@ program test_junction_seal
     write(*,'(a,a,a,es11.3)')'  implicit Jacobian vs Richardson differences (',merge('H7','H4',i==1),'): max rel ',err
     call chk(err<2e-4_wp,'implicit Jacobian consistent with the face flux ('//merge('H7','H4',i==1)//')')
   enddo
+  ! (14) Rankine-Hugoniot of the H7 front (moving), independent fluxes
+  block
+    real(wp)::ul1(3),us(3),fl1(3),fs(3),sf,pip,rk(3)
+    ul=[438.9335_wp,1.411318_wp,528.3750_wp]/rho;ur=[990.2674_wp,1.739060e-2_wp,524.9158_wp]/rho
+    cfg%junction_seal_jacobian='FD';cfg%junction_seal='LIQUID_BRIDGE';cfg%junction_seal_curve_steps=16;call sim%init(cfg)
+    call sim%face_pair(ul,ur,thp,thr,fm,fp,st,left_cell=3,junction_seal_info=info)
+    sf=junction_seal_front(1);ul1=junction_seal_front(2:4);us=junction_seal_front(5:7)
+    pip=cfg%omega_P/(cfg%omega_rho*cfg%omega_u**2)
+    call sim%point_state(ul1,thp,v,fl1,s,a,ds,k,need_jac=.false.,closure_id=cfg%closure_pipe)
+    fs=[us(3),0.0_wp,us(3)**2/us(1)+pip*junction_seal_front(9)]
+    rk=abs(sf*(us-ul1)-(fs-fl1))/max(abs(fs),abs(fl1),abs(sf*us),abs(sf*ul1))
+    write(*,'(a,es11.3,a,3es11.3,a,es11.3)')'  H7 front: s ',sf,' |s[U]-[F]|/scale ',rk,' Fg_L1 ',fl1(2)*rho
+    call chk(st==0.and.nint(info(1))==7.and.k==0,'H7 front states evaluable (independent pipe flux)')
+    call chk(maxval(rk)<1e-10_wp,'H7 front: Rankine-Hugoniot s[U]=[F], k=1,2,3')
+    call chk(abs(fl1(2)-sf*ul1(2))<=1e-14_wp*abs(fl1(2)).and.fl1(2)<0.and.fm(2)==0,'H7: no gas through the front; pipe-side Gg<0, face Gg*=0')
+  end block
   if(fails>0)then
     write(*,'(a,i0,a,i0)')'FAILED ',fails,' of ',n;error stop 1
   endif

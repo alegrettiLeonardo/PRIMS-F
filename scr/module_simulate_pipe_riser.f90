@@ -30,6 +30,10 @@ module module_simulate_pipe_riser
   ! seal-map evaluations. Reported in run_status.txt of T1 runs.
   integer(int64),save,public :: junction_face_solves=0,junction_face_ijac=0,junction_seal_res_calls=0
   real(wp),save,public :: junction_face_cpu=0
+  ! Diagnostic record of the last H7 (liquid bridge) solution of t1s_face, for the
+  ! independent Rankine-Hugoniot check of the moving front (P0.5): [s, U_L1(3), U*(3),
+  ! p_L1, p*]; NaN after any other exit. Written only; never read by the numerics.
+  real(wp),save,public :: junction_seal_front(9)=0
   interface
     function checkpoint_rename(old,new)bind(C,name='rename')result(status)
       import c_int,c_char
@@ -532,6 +536,7 @@ contains
       integer::code,k,side
       flux=ieee_value(0.0_wp,ieee_quiet_nan);spd=flux(1);istat=1625
       if(present(info))info=flux
+      junction_seal_front=flux(1)
       call t1_eig(x,thl_,id_left,lamx,rx,vx,gpx,gax,code)
       if(code/=0)then
         istat=merge(1620,1625,code==-7);return
@@ -731,6 +736,7 @@ contains
         istat=1625;return
       endif
       flux=fstar;istat=0
+      junction_seal_front=[sfront,ust(:,1),ust(:,2),v1(4),vstar(4)]
       if(present(trace))trace=[v1(4),flux(1),flux(2),0.0_wp,0.0_wp,vstar(4)]
       if(sjac_req)call t1s_ijac(7,0.0_wp,q,x,y,thl_,thr_,sjac,sjac_stat)
     end subroutine t1s_face

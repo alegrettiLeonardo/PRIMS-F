@@ -1,0 +1,37 @@
+t2_ss1 monitor.csv identical
+t2_ss1 conservation.csv identical
+t2_ss1 fields.csv identical
+t2_ss1 boundary_conditions.csv identical
+t2_ss1 rejected_proposals.csv identical
+t2_ss1 checkpoint.dat identical
+t2_ss1 steps identical
+t2_ss1 contract identical (except input_file)
+t2_st3 monitor.csv identical
+t2_st3 conservation.csv identical
+t2_st3 fields.csv identical
+t2_st3 boundary_conditions.csv identical
+t2_st3 rejected_proposals.csv identical
+t2_st3 checkpoint.dat identical
+t2_st3 steps identical
+t2_st3 contract identical (except input_file)
+t1_ss1 monitor.csv identical
+t1_ss1 conservation.csv identical
+t1_ss1 fields.csv identical
+t1_ss1 boundary_conditions.csv identical
+t1_ss1 rejected_proposals.csv identical
+t1_ss1 junction_transmission.csv identical
+t1_ss1 checkpoint.dat identical
+t1_ss1 steps identical
+t1_ss1 contract identical (except input_file)
+seal_rep monitor.csv identical
+seal_rep conservation.csv identical
+seal_rep fields.csv identical
+seal_rep boundary_conditions.csv identical
+seal_rep rejected_proposals.csv identical
+seal_rep junction_transmission.csv identical
+seal_rep checkpoint.dat identical
+seal_rep steps identical
+seal_rep contract identical (except input_file)
+seal_rep reached   1.0000000000000000E+00,
+
+[exited with code 0]

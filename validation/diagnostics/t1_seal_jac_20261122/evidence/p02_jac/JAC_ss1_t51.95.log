@@ -1,0 +1,18 @@
+STATE|t_s     0.000000|UL   4.402237E-01  1.412087E-03  1.000028E+00|UR   9.755973E-01  6.184722E-05  9.936270E-01|fixed curve steps 16
+BASE|status 0|config  4.|F   5.28155520177935E+02  2.41258825088529E-02  2.96587270390389E+05
+REF|relative step per column (0 = none admissible)  2.00E-04 2.00E-04 2.00E-04 5.00E-05 2.00E-04 2.00E-04
+REF|richardson admissible same-configuration samples T|cpu    9.753
+IMPLICIT|eps  1.0E-04|status 0|max scaled err vs ref   1.172E-04|cpu   0.4315
+IMPLICIT|eps  1.0E-05|status 0|max scaled err vs ref   1.563E-06|cpu   0.3644
+IMPLICIT|eps  1.0E-06|status 0|max scaled err vs ref   5.845E-07|cpu   0.3737
+MAT|J_implicit(1e-6)1|  3.039573E+00  1.934751E+01  1.672148E-02 -1.328556E+00 -5.231788E+02  6.365257E-03
+MAT|J_implicit(1e-6)2| -2.154860E-03  8.879186E+00  5.579567E-03 -5.101272E-01 -2.008855E+02  2.444075E-03
+MAT|J_implicit(1e-6)3|  4.579127E+02  7.350478E+05  4.628486E+02  8.504384E+02  3.348984E+05 -4.074543E+00
+IMPLICIT|eps  1.0E-07|status 0|max scaled err vs ref   2.389E-07|cpu   0.3635
+IMPLICIT|eps  1.0E-08|status 0|max scaled err vs ref   2.445E-05|cpu   0.4123
+MAT|J_reference1|  3.039573E+00  1.934751E+01  1.672148E-02 -1.328557E+00 -5.231788E+02  6.365258E-03
+MAT|J_reference2| -2.154859E-03  8.879187E+00  5.579568E-03 -5.101275E-01 -2.008856E+02  2.444075E-03
+MAT|J_reference3|  4.579128E+02  7.350478E+05  4.628486E+02  8.504389E+02  3.348985E+05 -4.074544E+00
+LEGACY_FD(fixed steps, tol 1e-12)|status 0|max scaled err vs ref   4.578E-07|cpu   5.1361
+LEGACY_FD(seal5 operator)|status 0|max scaled err vs ref   4.758E-06|cpu  14.2009
+IMPLICIT(legacy steps, frozen)|status 0|max scaled err vs ref(fixed)   1.838E-05|cpu   1.3796
