@@ -503,7 +503,7 @@ contains
       real(wp),intent(out),optional::trace(6),info(3)
       real(wp)::lamx(3),rx(3,3),lamy(3),ry(3,3),gpx(3),gax(3),gpy(3),gay(3),vx(6),vy(6)
       real(wp)::q(2),qs(2),o(12),ust(3,3),g0,zlo,zhi,glo,ghi,zm,gm,sfront,l1(3),l2(3),l3(3),rr(3,3),v1(6),v2(6),v3(6)
-      real(wp)::fstar(3),vstar(6),sclg,qg0(2)
+      real(wp)::fstar(3),vstar(6),sclg,qg0(2),za,ga
       integer::code,k,side
       flux=ieee_value(0.0_wp,ieee_quiet_nan);spd=flux(1);istat=1625
       if(present(info))info=flux
@@ -530,31 +530,43 @@ contains
       ! with the bracketed Illinois search as fallback. Every evaluation is a
       ! converged inner solve; failures are reported, never replaced.
       q=[vx(4),vy(4)];qg0=q
-      zhi=min(sqrt(max(vy(1),1e-30_wp)),0.5_wp)
+      zhi=min(sqrt(max(vy(1),1e-30_wp)),0.999_wp)
       call t1s_solve2r(zhi,q,qg0,x,y,thl_,thr_,qs,o,ust,istat)
       if(istat/=0)return
       ghi=o(2)-o(5);q=qs
+      if(abs(ghi)<=this%cfg%junction_seal_face_tol*max(abs(o(2)),abs(o(1))))then
+        ! the riser cell value already solves g=0 within the face tolerance
+        gm=ghi;zm=zhi
+        if(present(info))info(1)=4.0_wp
+        goto 650
+      endif
       if(ghi>=0.0_wp)then
-        call t1s_newton3(x,y,thl_,thr_,q(1),q(2),zhi,zm,qs,o,ust,istat)
-        if(istat==0.and.zm>0.0_wp)then
-          if(present(info))info(1)=4.0_wp
-          goto 600
-        endif
-        ! root above z_c: grow zhi; where the inner problem has no admissible
-        ! solution zhi moves back towards zlo (whose inner problem is solved)
-        zlo=zhi;glo=ghi;zhi=min(2*zhi,zlo+0.5_wp*(1-zlo))
-        do k=1,200
-          call t1s_solve2r(zhi,q,qg0,x,y,thl_,thr_,qs,o,ust,istat)
+        ! root above z_c: secant extrapolation from the last two solved points
+        ! (g(z) is smooth), overshooting by 1 % of the step so that the sign
+        ! change is bracketed; where the inner problem has no admissible solution
+        ! the trial moves back towards zlo (whose inner problem is solved).
+        zlo=zhi;glo=ghi;zm=min(1.1_wp*zhi,zlo+0.5_wp*(1-zlo));za=zlo;ga=glo
+        do k=1,60
+          call t1s_solve2r(zm,q,qg0,x,y,thl_,thr_,qs,o,ust,istat)
           if(istat/=0)then
-            zhi=zlo+0.5_wp*(zhi-zlo)
-            if(zhi-zlo<=1e-14_wp*zhi)exit
+            zm=zlo+0.5_wp*(zm-zlo)
+            if(zm-zlo<=1e-14_wp*zm)exit
             cycle
           endif
-          ghi=o(2)-o(5)
-          if(ghi<=0.0_wp)exit
-          zlo=zhi;glo=ghi;q=qs;zhi=min(2*zhi,zlo+0.5_wp*(1-zlo))
+          gm=o(2)-o(5)
+          if(gm<=0.0_wp)then
+            zhi=zm;ghi=gm;exit
+          endif
+          za=zlo;ga=glo;zlo=zm;glo=gm;q=qs
+          if(glo<ga)then
+            zm=zlo-glo*(zlo-za)/(glo-ga)
+            zm=zm+0.01_wp*(zm-zlo)
+          else
+            zm=zlo+2*(zlo-za)
+          endif
+          zm=min(zm,zlo+0.5_wp*(1-zlo))
         enddo
-        if(istat/=0.or.ghi>0.0_wp)then
+        if(istat/=0.or.gm>0.0_wp)then
           istat=1627;return
         endif
         qs=q
@@ -587,14 +599,8 @@ contains
             q=qg0
             goto 700
           endif
-          ! g0>0>g(z_c): root in (0,z_c); Newton from the estimate of g linear in z^2
+          ! g0>0>g(z_c): the root is bracketed in (0,z_c)
           zlo=0.0_wp;glo=g0
-          zm=zhi*sqrt(g0/(g0-ghi))
-          call t1s_newton3(x,y,thl_,thr_,qg0(1),qg0(2),zm,zm,qs,o,ust,istat)
-          if(istat==0.and.zm>0.0_wp)then
-            if(present(info))info(1)=4.0_wp
-            goto 600
-          endif
           q=qg0
         else
           ! the kinematic curve to alpha=0 left the closure domain: reduce z by 4
@@ -637,11 +643,11 @@ contains
         ! The gas flux of the closures carries round-off relative to the MIXTURE
         ! flux (velocities are recovered from the mixture momentum), so the
         ! mismatch is measured against max(|Fg|,|F1|), not |Fg| alone.
+650     continue
         sclg=max(abs(o(2)),abs(o(1)))
         if(abs(gm)>this%cfg%junction_seal_face_tol*sclg)then
           istat=1624;return
         endif
-600     continue
         call t1_eig(ust(:,1),thl_,id_left,l1,rr,v1,gpx,gax,code)
         if(code==0)call t1_eig(ust(:,2),thr_,id_right,l2,rr,v2,gpy,gay,code)
         if(code==0)call t1_eig(ust(:,3),thr_,id_right,l3,rr,v3,gpy,gay,code)
@@ -688,79 +694,6 @@ contains
       flux=fstar;istat=0
       if(present(trace))trace=[v1(4),flux(1),flux(2),0.0_wp,0.0_wp,vstar(4)]
     end subroutine t1s_face
-    subroutine t1s_newton3(x,y,thl_,thr_,px,py,z0,z,q,o,ust,istat)
-      !! H4 by Newton on s=(p_L*, z, p_M): residual F_L(U_L*)-F_R(U_R*(z)) scaled by
-      !! [|F1|, max(|Fg|,|F1|), p-scale]; difference Jacobian; damping keeps z in (0,1).
-      !! Convergence as t1s_solve2 (1e-14, or stagnation below junction_seal_face_tol).
-      real(wp),intent(in)::x(3),y(3),thl_,thr_,px,py,z0
-      real(wp),intent(out)::z,q(2),o(12),ust(3,3)
-      integer,intent(out)::istat
-      real(wp)::s(3),sn(3),r(3),rn(3),jm(3,3),jinv(3,3),det,ds(3),h,lam,sc(3),on(12),un(3,3),rnow,rprev
-      integer::it,j,k,code
-      istat=1624;s=[px,min(max(z0,1e-8_wp),0.999_wp),py]
-      call t1s_res3(s,x,y,thl_,thr_,r,o,ust,code)
-      if(code/=0)then
-        istat=1625;return
-      endif
-      sc=[max(abs(o(1)),1e-8_wp),max(abs(o(2)),abs(o(1))),this%cfg%omega_P/(this%cfg%omega_rho*this%cfg%omega_u**2)*px]
-      rprev=huge(1.0_wp)
-      do it=1,30
-        rnow=maxval(abs(r)/sc)
-        if(rnow<1e-14_wp.or.(rnow<this%cfg%junction_seal_face_tol.and.rnow>0.5_wp*rprev))then
-          z=s(2);q=s([1,3]);istat=0;return
-        endif
-        do j=1,3
-          sn=s;h=1e-7_wp*max(abs(s(j)),merge(1e-3_wp,1.0_wp,j==2));sn(j)=s(j)+h
-          call t1s_res3(sn,x,y,thl_,thr_,rn,on,un,code)
-          if(code/=0)then
-            sn(j)=s(j)-h
-            call t1s_res3(sn,x,y,thl_,thr_,rn,on,un,code)
-            if(code/=0)return
-            jm(:,j)=(r-rn)/h
-          else
-            jm(:,j)=(rn-r)/h
-          endif
-        enddo
-        det=jm(1,1)*(jm(2,2)*jm(3,3)-jm(2,3)*jm(3,2))-jm(1,2)*(jm(2,1)*jm(3,3)-jm(2,3)*jm(3,1)) &
-           +jm(1,3)*(jm(2,1)*jm(3,2)-jm(2,2)*jm(3,1))
-        if(.not.ieee_is_finite(det).or.det==0.0_wp)return
-        jinv(1,1)=jm(2,2)*jm(3,3)-jm(2,3)*jm(3,2);jinv(1,2)=jm(1,3)*jm(3,2)-jm(1,2)*jm(3,3)
-        jinv(1,3)=jm(1,2)*jm(2,3)-jm(1,3)*jm(2,2);jinv(2,1)=jm(2,3)*jm(3,1)-jm(2,1)*jm(3,3)
-        jinv(2,2)=jm(1,1)*jm(3,3)-jm(1,3)*jm(3,1);jinv(2,3)=jm(1,3)*jm(2,1)-jm(1,1)*jm(2,3)
-        jinv(3,1)=jm(2,1)*jm(3,2)-jm(2,2)*jm(3,1);jinv(3,2)=jm(1,2)*jm(3,1)-jm(1,1)*jm(3,2)
-        jinv(3,3)=jm(1,1)*jm(2,2)-jm(1,2)*jm(2,1)
-        ds=-matmul(jinv/det,r)
-        lam=1.0_wp
-        do k=1,30
-          sn=s+lam*ds
-          if(sn(2)>0.0_wp.and.sn(2)<1.0_wp)then
-            call t1s_res3(sn,x,y,thl_,thr_,rn,on,un,code)
-            if(code==0)then
-              if(maxval(abs(rn)/sc)<maxval(abs(r)/sc))exit
-            endif
-          endif
-          lam=0.5_wp*lam
-        enddo
-        if(k>30)then
-          if(rnow<this%cfg%junction_seal_face_tol)then
-            z=s(2);q=s([1,3]);istat=0
-          endif
-          return
-        endif
-        rprev=rnow
-        s=sn;r=rn;o=on;ust=un
-      enddo
-    end subroutine t1s_newton3
-    subroutine t1s_res3(ss,x,y,thl_,thr_,rr3,oo,uu,c)
-      !! H4 residual on (p_L*, z, p_M): [F1_L-F1_R, Fg_L-Fg_R, F3_L-F3_R]
-      real(wp),intent(in)::ss(3),x(3),y(3),thl_,thr_
-      real(wp),intent(out)::rr3(3),oo(12),uu(3,3)
-      integer,intent(out)::c
-      real(wp)::qq(2),r2(2)
-      qq=ss([1,3])
-      call t1s_res(4,ss(2),x,y,thl_,thr_,qq,r2,oo,uu,c)
-      rr3=[r2(1),oo(2)-oo(5),r2(2)]
-    end subroutine t1s_res3
     subroutine t1s_solve2r(z,qwarm,qg0,x,y,thl_,thr_,q,o,ust,istat)
       !! H4 inner solve at fixed z with deterministic restarts: warm start (last
       !! solved bracket end), then the cell pressures, then the G0 solution. A
@@ -924,17 +857,23 @@ contains
       dw=2*z*r([1,3],2)/dq
     end subroutine t1s_fieldz
     subroutine t1s_curvez(u0,th,cid,z1,u1,code)
-      !! RK4 (32 steps) of the kinematic integral curve from u0 to alpha=z1**2
+      !! RK4 of the kinematic integral curve from u0 to alpha=z1**2. Steps
+      !! proportional to the relative length: nz = ceiling(32 |z1-z0|/max(z0,z1)),
+      !! 16 <= nz <= 32, i.e. the relative step of the full curve to alpha=0 (32 steps,
+      !! convergence study in the report) is kept, with at least 16 steps (short
+      !! curve near the root: Gg* error 2.7e-3 with 4 steps, 1.7e-4 with 8, 1e-5 with 16).
       real(wp),intent(in)::u0(3),th,z1
       integer,intent(in)::cid
       real(wp),intent(out)::u1(3)
       integer,intent(out)::code
-      integer,parameter::nz=32
+      integer::nz
       real(wp)::v(6),f(3),k1(2),k2(2),k3(2),k4(2),h,z,w(2)
       integer::i
       u1=u0
       call t1_flux(u0,th,cid,f,v,code);if(code/=0)return
-      z=sqrt(v(1));h=(z1-z)/nz;w=u0([1,3])
+      z=sqrt(v(1));w=u0([1,3])
+      nz=max(16,min(32,ceiling(32*abs(z1-z)/max(z,z1,tiny(1.0_wp)))))
+      h=(z1-z)/nz
       if(h==0.0_wp)return
       do i=1,nz
         call t1s_fieldz(w,z,th,cid,k1,code);if(code/=0)return

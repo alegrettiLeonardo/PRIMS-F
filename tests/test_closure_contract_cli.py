@@ -92,7 +92,7 @@ def main():
     assert rc != 0 and 'Unknown junction_transmission' in log and not (d / 'closure_contract.txt').exists()
     records.append(dict(case='unknown_transmission', refused=True))
     # 6c. seal extension (experimental): recorded and verified with T1; refused with T2
-    d, deck, rc, log = run('t1seal_C5', dict(junction_transmission='T1', junction_seal='LIQUID_BRIDGE'))
+    d, deck, rc, log = run('t1seal_C5', dict(junction_transmission='T1', junction_seal='LIQUID_BRIDGE', time_dim=0.01))
     assert rc == 0, log[-1500:]
     assert 'junction_seal=LIQUID_BRIDGE' in (d / 'closure_contract.txt').read_text()
     vr, st = verify(d, deck); assert vr == 0 and st['status'] == 'PASS', st
