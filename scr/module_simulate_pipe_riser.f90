@@ -896,6 +896,7 @@ contains
       real(wp),intent(out)::d(6)
       integer,intent(out)::code
       real(wp)::hh,s1(6),s2(6),s3(6),fac(3)
+      real(wp),parameter::fx(6)=[0.0625_wp,16.0_wp,0.5_wp,2.0_wp,0.015625_wp,64.0_wp]
       integer::m,c1,c2,c3
       fac=[1.0_wp,0.25_wp,4.0_wp]
       code=1;d=0
@@ -921,6 +922,30 @@ contains
           d=(3*base-4*s2+s3)/(2*hh);code=0;return
         endif
       endif
+      ! Round 20261122 (after T95_dt0.0625 failed at 68.51 s, status 73): near alpha ~ 1e-14
+      ! the closure refuses ISOLATED samples (derivative consistency test of the riser
+      ! closure), so every stencil above can be hit. Further step sizes are tried ONLY
+      ! after all of the above failed (every previously successful path is unchanged):
+      ! central, then one-sided second order, at h0*{1/16, 16, 1/2, 2, 1/64, 64}.
+      do m=1,6
+        hh=h0*fx(m)
+        call t1s_sample(side,k,w0,qv0,z0,thl_,thr_,+hh,s1,c1);call t1s_sample(side,k,w0,qv0,z0,thl_,thr_,-hh,s2,c2)
+        if(c1==0.and.c2==0)then
+          d=(s1-s2)/(2*hh);code=0;return
+        endif
+        if(c1==0)then
+          call t1s_sample(side,k,w0,qv0,z0,thl_,thr_,+2*hh,s3,c3)
+          if(c3==0)then
+            d=(-3*base+4*s1-s3)/(2*hh);code=0;return
+          endif
+        endif
+        if(c2==0)then
+          call t1s_sample(side,k,w0,qv0,z0,thl_,thr_,-2*hh,s3,c3)
+          if(c3==0)then
+            d=(3*base-4*s2+s3)/(2*hh);code=0;return
+          endif
+        endif
+      enddo
     end subroutine t1s_col
     subroutine t1s_sample(side,k,w0,qv0,z0,thl_,thr_,dh,o6,c)
       !! one sample of the elementary map of one side with variable k displaced by dh
