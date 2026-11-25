@@ -1,0 +1,157 @@
+{
+ "D_OSC_C3_BAROTROPIC_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_OSC_C3_ISOTHERMAL_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "last_rejected_state.dat": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_OSC_C5_BAROTROPIC_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "last_rejected_state.dat": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_OSC_C5_ISOTHERMAL_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "last_rejected_state.dat": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_SS1_C3_BAROTROPIC_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "last_rejected_state.dat": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_SS1_C3_ISOTHERMAL_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "last_rejected_state.dat": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_SS1_C5_BAROTROPIC_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "last_rejected_state.dat": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_SS1_C5_ISOTHERMAL_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "last_rejected_state.dat": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_SS3_C3_BAROTROPIC_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "last_rejected_state.dat": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_SS3_C3_ISOTHERMAL_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "last_rejected_state.dat": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_SS3_C5_BAROTROPIC_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "last_rejected_state.dat": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_SS3_C5_ISOTHERMAL_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "last_rejected_state.dat": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_Stable_C3_BAROTROPIC_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_Stable_C3_ISOTHERMAL_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_Stable_C5_BAROTROPIC_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ },
+ "D_Stable_C5_ISOTHERMAL_N51_dt0.5": {
+  "monitor.csv": true,
+  "fields.csv": true,
+  "conservation.csv": true,
+  "boundary_conditions.csv": true,
+  "rejected_proposals.csv": true,
+  "steps.csv(no timing)": true,
+  "run_status(no timing)": true
+ }
+}

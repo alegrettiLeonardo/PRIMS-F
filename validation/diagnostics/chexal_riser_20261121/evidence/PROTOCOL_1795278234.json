@@ -1,0 +1,44 @@
+{
+ "created": "2026-11-21T13:23:54-0300",
+ "binary": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/bin/prims_f_contract",
+ "binary_sha256": "9e54e79f0abac7107b1a2f53108e22a498026399bcead789b5ad010eab26c778",
+ "source_sha256": "4e62d6d9b86e670b62be9c213fcc16cb66798cddee921c436ea0826391db857f",
+ "git_head": "7ba4d79b1b57d403e76b7c91251d22d5d6536ec9",
+ "git_dirty": false,
+ "limits": {
+  "max_wall_s": 14400.0,
+  "window_s": 1800.0,
+  "min_advance_s": 1.0
+ },
+ "env": {
+  "OMP_NUM_THREADS": "1",
+  "OPENBLAS_NUM_THREADS": "1",
+  "MKL_NUM_THREADS": "1"
+ },
+ "jobs": [
+  {
+   "name": "D_Stable_C5_BAROTROPIC_N51_dt0.125",
+   "case": "D_Stable",
+   "eos": "BAROTROPIC",
+   "closure_riser": 5,
+   "grid": "51:0.125",
+   "source_deck": "input/benchmarks/D_Stable.nml",
+   "source_sha256": "79c62fece8e55ad6d3d6d3963d4486ffe2b15d571bfa6944d1243e19f84938ab",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/p2_stable_dt/decks/D_Stable_C5_BAROTROPIC_N51_dt0.125.nml",
+   "deck_sha256": "eac9438eff32fb099001ed768fd7fe798dd1f29e22d8479714de33c8bef5a8ca",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/p2_stable_dt/runs/D_Stable_C5_BAROTROPIC_N51_dt0.125"
+  },
+  {
+   "name": "D_Stable_C3_BAROTROPIC_N51_dt0.125",
+   "case": "D_Stable",
+   "eos": "BAROTROPIC",
+   "closure_riser": 3,
+   "grid": "51:0.125",
+   "source_deck": "input/benchmarks/D_Stable.nml",
+   "source_sha256": "79c62fece8e55ad6d3d6d3963d4486ffe2b15d571bfa6944d1243e19f84938ab",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/p2_stable_dt/decks/D_Stable_C3_BAROTROPIC_N51_dt0.125.nml",
+   "deck_sha256": "14226f1b173b65e17440abf5cf2639997a6d6f21fa44e01730de9ae37cad769e",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/p2_stable_dt/runs/D_Stable_C3_BAROTROPIC_N51_dt0.125"
+  }
+ ]
+}

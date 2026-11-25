@@ -1,0 +1,9 @@
+reason=NEWTON_GLOBALIZATION_FAILURE
+newton_iteration=9
+backtrack=18
+jac_dissipation_fd=T
+lambda=  7.6293945312500000E-006
+proposal_status=1071
+proposal_index=94
+proposal_stage=CELL
+proposal_norm=                      NaN

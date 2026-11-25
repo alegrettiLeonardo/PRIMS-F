@@ -12,7 +12,8 @@ module module_boundary_trace
   private
   integer,parameter,public::BC_GEOMETRY_REQUIRED=130,BC_TRACE_FAILED=131,BC_DATA_REQUIRED=132
   integer,parameter,public::BC_SPECTRUM_INVALID=133,BC_PHASE_REQUIRED=134
-  public::steady_boundary_trace,check_boundary_characteristics
+  public::steady_boundary_trace,check_boundary_characteristics,steady_junction_trace
+  integer,parameter::JUNCTION_TRACE_STEPS=4
 contains
   subroutine steady_boundary_trace(u,theta,cfg,inlet,uf,angle,status)
     real(wp),intent(in)::u(3),theta
@@ -126,5 +127,76 @@ contains
     n=count(wr<0);if(inlet)n=count(wr>0)
     status=BC_DATA_REQUIRED
     if((inlet.and.n==2).or.(.not.inlet.and.n==1))status=0
+  end subroutine
+
+  subroutine steady_junction_trace(u,theta,cfg,left,uf,angle,status)
+    !! Steady extrapolation of one junction-adjacent cell-centre state to the
+    !! shared junction face, with the SAME ODE (gravity, friction, inclination)
+    !! and the closure of its own section (1 pipe, 2 riser). Phase mass fluxes
+    !! are those of the cell; only the pressure is integrated. A fixed RK4 step
+    !! count keeps the map smooth for finite-difference Jacobians (4 steps:
+    !! junction Gg error 5e-8 on a 9+9 mesh, O(h^4)). Diagnostic
+    !! statuses are returned unchanged; nothing is clipped.
+    real(wp),intent(in)::u(3),theta
+    type(sim_config_t),intent(in)::cfg
+    logical,intent(in)::left
+    real(wp),intent(out)::uf(3),angle
+    integer,intent(out)::status
+    real(wp)::alpha,rl,rg,p,ul,ug,jl,jg,kin,gl,gg,s,target,h,k1,k2,k3,k4
+    integer::i,model,section,phase,it,code
+    status=BC_GEOMETRY_REQUIRED;uf=u;angle=theta
+    if(.not.allocated(cfg%vns).or..not.allocated(cfg%face_positions).or.cfg%CA<=0)return
+    if(cfg%N_pipe<1.or.cfg%N_pipe>=ubound(cfg%face_positions,1))return
+    i=cfg%num_dummy_cells+cfg%N_pipe+1;model=cfg%closure_riser;section=2
+    if(left)then
+      i=cfg%num_dummy_cells+cfg%N_pipe;model=cfg%closure_pipe;section=1
+    endif
+    target=cfg%face_positions(cfg%N_pipe)
+    call compute_primitive_variables(u(1),u(2),u(3),theta,cfg%nCg,cfg%nCl,cfg%nrho_l0,cfg%nP_l0, &
+      cfg%D_H,cfg%AREA,cfg%eps,cfg%G,cfg%mu_l,cfg%mu_g,cfg%sigma,cfg%njl,cfg%omega_u,cfg%omega_rho, &
+      cfg%tol,cfg%tola,cfg%maxit,alpha,rl,rg,p,ul,ug,phase,status=code,closure_id=model)
+    if(code/=0)then
+      status=code;return
+    endif
+    if(alpha==0.or.alpha==1)then
+      status=BC_PHASE_REQUIRED;return
+    endif
+    gl=u(1)*ul;gg=u(2)*ug
+    if(gl==0.and.gg==0)then
+      status=BC_DATA_REQUIRED;return
+    endif
+    s=cfg%vns(i);h=(target-s)/JUNCTION_TRACE_STEPS
+    do it=1,JUNCTION_TRACE_STEPS
+      call rhs(s,p,k1,code);if(code/=0)exit
+      call rhs(s+h/2,p+h*k1/2,k2,code);if(code/=0)exit
+      call rhs(s+h/2,p+h*k2/2,k3,code);if(code/=0)exit
+      call rhs(s+h,p+h*k3,k4,code);if(code/=0)exit
+      p=p+h*(k1+2*k2+2*k3+k4)/6;s=s+h
+      if(.not.ieee_is_finite(p).or.p<=0)then
+        code=BC_TRACE_FAILED;exit
+      endif
+    enddo
+    if(code/=0)then
+      status=code;return
+    endif
+    angle=-cfg%beta
+    if(.not.left)angle=atan((target*cfg%Lr-cfg%Lp)/cfg%CA)
+    call state_at(p,angle,gl,gg,cfg%D_H,cfg%AREA,cfg%eps,cfg%G,cfg%nCl,cfg%nCg,cfg%nrho_l0, &
+      cfg%nP_l0,cfg%mu_l,cfg%mu_g,cfg%sigma,cfg%omega_u,cfg%omega_rho,cfg%tol,model, &
+      rl,rg,alpha,ul,ug,jl,jg,kin,code)
+    if(code/=0)then
+      status=code;return
+    endif
+    uf=[(1-alpha)*rl,alpha*rg,gl+gg];status=0
+  contains
+    subroutine rhs(x,y,f,st)
+      real(wp),intent(in)::x,y
+      real(wp),intent(out)::f
+      integer,intent(out)::st
+      f=fun_dpds(x,y,gl,gg,cfg%Lp,cfg%Lr,cfg%CA,cfg%beta,cfg%D_H,cfg%AREA,cfg%eps,cfg%G, &
+        cfg%nCl,cfg%nCg,cfg%nrho_l0,cfg%nP_l0,cfg%mu_l,cfg%mu_g,cfg%sigma, &
+        cfg%omega_P,cfg%omega_u,cfg%omega_rho,cfg%tol,st,cfg%closure_riser,section,cfg%closure_pipe)
+      if(st==0.and..not.ieee_is_finite(f))st=BC_TRACE_FAILED
+    end subroutine
   end subroutine
 end module

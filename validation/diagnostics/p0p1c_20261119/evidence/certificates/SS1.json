@@ -1,0 +1,543 @@
+{
+ "case": "SS1",
+ "raw": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/cert/SS1/certificate.raw",
+ "run": {
+  "status": {
+   "status": "6000",
+   "reached_time_s": "7.8576618280532784E+01",
+   "requested_time_s": "1.1000000000000001E+02",
+   "accepted_steps": "706",
+   "rejected_steps": "29",
+   "last_rejection_status": "6000",
+   "termination_reason": "NEWTON_GLOBALIZATION_FAILURE",
+   "cpu_seconds": "2.1271033399999999E+02",
+   "wall_seconds": "2.1431214781200001E+02",
+   "newton_iterations_total": "2415",
+   "jacobian_evaluations_total": "2415",
+   "residual_evaluations_total": "7468",
+   "linear_solves_total": "2415",
+   "backtrack_trials_total": "5053",
+   "prepare_calls_total": "735"
+  },
+  "accepted_steps": 706,
+  "min_dt_accepted_s": 1.5377343749999993e-07,
+  "last_dt_accepted_s": 1.5377343749999993e-07,
+  "min_dt_tried_s": 1.845281249999999e-07,
+  "rejected_proposal_codes": {
+   "0@NONE0": 451,
+   "3012@FACE53": 2216
+  },
+  "last_trial_codes": [
+   "3012"
+  ],
+  "reduction_reason": "dt halved after each non-converged Newton sequence (dt_shrink); see rejected_proposals.csv"
+ },
+ "accepted_state": {
+  "time_s": 78.57661828053278,
+  "dt_s": 1.845281249999999e-07,
+  "status": 0.0,
+  "index": 0.0,
+  "stage": 0.0,
+  "residual_norm": 6.854896e-07
+ },
+ "last_trial": {
+  "time_s": 78.57661828053278,
+  "dt_s": 1.845281249999999e-07,
+  "status": 0.0,
+  "index": 0.0,
+  "stage": 0.0,
+  "residual_norm": 1.420889e-07
+ },
+ "jacobian": {
+  "lapack_info": 0,
+  "norm1": 7.209976,
+  "condition_1norm_estimate": 41.17084,
+  "fd_max_relative_error_local_columns": 8.834594e-07,
+  "fd_columns_without_admissible_stencil": 0
+ },
+ "residual_dominant": [
+  {
+   "cell": 54,
+   "component": 2,
+   "scaled": 1.420889e-07
+  },
+  {
+   "cell": 55,
+   "component": 2,
+   "scaled": 7.020138e-08
+  },
+  {
+   "cell": 56,
+   "component": 2,
+   "scaled": 4.600586e-08
+  },
+  {
+   "cell": 57,
+   "component": 2,
+   "scaled": 3.382926e-08
+  },
+  {
+   "cell": 58,
+   "component": 2,
+   "scaled": 2.645925e-08
+  }
+ ],
+ "newton": {
+  "linear_info": 0,
+  "max_scaled_step": 1.42089e-07,
+  "at_cell": 54,
+  "component": 2
+ },
+ "ray": {
+  "admissible_samples": 161,
+  "best_norm": 1.420781e-07,
+  "best_lambda": 7.647589e-05,
+  "best_norm_ratio": 0.9999235
+ },
+ "boundary": {
+  "lambda_admissible": 1.5880661467349782e-09,
+  "lambda_refused": 1.5880661467349784e-09,
+  "status": 3012,
+  "index": 53,
+  "stage": "FACE",
+  "norm_ratio_at_edge": 1.0,
+  "decoded": {
+   "site": "junction riser closure",
+   "closure_status": 12
+  }
+ },
+ "location": {
+  "index": 53,
+  "s_m": 56.8373,
+  "inclination_deg": -2.0,
+  "width_m": 1.12549
+ },
+ "cells": [
+  {
+   "state": "accepted",
+   "index": 52,
+   "closure": 1,
+   "status": 0,
+   "U_SI": [
+    438.761694,
+    1.3397422,
+    528.256125
+   ],
+   "alpha": 0.559975559,
+   "rho_l": 997.130281,
+   "rho_g": 2.39250121,
+   "p_Pa": 281475.375,
+   "u_l": 1.20378507,
+   "u_g": 0.0607203803,
+   "eigen_real_m_s": [
+    -244.0234,
+    1.613934,
+    245.1976
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "accepted",
+   "index": 53,
+   "closure": 1,
+   "status": 0,
+   "U_SI": [
+    438.758959,
+    1.34034974,
+    528.214363
+   ],
+   "alpha": 0.559978327,
+   "rho_l": 997.130337,
+   "rho_g": 2.39357432,
+   "p_Pa": 281601.625,
+   "u_l": 1.20372064,
+   "u_g": 0.0530820451,
+   "eigen_real_m_s": [
+    -243.4993,
+    1.613724,
+    244.6674
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "accepted",
+   "index": 54,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    978.424114,
+    0.0449127432,
+    510.133354
+   ],
+   "alpha": 0.0187600828,
+   "rho_l": 997.130362,
+   "rho_g": 2.3940589,
+   "p_Pa": 281658.636,
+   "u_l": 0.52134138,
+   "u_g": 0.898996187,
+   "eigen_real_m_s": [
+    124.0775,
+    -123.0357,
+    0.8968158
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "trial",
+   "index": 52,
+   "closure": 1,
+   "status": 0,
+   "U_SI": [
+    438.761694,
+    1.33974221,
+    528.256125
+   ],
+   "alpha": 0.559975559,
+   "rho_l": 997.130281,
+   "rho_g": 2.39250122,
+   "p_Pa": 281475.375,
+   "u_l": 1.20378507,
+   "u_g": 0.0607203639,
+   "eigen_real_m_s": [
+    -244.0234,
+    1.613934,
+    245.1976
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "trial",
+   "index": 53,
+   "closure": 1,
+   "status": 0,
+   "U_SI": [
+    438.758959,
+    1.34034974,
+    528.214363
+   ],
+   "alpha": 0.559978327,
+   "rho_l": 997.130337,
+   "rho_g": 2.39357432,
+   "p_Pa": 281601.625,
+   "u_l": 1.20372064,
+   "u_g": 0.0530820266,
+   "eigen_real_m_s": [
+    -243.4993,
+    1.613724,
+    244.6674
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "trial",
+   "index": 54,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    978.424124,
+    0.0449127188,
+    510.133353
+   ],
+   "alpha": 0.0187600726,
+   "rho_l": 997.130362,
+   "rho_g": 2.3940589,
+   "p_Pa": 281658.636,
+   "u_l": 0.521341373,
+   "u_g": 0.898996177,
+   "eigen_real_m_s": [
+    124.0775,
+    -123.0358,
+    0.8968158
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "ray_edge_admissible",
+   "index": 52,
+   "closure": 1,
+   "status": 0,
+   "U_SI": [
+    438.761694,
+    1.33974221,
+    528.256125
+   ],
+   "alpha": 0.559975559,
+   "rho_l": 997.130281,
+   "rho_g": 2.39250122,
+   "p_Pa": 281475.375,
+   "u_l": 1.20378507,
+   "u_g": 0.0607203639,
+   "eigen_real_m_s": [
+    -244.0234,
+    1.613934,
+    245.1976
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "ray_edge_admissible",
+   "index": 53,
+   "closure": 1,
+   "status": 0,
+   "U_SI": [
+    438.758959,
+    1.34034974,
+    528.214363
+   ],
+   "alpha": 0.559978327,
+   "rho_l": 997.130337,
+   "rho_g": 2.39357432,
+   "p_Pa": 281601.625,
+   "u_l": 1.20372064,
+   "u_g": 0.0530820266,
+   "eigen_real_m_s": [
+    -243.4993,
+    1.613724,
+    244.6674
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "ray_edge_admissible",
+   "index": 54,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    978.424124,
+    0.0449127188,
+    510.133353
+   ],
+   "alpha": 0.0187600726,
+   "rho_l": 997.130362,
+   "rho_g": 2.3940589,
+   "p_Pa": 281658.636,
+   "u_l": 0.521341373,
+   "u_g": 0.898996177,
+   "eigen_real_m_s": [
+    124.0775,
+    -123.0358,
+    0.8968158
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "ray_first_refused",
+   "index": 52,
+   "closure": 1,
+   "status": 0,
+   "U_SI": [
+    438.761694,
+    1.33974221,
+    528.256125
+   ],
+   "alpha": 0.559975559,
+   "rho_l": 997.130281,
+   "rho_g": 2.39250122,
+   "p_Pa": 281475.375,
+   "u_l": 1.20378507,
+   "u_g": 0.0607203639,
+   "eigen_real_m_s": [
+    -244.0234,
+    1.613934,
+    245.1976
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "ray_first_refused",
+   "index": 53,
+   "closure": 1,
+   "status": 0,
+   "U_SI": [
+    438.758959,
+    1.34034974,
+    528.214363
+   ],
+   "alpha": 0.559978327,
+   "rho_l": 997.130337,
+   "rho_g": 2.39357432,
+   "p_Pa": 281601.625,
+   "u_l": 1.20372064,
+   "u_g": 0.0530820266,
+   "eigen_real_m_s": [
+    -243.4993,
+    1.613724,
+    244.6674
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "ray_first_refused",
+   "index": 54,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    978.424124,
+    0.0449127188,
+    510.133353
+   ],
+   "alpha": 0.0187600726,
+   "rho_l": 997.130362,
+   "rho_g": 2.3940589,
+   "p_Pa": 281658.636,
+   "u_l": 0.521341373,
+   "u_g": 0.898996177,
+   "eigen_real_m_s": [
+    124.0775,
+    -123.0358,
+    0.8968158
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  }
+ ],
+ "faces": [
+  {
+   "state": "accepted",
+   "riser_closure_status": 0,
+   "conv_Gl": 519.1181,
+   "conv_Gg": 0.055762445,
+   "diss_Gl": 8.8485007,
+   "diss_Gg": -0.055762419,
+   "Gl": 527.9666,
+   "Gg": 2.6393041e-08,
+   "Gg_pipe_cell": 0.071148506,
+   "Gg_riser_trace": 0.040376385,
+   "p_star_Pa": 281675.8,
+   "alpha_riser_face": 1.2354115e-08,
+   "units": "kg/m2/s"
+  },
+  {
+   "state": "trial",
+   "riser_closure_status": 0,
+   "conv_Gl": 519.1181,
+   "conv_Gg": 0.055762422,
+   "diss_Gl": 8.8485012,
+   "diss_Gg": -0.055762422,
+   "Gl": 527.9666,
+   "Gg": 6.8465374e-15,
+   "Gg_pipe_cell": 0.071148481,
+   "Gg_riser_trace": 0.040376363,
+   "p_star_Pa": 281675.8,
+   "alpha_riser_face": 3.2047429e-15,
+   "units": "kg/m2/s"
+  },
+  {
+   "state": "ray_edge_admissible",
+   "riser_closure_status": 0,
+   "conv_Gl": 519.1181,
+   "conv_Gg": 0.055762422,
+   "diss_Gl": 8.8485012,
+   "diss_Gg": -0.055762422,
+   "Gl": 527.9666,
+   "Gg": 9.9396541e-14,
+   "Gg_pipe_cell": 0.071148481,
+   "Gg_riser_trace": 0.040376363,
+   "p_star_Pa": 281675.8,
+   "alpha_riser_face": 4.6525761e-14,
+   "units": "kg/m2/s"
+  },
+  {
+   "state": "ray_first_refused",
+   "riser_closure_status": 12,
+   "conv_Gl": 519.1181,
+   "conv_Gg": 0.055762422,
+   "diss_Gl": 8.8485012,
+   "diss_Gg": -0.055762422,
+   "Gl": 527.9666,
+   "Gg": -2.3225231e-14,
+   "Gg_pipe_cell": 0.071148481,
+   "Gg_riser_trace": 0.040376363,
+   "p_star_Pa": 281675.8,
+   "alpha_riser_face": null,
+   "units": "kg/m2/s"
+  }
+ ],
+ "root_maps": [],
+ "margins": {
+  "status": 0,
+  "junction_raw_gas_superficial_nd": 2.859629e-15,
+  "min_riser_drift_margin_m_s": 370.4085,
+  "at_cell": 85
+ },
+ "flags": [
+  "NUMERICAL_FLUX_INDUCED_BOUNDARY"
+ ],
+ "classification": {
+  "blockage_in": "NEWTON_PROPOSAL",
+  "classes": [
+   "CONSTITUTIVE_DOMAIN_LIMIT",
+   "UNSUPPORTED_PHYSICAL_BOUNDARY"
+  ],
+  "flags": [
+   "NUMERICAL_FLUX_INDUCED_BOUNDARY"
+  ],
+  "evidence": [
+   "Jacobian assembled at the trial, LU nonsingular, local FD agreement 8.8e-07: not a Jacobian failure",
+   "admissible part of the Newton ray reduces the residual only to 0.999923: no admissible descent, not a line-search weakness",
+   "first refused point: CLOSURE_DOMAIN of the junction riser closure",
+   "junction gas flux 6.85e-15 -> -2.32e-14 kg/m2/s with face riser holdup 3.20e-15: required mixed->pure liquid transition of the face trace while both cells stay two-phase",
+   "both traces still carry gas upward (7.115e-02, 4.038e-02 kg/m2/s): the vanishing face flux comes from the Roe dissipation (diss_Gg=-5.576e-02) at the junction holdup jump; a PHYSICAL blockage is NOT established by these states"
+  ],
+  "not_implied": "absence of roots along local Newton proposals is not a proof that no global solution exists; the model, not the physics, is certified here"
+ }
+}

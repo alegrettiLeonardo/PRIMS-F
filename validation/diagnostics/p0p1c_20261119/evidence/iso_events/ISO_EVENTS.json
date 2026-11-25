@@ -1,0 +1,1195 @@
+{
+ "common_window_s": [
+  0.0,
+  197.83061284690498
+ ],
+ "definitions": "ISOTHERMAL OSC: common-window comparison and continuous-variable events.\n\nPre-registered definitions (fixed before reading the refined runs):\n  * Common window  W = [0, T_c], T_c = min over runs of the last accepted time\n    (a run still in progress contributes its current time and is marked RUNNING).\n  * Oscillation    p_in about its mean on [20, 60] s; half-cycle amplitudes\n    A_k = (max - min)/2 between successive up-crossings; period from up-crossings;\n    growth rate sigma = slope of ln A_k vs cycle mid-time over the complete\n    cycles inside W that start in (60, 150) s. (Amended after N401/dt0.015625\n    shortened W: the first rule, \"start after 60 s\", fitted 7 cycles in one run and\n    6 in the others; the amended rule fits the same four cycle indices everywhere.)\n  * Events from continuous monitor quantities (never from the solver status):\n      E_g(f)  first t > 20 s with mdot_g_base <= f * mean(mdot_g_in on [20,60]),\n              f in {0.5, 0.25, 0.10, 0.01}, by linear interpolation;\n      E_h(h)  first t > 20 s with holdup_liquid_base >= h, h in {0.80, 0.90, 0.98}.\n  * Newton failure time  t_fail = reached_time_s of run_status (termination_reason).\n  * Amplitude-aligned clock: t_A(L) = time at which the fitted envelope\n    ln A = ln A_0 + sigma t (cycles after 60 s inside W) reaches L = 3000 Pa;\n    an event is discretization-consistent if E - t_A(L) converges even when\n    E itself does not (seed amplitude A_0 depends on the initial-state error).\n  * Amplitude-space event (seed-independent): for every complete cycle of the\n    whole record, (A_k, min mdot_g_base / mean mdot_g_in, max holdup_base);\n    A*(f) = amplitude at which the per-cycle gas trough reaches f, by linear\n    interpolation of the trough ratio in ln A between successive complete cycles.\n  * Waveform distance on W: max and RMS of |p_in^a - p_in^b| / mean(p_in) on a\n    0.1 s grid (linear interpolation of the accepted monitor records).\nUsage: iso_event_analysis.py RESULTS_ISO_DIR OUT_JSON OUT_MD\n",
+ "runs": {
+  "B_ISO_MASS": {
+   "N_pipe": 51,
+   "dt_max_s": 0.125,
+   "flux": "MASS",
+   "termination_reason": "MAX_NEWTON",
+   "t_last_s": 223.6445229171398,
+   "t_fail_s": 223.6445229171398,
+   "mean_mdot_g_in_kg_s": 0.0030280682363617484,
+   "events_s": {
+    "E_g_0.5": 193.3464185509547,
+    "E_g_0.25": 197.17138109079207,
+    "E_g_0.1": 221.92072123815936,
+    "E_g_0.01": 223.4080638694388,
+    "E_h_0.8": 170.7243629740811,
+    "E_h_0.9": 197.78254947854504,
+    "E_h_0.98": 223.0635202391334
+   },
+   "cycles_in_window": [
+    {
+     "t_start": 11.415336556433893,
+     "t_end": 38.46866605340576,
+     "period_s": 27.05332949697187,
+     "amplitude_Pa": 228.5111236134835
+    },
+    {
+     "t_start": 38.46866605340576,
+     "t_end": 65.11359111337326,
+     "period_s": 26.6449250599675,
+     "amplitude_Pa": 441.2507921376382
+    },
+    {
+     "t_start": 65.11359111337326,
+     "t_end": 91.66619805185162,
+     "period_s": 26.552606938478363,
+     "amplitude_Pa": 863.5678671900823
+    },
+    {
+     "t_start": 91.66619805185162,
+     "t_end": 118.16053773465099,
+     "period_s": 26.494339682799364,
+     "amplitude_Pa": 1688.0592678140674
+    },
+    {
+     "t_start": 118.16053773465099,
+     "t_end": 144.61924959940438,
+     "period_s": 26.458711864753397,
+     "amplitude_Pa": 3290.533079778368
+    },
+    {
+     "t_start": 144.61924959940438,
+     "t_end": 171.07752342238544,
+     "period_s": 26.458273822981056,
+     "amplitude_Pa": 6353.877085127315
+    },
+    {
+     "t_start": 171.07752342238544,
+     "t_end": 197.6629663504921,
+     "period_s": 26.58544292810666,
+     "amplitude_Pa": 11887.315428465838
+    }
+   ],
+   "growth_rate_1_s": 0.025126207052983497,
+   "growth_per_cycle": 1.9461728976666224,
+   "period_mean_s": 26.50987504742377,
+   "seed_amplitude_first_cycle_Pa": 228.5111236134835,
+   "t_A3000_s": 127.86066634000413,
+   "complete_cycles_full_record": [
+    {
+     "t_start": 11.30685275983729,
+     "amplitude_Pa": 228.5111236134835,
+     "gas_trough_ratio": 0.9804837356970463,
+     "holdup_base_max": 0.6882335837729174
+    },
+    {
+     "t_start": 38.43185275983715,
+     "amplitude_Pa": 441.2507921376382,
+     "gas_trough_ratio": 0.9618725482504191,
+     "holdup_base_max": 0.6922057999567113
+    },
+    {
+     "t_start": 65.05685275983767,
+     "amplitude_Pa": 863.5678671900823,
+     "gas_trough_ratio": 0.9259679518741725,
+     "holdup_base_max": 0.6999921196336027
+    },
+    {
+     "t_start": 91.55685275983797,
+     "amplitude_Pa": 1688.0592678140674,
+     "gas_trough_ratio": 0.8578443252417596,
+     "holdup_base_max": 0.7153422522474493
+    },
+    {
+     "t_start": 118.05685275983663,
+     "amplitude_Pa": 3290.533079778368,
+     "gas_trough_ratio": 0.7333900487991628,
+     "holdup_base_max": 0.745453191375516
+    },
+    {
+     "t_start": 144.5568527598353,
+     "amplitude_Pa": 6353.877085127315,
+     "gas_trough_ratio": 0.5250514508610813,
+     "holdup_base_max": 0.8025538391121256
+    },
+    {
+     "t_start": 171.05685275983393,
+     "amplitude_Pa": 11887.315428465838,
+     "gas_trough_ratio": 0.23858863348458045,
+     "holdup_base_max": 0.8973905768548025
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6711.651626504673,
+    "A_star_0.25": 11594.359468355853,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   },
+   "aligned_events_s": {
+    "E_g_0.5": 65.48575221095057,
+    "E_g_0.25": 69.31071475078794,
+    "E_g_0.1": 94.06005489815523,
+    "E_g_0.01": 95.54739752943466,
+    "E_h_0.8": 42.86369663407696,
+    "E_h_0.9": 69.9218831385409,
+    "E_h_0.98": 95.20285389912927
+   },
+   "min_mdot_g_base_in_window_kg_s": 0.0007040889879520979,
+   "fail_minus_E_g_0.01_s": 0.236459047701004
+  },
+  "C_ISO_VOLUME": {
+   "N_pipe": 51,
+   "dt_max_s": 0.125,
+   "flux": "VOLUME",
+   "termination_reason": "MAX_NEWTON",
+   "t_last_s": 223.64197117111507,
+   "t_fail_s": 223.64197117111507,
+   "mean_mdot_g_in_kg_s": 0.0030280682363617484,
+   "events_s": {
+    "E_g_0.5": 193.34137179274705,
+    "E_g_0.25": 197.17458295462708,
+    "E_g_0.1": 221.9148505992966,
+    "E_g_0.01": 223.40428174925376,
+    "E_h_0.8": 170.72584280147223,
+    "E_h_0.9": 197.78702680338196,
+    "E_h_0.98": 223.05844749503888
+   },
+   "cycles_in_window": [
+    {
+     "t_start": 11.414550141647208,
+     "t_end": 38.466873176375145,
+     "period_s": 27.052323034727937,
+     "amplitude_Pa": 228.49793722678442
+    },
+    {
+     "t_start": 38.466873176375145,
+     "t_end": 65.1108215460197,
+     "period_s": 26.643948369644548,
+     "amplitude_Pa": 441.170774676546
+    },
+    {
+     "t_start": 65.1108215460197,
+     "t_end": 91.66238512008395,
+     "period_s": 26.55156357406426,
+     "amplitude_Pa": 863.3045339728415
+    },
+    {
+     "t_start": 91.66238512008395,
+     "t_end": 118.15565829810708,
+     "period_s": 26.49327317802313,
+     "amplitude_Pa": 1687.3466167148727
+    },
+    {
+     "t_start": 118.15565829810708,
+     "t_end": 144.61329338204928,
+     "period_s": 26.457635083942193,
+     "amplitude_Pa": 3288.7083942700992
+    },
+    {
+     "t_start": 144.61329338204928,
+     "t_end": 171.07042872210965,
+     "period_s": 26.457135340060375,
+     "amplitude_Pa": 6349.755727544543
+    },
+    {
+     "t_start": 171.07042872210965,
+     "t_end": 197.65441740942788,
+     "period_s": 26.583988687318225,
+     "amplitude_Pa": 11879.022150912046
+    }
+   ],
+   "growth_rate_1_s": 0.025122834061692287,
+   "growth_per_cycle": 1.9459391443245362,
+   "period_mean_s": 26.50871917268164,
+   "seed_amplitude_first_cycle_Pa": 228.49793722678442,
+   "t_A3000_s": 127.87629017967738,
+   "complete_cycles_full_record": [
+    {
+     "t_start": 11.30685275983729,
+     "amplitude_Pa": 228.49793722678442,
+     "gas_trough_ratio": 0.9804840222381012,
+     "holdup_base_max": 0.6882453903427852
+    },
+    {
+     "t_start": 38.43185275983715,
+     "amplitude_Pa": 441.170774676546,
+     "gas_trough_ratio": 0.9618761021287303,
+     "holdup_base_max": 0.6922171785081481
+    },
+    {
+     "t_start": 65.05685275983767,
+     "amplitude_Pa": 863.3045339728415,
+     "gas_trough_ratio": 0.9259799796527604,
+     "holdup_base_max": 0.7000023422045722
+    },
+    {
+     "t_start": 91.55685275983797,
+     "amplitude_Pa": 1687.3466167148727,
+     "gas_trough_ratio": 0.8578781572258144,
+     "holdup_base_max": 0.7153490022114132
+    },
+    {
+     "t_start": 118.05685275983663,
+     "amplitude_Pa": 3288.7083942700992,
+     "gas_trough_ratio": 0.7334732028975723,
+     "holdup_base_max": 0.7454501777003238
+    },
+    {
+     "t_start": 144.5568527598353,
+     "amplitude_Pa": 6349.755727544543,
+     "gas_trough_ratio": 0.5252139799980101,
+     "holdup_base_max": 0.8025290777325241
+    },
+    {
+     "t_start": 171.05685275983393,
+     "amplitude_Pa": 11879.022150912046,
+     "gas_trough_ratio": 0.23875650128608683,
+     "holdup_base_max": 0.8973548693050891
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6709.660335251374,
+    "A_star_0.25": 11590.541397296665,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   },
+   "aligned_events_s": {
+    "E_g_0.5": 65.46508161306967,
+    "E_g_0.25": 69.2982927749497,
+    "E_g_0.1": 94.03856041961923,
+    "E_g_0.01": 95.52799156957637,
+    "E_h_0.8": 42.84955262179484,
+    "E_h_0.9": 69.91073662370458,
+    "E_h_0.98": 95.1821573153615
+   },
+   "min_mdot_g_base_in_window_kg_s": 0.0007047189404427136,
+   "fail_minus_E_g_0.01_s": 0.2376894218613188
+  },
+  "B_ISO_MASS_dt0.0625": {
+   "N_pipe": 51,
+   "dt_max_s": 0.0625,
+   "flux": "MASS",
+   "termination_reason": "NEWTON_GLOBALIZATION_FAILURE",
+   "t_last_s": 222.5179319630739,
+   "t_fail_s": 222.5179319630739,
+   "mean_mdot_g_in_kg_s": 0.0030280682363617484,
+   "events_s": {
+    "E_g_0.5": 168.95687696505092,
+    "E_g_0.25": 194.96282857767238,
+    "E_g_0.1": 197.53918197870334,
+    "E_g_0.01": 222.37935624792007,
+    "E_h_0.8": 168.74470426205045,
+    "E_h_0.9": 195.45088751939767,
+    "E_h_0.98": 222.25110196119437
+   },
+   "cycles_in_window": [
+    {
+     "t_start": 11.336146406467602,
+     "t_end": 38.53116262566579,
+     "period_s": 27.19501621919819,
+     "amplitude_Pa": 240.35693423214252
+    },
+    {
+     "t_start": 38.53116262566579,
+     "t_end": 65.22017273044264,
+     "period_s": 26.689010104776848,
+     "amplitude_Pa": 483.2641501609178
+    },
+    {
+     "t_start": 65.22017273044264,
+     "t_end": 91.81118518998505,
+     "period_s": 26.591012459542412,
+     "amplitude_Pa": 989.4070376120217
+    },
+    {
+     "t_start": 91.81118518998505,
+     "t_end": 118.33937241417514,
+     "period_s": 26.52818722419009,
+     "amplitude_Pa": 2022.8956326246844
+    },
+    {
+     "t_start": 118.33937241417514,
+     "t_end": 144.83168681417982,
+     "period_s": 26.492314400004673,
+     "amplitude_Pa": 4118.17521556592
+    },
+    {
+     "t_start": 144.83168681417982,
+     "t_end": 171.35124616879915,
+     "period_s": 26.519559354619332,
+     "amplitude_Pa": 8253.614982997067
+    }
+   ],
+   "growth_rate_1_s": 0.026673437999167857,
+   "growth_per_cycle": 2.0283087038735723,
+   "period_mean_s": 26.532768359589127,
+   "seed_amplitude_first_cycle_Pa": 240.35693423214252,
+   "t_A3000_s": 119.95257828942769,
+   "complete_cycles_full_record": [
+    {
+     "t_start": 11.326236863347487,
+     "amplitude_Pa": 240.35693423214252,
+     "gas_trough_ratio": 0.979008378705418,
+     "holdup_base_max": 0.6885355646794526
+    },
+    {
+     "t_start": 38.4512368633478,
+     "amplitude_Pa": 483.2641501609178,
+     "gas_trough_ratio": 0.9573824376834813,
+     "holdup_base_max": 0.6931754537898087
+    },
+    {
+     "t_start": 65.20123686334681,
+     "amplitude_Pa": 989.4070376120217,
+     "gas_trough_ratio": 0.9137819078389903,
+     "holdup_base_max": 0.7026800425577997
+    },
+    {
+     "t_start": 91.70123686334625,
+     "amplitude_Pa": 2022.8956326246844,
+     "gas_trough_ratio": 0.8271711745296787,
+     "holdup_base_max": 0.7225740519155321
+    },
+    {
+     "t_start": 118.326236863349,
+     "amplitude_Pa": 4118.17521556592,
+     "gas_trough_ratio": 0.667053133483043,
+     "holdup_base_max": 0.7627304868118115
+    },
+    {
+     "t_start": 144.82623686335174,
+     "amplitude_Pa": 8253.614982997067,
+     "gas_trough_ratio": 0.40548403941808947,
+     "holdup_base_max": 0.8396157065623758
+    },
+    {
+     "t_start": 171.32623686335447,
+     "amplitude_Pa": 15637.697891941847,
+     "gas_trough_ratio": 0.0814524436205861,
+     "holdup_base_max": 0.9598509599156958
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6420.084646549381,
+    "A_star_0.25": 11215.38407701896,
+    "A_star_0.1": 15076.033411851024,
+    "A_star_0.01": null
+   },
+   "aligned_events_s": {
+    "E_g_0.5": 49.00429867562323,
+    "E_g_0.25": 75.01025028824469,
+    "E_g_0.1": 77.58660368927565,
+    "E_g_0.01": 102.42677795849238,
+    "E_h_0.8": 48.792125972622756,
+    "E_h_0.9": 75.49830922996998,
+    "E_h_0.98": 102.29852367176667
+   },
+   "min_mdot_g_base_in_window_kg_s": 0.00027104993114517186,
+   "fail_minus_E_g_0.01_s": 0.13857571515382006
+  },
+  "B_ISO_MASS_dt0.03125": {
+   "N_pipe": 51,
+   "dt_max_s": 0.03125,
+   "flux": "MASS",
+   "termination_reason": "MAX_NEWTON",
+   "t_last_s": 198.66709919470173,
+   "t_fail_s": 198.66709919470173,
+   "mean_mdot_g_in_kg_s": 0.0030280682363617484,
+   "events_s": {
+    "E_g_0.5": 168.25593859781333,
+    "E_g_0.25": 194.40118676117626,
+    "E_g_0.1": 196.3985509079831,
+    "E_g_0.01": 198.32016527091744,
+    "E_h_0.8": 168.18468844221056,
+    "E_h_0.9": 194.8933120960079,
+    "E_h_0.98": 197.71594090481446
+   },
+   "cycles_in_window": [
+    {
+     "t_start": 11.293487248347347,
+     "t_end": 38.56522417748727,
+     "period_s": 27.271736929139927,
+     "amplitude_Pa": 246.66249794067699
+    },
+    {
+     "t_start": 38.56522417748727,
+     "t_end": 65.27712321959294,
+     "period_s": 26.711899042105664,
+     "amplitude_Pa": 505.91763405760867
+    },
+    {
+     "t_start": 65.27712321959294,
+     "t_end": 91.88791357673361,
+     "period_s": 26.610790357140672,
+     "amplitude_Pa": 1059.1490805871726
+    },
+    {
+     "t_start": 91.88791357673361,
+     "t_end": 118.43415751858623,
+     "period_s": 26.546243941852623,
+     "amplitude_Pa": 2214.716754856141
+    },
+    {
+     "t_start": 118.43415751858623,
+     "t_end": 144.94543729344025,
+     "period_s": 26.511279774854017,
+     "amplitude_Pa": 4605.750068101333
+    },
+    {
+     "t_start": 144.94543729344025,
+     "t_end": 171.50753279794077,
+     "period_s": 26.56209550450052,
+     "amplitude_Pa": 9388.037487117035
+    }
+   ],
+   "growth_rate_1_s": 0.02741689855802599,
+   "growth_per_cycle": 2.0701912779303697,
+   "period_mean_s": 26.557602394586958,
+   "seed_amplitude_first_cycle_Pa": 246.66249794067699,
+   "t_A3000_s": 116.3643715338983,
+   "complete_cycles_full_record": [
+    {
+     "t_start": 11.217239999685273,
+     "amplitude_Pa": 246.66249794067699,
+     "gas_trough_ratio": 0.9781152438867707,
+     "holdup_base_max": 0.6887189214817682
+    },
+    {
+     "t_start": 38.46723999968469,
+     "amplitude_Pa": 505.91763405760867,
+     "gas_trough_ratio": 0.9550955130692357,
+     "holdup_base_max": 0.693656468800323
+    },
+    {
+     "t_start": 65.21723999968671,
+     "amplitude_Pa": 1059.1490805871726,
+     "gas_trough_ratio": 0.9066624038661665,
+     "holdup_base_max": 0.7042912252846811
+    },
+    {
+     "t_start": 91.84223999968944,
+     "amplitude_Pa": 2214.716754856141,
+     "gas_trough_ratio": 0.8106517466681376,
+     "holdup_base_max": 0.7264276357106385
+    },
+    {
+     "t_start": 118.34223999969217,
+     "amplitude_Pa": 4605.750068101333,
+     "gas_trough_ratio": 0.6308275668415589,
+     "holdup_base_max": 0.7723244375188516
+    },
+    {
+     "t_start": 144.8422399996949,
+     "amplitude_Pa": 9388.037487117035,
+     "gas_trough_ratio": 0.3402895273642792,
+     "holdup_base_max": 0.8612724595609498
+    },
+    {
+     "t_start": 171.46723999969765,
+     "amplitude_Pa": 17777.178329889415,
+     "gas_trough_ratio": 0.009278368546880647,
+     "holdup_base_max": 0.99145357310075
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6346.946365150586,
+    "A_star_0.25": 11174.043120043008,
+    "A_star_0.1": 14923.315738371904,
+    "A_star_0.01": 17752.450829685855
+   },
+   "aligned_events_s": {
+    "E_g_0.5": 51.89156706391503,
+    "E_g_0.25": 78.03681522727797,
+    "E_g_0.1": 80.0341793740848,
+    "E_g_0.01": 81.95579373701915,
+    "E_h_0.8": 51.820316908312265,
+    "E_h_0.9": 78.5289405621096,
+    "E_h_0.98": 81.35156937091617
+   },
+   "min_mdot_g_base_in_window_kg_s": 9.676208311482639e-05,
+   "fail_minus_E_g_0.01_s": 0.34693392378429166
+  },
+  "B_ISO_MASS_N101": {
+   "N_pipe": 101,
+   "dt_max_s": 0.125,
+   "flux": "MASS",
+   "termination_reason": "MAX_NEWTON",
+   "t_last_s": 249.3995620649342,
+   "t_fail_s": 249.3995620649342,
+   "mean_mdot_g_in_kg_s": 0.0030280682363617484,
+   "events_s": {
+    "E_g_0.5": 195.15614013535847,
+    "E_g_0.25": 221.38557152821286,
+    "E_g_0.1": 223.59484692191157,
+    "E_g_0.01": 226.35698402164383,
+    "E_h_0.8": 195.00422574442615,
+    "E_h_0.9": 221.78367649212703,
+    "E_h_0.98": 225.04061025628164
+   },
+   "cycles_in_window": [
+    {
+     "t_start": 11.419621544010948,
+     "t_end": 38.635345739489885,
+     "period_s": 27.215724195478938,
+     "amplitude_Pa": 131.0614019225759
+    },
+    {
+     "t_start": 38.635345739489885,
+     "t_end": 65.35033992566045,
+     "period_s": 26.714994186170564,
+     "amplitude_Pa": 263.6002462616889
+    },
+    {
+     "t_start": 65.35033992566045,
+     "t_end": 91.97645698130711,
+     "period_s": 26.62611705564666,
+     "amplitude_Pa": 539.6759432542895
+    },
+    {
+     "t_start": 91.97645698130711,
+     "t_end": 118.54722902550121,
+     "period_s": 26.5707720441941,
+     "amplitude_Pa": 1104.2533857008966
+    },
+    {
+     "t_start": 118.54722902550121,
+     "t_end": 145.0812017380595,
+     "period_s": 26.53397271255828,
+     "amplitude_Pa": 2255.9268960150075
+    },
+    {
+     "t_start": 145.0812017380595,
+     "t_end": 171.59537671728677,
+     "period_s": 26.514174979227278,
+     "amplitude_Pa": 4583.021597144252
+    }
+   ],
+   "growth_rate_1_s": 0.026854102740651954,
+   "growth_per_cycle": 2.039486819001071,
+   "period_mean_s": 26.56125919790658,
+   "seed_amplitude_first_cycle_Pa": 131.0614019225759,
+   "t_A3000_s": 142.50224018551742,
+   "complete_cycles_full_record": [
+    {
+     "t_start": 11.30685275983729,
+     "amplitude_Pa": 131.0614019225759,
+     "gas_trough_ratio": 0.9885266042432589,
+     "holdup_base_max": 0.6848177170849257
+    },
+    {
+     "t_start": 38.55685275983715,
+     "amplitude_Pa": 263.6002462616889,
+     "gas_trough_ratio": 0.9767042892823716,
+     "holdup_base_max": 0.6873415650163053
+    },
+    {
+     "t_start": 65.30685275983767,
+     "amplitude_Pa": 539.6759432542895,
+     "gas_trough_ratio": 0.9523699596076054,
+     "holdup_base_max": 0.6925959442245679
+    },
+    {
+     "t_start": 91.93185275983795,
+     "amplitude_Pa": 1104.2533857008966,
+     "gas_trough_ratio": 0.9040406090380961,
+     "holdup_base_max": 0.703275092512724
+    },
+    {
+     "t_start": 118.4318527598366,
+     "amplitude_Pa": 2255.9268960150075,
+     "gas_trough_ratio": 0.808684678523511,
+     "holdup_base_max": 0.7255553119646061
+    },
+    {
+     "t_start": 145.05685275983527,
+     "amplitude_Pa": 4583.021597144252,
+     "gas_trough_ratio": 0.6349488631393368,
+     "holdup_base_max": 0.770298352414841
+    },
+    {
+     "t_start": 171.5568527598339,
+     "amplitude_Pa": 9128.393404925679,
+     "gas_trough_ratio": 0.36080303894857,
+     "holdup_base_max": 0.8541349479031247
+    },
+    {
+     "t_start": 198.05685275983643,
+     "amplitude_Pa": 16978.641069797566,
+     "gas_trough_ratio": 0.04265081734226958,
+     "holdup_base_max": 0.9783090930183163
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6433.608530775977,
+    "A_star_0.25": 11330.686950911544,
+    "A_star_0.1": 15181.759403064852,
+    "A_star_0.01": null
+   },
+   "aligned_events_s": {
+    "E_g_0.5": 52.65389994984105,
+    "E_g_0.25": 78.88333134269544,
+    "E_g_0.1": 81.09260673639415,
+    "E_g_0.01": 83.8547438361264,
+    "E_h_0.8": 52.50198555890873,
+    "E_h_0.9": 79.2814363066096,
+    "E_h_0.98": 82.53837007076422
+   },
+   "min_mdot_g_base_in_window_kg_s": 0.0011123103812362757,
+   "fail_minus_E_g_0.01_s": 23.042578043290376
+  },
+  "B_ISO_MASS_N201": {
+   "N_pipe": 201,
+   "dt_max_s": 0.125,
+   "flux": "MASS",
+   "termination_reason": "MAX_NEWTON",
+   "t_last_s": 250.3789622874714,
+   "t_fail_s": 250.3789622874714,
+   "mean_mdot_g_in_kg_s": 0.0030280682363617484,
+   "events_s": {
+    "E_g_0.5": 220.5744187933648,
+    "E_g_0.25": 224.03261403660602,
+    "E_g_0.1": 248.9060590703071,
+    "E_g_0.01": 250.20881625016955,
+    "E_h_0.8": 198.62254784975508,
+    "E_h_0.9": 224.48341332964702,
+    "E_h_0.98": 249.77353531848485
+   },
+   "cycles_in_window": [
+    {
+     "t_start": 11.267173223732023,
+     "t_end": 38.54930127639546,
+     "period_s": 27.282128052663438,
+     "amplitude_Pa": 73.5870049004734
+    },
+    {
+     "t_start": 38.54930127639546,
+     "t_end": 65.31398573055199,
+     "period_s": 26.76468445415653,
+     "amplitude_Pa": 150.92518309416482
+    },
+    {
+     "t_start": 65.31398573055199,
+     "t_end": 91.98690064696882,
+     "period_s": 26.67291491641683,
+     "amplitude_Pa": 316.30680069926893
+    },
+    {
+     "t_start": 91.98690064696882,
+     "t_end": 118.60433558438585,
+     "period_s": 26.61743493741703,
+     "amplitude_Pa": 662.848052028974
+    },
+    {
+     "t_start": 118.60433558438585,
+     "t_end": 145.1861162857758,
+     "period_s": 26.581780701389945,
+     "amplitude_Pa": 1387.823003831145
+    },
+    {
+     "t_start": 145.1861162857758,
+     "t_end": 171.7405762437629,
+     "period_s": 26.554459957987092,
+     "amplitude_Pa": 2898.35123662572
+    }
+   ],
+   "growth_rate_1_s": 0.027757285963855405,
+   "growth_per_cycle": 2.0915704460494786,
+   "period_mean_s": 26.606647628302724,
+   "seed_amplitude_first_cycle_Pa": 73.5870049004734,
+   "t_A3000_s": 159.6898945581222,
+   "complete_cycles_full_record": [
+    {
+     "t_start": 11.181852759837287,
+     "amplitude_Pa": 73.5870049004734,
+     "gas_trough_ratio": 0.9934798866534112,
+     "holdup_base_max": 0.6828370204107812
+    },
+    {
+     "t_start": 38.43185275983715,
+     "amplitude_Pa": 150.92518309416482,
+     "gas_trough_ratio": 0.9864910060729883,
+     "holdup_base_max": 0.6843287150454602
+    },
+    {
+     "t_start": 65.30685275983767,
+     "amplitude_Pa": 316.30680069926893,
+     "gas_trough_ratio": 0.9716994623002552,
+     "holdup_base_max": 0.6874988036306917
+    },
+    {
+     "t_start": 91.93185275983795,
+     "amplitude_Pa": 662.848052028974,
+     "gas_trough_ratio": 0.9410341959327941,
+     "holdup_base_max": 0.6941825593400768
+    },
+    {
+     "t_start": 118.5568527598366,
+     "amplitude_Pa": 1387.823003831145,
+     "gas_trough_ratio": 0.878428103471061,
+     "holdup_base_max": 0.708304314097814
+    },
+    {
+     "t_start": 145.18185275983524,
+     "amplitude_Pa": 2898.35123662572,
+     "gas_trough_ratio": 0.7565230980973289,
+     "holdup_base_max": 0.737644897949068
+    },
+    {
+     "t_start": 171.6818527598339,
+     "amplitude_Pa": 5996.678009099502,
+     "gas_trough_ratio": 0.5381934710082874,
+     "holdup_base_max": 0.7973718414635772
+    },
+    {
+     "t_start": 198.18185275983643,
+     "amplitude_Pa": 11983.849789725602,
+     "gas_trough_ratio": 0.21817644986286527,
+     "holdup_base_max": 0.9060994451906934
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6513.239274889301,
+    "A_star_0.25": 11186.524660932466,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   },
+   "aligned_events_s": {
+    "E_g_0.5": 60.884524235242594,
+    "E_g_0.25": 64.34271947848382,
+    "E_g_0.1": 89.21616451218489,
+    "E_g_0.01": 90.51892169204734,
+    "E_h_0.8": 38.932653291632874,
+    "E_h_0.9": 64.79351877152482,
+    "E_h_0.98": 90.08364076036264
+   },
+   "min_mdot_g_base_in_window_kg_s": 0.001654723140686819,
+   "fail_minus_E_g_0.01_s": 0.17014603730186195
+  },
+  "B_ISO_MASS_N101_dt0.0625": {
+   "N_pipe": 101,
+   "dt_max_s": 0.0625,
+   "flux": "MASS",
+   "termination_reason": "MAX_NEWTON",
+   "t_last_s": 223.58792808356034,
+   "t_fail_s": 223.58792808356034,
+   "mean_mdot_g_in_kg_s": 0.0030280682363617484,
+   "events_s": {
+    "E_g_0.5": 193.99348973289537,
+    "E_g_0.25": 197.22460628805663,
+    "E_g_0.1": 222.23667452505893,
+    "E_g_0.01": 223.4269807642257,
+    "E_h_0.8": 171.86419785900463,
+    "E_h_0.9": 197.67378112127417,
+    "E_h_0.98": 223.10610063058027
+   },
+   "cycles_in_window": [
+    {
+     "t_start": 11.332518616398227,
+     "t_end": 38.70720587564605,
+     "period_s": 27.37468725924783,
+     "amplitude_Pa": 138.1262917094573
+    },
+    {
+     "t_start": 38.70720587564605,
+     "t_end": 65.46889876935518,
+     "period_s": 26.761692893709125,
+     "amplitude_Pa": 289.51430153188994
+    },
+    {
+     "t_start": 65.46889876935518,
+     "t_end": 92.13363966657464,
+     "period_s": 26.66474089721946,
+     "amplitude_Pa": 620.116956629674
+    },
+    {
+     "t_start": 92.13363966657464,
+     "t_end": 118.74212882482848,
+     "period_s": 26.608489158253846,
+     "amplitude_Pa": 1328.7062935319555
+    },
+    {
+     "t_start": 118.74212882482848,
+     "t_end": 145.3108141857867,
+     "period_s": 26.568685360958227,
+     "amplitude_Pa": 2839.362835523876
+    },
+    {
+     "t_start": 145.3108141857867,
+     "t_end": 171.86915020448066,
+     "period_s": 26.55833601869395,
+     "amplitude_Pa": 6012.894213989261
+    }
+   ],
+   "growth_rate_1_s": 0.028480962935337913,
+   "growth_per_cycle": 2.131831295367545,
+   "period_mean_s": 26.60006285878137,
+   "seed_amplitude_first_cycle_Pa": 138.1262917094573,
+   "t_A3000_s": 134.08034768780206,
+   "complete_cycles_full_record": [
+    {
+     "t_start": 11.326236863347487,
+     "amplitude_Pa": 138.1262917094573,
+     "gas_trough_ratio": 0.9873262196728159,
+     "holdup_base_max": 0.685074852257612
+    },
+    {
+     "t_start": 38.70123686334781,
+     "amplitude_Pa": 289.51430153188994,
+     "gas_trough_ratio": 0.9738936714995977,
+     "holdup_base_max": 0.6879438750462991
+    },
+    {
+     "t_start": 65.4512368633468,
+     "amplitude_Pa": 620.116956629674,
+     "gas_trough_ratio": 0.9443292168439742,
+     "holdup_base_max": 0.6943478262178759
+    },
+    {
+     "t_start": 92.0762368633463,
+     "amplitude_Pa": 1328.7062935319555,
+     "gas_trough_ratio": 0.8825063054771063,
+     "holdup_base_max": 0.7081918715156283
+    },
+    {
+     "t_start": 118.70123686334904,
+     "amplitude_Pa": 2839.362835523876,
+     "gas_trough_ratio": 0.7593787589339136,
+     "holdup_base_max": 0.737598470422964
+    },
+    {
+     "t_start": 145.20123686335177,
+     "amplitude_Pa": 6012.894213989261,
+     "gas_trough_ratio": 0.5319178816801646,
+     "holdup_base_max": 0.799745863958031
+    },
+    {
+     "t_start": 171.8262368633545,
+     "amplitude_Pa": 12282.003584609542,
+     "gas_trough_ratio": 0.20133548456505987,
+     "holdup_base_max": 0.9121679630502861
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6442.169247356233,
+    "A_star_0.25": 11056.235393686062,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   },
+   "aligned_events_s": {
+    "E_g_0.5": 59.91314204509331,
+    "E_g_0.25": 63.144258600254574,
+    "E_g_0.1": 88.15632683725687,
+    "E_g_0.01": 89.34663307642364,
+    "E_h_0.8": 37.78385017120257,
+    "E_h_0.9": 63.593433433472114,
+    "E_h_0.98": 89.02575294277821
+   },
+   "min_mdot_g_base_in_window_kg_s": 0.0006758361306615702,
+   "fail_minus_E_g_0.01_s": 0.1609473193346389
+  },
+  "B_ISO_MASS_N401": {
+   "N_pipe": 401,
+   "dt_max_s": 0.125,
+   "flux": "MASS",
+   "termination_reason": "MAX_NEWTON",
+   "t_last_s": 276.08361926961004,
+   "t_fail_s": 276.08361926961004,
+   "mean_mdot_g_in_kg_s": 0.0030280682363617484,
+   "events_s": {
+    "E_g_0.5": 222.76145934581217,
+    "E_g_0.25": 248.56457449045533,
+    "E_g_0.1": 251.2287129680471,
+    "E_g_0.01": 275.9501710966293,
+    "E_h_0.8": 222.42472658051796,
+    "E_h_0.9": 248.8964700708697,
+    "E_h_0.98": 275.59027733772524
+   },
+   "cycles_in_window": [
+    {
+     "t_start": 10.986148605164546,
+     "t_end": 38.238397431257916,
+     "period_s": 27.25224882609337,
+     "amplitude_Pa": 42.574424933613045
+    },
+    {
+     "t_start": 38.238397431257916,
+     "t_end": 65.04677732765902,
+     "period_s": 26.8083798964011,
+     "amplitude_Pa": 87.89322332580923
+    },
+    {
+     "t_start": 65.04677732765902,
+     "t_end": 91.7575516012598,
+     "period_s": 26.71077427360079,
+     "amplitude_Pa": 186.4600885155087
+    },
+    {
+     "t_start": 91.7575516012598,
+     "t_end": 118.40648459999663,
+     "period_s": 26.648932998736825,
+     "amplitude_Pa": 395.54675873264205
+    },
+    {
+     "t_start": 118.40648459999663,
+     "t_end": 145.01878039857056,
+     "period_s": 26.612295798573925,
+     "amplitude_Pa": 838.6165629927709
+    },
+    {
+     "t_start": 145.01878039857056,
+     "t_end": 171.6040878749613,
+     "period_s": 26.58530747639074,
+     "amplitude_Pa": 1775.8300109675038
+    }
+   ],
+   "growth_rate_1_s": 0.02820598505224644,
+   "growth_per_cycle": 2.118517891059615,
+   "period_mean_s": 26.63932763682557,
+   "seed_amplitude_first_cycle_Pa": 42.574424933613045,
+   "t_A3000_s": 176.90371229981474,
+   "complete_cycles_full_record": [
+    {
+     "t_start": 10.931852759837286,
+     "amplitude_Pa": 42.574424933613045,
+     "gas_trough_ratio": 0.9962081798070037,
+     "holdup_base_max": 0.6817756777665587
+    },
+    {
+     "t_start": 38.181852759837156,
+     "amplitude_Pa": 87.89322332580923,
+     "gas_trough_ratio": 0.9921622978356932,
+     "holdup_base_max": 0.6826346123179055
+    },
+    {
+     "t_start": 64.93185275983765,
+     "amplitude_Pa": 186.4600885155087,
+     "gas_trough_ratio": 0.9832206188166523,
+     "holdup_base_max": 0.6845445146548025
+    },
+    {
+     "t_start": 91.68185275983797,
+     "amplitude_Pa": 395.54675873264205,
+     "gas_trough_ratio": 0.9645256874844292,
+     "holdup_base_max": 0.6885717085018832
+    },
+    {
+     "t_start": 118.30685275983662,
+     "amplitude_Pa": 838.6165629927709,
+     "gas_trough_ratio": 0.9254711765681491,
+     "holdup_base_max": 0.6971641574467071
+    },
+    {
+     "t_start": 144.93185275983527,
+     "amplitude_Pa": 1775.8300109675038,
+     "gas_trough_ratio": 0.8455536292563434,
+     "holdup_base_max": 0.7155294107342292
+    },
+    {
+     "t_start": 171.5568527598339,
+     "amplitude_Pa": 3745.494958147465,
+     "gas_trough_ratio": 0.6918304704331137,
+     "holdup_base_max": 0.7539542293724197
+    },
+    {
+     "t_start": 198.05685275983643,
+     "amplitude_Pa": 7779.676031162613,
+     "gas_trough_ratio": 0.4272539809772405,
+     "holdup_base_max": 0.8317956313556197
+    },
+    {
+     "t_start": 224.68185275983916,
+     "amplitude_Pa": 15259.459895410342,
+     "gas_trough_ratio": 0.08856657737328118,
+     "holdup_base_max": 0.9594422093455098
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6363.223062592471,
+    "A_star_0.25": 11068.37057204702,
+    "A_star_0.1": 14916.341386436081,
+    "A_star_0.01": null
+   },
+   "aligned_events_s": {
+    "E_g_0.5": 45.85774704599743,
+    "E_g_0.25": 71.66086219064059,
+    "E_g_0.1": 74.32500066823235,
+    "E_g_0.01": 99.04645879681453,
+    "E_h_0.8": 45.52101428070321,
+    "E_h_0.9": 71.99275777105495,
+    "E_h_0.98": 98.6865650379105
+   },
+   "min_mdot_g_base_in_window_kg_s": 0.0021067944844348585,
+   "fail_minus_E_g_0.01_s": 0.1334481729807635
+  },
+  "B_ISO_MASS_dt0.015625": {
+   "N_pipe": 51,
+   "dt_max_s": 0.015625,
+   "flux": "MASS",
+   "termination_reason": "MAX_NEWTON",
+   "t_last_s": 197.83061284690498,
+   "t_fail_s": 197.83061284690498,
+   "mean_mdot_g_in_kg_s": 0.0030280682363617484,
+   "events_s": {
+    "E_g_0.5": 167.97301339782908,
+    "E_g_0.25": 194.179313874637,
+    "E_g_0.1": 196.04056463584726,
+    "E_g_0.01": 197.5931452301729,
+    "E_h_0.8": 167.95093244056906,
+    "E_h_0.9": 194.67924233862186,
+    "E_h_0.98": 197.19964529044987
+   },
+   "cycles_in_window": [
+    {
+     "t_start": 11.293840794402879,
+     "t_end": 38.59865746972041,
+     "period_s": 27.30481667531753,
+     "amplitude_Pa": 249.90383316299994
+    },
+    {
+     "t_start": 38.59865746972041,
+     "t_end": 65.3144340922968,
+     "period_s": 26.7157766225764,
+     "amplitude_Pa": 517.72728940862
+    },
+    {
+     "t_start": 65.3144340922968,
+     "t_end": 91.93102835444014,
+     "period_s": 26.616594262143337,
+     "amplitude_Pa": 1095.96299649321
+    },
+    {
+     "t_start": 91.93102835444014,
+     "t_end": 118.48473253766868,
+     "period_s": 26.553704183228533,
+     "amplitude_Pa": 2317.3175059692585
+    },
+    {
+     "t_start": 118.48473253766868,
+     "t_end": 145.0053230196927,
+     "period_s": 26.52059048202402,
+     "amplitude_Pa": 4870.722007407952
+    },
+    {
+     "t_start": 145.0053230196927,
+     "t_end": 171.59187158376383,
+     "period_s": 26.586548564071137,
+     "amplitude_Pa": 10006.08292043327
+    }
+   ],
+   "growth_rate_1_s": 0.027780507143062686,
+   "growth_per_cycle": 2.0910636809912244,
+   "period_mean_s": 26.569359372866757,
+   "seed_amplitude_first_cycle_Pa": 249.90383316299994,
+   "t_A3000_s": 114.65266482304675,
+   "complete_cycles_full_record": [
+    {
+     "t_start": 11.259317129447613,
+     "amplitude_Pa": 249.90383316299994,
+     "gas_trough_ratio": 0.9775796201562312,
+     "holdup_base_max": 0.6888315990117109
+    },
+    {
+     "t_start": 38.493692129448824,
+     "amplitude_Pa": 517.72728940862,
+     "gas_trough_ratio": 0.9537317749551976,
+     "holdup_base_max": 0.6939585837158073
+    },
+    {
+     "t_start": 65.29056712945159,
+     "amplitude_Pa": 1095.96299649321,
+     "gas_trough_ratio": 0.9031195409033395,
+     "holdup_base_max": 0.7050759162106258
+    },
+    {
+     "t_start": 91.86869212945432,
+     "amplitude_Pa": 2317.3175059692585,
+     "gas_trough_ratio": 0.8009991720761475,
+     "holdup_base_max": 0.7287942865306138
+    },
+    {
+     "t_start": 118.44681712945705,
+     "amplitude_Pa": 4870.722007407952,
+     "gas_trough_ratio": 0.6105977360790865,
+     "holdup_base_max": 0.7779088603433838
+    },
+    {
+     "t_start": 144.9155671294598,
+     "amplitude_Pa": 10006.08292043327,
+     "gas_trough_ratio": 0.3077049647732526,
+     "holdup_base_max": 0.8724033096869745
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6335.215535142231,
+    "A_star_0.25": null,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   },
+   "aligned_events_s": {
+    "E_g_0.5": 53.32034857478233,
+    "E_g_0.25": 79.52664905159024,
+    "E_g_0.1": 81.38789981280051,
+    "E_g_0.01": 82.94048040712615,
+    "E_h_0.8": 53.29826761752231,
+    "E_h_0.9": 80.02657751557511,
+    "E_h_0.98": 82.54698046740312
+   },
+   "min_mdot_g_base_in_window_kg_s": 1.871260237081749e-11,
+   "fail_minus_E_g_0.01_s": 0.23746761673208994
+  }
+ },
+ "waveform_distance_p_in": [
+  {
+   "axis": "time",
+   "a": "B_ISO_MASS",
+   "b": "B_ISO_MASS_dt0.0625",
+   "max_rel": 0.015060056714725281,
+   "rms_rel": 0.004348108634618337
+  },
+  {
+   "axis": "time",
+   "a": "B_ISO_MASS_dt0.0625",
+   "b": "B_ISO_MASS_dt0.03125",
+   "max_rel": 0.009589192590540665,
+   "rms_rel": 0.002592497078226685
+  },
+  {
+   "axis": "time",
+   "a": "B_ISO_MASS_dt0.03125",
+   "b": "B_ISO_MASS_dt0.015625",
+   "max_rel": 0.005432019731181702,
+   "rms_rel": 0.0014128867628583148
+  },
+  {
+   "axis": "space",
+   "a": "B_ISO_MASS",
+   "b": "B_ISO_MASS_N101",
+   "max_rel": 0.013016227554656453,
+   "rms_rel": 0.0036108535237705246
+  },
+  {
+   "axis": "space",
+   "a": "B_ISO_MASS_N101",
+   "b": "B_ISO_MASS_N201",
+   "max_rel": 0.01311164198028917,
+   "rms_rel": 0.0035410379875495785
+  },
+  {
+   "axis": "space",
+   "a": "B_ISO_MASS_N201",
+   "b": "B_ISO_MASS_N401",
+   "max_rel": 0.009528638205212134,
+   "rms_rel": 0.002500052343000611
+  },
+  {
+   "axis": "combined",
+   "a": "B_ISO_MASS",
+   "b": "B_ISO_MASS_N101_dt0.0625",
+   "max_rel": 0.011109910024358698,
+   "rms_rel": 0.0028343205829462715
+  },
+  {
+   "axis": "convention",
+   "a": "B_ISO_MASS",
+   "b": "C_ISO_VOLUME",
+   "max_rel": 9.995655594668907e-05,
+   "rms_rel": 2.7188044568565094e-05
+  }
+ ]
+}

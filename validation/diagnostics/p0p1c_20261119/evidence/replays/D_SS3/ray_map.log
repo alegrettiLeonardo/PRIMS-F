@@ -1,0 +1,8 @@
+TRIAL time_s dt_s status index stage norm   9.7131852338700099E+01  1.1071687499999994E-07     0     0     0  5.069258E-08
+NEWTON linear_status max|dx|    0  2.156787E-08
+RAY admissible_samples best_norm best_lambda norm_ratio   143  5.069238E-08  3.921325E-06  1.0000E+00
+BOUNDARY lambda_admissible lambda_refused status index stage   4.1542386429189259E-06  4.1542386429189267E-06  1017    69     1
+BOUNDARY norm_at_edge   5.069237E-08 norm_ratio   9.999958E-01 Armijo(1e-4)  T
+CELL lambda   0.000000E+00 alpha   6.38272E-01 theta  0.901239 ug_max_m_s   6.24560E-01 sign_changes   0 closure_domain_errors     1 Phi(ug=0),Phi(ug_max)   3.19679E-01  0.00000E+00 min|Phi|/alpha   7.74634E-08 at ug_m_s   6.24560E-01
+CELL lambda   4.154239E-06 alpha   6.38272E-01 theta  0.901239 ug_max_m_s   6.24560E-01 sign_changes   0 closure_domain_errors     0 Phi(ug=0),Phi(ug_max)   3.19679E-01  2.35922E-14 min|Phi|/alpha   3.69627E-14 at ug_m_s   6.24560E-01
+CELL lambda   4.154239E-06 alpha   6.38272E-01 theta  0.901239 ug_max_m_s   6.24560E-01 sign_changes   0 closure_domain_errors     0 Phi(ug=0),Phi(ug_max)   3.19679E-01  2.37079E-14 min|Phi|/alpha   3.71439E-14 at ug_m_s   6.24560E-01

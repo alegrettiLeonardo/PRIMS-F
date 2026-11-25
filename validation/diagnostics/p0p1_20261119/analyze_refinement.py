@@ -14,6 +14,8 @@ from analyze_accepted_conservation import audit_ledger
 from cycle_waveform import wave_difference
 sys.path.insert(0,str(Path(__file__).parent))
 from step_metadata import statistics as step_statistics
+sys.path.insert(0,str(Path(__file__).parents[1]/'p0p1c_20261119'))
+import settling_criteria as v2
 
 def data(path):
  with path.open()as f:rows=list(csv.DictReader(f))
@@ -37,8 +39,13 @@ def summarize(folder):
  if not m['available']:return result
  edges=cycle_markers(m)
  periods=np.diff(edges);amp=np.array([x['semi_amplitude_Pa']for x in m['peak_records']if x['peak_time_s']<edges[-1]]);means=np.array([integral(t,p,l,r)/(r-l)for l,r in zip(edges[:-1],edges[1:])])
- variation={name:float(np.ptp(x)/abs(np.mean(x)))for name,x in [('period',periods),('amplitude',amp),('mean',means)]}
- result.update(settled=all(x<=.005 for x in variation.values()),settling_variation=variation,period_s=float(np.mean(periods)),semi_amplitude_Pa=float(np.mean(amp)),mean_Pa=float(np.mean(means)),window_s=[edges[0],edges[-1]])
+ c0=v2.pressure_c0(periods,amp,means);variation=c0['variation']
+ # Pressure-only acceptance is kept for traceability but is no longer 'settled':
+ # inventories, phase fluxes, holdups and waveforms enter the v2 criteria.
+ result.update(pressure_settled=c0['passed'],settling_variation=variation,period_s=float(np.mean(periods)),semi_amplitude_Pa=float(np.mean(amp)),mean_Pa=float(np.mean(means)),window_s=[edges[0],edges[-1]])
+ cons=data(folder/'conservation.csv')
+ result['settling_v2']=v2.settle(t,d,edges,v2.feed_rates(cons,edges),c0)
+ result['settled']=result['settling_v2']['settled']
  channels=['p_riser_base_Pa','p_junction_Pa','holdup_liquid_base','holdup_liquid_out','mdot_l_base_kg_s','mdot_g_base_kg_s','mdot_l_out_kg_s','mdot_g_out_kg_s','Ml_kg','Mg_kg','Ml_pipe_kg','Mg_pipe_kg','Ml_riser_kg','Mg_riser_kg']
  waves={}
  for key in channels:
@@ -73,6 +80,8 @@ def main():
    for key in ['period_s','semi_amplitude_Pa','mean_Pa']:
     d[key+'_relative_difference']=abs(fine[key]-coarse[key])/max(abs(fine[key]),abs(coarse[key]))
    d['waveforms']={k:wave_difference(coarse['phase_waveforms'][k],fine['phase_waveforms'][k],fine['period_s'])for k in fine['phase_waveforms']}
+   d['convergence_v2']=v2.compare(coarse['settling_v2'],fine['settling_v2'])
+   d['period_amplitude_within_1percent']=d['period_s_relative_difference']<=.01 and d['semi_amplitude_Pa_relative_difference']<=.01
    comparisons.append(d)
  fig,axes=plt.subplots(3,2,figsize=(10,9))
  for column,(axis,key,label) in enumerate([('space','n','space'),('time','dt_max_s','time')]):
@@ -92,6 +101,6 @@ def main():
     order=brentq(fun,.05,8);r=h[1]/h[2];ext=y[2]+(y[2]-y[1])/(r**order-1);entry.update(observed_order=order,formal_extrapolate=float(ext),estimated_finest_error_relative=float(abs(ext-y[2])/abs(ext)))
    except(ValueError,ZeroDivisionError):entry['reason']='No positive observed order in [0.05,8] for the signed differences'
    orders.append(entry)
- (a.output/'summary.json').write_text(json.dumps(dict(analysis_script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),settling_range_over_mean_limit=.005,period_amplitude_target=.01,runs=result,comparisons=comparisons,orders=orders,interpretation='new common-initial-value campaign; settling and discretization convergence are separate; no experimental validation or GCI claimed'),indent=2,allow_nan=False)+'\n')
+ (a.output/'summary.json').write_text(json.dumps(dict(criteria_v2_protocol_sha256=v2.protocol_sha256(),analysis_script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),settling_range_over_mean_limit=.005,period_amplitude_target=.01,runs=result,comparisons=comparisons,orders=orders,interpretation='new common-initial-value campaign; settling and discretization convergence are separate; no experimental validation or GCI claimed'),indent=2,allow_nan=False)+'\n')
  for x in result:print(x['n'],x['dt_max_s'],x.get('period_s'),x.get('semi_amplitude_Pa'),x.get('settling_variation'),x['settled'])
 if __name__=='__main__':main()

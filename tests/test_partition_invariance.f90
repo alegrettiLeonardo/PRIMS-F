@@ -6,14 +6,14 @@ program test_partition_invariance
  type(sim_config_t)::cfg
  type(pipeline_riser_simulator_t)::sim
  real(wp)::u(6,3),r(3,6),ref(3,6),a(3,3,6),b(3,3,6),c(3,3,6),norm,fi(3),fo(3),base(2,2),p,rl,rg,alpha
- integer::i,k,st,n
+ integer::i,k,st,n,cid
  cfg%omega_rho=997.05_wp;cfg%omega_P=101325._wp;cfg%omega_u=1
  cfg%nCl=1498*sqrt(cfg%omega_rho/cfg%omega_P);cfg%nCg=343*sqrt(cfg%omega_rho/cfg%omega_P)
  cfg%nrho_l0=1;cfg%nP_l0=1;cfg%nPs=2.1_wp;cfg%mul=.5_wp;cfg%mug=.001_wp
  cfg%D_H=.05254_wp;cfg%AREA=acos(-1._wp)*cfg%D_H**2/4;cfg%Lr=12.546253993197219_wp
  cfg%eps=4.6e-5_wp;cfg%G=9.81_wp;cfg%mu_l=.00089_wp;cfg%mu_g=.0000185_wp;cfg%sigma=.0728_wp
  cfg%tol=1e-12_wp;cfg%tola=1e-13_wp;cfg%nCells=6;cfg%num_dummy_cells=0
- cfg%closure_pipe=2;cfg%closure_riser=2;cfg%junction_model='MATCHED'
+ cfg%junction_model='MATCHED'
  allocate(cfg%thetav(6),cfg%cell_width(6));cfg%thetav=0;cfg%cell_width=1
  do i=1,6
   p=2.1_wp+.001_wp*(i-1);alpha=.25_wp+.01_wp*(i-1)
@@ -21,6 +21,10 @@ program test_partition_invariance
   u(i,:)=[(1-alpha)*rl,alpha*rg,.6_wp+.003_wp*(i-1)]
  enddo
  n=0
+ ! Homogeneous partition with the same closure on both sides: Bendiksen (2)
+ ! and CHEXAL_1992 (5, the riser default; horizontal, co-current states).
+ do cid=2,5,3
+ cfg%closure_pipe=cid;cfg%closure_riser=cid
  do k=0,4,2
   cfg%N_pipe=k;call sim%init(cfg);call sim%prepare_dissipation(u,st)
   call check(st==0,'prepare')
@@ -30,6 +34,7 @@ program test_partition_invariance
   call check(maxval(abs(r-ref))<1e-12_wp,'physical partition invariance including removal')
   call check(maxval(abs(sum(r(:2,:),dim=2)-.001_wp*(fo(:2)-fi(:2))))<1e-15_wp,'global phase conservation')
   if(k>0)call check(all(base(:,1)==base(:,2)),'one common phase flux')
+ enddo
  enddo
  write(*,'(a,i0,a)')'PASS partition: ',n,' assertions'
 contains

@@ -1,0 +1,25 @@
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+At line 53 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ul0' of procedure 'solve'
+At line 53 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ur0' of procedure 'solve'
+At line 54 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'u' of procedure 'flux_of'
+At line 57 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ul0' of procedure 'solve'
+At line 57 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ur0' of procedure 'solve'
+At line 58 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'u' of procedure 'flux_of'
+At line 64 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ul0' of procedure 'solve'
+At line 64 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ur0' of procedure 'solve'
+At line 65 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 65 of file validation/diagnostics/junction_constitutive/junction_riemann_ref.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL

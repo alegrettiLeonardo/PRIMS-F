@@ -2,6 +2,11 @@
 
 ## Seleção e escopo
 
+> Desde 21/11/2026, na branch `implementation/chexal-riser-20261121`, o ID 5 é o
+> default do riser (namelist, `sim_config_t` e decks primários). Bhagwat é o ID 3
+> explícito. ACTIVE_SET, E1 e E2 são recusados com IDs 5–7. Consulte
+> [CHEXAL_LELLOUCHE_RISER_QUALIFICATION.md](CHEXAL_LELLOUCHE_RISER_QUALIFICATION.md).
+
 `closure_riser=5` seleciona `CHEXAL_1992` ar–água. IDs `6` e `7` selecionam,
 respectivamente, o ramo de maior e de menor fração de vazio da mesma correlação.
 São escolhas explícitas do usuário/modelo; não são um critério experimental para

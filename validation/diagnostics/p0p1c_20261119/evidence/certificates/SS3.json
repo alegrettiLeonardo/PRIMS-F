@@ -1,0 +1,498 @@
+{
+ "case": "SS3",
+ "raw": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/cert/SS3/certificate.raw",
+ "run": {
+  "status": {
+   "status": "6000",
+   "reached_time_s": "9.7131852191077598E+01",
+   "requested_time_s": "1.1000000000000000E+02",
+   "accepted_steps": "810",
+   "rejected_steps": "24",
+   "last_rejection_status": "6000",
+   "termination_reason": "NEWTON_GLOBALIZATION_FAILURE",
+   "cpu_seconds": "1.6507950100000002E+02",
+   "wall_seconds": "1.7370243626100000E+02",
+   "newton_iterations_total": "2409",
+   "jacobian_evaluations_total": "2409",
+   "residual_evaluations_total": "7362",
+   "linear_solves_total": "2409",
+   "backtrack_trials_total": "4953",
+   "prepare_calls_total": "834"
+  },
+  "accepted_steps": 810,
+  "min_dt_accepted_s": 2.2143374999999988e-07,
+  "last_dt_accepted_s": 2.2143374999999988e-07,
+  "min_dt_tried_s": 1.3286024999999991e-07,
+  "rejected_proposal_codes": {
+   "1017@CELL73": 105,
+   "1017@CELL65": 1,
+   "1017@CELL70": 155,
+   "1017@CELL72": 171,
+   "1017@CELL74": 260,
+   "1017@CELL71": 154,
+   "1017@CELL66": 9,
+   "1017@CELL69": 1705,
+   "1017@CELL68": 8
+  },
+  "last_trial_codes": [
+   "1017"
+  ],
+  "reduction_reason": "dt halved after each non-converged Newton sequence (dt_shrink); see rejected_proposals.csv"
+ },
+ "accepted_state": {
+  "time_s": 97.1318521910776,
+  "dt_s": 1.3286024999999991e-07,
+  "status": 0.0,
+  "index": 0.0,
+  "stage": 0.0,
+  "residual_norm": 9.437726e-08
+ },
+ "last_trial": {
+  "time_s": 97.1318521910776,
+  "dt_s": 1.3286024999999991e-07,
+  "status": 0.0,
+  "index": 0.0,
+  "stage": 0.0,
+  "residual_norm": 2.242457e-08
+ },
+ "jacobian": {
+  "lapack_info": 0,
+  "norm1": 1.358046,
+  "condition_1norm_estimate": 1.844256,
+  "fd_max_relative_error_local_columns": 1.877685e-09,
+  "fd_columns_without_admissible_stencil": 0
+ },
+ "residual_dominant": [
+  {
+   "cell": 54,
+   "component": 2,
+   "scaled": 2.242457e-08
+  },
+  {
+   "cell": 55,
+   "component": 2,
+   "scaled": 1.451533e-08
+  },
+  {
+   "cell": 54,
+   "component": 1,
+   "scaled": -1.162913e-08
+  },
+  {
+   "cell": 56,
+   "component": 2,
+   "scaled": 1.042571e-08
+  },
+  {
+   "cell": 104,
+   "component": 3,
+   "scaled": 9.540878e-09
+  }
+ ],
+ "newton": {
+  "linear_info": 0,
+  "max_scaled_step": 2.242457e-08,
+  "at_cell": 54,
+  "component": 2
+ },
+ "ray": {
+  "admissible_samples": 210,
+  "best_norm": 2.242448e-08,
+  "best_lambda": 3.667491e-06,
+  "best_norm_ratio": 0.9999963
+ },
+ "boundary": {
+  "lambda_admissible": 3.6817117703119605e-06,
+  "lambda_refused": 3.681711770311961e-06,
+  "status": 1017,
+  "index": 69,
+  "stage": "CELL",
+  "norm_ratio_at_edge": 0.9999963,
+  "decoded": {
+   "site": "cell primitive recovery",
+   "primitive_status": 7,
+   "primitive_name": "NO_PHYSICAL_ROOT"
+  }
+ },
+ "location": {
+  "index": 69,
+  "s_m": 61.2131,
+  "inclination_deg": 51.6372,
+  "width_m": 0.246005
+ },
+ "cells": [
+  {
+   "state": "accepted",
+   "index": 68,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    366.495142,
+    1.23140376,
+    0.947838342
+   ],
+   "alpha": 0.632441484,
+   "rho_l": 997.106927,
+   "rho_g": 1.94706355,
+   "p_Pa": 229070.08,
+   "u_l": 0.000443646203,
+   "u_g": 0.637682121,
+   "eigen_real_m_s": [
+    0.01670581,
+    -148.3972,
+    149.0787
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "accepted",
+   "index": 69,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    360.681733,
+    1.23933819,
+    0.774043432
+   ],
+   "alpha": 0.638271659,
+   "rho_l": 997.106647,
+   "rho_g": 1.94170957,
+   "p_Pa": 228440.189,
+   "u_l": 7.56134161e-09,
+   "u_g": 0.624559714,
+   "eigen_real_m_s": [
+    -32.90597,
+    0.3724642,
+    33.16097
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "accepted",
+   "index": 70,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    355.79926,
+    1.24499166,
+    0.799453978
+   ],
+   "alpha": 0.643168188,
+   "rho_l": 997.106332,
+   "rho_g": 1.93571711,
+   "p_Pa": 227735.182,
+   "u_l": 5.78690065e-05,
+   "u_g": 0.625597947,
+   "eigen_real_m_s": [
+    -115.1008,
+    0.02851419,
+    115.7417
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "trial",
+   "index": 68,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    366.495142,
+    1.23140378,
+    0.947826216
+   ],
+   "alpha": 0.632441484,
+   "rho_l": 997.106927,
+   "rho_g": 1.94706358,
+   "p_Pa": 229070.083,
+   "u_l": 0.000443616973,
+   "u_g": 0.637680966,
+   "eigen_real_m_s": [
+    0.01670584,
+    -148.3969,
+    149.0784
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "trial",
+   "index": 69,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    360.681732,
+    1.23933821,
+    0.774040708
+   ],
+   "alpha": 0.63827166,
+   "rho_l": 997.106647,
+   "rho_g": 1.9417096,
+   "p_Pa": 228440.193,
+   "u_l": 8.57759249e-15,
+   "u_g": 0.624559706,
+   "eigen_real_m_s": [
+    -30.40183,
+    0.4373907,
+    30.59136
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "trial",
+   "index": 70,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    355.79926,
+    1.24499164,
+    0.799455679
+   ],
+   "alpha": 0.643168187,
+   "rho_l": 997.106332,
+   "rho_g": 1.93571708,
+   "p_Pa": 227735.179,
+   "u_l": 5.78734777e-05,
+   "u_g": 0.625598045,
+   "eigen_real_m_s": [
+    -115.1025,
+    0.0285133,
+    115.7434
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "ray_edge_admissible",
+   "index": 68,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    366.495142,
+    1.23140378,
+    0.947826216
+   ],
+   "alpha": 0.632441484,
+   "rho_l": 997.106927,
+   "rho_g": 1.94706358,
+   "p_Pa": 229070.083,
+   "u_l": 0.000443616973,
+   "u_g": 0.637680966,
+   "eigen_real_m_s": [
+    0.01670584,
+    -148.3969,
+    149.0784
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "ray_edge_admissible",
+   "index": 69,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    360.681732,
+    1.23933821,
+    0.774040708
+   ],
+   "alpha": 0.63827166,
+   "rho_l": 997.106647,
+   "rho_g": 1.9417096,
+   "p_Pa": 228440.193,
+   "u_l": 0.0,
+   "u_g": 0.624559706,
+   "eigen_real_m_s": [
+    -30.39905,
+    0.437472,
+    30.5885
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "ray_edge_admissible",
+   "index": 70,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    355.79926,
+    1.24499164,
+    0.799455679
+   ],
+   "alpha": 0.643168187,
+   "rho_l": 997.106332,
+   "rho_g": 1.93571708,
+   "p_Pa": 227735.179,
+   "u_l": 5.78734777e-05,
+   "u_g": 0.625598045,
+   "eigen_real_m_s": [
+    -115.1025,
+    0.0285133,
+    115.7434
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "ray_first_refused",
+   "index": 68,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    366.495142,
+    1.23140378,
+    0.947826216
+   ],
+   "alpha": 0.632441484,
+   "rho_l": 997.106927,
+   "rho_g": 1.94706358,
+   "p_Pa": 229070.083,
+   "u_l": 0.000443616973,
+   "u_g": 0.637680966,
+   "eigen_real_m_s": [
+    0.01670584,
+    -148.3969,
+    149.0784
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  },
+  {
+   "state": "ray_first_refused",
+   "index": 69,
+   "closure": 3,
+   "status": 17,
+   "U_SI": [
+    360.681732,
+    1.23933821,
+    0.774040708
+   ],
+   "alpha": NaN,
+   "rho_l": NaN,
+   "rho_g": NaN,
+   "p_Pa": NaN,
+   "u_l": NaN,
+   "u_g": NaN,
+   "eigen_real_m_s": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "eigen_imag_m_s": [
+    NaN,
+    NaN,
+    NaN
+   ],
+   "hyperbolic": null
+  },
+  {
+   "state": "ray_first_refused",
+   "index": 70,
+   "closure": 3,
+   "status": 0,
+   "U_SI": [
+    355.79926,
+    1.24499164,
+    0.799455679
+   ],
+   "alpha": 0.643168187,
+   "rho_l": 997.106332,
+   "rho_g": 1.93571708,
+   "p_Pa": 227735.179,
+   "u_l": 5.78734777e-05,
+   "u_g": 0.625598045,
+   "eigen_real_m_s": [
+    -115.1025,
+    0.0285133,
+    115.7434
+   ],
+   "eigen_imag_m_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hyperbolic": true
+  }
+ ],
+ "faces": [],
+ "root_maps": [
+  {
+   "state": "ray_first_refused",
+   "cell": 69,
+   "alpha": 0.6382717,
+   "interior_sign_changes": 0,
+   "closure_domain_samples": 0,
+   "phi_ug0_ugmax": [
+    0.3196792,
+    2.370789e-14
+   ],
+   "min_abs_phi_over_alpha": 3.714388e-14,
+   "at_ug_m_s": 0.6245597
+  }
+ ],
+ "margins": {
+  "status": 0,
+  "junction_raw_gas_superficial_nd": 0.2269349,
+  "min_riser_drift_margin_m_s": 9.574286e-13,
+  "at_cell": 69
+ },
+ "classification": {
+  "blockage_in": "NEWTON_PROPOSAL",
+  "classes": [
+   "NO_ROOT_IN_DECLARED_BRANCH",
+   "CONSTITUTIVE_DOMAIN_LIMIT"
+  ],
+  "flags": [],
+  "evidence": [
+   "Jacobian assembled at the trial, LU nonsingular, local FD agreement 1.9e-09: not a Jacobian failure",
+   "admissible part of the Newton ray reduces the residual only to 0.999996: no admissible descent, not a line-search weakness",
+   "primitive recovery status 7: analytic exclusion over the whole co-current interval",
+   "root of the trial lies at the co-current endpoint (u_l=0); the proposal requires u_l<0"
+  ],
+  "not_implied": "absence of roots along local Newton proposals is not a proof that no global solution exists; the model, not the physics, is certified here"
+ }
+}

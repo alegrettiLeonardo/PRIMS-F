@@ -1,0 +1,78 @@
+STATE|t_s     9.570775|dt_s   8.3046E-02
+ITER 0|solver norm   7.2222E-02|max|R|/scale   7.2222E-02
+   cell   59|comp 2|scaled   7.222E-02|R   1.224E-08|scale   1.695E-07|U   1.00002E+00  1.69480E-07  1.00401E+00
+   cell   60|comp 2|scaled   6.544E-02|R   2.440E-08|scale   3.728E-07|U   9.99941E-01  3.72801E-07  1.00370E+00
+   cell   61|comp 2|scaled   5.937E-02|R   4.293E-08|scale   7.231E-07|U   9.99802E-01  7.23139E-07  1.00324E+00
+   cell   62|comp 2|scaled   5.398E-02|R   6.846E-08|scale   1.268E-06|U   9.99584E-01  1.26810E-06  1.00262E+00
+   cell   58|comp 2|scaled   5.239E-02|R   5.239E-09|scale   1.000E-07|U   1.00006E+00  6.57545E-08  1.00422E+00
+   max|dx|/scale   6.7485E-02
+ITER 1|solver norm   2.6377E-04|max|R|/scale   2.6377E-04
+   cell   59|comp 3|scaled   2.638E-04|R   2.648E-04|scale   1.004E+00|U   1.00003E+00  1.58042E-07  1.00456E+00
+   cell   58|comp 3|scaled   2.368E-04|R   2.378E-04|scale   1.004E+00|U   1.00007E+00  6.08959E-08  1.00476E+00
+   cell   60|comp 3|scaled   1.953E-04|R   1.960E-04|scale   1.004E+00|U   9.99950E-01  3.49848E-07  1.00426E+00
+   cell   57|comp 3|scaled   1.386E-04|R   1.392E-04|scale   1.004E+00|U   1.00008E+00  1.91306E-08  1.00491E+00
+   cell   61|comp 3|scaled   9.574E-05|R   9.605E-05|scale   1.003E+00|U   9.99818E-01  6.82501E-07  1.00382E+00
+   max|dx|/scale   6.8640E-06
+ITER 2|solver norm   5.4878E-10|max|R|/scale   5.4878E-10
+   cell   58|comp 3|scaled   5.488E-10|R  -5.511E-10|scale   1.004E+00|U   1.00007E+00  6.08955E-08  1.00476E+00
+   cell   61|comp 3|scaled   5.361E-10|R   5.378E-10|scale   1.003E+00|U   9.99818E-01  6.82497E-07  1.00382E+00
+   cell   60|comp 3|scaled   4.978E-10|R   4.996E-10|scale   1.004E+00|U   9.99950E-01  3.49845E-07  1.00425E+00
+   cell   62|comp 3|scaled   4.877E-10|R   4.889E-10|scale   1.003E+00|U   9.99610E-01  1.20294E-06  1.00321E+00
+   cell   57|comp 3|scaled   3.796E-10|R  -3.812E-10|scale   1.004E+00|U   1.00008E+00  1.91304E-08  1.00491E+00
+   max|dx|/scale   4.3364E-12
+ITER 3|solver norm   1.1826E-10|max|R|/scale   1.1826E-10
+   cell   55|comp 3|scaled   1.183E-10|R   1.188E-10|scale   1.005E+00|U   1.00009E+00  7.40044E-10  1.00516E+00
+   cell   57|comp 3|scaled   1.082E-10|R  -1.087E-10|scale   1.004E+00|U   1.00008E+00  1.91304E-08  1.00491E+00
+   cell   58|comp 3|scaled   9.694E-11|R   9.734E-11|scale   1.004E+00|U   1.00007E+00  6.08955E-08  1.00476E+00
+   cell   59|comp 3|scaled   5.517E-11|R   5.539E-11|scale   1.004E+00|U   1.00003E+00  1.58041E-07  1.00455E+00
+   cell   56|comp 3|scaled   5.500E-11|R  -5.525E-11|scale   1.005E+00|U   1.00009E+00  4.57765E-09  1.00503E+00
+   max|dx|/scale   3.7662E-13
+ITER 4|solver norm   1.4595E-10|max|R|/scale   1.4595E-10
+   cell   55|comp 3|scaled   1.460E-10|R   1.466E-10|scale   1.005E+00|U   1.00009E+00  7.40044E-10  1.00516E+00
+   cell   57|comp 3|scaled   1.084E-10|R  -1.089E-10|scale   1.004E+00|U   1.00008E+00  1.91304E-08  1.00491E+00
+   cell   58|comp 3|scaled   9.677E-11|R   9.717E-11|scale   1.004E+00|U   1.00007E+00  6.08955E-08  1.00476E+00
+   cell   56|comp 3|scaled   5.515E-11|R  -5.539E-11|scale   1.005E+00|U   1.00009E+00  4.57765E-09  1.00503E+00
+   cell   60|comp 3|scaled   2.345E-11|R  -2.353E-11|scale   1.004E+00|U   9.99950E-01  3.49845E-07  1.00425E+00
+   max|dx|/scale   3.5160E-13
+ITER 5|solver norm   3.1699E-10|max|R|/scale   3.1699E-10
+   cell   54|comp 3|scaled   3.170E-10|R  -3.185E-10|scale   1.005E+00|U   1.00009E+00  6.06321E-11  1.00528E+00
+   cell   55|comp 3|scaled   1.236E-10|R   1.242E-10|scale   1.005E+00|U   1.00009E+00  7.40044E-10  1.00516E+00
+   cell   57|comp 3|scaled   1.087E-10|R  -1.092E-10|scale   1.004E+00|U   1.00008E+00  1.91304E-08  1.00491E+00
+   cell   58|comp 3|scaled   9.654E-11|R   9.695E-11|scale   1.004E+00|U   1.00007E+00  6.08955E-08  1.00476E+00
+   cell   56|comp 3|scaled   5.512E-11|R  -5.537E-11|scale   1.005E+00|U   1.00009E+00  4.57765E-09  1.00503E+00
+   max|dx|/scale   1.5476E-12
+ITER 6|solver norm   1.0790E-10|max|R|/scale   1.0790E-10
+   cell   57|comp 3|scaled   1.079E-10|R  -1.084E-10|scale   1.004E+00|U   1.00008E+00  1.91304E-08  1.00491E+00
+   cell   58|comp 3|scaled   9.764E-11|R   9.805E-11|scale   1.004E+00|U   1.00007E+00  6.08955E-08  1.00476E+00
+   cell   55|comp 3|scaled   9.016E-11|R   9.058E-11|scale   1.005E+00|U   1.00009E+00  7.40044E-10  1.00516E+00
+   cell   59|comp 3|scaled   5.568E-11|R   5.591E-11|scale   1.004E+00|U   1.00003E+00  1.58041E-07  1.00455E+00
+   cell   56|comp 3|scaled   5.478E-11|R  -5.502E-11|scale   1.005E+00|U   1.00009E+00  4.57765E-09  1.00503E+00
+   max|dx|/scale   4.6546E-13
+ITER 7|solver norm   1.3532E-10|max|R|/scale   1.3532E-10
+   cell   55|comp 3|scaled   1.353E-10|R   1.359E-10|scale   1.005E+00|U   1.00009E+00  7.40044E-10  1.00516E+00
+   cell   57|comp 3|scaled   1.082E-10|R  -1.086E-10|scale   1.004E+00|U   1.00008E+00  1.91304E-08  1.00491E+00
+   cell   58|comp 3|scaled   9.725E-11|R   9.766E-11|scale   1.004E+00|U   1.00007E+00  6.08955E-08  1.00476E+00
+   cell   59|comp 3|scaled   5.537E-11|R   5.559E-11|scale   1.004E+00|U   1.00003E+00  1.58041E-07  1.00455E+00
+   cell   56|comp 3|scaled   5.464E-11|R  -5.488E-11|scale   1.005E+00|U   1.00009E+00  4.57765E-09  1.00503E+00
+   max|dx|/scale   3.9251E-13
+ITER 8|solver norm   1.4680E-10|max|R|/scale   1.4680E-10
+   cell   55|comp 3|scaled   1.468E-10|R   1.475E-10|scale   1.005E+00|U   1.00009E+00  7.40044E-10  1.00516E+00
+   cell   57|comp 3|scaled   1.082E-10|R  -1.087E-10|scale   1.004E+00|U   1.00008E+00  1.91304E-08  1.00491E+00
+   cell   58|comp 3|scaled   9.694E-11|R   9.734E-11|scale   1.004E+00|U   1.00007E+00  6.08955E-08  1.00476E+00
+   cell   59|comp 3|scaled   5.509E-11|R   5.531E-11|scale   1.004E+00|U   1.00003E+00  1.58041E-07  1.00455E+00
+   cell   56|comp 3|scaled   5.500E-11|R  -5.525E-11|scale   1.005E+00|U   1.00009E+00  4.57765E-09  1.00503E+00
+   max|dx|/scale   3.7973E-13
+ITER 9|solver norm   1.2731E-10|max|R|/scale   1.2731E-10
+   cell   55|comp 3|scaled   1.273E-10|R   1.279E-10|scale   1.005E+00|U   1.00009E+00  7.40044E-10  1.00516E+00
+   cell   57|comp 3|scaled   1.084E-10|R  -1.089E-10|scale   1.004E+00|U   1.00008E+00  1.91304E-08  1.00491E+00
+   cell   58|comp 3|scaled   9.679E-11|R   9.720E-11|scale   1.004E+00|U   1.00007E+00  6.08955E-08  1.00476E+00
+   cell   56|comp 3|scaled   5.517E-11|R  -5.542E-11|scale   1.005E+00|U   1.00009E+00  4.57765E-09  1.00503E+00
+   cell   60|comp 3|scaled   2.336E-11|R  -2.345E-11|scale   1.004E+00|U   9.99950E-01  3.49845E-07  1.00425E+00
+   max|dx|/scale   3.4481E-13
+ITER 10|solver norm   3.3430E-10|max|R|/scale   3.3430E-10
+   cell   54|comp 3|scaled   3.343E-10|R  -3.359E-10|scale   1.005E+00|U   1.00009E+00  6.06321E-11  1.00528E+00
+   cell   55|comp 3|scaled   1.409E-10|R   1.415E-10|scale   1.005E+00|U   1.00009E+00  7.40044E-10  1.00516E+00
+   cell   57|comp 3|scaled   1.087E-10|R  -1.092E-10|scale   1.004E+00|U   1.00008E+00  1.91304E-08  1.00491E+00
+   cell   58|comp 3|scaled   9.648E-11|R   9.689E-11|scale   1.004E+00|U   1.00007E+00  6.08955E-08  1.00476E+00
+   cell   56|comp 3|scaled   5.520E-11|R  -5.545E-11|scale   1.005E+00|U   1.00009E+00  4.57765E-09  1.00503E+00
+   max|dx|/scale   1.5495E-12

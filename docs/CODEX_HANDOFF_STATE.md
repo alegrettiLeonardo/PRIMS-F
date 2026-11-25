@@ -1,3 +1,294 @@
+## Atualização: qualificação numérica T1 + LIQUID_BRIDGE, Jacobiano implícito, 22/11/2026 (rodada 6)
+
+Relatório: [PRIMSF_T1_SEAL_JACOBIAN_PERFORMANCE_QUALIFICATION.md](PRIMSF_T1_SEAL_JACOBIAN_PERFORMANCE_QUALIFICATION.md).
+Branch `implementation/t1-seal-jacobian-20261122`, a partir de `56998bb`. Sem push nem merge; `main`
+intacta (`f3717dd`). Evidência bruta em `~/Documentos/PRIMS-F-t1seal-jac-results-20261122/`.
+
+- **Opções novas, desligadas por default.** Com os defaults o binário é byte-idêntico a seal5,
+  T2, Bhagwat e T1.
+  - `junction_seal='H4_ONLY'`: operador B, recusa 1628 no selo.
+  - `junction_seal_curve_steps=N`: curva cinemática em (p, U₃) com N passos fixos, bem
+    condicionada; elimina o quantum nCl²·ε de F₃ na face.
+  - `junction_seal_jacobian='IMPLICIT'`: dF*/dW pelo teorema da função implícita (H4 e H7
+    separados; status 73/74/75).
+  - `junction_t1_curve_steps`: passos da T1 original (8).
+  - `momentum_ledger`: balanço de momento por passo.
+- **P0.1 PASS.** B ≡ C em H4; RK4 de ordem ≈ 4. Os 273 Pa T1 × seal4 são histórico de Δt
+  (Euler implícito), não operador: com o mesmo Δt, ≤ 0,05 Pa.
+- **P0.2 PASS.** Implícito ≤ 7,6e-6 contra Richardson da face completa em 9 estados (3 em H7).
+  Troca contínua e Lipschitz numérico; J₊ ≠ J₋; semissuavidade NOT_VERIFIED.
+- **P0.3/P0.4.**
+  - SS1 0→3 s em núcleo isolado: 17,3 contra 862 CPU-s por s simulado (seal5), 0 rejeições,
+    mesma solução.
+  - **Piso em H7 não resolvido:** células quase líquidas, p(U₁) com quantum nCl²·ε, δR₃ ≈
+    (Δt/Δs)π_P δp ≈ 1e-10. Força Δt ≈ 0,085 s.
+  - Correção exige trocar incógnitas (δρ ou p) ou o critério de aceitação: fora do mandato.
+- **P0.5 PASS.** RH da frente móvel ≤ 8,6e-12 (37 estados); balanço de momento ≤ 5e-15 do bruto.
+- **P1.1.** SS1 desde t = 0 com C16 + IMPLICIT: SEAL 53,45 → PEN 67,30 → BLOW 84,93 → SEAL
+  91,93 s, em 2073 CPU-s. A réplica concorda a ≤ 0,23 s.
+- **P1.2 BLOCKED.** Em 92,2 s a queda de líquido no trecho **inclinado** da catenária é
+  contracorrente, e o CHEXAL_1992 recusa por domínio (61 → 1071). Há um único intervalo
+  SEAL→SEAL (38,5 s).
+- **P1.3.**
+  - p_in em H4 (0–50 s) converge com ordem ≈ 1 em Δt e em malha; o erro ainda é O(100 Pa)
+    com Δt = 0,0625 s.
+  - **O primeiro selo não converge em malha:** 53,2 s (51 nós), 94,4 s (101 nós), 96,6 s
+    (201 nós).
+  - Intervalo SEAL→SEAL: 38,48 / 39,78 / 40,65 s (Δt 0,5 / 0,25 / 0,125), ordem ≈ 0,6.
+  - Δt 0,0625 s falha em 70,45 s (3625, face), e 201 nós falham em 97,97 s (3621):
+    modos de falha novos, não investigados.
+  - Período e amplitude: NOT_VERIFIED.
+- **P2: NOT_VERIFIED.**
+- **`ececf68`:** estênceis adicionais do Jacobiano implícito, tentados só depois de todos os
+  originais falharem. Corrige o status 73 com α ≈ 2e-14 (Δt 0,125/0,0625 s, ~69 s). Os
+  caminhos que já funcionavam são byte-idênticos.
+- **Próximo passo:**
+  1. Decidir a extensão física para contracorrente inclinada no riser (fechamento),
+     necessária para o segundo ciclo.
+  2. Reformular as incógnitas de célula líquida (δρ_l ou p) para remover o piso de H7.
+  3. Resolver a dependência de malha do início da intermitência (MUSCL de 2ª ordem já
+     existe como opção, mas não foi qualificado com a T1 + selo), ou partir de um estado
+     de ciclo estabelecido.
+  4. Só então o refinamento de período e amplitude e a comparação com Baliño 2010.
+
+## Atualização: limite de selo líquido T1 + Chexal, 22/11/2026 (rodada 5)
+
+Relatório: [PRIMSF_T1_CHEXAL_SEAL_LIMIT_QUALIFICATION.md](PRIMSF_T1_CHEXAL_SEAL_LIMIT_QUALIFICATION.md).
+Branch `implementation/chexal-riser-20261121` (`538df1e` → `46e8830` + docs), sem push nem merge;
+`main` intacta (`f3717dd`).
+
+- **P0.1 PASS — causa da falha em 53,48 s:** ausência local da fase gasosa na face.
+  - Não existe raiz H4 para α_R* > 0; g₀ troca de sinal entre 53,450 e 53,475 s.
+  - A raiz da T1 em 53,4753 s era artefato da curva de 8 passos.
+  - Não é degeneração do Chexal nem perda de hiperbolicidade; o Newton falha em consequência.
+- **P0.2 PASS:** limite Chexal α → 0 regular (C₀ → 0, V_gj → 0,34419 m/s, F_g C¹, λ hiperbólico).
+- **Opção nova:** `junction_seal = 'OFF'` (default) | `'LIQUID_BRIDGE'` (experimental; só T1 + fechamentos 1/5).
+  `junction_seal_face_tol` 1e-11 ∈ [1e-14, 1e-9].
+  - **H7 (ponte líquida):** G_g* = 0 exato, frente de acumulação no oleoduto com s = u_g ≤ 0.
+  - **Seleção** pelo sinal de g; diferenças unilaterais na configuração base (Newton semissuave).
+  - **Preservação:** OFF byte-idêntico a T2, Bhagwat e T1.
+  - **Testes:** `test_junction_seal` com 26 asserções; Fortran 31/31, Python 123 (`PYTHONPATH=scripts`), CLI 8/8.
+- **Réplica a partir de 53,4753 s:**
+  - A T1 sem extensão não aceita nenhum passo.
+  - Com a extensão, 33,9 s: H7 por 14 s → reaparecimento do gás → produção → **início do blowdown**.
+  - Parada por COST_STAGNATION; seal4 × seal5 coincidem a ≤ 3 Pa.
+- **SS1 desde 0 com extensão: BLOCKED por custo** (TIMEOUT 6 h em 43,4 s). São ≈ 5× mais passos que a
+  T1, provavelmente pelo Jacobiano da face por diferenças (~1e-4). Os seis balanços ≤ 5,8e-11·M₀.
+- **P2.2 e Baliño 2010: NOT_VERIFIED** (sem ciclo completo).
+- **Próximo passo:**
+  1. Jacobiano analítico ou diferenciação implícita da face H4/H7, com derivadas laterais
+     explícitas na troca, para recuperar o Δt da T1.
+  2. Só depois, SS1 completo e refinamento.
+  3. Não usar 1e-13 na face (abaixo do piso de ruído).
+
+## Atualização: transmissão T1 implementada e qualificada, 21/11/2026 (rodada 4)
+
+Relatório: [PRIMSF_T1_JUNCTION_QUALIFICATION.md](PRIMSF_T1_JUNCTION_QUALIFICATION.md). Branch
+`implementation/chexal-riser-20261121`, sem push nem merge; `main` intacta (`f3717dd`).
+
+- **Opção:** `junction_transmission` = `'T2'` (default, operador original) ou `'T1'`
+  (experimental; exige MATCHED, ROE, traços CENTER, sem limitador no riser).
+  - Solver de face com camada estacionária: ondas acústicas linearizadas e onda cinemática por
+    curva integral em ln α.
+  - Estacionário inicial próprio da T1.
+  - Contrato, checkpoint e `junction_transmission.csv` registram a opção.
+- **P0-A..E: PASS.**
+  - Face global = referência local (G_g* ≤ 1,7e-4; 1,1e-3 no bloqueio do SS1).
+  - Salto de fluxo zero; identidade de momento ~1e-16.
+  - Jacobiano global ≤ 1,6e-8; partição homogênea com segunda ordem para o Roe.
+  - T2 idêntica byte a byte (16/16).
+- **P0-F replay 52,94 s:** a T2 bloqueia em t = 0 (3061); a T1 atravessa com G_g* > 0 e para em
+  3,15 s no limite de selo (1613/1614/1615).
+- **P1-A: PASS.** **P1-B, SS1 desde t = 0: BLOCKED** em 53,48 s. G_g* → 0⁺ e α_R* → 4e-4 (formação
+  do selo sem inversão de gás); o estado selado G_g* = 0 / α_R* = 0 e a quina do Chexal em j_g = 0
+  não estão representados.
+- **P1-C e P2: NOT_VERIFIED.**
+- **Outros casos com T1:** Stable 300 s COMPLETED; OSC BLOCKED_CONSTITUTIVE_DOMAIN em 163,75 s (T2:
+  145,70 s); SS3 BLOCKED_CONSTITUTIVE_DOMAIN em 41,65 s (T2: 41,55 s), depois da correção do critério da face (`20e00ba`; com 1e-11 havia MAX_NEWTON em 10,56 s).
+- **Suítes:** Fortran 30/30, Python 123 OK, CLI 8/8; T2 idêntica byte a byte.
+- **Guarda:** relógio monotônico. Três veredictos COST_STAGNATION da suspensão foram invalidados
+  e refeitos.
+- **Próximo passo:** representação fechada e fundamentada do estado selado sob T1 (ramo
+  α_R* = 0 da onda cinemática, com o Chexal no limite j_g → 0⁺) antes de qualquer campanha
+  de convergência.
+
+## Atualização: domínio físico Chexal e transmissão na junção, 21/11/2026 (rodada 3)
+
+Relatório: [CHEXAL_PHYSICAL_DOMAIN_AND_JUNCTION_QUALIFICATION.md](CHEXAL_PHYSICAL_DOMAIN_AND_JUNCTION_QUALIFICATION.md).
+
+- **P0.1:**
+  - contrato executável ar–água no núcleo (`CHEXAL_UNQUALIFIED` = 68 para ρg/ρl > 8,1e-3
+    ou D ∉ [0,010; 0,305] m);
+  - EPRI 1000 psia decomposto: as linhas 2, 6 e 7 implicam as mesmas propriedades
+    (ρg/ρf = 0,0468, grupo de Vgj +2,5 %), com equações verificadas;
+  - FAIL mantido para uso generalizado; subconjunto qualificado = ramo C5 < 1 (todo o PRIMS-F).
+- **P0.2: recomendação T1.**
+  - Fundamentos: Burr (72)–(75) e discretização nodal; balanço integral; dobra sem força
+    tangencial; Riemann local com Chexal (8 estados, multistart).
+  - No bloqueio do SS1, a T1 tem solução única com G_g* = 2,94e-3; a T2 não tem solução
+    (só G_g* ≤ 0).
+  - O operador atual ≈ T2. Ainda **não implementado**: próximo passo, T1 opt-in com
+    Jacobiano, partição e replay curto do SS1.
+- **P1.1:** registro rastreável de 9 fontes em `validation/experimental_airwater/`; nenhum
+  ponto primário de α acessível: NOT_VERIFIED.
+- **P1.2:**
+  - mecanismo B (líquido descendo a 65–76°): BLOCKED (Ousaka et al. 2006 é limite de
+    inundação, 16/26 mm, 30–60°);
+  - mecanismo A: não exigido sob T1.
+- **Regressão:** 29/29 Fortran, Python OK, 7/7 CLI; 16 réplicas idênticas byte a byte à P2,
+  contrato 16/16.
+
+## Atualização: qualificação Chexal, rodada 2 (P0/P1/P2), 21/11/2026
+
+Mesma branch e worktree, sem push nem merge. Relatório: Parte II de
+[CHEXAL_LELLOUCHE_RISER_QUALIFICATION.md](CHEXAL_LELLOUCHE_RISER_QUALIFICATION.md).
+
+- **P0.1 NP-3989:**
+  - linhas 1, 4 e 8 PASS;
+  - linha 5 PASS só com as equações de 1986 (revisão descendente demonstrada);
+  - linha 3 é referência inconsistente;
+  - linhas 2, 6 e 7 (1000 psia) FAIL, com causa não identificada: não é versão nem Re, e propriedades só a explicam com um par incoerente.
+
+  O núcleo ganhou `fluid=CHEXAL_FLUID_STEAM_WATER` (só para verificação; o caminho ar–água é bit a bit).
+- **P0.2:** `test_chexal_angles`, 468 verificações, PASS.
+- **P0.3:**
+  - `closure_contract.txt` (fechamento solicitado, efetivo e despachado por célula), que para o solver se divergirem;
+  - checkpoint com os IDs de fechamento;
+  - `scripts/verify_closure_contract.py` e `tests/test_closure_contract_cli.py` (CI);
+  - `run_campaign.py` verifica cada execução.
+- **P0.4:** `boundary_jacobian_probe`:
+  - erro ≤ 9e-10 em j_l → 0⁺ no topo;
+  - até 2,2e-6 com α → 0;
+  - nas quinas, o Jacobiano é a derivada do pedaço do estado; na quina exata, status 53 (`CLOSURE_DERIVATIVE`).
+- **P1.1:** NOT_VERIFIED. Não há pontos experimentais. O mapa de domínio dá 0 % validado (D = 52,5 mm, fora dos 25–38 mm de Beggs) e interpolação por Fr.
+- **P1.2:** BLOCKED. Nos 11 estados de bloqueio, os candidatos diferem 1,4–3,5× em u_g. Barnea e Ohnuki não estão disponíveis localmente.
+- **P1.3:** a junção passa em conservação, Jacobiano e partição (agora também com Chexal). A transmissão T1/T2 está pendente de decisão.
+- **P2:**
+  - 16 execuções com o binário `prims_f_contract` (`9e54e79f…`): contrato 16/16 PASS e saídas idênticas byte a byte às da Parte I;
+  - Stable a Δt 0,125 também decai (Chexal mais devagar).
+- **Pendências científicas:** dados de C0/Vgj/CCFL inclinados ar–água com D ≈ 50 mm; decisão T1/T2; dados primários de fração de vazio; PDF de Baliño et al. 2010.
+
+## Atualização: Chexal–Lellouche em todo o riser, 21/11/2026
+
+Worktree `PRIMS-F-chexal-riser-20261121`, branch `implementation/chexal-riser-20261121`
+(base `d2c8101`); sem push/merge; `main` intocada. Relatório:
+[CHEXAL_LELLOUCHE_RISER_QUALIFICATION.md](CHEXAL_LELLOUCHE_RISER_QUALIFICATION.md).
+Resultados: `~/Documentos/PRIMS-F-chexal-riser-results-20261121` (`p1/`, `p1_refine/`,
+`regress_bhagwat/`; `p1_INVALID_deck_override_bug/` não é evidência).
+
+- **Default:** `closure_riser=5` (CHEXAL_1992 AUTO) em `main.f90`, `sim_config_t` e
+  decks primários. Bhagwat é o ID 3 explícito, com decks arquivados em
+  `input/benchmarks/bhagwat/`, e reproduz byte a byte o binário `364b808`.
+  ACTIVE_SET, E1 e E2 são recusados com Chexal.
+- **Verificação:**
+  - Fortran 26/26 (5947 asserções), Python 123 OK, seis CLI PASS e o CLI novo
+    `test_chexal_default_cli.py`;
+  - núcleo contra transcrição independente em 945 estados (≤ 6,9e-14);
+  - NP-3989 Tabela A-1: casos de baixa pressão PASS, 1000 psia não reproduzidos;
+  - Jacobiano global contra diferenças finitas em 6 estados aceitos (≤ 4,3e-8);
+  - todos os estados aceitos do riser satisfazem o Chexal (≤ 8,3e-14).
+- **Física:**
+  - Stable completo (BARO/ISO).
+  - OSC e SS3 → `BLOCKED_CONSTITUTIVE_DOMAIN`: contracorrente inclinada exigida no topo
+    (65–76°), j_l → 0; persiste sob refino.
+  - SS1 → `BLOCKED_JUNCTION_TRACE_DOMAIN`: gás precisa inverter no traço horizontal.
+  - SS3 com N101/N201 a Δt 0,5 também falha por quina da derivada Chexal no caminho de
+    Roe (9323).
+  - Sem ciclos com Chexal: validação experimental NOT_VERIFIED; promoção BLOCKED.
+- **Próximo passo científico:** dados e forma constitutiva de contracorrente inclinada
+  ar–água (§9 do relatório). Não estender Chexal 1992 sem essa fonte.
+
+## Atualização: auditoria avançada P0–P2, 20/11/2026
+
+Mesma branch/worktree; sem push/merge. Relatório:
+[QUALIFICATION_P0P2_ADVANCED_20261120.md](QUALIFICATION_P0P2_ADVANCED_20261120.md).
+Operador congelado `007359d` (`frozen_007359d/`, `prims_f` `d1184263…`); default byte a
+byte = `1d71f00`; 25/25 Fortran, 123 Python, 6/6 CLI.
+
+- **P0.1:** nos estados aceitos terminais, a junção é classe **C** (gás presente e
+  subindo, fluxo de face nulo por cancelamento Roe). Com E1/STEADY, o gás no fim do
+  oleoduto chega a 1,3–1,6% de |U_d|, perto da estagnação (A). Ferramentas:
+  `junction_state_compare.f90` (argumentos: fixture, c_g, fluxo e traço da execução;
+  β = 2° agora definido) e `junction_classification.py`.
+- **P0.2:** `junction_flux='PHASE_UPWIND'` (E1, opt‑in, experimental, **não promover**).
+  Vetor (G_l\*, G_g\*, p\*) por Riemann acústico de Wood mais separação de fluxo
+  material por fase. A dinâmica fica igual à do Roe até o bloqueio; todas as execuções
+  concluídas terminam em 3021 (traço do riser com j_g = 0). O próximo passo é o E2
+  (passagem misto→puro na face).
+- **P0.3:** `initial_u_file` (opt‑in), `make_perturbed_ic.py`, `p03_analysis.py`.
+  - Estacionário discreto por Euler implícito com Δt grande (`p03/SS_N*`); com ΔP = 0
+    fica bit a bit estacionário.
+  - Com ΔP = 250 Pa, a semente independe da malha e os níveis refinados falham no
+    mesmo vale (173,3–174,2 s).
+  - σ ainda não está na região assintótica.
+- **P1.1:** `ss3_closure_map.f90`. O ramo Bhagwat termina em u_l = 0⁺, na fronteira do
+  domínio. Bendiksen dá um ramo contracorrente contínuo e hiperbólico, mas por
+  extrapolação. Literatura primária só no nível bibliográfico.
+- **P1.2:** combinado N101/Δt 0,0625 concluído. Amplitude FAIL (19–22% estimado);
+  interação espaço–tempo −619 Pa.
+- **P2:** NOT_VERIFIED. O PDF de Baliño 2010 não está nesta máquina; valores só via
+  `benchmark_sources.json`.
+
+---
+
+## Atualização: continuação 2 da auditoria físico-numérica, 20/11/2026
+
+Mesma branch/worktree; sem push/merge. Relatório:
+[QUALIFICATION_P0P1_CONTINUATION2_20261120.md](QUALIFICATION_P0P1_CONTINUATION2_20261120.md).
+
+- P0.1 (`0960246`): face do separador do modo reduzido *well-balanced* com G≠0
+  (forma de desvio do equilíbrio discreto da célula; `log1p` estável). Repouso
+  exato preservado; refluxo real sem composição continua 934. `test_hydrostatic_outlet`
+  (1760 asserções).
+- P0.2 (`1dde473`, `9c31dea`): certificados SS1/OSC-ISO/SS3 em
+  `validation/diagnostics/p0p1c_20261119/evidence/certificates/`. Todos em proposta de
+  Newton a partir de aceitos admissíveis. SS1/OSC: Gg Roe de face cancelado pela
+  dissipação com os dois traços a u_g>0 (`NUMERICAL_FLUX_INDUCED_BOUNDARY`). SS3: raiz
+  só em u_l=0 no ramo cocorrente.
+- P1.1 BLOCKED por limitação documentada (traço exige j_g>0; 21 em j_g=0, 12 em
+  j_g<0; `test_junction_vanishing_gas`). Extensão E1 (fluxo de massa por fase
+  *upwind*, tipo AUSMV) e E2 (limite α*→0⁺ só como continuação) **propostas, não
+  implementadas**.
+- P1.2: SS3 sem fechamento qualificado; Chexal 1992 cobre contracorrente só na
+  vertical (PDF local, p. 8). `ss3_local_closures.f90` é o solver local assinado.
+- P1.3 ISO (`1d71f00`, `1518f5d`; N51–N401, dt 0,125–0,015625): período converge;
+  σ assintótico de ordem ≈ 1 (erro 1,2–1,5%); semente O(h^0,8); A*(f) ±2,3%; o
+  instante do evento salta por ciclos (FAIL, não declarado).
+- P1.3 BARO (`21ad166`): as 4 execuções concluídas acomodam (v2, 14 canais);
+  amplitude FAIL (h 22%; dt 28% → 10%, ordem 1,28, erro estimado 6,8%). O combinado
+  N101/dt 0,0625 estava em execução em
+  `~/Documentos/PRIMS-F-p0p1c-results-20261119/baro_combined/`; analisar com
+  `baro_refinement_v2.py` quando houver `run_status.txt`.
+- Regressões no `1d71f00`: 24/24 Fortran, 123 Python, 6/6 CLI; binários de campanha
+  byte a byte equivalentes ao HEAD.
+
+---
+
+## Atualização: continuação P0/P1, 19–20/11/2026
+
+Branch local `implementation/p0p1-continuation-20261119`, worktree
+`~/Documentos/PRIMS-F-p0p1c-20261119` (máquina `leonardo-ubuntu`), base `f3717dd`;
+main local intacta, sem push/merge. Relatório:
+[QUALIFICATION_P0P1_CONTINUATION_20261120.md](QUALIFICATION_P0P1_CONTINUATION_20261120.md).
+Dados brutos: `~/Documentos/PRIMS-F-p0p1c-results-20261119`. `AGENTS.md` não existe
+em nenhum ramo; os resultados `/home/leonardoab/...` não estão nesta máquina.
+
+- P0 corrigidos: Jacobiano reduzido no limite de refluxo (`aef3774`), busca
+  mássica no ramo subsônico (`5e4882e`), média hidrostática exata para constantes
+  (`1c778bf`). 22/22 Fortran, 123 Python, 6 CLI; default byte a byte = `f3717dd`.
+- Critérios v2 pré-registrados (`813da75`) e aplicados (`9552bab`): inventários,
+  fluxos por fase, holdups e formas de onda entram em `settled`.
+- OSC ISOTHERMAL reproduz bit a bit o bloqueio em 223,6445 s: selo líquido na base
+  do riser e Gg de junção → 0 → CLOSURE_DOMAIN. Instante não converge em h/dt
+  (198,7–249,4 s). BLOCKED.
+- SS1 (face 53) e SS3 (célula 69, raiz em u_l=0) mapeados: ausência de estado no
+  domínio constitutivo declarado, não falha de busca/globalização. BLOCKED.
+- `junction_trace='STEADY'` (`fab19c6`, opt-in): remove erro de 29% do Gg
+  estacionário na junção; não desbloqueia SS1 (78,84 s) nem OSC-ISO (223,65 s).
+- BLAS/LAPACK desta máquina = Intel MKL via alternativas.
+
+---
+
 ## Atualização: correções P0 e qualificação P1,19/11/2026
 
 Branch `audit/p0p1-20261119`, worktree `PRIMS-F-p0p1-20261119`, base remota

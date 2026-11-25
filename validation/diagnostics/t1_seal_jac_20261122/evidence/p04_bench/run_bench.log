@@ -1,0 +1,8 @@
+ss1_s5 rc=0 reached_time_s=  3.0000000000000000E+00 termination_reason=COMPLETED 
+ss1_A rc=0 reached_time_s=  3.0000000000000000E+00 termination_reason=COMPLETED 
+ss1_C16fd rc=0 reached_time_s=  3.0000000000000000E+00 termination_reason=COMPLETED 
+ss1_C16ij rc=0 reached_time_s=  3.0000000000000000E+00 termination_reason=COMPLETED 
+rep_s5 rc=0 reached_time_s=  2.0000000000000000E+00 termination_reason=COMPLETED 
+rep_C16fd rc=0 reached_time_s=  2.0000000000000000E+00 termination_reason=COMPLETED 
+rep_C16ij rc=0 reached_time_s=  2.0000000000000000E+00 termination_reason=COMPLETED 
+bench done

@@ -1,0 +1,16 @@
+D_Stable_C3_BAROTROPIC_N51_dt0.5
+   p_in_Pa settles(<0.0001) at 2.9 s, last-600 s drift -1.0e-19 /s, max dev after t=600 s 0.0e+00
+   Mg_riser_kg settles(<0.0001) at 80.4 s, last-600 s drift -1.3e-19 /s, max dev after t=600 s 0.0e+00
+   alpha_riser_base settles(<0.0001) at 77.4 s, last-600 s drift -1.5e-19 /s, max dev after t=600 s 0.0e+00
+D_Stable_C3_ISOTHERMAL_N51_dt0.5
+   p_in_Pa settles(<0.0001) at 2.9 s, last-600 s drift -5.1e-20 /s, max dev after t=600 s 0.0e+00
+   Mg_riser_kg settles(<0.0001) at 97.9 s, last-600 s drift -8.0e-20 /s, max dev after t=600 s 0.0e+00
+   alpha_riser_base settles(<0.0001) at 105.4 s, last-600 s drift 0.0e+00 /s, max dev after t=600 s 0.0e+00
+D_Stable_C5_BAROTROPIC_N51_dt0.5
+   p_in_Pa settles(<0.0001) at 13.4 s, last-600 s drift 5.2e-20 /s, max dev after t=600 s 0.0e+00
+   Mg_riser_kg settles(<0.0001) at 110.9 s, last-600 s drift -1.2e-19 /s, max dev after t=600 s 0.0e+00
+   alpha_riser_base settles(<0.0001) at 118.9 s, last-600 s drift -3.0e-20 /s, max dev after t=600 s 0.0e+00
+D_Stable_C5_ISOTHERMAL_N51_dt0.5
+   p_in_Pa settles(<0.0001) at 2.9 s, last-600 s drift 0.0e+00 /s, max dev after t=600 s 2.5e-10
+   Mg_riser_kg settles(<0.0001) at 151.9 s, last-600 s drift 2.8e-20 /s, max dev after t=600 s 5.9e-09
+   alpha_riser_base settles(<0.0001) at 161.4 s, last-600 s drift -3.5e-20 /s, max dev after t=600 s 7.7e-09

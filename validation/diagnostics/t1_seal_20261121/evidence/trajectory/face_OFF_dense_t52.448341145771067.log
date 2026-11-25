@@ -1,0 +1,16 @@
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+At line 1495 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'u' of procedure 'point_state'
+At line 1515 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 1515 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+At line 1542 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'uinterior' of procedure 'boundary_flux'
+FACE|T2|prepare_dissipation 1061
+FACE|T1|     0|  5.2813548E+02  1.5643292E-02  2.9680987E+05  2.9680987E+05  2.9617439E+05  2.9652627E+05  5.5981118E-01  1.3620933E-02
+JUMP|T1|  0.0000E+00  0.0000E+00  0.0000E+00
+BAL |T1|identity residual   -4.3368E-19  -2.5411E-21   1.2230E-15 | dt*(fm-fp)    0.0000E+00   0.0000E+00   0.0000E+00 | scale    6.8798E-03   7.7932E-06   4.4771E+00

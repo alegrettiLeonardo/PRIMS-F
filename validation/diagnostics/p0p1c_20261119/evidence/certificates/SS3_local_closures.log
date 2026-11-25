@@ -1,0 +1,10 @@
+STATE  0 cell  69 theta_deg  51.637 alpha 0.638272 p_Pa    228440.2 rho_l,g  997.1066    1.9417 G_mix kg/m2s  7.7404E-01
+    STRATIFIED   roots  0  domain refusals    0 of 6001  scan u_g up to   30.00 x U3/U2
+    BENDIKSEN    root 1  u_l,u_g (m/s)   -0.003736    1.711731  branch COUNTER-CURRENT
+    BENDIKSEN    roots  1  domain refusals    0 of 6001  scan u_g up to   30.00 x U3/U2
+    BHAGWAT      roots  0  domain refusals 4905 of 6001  scan u_g up to   30.00 x U3/U2
+STATE  1 cell  69 theta_deg  51.637 alpha 0.638272 p_Pa    228440.2 rho_l,g  997.1066    1.9417 G_mix kg/m2s  7.7404E-01
+    STRATIFIED   roots  0  domain refusals    0 of 6001  scan u_g up to   30.00 x U3/U2
+    BENDIKSEN    root 1  u_l,u_g (m/s)   -0.003736    1.711731  branch COUNTER-CURRENT
+    BENDIKSEN    roots  1  domain refusals    0 of 6001  scan u_g up to   30.00 x U3/U2
+    BHAGWAT      roots  0  domain refusals 4905 of 6001  scan u_g up to   30.00 x U3/U2

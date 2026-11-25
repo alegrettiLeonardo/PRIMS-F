@@ -1,0 +1,26 @@
+{
+ "note": "RECONSTRUCTED after launch: the concurrent launcher protocol was overwritten (same-second file name); fixed in run_campaign.py (exclusive create + pid). Deck, binary and source hashes below are those of the files in use.",
+ "created": "2026-11-21T13:24:14-0300",
+ "binary": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/bin/prims_f_contract",
+ "binary_sha256": "9e54e79f0abac7107b1a2f53108e22a498026399bcead789b5ad010eab26c778",
+ "source_sha256": "4e62d6d9b86e670b62be9c213fcc16cb66798cddee921c436ea0826391db857f",
+ "limits": {
+  "max_wall_s": 14400.0,
+  "window_s": 1800.0,
+  "min_advance_s": 1.0
+ },
+ "jobs": [
+  {
+   "name": "D_Stable_C5_BAROTROPIC_N101_dt0.125",
+   "case": "D_Stable",
+   "eos": "BAROTROPIC",
+   "closure_riser": 5,
+   "grid": "101:0.125",
+   "deck": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/p2_stable_dt/decks/D_Stable_C5_BAROTROPIC_N101_dt0.125.nml",
+   "deck_sha256": "70632c89bd34d9c5dabb1f034dd578b1e3458c9d87dab6ce39d7811bdde26c2f",
+   "source_deck": "input/benchmarks/D_Stable.nml",
+   "source_sha256": "79c62fece8e55ad6d3d6d3963d4486ffe2b15d571bfa6944d1243e19f84938ab",
+   "run": "/home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/p2_stable_dt/runs/D_Stable_C5_BAROTROPIC_N101_dt0.125"
+  }
+ ]
+}

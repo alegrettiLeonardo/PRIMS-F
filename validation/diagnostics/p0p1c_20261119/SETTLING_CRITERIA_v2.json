@@ -1,0 +1,65 @@
+{
+  "name": "PRIMS-F limit-cycle settling and discretization-convergence criteria v2",
+  "registered_utc": "2026-11-19T22:50:00Z",
+  "registered_before_any_v2_analysis": true,
+  "base_commit": "f3717dd",
+  "supersedes_for_new_analyses": "validation/diagnostics/p0p1_20261119/analyze_refinement.py pressure-only 'settled' (kept as 'pressure_settled')",
+  "window": {
+    "markers": "pressure peaks of p_riser_base_Pa from analyze_osc_envelopes.pressure_envelope; the last eleven enclosed peaks",
+    "requirement": "eleven distinct strictly increasing markers delimit exactly ten complete cycles; fewer markers => not settled, never padded",
+    "phase": "each cycle mapped linearly to phi in [0,1) with 256 samples; the period is reported separately"
+  },
+  "channels": {
+    "pressure_Pa": ["p_riser_base_Pa", "p_junction_Pa"],
+    "holdup": ["holdup_liquid_base", "holdup_liquid_out"],
+    "mass_flux_liquid_kg_s": ["mdot_l_base_kg_s", "mdot_l_out_kg_s"],
+    "mass_flux_gas_kg_s": ["mdot_g_base_kg_s", "mdot_g_out_kg_s"],
+    "inventory_liquid_kg": ["Ml_kg", "Ml_pipe_kg", "Ml_riser_kg"],
+    "inventory_gas_kg": ["Mg_kg", "Mg_pipe_kg", "Mg_riser_kg"],
+    "junction_note": "base = junction face (single flux per phase shared by both cells); out = separator face"
+  },
+  "per_cycle_quantities": {
+    "m_k": "time mean over cycle k (trapezoid of the piecewise-linear monitor including interpolated end points)",
+    "r_k": "range max-min of the 256-sample phase waveform of cycle k",
+    "y_k(phi)": "phase waveform of cycle k",
+    "scales": "Mbar=mean_k m_k; Rbar=mean_k r_k"
+  },
+  "absolute_floors": {
+    "rationale": "near-zero channels are normalized by dimensioned absolute tolerances, never by a near-zero mean",
+    "pressure_Pa": 1.0,
+    "holdup": 1.0e-4,
+    "mass_flux": "1e-4 * feed mass flow of the same phase, from the accepted inlet flux integral over the window",
+    "inventory": "1e-4 * feed mass flow of the same phase * mean period (mass processed per cycle)"
+  },
+  "settling": {
+    "C0_pressure_preserved": {
+      "rule": "(max-min)/|mean| <= 0.005 for period, semi-amplitude and cycle-mean pressure of p_riser_base_Pa",
+      "status": "unchanged historical criterion"
+    },
+    "C1_cycle_mean_drift": {
+      "rule": "max(max_k m_k - min_k m_k, 9*|OLS slope of m_k versus k|) <= 0.05 * max(Rbar, floor), every channel",
+      "justification": "secular drift must be a small fraction of the oscillation the cycle is supposed to repeat. For pressure 0.05*Rbar ~ 0.05*2*1e4 Pa is the same order as the preserved 0.005*2.66e5 Pa; for inventories the mean (~70 kg) is not a meaningful scale for drift"
+    },
+    "C2_cycle_range_variation": {
+      "rule": "(max_k r_k - min_k r_k) <= 0.01 * max(Rbar, floor), every channel",
+      "justification": "twice the preserved 0.5% amplitude limit because non-pressure extrema are sampled, not parabolically refined"
+    },
+    "C3_waveform_shape": {
+      "rule": "max_k RMS_phi(y_k - ybar) <= 0.02 * max(Rbar, floor), every channel",
+      "justification": "within-cycle phase jitter allowed by C0 (period variation <=0.5%) gives RMS <~0.006 Rbar for a sinusoid; 0.02 keeps a factor ~3 and detects cycle-to-cycle shape changes"
+    },
+    "settled": "C0 and C1 and C2 and C3 for all channels; any missing channel => not settled"
+  },
+  "convergence_between_settled_runs": {
+    "preserved_targets": "relative difference of period and pressure semi-amplitude <= 0.01",
+    "added": {
+      "mean_level": "|Mbar_f - Mbar_c| <= 0.01 * max(|Mbar|, Rbar, floor), every channel",
+      "range": "|Rbar_f - Rbar_c| <= 0.01 * max(Rbar, floor), every channel",
+      "shape_phase_fixed": "RMS_phi(ybar_f - ybar_c) <= 0.02 * max(Rbar, floor), every channel; phase is NOT re-aligned",
+      "phase_diagnostic": "best circular lag maximizing correlation is reported as phase error; it never replaces the phase-fixed error"
+    },
+    "both_runs_must_be_settled": true,
+    "comparisons_mix_only_same_operator_EOS_compiler_flags": true
+  },
+  "not_implied": ["mass conservation does not imply inventory convergence", "settling does not imply discretization convergence", "neither implies experimental validation"]
+}

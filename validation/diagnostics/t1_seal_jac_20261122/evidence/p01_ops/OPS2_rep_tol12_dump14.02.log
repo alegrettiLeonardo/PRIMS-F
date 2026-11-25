@@ -1,0 +1,24 @@
+STATE|t_s    14.008103|UL   4.527928E-01  1.416067E-03  1.038339E+00|UR   1.000091E+00  1.176513E-13  1.037320E+00
+OPS|A|   8|  1616|NaN|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.0126
+OPS|A|  16|  1616|NaN|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.0257
+OPS|A|  32|  1616|NaN|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.0861
+OPS|A|  64|  1616|NaN|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.1104
+OPS|A| 128|  1616|NaN|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.3156
+OPS|B|   0|  1628| 4.|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.0698
+OPS|B|   8|  1628| 4.|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.0324
+OPS|B|  16|  1628| 4.|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.0601
+OPS|B|  32|  1628| 4.|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.1049
+OPS|b|  32|  1628| 4.|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.0000
+OPS|B|  64|  1628| 4.|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.2975
+OPS|b|  64|  1628| 4.|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.0000
+OPS|B| 128|  1627|NaN|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   2.2751
+OPS|b| 128|  1625|NaN|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.0000
+OPS|C|   0|     0| 7.|F   5.4819654299979607E+02  0.0000000000000000E+00  3.0426707018183032E+05|pL*,pR*   3.036008789040E+05  3.039656888729E+05|aL*,aR*   0.000000E+00  0.000000E+00|cpu   0.1706
+OPS|C|   8|     0| 7.|F   5.4819654299907859E+02  0.0000000000000000E+00  3.0426707018132095E+05|pL*,pR*   3.036008789040E+05  3.039656888724E+05|aL*,aR*   0.000000E+00  0.000000E+00|cpu   0.0543
+OPS|C|  16|     0| 7.|F   5.4819654299908495E+02  0.0000000000000000E+00  3.0426707018132095E+05|pL*,pR*   3.036008789040E+05  3.039656888724E+05|aL*,aR*   0.000000E+00  0.000000E+00|cpu   0.1050
+OPS|C|  32|     0| 7.|F   5.4819654299909507E+02  0.0000000000000000E+00  3.0426707018132100E+05|pL*,pR*   3.036008789040E+05  3.039656888724E+05|aL*,aR*   0.000000E+00  0.000000E+00|cpu   0.1747
+OPS|c|  32|     0| 7.|F   5.4819654299909507E+02  0.0000000000000000E+00  3.0426707018132100E+05|pL*,pR*   3.036008789040E+05  3.039656888724E+05|aL*,aR*   0.000000E+00  0.000000E+00|cpu   0.0000
+OPS|C|  64|     0| 7.|F   5.4819654299899105E+02  0.0000000000000000E+00  3.0426707018132065E+05|pL*,pR*   3.036008789040E+05  3.039656888724E+05|aL*,aR*   0.000000E+00  0.000000E+00|cpu   0.4471
+OPS|c|  64|     0| 7.|F   5.4819654299899105E+02  0.0000000000000000E+00  3.0426707018132065E+05|pL*,pR*   3.036008789040E+05  3.039656888724E+05|aL*,aR*   0.000000E+00  0.000000E+00|cpu   0.0000
+OPS|C| 128|  1627|NaN|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   2.2824
+OPS|c| 128|  1625|NaN|F                      NaN                     NaN                     NaN|pL*,pR*                  NaN                 NaN|aL*,aR*            NaN           NaN|cpu   0.0000

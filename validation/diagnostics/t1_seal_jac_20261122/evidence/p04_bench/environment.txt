@@ -1,0 +1,12 @@
+date 2026-11-22T15:50:22-03:00
+Linux leonardo-ubuntu 7.0.0-42-generic #42~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Mon Oct 19 14:43:01 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+Nome do modelo:                            11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
+Thread(s) per núcleo:                      2
+CPU(s) MHz de escala:                      23%
+CPU MHz máx.:                              4800,0000
+CPU MHz mín.:                              400,0000
+powersave
+GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+	libmkl_rt.so => /lib/x86_64-linux-gnu/libmkl_rt.so (0x00007c1c12c00000)
+e9af384c98aebc337e1a3f1599b4356f9dae5f0c4e7659c2f45a4333542a8601  /home/leonardo/Documentos/PRIMS-F-chexal-riser-results-20261121/bin/prims_f_seal5_46e8830
+bab94fb08f82e4897fd58f8cc988f1c91ba9bb62ecbea313b0affac41b0b91c0  /home/leonardo/Documentos/PRIMS-F-t1seal-jac-results-20261122/bin/prims_f_jac1_191d722

@@ -1,0 +1,24 @@
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 77 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+At line 36 of file validation/diagnostics/chexal_riser_20261121/t1_face_check.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 36 of file validation/diagnostics/chexal_riser_20261121/t1_face_check.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+At line 1011 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'u' of procedure 'point_state'
+At line 1031 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ul' of procedure 'face_pair'
+At line 1031 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'ur' of procedure 'face_pair'
+At line 1058 of file scr/module_simulate_pipe_riser.f90
+Fortran runtime warning: An array temporary was created for argument 'uinterior' of procedure 'boundary_flux'
+At line 53 of file validation/diagnostics/chexal_riser_20261121/t1_face_check.f90
+Fortran runtime warning: An array temporary was created for argument 'u' of procedure 'point_state'
+FACE|T2|     0|  5.4636150E+02  1.9853057E+00  2.7683589E+05  2.7670502E+05  2.7616615E+05  2.7616615E+05  5.5095696E-01  4.4048426E-01
+JUMP|T2|  0.0000E+00  0.0000E+00  1.3087E+02
+BAL |T2|identity residual    2.6021E-18   5.0822E-21   4.5094E-04 | dt*(fm-fp)    0.0000E+00   0.0000E+00   4.5094E-04 | scale    9.3642E-03   1.5359E-05   1.9065E+00
+FACE|T1|     0|  5.4637747E+02  1.9933032E+00  2.7683536E+05  2.7683536E+05  2.7616556E+05  2.7629475E+05  5.5095718E-01  4.4224727E-01
+JUMP|T1|  0.0000E+00  0.0000E+00  0.0000E+00
+BAL |T1|identity residual    2.6021E-18   5.0822E-21  -8.8731E-16 | dt*(fm-fp)    0.0000E+00   0.0000E+00   0.0000E+00 | scale    9.3642E-03   1.5359E-05   1.9065E+00

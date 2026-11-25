@@ -1,0 +1,481 @@
+[
+ {
+  "run": "D_OSC_C5_BAROTROPIC_N51_dt0.5_T1_t300",
+  "closure_riser": 5,
+  "termination": "NEWTON_GLOBALIZATION_FAILURE",
+  "guard": "FAIL:NEWTON_GLOBALIZATION_FAILURE",
+  "classification": "BLOCKED_CONSTITUTIVE_DOMAIN",
+  "decoded": "CELL primitive recovery code 61 (DOMAIN)",
+  "proposal_index": "103",
+  "reached_time_s": 163.7533646784108,
+  "accepted_steps": 372,
+  "rejected_steps": 30,
+  "newton_iterations": 1424,
+  "cpu_s": 1013.351497,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": 0.1984598938860084,
+  "p_in_range_Pa": [
+   248062.9452730238,
+   280794.9159621775
+  ],
+  "alpha_riser_base_range": [
+   0.1504222494067945,
+   0.5642918732169974
+  ],
+  "Ml_kg": [
+   71.437291734575,
+   69.14814820710365
+  ],
+  "Mg_kg": [
+   0.17661612070131602,
+   0.17235059827631244
+  ],
+  "Mg_riser_kg": [
+   0.023109563779580684,
+   0.026570550366097016
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.5963731186464265,
+   "jl_m_s": 3.846994561060235e-10
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 7.105427357601002e-13,
+    "rel_inventory": 9.946384003471445e-15,
+    "rel_processed": 1.824047035071398e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 1.6200374375330284e-12,
+    "rel_inventory": 2.908159160058893e-14,
+    "rel_processed": 4.183105795062895e-15
+   },
+   "l_riser": {
+    "max_abs_kg": 1.0231815394945443e-12,
+    "rel_inventory": 6.504376608971469e-14,
+    "rel_processed": 2.626437189942329e-15
+   },
+   "g_system": {
+    "max_abs_kg": 1.9872992140790302e-14,
+    "rel_inventory": 1.1252082800753206e-13,
+    "rel_processed": 1.9953239144466426e-14
+   },
+   "g_pipe": {
+    "max_abs_kg": 2.8427260545527133e-13,
+    "rel_inventory": 1.851859693525707e-12,
+    "rel_processed": 2.844321054879887e-13
+   },
+   "g_riser": {
+    "max_abs_kg": 2.661759701538813e-13,
+    "rel_inventory": 1.1518000629205774e-11,
+    "rel_processed": 2.651934930232972e-13
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 1.1518000629205774e-11
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_T1_t300",
+  "closure_riser": 5,
+  "termination": "NEWTON_GLOBALIZATION_FAILURE",
+  "guard": "FAIL:NEWTON_GLOBALIZATION_FAILURE",
+  "classification": "FAIL:NEWTON_GLOBALIZATION_FAILURE/3615",
+  "decoded": "FACE code 1615",
+  "proposal_index": "53",
+  "reached_time_s": 53.47529986059883,
+  "accepted_steps": 152,
+  "rejected_steps": 28,
+  "newton_iterations": 731,
+  "cpu_s": 1851.0433170000001,
+  "E_g_001_s": 53.34834114577107,
+  "mdot_g_base_min_rel": 1.8842381406155306e-06,
+  "p_in_range_Pa": [
+   288165.43585768144,
+   290742.506059245
+  ],
+  "alpha_riser_base_range": [
+   0.006889535129169004,
+   0.09977077433464929
+  ],
+  "Ml_kg": [
+   79.36395764917184,
+   79.63956039048537
+  ],
+  "Mg_kg": [
+   0.17896544750974827,
+   0.17815033506373185
+  ],
+  "Mg_riser_kg": [
+   0.005212966523964242,
+   0.004433121951671803
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.1210503997340863,
+   "jl_m_s": 0.4310675380099245
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 1.5631940186722204e-13,
+    "rel_inventory": 1.9696523018450198e-15,
+    "rel_processed": 1.2786296506717895e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 2.5579538487363607e-13,
+    "rel_inventory": 4.683068735724394e-15,
+    "rel_processed": 2.087598381040441e-15
+   },
+   "l_riser": {
+    "max_abs_kg": 1.7053025658242404e-13,
+    "rel_inventory": 6.892160917982887e-15,
+    "rel_processed": 1.3948696649871033e-15
+   },
+   "g_system": {
+    "max_abs_kg": 2.0296264668928643e-16,
+    "rel_inventory": 1.1340884484320973e-15,
+    "rel_processed": 6.438071702256814e-15
+   },
+   "g_pipe": {
+    "max_abs_kg": 2.2360585605341043e-15,
+    "rel_inventory": 1.2869218026976276e-14,
+    "rel_processed": 7.272791462427056e-14
+   },
+   "g_riser": {
+    "max_abs_kg": 2.2273849431542203e-15,
+    "rel_inventory": 4.27277814448804e-13,
+    "rel_processed": 7.057475701345945e-14
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 4.27277814448804e-13
+ },
+ {
+  "run": "D_Stable_C5_BAROTROPIC_N51_dt0.5_T1_t300",
+  "closure_riser": 5,
+  "termination": "COMPLETED",
+  "guard": "COMPLETED",
+  "classification": "COMPLETED",
+  "decoded": null,
+  "proposal_index": null,
+  "reached_time_s": 300.0,
+  "accepted_steps": 630,
+  "rejected_steps": 0,
+  "newton_iterations": 1038,
+  "cpu_s": 947.7222519999999,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": 0.8093835720125987,
+  "p_in_range_Pa": [
+   489969.2015796835,
+   490197.384398641
+  ],
+  "alpha_riser_base_range": [
+   0.2018592538573035,
+   0.21317308951994948
+  ],
+  "Ml_kg": [
+   80.4056216081204,
+   80.40295831991119
+  ],
+  "Mg_kg": [
+   0.29584407483634206,
+   0.2958619573759542
+  ],
+  "Mg_riser_kg": [
+   0.02441245882627581,
+   0.024423875708175558
+  ],
+  "cycles": {
+   "decayed_to_steady": true,
+   "rel_oscillation_last_third": 6.609947331195275e-07,
+   "p_in_mean_Pa": 490142.4166396011
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 3.0127011996228248e-12,
+    "rel_inventory": 3.746878811914518e-14,
+    "rel_processed": 3.910478546218841e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 2.8421709430404007e-12,
+    "rel_inventory": 4.778359095233174e-14,
+    "rel_processed": 3.6891429439533465e-15
+   },
+   "l_riser": {
+    "max_abs_kg": 5.684341886080801e-13,
+    "rel_inventory": 2.7164586941373772e-14,
+    "rel_processed": 7.378260381608536e-16
+   },
+   "g_system": {
+    "max_abs_kg": 2.2870594307278225e-14,
+    "rel_inventory": 7.730624424345829e-14,
+    "rel_processed": 2.1162970523825704e-14
+   },
+   "g_pipe": {
+    "max_abs_kg": 1.2068124277675452e-13,
+    "rel_inventory": 4.446101178290113e-13,
+    "rel_processed": 1.1166944629076691e-13
+   },
+   "g_riser": {
+    "max_abs_kg": 9.825473767932635e-14,
+    "rel_inventory": 4.024778428855845e-12,
+    "rel_processed": 9.091913091939122e-14
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 4.024778428855845e-12
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_REPLAY52.94_T1",
+  "closure_riser": 5,
+  "termination": "NEWTON_GLOBALIZATION_FAILURE",
+  "guard": "FAIL:NEWTON_GLOBALIZATION_FAILURE",
+  "classification": "FAIL:NEWTON_GLOBALIZATION_FAILURE/3614",
+  "decoded": "FACE code 1614",
+  "proposal_index": "53",
+  "reached_time_s": 3.1477655352463323,
+  "accepted_steps": 52,
+  "rejected_steps": 28,
+  "newton_iterations": 434,
+  "cpu_s": 1404.115729,
+  "E_g_001_s": 3.1477655352463323,
+  "mdot_g_base_min_rel": 0.00016532828166997002,
+  "p_in_range_Pa": [
+   290231.007862373,
+   291530.51701400755
+  ],
+  "alpha_riser_base_range": [
+   0.007650602060567374,
+   0.024151388426554832
+  ],
+  "Ml_kg": [
+   79.5778352835915,
+   80.03197621104694
+  ],
+  "Mg_kg": [
+   0.17835393668028945,
+   0.17812193600773
+  ],
+  "Mg_riser_kg": [
+   0.0045667998831968705,
+   0.0035693548512634368
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.11397670553488148,
+   "jl_m_s": 0.4345358779255446
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 8.393286066166183e-14,
+    "rel_inventory": 1.054726612787975e-15,
+    "rel_processed": 1.2418832291082564e-14
+   },
+   "l_pipe": {
+    "max_abs_kg": 3.6137759451548845e-14,
+    "rel_inventory": 6.616050768934569e-16,
+    "rel_processed": 5.011656741244316e-15
+   },
+   "l_riser": {
+    "max_abs_kg": 2.6645352591003757e-14,
+    "rel_inventory": 1.0676722872779706e-15,
+    "rel_processed": 3.943603550098524e-15
+   },
+   "g_system": {
+    "max_abs_kg": 1.9878846832521724e-16,
+    "rel_inventory": 1.114572921827669e-15,
+    "rel_processed": 9.745836145610302e-14
+   },
+   "g_pipe": {
+    "max_abs_kg": 3.0839859745807052e-15,
+    "rel_inventory": 1.7745766639687796e-14,
+    "rel_processed": 2.958878259713144e-12
+   },
+   "g_riser": {
+    "max_abs_kg": 3.106022383736473e-15,
+    "rel_inventory": 6.801310465047534e-13,
+    "rel_processed": 2.437467055857787e-12
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 6.801310465047534e-13
+ },
+ {
+  "run": "D_SS3_C5_BAROTROPIC_N51_dt0.5_T1_t300",
+  "closure_riser": 5,
+  "termination": "MAX_NEWTON",
+  "guard": "FAIL:MAX_NEWTON",
+  "classification": "FAIL:MAX_NEWTON/0",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 10.56335914246888,
+  "accepted_steps": 201,
+  "rejected_steps": 33,
+  "newton_iterations": 1709,
+  "cpu_s": 1672.113175,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": 0.8723899076282406,
+  "p_in_range_Pa": [
+   265703.89146686625,
+   265885.49408509635
+  ],
+  "alpha_riser_base_range": [
+   0.25350072171733157,
+   0.27067218071452814
+  ],
+  "Ml_kg": [
+   53.63425913645365,
+   53.62809954644344
+  ],
+  "Mg_kg": [
+   0.22099408698545248,
+   0.22090860463082257
+  ],
+  "Mg_riser_kg": [
+   0.015851603177366363,
+   0.01585165487520675
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.31437870657703965,
+   "jl_m_s": 0.24121767448820405
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 4.75626482643321e-14,
+    "rel_inventory": 8.867960335450059e-16,
+    "rel_processed": 3.717747162782111e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 7.815970093361102e-14,
+    "rel_inventory": 2.2797135787875873e-15,
+    "rel_processed": 6.112448384654316e-15
+   },
+   "l_riser": {
+    "max_abs_kg": 6.750155989720952e-14,
+    "rel_inventory": 3.4885642029645e-15,
+    "rel_processed": 5.27639101453643e-15
+   },
+   "g_system": {
+    "max_abs_kg": 6.557254739192331e-16,
+    "rel_inventory": 2.967162980982375e-15,
+    "rel_processed": 2.469112866325147e-14
+   },
+   "g_pipe": {
+    "max_abs_kg": 3.05016428781002e-14,
+    "rel_inventory": 1.4868515927025114e-13,
+    "rel_processed": 1.1485271697196945e-12
+   },
+   "g_riser": {
+    "max_abs_kg": 3.010959537252944e-14,
+    "rel_inventory": 1.899466888971917e-12,
+    "rel_processed": 1.1301271200431074e-12
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 1.899466888971917e-12
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_REPLAY52.94_T2",
+  "closure_riser": 5,
+  "termination": "MAX_NEWTON",
+  "guard": "FAIL:MAX_NEWTON",
+  "classification": "BLOCKED_JUNCTION_TRACE_DOMAIN",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 0.0,
+  "accepted_steps": 0,
+  "rejected_steps": 16,
+  "newton_iterations": 185,
+  "cpu_s": 88.812922,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": 1.0,
+  "p_in_range_Pa": [
+   290231.007862373,
+   290231.007862373
+  ],
+  "alpha_riser_base_range": [
+   0.007650602060567374,
+   0.007650602060567374
+  ],
+  "Ml_kg": [
+   79.5778352835915,
+   79.5778352835915
+  ],
+  "Mg_kg": [
+   0.17835393668028945,
+   0.17835393668028945
+  ],
+  "Mg_riser_kg": [
+   0.0045667998831968705,
+   0.0045667998831968705
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.12284088079252133,
+   "jl_m_s": 0.4298688256797175
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 0.0,
+    "rel_inventory": 0.0,
+    "rel_processed": null
+   },
+   "l_pipe": {
+    "max_abs_kg": 0.0,
+    "rel_inventory": 0.0,
+    "rel_processed": null
+   },
+   "l_riser": {
+    "max_abs_kg": 0.0,
+    "rel_inventory": 0.0,
+    "rel_processed": null
+   },
+   "g_system": {
+    "max_abs_kg": 0.0,
+    "rel_inventory": 0.0,
+    "rel_processed": null
+   },
+   "g_pipe": {
+    "max_abs_kg": 0.0,
+    "rel_inventory": 0.0,
+    "rel_processed": null
+   },
+   "g_riser": {
+    "max_abs_kg": 0.0,
+    "rel_inventory": 0.0,
+    "rel_processed": null
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 0.0
+ }
+]

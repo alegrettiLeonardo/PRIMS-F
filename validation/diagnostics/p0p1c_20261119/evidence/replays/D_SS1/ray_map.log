@@ -1,0 +1,8 @@
+TRIAL time_s dt_s status index stage norm   7.8571788476739314E+01  1.3286024999999991E-07     0     0     0  2.976406E-07
+NEWTON linear_status max|dx|    0  1.052622E-08
+RAY admissible_samples best_norm best_lambda norm_ratio   131  2.976373E-07  1.119279E-05  9.9999E-01
+BOUNDARY lambda_admissible lambda_refused status index stage   9.9821566122760997E-09  9.9821566122761014E-09  3012    53     2
+BOUNDARY norm_at_edge   2.976406E-07 norm_ratio   1.000000E+00 Armijo(1e-4)  T
+FACE lambda status raw_Gg_kg_m2s conv_Gg diss_Gg p*_Pa   0.000000E+00     0  4.92628420E-13  5.56730375E-02 -5.56730375E-02  2.81717219E+05
+FACE lambda status raw_Gg_kg_m2s conv_Gg diss_Gg p*_Pa   9.982157E-09     0  1.01608058E-12  5.56730375E-02 -5.56730375E-02  2.81717219E+05
+FACE lambda status raw_Gg_kg_m2s conv_Gg diss_Gg p*_Pa   9.982157E-09     0 -2.35475053E-14  5.56730375E-02 -5.56730375E-02  2.81717219E+05

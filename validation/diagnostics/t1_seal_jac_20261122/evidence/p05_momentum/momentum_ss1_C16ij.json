@@ -1,0 +1,44 @@
+{
+ "run": "/home/leonardo/Documentos/PRIMS-F-t1seal-jac-results-20261122/camp/runs/ss1_C16ij",
+ "steps": 389,
+ "t_start_s": 0.001,
+ "t_end_s": 92.19794887052097,
+ "rows_with_status": 0,
+ "E_P_kg_m_s": {
+  "pipe": 2.660029535496165e-07,
+  "riser": -1.9116335353000155e-07,
+  "system": 7.483960001961493e-08,
+  "junction_jump": 0.0
+ },
+ "residual_integral_kg_m_s": {
+  "pipe": 2.6516018175457056e-07,
+  "riser": -1.912428104622419e-07
+ },
+ "gross_normalization_kg_m_s": 55095121.396326475,
+ "E_P_over_gross": {
+  "pipe": 4.82806729176846e-15,
+  "riser": -3.46969656632334e-15,
+  "system": 1.3583707254451198e-15
+ },
+ "E_P_minus_residual_over_gross": {
+  "pipe": 1.5296668265479403e-17,
+  "riser": 1.4421772786156983e-18
+ },
+ "max_step_E_over_step_gross": {
+  "pipe": 2.3644680668408315e-10,
+  "riser": 2.2552422633586824e-10,
+  "system": 1.3858257429706814e-11
+ },
+ "integrated_terms_kg_m_s": {
+  "F3_in": 26746869.40487681,
+  "F3_out": 19211475.96752359,
+  "grav_pipe": 797945.4018466823,
+  "fric_pipe": -222945.56736751774,
+  "grav_riser": -8021341.4421623815,
+  "fric_riser": -94543.61254944603
+ },
+ "storage_change_kg_m_s": {
+  "pipe": 70.23512440825289,
+  "riser": -5562.018003747728
+ }
+}

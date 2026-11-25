@@ -1,0 +1,10 @@
+BASE|status 0|config  7.|F   5.49892560733649E+02  0.00000000000000E+00  3.04469051112101E+05
+REF|relative step per column (0 = none admissible)  2.00E-04 5.00E-05 2.00E-04 5.00E-05 5.00E-05 1.25E-05
+REF|richardson admissible same-configuration samples T|cpu    5.717
+IMPLICIT|eps  1.0E-04|status 0|max scaled err vs ref   5.369E-05|cpu   0.1771
+IMPLICIT|eps  1.0E-05|status 0|max scaled err vs ref   5.791E-07|cpu   0.2017
+IMPLICIT|eps  1.0E-06|status 0|max scaled err vs ref   5.304E-07|cpu   0.1734
+IMPLICIT|eps  1.0E-07|status 0|max scaled err vs ref   4.360E-05|cpu   0.2064
+IMPLICIT|eps  1.0E-08|status 0|max scaled err vs ref   5.447E-05|cpu   0.1787
+LEGACY_FD(fixed steps, tol 1e-12)|status 0|max scaled err vs ref   5.360E-08|cpu   2.4550
+LEGACY_FD(seal5 operator)|status 0|max scaled err vs ref   2.529E-07|cpu   8.0057

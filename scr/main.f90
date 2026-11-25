@@ -49,7 +49,12 @@ program main
   real(wp)           :: mesh_ratio
   real(wp)           :: T_scenario, time_phys
   real(wp)           :: gamma_g
-  character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model
+  character(len=16) :: gas_eos, gas_flow_basis, flux_scheme, junction_model, junction_trace, junction_flux, junction_riser_limit
+  character(len=16) :: junction_transmission, junction_seal
+  real(wp) :: junction_seal_face_tol
+  integer :: junction_seal_curve_steps, junction_t1_curve_steps
+  character(len=16) :: junction_seal_jacobian
+  logical :: momentum_ledger
   character(len=16)::boundary_method
   integer::outlet_reservoir_phase,initial_phase_hint
   character(len=16)::single_phase_mode,source_scheme,initial_phase
@@ -65,6 +70,8 @@ program main
   real(wp) :: Cg_fixed, P_standard, T_standard, dt_min_s, dt_max_s, dt_start_s
   real(wp) :: perturbation_amplitude, output_interval_s, field_interval_s
   integer(i4) :: n_riser, closure_riser, closure_pipe, sim_status, steady_status, output_closure, output_status
+  integer(i4) :: closure_riser_requested, closure_pipe_requested, contract_unit
+  integer, allocatable :: effective_ids(:)
   integer(i4)        :: quad_points, max_iter, max_workers, save_every, newton_max
   character(len=32)  :: regime
 
@@ -78,22 +85,24 @@ program main
 
 
   character(len=256) :: out_dir
+  character(len=512) :: initial_u_file
   logical           :: use_muscl
   namelist /PARAMS/ nodes, num_dummy_cells, X, Z, Lp, beta_deg, D, eps, mesh_ratio, &
                     rho_l0, P_l0, Cl, Rg, mu_l, mu_g, mul, mug, sigma, G, &
                     CFL, tol, tola, tol_res, tol_inc, dt_min, dt_max, dt_start, cfl_target, &
                     it_target, use_it_target, it_p, dt_fac_min, dt_fac_max, dt_growth, dt_shrink, newton_fast, newton_slow, quad_points, Ps, jl, jg, Tgas, time_dim, T_scenario, time_phys, &
-                    gamma_g, max_iter, max_workers, save_every, newton_max, regime, use_muscl, out_dir, jac_dissipation_fd, jac_dissipation_fd_eps, debug_dfduj_check, debug_dfduj_cell, debug_dfduj_eps, &
+                    gamma_g, max_iter, max_workers, save_every, newton_max, regime, use_muscl, out_dir, initial_u_file, jac_dissipation_fd, jac_dissipation_fd_eps, debug_dfduj_check, debug_dfduj_cell, debug_dfduj_eps, &
                     pb_dp_on, pb_dp_off, &
                     stab_si_on, stab_si_off, stab_use_hysteresis, &
                     gas_eos, gas_flow_basis, liquid_flow_basis, single_phase_mode, source_scheme, initial_phase, outlet_reservoir_phase, boundary_method, Cg_fixed, P_standard, T_standard, n_riser, closure_riser, closure_pipe, pipe_regime_mode, &
-                    checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, dissipation_mode, newton_globalization
+                    checkpoint_interval_s, dt_min_s, dt_max_s, dt_start_s, perturbation_amplitude, output_interval_s, field_interval_s, flux_scheme, junction_model, junction_trace, junction_flux, junction_riser_limit, dissipation_mode, newton_globalization, junction_transmission, &
+                    junction_seal, junction_seal_face_tol, junction_seal_curve_steps, junction_seal_jacobian, junction_t1_curve_steps, momentum_ledger
   ! ------------------------------ Locals ---------------------------------
   type(sim_config_t)            :: cfg
   type(pipeline_riser_simulator_t) :: sim
   type(fluid_dynamics_t)        :: fd
 
-  integer(i4) :: i, nd, Nss, N, ios
+  integer(i4) :: i, nd, Nss, N, ios, ios_open
   real(wp)    :: CA, Lr, AREA
   real(wp)    :: Cg
   real(wp)    :: Pb, rhog, rhol
@@ -201,10 +210,15 @@ program main
     save_every = 10
   regime = 'OSC'
   out_dir = 'output'
+  initial_u_file = ''
 
   use_muscl = .false.
   n_riser = 0
-  closure_riser = 2
+  ! Development default (21/11/2026): CHEXAL_1992 air-water, AUTO branch, in
+  ! every riser cell, face, junction trace, steady profile and boundary.
+  ! Bhagwat (3) and Bendiksen (2) remain explicit legacy/comparison choices.
+  ! The sentinel -1 records whether the deck REQUESTED a closure (contract).
+  closure_riser = -1
   ! Sentinel distinguishes an explicitly supplied drift closure from a default.
   closure_pipe = -1
   pipe_regime_mode = 'FIXED_STRATIFIED'
@@ -225,6 +239,16 @@ program main
   field_interval_s = 30.0_wp
   flux_scheme = 'ROE'
   junction_model = 'MATCHED'
+  junction_trace = 'CENTER'
+  junction_flux = 'ROE'
+  junction_riser_limit = 'NONE'
+  junction_transmission = 'T2'
+  junction_seal = 'OFF'
+  junction_seal_face_tol = 1e-11_wp
+  junction_seal_curve_steps = 0
+  junction_seal_jacobian = 'FD'
+  junction_t1_curve_steps = 8
+  momentum_ledger = .false.
   dissipation_mode = 'LAGGED'
   newton_globalization = 'LINE_SEARCH'
   ! ------------------------------ Read -----------------------------------
@@ -271,6 +295,8 @@ program main
 
   end if
 
+  closure_riser_requested=closure_riser;closure_pipe_requested=closure_pipe
+  if(closure_riser==-1)closure_riser=5
   select case(trim(pipe_regime_mode))
   case('FIXED_STRATIFIED','AUTO_BURR15')
     if(closure_pipe/=-1.and.closure_pipe/=1) &
@@ -301,10 +327,43 @@ program main
   if (trim(flux_scheme)/='ROE'.and.trim(flux_scheme)/='RUSANOV') error stop 'Unknown flux_scheme'
   if (trim(junction_model)/='MATCHED'.and.trim(junction_model)/='BLOCKING'.and. &
       trim(junction_model)/='CONSERVATIVE') error stop 'Unknown junction_model'
+  if (trim(junction_trace)/='CENTER'.and.trim(junction_trace)/='STEADY') error stop 'Unknown junction_trace'
+  if (trim(junction_flux)/='ROE'.and.trim(junction_flux)/='PHASE_UPWIND') error stop 'Unknown junction_flux'
+  if (trim(junction_riser_limit)/='NONE'.and.trim(junction_riser_limit)/='ALPHA0') error stop 'Unknown junction_riser_limit'
   if (trim(dissipation_mode)/='LAGGED'.and.trim(dissipation_mode)/='FULLY_IMPLICIT') error stop 'Unknown dissipation_mode'
   if (mu_l<=0.0_wp .or. mu_g<=0.0_wp .or. eps<0.0_wp .or. eps/D>=1.0_wp) error stop 'Invalid viscosities/roughness'
   if(trim(newton_globalization)/='LINE_SEARCH'.and.trim(newton_globalization)/='ACTIVE_SET') &
     error stop 'Unknown newton_globalization'
+  ! Options whose physics/numerics were derived or qualified ONLY with the
+  ! Bhagwat riser closure are refused with any other riser closure, instead
+  ! of running silently inactive or unqualified (no automatic fallback).
+  if(trim(newton_globalization)=='ACTIVE_SET'.and.closure_riser/=3) &
+    error stop 'ACTIVE_SET admissibility margin is qualified only for closure_riser=3 (Bhagwat)'
+  if(closure_riser>=5.and.trim(junction_flux)/='ROE') &
+    error stop 'Experimental junction_flux (E1) is not qualified with CHEXAL_1992; use ROE'
+  if(closure_riser>=5.and.trim(junction_riser_limit)/='NONE') &
+    error stop 'Experimental junction_riser_limit (E2) is not qualified with CHEXAL_1992; use NONE'
+  if(trim(junction_transmission)/='T2'.and.trim(junction_transmission)/='T1') &
+    error stop 'Unknown junction_transmission: use T2 (default) or T1 (experimental)'
+  if(trim(junction_transmission)=='T1'.and.(trim(junction_model)/='MATCHED'.or.trim(junction_flux)/='ROE'.or. &
+     trim(junction_riser_limit)/='NONE'.or.trim(junction_trace)/='CENTER')) &
+    error stop 'junction_transmission=T1 is qualified only with MATCHED, ROE, CENTER traces and no riser limit'
+  if(trim(junction_seal)/='OFF'.and.trim(junction_seal)/='LIQUID_BRIDGE'.and.trim(junction_seal)/='H4_ONLY') &
+    error stop 'Unknown junction_seal: use OFF (default), LIQUID_BRIDGE or H4_ONLY (experimental)'
+  if(trim(junction_seal)/='OFF'.and.trim(junction_transmission)/='T1') &
+    error stop 'junction_seal=LIQUID_BRIDGE|H4_ONLY requires junction_transmission=T1'
+  if(trim(junction_seal)/='OFF'.and.(closure_pipe/=1.or.closure_riser/=5)) &
+    error stop 'junction_seal=LIQUID_BRIDGE|H4_ONLY is qualified only with the stratified pipe (1) and CHEXAL_1992 riser (5)'
+  if(.not.(junction_seal_curve_steps==0.or.(junction_seal_curve_steps>=8.and.junction_seal_curve_steps<=256))) &
+    error stop 'junction_seal_curve_steps must be 0 (legacy adaptive rule) or lie in [8, 256]'
+  if(trim(junction_seal_jacobian)/='FD'.and.trim(junction_seal_jacobian)/='IMPLICIT') &
+    error stop 'Unknown junction_seal_jacobian: use FD (default) or IMPLICIT (experimental)'
+  if(trim(junction_seal_jacobian)=='IMPLICIT'.and.trim(junction_seal)=='OFF') &
+    error stop 'junction_seal_jacobian=IMPLICIT requires junction_seal=LIQUID_BRIDGE or H4_ONLY'
+  if(.not.(junction_t1_curve_steps>=4.and.junction_t1_curve_steps<=256)) &
+    error stop 'junction_t1_curve_steps must lie in [4, 256]'
+  if(.not.(junction_seal_face_tol>=1e-14_wp.and.junction_seal_face_tol<=1e-9_wp)) &
+    error stop 'junction_seal_face_tol must lie in [1e-14, 1e-9]'
   beta_rad = beta_deg * (acos(-1.0_wp)/180.0_wp)
 
   ! ---------------------- Geometry & properties --------------------------
@@ -352,7 +411,8 @@ program main
                                     vns, vnp, nrhogv, nrholv, alphav, nugv, nulv, thetav, njlv, njgv, &
                                     mesh_ratio=mesh_ratio, n_riser=n_riser, face_positions=physical_faces, &
                                     closure_id_riser=closure_riser, status=steady_status, closure_id_pipe=closure_pipe, phase_hint=initial_phase_hint, &
-                                    face_pressures=initial_face_pressures)
+                                    face_pressures=initial_face_pressures, &
+                                    t1_junction=trim(junction_transmission)=='T1')
   if (steady_status/=0) then
     write(error_unit,'(a,i0)') 'Steady initialization failed, status=',steady_status
     error stop 2
@@ -400,6 +460,23 @@ program main
     U(i,3)=U(i,3)*(1.0_wp+perturbation_amplitude*exp(-((vns_ext(i)-Lp/Lr)/0.15_wp)**2))
   end do
   call apply_ghost_cells(U,nd)
+  ! Opt-in (diagnostic campaigns): replace the physical-cell initial state by
+  ! an externally projected conservative state (one nondimensional U1 U2 U3
+  ! line per physical cell). Geometry, EOS, feed and steady boundary data are
+  ! still built above; the legacy perturbation is NOT added to this state.
+  if(len_trim(initial_u_file)>0)then
+    open(newunit=ios,file=trim(initial_u_file),status='old',action='read',iostat=ios_open)
+    if(ios_open/=0)error stop 'initial_u_file cannot be opened'
+    do i=nd+1,N-nd
+      read(ios,*,iostat=ios_open)U(i,:)
+      if(ios_open/=0)error stop 'initial_u_file has fewer valid lines than physical cells'
+    end do
+    close(ios)
+    if(any(.not.ieee_is_finite(U(nd+1:N-nd,:))))error stop 'initial_u_file contains non-finite values'
+    if(any(U(nd+1:N-nd,1:2)<=0.0_wp))error stop 'initial_u_file contains a non-positive phase mass'
+    call apply_ghost_cells(U,nd)
+    write(output_unit,'(2a)')'[INIT] conservative initial state read from ',trim(initial_u_file)
+  end if
 
   ! ---------------------------- Config -----------------------------------
   cfg%regime         = trim(adjustl(regime))
@@ -411,6 +488,16 @@ program main
   cfg%pipe_regime_mode = trim(pipe_regime_mode)
   cfg%flux_scheme    = flux_scheme
   cfg%junction_model = junction_model
+  cfg%junction_trace = junction_trace
+  cfg%junction_flux = junction_flux
+  cfg%junction_riser_limit = junction_riser_limit
+  cfg%junction_transmission = junction_transmission
+  cfg%junction_seal = junction_seal
+  cfg%junction_seal_face_tol = junction_seal_face_tol
+  cfg%junction_seal_curve_steps = junction_seal_curve_steps
+  cfg%junction_seal_jacobian = junction_seal_jacobian
+  cfg%junction_t1_curve_steps = junction_t1_curve_steps
+  cfg%momentum_ledger = momentum_ledger
   cfg%dissipation_mode = dissipation_mode
   cfg%newton_globalization = newton_globalization
   cfg%gas_eos        = gas_eos
@@ -550,6 +637,52 @@ program main
 
   ! ---------------------------- Simulate ---------------------------------
   call sim%init(cfg)
+  ! Closure contract: requested (deck) vs effective (dispatched per cell).
+  ! Written BEFORE the transient so failed runs carry it; any cell whose
+  ! dispatched closure differs from the resolved section closure stops here.
+  allocate(effective_ids(cfg%nCells))
+  call sim%effective_closures(effective_ids)
+  open(newunit=contract_unit,file=trim(out_dir)//'/closure_contract.txt',status='replace')
+  write(contract_unit,'(a)')'contract_version=1'
+  call contract_int('closure_pipe_requested',closure_pipe_requested)
+  write(contract_unit,'(a,i0)')'closure_pipe_effective=',cfg%closure_pipe
+  call contract_int('closure_riser_requested',closure_riser_requested)
+  write(contract_unit,'(a,i0)')'closure_riser_effective=',cfg%closure_riser
+  write(contract_unit,'(2a)')'closure_riser_name=',trim(closure_name(cfg%closure_riser))
+  write(contract_unit,'(2a)')'closure_pipe_name=',trim(closure_name(cfg%closure_pipe))
+  write(contract_unit,'(a,i0)')'pipe_cells=',cfg%N_pipe
+  write(contract_unit,'(a,i0)')'pipe_cells_dispatched_effective=',count(effective_ids(nd+1:nd+cfg%N_pipe)==cfg%closure_pipe)
+  write(contract_unit,'(a,i0)')'riser_cells=',cfg%nCells-2*nd-cfg%N_pipe
+  write(contract_unit,'(a,i0)')'riser_cells_dispatched_effective=', &
+    count(effective_ids(nd+cfg%N_pipe+1:cfg%nCells-nd)==cfg%closure_riser)
+  write(contract_unit,'(a,i0)')'junction_riser_trace_closure=',cfg%closure_riser
+  write(contract_unit,'(a,i0)')'outlet_boundary_closure=',cfg%closure_riser
+  write(contract_unit,'(2a)')'pipe_regime_mode=',trim(pipe_regime_mode)
+  write(contract_unit,'(2a)')'gas_eos=',trim(gas_eos)
+  write(contract_unit,'(2a)')'junction_model=',trim(junction_model)
+  write(contract_unit,'(2a)')'junction_flux=',trim(junction_flux)
+  write(contract_unit,'(2a)')'junction_trace=',trim(junction_trace)
+  write(contract_unit,'(2a)')'junction_riser_limit=',trim(junction_riser_limit)
+  write(contract_unit,'(2a)')'junction_transmission=',trim(junction_transmission)
+  ! Written only when the extension is active: T1/T2 contracts stay byte-identical.
+  if(trim(junction_seal)/='OFF')then
+    write(contract_unit,'(2a)')'junction_seal=',trim(junction_seal)
+    write(contract_unit,'(a,es10.3)')'junction_seal_face_tol=',junction_seal_face_tol
+    ! Round 20261122 options: written only when not at their defaults (seal5 contracts unchanged).
+    if(junction_seal_curve_steps/=0)write(contract_unit,'(a,i0)')'junction_seal_curve_steps=',junction_seal_curve_steps
+    if(trim(junction_seal_jacobian)/='FD')write(contract_unit,'(2a)')'junction_seal_jacobian=',trim(junction_seal_jacobian)
+  endif
+  if(junction_t1_curve_steps/=8)write(contract_unit,'(a,i0)')'junction_t1_curve_steps=',junction_t1_curve_steps
+  if(momentum_ledger)write(contract_unit,'(a)')'momentum_ledger=T'
+  write(contract_unit,'(2a)')'newton_globalization=',trim(newton_globalization)
+  write(contract_unit,'(2a)')'dissipation_mode=',trim(dissipation_mode)
+  write(contract_unit,'(2a)')'flux_scheme=',trim(flux_scheme)
+  write(contract_unit,'(a,es12.4)')'tol_res=',tol_res
+  write(contract_unit,'(2a)')'input_file=',trim(infile)
+  close(contract_unit)
+  if(any(effective_ids(nd+1:nd+cfg%N_pipe)/=cfg%closure_pipe).or. &
+     any(effective_ids(nd+cfg%N_pipe+1:cfg%nCells-nd)/=cfg%closure_riser)) &
+    error stop 'Closure contract violated: dispatched cell closure differs from the resolved section closure'
   call sim%simulate(U, vns_ext, thetav_ext, cfg%T, max_iter=max_iter, &
                    it_target=it_target, use_it_target=use_it_target, it_p=it_p, &
                    dt_fac_min=dt_fac_min, dt_fac_max=dt_fac_max, &
@@ -599,6 +732,31 @@ program main
   write(*,'(a,1x,a)') 'Done. Wrote', trim(outname)
 
 contains
+
+  subroutine contract_int(key,value)
+    character(*),intent(in)::key
+    integer(i4),intent(in)::value
+    if(value==-1)then
+      write(contract_unit,'(2a)')key,'=DEFAULT'
+    else
+      write(contract_unit,'(a,a,i0)')key,'=',value
+    endif
+  end subroutine contract_int
+
+  pure function closure_name(id) result(name)
+    integer(i4),intent(in)::id
+    character(len=32)::name
+    select case(id)
+    case(1);name='STRATIFIED'
+    case(2);name='BENDIKSEN'
+    case(3);name='BHAGWAT_AZEVEDO2015'
+    case(4);name='MONTGOMERY'
+    case(5);name='CHEXAL_1992_AUTO'
+    case(6);name='CHEXAL_1992_HIGH'
+    case(7);name='CHEXAL_1992_LOW'
+    case default;name='UNKNOWN'
+    end select
+  end function closure_name
   function shell_quote(s) result(quoted)
     character(len=*),intent(in)::s
     character(len=:),allocatable::quoted

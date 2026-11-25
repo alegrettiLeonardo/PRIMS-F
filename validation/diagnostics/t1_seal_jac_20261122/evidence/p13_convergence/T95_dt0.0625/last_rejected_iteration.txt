@@ -1,0 +1,9 @@
+reason=ASSEMBLY
+newton_iteration=1
+backtrack=0
+jac_dissipation_fd=F
+lambda=  0.0000000000000000E+000
+proposal_status=0
+proposal_index=0
+proposal_stage=NONE
+proposal_norm=                      NaN

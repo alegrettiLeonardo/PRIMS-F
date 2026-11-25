@@ -17,10 +17,16 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def assign(text,key,value):
-    pattern=r'(\b'+re.escape(key)+r'\s*=)\s*(\'[^\']*\'|[^,\n]+)'
-    if re.search(pattern,text,re.I):
-        return re.sub(pattern,lambda m:m[1]+value,text,flags=re.I)
-    return re.sub(r'(?m)^\s*/\s*$',f'  {key}={value}\n/',text)
+    # Edit assignments on non-comment lines only: a provenance comment that
+    # mentions a key must never be (or hide) the edited value.
+    pattern=re.compile(r'(\b'+re.escape(key)+r'\s*=)\s*(\'[^\']*\'|[^,\n]+)',re.I)
+    lines=text.splitlines(keepends=True);hits=0
+    for i,ln in enumerate(lines):
+        if ln.lstrip().startswith('!'):continue
+        new,n=pattern.subn(lambda m:m[1]+value,ln)
+        if n:lines[i]=new;hits+=n
+    if hits:return ''.join(lines)
+    return re.sub(r'(?m)^[ \t]*/[ \t]*$',f'  {key}={value}\n/',text)
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
@@ -29,7 +35,7 @@ def main():
     p.add_argument('--riser-cells',type=int)
     p.add_argument('--dt',type=float,default=.5,help='Maximum physical time step, seconds')
     p.add_argument('--time',type=float,default=2400)
-    p.add_argument('--closure',type=int,default=3)
+    p.add_argument('--closure',type=int,default=5,help='Riser closure ID; 5=CHEXAL_1992 (default), 3=Bhagwat legacy')
     p.add_argument('--min-dt',type=float,default=1e-7,help='Failure floor for physical time step, seconds')
     p.add_argument('--eos',choices=['BAROTROPIC','ISOTHERMAL'],default='BAROTROPIC')
     p.add_argument('--junction',choices=['MATCHED','BLOCKING','CONSERVATIVE'],default='MATCHED')

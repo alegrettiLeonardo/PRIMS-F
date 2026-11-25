@@ -1,0 +1,762 @@
+[
+ {
+  "reference": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/jt2/SS1_CENTER",
+   "reason": "NEWTON_GLOBALIZATION_FAILURE",
+   "t_reached_s": 78.57661828053278,
+   "accepted": 706,
+   "rejected": 29,
+   "dt_min_accepted_s": 1.5377343749999993e-07,
+   "cpu_s": 212.710334,
+   "last": {
+    "p_in_Pa": 275139.4184293958,
+    "mdot_g_base_kg_s": 5.447023633744888e-11,
+    "alpha_pipe_end": 0.5599783273301595,
+    "alpha_riser_base": 0.01876008278798217,
+    "holdup_base": 0.9812399172120179
+   },
+   "cycles": [],
+   "amplitude_events_Pa": {
+    "A_star_0.5": null,
+    "A_star_0.25": null,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   }
+  },
+  "e1": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/e1/SS1_E1_CENTER",
+   "reason": "NEWTON_GLOBALIZATION_FAILURE",
+   "t_reached_s": 80.8611501552131,
+   "accepted": 678,
+   "rejected": 23,
+   "dt_min_accepted_s": 2.460374999999999e-06,
+   "cpu_s": 176.70941599999998,
+   "last": {
+    "p_in_Pa": 278302.3449550318,
+    "mdot_g_base_kg_s": 1.8871763093641125e-11,
+    "alpha_pipe_end": 0.5586015081922949,
+    "alpha_riser_base": 0.015219733219308534,
+    "holdup_base": 0.9847802667806914
+   },
+   "cycles": [],
+   "amplitude_events_Pa": {
+    "A_star_0.5": null,
+    "A_star_0.25": null,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   }
+  },
+  "common_window_s": [
+   0,
+   78.57661828053278
+  ],
+  "p_in_max_rel": 0.020040526158315787,
+  "p_in_rms_rel": 0.006298605090401729,
+  "Ml_max_abs_kg": 1.5249397495359744,
+  "Mg_max_abs_kg": 0.001614462224073021
+ },
+ {
+  "reference": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/jt2/SS1_CENTER",
+   "reason": "NEWTON_GLOBALIZATION_FAILURE",
+   "t_reached_s": 78.57661828053278,
+   "accepted": 706,
+   "rejected": 29,
+   "dt_min_accepted_s": 1.5377343749999993e-07,
+   "cpu_s": 212.710334,
+   "last": {
+    "p_in_Pa": 275139.4184293958,
+    "mdot_g_base_kg_s": 5.447023633744888e-11,
+    "alpha_pipe_end": 0.5599783273301595,
+    "alpha_riser_base": 0.01876008278798217,
+    "holdup_base": 0.9812399172120179
+   },
+   "cycles": [],
+   "amplitude_events_Pa": {
+    "A_star_0.5": null,
+    "A_star_0.25": null,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   }
+  },
+  "e1": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/e1/SS1_E1_STEADY",
+   "reason": "NEWTON_GLOBALIZATION_FAILURE",
+   "t_reached_s": 79.88553969671311,
+   "accepted": 669,
+   "rejected": 23,
+   "dt_min_accepted_s": 1.0251562499999994e-06,
+   "cpu_s": 754.199384,
+   "last": {
+    "p_in_Pa": 277260.65544640407,
+    "mdot_g_base_kg_s": 3.4087648040914393e-12,
+    "alpha_pipe_end": 0.5592928670612546,
+    "alpha_riser_base": 0.016380990306552597,
+    "holdup_base": 0.9836190096934474
+   },
+   "cycles": [],
+   "amplitude_events_Pa": {
+    "A_star_0.5": null,
+    "A_star_0.25": null,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   }
+  },
+  "common_window_s": [
+   0,
+   78.57661828053278
+  ],
+  "p_in_max_rel": 0.012412805549291746,
+  "p_in_rms_rel": 0.003895006425167809,
+  "Ml_max_abs_kg": 0.9446022945542722,
+  "Mg_max_abs_kg": 0.001000224342706607
+ },
+ {
+  "reference": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/jt2/SS1_STEADY",
+   "reason": "NEWTON_GLOBALIZATION_FAILURE",
+   "t_reached_s": 78.83780317470136,
+   "accepted": 661,
+   "rejected": 23,
+   "dt_min_accepted_s": 1.2814453124999993e-07,
+   "cpu_s": 628.706593,
+   "last": {
+    "p_in_Pa": 275678.23299579753,
+    "mdot_g_base_kg_s": 4.663769246597221e-11,
+    "alpha_pipe_end": 0.5599670248515483,
+    "alpha_riser_base": 0.018131932264937985,
+    "holdup_base": 0.981868067735062
+   },
+   "cycles": [],
+   "amplitude_events_Pa": {
+    "A_star_0.5": null,
+    "A_star_0.25": null,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   }
+  },
+  "e1": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/e1/SS1_E1_STEADY",
+   "reason": "NEWTON_GLOBALIZATION_FAILURE",
+   "t_reached_s": 79.88553969671311,
+   "accepted": 669,
+   "rejected": 23,
+   "dt_min_accepted_s": 1.0251562499999994e-06,
+   "cpu_s": 754.199384,
+   "last": {
+    "p_in_Pa": 277260.65544640407,
+    "mdot_g_base_kg_s": 3.4087648040914393e-12,
+    "alpha_pipe_end": 0.5592928670612546,
+    "alpha_riser_base": 0.016380990306552597,
+    "holdup_base": 0.9836190096934474
+   },
+   "cycles": [],
+   "amplitude_events_Pa": {
+    "A_star_0.5": null,
+    "A_star_0.25": null,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   }
+  },
+  "common_window_s": [
+   0,
+   78.83780317470136
+  ],
+  "p_in_max_rel": 0.009609384778485483,
+  "p_in_rms_rel": 0.003029825977426091,
+  "Ml_max_abs_kg": 0.7309823536400017,
+  "Mg_max_abs_kg": 0.0007905545514059753
+ },
+ {
+  "reference": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/iso/B_ISO_MASS",
+   "reason": "MAX_NEWTON",
+   "t_reached_s": 223.6445229171398,
+   "accepted": 1829,
+   "rejected": 25,
+   "dt_min_accepted_s": 1.652994086399999e-07,
+   "cpu_s": 311.355953,
+   "last": {
+    "p_in_Pa": 265512.9896345135,
+    "mdot_g_base_kg_s": 1.726577549396846e-11,
+    "alpha_pipe_end": 0.5505028991482672,
+    "alpha_riser_base": 0.005654060278694823,
+    "holdup_base": 0.9943459397213051
+   },
+   "cycles": [
+    {
+     "t_start": 11.30685275983729,
+     "amplitude_Pa": 228.5111236134835,
+     "gas_trough_ratio": 0.9804837356970463,
+     "holdup_base_max": 0.6882335837729174
+    },
+    {
+     "t_start": 38.43185275983715,
+     "amplitude_Pa": 441.2507921376382,
+     "gas_trough_ratio": 0.9618725482504191,
+     "holdup_base_max": 0.6922057999567113
+    },
+    {
+     "t_start": 65.05685275983767,
+     "amplitude_Pa": 863.5678671900823,
+     "gas_trough_ratio": 0.9259679518741725,
+     "holdup_base_max": 0.6999921196336027
+    },
+    {
+     "t_start": 91.55685275983797,
+     "amplitude_Pa": 1688.0592678140674,
+     "gas_trough_ratio": 0.8578443252417596,
+     "holdup_base_max": 0.7153422522474493
+    },
+    {
+     "t_start": 118.05685275983663,
+     "amplitude_Pa": 3290.533079778368,
+     "gas_trough_ratio": 0.7333900487991628,
+     "holdup_base_max": 0.745453191375516
+    },
+    {
+     "t_start": 144.5568527598353,
+     "amplitude_Pa": 6353.877085127315,
+     "gas_trough_ratio": 0.5250514508610813,
+     "holdup_base_max": 0.8025538391121256
+    },
+    {
+     "t_start": 171.05685275983393,
+     "amplitude_Pa": 11887.315428465838,
+     "gas_trough_ratio": 0.23858863348458045,
+     "holdup_base_max": 0.8973905768548025
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6711.651626504673,
+    "A_star_0.25": 11594.359468355853,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   }
+  },
+  "e1": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/e1/ISO_E1_CENTER",
+   "reason": "NEWTON_GLOBALIZATION_FAILURE",
+   "t_reached_s": 223.88306044551655,
+   "accepted": 1825,
+   "rejected": 24,
+   "dt_min_accepted_s": 2.2143374999999994e-07,
+   "cpu_s": 329.10435,
+   "last": {
+    "p_in_Pa": 264853.29572859645,
+    "mdot_g_base_kg_s": 9.376445486938336e-12,
+    "alpha_pipe_end": 0.5488869281569749,
+    "alpha_riser_base": 0.005983306293904736,
+    "holdup_base": 0.9940166937060952
+   },
+   "cycles": [
+    {
+     "t_start": 11.556852759837291,
+     "amplitude_Pa": 241.24166155903367,
+     "gas_trough_ratio": 0.9793910206438535,
+     "holdup_base_max": 0.6884503631960979
+    },
+    {
+     "t_start": 38.68185275983715,
+     "amplitude_Pa": 464.64964626557776,
+     "gas_trough_ratio": 0.9599661226732316,
+     "holdup_base_max": 0.6925981381199117
+    },
+    {
+     "t_start": 65.30685275983767,
+     "amplitude_Pa": 906.0036626442161,
+     "gas_trough_ratio": 0.9221758941197894,
+     "holdup_base_max": 0.7008529678667252
+    },
+    {
+     "t_start": 91.93185275983795,
+     "amplitude_Pa": 1764.4920854636002,
+     "gas_trough_ratio": 0.8514299963346961,
+     "holdup_base_max": 0.7168786781512599
+    },
+    {
+     "t_start": 118.4318527598366,
+     "amplitude_Pa": 3426.2287887088605,
+     "gas_trough_ratio": 0.7245970249061624,
+     "holdup_base_max": 0.7476048923479608
+    },
+    {
+     "t_start": 144.80685275983527,
+     "amplitude_Pa": 6586.445732669512,
+     "gas_trough_ratio": 0.5130960074838912,
+     "holdup_base_max": 0.805952023563203
+    },
+    {
+     "t_start": 171.30685275983393,
+     "amplitude_Pa": 12241.817227285952,
+     "gas_trough_ratio": 0.22432691093258283,
+     "holdup_base_max": 0.902766525611142
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6774.221728675522,
+    "A_star_0.25": 11585.454133124567,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   }
+  },
+  "common_window_s": [
+   0,
+   223.6445229171398
+  ],
+  "p_in_max_rel": 0.010234844938797807,
+  "p_in_rms_rel": 0.0020701657148628465,
+  "Ml_max_abs_kg": 0.7308015964704282,
+  "Mg_max_abs_kg": 0.0014578246348760093
+ },
+ {
+  "reference": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/iso/B_ISO_MASS",
+   "reason": "MAX_NEWTON",
+   "t_reached_s": 223.6445229171398,
+   "accepted": 1829,
+   "rejected": 25,
+   "dt_min_accepted_s": 1.652994086399999e-07,
+   "cpu_s": 311.355953,
+   "last": {
+    "p_in_Pa": 265512.9896345135,
+    "mdot_g_base_kg_s": 1.726577549396846e-11,
+    "alpha_pipe_end": 0.5505028991482672,
+    "alpha_riser_base": 0.005654060278694823,
+    "holdup_base": 0.9943459397213051
+   },
+   "cycles": [
+    {
+     "t_start": 11.30685275983729,
+     "amplitude_Pa": 228.5111236134835,
+     "gas_trough_ratio": 0.9804837356970463,
+     "holdup_base_max": 0.6882335837729174
+    },
+    {
+     "t_start": 38.43185275983715,
+     "amplitude_Pa": 441.2507921376382,
+     "gas_trough_ratio": 0.9618725482504191,
+     "holdup_base_max": 0.6922057999567113
+    },
+    {
+     "t_start": 65.05685275983767,
+     "amplitude_Pa": 863.5678671900823,
+     "gas_trough_ratio": 0.9259679518741725,
+     "holdup_base_max": 0.6999921196336027
+    },
+    {
+     "t_start": 91.55685275983797,
+     "amplitude_Pa": 1688.0592678140674,
+     "gas_trough_ratio": 0.8578443252417596,
+     "holdup_base_max": 0.7153422522474493
+    },
+    {
+     "t_start": 118.05685275983663,
+     "amplitude_Pa": 3290.533079778368,
+     "gas_trough_ratio": 0.7333900487991628,
+     "holdup_base_max": 0.745453191375516
+    },
+    {
+     "t_start": 144.5568527598353,
+     "amplitude_Pa": 6353.877085127315,
+     "gas_trough_ratio": 0.5250514508610813,
+     "holdup_base_max": 0.8025538391121256
+    },
+    {
+     "t_start": 171.05685275983393,
+     "amplitude_Pa": 11887.315428465838,
+     "gas_trough_ratio": 0.23858863348458045,
+     "holdup_base_max": 0.8973905768548025
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6711.651626504673,
+    "A_star_0.25": 11594.359468355853,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   }
+  },
+  "e1": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/e1/ISO_E1_STEADY",
+   "reason": "NEWTON_GLOBALIZATION_FAILURE",
+   "t_reached_s": 223.84179225302032,
+   "accepted": 1823,
+   "rejected": 24,
+   "dt_min_accepted_s": 3.690562499999999e-07,
+   "cpu_s": 1580.6461149999998,
+   "last": {
+    "p_in_Pa": 265429.06871382624,
+    "mdot_g_base_kg_s": 1.6862388830415915e-12,
+    "alpha_pipe_end": 0.5495745711129694,
+    "alpha_riser_base": 0.005712557760357202,
+    "holdup_base": 0.9942874422396428
+   },
+   "cycles": [
+    {
+     "t_start": 11.43185275983729,
+     "amplitude_Pa": 233.97018132850644,
+     "gas_trough_ratio": 0.9800219849030006,
+     "holdup_base_max": 0.6882950394013342
+    },
+    {
+     "t_start": 38.55685275983715,
+     "amplitude_Pa": 450.9336701334105,
+     "gas_trough_ratio": 0.9611134363742192,
+     "holdup_base_max": 0.6923308738650822
+    },
+    {
+     "t_start": 65.18185275983767,
+     "amplitude_Pa": 880.345579088782,
+     "gas_trough_ratio": 0.9242692353803614,
+     "holdup_base_max": 0.7003710769781655
+    },
+    {
+     "t_start": 91.80685275983795,
+     "amplitude_Pa": 1716.611304931168,
+     "gas_trough_ratio": 0.8551348541067831,
+     "holdup_base_max": 0.7160035480043156
+    },
+    {
+     "t_start": 118.30685275983662,
+     "amplitude_Pa": 3337.856659387093,
+     "gas_trough_ratio": 0.7307496418432922,
+     "holdup_base_max": 0.7460389812589379
+    },
+    {
+     "t_start": 144.68185275983527,
+     "amplitude_Pa": 6428.1022845226835,
+     "gas_trough_ratio": 0.5220894636823273,
+     "holdup_base_max": 0.8032969166909546
+    },
+    {
+     "t_start": 171.18185275983393,
+     "amplitude_Pa": 11985.336667720563,
+     "gas_trough_ratio": 0.23392473971522543,
+     "holdup_base_max": 0.8992459942809656
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6742.53659119737,
+    "A_star_0.25": 11575.94995158124,
+    "A_star_0.1": null,
+    "A_star_0.01": null
+   }
+  },
+  "common_window_s": [
+   0,
+   223.6445229171398
+  ],
+  "p_in_max_rel": 0.005409972279173778,
+  "p_in_rms_rel": 0.001080524868674698,
+  "Ml_max_abs_kg": 0.3864054974122695,
+  "Mg_max_abs_kg": 0.0007630131802290052
+ },
+ {
+  "reference": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/iso/B_ISO_MASS_N101",
+   "reason": "MAX_NEWTON",
+   "t_reached_s": 249.3995620649342,
+   "accepted": 2037,
+   "rejected": 24,
+   "dt_min_accepted_s": 4.4286749999999987e-07,
+   "cpu_s": 811.323542,
+   "last": {
+    "p_in_Pa": 256165.2728586667,
+    "mdot_g_base_kg_s": 2.450938548579135e-12,
+    "alpha_pipe_end": 0.5509970563663236,
+    "alpha_riser_base": 0.004889659006553382,
+    "holdup_base": 0.9951103409934466
+   },
+   "cycles": [
+    {
+     "t_start": 11.30685275983729,
+     "amplitude_Pa": 131.0614019225759,
+     "gas_trough_ratio": 0.9885266042432589,
+     "holdup_base_max": 0.6848177170849257
+    },
+    {
+     "t_start": 38.55685275983715,
+     "amplitude_Pa": 263.6002462616889,
+     "gas_trough_ratio": 0.9767042892823716,
+     "holdup_base_max": 0.6873415650163053
+    },
+    {
+     "t_start": 65.30685275983767,
+     "amplitude_Pa": 539.6759432542895,
+     "gas_trough_ratio": 0.9523699596076054,
+     "holdup_base_max": 0.6925959442245679
+    },
+    {
+     "t_start": 91.93185275983795,
+     "amplitude_Pa": 1104.2533857008966,
+     "gas_trough_ratio": 0.9040406090380961,
+     "holdup_base_max": 0.703275092512724
+    },
+    {
+     "t_start": 118.4318527598366,
+     "amplitude_Pa": 2255.9268960150075,
+     "gas_trough_ratio": 0.808684678523511,
+     "holdup_base_max": 0.7255553119646061
+    },
+    {
+     "t_start": 145.05685275983527,
+     "amplitude_Pa": 4583.021597144252,
+     "gas_trough_ratio": 0.6349488631393368,
+     "holdup_base_max": 0.770298352414841
+    },
+    {
+     "t_start": 171.5568527598339,
+     "amplitude_Pa": 9128.393404925679,
+     "gas_trough_ratio": 0.36080303894857,
+     "holdup_base_max": 0.8541349479031247
+    },
+    {
+     "t_start": 198.05685275983643,
+     "amplitude_Pa": 16978.641069797566,
+     "gas_trough_ratio": 0.04265081734226958,
+     "holdup_base_max": 0.9783090930183163
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6433.608530775977,
+    "A_star_0.25": 11330.686950911544,
+    "A_star_0.1": 15181.759403064852,
+    "A_star_0.01": null
+   }
+  },
+  "e1": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/e1/ISO_E1_CENTER_N101",
+   "reason": "OPERATOR_TERMINATED_COST_STAGNATION",
+   "t_reached_s": 226.30685275983933,
+   "accepted": 2423,
+   "rejected": -1,
+   "dt_min_accepted_s": 4.5562499999999996e-05,
+   "cpu_s": null,
+   "last": {
+    "p_in_Pa": 273433.00601462554,
+    "mdot_g_base_kg_s": 8.042659904464408e-06,
+    "alpha_pipe_end": 0.5494271694043131,
+    "alpha_riser_base": 0.002404282054256082,
+    "holdup_base": 0.9975957179457439
+   },
+   "cycles": [
+    {
+     "t_start": 11.43185275983729,
+     "amplitude_Pa": 135.28240657274728,
+     "gas_trough_ratio": 0.9881417865307031,
+     "holdup_base_max": 0.6848931560472817
+    },
+    {
+     "t_start": 38.68185275983715,
+     "amplitude_Pa": 272.11935263709165,
+     "gas_trough_ratio": 0.9759615878063398,
+     "holdup_base_max": 0.6874941643029383
+    },
+    {
+     "t_start": 65.43185275983767,
+     "amplitude_Pa": 556.5820300798805,
+     "gas_trough_ratio": 0.9509234322498759,
+     "holdup_base_max": 0.6929047454516193
+    },
+    {
+     "t_start": 92.05685275983794,
+     "amplitude_Pa": 1137.8454117963556,
+     "gas_trough_ratio": 0.9012785150917536,
+     "holdup_base_max": 0.7038902478226314
+    },
+    {
+     "t_start": 118.5568527598366,
+     "amplitude_Pa": 2322.3047678726725,
+     "gas_trough_ratio": 0.8035746222819301,
+     "holdup_base_max": 0.7267814338070002
+    },
+    {
+     "t_start": 145.18185275983524,
+     "amplitude_Pa": 4711.931939060421,
+     "gas_trough_ratio": 0.6263881082434951,
+     "holdup_base_max": 0.7726399978056586
+    },
+    {
+     "t_start": 171.6818527598339,
+     "amplitude_Pa": 9364.118966028647,
+     "gas_trough_ratio": 0.34649570895312093,
+     "holdup_base_max": 0.8592198837285974
+    },
+    {
+     "t_start": 198.30685275983646,
+     "amplitude_Pa": 17328.52231005313,
+     "gas_trough_ratio": 0.030040198670194997,
+     "holdup_base_max": 0.9840540853561104
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6425.17199110899,
+    "A_star_0.25": 11297.23501773714,
+    "A_star_0.1": 15124.111895443384,
+    "A_star_0.01": null
+   }
+  },
+  "common_window_s": [
+   0,
+   226.30685275983933
+  ],
+  "p_in_max_rel": 0.0036555844331776634,
+  "p_in_rms_rel": 0.0008330661187831851,
+  "Ml_max_abs_kg": 0.2580684017410988,
+  "Mg_max_abs_kg": 0.000510732538439751
+ },
+ {
+  "reference": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/iso/B_ISO_MASS_N101",
+   "reason": "MAX_NEWTON",
+   "t_reached_s": 249.3995620649342,
+   "accepted": 2037,
+   "rejected": 24,
+   "dt_min_accepted_s": 4.4286749999999987e-07,
+   "cpu_s": 811.323542,
+   "last": {
+    "p_in_Pa": 256165.2728586667,
+    "mdot_g_base_kg_s": 2.450938548579135e-12,
+    "alpha_pipe_end": 0.5509970563663236,
+    "alpha_riser_base": 0.004889659006553382,
+    "holdup_base": 0.9951103409934466
+   },
+   "cycles": [
+    {
+     "t_start": 11.30685275983729,
+     "amplitude_Pa": 131.0614019225759,
+     "gas_trough_ratio": 0.9885266042432589,
+     "holdup_base_max": 0.6848177170849257
+    },
+    {
+     "t_start": 38.55685275983715,
+     "amplitude_Pa": 263.6002462616889,
+     "gas_trough_ratio": 0.9767042892823716,
+     "holdup_base_max": 0.6873415650163053
+    },
+    {
+     "t_start": 65.30685275983767,
+     "amplitude_Pa": 539.6759432542895,
+     "gas_trough_ratio": 0.9523699596076054,
+     "holdup_base_max": 0.6925959442245679
+    },
+    {
+     "t_start": 91.93185275983795,
+     "amplitude_Pa": 1104.2533857008966,
+     "gas_trough_ratio": 0.9040406090380961,
+     "holdup_base_max": 0.703275092512724
+    },
+    {
+     "t_start": 118.4318527598366,
+     "amplitude_Pa": 2255.9268960150075,
+     "gas_trough_ratio": 0.808684678523511,
+     "holdup_base_max": 0.7255553119646061
+    },
+    {
+     "t_start": 145.05685275983527,
+     "amplitude_Pa": 4583.021597144252,
+     "gas_trough_ratio": 0.6349488631393368,
+     "holdup_base_max": 0.770298352414841
+    },
+    {
+     "t_start": 171.5568527598339,
+     "amplitude_Pa": 9128.393404925679,
+     "gas_trough_ratio": 0.36080303894857,
+     "holdup_base_max": 0.8541349479031247
+    },
+    {
+     "t_start": 198.05685275983643,
+     "amplitude_Pa": 16978.641069797566,
+     "gas_trough_ratio": 0.04265081734226958,
+     "holdup_base_max": 0.9783090930183163
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6433.608530775977,
+    "A_star_0.25": 11330.686950911544,
+    "A_star_0.1": 15181.759403064852,
+    "A_star_0.01": null
+   }
+  },
+  "e1": {
+   "run": "/home/leonardo/Documentos/PRIMS-F-p0p1c-results-20261119/e1/ISO_E1_STEADY_N101",
+   "reason": "OPERATOR_TERMINATED_COST_STAGNATION",
+   "t_reached_s": 226.88435275983937,
+   "accepted": 2160,
+   "rejected": -1,
+   "dt_min_accepted_s": 3.1640625e-05,
+   "cpu_s": null,
+   "last": {
+    "p_in_Pa": 275838.8833714882,
+    "mdot_g_base_kg_s": 4.636176671805951e-06,
+    "alpha_pipe_end": 0.5497506919826879,
+    "alpha_riser_base": 0.001196500998758859,
+    "holdup_base": 0.9988034990012411
+   },
+   "cycles": [
+    {
+     "t_start": 11.43185275983729,
+     "amplitude_Pa": 133.02152381453197,
+     "gas_trough_ratio": 0.9882968442973429,
+     "holdup_base_max": 0.6848540817456675
+    },
+    {
+     "t_start": 38.68185275983715,
+     "amplitude_Pa": 267.5278261220665,
+     "gas_trough_ratio": 0.9764602449242271,
+     "holdup_base_max": 0.6873722193109635
+    },
+    {
+     "t_start": 65.30685275983767,
+     "amplitude_Pa": 547.3757803648477,
+     "gas_trough_ratio": 0.951894474517079,
+     "holdup_base_max": 0.6926714805487502
+    },
+    {
+     "t_start": 91.93185275983795,
+     "amplitude_Pa": 1119.3906376223022,
+     "gas_trough_ratio": 0.902536725343202,
+     "holdup_base_max": 0.7036201200163987
+    },
+    {
+     "t_start": 118.5568527598366,
+     "amplitude_Pa": 2285.147113876679,
+     "gas_trough_ratio": 0.8070618957842058,
+     "holdup_base_max": 0.7258804185842367
+    },
+    {
+     "t_start": 145.05685275983527,
+     "amplitude_Pa": 4639.233024286252,
+     "gas_trough_ratio": 0.6323412058825659,
+     "holdup_base_max": 0.770905829082989
+    },
+    {
+     "t_start": 171.5568527598339,
+     "amplitude_Pa": 9229.668088239385,
+     "gas_trough_ratio": 0.3547616908391196,
+     "holdup_base_max": 0.856267528629351
+    },
+    {
+     "t_start": 198.18185275983643,
+     "amplitude_Pa": 17123.923100469387,
+     "gas_trough_ratio": 0.03749062464154416,
+     "holdup_base_max": 0.9806517522866507
+    }
+   ],
+   "amplitude_events_Pa": {
+    "A_star_0.5": 6439.853669381301,
+    "A_star_0.25": 11319.217629498176,
+    "A_star_0.1": 15160.697489210184,
+    "A_star_0.01": null
+   }
+  },
+  "common_window_s": [
+   0,
+   226.88435275983937
+  ],
+  "p_in_max_rel": 0.0019331552599356338,
+  "p_in_rms_rel": 0.00043717667972299415,
+  "Ml_max_abs_kg": 0.13655587368816668,
+  "Mg_max_abs_kg": 0.0002681641581582239
+ }
+]

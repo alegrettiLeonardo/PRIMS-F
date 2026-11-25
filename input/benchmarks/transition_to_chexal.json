@@ -1,0 +1,123 @@
+{
+  "purpose": "Preserve the eight Bhagwat (closure_riser=3) benchmark decks byte for byte as the legacy/regression baseline; the primary decks select CHEXAL_1992 (closure_riser=5). Only the riser closure ID and the provenance comment line change; geometry, properties, EOS, feed and numerical controls are identical.",
+  "archive_directory": "input/benchmarks/bhagwat",
+  "source_commit": "d2c81010abeb1207392671a86502a81ec85d9b6a",
+  "archived_sha256": {
+    "D_OSC.nml": "48b02dffb9319c3786fc5d4c102c1893786e9d3ab8ec668025f1893e26272408",
+    "D_OSC_ISO.nml": "030a271e93bdb491a4f317046f0c37a9a9b36759667cc6c9a9f4cdab14e519b9",
+    "D_SS1.nml": "6c7b0f9bdcc0b2d2acca212f50b760dc2613fc8f3b6474ceac7731e240d58f7d",
+    "D_SS1_ISO.nml": "db31eff235698bdd1c35e4f951b42d3ddc3c09e25f0578645698ee1769bc3817",
+    "D_SS3.nml": "f5fe9ece006415d71541f1196b243fb047d57abd5739319cf1a81247261c86ee",
+    "D_SS3_ISO.nml": "ef047dc2fe5f54f412bf3895d41bddcadb25adaae82477efa43b27f06a9a279a",
+    "D_Stable.nml": "bc41e84552eb44e0938a25065a71d1c3ebcf7c81fbf7cb0c4349d10431e49ec9",
+    "D_Stable_ISO.nml": "1417971608264446e4e41351aa712b2034242a1101bff437f46672530b8a381c"
+  },
+  "primary_sha256": {
+    "D_OSC.nml": "0f7a03e3e9581e9b66c3a836e2730a8c29d3739ea6620f13c7460eeb4744f5e3",
+    "D_OSC_ISO.nml": "80ed29afa31eca262d20391a18147aea212de8d298700ab34ba43e667686def5",
+    "D_SS1.nml": "e1f0c39019eb74b414b4c079cd995d259ddcacae4f08da37341b06c40861824c",
+    "D_SS1_ISO.nml": "e89b1cf48a0d20e79698efd37df5f92bfaf606fa22cacfbe49a1bad32ec97e9c",
+    "D_SS3.nml": "541e96182dc4bc958bc0662513a6a0d8b74c291734ef20f2383a32e79fff1583",
+    "D_SS3_ISO.nml": "d8bf7ac86adb0dd0cbca35d641dd67b6178fc50352cf62a9c4452bb63677f34a",
+    "D_Stable.nml": "79c62fece8e55ad6d3d6d3963d4486ffe2b15d571bfa6944d1243e19f84938ab",
+    "D_Stable_ISO.nml": "eedde69cd910f63877d7de3de1557d1dd4996c2637aabbc0cb51779ba49d07d2"
+  },
+  "changed_lines": {
+    "D_OSC.nml": [
+      {
+        "line": 1,
+        "before": "! D_OSC: dissertation inputs; Bhagwat per Azevedo, Balino & Burr2015, eqs116-128, p121/PDF135.",
+        "after": "! D_OSC: dissertation inputs; riser closure CHEXAL_1992 (ID5, dev default 21/11/2026); legacy Bhagwat (Azevedo, Balino & Burr 2015) is riser closure ID 3."
+      },
+      {
+        "line": 20,
+        "before": "  closure_riser=3,",
+        "after": "  closure_riser=5,"
+      }
+    ],
+    "D_OSC_ISO.nml": [
+      {
+        "line": 1,
+        "before": "! D_OSC_ISO: dissertation inputs; Bhagwat per Azevedo, Balino & Burr2015, eqs116-128, p121/PDF135.",
+        "after": "! D_OSC_ISO: dissertation inputs; riser closure CHEXAL_1992 (ID5, dev default 21/11/2026); legacy Bhagwat (Azevedo, Balino & Burr 2015) is riser closure ID 3."
+      },
+      {
+        "line": 20,
+        "before": "  closure_riser=3,",
+        "after": "  closure_riser=5,"
+      }
+    ],
+    "D_SS1.nml": [
+      {
+        "line": 1,
+        "before": "! D_SS1: dissertation inputs; Bhagwat per Azevedo, Balino & Burr2015, eqs116-128, p121/PDF135.",
+        "after": "! D_SS1: dissertation inputs; riser closure CHEXAL_1992 (ID5, dev default 21/11/2026); legacy Bhagwat (Azevedo, Balino & Burr 2015) is riser closure ID 3."
+      },
+      {
+        "line": 20,
+        "before": "  closure_riser=3,",
+        "after": "  closure_riser=5,"
+      }
+    ],
+    "D_SS1_ISO.nml": [
+      {
+        "line": 1,
+        "before": "! D_SS1_ISO: dissertation inputs; Bhagwat per Azevedo, Balino & Burr2015, eqs116-128, p121/PDF135.",
+        "after": "! D_SS1_ISO: dissertation inputs; riser closure CHEXAL_1992 (ID5, dev default 21/11/2026); legacy Bhagwat (Azevedo, Balino & Burr 2015) is riser closure ID 3."
+      },
+      {
+        "line": 20,
+        "before": "  closure_riser=3,",
+        "after": "  closure_riser=5,"
+      }
+    ],
+    "D_SS3.nml": [
+      {
+        "line": 1,
+        "before": "! D_SS3: dissertation inputs; Bhagwat per Azevedo, Balino & Burr2015, eqs116-128, p121/PDF135.",
+        "after": "! D_SS3: dissertation inputs; riser closure CHEXAL_1992 (ID5, dev default 21/11/2026); legacy Bhagwat (Azevedo, Balino & Burr 2015) is riser closure ID 3."
+      },
+      {
+        "line": 20,
+        "before": "  closure_riser=3,",
+        "after": "  closure_riser=5,"
+      }
+    ],
+    "D_SS3_ISO.nml": [
+      {
+        "line": 1,
+        "before": "! D_SS3_ISO: dissertation inputs; Bhagwat per Azevedo, Balino & Burr2015, eqs116-128, p121/PDF135.",
+        "after": "! D_SS3_ISO: dissertation inputs; riser closure CHEXAL_1992 (ID5, dev default 21/11/2026); legacy Bhagwat (Azevedo, Balino & Burr 2015) is riser closure ID 3."
+      },
+      {
+        "line": 20,
+        "before": "  closure_riser=3,",
+        "after": "  closure_riser=5,"
+      }
+    ],
+    "D_Stable.nml": [
+      {
+        "line": 1,
+        "before": "! D_Stable: dissertation inputs; Bhagwat per Azevedo, Balino & Burr2015, eqs116-128, p121/PDF135.",
+        "after": "! D_Stable: dissertation inputs; riser closure CHEXAL_1992 (ID5, dev default 21/11/2026); legacy Bhagwat (Azevedo, Balino & Burr 2015) is riser closure ID 3."
+      },
+      {
+        "line": 20,
+        "before": "  closure_riser=3,",
+        "after": "  closure_riser=5,"
+      }
+    ],
+    "D_Stable_ISO.nml": [
+      {
+        "line": 1,
+        "before": "! D_Stable_ISO: dissertation inputs; Bhagwat per Azevedo, Balino & Burr2015, eqs116-128, p121/PDF135.",
+        "after": "! D_Stable_ISO: dissertation inputs; riser closure CHEXAL_1992 (ID5, dev default 21/11/2026); legacy Bhagwat (Azevedo, Balino & Burr 2015) is riser closure ID 3."
+      },
+      {
+        "line": 20,
+        "before": "  closure_riser=3,",
+        "after": "  closure_riser=5,"
+      }
+    ]
+  }
+}

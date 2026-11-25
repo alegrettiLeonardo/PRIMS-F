@@ -47,18 +47,28 @@ contains
     type(sim_config_t),intent(in)::cfg
     integer,intent(in)::phase
     real(wp),intent(inout)::u(:,:)
+    integer::i,lo,hi
+    lo=first_physical_cell(cfg);hi=last_physical_cell(cfg)
+    do i=lo,hi
+      u(i,:)=0
+      u(i,phase)=equilibrium_density(cfg,phase,i)
+    enddo
+  end subroutine
+  real(wp) function equilibrium_density(cfg,phase,i)result(rho)
+    !! Cell mean of the discrete hydrostatic rest referred to the separator:
+    !! rho_eq,i = rho_b*<exp(-g(z-z_top)/c^2)>_i, mean normalized by the stored
+    !! weights. The SAME function defines the hydrostatic initial state and the
+    !! separator-face deviation, so the rest state is bitwise rho_eq.
+    type(sim_config_t),intent(in)::cfg
+    integer,intent(in)::phase,i
     real(wp)::c2,p0,rho0,mu,rhot,zref
-    integer::i,lo,hi,cell
+    integer::cell
     call coefficients(cfg,phase,c2,p0,rho0,mu)
     rhot=cfg%nPs/cfg%nCg**2
     if(phase==1)rhot=cfg%nrho_l0+(cfg%nPs-cfg%nP_l0)/cfg%nCl**2
-    zref=cfg%z_faces(ubound(cfg%z_faces,1));lo=first_physical_cell(cfg);hi=last_physical_cell(cfg)
-    do i=lo,hi
-      cell=i-cfg%num_dummy_cells
-      u(i,:)=0
-      u(i,phase)=rhot*.5_wp*sum(qw*exp(-cfg%G*(cfg%z_quadrature(:,cell)-zref)/(cfg%omega_u**2*c2)))
-    enddo
-  end subroutine
+    zref=cfg%z_faces(ubound(cfg%z_faces,1));cell=i-cfg%num_dummy_cells
+    rho=rhot*sum(qw*exp(-cfg%G*(cfg%z_quadrature(:,cell)-zref)/(cfg%omega_u**2*c2)))/sum(qw)
+  end function
   integer function global_single_phase(u,cfg)result(phase)
     real(wp),intent(in)::u(:,:)
     type(sim_config_t),intent(in)::cfg
@@ -121,7 +131,9 @@ contains
     if(maxval(abs(ex))>log(huge(1._wp))-2)then
       status=PHASE_INVALID;return
     endif
-    average=.5_wp*sum(qw*exp(ex))
+    ! Normalize by the stored weights (0.5*sum(qw)=1+2.2e-16 in binary64):
+    ! G=0 then gives fl=fr=1 exactly, never a roundoff-signed outlet velocity.
+    average=sum(qw*exp(ex))/sum(qw)
     fl=exp(-cfg%G*(zl-zm)/(cfg%omega_u**2*c2))/average
     fr=exp(-cfg%G*(zr-zm)/(cfg%omega_u**2*c2))/average
     if(.not.all(ieee_is_finite([fl,fr])).or.min(fl,fr)<=0)status=PHASE_INVALID
@@ -217,36 +229,64 @@ contains
         endif
       else
         target=cfg%mul;if(phase==2)target=cfg%mug
-        ! The pressure-vacuum boundary is thermodynamic, not a mass floor.
+        ! Admissible branch of the boundary state: subsonic |vb|<c and p>0.
+        ! On it m(r)=r*vb(r) is strictly increasing (dm/dr=vb+c on the
+        ! rarefaction curve, >=vb+c on the compression curve), so a root exists
+        ! iff m(left)<target<m(right). The sonic ends are closed form:
+        !   rarefaction vb=-c: r=rho*exp(-1-v/c), r/rho in (exp(-2),1);
+        !   compression vb=+c: sqrt(r/rho)-sqrt(rho/r)=(c-v)/c.
+        ! The thermodynamic vacuum p=0 is an open bound, never a mass floor.
         lower=0
         if(phase==1)lower=cfg%nrho_l0-cfg%nP_l0/cfg%nCl**2
-        left=max(nearest(0._wp,1._wp),nearest(lower,1._wp));right=max(2*rho,2*left)
+        if(rho<=lower)then
+          status=PHASE_INVALID;return
+        endif
+        val(1)=(c-v)/c
+        right=rho*(.5_wp*(val(1)+sqrt(val(1)**2+4)))**2
+        left=max(rho*exp(-1-v/c),lower)
         gleft=mass_residual(left);gright=mass_residual(right)
-        do j=1,60
-          if(gleft<=0.and.gright>=0)exit
-          if(gleft>0)then
-            status=PHASE_DATA_REQUIRED;return
-          endif
-          right=2*right;gright=mass_residual(right)
-        enddo
-        if(j>60)then
+        if(.not.ieee_is_finite(gleft).or..not.ieee_is_finite(gright))then
+          status=PHASE_INVALID;return
+        endif
+        if(gleft>=0.or.gright<=0)then
+          ! Proven absence of a subsonic, positive-pressure boundary state.
           status=PHASE_DATA_REQUIRED;return
         endif
-        do j=1,80
+        gm=gleft;mid=left
+        do j=1,200
           mid=left+.5_wp*(right-left);gm=mass_residual(mid)
           if(mid==left.or.mid==right.or.gm==0)exit
           if(gm<0)then
-            left=mid
+            left=mid;gleft=gm
           else
-            right=mid
+            right=mid;gright=gm
           endif
         enddo
+        if(gm/=0)then
+          ! Bracket exhausted at adjacent floating-point numbers.
+          mid=left
+          if(abs(gright)<abs(gleft))mid=right
+        endif
         rhob=mid;vb=target/rhob
       endif
     else
       rhob=cfg%nPs/cfg%nCg**2
       if(phase==1)rhob=cfg%nrho_l0+(cfg%nPs-cfg%nP_l0)/cfg%nCl**2
-      if(rhob>rho)then
+      if(trim(cfg%source_scheme)=='HYDROSTATIC'.and.allocated(cfg%z_quadrature).and.allocated(cfg%z_faces))then
+        ! Well-balanced deviation form (equilibrium-preserving reconstruction):
+        ! rho_face/rho_b = u_N/rho_eq,N exactly in exact arithmetic, because the
+        ! top face is the reference elevation. x is computed against the SAME
+        ! rho_eq used by the initial state: x=0 bitwise at discrete rest, and a
+        ! physical deviation keeps full relative accuracy (log1p). No tolerance
+        ! is applied to the sign of vb.
+        lower=equilibrium_density(cfg,phase,i)
+        val(1)=(u(i,phase)-lower)/lower
+        if(val(1)<0)then
+          vb=v+c*val(1)/sqrt(1+val(1))
+        else
+          vb=v+c*log1p_stable(val(1))
+        endif
+      else if(rhob>rho)then
         vb=v-c*(rhob-rho)/sqrt(rhob*rho)
       else
         vb=v+c*log(rho/rhob)
@@ -285,17 +325,22 @@ contains
     end function
   end subroutine
 
-  subroutine single_phase_assemble(u,old,dt,cfg,phase,r,a,b,c,norm,fin,fout,status,jac,base)
+  subroutine single_phase_assemble(u,old,dt,cfg,phase,r,a,b,c,norm,fin,fout,status,jac,base,one_sided_count)
     real(wp),intent(in)::u(:,:),old(:,:),dt
     type(sim_config_t),intent(in)::cfg
     integer,intent(in)::phase
     real(wp),intent(out)::r(:,:),a(:,:,:),b(:,:,:),c(:,:,:),norm,fin(3),fout(3),base(2,2)
     integer,intent(out)::status
     logical,intent(in)::jac
+    !! Columns differentiated with a one-sided stencil because the base state
+    !! lies on the edge of the admissible residual domain.
+    integer,intent(out),optional::one_sided_count
     real(wp)::xp(size(u,1),3),xm(size(u,1),3),rp(size(r,1),size(r,2)),rm(size(r,1),size(r,2))
-    real(wp)::fi(3),fo(3),bb(2,2),h,sc(3),d(3),err
-    integer::lo,hi,i,j,k,l,t,cp,cm,idx(2)
+    real(wp)::fi(3),fo(3),bb(2,2),h,h0,sc(3),d(3),side
+    integer::lo,hi,i,j,k,l,t,cp,cm,idx(2),m,refusal,stencil,n_one
     lo=first_physical_cell(cfg);hi=last_physical_cell(cfg);idx=[phase,3]
+    n_one=0
+    if(present(one_sided_count))one_sided_count=0
     a=0;b=0;c=0;norm=huge(1._wp)
     r=ieee_value(0._wp,ieee_quiet_nan);fin=r(:,1);fout=fin;base=fin(1)
     status=PHASE_INVALID
@@ -314,21 +359,59 @@ contains
       ! An exact inactive constraint, not a fabricated physical wave/Jacobian.
       b(3-phase,3-phase,i-lo+1)=1
       do t=1,2
-        k=idx(t);h=1e-5_wp*max(abs(u(i,k)),1e-2_wp)
-        if(k==phase)h=min(h,.2_wp*u(i,k))
-        xp=u;xm=u;xp(i,k)=u(i,k)+h;xm(i,k)=u(i,k)-h
-        call residual(xp,rp,fi,fo,bb,cp);call residual(xm,rm,fi,fo,bb,cm)
-        if(cp/=0.or.cm/=0)then
-          status=PHASE_INVALID;return
+        k=idx(t);h0=1e-5_wp*max(abs(u(i,k)),1e-2_wp)
+        if(k==phase)h0=min(h0,.2_wp*u(i,k))
+        ! The base residual is admissible. A perturbation may leave the
+        ! admissible set (e.g. outlet backflow without reservoir data, 934):
+        ! 1) central stencil with a controlled shrinking increment, for a base
+        !    state strictly inside the domain;
+        ! 2) second-order one-sided stencil from the admissible side only,
+        !    the derivative of the admissible function at its domain edge.
+        ! Refusal codes are never replaced by a fabricated derivative.
+        stencil=0;refusal=0
+        do m=0,2
+          h=h0/8._wp**m
+          xp=u;xm=u;xp(i,k)=u(i,k)+h;xm(i,k)=u(i,k)-h
+          call residual(xp,rp,fi,fo,bb,cp);call residual(xm,rm,fi,fo,bb,cm)
+          if(cp==0.and.cm==0)then
+            stencil=2;exit
+          endif
+          if(refusal==0)refusal=merge(cp,cm,cp/=0)
+        enddo
+        if(stencil==0)then
+          sides:do l=1,2
+            side=merge(1._wp,-1._wp,l==1)
+            do m=0,2
+              h=h0/8._wp**m
+              xp=u;xm=u;xp(i,k)=u(i,k)+side*h;xm(i,k)=u(i,k)+2*side*h
+              call residual(xp,rp,fi,fo,bb,cp)
+              if(cp/=0)cycle
+              call residual(xm,rm,fi,fo,bb,cm)
+              if(cm==0)then
+                stencil=1;exit sides
+              endif
+            enddo
+          enddo sides
         endif
+        if(stencil==0)then
+          status=refusal;if(status==0)status=PHASE_INVALID
+          return
+        endif
+        if(stencil==1)n_one=n_one+1
         do j=max(lo,i-1),min(hi,i+1)
-          l=j-lo+1;d=(rp(:,l)-rm(:,l))/(2*h)
+          l=j-lo+1
+          if(stencil==2)then
+            d=(rp(:,l)-rm(:,l))/(2*h)
+          else
+            d=side*(-3*r(:,l)+4*rp(:,l)-rm(:,l))/(2*h)
+          endif
           if(j==i)b(:,k,l)=d
           if(j==i-1)c(:,k,l)=d
           if(j==i+1)a(:,k,l)=d
         enddo
       enddo
     enddo
+    if(present(one_sided_count))one_sided_count=n_one
   contains
     subroutine residual(x,rr,fi,fo,fb,st)
       real(wp),intent(in)::x(:,:)
@@ -378,4 +461,16 @@ contains
       st=0
     end subroutine
   end subroutine
+  pure real(wp) function log1p_stable(x)result(y)
+    !! log(1+x) to full relative accuracy for small |x| (Goldberg 1991, Thm 4):
+    !! with w=fl(1+x), log(w)*x/(w-1); exact 0 at x=0.
+    real(wp),intent(in)::x
+    real(wp)::w
+    w=1+x
+    if(w==1)then
+      y=x
+    else
+      y=log(w)*x/(w-1)
+    endif
+  end function
 end module

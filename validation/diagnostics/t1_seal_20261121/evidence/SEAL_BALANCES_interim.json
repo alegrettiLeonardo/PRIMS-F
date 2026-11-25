@@ -1,0 +1,322 @@
+[
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_REPLAY53.4753_T1SEAL",
+  "closure_riser": 5,
+  "termination": "RUNNING",
+  "guard": null,
+  "classification": "RUNNING",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 20.917223912172958,
+  "accepted_steps": -1,
+  "rejected_steps": -1,
+  "newton_iterations": -1,
+  "cpu_s": null,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": NaN,
+  "p_in_range_Pa": [
+   290113.21426599065,
+   297937.44620999426
+  ],
+  "alpha_riser_base_range": [
+   5.6579692020433083e-11,
+   0.10650977208718088
+  ],
+  "Ml_kg": [
+   79.63956039048537,
+   80.99356575309022
+  ],
+  "Mg_kg": [
+   0.17815033506373185,
+   0.1799431449889642
+  ],
+  "Mg_riser_kg": [
+   0.004433121951671803,
+   0.0018647229162233078
+  ],
+  "boundary_cell": {
+   "index": 54,
+   "theta_deg": 2.333731331866095,
+   "alpha": 0.10580841873997394,
+   "jl_m_s": 0.5324442853906657
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 9.414691248821327e-14,
+    "rel_inventory": 1.1821626340802992e-15,
+    "rel_processed": 2.0214118776366626e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 1.2740919430598296e-12,
+    "rel_inventory": 2.3325874323319294e-14,
+    "rel_processed": 2.6587804598431973e-14
+   },
+   "l_riser": {
+    "max_abs_kg": 1.2876366639602566e-12,
+    "rel_inventory": 5.146808210183725e-14,
+    "rel_processed": 2.765176935104353e-14
+   },
+   "g_system": {
+    "max_abs_kg": 2.1378433962340737e-16,
+    "rel_inventory": 1.2000221023829555e-15,
+    "rel_processed": 2.091881093848753e-14
+   },
+   "g_pipe": {
+    "max_abs_kg": 6.26634161227102e-14,
+    "rel_inventory": 3.6072082322831077e-13,
+    "rel_processed": 8.189884641048259e-12
+   },
+   "g_riser": {
+    "max_abs_kg": 6.265214042011635e-14,
+    "rel_inventory": 1.4132735598778013e-11,
+    "rel_processed": 1.0694213260342107e-11
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 1.4132735598778013e-11
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_T1SEAL_t300",
+  "closure_riser": 5,
+  "termination": "RUNNING",
+  "guard": null,
+  "classification": "RUNNING",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 12.511260101924712,
+  "accepted_steps": -1,
+  "rejected_steps": -1,
+  "newton_iterations": -1,
+  "cpu_s": null,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": 0.5715889424463703,
+  "p_in_range_Pa": [
+   290130.75471438695,
+   290450.6457794678
+  ],
+  "alpha_riser_base_range": [
+   0.07015886948281647,
+   0.08959069265399566
+  ],
+  "Ml_kg": [
+   79.36395764917184,
+   79.42598817151298
+  ],
+  "Mg_kg": [
+   0.17896544750974827,
+   0.17895424449354713
+  ],
+  "Mg_riser_kg": [
+   0.005212966523964242,
+   0.005068975199548086
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.10007953806070759,
+   "jl_m_s": 0.5013998053058966
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 1.1368683772161603e-13,
+    "rel_inventory": 1.4324744013418327e-15,
+    "rel_processed": 3.9529532977865895e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 6.643574579356937e-13,
+    "rel_inventory": 1.2162970188617522e-14,
+    "rel_processed": 2.3049837219169173e-14
+   },
+   "l_riser": {
+    "max_abs_kg": 6.661338147750939e-13,
+    "rel_inventory": 2.692250358587065e-14,
+    "rel_processed": 2.316200511248563e-14
+   },
+   "g_system": {
+    "max_abs_kg": 1.942890293094024e-16,
+    "rel_inventory": 1.0856231301230332e-15,
+    "rel_processed": 2.6852244227196965e-14
+   },
+   "g_pipe": {
+    "max_abs_kg": 3.26032603692461e-14,
+    "rel_inventory": 1.8764198464546595e-13,
+    "rel_processed": 4.598661185082361e-12
+   },
+   "g_riser": {
+    "max_abs_kg": 3.260195932663912e-14,
+    "rel_inventory": 6.254012792287547e-12,
+    "rel_processed": 4.591006752227096e-12
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 6.254012792287547e-12
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_REPLAY53.4753_T1SEAL",
+  "closure_riser": 5,
+  "termination": "RUNNING",
+  "guard": null,
+  "classification": "RUNNING",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 7.09609175253279,
+  "accepted_steps": -1,
+  "rejected_steps": -1,
+  "newton_iterations": -1,
+  "cpu_s": null,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": NaN,
+  "p_in_range_Pa": [
+   290113.21426599065,
+   294142.9638283681
+  ],
+  "alpha_riser_base_range": [
+   4.557353710187267e-07,
+   0.006889535129169004
+  ],
+  "Ml_kg": [
+   79.63956039048537,
+   80.8302711777412
+  ],
+  "Mg_kg": [
+   0.17815033506373185,
+   0.17788293816044012
+  ],
+  "Mg_riser_kg": [
+   0.004433121951671803,
+   0.002128122027520804
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.09304581462602271,
+   "jl_m_s": 0.444566046431368
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 8.282263763703668e-14,
+    "rel_inventory": 1.0399685436602632e-15,
+    "rel_processed": 5.439094167786897e-15
+   },
+   "l_pipe": {
+    "max_abs_kg": 2.319922032256727e-12,
+    "rel_inventory": 4.247276663123736e-14,
+    "rel_processed": 1.4241942889091074e-13
+   },
+   "l_riser": {
+    "max_abs_kg": 2.3145929617385264e-12,
+    "rel_inventory": 9.251651799095559e-14,
+    "rel_processed": 1.5339998729598404e-13
+   },
+   "g_system": {
+    "max_abs_kg": 2.970510664702941e-16,
+    "rel_inventory": 1.6674179499242961e-15,
+    "rel_processed": 6.776998912179873e-14
+   },
+   "g_pipe": {
+    "max_abs_kg": 1.0798653637955624e-16,
+    "rel_inventory": 6.21622546465198e-16,
+    "rel_processed": 5.2453732297781654e-14
+   },
+   "g_riser": {
+    "max_abs_kg": 2.693564772268675e-18,
+    "rel_inventory": 6.075999716752407e-16,
+    "rel_processed": 1.1587599010846973e-15
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 9.251651799095559e-14
+ },
+ {
+  "run": "D_SS1_C5_BAROTROPIC_N51_dt0.5_T1SEAL_t300",
+  "closure_riser": 5,
+  "termination": "RUNNING",
+  "guard": null,
+  "classification": "RUNNING",
+  "decoded": null,
+  "proposal_index": "0",
+  "reached_time_s": 2.1335099736059697,
+  "accepted_steps": -1,
+  "rejected_steps": -1,
+  "newton_iterations": -1,
+  "cpu_s": null,
+  "E_g_001_s": null,
+  "mdot_g_base_min_rel": 0.5943038073575351,
+  "p_in_range_Pa": [
+   290130.8255319483,
+   290233.8743896075
+  ],
+  "alpha_riser_base_range": [
+   0.07420045180117342,
+   0.0895906926371546
+  ],
+  "Ml_kg": [
+   79.36395764917184,
+   79.34563780967875
+  ],
+  "Mg_kg": [
+   0.17896544750974827,
+   0.17896437995149608
+  ],
+  "Mg_riser_kg": [
+   0.005212966523964242,
+   0.005257199241969212
+  ],
+  "boundary_cell": {
+   "index": 103,
+   "theta_deg": 76.07952696209932,
+   "alpha": 0.09879689367233126,
+   "jl_m_s": 0.5026019978490992
+  },
+  "balances": {
+   "l_system": {
+    "max_abs_kg": 9.378522264347211e-14,
+    "rel_inventory": 1.1817105071555202e-15,
+    "rel_processed": 1.8330737706238942e-14
+   },
+   "l_pipe": {
+    "max_abs_kg": 1.241673430740775e-12,
+    "rel_inventory": 2.2732396154662162e-14,
+    "rel_processed": 2.435020806371056e-13
+   },
+   "l_riser": {
+    "max_abs_kg": 1.2474465904688259e-12,
+    "rel_inventory": 5.041687504847377e-14,
+    "rel_processed": 2.4381363889092175e-13
+   },
+   "g_system": {
+    "max_abs_kg": 2.1347940776239582e-16,
+    "rel_inventory": 1.1928526468818373e-15,
+    "rel_processed": 1.6689609820043957e-13
+   },
+   "g_pipe": {
+    "max_abs_kg": 5.979374981257557e-15,
+    "rel_inventory": 3.441317756922719e-14,
+    "rel_processed": 4.528289864795392e-12
+   },
+   "g_riser": {
+    "max_abs_kg": 5.968099278663708e-15,
+    "rel_inventory": 1.1448566284145671e-12,
+    "rel_processed": 4.5159538225572595e-12
+   }
+  },
+  "ledger_arithmetic_pass": true,
+  "junction_integral_mismatch_kg": {
+   "l": 0.0,
+   "g": 0.0
+  },
+  "max_rel_balance": 1.1448566284145671e-12
+ }
+]

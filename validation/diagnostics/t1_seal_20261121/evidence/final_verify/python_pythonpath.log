@@ -1,0 +1,7 @@
+...................................................................................................{"name": "case", "status": "COMPLETED", "cycles_available": false, "accommodated": false, "needs_extension": true}
+.{"name": "case", "status": "FAILED", "cycles_available": false, "accommodated": false, "needs_extension": false}
+.......................
+----------------------------------------------------------------------
+Ran 123 tests in 1.087s
+
+OK

@@ -1,0 +1,23 @@
+TEST|UNIFORM_PIPE|   0|Fref  4.714522E-01  1.130047E-03  1.977847E+02|Fref-F(U) rel  0.0000E+00  0.0000E+00  0.0000E+00
+TEST|UNIFORM_RISER|   0|Fref  4.687613E-01  1.113455E-03  1.976459E+02|Fref-F(U) rel  0.0000E+00  0.0000E+00  0.0000E+00
+  NEWTON  1  8.1001E-06  2.5582E-03 -1.1946E-04 s  2.61195978E+00 -5.95903813E-01  2.61227200E+00
+  NEWTON  2 -1.0834E-07  1.3158E-05  5.6981E-11 s  2.61212815E+00 -5.95903636E-01  2.61212815E+00
+TEST|PARTITION_PIPE|   0|   0|Fref  4.714275E-01  1.112381E-03  1.977738E+02|Froe  4.714277E-01  1.112332E-03  1.977738E+02|rel diff -3.4851E-07  4.4302E-05 -6.6869E-10
+TEST|SMALL_WAVE|closure 1|family 1|eps  1.0E-02|lambda m/s -2.990E+02|   0|(Fref-Fupwind)/|F(UR)-F(UL)|  4.2337E-04  1.0036E-04  9.3623E-02
+TEST|SMALL_WAVE|closure 1|family 1|eps  1.0E-03|lambda m/s -2.990E+02|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -2.7547E-05 -2.3100E-05 -1.3843E-02
+TEST|SMALL_WAVE|closure 1|family 1|eps  1.0E-04|lambda m/s -2.990E+02|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -2.9317E-06 -2.2478E-06 -1.3811E-03
+TEST|SMALL_WAVE|closure 1|family 2|eps  1.0E-02|lambda m/s  1.640E+00|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -1.7849E-04 -1.2962E-04  7.9417E-02
+TEST|SMALL_WAVE|closure 1|family 2|eps  1.0E-03|lambda m/s  1.640E+00|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -1.8126E-05 -1.3168E-05  8.0671E-03
+TEST|SMALL_WAVE|closure 1|family 2|eps  1.0E-04|lambda m/s  1.640E+00|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -1.8155E-06 -1.3189E-06  8.0801E-04
+TEST|SMALL_WAVE|closure 1|family 3|eps  1.0E-02|lambda m/s  3.010E+02|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -2.1086E-04 -1.4173E-04  8.8841E-02
+TEST|SMALL_WAVE|closure 1|family 3|eps  1.0E-03|lambda m/s  3.010E+02|   0|(Fref-Fupwind)/|F(UR)-F(UL)|  2.9789E-05  2.1668E-05 -1.3269E-02
+TEST|SMALL_WAVE|closure 1|family 3|eps  1.0E-04|lambda m/s  3.010E+02|   0|(Fref-Fupwind)/|F(UR)-F(UL)|  2.9544E-06  2.1464E-06 -1.3149E-03
+TEST|SMALL_WAVE|closure 5|family 1|eps  1.0E-02|lambda m/s -3.135E+01|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -5.8800E-06 -3.3346E-09 -1.5132E-04
+TEST|SMALL_WAVE|closure 5|family 1|eps  1.0E-03|lambda m/s -3.135E+01|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -5.8729E-07 -3.3446E-10 -1.5125E-05
+TEST|SMALL_WAVE|closure 5|family 1|eps  1.0E-04|lambda m/s -3.135E+01|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -5.8732E-08 -3.3467E-11 -1.5120E-06
+TEST|SMALL_WAVE|closure 5|family 2|eps  1.0E-02|lambda m/s  2.183E+00|   0|(Fref-Fupwind)/|F(UR)-F(UL)|  1.1034E-04  1.0905E-07 -2.9851E-03
+TEST|SMALL_WAVE|closure 5|family 2|eps  1.0E-03|lambda m/s  2.183E+00|   0|(Fref-Fupwind)/|F(UR)-F(UL)|  1.1190E-05  1.1060E-08 -3.0273E-04
+TEST|SMALL_WAVE|closure 5|family 2|eps  1.0E-04|lambda m/s  2.183E+00|   0|(Fref-Fupwind)/|F(UR)-F(UL)|  1.1205E-06  1.1075E-09 -3.0318E-05
+TEST|SMALL_WAVE|closure 5|family 3|eps  1.0E-02|lambda m/s  3.212E+01|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -8.8149E-06 -8.7126E-09  2.3848E-04
+TEST|SMALL_WAVE|closure 5|family 3|eps  1.0E-03|lambda m/s  3.212E+01|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -8.8077E-07 -8.7055E-10  2.3829E-05
+TEST|SMALL_WAVE|closure 5|family 3|eps  1.0E-04|lambda m/s  3.212E+01|   0|(Fref-Fupwind)/|F(UR)-F(UL)| -8.8073E-08 -8.7049E-11  2.3831E-06
